@@ -1,0 +1,2 @@
+platform :ios, ‘6.0’
+pod 'ObjectMapper', '~> 1.2’

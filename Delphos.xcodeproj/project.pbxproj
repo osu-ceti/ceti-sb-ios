@@ -1,0 +1,800 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
+		F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBACC1CE05B24000A3D2A /* LoginBean.swift */; };
+		F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */; };
+		F58BBAD71CE06280000A3D2A /* UserBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD61CE06280000A3D2A /* UserBean.swift */; };
+		F58BBADA1CE07444000A3D2A /* EventDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */; };
+		F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843B1CDC9D400055C8D3 /* DelphosStrings.swift */; };
+		F599843E1CDC9F120055C8D3 /* SchoolBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843D1CDC9F120055C8D3 /* SchoolBusiness.swift */; };
+		F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843F1CDCC3360055C8D3 /* RegisterController.swift */; };
+		F59984431CDCCDC40055C8D3 /* FacadeDelphos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */; };
+		F59984451CDCCDDF0055C8D3 /* DelegateDlphos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984441CDCCDDF0055C8D3 /* DelegateDlphos.swift */; };
+		F59984471CDCDEBE0055C8D3 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = F59984461CDCDEBE0055C8D3 /* Pods */; };
+		F59984651CDCE46A0055C8D3 /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F59984531CDCE3280055C8D3 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE791CDC6CD800419419 /* AppDelegate.swift */; };
+		F5A2EE7C1CDC6CD800419419 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE7B1CDC6CD800419419 /* ViewController.swift */; };
+		F5A2EE7F1CDC6CD800419419 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5A2EE7D1CDC6CD800419419 /* Main.storyboard */; };
+		F5A2EE811CDC6CD800419419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5A2EE801CDC6CD800419419 /* Assets.xcassets */; };
+		F5A2EE841CDC6CD800419419 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5A2EE821CDC6CD800419419 /* LaunchScreen.storyboard */; };
+		F5A2EE8F1CDC6CD800419419 /* DelphosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE8E1CDC6CD800419419 /* DelphosTests.swift */; };
+		F5A2EE9A1CDC6CD800419419 /* DelphosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE991CDC6CD800419419 /* DelphosUITests.swift */; };
+		F5AFC04B1CE0A1A700C95687 /* EventDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */; };
+		F5AFC0531CE0A3AF00C95687 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC0521CE0A3AF00C95687 /* EventBean.swift */; };
+		F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */; };
+		F5AFC0561CE0BB6300C95687 /* EventDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */; };
+		F5AFC0571CE0BB6500C95687 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC0521CE0A3AF00C95687 /* EventBean.swift */; };
+		F5AFC0581CE0BD0E00C95687 /* EventDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */; };
+		F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598EA1CDDBFB2000C3F58 /* DelphosAction.swift */; };
+		F5C598EE1CDDE674000C3F58 /* DAOPostAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */; };
+		F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */; };
+		F5C598F21CDDE6FB000C3F58 /* DAOGetAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598F11CDDE6FB000C3F58 /* DAOGetAPIs.swift */; };
+		F5C598F41CDDE78C000C3F58 /* DAOErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598F31CDDE78C000C3F58 /* DAOErrorCodes.swift */; };
+		F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F59984521CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6AAC8F7619F03C2900E7A677;
+			remoteInfo = "ObjectMapper-iOS";
+		};
+		F59984541CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD1602FF1AC023D5000CD69A;
+			remoteInfo = "ObjectMapper-Mac";
+		};
+		F59984561CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A2AD03D1B2C78540097E150;
+			remoteInfo = "ObjectMapper-watchOS";
+		};
+		F59984581CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A05B7A61BE274BE00F19B53;
+			remoteInfo = "ObjectMapper-tvOS";
+		};
+		F599845A1CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6AAC8F8119F03C2900E7A677;
+			remoteInfo = "ObjectMapper-iOSTests";
+		};
+		F599845C1CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD1603091AC023D6000CD69A;
+			remoteInfo = "ObjectMapper-MacTests";
+		};
+		F599845E1CDCE3280055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A05B7AF1BE274BE00F19B53;
+			remoteInfo = "ObjectMapper-tvOSTests";
+		};
+		F59984601CDCE3A00055C8D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AAC8F7519F03C2900E7A677;
+			remoteInfo = "ObjectMapper-iOS";
+		};
+		F5A2EE8B1CDC6CD800419419 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5A2EE6E1CDC6CD800419419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5A2EE751CDC6CD800419419;
+			remoteInfo = Delphos;
+		};
+		F5A2EE961CDC6CD800419419 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5A2EE6E1CDC6CD800419419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5A2EE751CDC6CD800419419;
+			remoteInfo = Delphos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F59984641CDCE44F0055C8D3 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F59984651CDCE46A0055C8D3 /* ObjectMapper.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
+		F58BBACC1CE05B24000A3D2A /* LoginBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBean.swift; sourceTree = "<group>"; };
+		F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsBean.swift; sourceTree = "<group>"; };
+		F58BBAD61CE06280000A3D2A /* UserBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBean.swift; sourceTree = "<group>"; };
+		F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDisplayController.swift; sourceTree = "<group>"; };
+		F599843B1CDC9D400055C8D3 /* DelphosStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosStrings.swift; sourceTree = "<group>"; };
+		F599843D1CDC9F120055C8D3 /* SchoolBusiness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolBusiness.swift; sourceTree = "<group>"; };
+		F599843F1CDCC3360055C8D3 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacadeDelphos.swift; sourceTree = "<group>"; };
+		F59984441CDCCDDF0055C8D3 /* DelegateDlphos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateDlphos.swift; sourceTree = "<group>"; };
+		F59984461CDCDEBE0055C8D3 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
+		F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = ObjectMapper/ObjectMapper.xcodeproj; sourceTree = "<group>"; };
+		F5A2EE761CDC6CD800419419 /* Delphos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delphos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A2EE791CDC6CD800419419 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F5A2EE7B1CDC6CD800419419 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F5A2EE7E1CDC6CD800419419 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F5A2EE801CDC6CD800419419 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F5A2EE831CDC6CD800419419 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F5A2EE851CDC6CD800419419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5A2EE8A1CDC6CD800419419 /* DelphosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DelphosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A2EE8E1CDC6CD800419419 /* DelphosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelphosTests.swift; sourceTree = "<group>"; };
+		F5A2EE901CDC6CD800419419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5A2EE951CDC6CD800419419 /* DelphosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DelphosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A2EE991CDC6CD800419419 /* DelphosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelphosUITests.swift; sourceTree = "<group>"; };
+		F5A2EE9B1CDC6CD800419419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDisplayBean.swift; sourceTree = "<group>"; };
+		F5AFC0521CE0A3AF00C95687 /* EventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBean.swift; sourceTree = "<group>"; };
+		F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDsiplayCell.swift; sourceTree = "<group>"; };
+		F5C598EA1CDDBFB2000C3F58 /* DelphosAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosAction.swift; sourceTree = "<group>"; };
+		F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOPostAPIs.swift; sourceTree = "<group>"; };
+		F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOBase.swift; sourceTree = "<group>"; };
+		F5C598F11CDDE6FB000C3F58 /* DAOGetAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOGetAPIs.swift; sourceTree = "<group>"; };
+		F5C598F31CDDE78C000C3F58 /* DAOErrorCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOErrorCodes.swift; sourceTree = "<group>"; };
+		F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBean.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F5A2EE731CDC6CD800419419 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A2EE871CDC6CD800419419 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A2EE921CDC6CD800419419 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F58BBAD81CE07433000A3D2A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F599843F1CDCC3360055C8D3 /* RegisterController.swift */,
+				F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */,
+				F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F599843A1CDC9CE50055C8D3 /* DelphosGlobals */ = {
+			isa = PBXGroup;
+			children = (
+				F599843B1CDC9D400055C8D3 /* DelphosStrings.swift */,
+			);
+			name = DelphosGlobals;
+			sourceTree = "<group>";
+		};
+		F59984411CDCCD900055C8D3 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */,
+				F59984441CDCCDDF0055C8D3 /* DelegateDlphos.swift */,
+			);
+			name = Business;
+			sourceTree = "<group>";
+		};
+		F59984491CDCE3270055C8D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F59984531CDCE3280055C8D3 /* ObjectMapper.framework */,
+				F59984551CDCE3280055C8D3 /* ObjectMapper.framework */,
+				F59984571CDCE3280055C8D3 /* ObjectMapper.framework */,
+				F59984591CDCE3280055C8D3 /* ObjectMapper.framework */,
+				F599845B1CDCE3280055C8D3 /* ObjectMapper-iOSTests.xctest */,
+				F599845D1CDCE3280055C8D3 /* ObjectMapper-MacTests.xctest */,
+				F599845F1CDCE3280055C8D3 /* ObjectMapper-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F5A2EE6D1CDC6CD800419419 = {
+			isa = PBXGroup;
+			children = (
+				F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */,
+				F59984461CDCDEBE0055C8D3 /* Pods */,
+				F5A2EE781CDC6CD800419419 /* Delphos */,
+				F5A2EE8D1CDC6CD800419419 /* DelphosTests */,
+				F5A2EE981CDC6CD800419419 /* DelphosUITests */,
+				F5A2EE771CDC6CD800419419 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F5A2EE771CDC6CD800419419 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F5A2EE761CDC6CD800419419 /* Delphos.app */,
+				F5A2EE8A1CDC6CD800419419 /* DelphosTests.xctest */,
+				F5A2EE951CDC6CD800419419 /* DelphosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F5A2EE781CDC6CD800419419 /* Delphos */ = {
+			isa = PBXGroup;
+			children = (
+				F58BBAD81CE07433000A3D2A /* Controllers */,
+				F5C598F51CDDF800000C3F58 /* Beans */,
+				F5C598E31CDDBF87000C3F58 /* DelphosAction */,
+				F59984411CDCCD900055C8D3 /* Business */,
+				F599843A1CDC9CE50055C8D3 /* DelphosGlobals */,
+				F5A2EE791CDC6CD800419419 /* AppDelegate.swift */,
+				F5A2EE7B1CDC6CD800419419 /* ViewController.swift */,
+				F5A2EE7D1CDC6CD800419419 /* Main.storyboard */,
+				F5A2EE801CDC6CD800419419 /* Assets.xcassets */,
+				F5A2EE821CDC6CD800419419 /* LaunchScreen.storyboard */,
+				F5A2EE851CDC6CD800419419 /* Info.plist */,
+			);
+			path = Delphos;
+			sourceTree = "<group>";
+		};
+		F5A2EE8D1CDC6CD800419419 /* DelphosTests */ = {
+			isa = PBXGroup;
+			children = (
+				F5A2EE8E1CDC6CD800419419 /* DelphosTests.swift */,
+				F5A2EE901CDC6CD800419419 /* Info.plist */,
+			);
+			path = DelphosTests;
+			sourceTree = "<group>";
+		};
+		F5A2EE981CDC6CD800419419 /* DelphosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F5A2EE991CDC6CD800419419 /* DelphosUITests.swift */,
+				F5A2EE9B1CDC6CD800419419 /* Info.plist */,
+			);
+			path = DelphosUITests;
+			sourceTree = "<group>";
+		};
+		F5C598E31CDDBF87000C3F58 /* DelphosAction */ = {
+			isa = PBXGroup;
+			children = (
+				F5C598EA1CDDBFB2000C3F58 /* DelphosAction.swift */,
+			);
+			name = DelphosAction;
+			sourceTree = "<group>";
+		};
+		F5C598EC1CDDE655000C3F58 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F599843D1CDC9F120055C8D3 /* SchoolBusiness.swift */,
+				F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */,
+				F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */,
+				F5C598F11CDDE6FB000C3F58 /* DAOGetAPIs.swift */,
+				F5C598F31CDDE78C000C3F58 /* DAOErrorCodes.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		F5C598F51CDDF800000C3F58 /* Beans */ = {
+			isa = PBXGroup;
+			children = (
+				F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */,
+				F5C598EC1CDDE655000C3F58 /* Data */,
+				F58BBACC1CE05B24000A3D2A /* LoginBean.swift */,
+				F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */,
+				F58BBAD61CE06280000A3D2A /* UserBean.swift */,
+				F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */,
+				F5AFC0521CE0A3AF00C95687 /* EventBean.swift */,
+				F578B5751CE1F2EC0063246A /* RegisterBean.swift */,
+			);
+			name = Beans;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F5A2EE751CDC6CD800419419 /* Delphos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5A2EE9E1CDC6CD800419419 /* Build configuration list for PBXNativeTarget "Delphos" */;
+			buildPhases = (
+				F5A2EE721CDC6CD800419419 /* Sources */,
+				F5A2EE731CDC6CD800419419 /* Frameworks */,
+				F5A2EE741CDC6CD800419419 /* Resources */,
+				F59984641CDCE44F0055C8D3 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F59984611CDCE3A00055C8D3 /* PBXTargetDependency */,
+			);
+			name = Delphos;
+			productName = Delphos;
+			productReference = F5A2EE761CDC6CD800419419 /* Delphos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F5A2EE891CDC6CD800419419 /* DelphosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5A2EEA11CDC6CD800419419 /* Build configuration list for PBXNativeTarget "DelphosTests" */;
+			buildPhases = (
+				F5A2EE861CDC6CD800419419 /* Sources */,
+				F5A2EE871CDC6CD800419419 /* Frameworks */,
+				F5A2EE881CDC6CD800419419 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5A2EE8C1CDC6CD800419419 /* PBXTargetDependency */,
+			);
+			name = DelphosTests;
+			productName = DelphosTests;
+			productReference = F5A2EE8A1CDC6CD800419419 /* DelphosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F5A2EE941CDC6CD800419419 /* DelphosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5A2EEA41CDC6CD800419419 /* Build configuration list for PBXNativeTarget "DelphosUITests" */;
+			buildPhases = (
+				F5A2EE911CDC6CD800419419 /* Sources */,
+				F5A2EE921CDC6CD800419419 /* Frameworks */,
+				F5A2EE931CDC6CD800419419 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5A2EE971CDC6CD800419419 /* PBXTargetDependency */,
+			);
+			name = DelphosUITests;
+			productName = DelphosUITests;
+			productReference = F5A2EE951CDC6CD800419419 /* DelphosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F5A2EE6E1CDC6CD800419419 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Ontoborn;
+				TargetAttributes = {
+					F5A2EE751CDC6CD800419419 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					F5A2EE891CDC6CD800419419 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F5A2EE751CDC6CD800419419;
+					};
+					F5A2EE941CDC6CD800419419 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F5A2EE751CDC6CD800419419;
+					};
+				};
+			};
+			buildConfigurationList = F5A2EE711CDC6CD800419419 /* Build configuration list for PBXProject "Delphos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F5A2EE6D1CDC6CD800419419;
+			productRefGroup = F5A2EE771CDC6CD800419419 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F59984491CDCE3270055C8D3 /* Products */;
+					ProjectRef = F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F5A2EE751CDC6CD800419419 /* Delphos */,
+				F5A2EE891CDC6CD800419419 /* DelphosTests */,
+				F5A2EE941CDC6CD800419419 /* DelphosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F59984531CDCE3280055C8D3 /* ObjectMapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectMapper.framework;
+			remoteRef = F59984521CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F59984551CDCE3280055C8D3 /* ObjectMapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectMapper.framework;
+			remoteRef = F59984541CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F59984571CDCE3280055C8D3 /* ObjectMapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectMapper.framework;
+			remoteRef = F59984561CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F59984591CDCE3280055C8D3 /* ObjectMapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectMapper.framework;
+			remoteRef = F59984581CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F599845B1CDCE3280055C8D3 /* ObjectMapper-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ObjectMapper-iOSTests.xctest";
+			remoteRef = F599845A1CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F599845D1CDCE3280055C8D3 /* ObjectMapper-MacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ObjectMapper-MacTests.xctest";
+			remoteRef = F599845C1CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F599845F1CDCE3280055C8D3 /* ObjectMapper-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ObjectMapper-tvOSTests.xctest";
+			remoteRef = F599845E1CDCE3280055C8D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F5A2EE741CDC6CD800419419 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A2EE841CDC6CD800419419 /* LaunchScreen.storyboard in Resources */,
+				F5A2EE811CDC6CD800419419 /* Assets.xcassets in Resources */,
+				F59984471CDCDEBE0055C8D3 /* Pods in Resources */,
+				F5A2EE7F1CDC6CD800419419 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A2EE881CDC6CD800419419 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A2EE931CDC6CD800419419 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F5A2EE721CDC6CD800419419 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */,
+				F5A2EE7C1CDC6CD800419419 /* ViewController.swift in Sources */,
+				F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */,
+				F5AFC04B1CE0A1A700C95687 /* EventDisplayBean.swift in Sources */,
+				F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */,
+				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
+				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
+				F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */,
+				F5C598F21CDDE6FB000C3F58 /* DAOGetAPIs.swift in Sources */,
+				F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */,
+				F5AFC0531CE0A3AF00C95687 /* EventBean.swift in Sources */,
+				F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */,
+				F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */,
+				F599843E1CDC9F120055C8D3 /* SchoolBusiness.swift in Sources */,
+				F58BBADA1CE07444000A3D2A /* EventDisplayController.swift in Sources */,
+				F59984431CDCCDC40055C8D3 /* FacadeDelphos.swift in Sources */,
+				F5C598EE1CDDE674000C3F58 /* DAOPostAPIs.swift in Sources */,
+				F5C598F41CDDE78C000C3F58 /* DAOErrorCodes.swift in Sources */,
+				F59984451CDCCDDF0055C8D3 /* DelegateDlphos.swift in Sources */,
+				F58BBAD71CE06280000A3D2A /* UserBean.swift in Sources */,
+				F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A2EE861CDC6CD800419419 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A2EE8F1CDC6CD800419419 /* DelphosTests.swift in Sources */,
+				F5AFC0571CE0BB6500C95687 /* EventBean.swift in Sources */,
+				F5AFC0561CE0BB6300C95687 /* EventDisplayBean.swift in Sources */,
+				F5AFC0581CE0BD0E00C95687 /* EventDisplayController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A2EE911CDC6CD800419419 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A2EE9A1CDC6CD800419419 /* DelphosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F59984611CDCE3A00055C8D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjectMapper-iOS";
+			targetProxy = F59984601CDCE3A00055C8D3 /* PBXContainerItemProxy */;
+		};
+		F5A2EE8C1CDC6CD800419419 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5A2EE751CDC6CD800419419 /* Delphos */;
+			targetProxy = F5A2EE8B1CDC6CD800419419 /* PBXContainerItemProxy */;
+		};
+		F5A2EE971CDC6CD800419419 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5A2EE751CDC6CD800419419 /* Delphos */;
+			targetProxy = F5A2EE961CDC6CD800419419 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F5A2EE7D1CDC6CD800419419 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A2EE7E1CDC6CD800419419 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F5A2EE821CDC6CD800419419 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A2EE831CDC6CD800419419 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F5A2EE9C1CDC6CD800419419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F5A2EE9D1CDC6CD800419419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F5A2EE9F1CDC6CD800419419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Delphos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.Delphos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F5A2EEA01CDC6CD800419419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Delphos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.Delphos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F5A2EEA21CDC6CD800419419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DelphosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.DelphosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Delphos.app/Delphos";
+			};
+			name = Debug;
+		};
+		F5A2EEA31CDC6CD800419419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DelphosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.DelphosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Delphos.app/Delphos";
+			};
+			name = Release;
+		};
+		F5A2EEA51CDC6CD800419419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DelphosUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.DelphosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Delphos;
+			};
+			name = Debug;
+		};
+		F5A2EEA61CDC6CD800419419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DelphosUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.DelphosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Delphos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F5A2EE711CDC6CD800419419 /* Build configuration list for PBXProject "Delphos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5A2EE9C1CDC6CD800419419 /* Debug */,
+				F5A2EE9D1CDC6CD800419419 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5A2EE9E1CDC6CD800419419 /* Build configuration list for PBXNativeTarget "Delphos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5A2EE9F1CDC6CD800419419 /* Debug */,
+				F5A2EEA01CDC6CD800419419 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5A2EEA11CDC6CD800419419 /* Build configuration list for PBXNativeTarget "DelphosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5A2EEA21CDC6CD800419419 /* Debug */,
+				F5A2EEA31CDC6CD800419419 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5A2EEA41CDC6CD800419419 /* Build configuration list for PBXNativeTarget "DelphosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5A2EEA51CDC6CD800419419 /* Debug */,
+				F5A2EEA61CDC6CD800419419 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F5A2EE6E1CDC6CD800419419 /* Project object */;
+}

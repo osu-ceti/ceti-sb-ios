@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DelegateDiphos.(showAllEvents(UIViewController) -&gt; ()).(closure #1).(closure #1):DelegateDlphos.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EventDisplayController.viewDidLoad() -&gt; ():EventDisplayController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gObjEventDisplayBean.events">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DelegateDiphos.showAllEvents(UIViewController) -&gt; ():DelegateDlphos.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "result">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterController.pickerView(UIPickerView, didSelectRow : Int, inComponent : Int) -&gt; ():RegisterController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "txtRole.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DAOBase.(doPost(String, addAuthHeader : Bool, callBack : (jsonResult : NSDictionary, status : Bool, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOBase.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DAOPostAPIs.(doRegister(CredentialsBean, callBack : (result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOPostAPIs.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
