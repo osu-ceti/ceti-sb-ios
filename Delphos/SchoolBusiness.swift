@@ -25,6 +25,8 @@ let TAG: String = "school_business"
 let LOGIN_URL: String = "users/sign_in"
 let REGISTER_URL: String = "users/sign_up"
 let SHOW_ALL_EVENTS = "events/my_events"
+let EVENT = "events/"
+let SEARCH_EVENT = "events?search="
 
 
 

@@ -13,4 +13,6 @@ enum DelphosAction
     case LOGIN
     case EVENT_ALL
     case REGISTER
+    case SHOW_EVENT
+    case SEARCH_EVENT
 }

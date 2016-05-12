@@ -11,3 +11,5 @@ import Foundation
 
 var  gObjEventBean : EventDisplayController!
 var gObjEventDisplayBean : EventDisplayBean!
+var gEventID : Int!
+var gObjShowEventBean: ShowEventBean!

@@ -3,15 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DelegateDiphos.(showAllEvents(UIViewController) -&gt; ()).(closure #1).(closure #1):DelegateDlphos.swift">
+         contextName = "DAOGetAPIs.(getAllEvents((result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOGetAPIs.swift">
       </ContextState>
       <ContextState
-         contextName = "EventDisplayController.viewDidLoad() -&gt; ():EventDisplayController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "gObjEventDisplayBean.events">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "DAOPostAPIs.(doRegister(CredentialsBean, callBack : (result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOPostAPIs.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DAOBase.(doPost(String, addAuthHeader : Bool, callBack : (jsonResult : NSDictionary, status : Bool, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOBase.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DelegateDiphos.(showAllEvents(UIViewController) -&gt; ()).(closure #1):DelegateDlphos.swift">
       </ContextState>
       <ContextState
          contextName = "DelegateDiphos.showAllEvents(UIViewController) -&gt; ():DelegateDlphos.swift">
@@ -22,18 +23,31 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EventDisplayController.viewDidLoad() -&gt; ():EventDisplayController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gObjEventDisplayBean.events">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DelegateDiphos.(showAllEvents(UIViewController) -&gt; ()).(closure #1).(closure #1):DelegateDlphos.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gObjEventDisplayBean">
+            </PersistentString>
+            <PersistentString
+               value = "eventDisplayController.eventBeanArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "RegisterController.pickerView(UIPickerView, didSelectRow : Int, inComponent : Int) -&gt; ():RegisterController.swift">
          <PersistentStrings>
             <PersistentString
                value = "txtRole.text">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DAOBase.(doPost(String, addAuthHeader : Bool, callBack : (jsonResult : NSDictionary, status : Bool, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOBase.swift">
-      </ContextState>
-      <ContextState
-         contextName = "DAOPostAPIs.(doRegister(CredentialsBean, callBack : (result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOPostAPIs.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

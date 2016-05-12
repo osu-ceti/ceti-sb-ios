@@ -40,6 +40,15 @@ class DelegateDiphos: NSObject {
         case .REGISTER:
             print("Regsiter")
             register(objCurrentController)
+            
+        case .SHOW_EVENT:
+            print("SHOW_EVENT")
+            showEvent(objCurrentController)
+            
+        case .SEARCH_EVENT:
+            print("SEARCH_EVENT")
+            searchEvent(objCurrentController)
+
 
         default:
             print("Error in delegate enum")
@@ -83,16 +92,24 @@ class DelegateDiphos: NSObject {
 
     func showAllEvents(objCurrentContoller: UIViewController) {
          doGetAPIs.getAllEvents { (result: AnyObject,statusCode: Int) in
+            
+             let eventDisplayController = objCurrentContoller as! EventDisplayController
             if(statusCode != 0){
                 print("Show event")
                 //var objEventDisplayBean = result as! EventDisplayBean
-                dispatch_async(dispatch_get_main_queue(), {
 
-                    
+                dispatch_async(dispatch_get_main_queue(), {
+               
                 gObjEventDisplayBean = result as! EventDisplayBean
-                    print("Show", gObjEventDisplayBean)
+                    print("Show", objCurrentContoller)
                     
-                })
+                eventDisplayController.eventBeanArray = gObjEventDisplayBean.events
+                    
+              //      print(eventDisplayController.eventBeanArray);
+                    
+                    eventDisplayController.tableView.reloadData()
+                    
+                     })
             }
         }
     }
@@ -128,6 +145,44 @@ class DelegateDiphos: NSObject {
             
         }
         return boolRegister
+    }
+    
+    func showEvent(objCurrentContoller: UIViewController) {
+        var strUserDetail: String = String(gEventID)
+        
+        doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == 200) {
+                 dispatch_async(dispatch_get_main_queue(), {
+                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+                    gObjShowEventBean = result as! ShowEventBean
+                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+                })
+            }
+        })
+    }
+    
+    func  searchEvent(objCurrentController: UIViewController) {
+        let objEventDisplayController = objCurrentController as! EventDisplayController
+        
+        var strSearchText = objEventDisplayController.txtSearchEvent.text
+        
+        doGetAPIs.searchEvent(strSearchText!,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == 200) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjEventDisplayBean = result as! EventDisplayBean
+                    
+                    objEventDisplayController.eventBeanArray = gObjEventDisplayBean.events
+                    
+                    //      print(eventDisplayController.eventBeanArray);
+                    
+                    objEventDisplayController.tableView.reloadData()
+                    
+                })
+
+            }
+        })
+        
     }
     
 }

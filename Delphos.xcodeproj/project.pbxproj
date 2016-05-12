@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
+		F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580614E1CE4668E004BF043 /* ShowEventBean.swift */; };
+		F58061571CE46941004BF043 /* EventShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58061561CE46941004BF043 /* EventShowController.swift */; };
 		F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBACC1CE05B24000A3D2A /* LoginBean.swift */; };
 		F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */; };
 		F58BBAD71CE06280000A3D2A /* UserBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD61CE06280000A3D2A /* UserBean.swift */; };
@@ -129,6 +131,8 @@
 
 /* Begin PBXFileReference section */
 		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
+		F580614E1CE4668E004BF043 /* ShowEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventBean.swift; sourceTree = "<group>"; };
+		F58061561CE46941004BF043 /* EventShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventShowController.swift; sourceTree = "<group>"; };
 		F58BBACC1CE05B24000A3D2A /* LoginBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBean.swift; sourceTree = "<group>"; };
 		F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsBean.swift; sourceTree = "<group>"; };
 		F58BBAD61CE06280000A3D2A /* UserBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBean.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				F599843F1CDCC3360055C8D3 /* RegisterController.swift */,
 				F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */,
 				F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */,
+				F58061561CE46941004BF043 /* EventShowController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */,
 				F5AFC0521CE0A3AF00C95687 /* EventBean.swift */,
 				F578B5751CE1F2EC0063246A /* RegisterBean.swift */,
+				F580614E1CE4668E004BF043 /* ShowEventBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -517,11 +523,13 @@
 			files = (
 				F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */,
 				F5A2EE7C1CDC6CD800419419 /* ViewController.swift in Sources */,
+				F58061571CE46941004BF043 /* EventShowController.swift in Sources */,
 				F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */,
 				F5AFC04B1CE0A1A700C95687 /* EventDisplayBean.swift in Sources */,
 				F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */,
 				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
 				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
+				F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */,
 				F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */,
 				F5C598F21CDDE6FB000C3F58 /* DAOGetAPIs.swift in Sources */,
 				F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */,
