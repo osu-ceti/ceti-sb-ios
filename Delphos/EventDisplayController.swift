@@ -10,92 +10,118 @@ import UIKit
 import ObjectMapper
 
 
-class EventDisplayController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate, UISearchBarDelegate {
+class EventDisplayController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate {
     
+    @IBOutlet weak var btnEvents: SSRadioButton!
+    @IBOutlet weak var btnSchools: SSRadioButton!
+    @IBOutlet weak var btnUsers: SSRadioButton!
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []
     var eventBeanSearchArray: [EventBean]! = []
     
-    @IBOutlet weak var txtSearchEvent: UITextField!
-    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 130, 15))
+    var navigationBar: UINavigationBar = UINavigationBar()
+    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+    var searchButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
+    var searchButtonItem = UIBarButtonItem()
     @IBOutlet weak var tableView: UITableView!
+    var radioButtonController: SSRadioButtonsController?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        radioButtonController = SSRadioButtonsController(buttons: btnEvents, btnSchools, btnUsers)
+        radioButtonController!.delegate = self
+        radioButtonController!.shouldLetDeSelect = true
         searchBar.delegate = self
                // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 44))
+        navigationBar = UINavigationBar(frame: CGRectMake(0, 10, self.view.frame.size.width, 44))
         navigationBar.backgroundColor = UIColor.whiteColor()
         navigationBar.delegate = self;
         
         // Create a navigation item with a title
         let navigationItem = UINavigationItem()
         navigationItem.title = "Events"
-       // var searchBar = UISearchBar(frame: CGRectMake(0, 0, 130, 15))
-        var searchButtonItem = UIBarButtonItem(customView:searchBar)
-        
+        searchButtonItem = UIBarButtonItem(customView:searchBar)
         // Create left and right button for navigation item
-        let leftButton: UIBarButtonItem =  UIBarButtonItem(title: "Save", style:   UIBarButtonItemStyle.Plain, target: self, action: "btn_clicked:")
-        var searchButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
-        
-//        searchBar.delegate = self
-//        
-//        searchBar.searchBarStyle = UISearchBarStyle.Minimal
-//        navigationItem.rightBarButtonItem = searchBarItem
-//
+
+        searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
+
         // Create two buttons for the navigation item
-       navigationItem.rightBarButtonItem = searchButtonItem
+        navigationItem.rightBarButtonItem = searchButton
         
         // Assign the navigation item to the navigation bar
         navigationBar.items = [navigationItem]
         
         // Make the navigation bar a subview of the current view controller
         self.view.addSubview(navigationBar)
-      //  searchBar.showsCancelButton = true
         
-       self.tableView.dataSource = self
+        self.tableView.dataSource = self
         tableView.delegate = self
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.EVENT_ALL)
         
         self.tableView.tableFooterView = UIView()
+        gBtnRadioValue = "events"
             }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func eventsClick(sender: UIButton) {
+        gBtnRadioValue = "events"
+    }
+    @IBAction func btnSchool(sender: UIButton) {
+        gBtnRadioValue = "schools"
+    }
+    func didSelectButton(aButton: UIButton?) {
+        print(aButton)
+    }
 
     func btnAdd(sender:UIButton) {
         print("clicked")
     }
+    @IBAction func btnUsers(sender: UIButton) {
+        gBtnRadioValue = "users"
+    }
     
     func btnSearchClick(sender: UIBarButtonItem) {
-        // Do something
-        searchBar.alpha = 0
         navigationItem.titleView = searchBar
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
-        UIView.animateWithDuration(0.5, animations: {
-            self.searchBar.alpha = 1
-            }, completion: { finished in
-                self.searchBar.becomeFirstResponder()
-        })
+        navigationItem.rightBarButtonItem = nil
+        searchBar.sizeToFit()
+        searchBar.becomeFirstResponder()
+        searchBar.showsCancelButton = true
+        
+        navigationBar.items = [navigationItem]
     }
     
-    @IBAction func btnSearch(sender: UIButton) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
-    }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print("Changed")
+//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let testfacade = appDelegate.getObjFacade()
+//        testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        navigationItem.titleView = nil
+        navigationItem.rightBarButtonItem = searchButton
+        navigationItem.title = "Event"
+        searchBar.text = " "
+        searchBar.sizeToFit()
+        searchBar.becomeFirstResponder()
+        searchBar.showsCancelButton = true
+        
+        navigationBar.items = [navigationItem]
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print("Clicked")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
+         testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
     }
     
     @IBAction func eventAll(sender: UIButton) {

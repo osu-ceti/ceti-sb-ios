@@ -11,5 +11,7 @@ import Foundation
 
 var  gObjEventBean : EventDisplayController!
 var gObjEventDisplayBean : EventDisplayBean!
+var gObjUsersBean : usersBean!
 var gEventID : Int!
 var gObjShowEventBean: ShowEventBean!
+var gBtnRadioValue: String!

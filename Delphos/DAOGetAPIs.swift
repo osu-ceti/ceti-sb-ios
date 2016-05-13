@@ -73,17 +73,21 @@ class DAOGetAPIs: DAOBase {
         })
     }
     
-     func searchEvent(strSearchEvent: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    func searchEvent(gBtnRadioValue: String, strSearchEvent: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         
-         strURL =  DEV_TARGET + SEARCH_EVENT + strSearchEvent
-        
+         strURL =  DEV_TARGET + gBtnRadioValue + SEARCH_EVENT + strSearchEvent
+         var searchBean: AnyObject!
          doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             
             if(status) {
                 print(jsonResult)
-                var eventBean = Mapper<EventDisplayBean>().map(jsonResult)
+                if(gBtnRadioValue == "events") {
+                 searchBean = Mapper<EventDisplayBean>().map(jsonResult)
+                } else if(gBtnRadioValue == "users") {
+                    searchBean = Mapper<usersBean>().map(jsonResult)
+                }
                 
-                callBack?(result: eventBean!, statusCode: statusCode )
+                callBack?(result: searchBean!, statusCode: statusCode )
                 
                 return
             }

@@ -3,10 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DAOGetAPIs.(getAllEvents((result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOGetAPIs.swift">
+         contextName = "DAOPostAPIs.(doRegister(CredentialsBean, callBack : (result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOPostAPIs.swift">
       </ContextState>
       <ContextState
-         contextName = "DAOPostAPIs.(doRegister(CredentialsBean, callBack : (result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOPostAPIs.swift">
+         contextName = "RegisterController.pickerView(UIPickerView, didSelectRow : Int, inComponent : Int) -&gt; ():RegisterController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "txtRole.text">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "DAOBase.(doPost(String, addAuthHeader : Bool, callBack : (jsonResult : NSDictionary, status : Bool, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOBase.swift">
@@ -21,6 +26,17 @@
                value = "result">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SearchController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:SearchController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "eventBeanArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DAOGetAPIs.(getAllEvents((result : AnyObject, statusCode : Int) -&gt; ()?) -&gt; ()).(closure #1):DAOGetAPIs.swift">
       </ContextState>
       <ContextState
          contextName = "EventDisplayController.viewDidLoad() -&gt; ():EventDisplayController.swift">
@@ -38,14 +54,6 @@
             </PersistentString>
             <PersistentString
                value = "eventDisplayController.eventBeanArray">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RegisterController.pickerView(UIPickerView, didSelectRow : Int, inComponent : Int) -&gt; ():RegisterController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "txtRole.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

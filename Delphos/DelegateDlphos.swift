@@ -162,21 +162,29 @@ class DelegateDiphos: NSObject {
     }
     
     func  searchEvent(objCurrentController: UIViewController) {
+        
+        print(objCurrentController)
         let objEventDisplayController = objCurrentController as! EventDisplayController
         
-        var strSearchText = objEventDisplayController.txtSearchEvent.text
+        var strSearchText = objEventDisplayController.searchBar.text
         
-        doGetAPIs.searchEvent(strSearchText!,callBack: {(result: AnyObject,statusCode: Int)   in
+        doGetAPIs.searchEvent(gBtnRadioValue!, strSearchEvent: strSearchText!, callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == 200) {
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    gObjEventDisplayBean = result as! EventDisplayBean
-                    
-                    objEventDisplayController.eventBeanArray = gObjEventDisplayBean.events
+                    let goToSearchController = objCurrentController.storyboard?.instantiateViewControllerWithIdentifier("searchID") as! SearchController
+                    if(gBtnRadioValue == "events") {
+                        gObjEventDisplayBean = result as! EventDisplayBean
+                         goToSearchController.eventBeanArray = gObjEventDisplayBean.events
+                    } else if(gBtnRadioValue == "users") {
+                        gObjUsersBean = result as! usersBean
+                         goToSearchController.usersBeanArray = gObjUsersBean.users
+                    }
+                   
                     
                     //      print(eventDisplayController.eventBeanArray);
-                    
-                    objEventDisplayController.tableView.reloadData()
+                     objCurrentController.presentViewController(goToSearchController, animated: true, completion: nil)
+                    //objEventDisplayController.tableView.reloadData()
                     
                 })
 
