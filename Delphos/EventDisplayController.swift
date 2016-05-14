@@ -25,6 +25,7 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
     @IBOutlet weak var tableView: UITableView!
+    
     var radioButtonController: SSRadioButtonsController?
     override func viewDidLoad() {
         super.viewDidLoad()

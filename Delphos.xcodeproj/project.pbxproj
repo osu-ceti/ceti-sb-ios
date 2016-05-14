@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */; };
+		0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */; };
 		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
 		F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580614E1CE4668E004BF043 /* ShowEventBean.swift */; };
 		F58061571CE46941004BF043 /* EventShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58061561CE46941004BF043 /* EventShowController.swift */; };
-		F580615A1CE5C2DA004BF043 /* SSRadioButtonController in Resources */ = {isa = PBXBuildFile; fileRef = F58061591CE5C2DA004BF043 /* SSRadioButtonController */; };
 		F580616A1CE5E2B9004BF043 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58061691CE5E2B9004BF043 /* SearchController.swift */; };
 		F580616C1CE5E73F004BF043 /* SearchControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580616B1CE5E73F004BF043 /* SearchControllerCell.swift */; };
-		F580616F1CE5EB73004BF043 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580616E1CE5EB73004BF043 /* SSRadioButton.swift */; };
-		F58061711CE5EB7E004BF043 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58061701CE5EB7E004BF043 /* SSRadioButtonsController.swift */; };
 		F58061731CE5F93C004BF043 /* userListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58061721CE5F93C004BF043 /* userListBean.swift */; };
 		F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58061741CE5F9CF004BF043 /* usersBean.swift */; };
 		F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBACC1CE05B24000A3D2A /* LoginBean.swift */; };
@@ -26,7 +25,6 @@
 		F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843F1CDCC3360055C8D3 /* RegisterController.swift */; };
 		F59984431CDCCDC40055C8D3 /* FacadeDelphos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */; };
 		F59984451CDCCDDF0055C8D3 /* DelegateDlphos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984441CDCCDDF0055C8D3 /* DelegateDlphos.swift */; };
-		F59984471CDCDEBE0055C8D3 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = F59984461CDCDEBE0055C8D3 /* Pods */; };
 		F59984651CDCE46A0055C8D3 /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F59984531CDCE3280055C8D3 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE791CDC6CD800419419 /* AppDelegate.swift */; };
 		F5A2EE7C1CDC6CD800419419 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE7B1CDC6CD800419419 /* ViewController.swift */; };
@@ -137,14 +135,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButton.swift; path = SSRadioButtonController/SSRadioButton.swift; sourceTree = "<group>"; };
+		0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButtonsController.swift; path = SSRadioButtonController/SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
 		F580614E1CE4668E004BF043 /* ShowEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventBean.swift; sourceTree = "<group>"; };
 		F58061561CE46941004BF043 /* EventShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventShowController.swift; sourceTree = "<group>"; };
-		F58061591CE5C2DA004BF043 /* SSRadioButtonController */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SSRadioButtonController; path = /Users/prabhu/Documents/Repo/Delphos/SSRadioButtonController; sourceTree = "<absolute>"; };
 		F58061691CE5E2B9004BF043 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		F580616B1CE5E73F004BF043 /* SearchControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchControllerCell.swift; sourceTree = "<group>"; };
-		F580616E1CE5EB73004BF043 /* SSRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButton.swift; path = SSRadioButtonController/SSRadioButton.swift; sourceTree = "<group>"; };
-		F58061701CE5EB7E004BF043 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButtonsController.swift; path = SSRadioButtonController/SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		F58061721CE5F93C004BF043 /* userListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userListBean.swift; sourceTree = "<group>"; };
 		F58061741CE5F9CF004BF043 /* usersBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = usersBean.swift; sourceTree = "<group>"; };
 		F58BBACC1CE05B24000A3D2A /* LoginBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBean.swift; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 		F599843F1CDCC3360055C8D3 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacadeDelphos.swift; sourceTree = "<group>"; };
 		F59984441CDCCDDF0055C8D3 /* DelegateDlphos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateDlphos.swift; sourceTree = "<group>"; };
-		F59984461CDCDEBE0055C8D3 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = ObjectMapper/ObjectMapper.xcodeproj; sourceTree = "<group>"; };
 		F5A2EE761CDC6CD800419419 /* Delphos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delphos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A2EE791CDC6CD800419419 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -207,11 +203,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F580616D1CE5EB64004BF043 /* SSRadioButtonController */ = {
+		0F1C22FC1CE728AF0052AA17 /* SSRadioButtonController */ = {
 			isa = PBXGroup;
 			children = (
-				F58061701CE5EB7E004BF043 /* SSRadioButtonsController.swift */,
-				F580616E1CE5EB73004BF043 /* SSRadioButton.swift */,
+				0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */,
+				0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */,
 			);
 			name = SSRadioButtonController;
 			sourceTree = "<group>";
@@ -263,9 +259,8 @@
 		F5A2EE6D1CDC6CD800419419 = {
 			isa = PBXGroup;
 			children = (
-				F580616D1CE5EB64004BF043 /* SSRadioButtonController */,
+				0F1C22FC1CE728AF0052AA17 /* SSRadioButtonController */,
 				F59984481CDCE3270055C8D3 /* ObjectMapper.xcodeproj */,
-				F59984461CDCDEBE0055C8D3 /* Pods */,
 				F5A2EE781CDC6CD800419419 /* Delphos */,
 				F5A2EE8D1CDC6CD800419419 /* DelphosTests */,
 				F5A2EE981CDC6CD800419419 /* DelphosUITests */,
@@ -523,8 +518,6 @@
 			files = (
 				F5A2EE841CDC6CD800419419 /* LaunchScreen.storyboard in Resources */,
 				F5A2EE811CDC6CD800419419 /* Assets.xcassets in Resources */,
-				F59984471CDCDEBE0055C8D3 /* Pods in Resources */,
-				F580615A1CE5C2DA004BF043 /* SSRadioButtonController in Resources */,
 				F5A2EE7F1CDC6CD800419419 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,8 +543,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F58061711CE5EB7E004BF043 /* SSRadioButtonsController.swift in Sources */,
-				F580616F1CE5EB73004BF043 /* SSRadioButton.swift in Sources */,
+				0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */,
+				0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */,
 				F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */,
 				F5A2EE7C1CDC6CD800419419 /* ViewController.swift in Sources */,
 				F58061571CE46941004BF043 /* EventShowController.swift in Sources */,

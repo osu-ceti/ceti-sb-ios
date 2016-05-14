@@ -12,10 +12,40 @@ import ObjectMapper
 class ViewController: UIViewController {
     @IBOutlet weak var userTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var schoolbusiness: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        // UIColor(hue: 218/360, saturation: 8/100, brightness: 93/100, alpha: 1.0) /* #dae1ed */
+        
+        // UIColor(red: 0.8549, green: 0.8824, blue: 0.9294, alpha: 1.0) /* #dae1ed */
+        // UIColor(red: 218/255, green: 225/255, blue: 237/255, alpha: 1.0) /* #dae1ed */
+        
+        view.backgroundColor = color
+        schoolbusiness.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        schoolbusiness.layer.shadowOpacity = 4
+        schoolbusiness.layer.shadowRadius  = 2
+        schoolbusiness.layer.shadowOffset = CGSizeMake(2, 2);
+        
+        //Bottom border
+        
+        
+        var bottomLine = CALayer()
+        
+        bottomLine.frame = CGRectMake(0.0, userTxt.frame.height - 1, userTxt.frame.width, 1.0)
+        bottomLine.backgroundColor = UIColor.blackColor().CGColor
+        userTxt.borderStyle = UITextBorderStyle.None
+        userTxt.layer.addSublayer(bottomLine)
+        
+        var textboxLine = CALayer()
+        textboxLine.frame = CGRectMake(0.0, passwordTxt.frame.height - 1, passwordTxt.frame.width, 1.0)
+        textboxLine.backgroundColor = UIColor.blackColor().CGColor
+        passwordTxt.borderStyle = UITextBorderStyle.None
+        passwordTxt.layer.addSublayer(textboxLine)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,12 +55,13 @@ class ViewController: UIViewController {
 
 
     @IBAction func btnSignIn(sender: UIButton) {
-  
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)
         
     }
+
 
     @IBAction func btnRegister(sender: UIButton) {
         

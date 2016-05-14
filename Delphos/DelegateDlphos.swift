@@ -21,6 +21,13 @@ class DelegateDiphos: NSObject {
         doPostAPIs = DAOPostAPIs()
         doGetAPIs = DAOGetAPIs()
     }
+    func showAlert(objCurrentController: UIViewController, strMessage: String) {
+        dispatch_async(dispatch_get_main_queue(), {
+            let alertView = UIAlertController(title: "Error", message: strMessage, preferredStyle: .Alert)
+            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            objCurrentController.presentViewController(alertView, animated: true, completion: nil)
+        })
+    }
 
     
     func delegateControl(objCurrentController: UIViewController, action enmAction: DelphosAction) {
@@ -85,6 +92,7 @@ class DelegateDiphos: NSObject {
             else {
                 print("Login failure")
                 boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
             }
         }
         return boolLogin
