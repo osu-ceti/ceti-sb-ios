@@ -15,3 +15,4 @@ var gObjUsersBean : usersBean!
 var gEventID : Int!
 var gObjShowEventBean: ShowEventBean!
 var gBtnRadioValue: String!
+var gBtnRegisterRadio: String!

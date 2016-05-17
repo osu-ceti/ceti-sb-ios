@@ -55,7 +55,9 @@ class DelegateDiphos: NSObject {
         case .SEARCH_EVENT:
             print("SEARCH_EVENT")
             searchEvent(objCurrentController)
-
+        case.CREATE_EVENT:
+            print("CREATE_EVENT")
+            createEvent(objCurrentController)
 
         default:
             print("Error in delegate enum")
@@ -64,7 +66,29 @@ class DelegateDiphos: NSObject {
 
         }
     }
-    
+    func createEvent(objCurrentContoller: UIViewController){
+        let createEventController = objCurrentContoller as! CreateEventController
+        let strTitle = createEventController.txtTitle.text
+        let strContents = createEventController.txtContents.text
+        let strTags = createEventController.txtTags.text
+        let strStartDate = createEventController.txtStartDate.text
+        let strEndDate = createEventController.txtEndDate.text
+       // var objCreateEventBean
+        //DOA calls
+//        doPostAPIs.doLogin(objInputParamBean){ (result: AnyObject, statusCode: Int) in
+//        
+//            if (statusCode == 200){
+//                print("Login Sucessfull")
+//            }
+//            else{
+//                print("Login failure")
+//                boolLogin = false;
+//            }
+//        
+//        
+//        }
+        
+    }
     func login(objCurrentContoller: UIViewController) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! ViewController
@@ -82,6 +106,7 @@ class DelegateDiphos: NSObject {
             
             if (statusCode == 200){
                 print("Login Sucessfull")
+               
                 boolLogin = true;
                    dispatch_async(dispatch_get_main_queue(), {
                     
@@ -127,7 +152,7 @@ class DelegateDiphos: NSObject {
         let strName = registerController.txtName.text
         let strEmail = registerController.txtEmail.text
         let strPassword = registerController.txtPassword.text
-        let strRole = registerController.txtRole.text
+        let strRole = gBtnRegisterRadio
         let strConformPassword = registerController.txtConformPassword.text
         var objInputParamBean: CredentialsBean = CredentialsBean()
         var objInputRegisterBean: LoginBean = LoginBean()
@@ -144,6 +169,7 @@ class DelegateDiphos: NSObject {
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
             if(statusCode == 200) {
                 boolRegister = true
+               
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! ViewController

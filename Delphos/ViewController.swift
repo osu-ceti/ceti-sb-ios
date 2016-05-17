@@ -14,15 +14,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var schoolbusiness: UILabel!
     
+    @IBOutlet weak var switchRememberme: UISwitch!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        // UIColor(hue: 218/360, saturation: 8/100, brightness: 93/100, alpha: 1.0) /* #dae1ed */
-        
-        // UIColor(red: 0.8549, green: 0.8824, blue: 0.9294, alpha: 1.0) /* #dae1ed */
-        // UIColor(red: 218/255, green: 225/255, blue: 237/255, alpha: 1.0) /* #dae1ed */
         
         view.backgroundColor = color
         schoolbusiness.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
@@ -30,6 +28,8 @@ class ViewController: UIViewController {
         schoolbusiness.layer.shadowRadius  = 2
         schoolbusiness.layer.shadowOffset = CGSizeMake(2, 2);
         
+       
+        switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
         //Bottom border
         
         

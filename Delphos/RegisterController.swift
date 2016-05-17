@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class RegisterController: UIViewController, UITextFieldDelegate, SSRadioButtonControllerDelegate {
     
     @IBOutlet weak var schoolbusiness: UILabel!
     @IBOutlet weak var txtName: UITextField!
@@ -16,23 +16,22 @@ class RegisterController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtConformPassword: UITextField!
     
-    @IBOutlet weak var txtRole: UITextField!
-    @IBOutlet weak var pickerRole: UIPickerView!
-     
+    @IBOutlet weak var radioTeacher: SSRadioButton!
+    @IBOutlet weak var radioSpeaker: SSRadioButton!
+    @IBOutlet weak var radioBoth: SSRadioButton!
+    
+    var radioButtonController: SSRadioButtonsController?
     
     var arrRole = ["Speaker", "Teacher" ,"Both"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        pickerRole.hidden = true
-        txtRole.text = arrRole[0]
-        txtRole.inputView = UIView()
         
-        txtRole.delegate = self
-        pickerRole.delegate = self
-        pickerRole.dataSource = self
-       // txtRole.inputView = pickerRole
-        
+       
+        radioButtonController = SSRadioButtonsController(buttons: radioTeacher, radioSpeaker,radioBoth)
+        radioButtonController!.delegate = self
+        radioButtonController!.shouldLetDeSelect = true
         
         var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
@@ -70,40 +69,27 @@ class RegisterController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func didSelectButton(aButton: UIButton?) {
+        print(aButton)
+    }
 
-    @IBAction func btnRegister(sender: UIButton) {
+    @IBAction func btnTeacher(sender: UIButton) {
+        gBtnRegisterRadio = "Teacher"
         
+    }
+    @IBAction func btnSpeaker(sender: UIButton) {
+        gBtnRegisterRadio = "Speaker"
+    }
+   
+    @IBAction func btnBoth(sender: UIButton) {
+        gBtnRegisterRadio = "Both"
+    }
+    @IBAction func btnRegister(sender: UIButton) {
+    
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.REGISTER)
     }
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrRole.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrRole[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
-       
-            txtRole.text = arrRole[row]
-        
-            pickerRole.hidden = true
-    }
-    
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        if (textField == txtRole) {
-            pickerRole.hidden = false
-            self.pickerRole.layer.zPosition = 1
-        }
-        textField.resignFirstResponder()
-       return false
-    }
-
+   
 }

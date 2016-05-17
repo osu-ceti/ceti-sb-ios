@@ -66,6 +66,12 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
         gBtnRadioValue = "events"
             }
     
+    @IBAction func btnCreateEvent(sender: UIButton) {
+    
+        let goToCreateEvent = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
+        self.presentViewController(goToCreateEvent, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
