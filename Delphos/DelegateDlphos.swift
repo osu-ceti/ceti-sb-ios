@@ -71,22 +71,36 @@ class DelegateDiphos: NSObject {
         let strTitle = createEventController.txtTitle.text
         let strContents = createEventController.txtContents.text
         let strTags = createEventController.txtTags.text
-        let strStartDate = createEventController.txtStartDate.text
-        let strEndDate = createEventController.txtEndDate.text
-       // var objCreateEventBean
+        let strStartDate: String = createEventController.startDate.text!
+        let strStartTime: String = createEventController.startTime.text!
+        let strEndDate: String = createEventController.endDate.text!
+        let strEndTime: String = createEventController.endTime.text!
+        var strEventStartDate =  strStartDate + "," + strStartTime
+        var strEventEndDate =  strEndDate + "," + strEndTime
+        
+        var objInputParamBean:CreateBean  = CreateBean()
+       var objInputParamEventBean: CreateEventBean = CreateEventBean()
+        objInputParamEventBean.title = strTitle
+        objInputParamEventBean.content = strContents
+        objInputParamEventBean.tag_list = strTags
+        objInputParamEventBean.event_start = strEventStartDate
+        objInputParamEventBean.event_end = strEventEndDate
+        objInputParamEventBean.loc_id = gObjUserBean.school_id
+        objInputParamEventBean.time_zone = "Eastern Time (US & Canada)"
+        objInputParamBean.event = objInputParamEventBean
         //DOA calls
-//        doPostAPIs.doLogin(objInputParamBean){ (result: AnyObject, statusCode: Int) in
-//        
-//            if (statusCode == 200){
-//                print("Login Sucessfull")
-//            }
-//            else{
-//                print("Login failure")
-//                boolLogin = false;
-//            }
-//        
-//        
-//        }
+        doPostAPIs.doCreateEvent(objInputParamBean){ (result: AnyObject, statusCode: Int) in
+        
+            if (statusCode == 200){
+                print("create event Sucessfull")
+            }
+            else{
+                print("create event failure")
+              
+            }
+        
+        
+        }
         
     }
     func login(objCurrentContoller: UIViewController) -> Bool {
@@ -106,7 +120,9 @@ class DelegateDiphos: NSObject {
             
             if (statusCode == 200){
                 print("Login Sucessfull")
-               
+                gObjUserBean = loginResult as! UserBean
+                
+
                 boolLogin = true;
                    dispatch_async(dispatch_get_main_queue(), {
                     

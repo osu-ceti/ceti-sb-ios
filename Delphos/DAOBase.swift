@@ -134,7 +134,7 @@ class DAOBase: NSObject {
      */
     func doPost(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
         
-        var objRequest : NSMutableURLRequest = NSMutableURLRequest()
+        let objRequest : NSMutableURLRequest = NSMutableURLRequest()
         
         var disJsonResult: NSDictionary!
         
@@ -148,6 +148,14 @@ class DAOBase: NSObject {
         objRequest.HTTPMethod = "POST"
         
         objRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if (addAuthHeader) {
+        
+            objRequest.setValue(gObjUserBean.email, forHTTPHeaderField: "X-User-Email")
+        
+            objRequest.setValue(gObjUserBean.authentication_token, forHTTPHeaderField: "X-User-Token")
+        }
+        
         
         if strInputParamsJson != "" {
             print("DoPost-InputParamJson\(strInputParamsJson)")

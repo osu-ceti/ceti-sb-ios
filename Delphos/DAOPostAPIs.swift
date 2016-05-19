@@ -57,5 +57,27 @@ class DAOPostAPIs: DAOBase {
             }
         })
     }
+    func doCreateEvent(objLoginParam: CreateBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        print("doCreaateEvent")
+        strURL =  CREATE_EVENT_URL
+        let JSONString = Mapper().toJSONString(objLoginParam, prettyPrint: true)
+        
+        doPost(JSONString!, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status){
+                var userBean = Mapper<UserBean>().map(jsonResult)!
+                callBack?(result: userBean, statusCode: statusCode )
+                return
+            }
+            else{
+                print(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+        })
+    }
+
 
 }

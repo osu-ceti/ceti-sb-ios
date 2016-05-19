@@ -1,5 +1,5 @@
 //
-//  EventBean.swift
+//  CreateBean.swift
 //  Delphos
 //
 //  Created by Babu on 5/18/16.
@@ -13,13 +13,10 @@ import ObjectMapper
  * ErrorBean Class to store ErrorBean details
  * returned from REST API JSON
  */
-class EventBean: Mappable {
+class CreateBean: Mappable {
     
-    var event_start: String!
+    var event: CreateEventBean!
     
-    var event_title: String!
-    
-    var id: Int!
     
     required init()
     {
@@ -33,12 +30,9 @@ class EventBean: Mappable {
     // Mappable
     func mapping(map: Map) {
         
-        event_start    <- map["event_start"]
+        event    <- map["event"]
+     
         
-        event_title    <- map["event_title"]
-        
-        id              <- map["id"]
         
     }
-    
 }

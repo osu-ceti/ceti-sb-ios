@@ -1,25 +1,23 @@
 //
-//  CreateEventBeans.swift
+//  EventBeans.swift
 //  Delphos
 //
-//  Created by Babu on 5/17/16.
+//  Created by Babu on 5/18/16.
 //  Copyright © 2016 Ontoborn. All rights reserved.
 //
 
 import UIKit
 import ObjectMapper
 
-class  CreateEventBean: Mappable {
+/**
+ * ErrorBean Class to store ErrorBean details
+ * returned from REST API JSON
+ */
+class EventBeans: Mappable {
 
-    var title: String!
+    var event: CredentialsBean!
     
-    var contents: String!
-    
-    var tags: String!
-    
-    var startdate: String!
-    
-    var enddate: String!
+    var commit: String?
     
     required init()
     {
@@ -33,7 +31,10 @@ class  CreateEventBean: Mappable {
     // Mappable
     func mapping(map: Map) {
         
-        title    <- map["title"]
+        event    <- map["event"]
+        
+        commit    <- map["commit"]
+        
         
     }
 
