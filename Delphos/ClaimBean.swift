@@ -14,11 +14,11 @@ import ObjectMapper
  * ErrorBean Class to store ErrorBean details
  * returned from REST API JSON
  */
-class usersBean: Mappable {
+class ClaimBean: Mappable {
     
-    var users: [userListBean]!
-    var user: searchUserListBean!
-
+    var event_id: Int!
+    
+    var user_id: Int!
     
     required init()
     {
@@ -32,9 +32,9 @@ class usersBean: Mappable {
     // Mappable
     func mapping(map: Map) {
         
-        users    <- map["users"]
+        event_id    <- map["event_id"]
         
-        user    <- map["user"]
-
+        user_id    <- map["user_id"]
+                
     }
 }

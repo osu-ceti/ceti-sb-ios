@@ -50,10 +50,12 @@ class SearchController: UIViewController, UITableViewDataSource, UITableViewDele
             var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
         
             (cell as! SearchControllerCell).txtTitle!.text = String(eventDisplayBean.event_title)
+            (cell as! SearchControllerCell).txtIdHidden!.text = String(eventDisplayBean.id)
         } else if(usersBeanArray.count > 0) {
             var usersListBean: userListBean! = usersBeanArray[indexPath.row]
             
             (cell as! SearchControllerCell).txtTitle!.text = String(usersListBean.name)
+            (cell as! SearchControllerCell).txtIdHidden!.text = String(usersListBean.id)
         }
         
     }
@@ -69,15 +71,15 @@ class SearchController: UIViewController, UITableViewDataSource, UITableViewDele
     
     //function to respond to row selection
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! EventDisplayCell
-        print("currentCell", currentCell.eventID.text!)
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchControllerCell
+        print("currentCell", currentCell.txtIdHidden.text!)
         
-        gEventID = Int(currentCell.eventID.text!)
+        gSearchValue = Int(currentCell.txtIdHidden.text!)
         dispatch_async(dispatch_get_main_queue(), {
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+            testfacade.doTask(self,action: DelphosAction.SHOW_SEARCH)
         })
     }
 }

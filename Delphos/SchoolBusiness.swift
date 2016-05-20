@@ -26,9 +26,15 @@ let LOGIN_URL: String = "users/sign_in"
 let REGISTER_URL: String = "users/sign_up"
 let SHOW_ALL_EVENTS = "events/my_events"
 let EVENT = "events/"
+let SCHOOL = "schools/"
+let USERS = "users/"
 let SEARCH_EVENT = "?search="
 let CREATE_EVENT_URL = "events/create"
 
+let CREATE_CLAIMS = "events/claim_event"
+let USER_CLAIM = "&user_id="
+let CLAIMS = "claims/"
+let CANCEL_CLAIMS = "/cancel"
 
 
 

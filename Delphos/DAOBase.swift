@@ -265,5 +265,141 @@ class DAOBase: NSObject {
         }
         task.resume()
     }
+    
+    
+    func doDelete(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
+        
+        
+        let objRequest : NSMutableURLRequest = NSMutableURLRequest()
+        
+        var disJsonResult: NSDictionary!
+        
+        var strStatus = false
+        
+        var strStatusCode: Int!
+        
+        
+        objRequest.URL = NSURL(string: DEV_TARGET+strURL)
+        
+        objRequest.HTTPMethod = "DELETE"
+        
+        objRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if (addAuthHeader) {
+            
+            objRequest.setValue(gObjUserBean.email, forHTTPHeaderField: "X-User-Email")
+            
+            objRequest.setValue(gObjUserBean.authentication_token, forHTTPHeaderField: "X-User-Token")
+        }
+        
+        
+        if strInputParamsJson != "" {
+            print("DoPost-InputParamJson\(strInputParamsJson)")
+            
+            objRequest.HTTPBody = strInputParamsJson.dataUsingEncoding(NSUTF8StringEncoding)
+        }
+        
+        // sending synchronousRequest
+        print(objRequest)
+        
+        let session = NSURLSession.sharedSession()
+        
+        // println("hold request proceeding")
+        let task = session.dataTaskWithRequest(objRequest) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            
+            if ((error) != nil)
+            {
+                print("error: \(error)")
+                
+                strStatus  = false
+                
+                let errorBean:ErrorBean = ErrorBean()
+                errorBean.description = "Empty Respsonse , Probable API key error"
+                errorBean.exception   =  error.debugDescription
+                errorBean.statusCode  =  error!.code
+                errorBean.reasonPhrase = "Check Status Code"
+                
+                //let dataToUse = NSJSONSerialization.JSONObjectWithData(errorBean as NSData, options:   NSJSONReadingOptions.AllowFragments, error: errorData) as! NSDictionary
+                let JSONString = Mapper().toJSON(errorBean)
+                
+                callBack?(jsonResult: JSONString, status: strStatus, statusCode: 401)
+                
+                return
+            }
+            
+            print(response)
+            
+            if let responseUrl = response as? NSHTTPURLResponse
+            {
+                strStatusCode = responseUrl.statusCode
+                
+                // println(responseUrl)
+                
+                let error:NSError?
+                
+                print(strStatusCode)
+                do{
+                    //JSON Parser
+                    disJsonResult =  try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary
+                    
+                    print(disJsonResult)
+                }catch{
+                    print("Error while Parsing JSON")
+                    disJsonResult = ["Result" : "Empty",
+                                     "description"   : "",
+                                     
+                                     "exception"   : "",
+                                     "reasonPhrase": "",
+                                     
+                                     "statusCode"    : 0 ]
+                    
+                    callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: 0)
+                    return
+                    
+                    
+                }
+                
+                if(strStatusCode < 400){
+                    
+                    strStatus  = true
+                    if(disJsonResult == nil)
+                    {
+                        
+                        if NSString(data: data!, encoding: NSUTF8StringEncoding) != nil
+                        {
+                            if let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSArray, let dictionary = json.firstObject as? NSDictionary {
+                                print(dictionary)
+                                callBack?(jsonResult: dictionary, status: strStatus, statusCode: strStatusCode)
+                            } else {
+                                
+                                disJsonResult = ["Result" : "Empty"]
+                                
+                                callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
+                                return
+                            }
+                            return
+                        }
+                        
+                        disJsonResult = ["Result" : "Empty"]
+                        
+                        callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
+                        return
+                    }
+                    
+                    callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
+                }
+                else{
+                    strStatus  = false
+                    
+                    let dataToUse = (try! NSJSONSerialization.JSONObjectWithData(data!, options:   NSJSONReadingOptions.AllowFragments)) as! NSDictionary
+                    
+                    callBack?(jsonResult: dataToUse, status: strStatus, statusCode: strStatusCode)
+                    
+                    print(dataToUse)
+                }
+            }
+        }
+        task.resume()
+    }
 }
 

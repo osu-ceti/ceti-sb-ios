@@ -56,7 +56,6 @@ class ViewController: UIViewController {
 
 
     @IBAction func btnSignIn(sender: UIButton) {
-
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)

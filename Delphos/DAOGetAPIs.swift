@@ -106,4 +106,53 @@ class DAOGetAPIs: DAOBase {
         })
         
      }
+    
+    
+    
+    func getSearchEventsAndUsers(gBtnRadioValue: String, strsearchID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("getEvent")
+        
+        if(gBtnRadioValue == events) {
+            strURL =  DEV_TARGET + EVENT + strsearchID
+        } else if(gBtnRadioValue == schools) {
+            strURL =  DEV_TARGET + SCHOOL + strsearchID
+        } else if(gBtnRadioValue == users) {
+            strURL =  DEV_TARGET + USERS + strsearchID
+        }
+        
+        var showEventBean : AnyObject!
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                if(gBtnRadioValue == events) {
+                    showEventBean = Mapper<ShowEventBean>().map(jsonResult)
+                } else if(gBtnRadioValue == schools) {
+                    
+                } else if(gBtnRadioValue == users) {
+                    showEventBean = Mapper<usersBean>().map(jsonResult)
+                }
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    
+   
+
 }

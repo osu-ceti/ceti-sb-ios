@@ -18,3 +18,11 @@ var gBtnRadioValue: String!
 var gBtnRegisterRadio: String!
 var gObjUserBean : UserBean!
 
+var gObjSearchUserListBean : searchUserListBean!
+var gSearchValue: Int!
+var gObjUsers: UserBean!
+
+var events = "events"
+var schools = "schools"
+var users = "users"
+var gClaim: String!

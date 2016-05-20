@@ -58,7 +58,18 @@ class DelegateDiphos: NSObject {
         case.CREATE_EVENT:
             print("CREATE_EVENT")
             createEvent(objCurrentController)
-
+        case .SHOW_SEARCH:
+            print("SHOW_SEARCH")
+            showSearch(objCurrentController)
+            
+        case .CLAIM_EVENT:
+            print("SHOW_SEARCH")
+            claimEvent(objCurrentController)
+            
+        case .CANCEL_CLAIM:
+            print("SHOW_SEARCH")
+            cancelClaim(objCurrentController)
+            
         default:
             print("Error in delegate enum")
         
@@ -114,7 +125,6 @@ class DelegateDiphos: NSObject {
         objInputParamCredsBean.email = strUser
         objInputParamCredsBean.password = strPassword
         objInputParamBean.user = objInputParamCredsBean
-        
         //DOA calls
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
             
@@ -127,6 +137,8 @@ class DelegateDiphos: NSObject {
                    dispatch_async(dispatch_get_main_queue(), {
                     
                 let goToEventDisplay = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! EventDisplayController
+                  
+                    gObjUsers = loginResult as! UserBean
                    objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
                 })
             }
@@ -243,6 +255,66 @@ class DelegateDiphos: NSObject {
         
     }
     
+    func showSearch(objCurrentContoller: UIViewController) {
+        
+        var strShowSearch: String = String(gSearchValue)
+        
+        doGetAPIs.getSearchEventsAndUsers(gBtnRadioValue, strsearchID: strShowSearch,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == 200) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+                    if(gBtnRadioValue == events) {
+                        gObjShowEventBean = result as! ShowEventBean
+                    } else if(gBtnRadioValue == schools) {
+                        
+                    } else if(gBtnRadioValue == users) {
+                         var objUserBean = result as! usersBean
+                        gObjSearchUserListBean = objUserBean.user
+                    }
+                    
+                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+                })
+            }
+        })
+
+    }
+    
+    func claimEvent(objCurrentContoller: UIViewController) -> Bool {
+        
+      //  var objShowEventBean: ShowEventBean = ShowEventBean()
+        
+       // objClaimBean.user_id = gObjUsers.id
+       // objClaimBean.event_id = gObjShowEventBean.user_id
+        //DOA calls
+        doPostAPIs.doClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
+            
+            if (statusCode == 200){
+                print("claimed")
+                
+                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! EventDisplayController
+                objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+                
+            } else {
+                print("not claimed")
+            }
+        }
+        return true
+    }
+    
+    func cancelClaim(objCurrentContoller: UIViewController) -> Bool {
+                
+     //   var claimID = gObjShowEventBean.claim_id
+        
+        doPostAPIs.doCancelClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
+            if (statusCode == 200){
+                print("Cancel claimed")
+            } else {
+                print("not claimed")
+            }
+        }
+        
+        return true
+    }
 }
 
 

@@ -13,6 +13,7 @@ import UIKit
 class SearchControllerCell: UITableViewCell {
 
     @IBOutlet weak var txtTitle: UILabel!
+    @IBOutlet weak var txtIdHidden: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
