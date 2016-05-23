@@ -22,16 +22,30 @@ let TEACHER: String = "Teacher"
 let SPEAKER: String = "Speaker"
 let BOTH: String = "Both"
 let TAG: String = "school_business"
+let POST = "POST"
+let GET = "GET"
+let PATCH = "PATCH"
+let DELETE = "DELETE"
+
+
+
+
+//API URLS
 let LOGIN_URL: String = "users/sign_in"
 let REGISTER_URL: String = "users/sign_up"
-let SHOW_ALL_EVENTS = "events/my_events"
 let EVENT = "events/"
+let SHOW_ALL_EVENTS = EVENT + "my_events"
+let SHOW_APPROVED = EVENT + "pending_events"
+let SHOW_CLAIMS = EVENT + "pending_claims"
+let SHOW_CONFIRMED = EVENT + "confirmed"
+
 let SCHOOL = "schools/"
 let USERS = "users/"
 let SEARCH_EVENT = "?search="
-let CREATE_EVENT_URL = "events/create"
+let EVENT_URL = "events"
+let CREATE_EVENT_URL = EVENT_URL + "/create"
 
-let CREATE_CLAIMS = "events/claim_event"
+let CREATE_CLAIMS = EVENT_URL + "/claim_event"
 let USER_CLAIM = "&user_id="
 let CLAIMS = "claims/"
 let CANCEL_CLAIMS = "/cancel"

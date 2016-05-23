@@ -12,8 +12,14 @@
 		0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B271CEAFBE0000ED18F /* CreateEventController.swift */; };
 		0F500B2E1CEB224E000ED18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F500B2C1CEB224E000ED18F /* Main.storyboard */; };
 		0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */; };
+		0F9E4F191CF31D4A004FC736 /* DelphosEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */; };
+		0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1A1CF32891004FC736 /* RightViewController.swift */; };
+		0F9E4F1D1CF32ACB004FC736 /* SlidingMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */; };
+		0F9E4F1F1CF33A9C004FC736 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1E1CF33A9C004FC736 /* UIViewControllerExtension.swift */; };
 		0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF601CEC3C900094EC79 /* EventBean.swift */; };
 		0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF631CEC5E050094EC79 /* CreateBean.swift */; };
+		0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */; };
+		0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */; };
 		F57260411CEC2F18007078C3 /* ClaimBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57260401CEC2F18007078C3 /* ClaimBean.swift */; };
 		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
 		F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580614E1CE4668E004BF043 /* ShowEventBean.swift */; };
@@ -25,7 +31,7 @@
 		F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBACC1CE05B24000A3D2A /* LoginBean.swift */; };
 		F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */; };
 		F58BBAD71CE06280000A3D2A /* UserBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD61CE06280000A3D2A /* UserBean.swift */; };
-		F58BBADA1CE07444000A3D2A /* EventDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */; };
+		F58BBADA1CE07444000A3D2A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* HomeController.swift */; };
 		F58F698D1CEAF2DB00C4ED91 /* searchUserListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58F698C1CEAF2DB00C4ED91 /* searchUserListBean.swift */; };
 		F58F69951CEAF41C00C4ED91 /* BadgesBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58F69941CEAF41C00C4ED91 /* BadgesBean.swift */; };
 		F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843B1CDC9D400055C8D3 /* DelphosStrings.swift */; };
@@ -43,7 +49,7 @@
 		F5AFC04B1CE0A1A700C95687 /* EventDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */; };
 		F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */; };
 		F5AFC0561CE0BB6300C95687 /* EventDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */; };
-		F5AFC0581CE0BD0E00C95687 /* EventDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */; };
+		F5AFC0581CE0BD0E00C95687 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* HomeController.swift */; };
 		F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598EA1CDDBFB2000C3F58 /* DelphosAction.swift */; };
 		F5C598EE1CDDE674000C3F58 /* DAOPostAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */; };
 		F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */; };
@@ -146,8 +152,14 @@
 		0F500B271CEAFBE0000ED18F /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		0F500B2D1CEB224E000ED18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventBean.swift; sourceTree = "<group>"; };
+		0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosEnums.swift; sourceTree = "<group>"; };
+		0F9E4F1A1CF32891004FC736 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
+		0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingMenuController.swift; sourceTree = "<group>"; };
+		0F9E4F1E1CF33A9C004FC736 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		0FB1DF601CEC3C900094EC79 /* EventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBean.swift; sourceTree = "<group>"; };
 		0FB1DF631CEC5E050094EC79 /* CreateBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBean.swift; sourceTree = "<group>"; };
+		0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultBean.swift; sourceTree = "<group>"; };
+		0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultEvent.swift; sourceTree = "<group>"; };
 		F57260401CEC2F18007078C3 /* ClaimBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimBean.swift; sourceTree = "<group>"; };
 		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
 		F580614E1CE4668E004BF043 /* ShowEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventBean.swift; sourceTree = "<group>"; };
@@ -159,7 +171,7 @@
 		F58BBACC1CE05B24000A3D2A /* LoginBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBean.swift; sourceTree = "<group>"; };
 		F58BBAD41CE05B64000A3D2A /* CredentialsBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsBean.swift; sourceTree = "<group>"; };
 		F58BBAD61CE06280000A3D2A /* UserBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBean.swift; sourceTree = "<group>"; };
-		F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDisplayController.swift; sourceTree = "<group>"; };
+		F58BBAD91CE07444000A3D2A /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		F58F698C1CEAF2DB00C4ED91 /* searchUserListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchUserListBean.swift; sourceTree = "<group>"; };
 		F58F69941CEAF41C00C4ED91 /* BadgesBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgesBean.swift; sourceTree = "<group>"; };
 		F599843B1CDC9D400055C8D3 /* DelphosStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosStrings.swift; sourceTree = "<group>"; };
@@ -229,12 +241,15 @@
 			isa = PBXGroup;
 			children = (
 				F599843F1CDCC3360055C8D3 /* RegisterController.swift */,
-				F58BBAD91CE07444000A3D2A /* EventDisplayController.swift */,
+				F58BBAD91CE07444000A3D2A /* HomeController.swift */,
 				F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */,
 				F58061561CE46941004BF043 /* EventShowController.swift */,
 				F58061691CE5E2B9004BF043 /* SearchController.swift */,
 				F580616B1CE5E73F004BF043 /* SearchControllerCell.swift */,
 				0F500B271CEAFBE0000ED18F /* CreateEventController.swift */,
+				0F9E4F1A1CF32891004FC736 /* RightViewController.swift */,
+				0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */,
+				0F9E4F1E1CF33A9C004FC736 /* UIViewControllerExtension.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				F599843B1CDC9D400055C8D3 /* DelphosStrings.swift */,
+				0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */,
 			);
 			name = DelphosGlobals;
 			sourceTree = "<group>";
@@ -368,6 +384,8 @@
 				F58F69941CEAF41C00C4ED91 /* BadgesBean.swift */,
 				F57260401CEC2F18007078C3 /* ClaimBean.swift */,
 				F5E06FD81CED9BAB00E3D83B /* ClaimEventBean.swift */,
+				0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */,
+				0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -573,18 +591,24 @@
 				F58061571CE46941004BF043 /* EventShowController.swift in Sources */,
 				0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */,
 				F57260411CEC2F18007078C3 /* ClaimBean.swift in Sources */,
+				0F9E4F191CF31D4A004FC736 /* DelphosEnums.swift in Sources */,
 				F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */,
 				F5AFC04B1CE0A1A700C95687 /* EventDisplayBean.swift in Sources */,
 				F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */,
+				0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */,
 				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
+				0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */,
 				F580616C1CE5E73F004BF043 /* SearchControllerCell.swift in Sources */,
+				0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */,
 				0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */,
 				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
 				F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */,
+				0F9E4F1D1CF32ACB004FC736 /* SlidingMenuController.swift in Sources */,
 				F5E06FD91CED9BAB00E3D83B /* ClaimEventBean.swift in Sources */,
 				F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */,
 				F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */,
 				F5C598F21CDDE6FB000C3F58 /* DAOGetAPIs.swift in Sources */,
+				0F9E4F1F1CF33A9C004FC736 /* UIViewControllerExtension.swift in Sources */,
 				F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */,
 				F58F698D1CEAF2DB00C4ED91 /* searchUserListBean.swift in Sources */,
 				F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */,
@@ -592,7 +616,7 @@
 				0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */,
 				F58061731CE5F93C004BF043 /* userListBean.swift in Sources */,
 				F599843E1CDC9F120055C8D3 /* SchoolBusiness.swift in Sources */,
-				F58BBADA1CE07444000A3D2A /* EventDisplayController.swift in Sources */,
+				F58BBADA1CE07444000A3D2A /* HomeController.swift in Sources */,
 				F59984431CDCCDC40055C8D3 /* FacadeDelphos.swift in Sources */,
 				F5C598EE1CDDE674000C3F58 /* DAOPostAPIs.swift in Sources */,
 				F580616A1CE5E2B9004BF043 /* SearchController.swift in Sources */,
@@ -609,7 +633,7 @@
 			files = (
 				F5A2EE8F1CDC6CD800419419 /* DelphosTests.swift in Sources */,
 				F5AFC0561CE0BB6300C95687 /* EventDisplayBean.swift in Sources */,
-				F5AFC0581CE0BD0E00C95687 /* EventDisplayController.swift in Sources */,
+				F5AFC0581CE0BD0E00C95687 /* HomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

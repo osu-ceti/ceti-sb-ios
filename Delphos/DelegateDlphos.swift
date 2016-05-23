@@ -69,7 +69,9 @@ class DelegateDiphos: NSObject {
         case .CANCEL_CLAIM:
             print("SHOW_SEARCH")
             cancelClaim(objCurrentController)
-            
+//        case .EDIT_EVENT:
+//            print("Edit_Event")
+//            editEvent(objCurrentController)
         default:
             print("Error in delegate enum")
         
@@ -86,9 +88,10 @@ class DelegateDiphos: NSObject {
         let strStartTime: String = createEventController.startTime.text!
         let strEndDate: String = createEventController.endDate.text!
         let strEndTime: String = createEventController.endTime.text!
-        var strEventStartDate =  strStartDate + "," + strStartTime
-        var strEventEndDate =  strEndDate + "," + strEndTime
-        
+        var strEventStartDate =  strStartDate + "-" + strStartTime
+        var strEventEndDate =  strEndDate + "-" + strEndTime
+        var strEventTimeZone = createEventController.txtTimeZone.text
+        var eventId = 0
         var objInputParamBean:CreateBean  = CreateBean()
        var objInputParamEventBean: CreateEventBean = CreateEventBean()
         objInputParamEventBean.title = strTitle
@@ -97,20 +100,45 @@ class DelegateDiphos: NSObject {
         objInputParamEventBean.event_start = strEventStartDate
         objInputParamEventBean.event_end = strEventEndDate
         objInputParamEventBean.loc_id = gObjUserBean.school_id
-        objInputParamEventBean.time_zone = "Eastern Time (US & Canada)"
+        objInputParamEventBean.time_zone = strEventTimeZone
         objInputParamBean.event = objInputParamEventBean
         //DOA calls
-        doPostAPIs.doCreateEvent(objInputParamBean){ (result: AnyObject, statusCode: Int) in
+        if(createEventController.isEdit){
+            eventId = createEventController.eventId
+        }
+      
+        doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: objInputParamBean){ (result: AnyObject, statusCode: Int) in
         
             if (statusCode == 200){
                 print("create event Sucessfull")
+                let resultBean: CreateEventResultEventBean = result as! CreateEventResultEventBean
+                gObjShowEventBean = ShowEventBean()
+                gObjShowEventBean.id = resultBean.id
+                gObjShowEventBean.user_id = resultBean.user_id
+                gObjShowEventBean.created_at = resultBean.created_at
+                gObjShowEventBean.updated_at = resultBean.updated_at
+                gObjShowEventBean.content = resultBean.content
+                gObjShowEventBean.title = resultBean.title
+                gObjShowEventBean.event_start = resultBean.event_start
+                gObjShowEventBean.event_end = resultBean.event_end
+                gObjShowEventBean.loc_id = resultBean.loc_id
+                gObjShowEventBean.speaker_id = resultBean.speaker_id
+                gObjShowEventBean.user_name = resultBean.user_name
+                gObjShowEventBean.loc_name = resultBean.loc_name
+                gObjShowEventBean.active = resultBean.active
+                gObjShowEventBean.time_zone = resultBean.time_zone
+                gObjShowEventBean.complete = resultBean.complete
+                  gObjShowEventBean.claim_id = 1
+                self.showEventUI(objCurrentContoller)
+
+                
             }
             else{
                 print("create event failure")
               
             }
-        
-        
+    
+            
         }
         
     }
@@ -136,7 +164,7 @@ class DelegateDiphos: NSObject {
                 boolLogin = true;
                    dispatch_async(dispatch_get_main_queue(), {
                     
-                let goToEventDisplay = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! EventDisplayController
+                let goToEventDisplay = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
                   
                     gObjUsers = loginResult as! UserBean
                    objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
@@ -152,9 +180,30 @@ class DelegateDiphos: NSObject {
     }
 
     func showAllEvents(objCurrentContoller: UIViewController) {
+        
+        let  homeController = objCurrentContoller as! HomeController
+        
+        switch homeController.listType {
+        case .ALL:
+            doGetAPIs.strURL =  DEV_TARGET + SHOW_ALL_EVENTS
+            
+        case .APPROVED:
+            doGetAPIs.strURL =  DEV_TARGET + SHOW_APPROVED
+            
+        case .CLAIMS:
+            doGetAPIs.strURL =  DEV_TARGET + SHOW_CLAIMS
+            
+        case .CONFIRMED:
+            doGetAPIs.strURL =  DEV_TARGET + SHOW_CONFIRMED
+            
+        default:
+            doGetAPIs.strURL =  DEV_TARGET + SHOW_ALL_EVENTS
+        }
+        
+
          doGetAPIs.getAllEvents { (result: AnyObject,statusCode: Int) in
             
-             let eventDisplayController = objCurrentContoller as! EventDisplayController
+             let eventDisplayController = objCurrentContoller as! HomeController
             if(statusCode != 0){
                 print("Show event")
                 //var objEventDisplayBean = result as! EventDisplayBean
@@ -209,16 +258,26 @@ class DelegateDiphos: NSObject {
         return boolRegister
     }
     
+    func showEventUI(objCurrentContoller: UIViewController) {
+    
+        dispatch_async(dispatch_get_main_queue(), {
+        let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+        objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+        })
+    }
+    
     func showEvent(objCurrentContoller: UIViewController) {
         var strUserDetail: String = String(gEventID)
         
         doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == 200) {
-                 dispatch_async(dispatch_get_main_queue(), {
-                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
-                    gObjShowEventBean = result as! ShowEventBean
-                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
-                })
+                gObjShowEventBean = result as! ShowEventBean
+                self.showEventUI(objCurrentContoller)
+
+//                 dispatch_async(dispatch_get_main_queue(), {
+//                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+//                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+//                })
             }
         })
     }
@@ -226,7 +285,7 @@ class DelegateDiphos: NSObject {
     func  searchEvent(objCurrentController: UIViewController) {
         
         print(objCurrentController)
-        let objEventDisplayController = objCurrentController as! EventDisplayController
+        let objEventDisplayController = objCurrentController as! HomeController
         
         var strSearchText = objEventDisplayController.searchBar.text
         
@@ -291,7 +350,7 @@ class DelegateDiphos: NSObject {
             if (statusCode == 200){
                 print("claimed")
                 
-                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! EventDisplayController
+                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
                 objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
                 
             } else {
@@ -315,6 +374,15 @@ class DelegateDiphos: NSObject {
         
         return true
     }
+//    func editEvent(objCurrentContoller: UIViewController) -> Bool {
+//        
+//        let goToCreateEventController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
+//        objCurrentContoller.presentViewController(goToCreateEventController, animated: true, completion: nil)
+//        
+//
+//        
+//                  }
+
 }
 
 

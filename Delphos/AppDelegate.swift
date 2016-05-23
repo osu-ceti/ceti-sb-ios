@@ -22,9 +22,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return facade
     }
+    private func createMenuView() {
+        
+        // create viewController code...
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
+       
+        let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
+        
+        let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
+
+        
+        
+        
+        let slideMenuController = SlidingMenuController(mainViewController:nvc, rightMenuViewController: rightViewController)
+        
+        self.window?.backgroundColor = UIColor.whiteColor()
+        self.window?.rootViewController = slideMenuController
+        self.window?.makeKeyAndVisible()
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+       // self.createMenuView()
         return true
     }
 

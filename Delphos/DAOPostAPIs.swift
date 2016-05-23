@@ -57,18 +57,49 @@ class DAOPostAPIs: DAOBase {
             }
         })
     }
-    func doCreateEvent(objLoginParam: CreateBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    func doSaveEvent(isEdit: Bool, eventId: Int, objEventParam: CreateBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         
-        print("doCreaateEvent")
-        strURL =  CREATE_EVENT_URL
-        let JSONString = Mapper().toJSONString(objLoginParam, prettyPrint: true)
+        print("doCreateEvent")
+        var method :String
+        if(isEdit)
+        {
+            strURL = EVENT_URL + "/" + String(eventId)
+            method = PATCH
+        }
+        else{
+            strURL =  CREATE_EVENT_URL
+            method = POST
+        }
+        let JSONString = Mapper().toJSONString(objEventParam, prettyPrint: true)
         
-        doPost(JSONString!, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+        doUpdate(method,strInputParamsJson: JSONString!, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var userBean = Mapper<UserBean>().map(jsonResult)!
-                callBack?(result: userBean, statusCode: statusCode )
-                return
+                if(!isEdit){
+                    for (key, value) in jsonResult {
+                        print("\(key) = \(value)")
+                        if(key as! String == "event"){
+                            var result = (value as! String)
+                            var slashesStrippedResult = result.stringByReplacingOccurrencesOfString("\\\"", withString: "\"")
+                            var commasCorrectedResult = slashesStrippedResult.stringByReplacingOccurrencesOfString(",", withString: ",\n")
+                            var finalResult = commasCorrectedResult.stringByReplacingOccurrencesOfString("}", withString: "\n}")
+                            finalResult = commasCorrectedResult.stringByReplacingOccurrencesOfString("{", withString: "{\n")
+                            print(finalResult)
+                        
+                            let showEventBean = Mapper<CreateEventResultEventBean>().map(finalResult)!
+                            callBack?(result: showEventBean, statusCode: statusCode )
+                            return
+
+                        }
+                    }
+                }
+               
+                else{
+                    let showEventBean = Mapper<CreateEventResultBean>().map(jsonResult)!
+                    callBack?(result: showEventBean.event, statusCode: statusCode )
+                    return
+                }
+               
             }
             else{
                 print(jsonResult)

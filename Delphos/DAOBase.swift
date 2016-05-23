@@ -28,6 +28,7 @@ class DAOBase: NSObject {
         return intStatusCode;
     }
     
+    
     /**
      * Method Adds API Key to the HTTP Connection Header.
      * Should be Overridden in Login DAO and Register as API Key is not Required
@@ -134,6 +135,16 @@ class DAOBase: NSObject {
      */
     func doPost(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
         
+        doUpdate(POST, strInputParamsJson: strInputParamsJson, addAuthHeader: addAuthHeader, callBack: callBack)
+    }
+    
+    func doPatch(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
+        
+        doUpdate(PATCH, strInputParamsJson: strInputParamsJson, addAuthHeader: addAuthHeader, callBack: callBack)
+    }
+    
+    func doUpdate(method: String, strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
+        
         let objRequest : NSMutableURLRequest = NSMutableURLRequest()
         
         var disJsonResult: NSDictionary!
@@ -145,14 +156,14 @@ class DAOBase: NSObject {
         
         objRequest.URL = NSURL(string: DEV_TARGET+strURL)
         
-        objRequest.HTTPMethod = "POST"
+        objRequest.HTTPMethod = method
         
         objRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         if (addAuthHeader) {
-        
+            
             objRequest.setValue(gObjUserBean.email, forHTTPHeaderField: "X-User-Email")
-        
+            
             objRequest.setValue(gObjUserBean.authentication_token, forHTTPHeaderField: "X-User-Token")
         }
         
@@ -203,23 +214,23 @@ class DAOBase: NSObject {
                 
                 print(strStatusCode)
                 do{
-                //JSON Parser
-                disJsonResult =  try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary
-                
-                print(disJsonResult)
+                    //JSON Parser
+                    disJsonResult =  try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary
+                    
+                    print(disJsonResult)
                 }catch{
                     print("Error while Parsing JSON")
                     disJsonResult = ["Result" : "Empty",
                                      "description"   : "",
-                        
-                        "exception"   : "",
-                        "reasonPhrase": "",
-                        
-                        "statusCode"    : 0 ]
+                                     
+                                     "exception"   : "",
+                                     "reasonPhrase": "",
+                                     
+                                     "statusCode"    : 0 ]
                     
                     callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: 0)
                     return
-
+                    
                     
                 }
                 
@@ -249,6 +260,9 @@ class DAOBase: NSObject {
                         callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
                         return
                     }
+                    for (key, value) in disJsonResult {
+                        print("\(key) = \(value)")
+                    }
                     
                     callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
                 }
@@ -265,7 +279,6 @@ class DAOBase: NSObject {
         }
         task.resume()
     }
-    
     
     func doDelete(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
         

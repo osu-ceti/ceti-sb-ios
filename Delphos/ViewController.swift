@@ -9,26 +9,61 @@
 import UIKit
 import ObjectMapper
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UINavigationBarDelegate {
     @IBOutlet weak var userTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var schoolbusiness: UILabel!
     
     @IBOutlet weak var switchRememberme: UISwitch!
    
+    var navigationBar: UINavigationBar = UINavigationBar()
+    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+   // var searchButton : UIBarButtonItem = UIBarButtonItem()
+    var searchBarItem = UIBarButtonItem()
+    var searchButtonItem = UIBarButtonItem()
+
+    @IBOutlet weak var requiredError: UILabel!
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.requiredError.hidden = true
+       
+        // Create the navigation bar
+        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
+        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+        navigationBar.delegate = self;
+        navigationBar.layer.shadowOpacity = 4
+        navigationBar.layer.shadowRadius  = 2
+        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
+        // Create a navigation item with a title
+        let navigationItem = UINavigationItem()
+        navigationItem.title = "School-Business"
+        searchButtonItem = UIBarButtonItem(customView:searchBar)
+        // Create left and right button for navigation item
+        
+        //searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
+        
+        // Create two buttons for the navigation item
+        //navigationItem.leftBarButtonItem = searchButton
+        
+        // Assign the navigation item to the navigation bar
+        navigationBar.items = [navigationItem]
+        
+        // Make the navigation bar a subview of the current view controller
+        self.view.addSubview(navigationBar)
+
         // Do any additional setup after loading the view, typically from a nib.
         
         var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
         view.backgroundColor = color
-        schoolbusiness.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        schoolbusiness.layer.shadowOpacity = 4
-        schoolbusiness.layer.shadowRadius  = 2
-        schoolbusiness.layer.shadowOffset = CGSizeMake(2, 2);
-        
+//        schoolbusiness.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+//        schoolbusiness.layer.shadowOpacity = 4
+//        schoolbusiness.layer.shadowRadius  = 2
+//        schoolbusiness.layer.shadowOffset = CGSizeMake(2, 2);
+        userTxt.text = "jith87@gmail.com"
+        passwordTxt.text = "ontojith"
        
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
         //Bottom border
@@ -48,25 +83,61 @@ class ViewController: UIViewController {
         passwordTxt.layer.addSublayer(textboxLine)
 
     }
+//    func showAlert(objCurrentController: UIViewController, strMessage: String) {
+//        dispatch_async(dispatch_get_main_queue(), {
+//            let alertView = UIAlertController(title: "Error", message: strMessage, preferredStyle: .Alert)
+//            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+//            objCurrentController.presentViewController(alertView, animated: true, completion: nil)
+//        })
+//    }
+    
+
+  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-
+    
+    @IBAction func touchEvent(sender: UITextField) {
+        self.requiredError.hidden = true
+    }
+    
+    
+    @IBAction func touchRequiredHidePassword(sender: AnyObject) {
+         self.requiredError.hidden = true
+    }
     @IBAction func btnSignIn(sender: UIButton) {
+        
+        
+        if (userTxt.text == ""){
+            self.requiredError.hidden = false
+            self.requiredError.text = "Required Username"
+           //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
+        }
+        else if (passwordTxt.text == "")
+        {
+            self.requiredError.hidden = false
+            self.requiredError.text = "Required Password"
+        }
+            
+        else{
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)
-        
+        }
     }
 
-
+   
+   
     @IBAction func btnRegister(sender: UIButton) {
         
-        let goToRegisterController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
-        self.presentViewController(goToRegisterController, animated: true, completion: nil)
-    }
+     
+            let goToRegisterController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
+            self.presentViewController(goToRegisterController, animated: true, completion: nil)
+        }
+    
 }
 

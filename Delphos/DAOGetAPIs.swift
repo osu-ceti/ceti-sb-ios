@@ -17,7 +17,6 @@ class DAOGetAPIs: DAOBase {
     func getAllEvents(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
     
         print("getAllEvents")
-        strURL =  DEV_TARGET + SHOW_ALL_EVENTS
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             print(jsonResult);

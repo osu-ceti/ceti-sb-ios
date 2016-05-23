@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 
-class EventDisplayController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate {
+class HomeController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate {
     
     @IBOutlet weak var btnEvents: SSRadioButton!
     @IBOutlet weak var btnSchools: SSRadioButton!
@@ -22,10 +22,12 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
     var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
     var searchButton : UIBarButtonItem = UIBarButtonItem()
+     var backButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
+    var listType = EventListingType.ALL
+     var menuButton : UIBarButtonItem = UIBarButtonItem()
     @IBOutlet weak var tableView: UITableView!
-    
     var radioButtonController: SSRadioButtonsController?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,21 +37,27 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
         radioButtonController!.shouldLetDeSelect = true
         searchBar.delegate = self
                // Create the navigation bar
-        navigationBar = UINavigationBar(frame: CGRectMake(0, 10, self.view.frame.size.width, 44))
+        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
         navigationBar.backgroundColor = UIColor.whiteColor()
         navigationBar.delegate = self;
+        //self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
+
         
         // Create a navigation item with a title
         let navigationItem = UINavigationItem()
-        navigationItem.title = "Events"
+        navigationItem.title = "School-Business"
         searchButtonItem = UIBarButtonItem(customView:searchBar)
         // Create left and right button for navigation item
 
         searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
+        menuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: "menuButtonClick:")
 
         // Create two buttons for the navigation item
-        navigationItem.rightBarButtonItem = searchButton
-        
+//        let backimage = UIImage(contentsOfFile:"backarrow")
+        backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: "back:")
+
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItems = [searchButton, menuButton]
         // Assign the navigation item to the navigation bar
         navigationBar.items = [navigationItem]
         
@@ -64,7 +72,25 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
         
         self.tableView.tableFooterView = UIView()
         gBtnRadioValue = "events"
+        //self.setNavigationBarItem()
+//        if (SchoolBusiness.getRole().equals("Teacher") || SchoolBusiness.getRole().equals("Both")) {
+//            ((Button) view.findViewById(R.id.create_event)).setOnClickListener(HomeFragment.this);
+//        } else {
+//            ((Button) view.findViewById(R.id.create_event)).setVisibility(View.INVISIBLE);
+//        }
+        
             }
+    func back(sender: UIBarButtonItem){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("loginId") as! ViewController
+        self.presentViewController(nextViewController,animated:true,completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    func menuButtonClick(sender: UIBarButtonItem){
+        
+    
+    }
     
     @IBAction func btnCreateEvent(sender: UIButton) {
     
@@ -114,8 +140,8 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         navigationItem.titleView = nil
-        navigationItem.rightBarButtonItem = searchButton
-        navigationItem.title = "Event"
+        navigationItem.rightBarButtonItems = [searchButton, menuButton]
+        navigationItem.title = "School-Business"
         searchBar.text = " "
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
@@ -130,19 +156,28 @@ class EventDisplayController: UIViewController, UITableViewDataSource, UITableVi
         let testfacade = appDelegate.getObjFacade()
          testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
     }
-    
-    @IBAction func eventAll(sender: UIButton) {
+    func getEventsList(){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.EVENT_ALL)
+    }
+    
+    @IBAction func eventAll(sender: UIButton) {
+       listType = EventListingType.ALL
+       getEventsList()
         
     }
     @IBAction func eventApproval(sender: AnyObject) {
-        
+        listType = EventListingType.APPROVED
+        getEventsList()
     }
     @IBAction func eventClaims(sender: AnyObject) {
+        listType = EventListingType.CLAIMS
+        getEventsList()
     }
     @IBAction func eventConfirmed(sender: AnyObject) {
+        listType = EventListingType.CONFIRMED
+        getEventsList()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -14,14 +14,13 @@ import ObjectMapper
  * ErrorBean Class to store ErrorBean details
  * returned from REST API JSON
  */
-class  ShowEventBean: Mappable {
+class  CreateEventResultEventBean: Mappable {
     
     var active: Bool!
-    
-    var claim_id: Int!
-    
+//    
+//    
     var complete: Bool!
-    
+
     var content: String!
     
     var created_at: String!
@@ -29,14 +28,13 @@ class  ShowEventBean: Mappable {
     var event_end: String!
     
     var event_start: String!
-    
+
     var id: Int!
     
     var loc_id: Int!
     
     var loc_name: String!
     
-    var speaker: String!
     
     var speaker_id: Int!
     
@@ -49,7 +47,8 @@ class  ShowEventBean: Mappable {
     var user_id: Int!
     
     var user_name: String!
-    
+
+    var claim_id:String!
     
     required init()
     {
@@ -62,13 +61,11 @@ class  ShowEventBean: Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        
+        claim_id  <- map["claim_id"]
         active    <- map["active"]
         
-        claim_id    <- map["claim_id"]
-        
         complete    <- map["complete"]
-        
+
         content    <- map["content"]
         
         created_at    <- map["created_at"]
@@ -82,8 +79,7 @@ class  ShowEventBean: Mappable {
         loc_id    <- map["loc_id"]
         
         loc_name    <- map["loc_name"]
-        
-        speaker    <- map["speaker"]
+       
         
         speaker_id    <- map["speaker_id"]
         

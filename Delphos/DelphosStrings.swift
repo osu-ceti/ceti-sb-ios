@@ -9,7 +9,7 @@
 import Foundation
 
 
-var  gObjEventBean : EventDisplayController!
+var gObjEventBean : HomeController!
 var gObjEventDisplayBean : EventDisplayBean!
 var gObjUsersBean : usersBean!
 var gEventID : Int!
@@ -22,7 +22,9 @@ var gObjSearchUserListBean : searchUserListBean!
 var gSearchValue: Int!
 var gObjUsers: UserBean!
 
+var gObjCreateEvent : CreateEventBean!
 var events = "events"
 var schools = "schools"
 var users = "users"
 var gClaim: String!
+var gEditEvent:String!
