@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class EventShowController: NavController,UISearchBarDelegate {
+class EventShowController: NavController {
 
     @IBOutlet weak var labeltext1: UILabel!
     @IBOutlet weak var labelText2: UILabel!

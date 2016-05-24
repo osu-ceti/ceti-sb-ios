@@ -9,12 +9,9 @@
 import UIKit
 
 
-class HomeController: NavController, UITableViewDataSource, UITableViewDelegate,  UISearchBarDelegate, SSRadioButtonControllerDelegate {
+class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var btnEvents: SSRadioButton!
-    @IBOutlet weak var btnSchools: SSRadioButton!
-    @IBOutlet weak var btnUsers: SSRadioButton!
-    
+
     @IBOutlet weak var btnConfirmEvent: UIButton!
     @IBOutlet weak var btnClaimEvent: UIButton!
     @IBOutlet weak var btnApprovalEvent: UIButton!
@@ -29,21 +26,18 @@ class HomeController: NavController, UITableViewDataSource, UITableViewDelegate,
     var listType = EventListingType.ALL
     
     @IBOutlet weak var tableView: UITableView!
-    var radioButtonController: SSRadioButtonsController?
+   // var radioButtonController: SSRadioButtonsController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        radioButtonController = SSRadioButtonsController(buttons: btnEvents, btnSchools, btnUsers)
-        radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = true
         
         //Adding Navbar
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         navigationBar.delegate = self;
         backToView = ""
-        
+        radioButtonController!.delegate = self
+
         
         self.tableView.dataSource = self
         tableView.delegate = self
@@ -81,12 +75,7 @@ class HomeController: NavController, UITableViewDataSource, UITableViewDelegate,
   
   
 
-    @IBAction func eventsClick(sender: UIButton) {
-        gBtnRadioValue = "events"
-    }
-    @IBAction func btnSchool(sender: UIButton) {
-        gBtnRadioValue = "schools"
-    }
+
     func didSelectButton(aButton: UIButton?) {
         print(aButton)
     }
@@ -94,9 +83,7 @@ class HomeController: NavController, UITableViewDataSource, UITableViewDelegate,
     func btnAdd(sender:UIButton) {
         print("clicked")
     }
-    @IBAction func btnUsers(sender: UIButton) {
-        gBtnRadioValue = "users"
-    }
+
     
    
     func getEventsList(){

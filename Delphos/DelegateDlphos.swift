@@ -288,7 +288,7 @@ class DelegateDiphos: NSObject {
     func  searchEvent(objCurrentController: UIViewController) {
         
         print(objCurrentController)
-        let objEventDisplayController = objCurrentController as! HomeController
+        let objEventDisplayController = objCurrentController as! NavController
         
         var strSearchText = objEventDisplayController.searchBar.text
         

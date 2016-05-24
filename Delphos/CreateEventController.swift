@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class CreateEventController: NavController,UISearchBarDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class CreateEventController: NavController, UIPickerViewDataSource, UIPickerViewDelegate {
     
        @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtContents: UITextField!

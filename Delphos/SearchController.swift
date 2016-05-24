@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class SearchController: NavController,UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchController: NavController, UITableViewDataSource, UITableViewDelegate {
 
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []
