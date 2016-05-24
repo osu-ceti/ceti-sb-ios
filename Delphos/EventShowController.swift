@@ -27,8 +27,11 @@ class EventShowController: NavController {
     @IBOutlet weak var txtTitle: UILabel!
     @IBOutlet weak var claim: UIButton!
     @IBOutlet weak var editEvent: UIButton!
+   
+    @IBOutlet weak var cancelClaim: UIButton!
     @IBOutlet weak var cancelEvent: UIButton!
    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,9 +57,9 @@ class EventShowController: NavController {
             self.labeltext1.text = "Speaker:"
             self.labelText2.text = "Event Start:"
             self.labelText3.text = "Event End:"
-            self.labelText4.text = "Event Location:"
-            self.labelText5.text = "Event Username:"
-            self.labelText6.text = "Event content:"
+            self.labelText4.text = "Location:"
+            self.labelText5.text = "Created By:"
+            self.labelText6.text = "Content:"
             
             
             self.txtTitle.text = gObjShowEventBean.title
@@ -72,12 +75,14 @@ class EventShowController: NavController {
                 RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
                 
                 self.editEvent.hidden = false
-                self.editEvent.hidden = false
+                self.cancelEvent.hidden = false
                 self.claim.hidden = true
-                gCancelEvent = "cancel"
+                self.cancelClaim.hidden = true
+                gCancelEvent = "cancelEvent "
                 gEditEvent = "EditEvent"
-                editEvent.setTitle( "EditEvent", forState: .Normal)
-                cancelEvent.setTitle( "Cancel", forState: .Normal)
+                cancelEvent.setTitle( "Cancel Event", forState: .Normal)
+                editEvent.setTitle( "Edit Event", forState: .Normal)
+                
                 
 
             }
@@ -85,9 +90,11 @@ class EventShowController: NavController {
                 
                 self.editEvent.hidden = true
                 self.cancelEvent.hidden = true
+                gCancelClaim = "cancelClaim"
                 gClaim = "claim"
-                 claim.setTitle( "claim", forState: .Normal)
-                //claim.frame = CGRectMake(0, 600, 100, 50)
+                cancelClaim.setTitle( "Cancel Claim", forState: .Normal)
+                claim.setTitle( "Claim", forState: .Normal)
+                
                 
             }
 
@@ -122,7 +129,7 @@ class EventShowController: NavController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func btnClaim(sender: AnyObject) {
-        
+         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
          testfacade.doTask(self,action: DelphosAction.CLAIM_EVENT)
@@ -132,5 +139,11 @@ class EventShowController: NavController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
          testfacade.doTask(self,action: DelphosAction.CANCEL_CLAIM)
+    }
+    @IBAction func btnDeleteEvent(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.CANCEL_EVENT)
+        
     }
 }

@@ -157,5 +157,28 @@ class DAOPostAPIs: DAOBase {
         })
         
     }
+    func doCancelEvent(objEventID: ShowEventBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        var strEventID = String(objEventID.id)
+        strURL =  EVENT + String(objEventID.id) + CANCEL_EVENT
+        
+        //   let JSONString = Mapper().toJSONString(strClaimID, prettyPrint: true)
+        
+        doDelete(strEventID, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            if(status) {
+                var cancelEventBean = Mapper<CancelEventBean>().map(jsonResult)!
+                callBack?(result: cancelEventBean, statusCode: statusCode )
+                return
+            } else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+        
+    }
+
 
 }

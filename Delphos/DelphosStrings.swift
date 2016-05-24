@@ -29,3 +29,4 @@ var users = "users"
 var gClaim: String!
 var gEditEvent:String!
 var gCancelEvent:String!
+var gCancelClaim:String!

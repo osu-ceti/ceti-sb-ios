@@ -72,6 +72,9 @@ class DelegateDiphos: NSObject {
 //        case .EDIT_EVENT:
 //            print("Edit_Event")
 //            editEvent(objCurrentController)
+        case .CANCEL_EVENT:
+            print("DELETE EVENT")
+            cancelEvent(objCurrentController)
         default:
             print("Error in delegate enum")
         
@@ -385,6 +388,25 @@ class DelegateDiphos: NSObject {
 //
 //        
 //                  }
+    func cancelEvent(objCurrentContoller: UIViewController) -> Bool {
+    
+   
+    
+    doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
+        if (statusCode == 200){
+            print("Cancel Events")
+            let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
+            objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+        
+        }
+        else {
+            print("not Cancel Event")
+        }
+    }
+    
+    return true
+    }
+
 
 }
 

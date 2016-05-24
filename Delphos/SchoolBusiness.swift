@@ -49,6 +49,7 @@ let CREATE_CLAIMS = EVENT_URL + "/claim_event"
 let USER_CLAIM = "&user_id="
 let CLAIMS = "claims/"
 let CANCEL_CLAIMS = "/cancel"
+let CANCEL_EVENT = "/cancel"
 
 
 
