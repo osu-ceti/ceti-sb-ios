@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class CreateEventController: UIViewController,UINavigationBarDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class CreateEventController: NavController,UISearchBarDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
        @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtContents: UITextField!
@@ -26,11 +26,7 @@ class CreateEventController: UIViewController,UINavigationBarDelegate, UIPickerV
     var datePickerView = UIDatePicker()
     
     var dateFormatter = NSDateFormatter()
-    var navigationBar: UINavigationBar = UINavigationBar()
-    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-    var searchButton : UIBarButtonItem = UIBarButtonItem()
-    var searchBarItem = UIBarButtonItem()
-    var searchButtonItem = UIBarButtonItem()
+    
     var isEdit = false
     var eventId = 0
 
@@ -46,29 +42,14 @@ class CreateEventController: UIViewController,UINavigationBarDelegate, UIPickerV
         self.requiredError.hidden = true
        // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))
         //self.view.addSubview(txtTitle)
-        // Create the navigation bar
-        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
-        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+        
+        
+        //Adding Navbar
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
         navigationBar.delegate = self;
-        navigationBar.layer.shadowOpacity = 4
-        navigationBar.layer.shadowRadius  = 2
-        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
-        navigationItem.title = "School-Business"
-        searchButtonItem = UIBarButtonItem(customView:searchBar)
-        // Create left and right button for navigation item
-        
-        //searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
-        
-        // Create two buttons for the navigation item
-        
-        let backimage = UIImage(contentsOfFile:"backarrow")
-        searchButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: "back:")
-        navigationItem.leftBarButtonItem = searchButton
-        
-        // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
+        backToView = "HomeID"
+
         
         // Make the navigation bar a subview of the current view controller
         self.view.addSubview(navigationBar)
@@ -96,7 +77,7 @@ class CreateEventController: UIViewController,UINavigationBarDelegate, UIPickerV
         endTime.text = dateFormatter.stringFromDate(futureDate)
         txtTimeZone.text = "Eastern Time (US & Canada)"
         self.startTime.hidden = true
-        self.endTime.hidden = true
+       self.endTime.hidden = true
         self.txtTimeZone.hidden = true
         var currentDtae = NSDate()
          var CurrentDateFormat = NSDateFormatter()
@@ -106,27 +87,27 @@ class CreateEventController: UIViewController,UINavigationBarDelegate, UIPickerV
         
         if(isEdit){
             //Page is being edited 
+           
             self.txtTitle.text = gObjShowEventBean.title
             self.txtContents.text = gObjShowEventBean.content
-            self.startDate.text = gObjShowEventBean.event_start
-            self.endDate.text = gObjShowEventBean.event_end
+           var spiltStartDateTime = gObjShowEventBean.event_start.componentsSeparatedByString(" ")
+            var spiltEndDateTime = gObjShowEventBean.event_end.componentsSeparatedByString(" ")
+            self.startDate.text = spiltStartDateTime[0]
+            self.endDate.text = spiltEndDateTime[0]
             self.eventId = gObjShowEventBean.id
-//          self.startTime.text = gObjShowEventBean.user_name
-//          self.endTime.text = gObjShowEventBean.content
+            var timeOfStartPicker = spiltStartDateTime[2]
+            dateFormatter.dateFormat = "HH:mm"
+            self.stratTimePicker.date = dateFormatter.dateFromString(timeOfStartPicker)!
+            self.startTime.text = spiltStartDateTime[2] + "-" + spiltStartDateTime[3]
+           self.endTime.text = spiltEndDateTime[2] + "-" + spiltEndDateTime[3]
 //          self.txtTags.text = gObjShowEventBean.event_
 
             btnPostEvent.setTitle("Update Event", forState: .Normal)
             
-
+         
         }
     }
-    func back(sender: UIBarButtonItem){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("loginId") as! ViewController
-        self.presentViewController(nextViewController,animated:true,completion: nil)
-        self.navigationController?.popViewControllerAnimated(true)
-        
-    }
+    
     @IBAction func StartDateTouch(sender: UITextField) {
     
         

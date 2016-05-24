@@ -21,7 +21,7 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
     @IBOutlet weak var radioBoth: SSRadioButton!
     let checkCharacter = NSCharacterSet.letterCharacterSet()
     var radioButtonController: SSRadioButtonsController?
-    
+     
     @IBOutlet weak var requiredField: UILabel!
     
     
@@ -176,7 +176,7 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
         else if (txtEmail.text != "" )
         {
             var emailvalid = isValidEmail(txtEmail.text!)
-            print(emailvalid)
+            //print(emailvalid)
             if(emailvalid == false ){
                 self.requiredField.hidden = false
                 self.requiredField.text = "Required Vaild Email"

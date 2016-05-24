@@ -164,7 +164,7 @@ class DelegateDiphos: NSObject {
                 boolLogin = true;
                    dispatch_async(dispatch_get_main_queue(), {
                     
-                let goToEventDisplay = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
+                let goToEventDisplay = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
                   
                     gObjUsers = loginResult as! UserBean
                    objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
@@ -252,6 +252,9 @@ class DelegateDiphos: NSObject {
                     let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! ViewController
                     objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
                 })
+            }
+            else{
+                    self.showAlert(objCurrentContoller, strMessage: "Select Role")
             }
             
         }
@@ -350,7 +353,7 @@ class DelegateDiphos: NSObject {
             if (statusCode == 200){
                 print("claimed")
                 
-                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
+                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
                 objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
                 
             } else {

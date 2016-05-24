@@ -15,3 +15,11 @@ enum EventListingType: UInt{
     case CLAIMS
     case CONFIRMED    
 }
+
+enum RoleType: UInt{
+    case TEACHER = 1
+    case SPEAKER = 2
+    case BOTH = 3
+
+
+}

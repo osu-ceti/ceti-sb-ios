@@ -45,7 +45,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         
-        let homeController = storyboard.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
+        let homeController = storyboard.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
         self.homeController = UINavigationController(rootViewController: homeController)
        
         

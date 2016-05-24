@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // create viewController code...
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("eventDisplayID") as! HomeController
+        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
        
         let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
         

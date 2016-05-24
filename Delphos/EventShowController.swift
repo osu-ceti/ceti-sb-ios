@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class EventShowController: UIViewController,UINavigationBarDelegate {
+class EventShowController: NavController,UISearchBarDelegate {
 
     @IBOutlet weak var labeltext1: UILabel!
     @IBOutlet weak var labelText2: UILabel!
@@ -27,42 +27,25 @@ class EventShowController: UIViewController,UINavigationBarDelegate {
     @IBOutlet weak var txtTitle: UILabel!
     @IBOutlet weak var claim: UIButton!
     @IBOutlet weak var editEvent: UIButton!
-    
-    var navigationBar: UINavigationBar = UINavigationBar()
-    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-    var searchButton : UIBarButtonItem = UIBarButtonItem()
-    var searchBarItem = UIBarButtonItem()
-    var searchButtonItem = UIBarButtonItem()
-
+    @IBOutlet weak var cancelEvent: UIButton!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        // Create the navigation bar
-        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
-        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+        
+        txtTitle.font = UIFont.boldSystemFontOfSize(15)
+        labeltext1.font = UIFont.boldSystemFontOfSize(15)
+        labelText2.font = UIFont.boldSystemFontOfSize(15)
+        labelText3.font = UIFont.boldSystemFontOfSize(15)
+        labelText4.font = UIFont.boldSystemFontOfSize(15)
+        labelText5.font = UIFont.boldSystemFontOfSize(15)
+        labelText6.font = UIFont.boldSystemFontOfSize(15)
+    
+        
+        //Adding Navbar
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
         navigationBar.delegate = self;
-        navigationBar.layer.shadowOpacity = 4
-        navigationBar.layer.shadowRadius  = 2
-        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
-        navigationItem.title = "School-Business"
-        searchButtonItem = UIBarButtonItem(customView:searchBar)
-        // Create left and right button for navigation item
-        
-       // searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
-        
-        // Create two buttons for the navigation item
-        
-        let backimage = UIImage(contentsOfFile:"backarrow")
-        searchButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: "back:")
-        navigationItem.leftBarButtonItem = searchButton
-        
-        // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
-        
-        // Make the navigation bar a subview of the current view controller
-        self.view.addSubview(navigationBar)
+        backToView = "HomeID"
         
 
         
@@ -75,6 +58,7 @@ class EventShowController: UIViewController,UINavigationBarDelegate {
             self.labelText5.text = "Event Username:"
             self.labelText6.text = "Event content:"
             
+            
             self.txtTitle.text = gObjShowEventBean.title
             self.txtText1.text = gObjShowEventBean.speaker
             self.txtText2.text = gObjShowEventBean.event_start
@@ -83,16 +67,31 @@ class EventShowController: UIViewController,UINavigationBarDelegate {
             self.txtText5.text = gObjShowEventBean.user_name
             self.txtText6.text = gObjShowEventBean.content
             
-           
+            //self.setNavigationBarItem()
+            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
+                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+                
                 self.editEvent.hidden = false
-                gClaim = "cancel"
+                self.editEvent.hidden = false
+                self.claim.hidden = true
+                gCancelEvent = "cancel"
                 gEditEvent = "EditEvent"
                 editEvent.setTitle( "EditEvent", forState: .Normal)
-                claim.setTitle( "Cancel", forState: .Normal)
+                cancelEvent.setTitle( "Cancel", forState: .Normal)
                 
-           
-                //self.editEvent.hidden = true
+
+            }
+            else{
+                
+                self.editEvent.hidden = true
+                self.cancelEvent.hidden = true
                 gClaim = "claim"
+                 claim.setTitle( "claim", forState: .Normal)
+                //claim.frame = CGRectMake(0, 600, 100, 50)
+                
+            }
+
+            
             
         } else if(gBtnRadioValue == users) {
             
@@ -108,13 +107,7 @@ class EventShowController: UIViewController,UINavigationBarDelegate {
             self.txtText2.text = gObjSearchUserListBean.biography
         }
     }
-    func back(sender: UIBarButtonItem){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("loginId") as! ViewController
-        self.presentViewController(nextViewController,animated:true,completion: nil)
-        self.navigationController?.popViewControllerAnimated(true)
-        
-    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -132,13 +125,12 @@ class EventShowController: UIViewController,UINavigationBarDelegate {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        if(gClaim == "claim") {
-            testfacade.doTask(self,action: DelphosAction.CLAIM_EVENT)
-        } else if(gClaim == "cancel") {
-           
-            testfacade.doTask(self,action: DelphosAction.CANCEL_CLAIM)
-            
-        }
-
+         testfacade.doTask(self,action: DelphosAction.CLAIM_EVENT)
+       
+    }
+    @IBAction func btnCancelEvent(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+         testfacade.doTask(self,action: DelphosAction.CANCEL_CLAIM)
     }
 }
