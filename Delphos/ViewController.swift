@@ -68,6 +68,7 @@ class ViewController: UIViewController,UINavigationBarDelegate {
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
         //Bottom border
         
+
         
         var bottomLine = CALayer()
         
@@ -81,6 +82,12 @@ class ViewController: UIViewController,UINavigationBarDelegate {
         textboxLine.backgroundColor = UIColor.blackColor().CGColor
         passwordTxt.borderStyle = UITextBorderStyle.None
         passwordTxt.layer.addSublayer(textboxLine)
+        
+        
+        
+               
+        
+      
 
     }
 //    func showAlert(objCurrentController: UIViewController, strMessage: String) {

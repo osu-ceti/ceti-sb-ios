@@ -21,7 +21,7 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
     @IBOutlet weak var radioBoth: SSRadioButton!
     let checkCharacter = NSCharacterSet.letterCharacterSet()
     var radioButtonController: SSRadioButtonsController?
-     
+    
     @IBOutlet weak var requiredField: UILabel!
     
     
@@ -37,8 +37,8 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-    self.requiredField.hidden = true
+        gBtnRegisterRadio = ""
+        self.requiredField.hidden = true
         // Create the navigation bar
         navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
         navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
@@ -197,11 +197,11 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
             self.requiredField.text = "Required ConfirmPassword"
         }
         
-//        else if (gBtnRegisterRadio == "")
-//        {
-//            self.requiredField.hidden = false
-//            self.requiredField.text = "Required Role"
-//        }
+        else if (gBtnRegisterRadio == "")
+        {
+            self.requiredField.hidden = false
+            self.requiredField.text = "Required Role"
+        }
         else {
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

@@ -25,6 +25,7 @@ class  CreateEventResultEventBean: Mappable {
     
     var created_at: String!
     
+    //Format - YYYY-MM-DD HH:mm a
     var event_end: String!
     
     var event_start: String!
@@ -34,7 +35,6 @@ class  CreateEventResultEventBean: Mappable {
     var loc_id: Int!
     
     var loc_name: String!
-    
     
     var speaker_id: Int!
     

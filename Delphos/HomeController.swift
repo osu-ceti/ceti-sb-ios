@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 
 class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate {
@@ -56,10 +57,22 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         else{
             self.btnCreateEvent.hidden = true
         }
+       
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        
+        CGContextMoveToPoint(context, 10, 50)
+        CGContextAddLineToPoint(context, 20, 100)
+        
+        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
+        CGContextStrokePath(context)
+        
+
         
     }
     
-   
     
     @IBAction func btnCreateEvent(sender: UIButton) {
     

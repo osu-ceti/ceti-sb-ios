@@ -26,6 +26,10 @@ var gObjCreateEvent : CreateEventBean!
 var events = "events"
 var schools = "schools"
 var users = "users"
+
+var gTimeFormat = "HH:mm:ss-a"
+var gDateFormat = "YYYY-MM-dd"
+var gSplitDateTime = "T"
 var gClaim: String!
 var gEditEvent:String!
 var gCancelEvent:String!

@@ -82,7 +82,11 @@ class DAOGetAPIs: DAOBase {
                 print(jsonResult)
                 if(gBtnRadioValue == "events") {
                  searchBean = Mapper<EventDisplayBean>().map(jsonResult)
-                } else if(gBtnRadioValue == "users") {
+                }
+                else if(gBtnRadioValue == "schools") {
+                    searchBean = Mapper<SearchEventBean>().map(jsonResult)
+                }
+                else if(gBtnRadioValue == "users") {
                     searchBean = Mapper<usersBean>().map(jsonResult)
                 }
                 

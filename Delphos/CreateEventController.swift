@@ -26,7 +26,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     var datePickerView = UIDatePicker()
     
     var dateFormatter = NSDateFormatter()
-    
+     var endDatevalid = NSDate()
+     var startDatevalid = NSDate()
+    var startTimeValid = NSDate()
+    var endTimeValid = NSDate()
     var isEdit = false
     var eventId = 0
 
@@ -72,36 +75,124 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         var myObject = NSDate()
         let futureDate = myObject.dateByAddingTimeInterval(60*60);
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH-mm-ss-a"
+        dateFormatter.dateFormat = gTimeFormat
         startTime.text = dateFormatter.stringFromDate(myObject)
         endTime.text = dateFormatter.stringFromDate(futureDate)
+      // self.endTimePicker.date =   dateFormatter.stringFromDate(futureDate)!
         txtTimeZone.text = "Eastern Time (US & Canada)"
-        self.startTime.hidden = true
-       self.endTime.hidden = true
-        self.txtTimeZone.hidden = true
-        var currentDtae = NSDate()
-         var CurrentDateFormat = NSDateFormatter()
-        CurrentDateFormat.dateFormat = "yyyy-mm-dd"
-        self.startDate.text = CurrentDateFormat.stringFromDate(currentDtae)
-        self.endDate.text = CurrentDateFormat.stringFromDate(currentDtae)
         
+        self.startTime.hidden = true
+        self.endTime.hidden = true
+        self.txtTimeZone.hidden = true
+        
+        var currentDate = NSDate()
+        var CurrentDateFormat = NSDateFormatter()
+        CurrentDateFormat.dateFormat = gDateFormat
+        self.startDate.text = CurrentDateFormat.stringFromDate(currentDate)
+        self.endDate.text = CurrentDateFormat.stringFromDate(currentDate)
+      
         if(isEdit){
             //Page is being edited 
-           
+            self.eventId = gObjShowEventBean.id
+
             self.txtTitle.text = gObjShowEventBean.title
             self.txtContents.text = gObjShowEventBean.content
-           var spiltStartDateTime = gObjShowEventBean.event_start.componentsSeparatedByString(" ")
-            var spiltEndDateTime = gObjShowEventBean.event_end.componentsSeparatedByString(" ")
-            self.startDate.text = spiltStartDateTime[0]
-            self.endDate.text = spiltEndDateTime[0]
-            self.eventId = gObjShowEventBean.id
-            var timeOfStartPicker = spiltStartDateTime[2]
-            dateFormatter.dateFormat = "HH:mm"
-            self.stratTimePicker.date = dateFormatter.dateFromString(timeOfStartPicker)!
-            self.startTime.text = spiltStartDateTime[2] + "-" + spiltStartDateTime[3]
-           self.endTime.text = spiltEndDateTime[2] + "-" + spiltEndDateTime[3]
-//          self.txtTags.text = gObjShowEventBean.event_
+            
+            
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
+            //DateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
+            var eventStartDate =  dateFormatter.dateFromString(gObjShowEventBean.event_start)
+            if  (eventStartDate != nil) {
+                //String is already formatted
+                
+                //Start Date and Time
+                
+                self.stratTimePicker.date = eventStartDate!
+                
+                dateFormatter.dateFormat = "hh:mm:ss-a"
+                self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
+                
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                self.startDate.text =  dateFormatter.stringFromDate(eventStartDate!)
+                
+                
+            }
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
 
+           var eventEndDate =  dateFormatter.dateFromString(gObjShowEventBean.event_end)
+            if  (eventEndDate != nil) {
+                //String is already formatted
+                
+                //Start Date and Time
+                
+                self.endTimePicker.date = eventEndDate!
+                
+                dateFormatter.dateFormat = "hh:mm:ss-a"
+                self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
+                
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                self.endDate.text =  dateFormatter.stringFromDate(eventEndDate!)
+                
+                
+            }
+            
+            
+            
+            
+//            else {
+//                //Remove trailing Z
+//
+//                dateFormatter.dateFormat =  "yyyy-MM-dd'T'HH:mm:ss.SSS"
+//                var startDateindex = gObjShowEventBean.event_start.endIndex.advancedBy(-1)
+//                var startDateSubStr = gObjShowEventBean.event_start.substringToIndex(startDateindex)
+//                
+//                
+//                
+//                eventStartDate =  dateFormatter.dateFromString(startDateSubStr)!
+//                dateFormatter.dateFormat =  "yyyy-MM-dd hh:mm a"
+//                self.startDate.text = dateFormatter.stringFromDate(eventStartDate!)
+//                
+//                dateFormatter.dateFormat =  "HH:mm"
+//                self.stratTimePicker.date = eventStartDate!
+//                self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
+//                
+//                
+//            }
+            
+//           var spiltStartDateTime = gObjShowEventBean.event_start.componentsSeparatedByString(" ")
+//            var spiltEndDateTime = gObjShowEventBean.event_end.componentsSeparatedByString(" ")
+//            if(spiltStartDateTime.count == 1){
+
+//                spiltStartDateTime = gObjShowEventBean.event_start.componentsSeparatedByString(gSplitDateTime)
+//                spiltEndDateTime = gObjShowEventBean.event_end.componentsSeparatedByString(gSplitDateTime)
+//            }
+            
+            
+            
+//            self.startDate.text = spiltStartDateTime[0]
+//            
+//            self.endDate.text = spiltEndDateTime[0]
+//            
+//            var timeOfStartPicker = spiltStartDateTime[1]
+//            
+//            var timeOfEndPicker = spiltEndDateTime[1]
+
+            
+            
+            
+            
+//            self.stratTimePicker.date = eventStartDate!
+//            self.stratTimePicker.timeZone = NSTimeZone(abbreviation: "EDT")
+            
+            //self.endTimePicker.date = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
+            
+            
+            
+//            self.startTime.text =  spiltStartDateTime[1]
+//            
+//            self.endTime.text = spiltEndDateTime[1]
+            
+            
             btnPostEvent.setTitle("Update Event", forState: .Normal)
             
          
@@ -166,8 +257,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
      * Method call to showing date picker for start date in a correct format
      */
     func handleDatePicker(sender: UIDatePicker) {
-        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.dateFormat = gDateFormat
+        startDatevalid = sender.date
         startDate.text = dateFormatter.stringFromDate(sender.date)
+        
     }
     
 
@@ -179,7 +272,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     func handleEndDatePicker(sender: UIDatePicker) {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.dateFormat = gDateFormat
+        endDatevalid = sender.date
         endDate.text = dateFormatter.stringFromDate(sender.date)
     }
 
@@ -194,7 +288,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     @IBAction func startTimePickerChange(sender: AnyObject) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss-a"
+        dateFormatter.dateFormat = gTimeFormat
+        startTimeValid = sender.date
         var strDate = dateFormatter.stringFromDate(sender.date)
         startTime.text = strDate
 
@@ -202,8 +297,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     @IBAction func endTimePickerChange(sender: AnyObject) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss-a"
+        dateFormatter.dateFormat = gTimeFormat
+        endTimeValid = sender.date
         var strDate = dateFormatter.stringFromDate(sender.date)
+       
         endTime.text = strDate
         
 
@@ -266,15 +363,29 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             self.requiredError.hidden = false
              self.requiredError.text = "Required Title"
         }
-         else if (txtContents.text == "") {
+      
+//                   else if (txtTags.text == "") {
+//            self.requiredError.hidden = false
+//            self.requiredError.text = "Required Tags"
+//        }
+        else if (txtContents.text == "") {
             self.requiredError.hidden = false
             self.requiredError.text = "Required Contests"
         }
-        else if (txtTags.text == "") {
-            self.requiredError.hidden = false
-            self.requiredError.text = "Required Tags"
+       else if startDatevalid.timeIntervalSinceReferenceDate > endDatevalid.timeIntervalSinceReferenceDate {
+            print("Date1 is Later than Date2")
+             self.requiredError.hidden = false
+            self.requiredError.text = "Invalid End Date"
         }
-        
+//        else if startTimeValid.laterDate(endTimeValid){
+//            self.requiredError.hidden = false
+//            self.requiredError.text = "Invalid End Time"
+//        }
+//        else if startDatevalid.compare(endDatevalid) == NSComparisonResult.OrderedDescending {
+//                print("Date1 is Later than Date2")
+//            }
+
+
         else
         {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

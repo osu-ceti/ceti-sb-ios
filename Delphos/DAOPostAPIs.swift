@@ -57,7 +57,8 @@ class DAOPostAPIs: DAOBase {
             }
         })
     }
-    func doSaveEvent(isEdit: Bool, eventId: Int, objEventParam: CreateBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    
+    func doSaveEvent(isEdit: Bool, eventId: Int, objEventParam: Mappable,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         
         print("doCreateEvent")
         var method :String
@@ -70,9 +71,17 @@ class DAOPostAPIs: DAOBase {
             strURL =  CREATE_EVENT_URL
             method = POST
         }
-        let JSONString = Mapper().toJSONString(objEventParam, prettyPrint: true)
+         var JSONString = ""
+        if(isEdit){
+            JSONString = Mapper().toJSONString(objEventParam as! CreateEventBean, prettyPrint: true)!
+        }
+        else{
+            JSONString = Mapper().toJSONString(objEventParam as! CreateBean, prettyPrint: true)!
+
+        }
         
-        doUpdate(method,strInputParamsJson: JSONString!, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+        
+        doUpdate(method,strInputParamsJson: JSONString, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
                 if(!isEdit){
@@ -87,7 +96,24 @@ class DAOPostAPIs: DAOBase {
                             print(finalResult)
                         
                             let showEventBean = Mapper<CreateEventResultEventBean>().map(finalResult)!
-                            callBack?(result: showEventBean, statusCode: statusCode )
+                            if (showEventBean.id != nil){
+                                
+                                
+                                showEventBean.event_start = self.prettyConvertDateString(showEventBean.event_start)
+                                showEventBean.event_end = self.prettyConvertDateString(showEventBean.event_end)
+                                
+                                
+                                callBack?(result: showEventBean, statusCode: statusCode )
+                            }
+                            else{
+                                //Return Error
+                                print("Server responded  event_id=null")
+                                var  errorBean = ErrorBean()
+                                errorBean.statusCode = 400
+                                errorBean.description = "Failed to Create Event"
+                                callBack?(result: errorBean, statusCode: errorBean.statusCode )
+                            }
+                            
                             return
 
                         }

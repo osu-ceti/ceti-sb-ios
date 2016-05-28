@@ -414,5 +414,22 @@ class DAOBase: NSObject {
         }
         task.resume()
     }
+    
+    var dateFormatter = NSDateFormatter()
+    func prettyConvertDateString(dateStr:String)->String{
+        //The Server returns time in two formats
+        //1. Event Details - "2016-05-28  9:56 AM EDT"
+        //2. Create Event - "2016-04-07T13:02:16.247Z"
+        //We will convert format 2 to format 1 here
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        
+        let eventStartDate =  dateFormatter.dateFromString(dateStr)
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
+        
+        return dateFormatter.stringFromDate(eventStartDate!)
+
+        
+    }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 /**
  * Delegate class that delegates control to all Models.
@@ -86,31 +87,38 @@ class DelegateDiphos: NSObject {
         let createEventController = objCurrentContoller as! CreateEventController
         let strTitle = createEventController.txtTitle.text
         let strContents = createEventController.txtContents.text
-        let strTags = createEventController.txtTags.text
+       // let strTags = createEventController.txtTags.text
         let strStartDate: String = createEventController.startDate.text!
         let strStartTime: String = createEventController.startTime.text!
         let strEndDate: String = createEventController.endDate.text!
         let strEndTime: String = createEventController.endTime.text!
-        var strEventStartDate =  strStartDate + "-" + strStartTime
-        var strEventEndDate =  strEndDate + "-" + strEndTime
+        var strEventStartDate =  strStartDate + " " + strStartTime
+        var strEventEndDate =  strEndDate + " " + strEndTime
         var strEventTimeZone = createEventController.txtTimeZone.text
         var eventId = 0
         var objInputParamBean:CreateBean  = CreateBean()
        var objInputParamEventBean: CreateEventBean = CreateEventBean()
+        
+        
+        print("strEventEndDate =" + strEventEndDate )
+        print("strEventStartDate =" + strEventStartDate )
+        
         objInputParamEventBean.title = strTitle
         objInputParamEventBean.content = strContents
-        objInputParamEventBean.tag_list = strTags
+      //  objInputParamEventBean.tag_list = strTags
         objInputParamEventBean.event_start = strEventStartDate
         objInputParamEventBean.event_end = strEventEndDate
         objInputParamEventBean.loc_id = gObjUserBean.school_id
         objInputParamEventBean.time_zone = strEventTimeZone
         objInputParamBean.event = objInputParamEventBean
+        var eventBean: Mappable = objInputParamBean
         //DOA calls
         if(createEventController.isEdit){
             eventId = createEventController.eventId
+            eventBean = objInputParamEventBean
         }
       
-        doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: objInputParamBean){ (result: AnyObject, statusCode: Int) in
+        doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: eventBean){ (result: AnyObject, statusCode: Int) in
         
             if (statusCode == 200){
                 print("create event Sucessfull")
@@ -138,7 +146,8 @@ class DelegateDiphos: NSObject {
             }
             else{
                 print("create event failure")
-              
+                //TODO: Handle error
+              self.showAlert(objCurrentContoller, strMessage: "Failed to Create Event")
             }
     
             
@@ -257,7 +266,7 @@ class DelegateDiphos: NSObject {
                 })
             }
             else{
-                    self.showAlert(objCurrentContoller, strMessage: "Select Role")
+                    self.showAlert(objCurrentContoller, strMessage: "Failed to Registration")
             }
             
         }
@@ -303,7 +312,12 @@ class DelegateDiphos: NSObject {
                     if(gBtnRadioValue == "events") {
                         gObjEventDisplayBean = result as! EventDisplayBean
                          goToSearchController.eventBeanArray = gObjEventDisplayBean.events
-                    } else if(gBtnRadioValue == "users") {
+                    }
+                    else if(gBtnRadioValue == "Schools") {
+                        gObjUsersBean = result as! usersBean
+                        goToSearchController.usersBeanArray = gObjUsersBean.users
+                    }
+                    else if(gBtnRadioValue == "users") {
                         gObjUsersBean = result as! usersBean
                          goToSearchController.usersBeanArray = gObjUsersBean.users
                     }

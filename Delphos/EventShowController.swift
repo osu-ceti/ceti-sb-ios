@@ -31,7 +31,11 @@ class EventShowController: NavController {
     @IBOutlet weak var cancelClaim: UIButton!
     @IBOutlet weak var cancelEvent: UIButton!
    
-  
+    @IBOutlet weak var btnLinkSpeaker: UIButton!
+    @IBOutlet weak var btnLinkLocation: UIButton!
+    @IBOutlet weak var btnLinkCreatedBy: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,13 +65,26 @@ class EventShowController: NavController {
             self.labelText5.text = "Created By:"
             self.labelText6.text = "Content:"
             
-            
+            btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
+            btnLinkLocation.setTitle(gObjShowEventBean.loc_name, forState: .Normal)
+            btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, forState: .Normal)
+            if (gObjShowEventBean.active == false)
+            {
+                var titleLength = gObjShowEventBean.title.characters.count
+                var attributedString = NSMutableAttributedString(string: gObjShowEventBean.title as String)
+                let secondAttributes = [NSForegroundColorAttributeName: UIColor.redColor(),  NSStrikethroughStyleAttributeName: 1]
+                attributedString.addAttributes(secondAttributes, range: NSRange(location: 0,length:titleLength))
+                self.txtTitle.attributedText = attributedString
+   
+            }
+            else{
             self.txtTitle.text = gObjShowEventBean.title
-            self.txtText1.text = gObjShowEventBean.speaker
+            }
+            //  self.txtText1.text = gObjShowEventBean.speaker
             self.txtText2.text = gObjShowEventBean.event_start
             self.txtText3.text = gObjShowEventBean.event_end
-            self.txtText4.text = gObjShowEventBean.loc_name
-            self.txtText5.text = gObjShowEventBean.user_name
+           // self.txtText4.text = gObjShowEventBean.loc_name
+            //self.txtText5.text = gObjShowEventBean.user_name
             self.txtText6.text = gObjShowEventBean.content
             
             //self.setNavigationBarItem()

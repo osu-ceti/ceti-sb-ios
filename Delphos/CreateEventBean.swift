@@ -15,7 +15,7 @@ class  CreateEventBean: Mappable {
     
     var content: String!
     
-    var tag_list: String!
+    //var tag_list: String!
     
     var event_start: String!
     
@@ -41,7 +41,7 @@ class  CreateEventBean: Mappable {
         
         content    <- map["content"]
         
-        tag_list        <- map["tag_list"]
+      //  tag_list        <- map["tag_list"]
         
         event_start   <- map["event_start"]
         
