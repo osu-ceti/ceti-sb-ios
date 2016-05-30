@@ -9,7 +9,7 @@ import UIKit
 
 class CreateEventController: NavController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-       @IBOutlet weak var txtTitle: UITextField!
+    @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtContents: UITextField!
     @IBOutlet weak var txtTags: UITextField!
     @IBOutlet weak var startDate: UITextField!
@@ -22,20 +22,22 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var txtTimeZone: UITextField!
     @IBOutlet weak var btnPostEvent: UIButton!
     
+    @IBOutlet weak var selectTimeZone: UIPickerView!
     @IBOutlet weak var requiredError: UILabel!
     var datePickerView = UIDatePicker()
     
-    var dateFormatter = NSDateFormatter()
-     var endDatevalid = NSDate()
-     var startDatevalid = NSDate()
-    var startTimeValid = NSDate()
-    var endTimeValid = NSDate()
+    var dateFormatter   = NSDateFormatter()
+    var endDatevalid    = NSDate()
+    var startDatevalid  = NSDate()
+    var startTimeValid  = NSDate()
+    var endTimeValid    = NSDate()
+    
     var isEdit = false
     var eventId = 0
 
     //let dataTimeZone = NSTimeZone.knownTimeZoneNames()
    // var timeAbb = iOStimeZones?.abbreviation
-    var iOStimeZones = ["Eastern Time (US & Canada)"]
+    let iOStimeZones = ["Eastern Time (US & Canada)"]
     
     @IBOutlet weak var scrolview: UIScrollView!
     @IBOutlet weak var timeZonePicker: UIPickerView!
@@ -43,11 +45,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         super.viewDidLoad()
         
         self.requiredError.hidden = true
+       
        // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))
         //self.view.addSubview(txtTitle)
         
-        
-        //Adding Navbar
+                //Adding Navbar
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         navigationBar.delegate = self;
@@ -70,6 +72,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         txtTags.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         startDate.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         endDate.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        //button
+      
+        
+        
         //end bg design
         //start.frame = CGRectMake(10, 30, 30, 20)
         var myObject = NSDate()
@@ -80,7 +86,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         endTime.text = dateFormatter.stringFromDate(futureDate)
       // self.endTimePicker.date =   dateFormatter.stringFromDate(futureDate)!
         txtTimeZone.text = "Eastern Time (US & Canada)"
-        
+      
         self.startTime.hidden = true
         self.endTime.hidden = true
         self.txtTimeZone.hidden = true
@@ -316,6 +322,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        
+//       
+//        let titleData = iOStimeZones[row]
+//        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!])
+       // pickerView.sizeToFit()
         return iOStimeZones[row]
     }
 
@@ -372,19 +383,19 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             self.requiredError.hidden = false
             self.requiredError.text = "Required Contests"
         }
-       else if startDatevalid.timeIntervalSinceReferenceDate > endDatevalid.timeIntervalSinceReferenceDate {
-            print("Date1 is Later than Date2")
+       else if startDatevalid.compare(endDatevalid) == NSComparisonResult.OrderedDescending {
+           // print("Date1 is Later than Date2")
              self.requiredError.hidden = false
             self.requiredError.text = "Invalid End Date"
         }
-//        else if startTimeValid.laterDate(endTimeValid){
+//        else if startTimeValid.earlierDate(endTimeValid){
 //            self.requiredError.hidden = false
 //            self.requiredError.text = "Invalid End Time"
 //        }
-//        else if startDatevalid.compare(endDatevalid) == NSComparisonResult.OrderedDescending {
-//                print("Date1 is Later than Date2")
-//            }
-
+       else if (startTimeValid.compare(endTimeValid) == NSComparisonResult.OrderedDescending) {
+            self.requiredError.hidden = false
+            self.requiredError.text = "Invalid End Time"
+        }
 
         else
         {

@@ -19,6 +19,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var backToView: String = "loginId"
     var searchView: UIView = UIView()
     var radioButtonController: SSRadioButtonsController?
+    var isBackEnabled:Bool = true
   
     
 //    required init?(coder aDecoder: NSCoder) {
@@ -88,9 +89,11 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
         // Create two buttons for the navigation item
         //        let backimage = UIImage(contentsOfFile:"backarrow")
-        backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: #selector(NavController.back(_:)))
+        if(isBackEnabled){
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: #selector(NavController.back(_:)))
         
-        navigationItem.leftBarButtonItem = backButton
+            navigationItem.leftBarButtonItem = backButton
+        }
         navigationItem.rightBarButtonItems = [searchButton, menuButton]
         // Assign the navigation item to the navigation bar
         navigationBar.items = [navigationItem]

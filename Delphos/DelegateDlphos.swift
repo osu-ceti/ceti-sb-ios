@@ -182,11 +182,17 @@ class DelegateDiphos: NSObject {
                    objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
                 })
             }
+            else if statusCode > 200{
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
+            }
             else {
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
             }
+
         }
         return boolLogin
     }
@@ -260,13 +266,18 @@ class DelegateDiphos: NSObject {
                 boolRegister = true
                
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+                   // self.showAlert(objCurrentContoller, strMessage: "Registration Success")
                     let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! ViewController
                     objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
                 })
             }
+            else if(statusCode > 200) {
+                    self.showAlert(objCurrentContoller, strMessage: "Could not connect to the server")
+            }
             else{
+              
                     self.showAlert(objCurrentContoller, strMessage: "Failed to Registration")
+               
             }
             
         }
@@ -315,7 +326,7 @@ class DelegateDiphos: NSObject {
                     }
                     else if(gBtnRadioValue == "Schools") {
                         gObjUsersBean = result as! usersBean
-                        goToSearchController.usersBeanArray = gObjUsersBean.users
+                        goToSearchController.schoolBeanArray = gObjUsersBean.users
                     }
                     else if(gBtnRadioValue == "users") {
                         gObjUsersBean = result as! usersBean

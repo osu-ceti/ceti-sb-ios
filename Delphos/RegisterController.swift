@@ -189,14 +189,24 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
         if (txtPassword.text! == "")
         {
             self.requiredField.hidden = false
-            self.requiredField.text = "Required Password OR Password Must have 8 character"
+            self.requiredField.text = "Required Password "
+        }
+                
+        else if (txtPassword.text?.characters.count <= 7)
+        {
+            self.requiredField.hidden = false
+            self.requiredField.text = "Password Must have 8 character"
         }
         else if (txtConformPassword.text == "")
         {
             self.requiredField.hidden = false
             self.requiredField.text = "Required ConfirmPassword"
         }
-        
+        else if (txtConformPassword.text != txtPassword.text!)
+        {
+            self.requiredField.hidden = false
+            self.requiredField.text = "ConfirmPassword does not match"
+        }
         else if (gBtnRegisterRadio == "")
         {
             self.requiredField.hidden = false

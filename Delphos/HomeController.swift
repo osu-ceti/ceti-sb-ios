@@ -17,9 +17,13 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var btnClaimEvent: UIButton!
     @IBOutlet weak var btnApprovalEvent: UIButton!
     @IBOutlet weak var btnAllEvent: UIButton!
-//    @IBOutlet weak var btnClaimEvent: UIButton!
-//    @IBOutlet weak var btnConfirmEvent: UIButton!
     @IBOutlet weak var btnCreateEvent: UIButton!
+   
+     var bottomLineAll      = CALayer()
+     var bottomLineApproval = CALayer()
+     var bottomLineClaim    = CALayer()
+     var bottomLineConfirm  = CALayer()
+    
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []
     var eventBeanSearchArray: [EventBean]! = []
@@ -33,10 +37,13 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         super.viewDidLoad()
         
         //Adding Navbar
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         navigationBar.delegate = self;
+        
         backToView = ""
+               
         radioButtonController!.delegate = self
 
         
@@ -57,7 +64,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         else{
             self.btnCreateEvent.hidden = true
         }
-       
+              
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
@@ -108,37 +115,58 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     @IBAction func eventAll(sender: UIButton) {
        listType = EventListingType.ALL
        getEventsList()
+ 
+        bottomLineAll.frame = CGRectMake(0, btnAllEvent.frame.size.height - 1.0, btnAllEvent.frame.size.width, 1)
+        bottomLineAll.borderWidth = 2.0
+        bottomLineAll.borderColor = UIColor.blueColor().CGColor
+        btnAllEvent.layer.addSublayer(bottomLineAll)
        
-        btnAllEvent.backgroundColor = UIColor.blueColor()
-        
-        btnApprovalEvent.backgroundColor = UIColor.clearColor()
-        btnClaimEvent.backgroundColor = UIColor.clearColor()
-        btnConfirmEvent.backgroundColor = UIColor.clearColor()
+       
+        bottomLineApproval.borderColor = UIColor.clearColor().CGColor
+        bottomLineClaim.borderColor = UIColor.clearColor().CGColor
+        bottomLineConfirm.borderColor = UIColor.clearColor().CGColor
+       
     }
     @IBAction func eventApproval(sender: AnyObject) {
         listType = EventListingType.APPROVED
         getEventsList()
-        btnApprovalEvent.backgroundColor = UIColor.blueColor()
-        btnAllEvent.backgroundColor = UIColor.clearColor()
-        btnClaimEvent.backgroundColor = UIColor.clearColor()
-        btnConfirmEvent.backgroundColor = UIColor.clearColor()
-
+        
+        bottomLineApproval.frame = CGRectMake(0, btnApprovalEvent.frame.size.height - 1.0, btnApprovalEvent.frame.size.width, 1)
+        bottomLineApproval.borderWidth = 2.0
+        bottomLineApproval.borderColor = UIColor.blueColor().CGColor
+        btnApprovalEvent.layer.addSublayer(bottomLineApproval)
+       
+        bottomLineClaim.borderColor = UIColor.clearColor().CGColor
+        bottomLineAll.borderColor = UIColor.clearColor().CGColor
+        bottomLineConfirm.borderColor = UIColor.clearColor().CGColor
+       
     }
     @IBAction func eventClaims(sender: AnyObject) {
         listType = EventListingType.CLAIMS
         getEventsList()
-        btnClaimEvent.backgroundColor = UIColor.blueColor()
-        btnApprovalEvent.backgroundColor = UIColor.clearColor()
-        btnAllEvent.backgroundColor = UIColor.clearColor()
-        btnConfirmEvent.backgroundColor = UIColor.clearColor()
+        
+        bottomLineClaim.frame = CGRectMake(0, btnClaimEvent.frame.size.height - 1.0, btnClaimEvent.frame.size.width, 1)
+        bottomLineClaim.borderWidth = 2.0
+        bottomLineClaim.borderColor = UIColor.blueColor().CGColor
+        btnClaimEvent.layer.addSublayer(bottomLineClaim)
+        
+        bottomLineAll.borderColor = UIColor.clearColor().CGColor
+        bottomLineApproval.borderColor = UIColor.clearColor().CGColor
+        bottomLineConfirm.borderColor = UIColor.clearColor().CGColor
+       
     }
     @IBAction func eventConfirmed(sender: AnyObject) {
         listType = EventListingType.CONFIRMED
         getEventsList()
-        btnConfirmEvent.backgroundColor = UIColor.blueColor()
-        btnApprovalEvent.backgroundColor = UIColor.clearColor()
-        btnClaimEvent.backgroundColor = UIColor.clearColor()
-        btnAllEvent.backgroundColor = UIColor.clearColor()
+        
+        bottomLineConfirm.frame = CGRectMake(0, btnConfirmEvent.frame.size.height - 1.0, btnConfirmEvent.frame.size.width, 1)
+        bottomLineConfirm.borderWidth = 2.0
+        bottomLineConfirm.borderColor = UIColor.blueColor().CGColor
+        btnConfirmEvent.layer.addSublayer(bottomLineConfirm)
+        
+        bottomLineAll.borderColor = UIColor.clearColor().CGColor
+        bottomLineApproval.borderColor = UIColor.clearColor().CGColor
+        bottomLineClaim.borderColor = UIColor.clearColor().CGColor
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

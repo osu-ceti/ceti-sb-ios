@@ -14,7 +14,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []
     var usersBeanArray: [userListBean]! = []
-   
+      var schoolBeanArray: [userListBean]! = []
     
     @IBOutlet weak var tableVIew: UITableView!
     override func viewDidLoad() {
@@ -65,6 +65,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
             (cell as! SearchControllerCell).txtTitle!.text = String(usersListBean.name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(usersListBean.id)
         }
+        
         
     }
     
