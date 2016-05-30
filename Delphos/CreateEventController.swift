@@ -115,11 +115,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 
                 self.stratTimePicker.date = eventStartDate!
                 
-                dateFormatter.dateFormat = "hh:mm:ss-a"
+                dateFormatter.dateFormat = gTimeFormat
                 self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
                 
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 self.startDate.text =  dateFormatter.stringFromDate(eventStartDate!)
+                
+                startDatevalid = eventStartDate!
                 
                 
             }
@@ -133,13 +135,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 
                 self.endTimePicker.date = eventEndDate!
                 
-                dateFormatter.dateFormat = "hh:mm:ss-a"
+                dateFormatter.dateFormat = gTimeFormat
                 self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
                 
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 self.endDate.text =  dateFormatter.stringFromDate(eventEndDate!)
                 
-                
+                endDatevalid = eventEndDate!
             }
             
             

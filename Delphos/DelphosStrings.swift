@@ -27,7 +27,7 @@ var events = "events"
 var schools = "schools"
 var users = "users"
 
-var gTimeFormat = "HH:mm:ss-a"
+var gTimeFormat = "HH:mm a zzz"
 var gDateFormat = "YYYY-MM-dd"
 var gSplitDateTime = "T"
 var gClaim: String!
