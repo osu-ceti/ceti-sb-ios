@@ -85,7 +85,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         // Create left and right button for navigation item
         
         searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
-        menuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: #selector(NavController.menuButtonClick(_:)))
+       // menuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: #selector(NavController.menuButtonClick(_:)))
         
         // Create two buttons for the navigation item
         //        let backimage = UIImage(contentsOfFile:"backarrow")
