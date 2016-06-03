@@ -9,28 +9,41 @@ import UIKit
 
 class CreateEventController: NavController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    
+   
+   
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtContents: UITextField!
     @IBOutlet weak var txtTags: UITextField!
     @IBOutlet weak var startDate: UITextField!
-    @IBOutlet weak var stratTimePicker: UIDatePicker!
-    @IBOutlet weak var startTime: UITextField!
+    
+    @IBOutlet weak var startTimePicker: UIDatePicker!
+    
     @IBOutlet weak var endDate: UITextField!
     @IBOutlet weak var endTimePicker: UIDatePicker!
+    @IBOutlet weak var requiredError: UILabel!
+    @IBOutlet weak var startTime: UITextField!
     @IBOutlet weak var endTime: UITextField!
-    @IBOutlet weak var validateTitle: UILabel!
     @IBOutlet weak var txtTimeZone: UITextField!
+    
     @IBOutlet weak var btnPostEvent: UIButton!
     
-    @IBOutlet weak var selectTimeZone: UIPickerView!
-    @IBOutlet weak var requiredError: UILabel!
-    var datePickerView = UIDatePicker()
     
+  
+  
+    var datePickerView = UIDatePicker()
+    func getCurrentDate() -> NSDate{
+        return NSDate()
+    }
+    var currentDate = NSDate()
+
     var dateFormatter   = NSDateFormatter()
-    var endDatevalid    = NSDate()
+    var endDatevalid   = NSDate()
     var startDatevalid  = NSDate()
     var startTimeValid  = NSDate()
     var endTimeValid    = NSDate()
+    var startDateAndTime = NSDate()
+    var endDateAndTime = NSDate()
     
     var isEdit = false
     var eventId = 0
@@ -39,8 +52,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
    // var timeAbb = iOStimeZones?.abbreviation
     let iOStimeZones = ["Eastern Time (US & Canada)"]
     
-    @IBOutlet weak var scrolview: UIScrollView!
+    @IBOutlet var scrolview: UIScrollView!
+   
     @IBOutlet weak var timeZonePicker: UIPickerView!
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,20 +93,23 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         //end bg design
         //start.frame = CGRectMake(10, 30, 30, 20)
-        var myObject = NSDate()
-        let futureDate = myObject.dateByAddingTimeInterval(60*60);
+        let startTimeSet = currentDate.dateByAddingTimeInterval(60*60);
+        let endTimeSet = currentDate.dateByAddingTimeInterval(60*120);
+        
+        
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gTimeFormat
-        startTime.text = dateFormatter.stringFromDate(myObject)
-        endTime.text = dateFormatter.stringFromDate(futureDate)
-      // self.endTimePicker.date =   dateFormatter.stringFromDate(futureDate)!
+        startTime.text = dateFormatter.stringFromDate(startTimeSet)
+        endTime.text = dateFormatter.stringFromDate(endTimeSet)
+        self.startTimePicker.setDate(startTimeSet, animated: false)
+        self.endTimePicker.setDate(endTimeSet, animated: false)
         txtTimeZone.text = "Eastern Time (US & Canada)"
       
         self.startTime.hidden = true
         self.endTime.hidden = true
         self.txtTimeZone.hidden = true
         
-        var currentDate = NSDate()
+        
         var CurrentDateFormat = NSDateFormatter()
         CurrentDateFormat.dateFormat = gDateFormat
         self.startDate.text = CurrentDateFormat.stringFromDate(currentDate)
@@ -113,7 +131,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 
                 //Start Date and Time
                 
-                self.stratTimePicker.date = eventStartDate!
+                self.startTimePicker.date = eventStartDate!
                 
                 dateFormatter.dateFormat = gTimeFormat
                 self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
@@ -208,7 +226,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
     
     @IBAction func StartDateTouch(sender: UITextField) {
-    
+         
         
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
         if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
@@ -235,6 +253,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
  
     @IBAction func EndDateTouch(sender: UITextField) {
+      
    
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
         
@@ -353,7 +372,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     {
         super.viewDidAppear(animated);
         
-        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 50)
+        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 500)
+        scrolview.scrollEnabled = true
+        //view.addSubview(scrolview)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -372,12 +393,26 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
     }
     @IBAction func btnPostEvent(sender: UIButton) {
+        
+        //dateFormatter.dateFormat = "yyyy-MM-dd"
+       // var stratDateValidate = dateFormatter.dateFromString(startDate.text!)
+
+       // var currentDateValidate = dateFormatter.stringFromDate(currentDateCheck)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a zzz"
+        var startDateTimeMerge  = startDate.text! + " " + startTime.text!
+        var  startDateAndTime = dateFormatter.dateFromString(startDateTimeMerge)!
+        
+        var endDateTimeMerge  = endDate.text! + " " + endTime.text!
+        var  endDateAndTime = dateFormatter.dateFromString(endDateTimeMerge)!
+        
+        
         if(txtTitle.text == "") {
             self.requiredError.hidden = false
              self.requiredError.text = "Required Title"
         }
       
-//                   else if (txtTags.text == "") {
+//      else if (txtTags.text == "") {
 //            self.requiredError.hidden = false
 //            self.requiredError.text = "Required Tags"
 //        }
@@ -385,19 +420,28 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             self.requiredError.hidden = false
             self.requiredError.text = "Required Contests"
         }
-       else if startDatevalid.compare(endDatevalid) == NSComparisonResult.OrderedDescending {
-           // print("Date1 is Later than Date2")
+//        else if (stratDateValidate!.compare(currentDateValidate) == NSComparisonResult.OrderedSame) {
+//            print("Same dates")
+//        }
+            
+        else if (startDateAndTime.compare(currentDate) == NSComparisonResult.OrderedAscending) {
+            // print("Date1 is Later than Date2")
+            self.requiredError.hidden = false
+            self.requiredError.text = "Invalid start Date and time"
+        }
+       else if (startDateAndTime.timeIntervalSinceReferenceDate > endDateAndTime.timeIntervalSinceReferenceDate) {
+            // print("Date1 is Later than Date2")
              self.requiredError.hidden = false
-            self.requiredError.text = "Invalid End Date"
+            self.requiredError.text = "Invalid End Date and time"
         }
 //        else if startTimeValid.earlierDate(endTimeValid){
 //            self.requiredError.hidden = false
 //            self.requiredError.text = "Invalid End Time"
 //        }
-       else if (startTimeValid.compare(endTimeValid) == NSComparisonResult.OrderedDescending) {
-            self.requiredError.hidden = false
-            self.requiredError.text = "Invalid End Time"
-        }
+//       else if (startTimeValid.compare(endTimeValid) == NSComparisonResult.OrderedDescending) {
+//            self.requiredError.hidden = false
+//            self.requiredError.text = "Invalid End Time"
+//        }
 
         else
         {
@@ -414,6 +458,6 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         }
         
     }
+    
 
-
-   }
+}

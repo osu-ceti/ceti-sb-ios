@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F14C3891CFF0DAB002C6912 /* EventShowControllerCells.swift */; };
 		0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */; };
 		0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */; };
 		0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */; };
 		0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B271CEAFBE0000ED18F /* CreateEventController.swift */; };
 		0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */; };
+		0F8B11FE1D0001330030CE82 /* ClaimListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */; };
+		0F8B12061D00061B0030CE82 /* ClaimListClaimBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B12051D00061B0030CE82 /* ClaimListClaimBean.swift */; };
 		0F9E4F191CF31D4A004FC736 /* DelphosEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */; };
 		0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1A1CF32891004FC736 /* RightViewController.swift */; };
 		0F9E4F1D1CF32ACB004FC736 /* SlidingMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */; };
@@ -150,11 +153,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F14C3891CFF0DAB002C6912 /* EventShowControllerCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventShowControllerCells.swift; sourceTree = "<group>"; };
 		0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButton.swift; path = SSRadioButtonController/SSRadioButton.swift; sourceTree = "<group>"; };
 		0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButtonsController.swift; path = SSRadioButtonController/SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelEventBean.swift; sourceTree = "<group>"; };
 		0F500B271CEAFBE0000ED18F /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventBean.swift; sourceTree = "<group>"; };
+		0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimListBean.swift; sourceTree = "<group>"; };
+		0F8B12051D00061B0030CE82 /* ClaimListClaimBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimListClaimBean.swift; sourceTree = "<group>"; };
 		0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosEnums.swift; sourceTree = "<group>"; };
 		0F9E4F1A1CF32891004FC736 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingMenuController.swift; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 				0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */,
 				0F9E4F1E1CF33A9C004FC736 /* UIViewControllerExtension.swift */,
 				0F9E4F231CF47236004FC736 /* NavController.swift */,
+				0F14C3891CFF0DAB002C6912 /* EventShowControllerCells.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -395,6 +402,8 @@
 				0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */,
 				0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */,
 				0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */,
+				0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */,
+				0F8B12051D00061B0030CE82 /* ClaimListClaimBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -594,6 +603,7 @@
 				0F9E4F241CF47236004FC736 /* NavController.swift in Sources */,
 				0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */,
 				0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */,
+				0F8B11FE1D0001330030CE82 /* ClaimListBean.swift in Sources */,
 				F58F69951CEAF41C00C4ED91 /* BadgesBean.swift in Sources */,
 				F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */,
 				0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */,
@@ -607,11 +617,13 @@
 				F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */,
 				0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */,
 				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
+				0F8B12061D00061B0030CE82 /* ClaimListClaimBean.swift in Sources */,
 				0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */,
 				F580616C1CE5E73F004BF043 /* SearchControllerCell.swift in Sources */,
 				0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */,
 				0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */,
 				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
+				0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */,
 				F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */,
 				0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */,
 				0F9E4F1D1CF32ACB004FC736 /* SlidingMenuController.swift in Sources */,
@@ -778,6 +790,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Delphos/Info.plist;
@@ -785,6 +798,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.Delphos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Delphos/Delphos-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -792,6 +807,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Delphos/Info.plist;
@@ -799,6 +815,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.Delphos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Delphos/Delphos-Bridging-Header.h";
 			};
 			name = Release;
 		};

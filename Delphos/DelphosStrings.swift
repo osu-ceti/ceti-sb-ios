@@ -23,6 +23,9 @@ var gSearchValue: Int!
 var gObjUsers: UserBean!
 
 var gObjCreateEvent : CreateEventBean!
+
+var gClaimEventId : Int!
+
 var events = "events"
 var schools = "schools"
 var users = "users"
@@ -34,3 +37,7 @@ var gClaim: String!
 var gEditEvent:String!
 var gCancelEvent:String!
 var gCancelClaim:String!
+
+var gClaimDetailId:Int!
+
+

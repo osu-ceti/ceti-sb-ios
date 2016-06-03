@@ -39,6 +39,10 @@ let SHOW_APPROVED = EVENT + "pending_events"
 let SHOW_CLAIMS = EVENT + "pending_claims"
 let SHOW_CONFIRMED = EVENT + "confirmed"
 
+let SHOWCLAIMSDATA = "pending_claims"
+let EVENT_ID = "event_id"
+let CLAIMS_LIST = "claims"
+
 let SCHOOL = "schools/"
 let USERS = "users/"
 let SEARCH_EVENT = "?search="

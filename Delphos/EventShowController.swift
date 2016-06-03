@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class EventShowController: NavController {
+class EventShowController: NavController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var labeltext1: UILabel!
     @IBOutlet weak var labelText2: UILabel!
@@ -28,6 +28,10 @@ class EventShowController: NavController {
     @IBOutlet weak var claim: UIButton!
     @IBOutlet weak var editEvent: UIButton!
    
+    @IBOutlet weak var labelBusiness: UILabel!
+    @IBOutlet weak var labelJobTitle: UILabel!
+    
+    
     @IBOutlet weak var cancelClaim: UIButton!
     @IBOutlet weak var cancelEvent: UIButton!
    
@@ -35,9 +39,31 @@ class EventShowController: NavController {
     @IBOutlet weak var btnLinkLocation: UIButton!
     @IBOutlet weak var btnLinkCreatedBy: UIButton!
     
+    @IBOutlet weak var tableView: UITableView!
+   
+   
+    var claimBeanArray: [ClaimListClaimBeanBean]?
+   // var claimBeanDetail: [ClaimListClaimBeanBean]?
+    var name = ["claim"]
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //TODO:API Call
+        
+//        gClaimEventId = Int(gObjShowEventBean.id)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        
+            testfacade.doTask(self,action: DelphosAction.CLAIM_VIEW)
+
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+         self.labelBusiness.hidden = true
+         self.labelJobTitle.hidden = true
         
         txtTitle.font = UIFont.boldSystemFontOfSize(15)
         labeltext1.font = UIFont.boldSystemFontOfSize(15)
@@ -53,7 +79,7 @@ class EventShowController: NavController {
         searchBar.delegate = self
         navigationBar.delegate = self;
         backToView = "HomeID"
-        
+      
 
         
         if(gBtnRadioValue == events || gObjShowEventBean != nil) {
@@ -86,6 +112,13 @@ class EventShowController: NavController {
            // self.txtText4.text = gObjShowEventBean.loc_name
             //self.txtText5.text = gObjShowEventBean.user_name
             self.txtText6.text = gObjShowEventBean.content
+            
+            if (gObjShowEventBean.claim_id == 1)
+            {
+                
+            }
+            
+            
             
             //self.setNavigationBarItem()
             if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
@@ -137,7 +170,59 @@ class EventShowController: NavController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section.
+        return 1
+           // claimBeanArray!.count
+        
+    }
+    
+    func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+        if(claimBeanArray?.count > 0){
+        var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
+        
+        (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
+        (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
+           
+        }
+        
+    }
+    
+    //function to return dynamic cell
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("ClaimCell", forIndexPath: indexPath) as? UITableViewCell
+        
+        configureCell(cell!, indexPath: indexPath)
+        
+        return cell!
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! EventShowControllerCells
+        print("currentCell", currentCell.userId.text!)
+        
+        gClaimDetailId = Int(currentCell.userId.text!)
+       
+        
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.CLAIM_LIST_DETAILS)
+           
+        self.tableView.hidden = true
+        self.labelBusiness.hidden = false
+        self.labelJobTitle.hidden = false
+    }
 
+    
+    
+    
     @IBAction func btnEditEvent(sender: AnyObject) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController

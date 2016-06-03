@@ -76,6 +76,12 @@ class DelegateDiphos: NSObject {
         case .CANCEL_EVENT:
             print("DELETE EVENT")
             cancelEvent(objCurrentController)
+        case .CLAIM_VIEW:
+            print("claim view")
+             showClaimView(objCurrentController)
+        case .CLAIM_LIST_DETAILS:
+            print("CLAIM_LIST_DETAILS")
+            showClaimListDetails(objCurrentController)
         default:
             print("Error in delegate enum")
         
@@ -241,6 +247,8 @@ class DelegateDiphos: NSObject {
             }
         }
     }
+    
+   
     func register(objCurrentContoller: UIViewController) -> Bool {
         var boolRegister = false
         let registerController = objCurrentContoller as! RegisterController
@@ -253,9 +261,9 @@ class DelegateDiphos: NSObject {
         var objInputRegisterBean: LoginBean = LoginBean()
         objInputParamBean.name = strName
         objInputParamBean.email = strEmail
-          objInputParamBean.password = strPassword
-          objInputParamBean.role = strRole
-       objInputParamBean.password_confirmation = strConformPassword
+        objInputParamBean.password = strPassword
+        objInputParamBean.role = strRole
+        objInputParamBean.password_confirmation = strConformPassword
         objInputParamBean.school_id = "1"
         
         objInputRegisterBean.user = objInputParamBean
@@ -266,7 +274,7 @@ class DelegateDiphos: NSObject {
                 boolRegister = true
                
                 dispatch_async(dispatch_get_main_queue(), {
-                   // self.showAlert(objCurrentContoller, strMessage: "Registration Success")
+                  
                     let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! ViewController
                     objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
                 })
@@ -276,7 +284,7 @@ class DelegateDiphos: NSObject {
             }
             else{
               
-                    self.showAlert(objCurrentContoller, strMessage: "Failed to Registration")
+                    self.showAlert(objCurrentContoller, strMessage: "Failed to Register")
                
             }
             
@@ -307,7 +315,42 @@ class DelegateDiphos: NSObject {
             }
         })
     }
+    func showClaimView(objCurrentContoller: UIViewController) {
+         //var strClaimEventId: String = String(gObjShowEventBean.id)
+        
+        doGetAPIs.getClaimView(String(gObjShowEventBean.id),callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == 200) {
+                      dispatch_async(dispatch_get_main_queue(), {
+                var claimsList = result as! ClaimListBean
+                (objCurrentContoller as! EventShowController).claimBeanArray = claimsList.claims
+                (objCurrentContoller as! EventShowController).tableView.reloadData()
+                })
+            }
+        })
+    }
+     func showClaimListDetails(objCurrentContoller: UIViewController) {
+        var strClaimDetailId:String  = String(gClaimDetailId)
+        
+        doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == 200) {
+                var objEventShowController = objCurrentContoller as! EventShowController
+               
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                   var  claimsListDetails = result as! ClaimListClaimBeanBean
+                    objEventShowController.labelBusiness.text! = String(claimsListDetails.business)
+                    objEventShowController.labelJobTitle.text! = String(claimsListDetails.job_title)
+
+                   // (objCurrentContoller as! EventShowController).claimBeanDetail = gclaimsListDetails
+                   // (objCurrentContoller as! EventShowController).tableView.reloadData()
+                    
+                   
+                })
+            }
+        })
+
     
+    }
     func  searchEvent(objCurrentController: UIViewController) {
         
         print(objCurrentController)
@@ -342,6 +385,7 @@ class DelegateDiphos: NSObject {
 
             }
         })
+        
         
     }
     

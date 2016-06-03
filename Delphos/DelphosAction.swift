@@ -21,4 +21,6 @@ enum DelphosAction
     case CANCEL_CLAIM
     case EDIT_EVENT
     case CANCEL_EVENT
+    case CLAIM_VIEW
+    case CLAIM_LIST_DETAILS
 }
