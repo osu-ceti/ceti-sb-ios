@@ -54,6 +54,8 @@ let USER_CLAIM = "&user_id="
 let CLAIMS = "claims/"
 let CANCEL_CLAIMS = "/cancel"
 let CANCEL_EVENT = "/cancel"
+let TEACHER_CONFIRM = "teacher_confirm"
+let REJECT = "reject"
 
 
 

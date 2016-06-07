@@ -183,6 +183,55 @@ class DAOPostAPIs: DAOBase {
         })
         
     }
+    
+    
+    func doAcceptClaim(strClaimEventId : String ,strClaimid : String,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        var strEventId = String(strClaimEventId)
+        var strClaimid = String(strClaimid)
+         strURL =  CLAIMS_LIST + "/" + TEACHER_CONFIRM + "?" + "event_id=" + strEventId + "&" + "claim_id=" + strClaimid
+        
+        doPost(strEventId,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status){
+                var claimEventBean = Mapper<ClaimEventBean>().map(jsonResult)!
+                callBack?(result: claimEventBean, statusCode: statusCode )
+                return
+            }
+            else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+
+        
+    })
+    }
+    func doRejectClaim(strClaimid:String,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    
+   
+    var strClaimid = String(strClaimid)
+    strURL =  CLAIMS_LIST + "/" + strClaimid + "/"  + REJECT
+    doDelete(strClaimid,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+    
+    if(status){
+        var claimEventBean = Mapper<ClaimEventBean>().map(jsonResult)!
+        callBack?(result: claimEventBean, statusCode: statusCode )
+        return
+    }
+    else {
+        //println(jsonResult)
+        var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+        callBack?(result: errorBean, statusCode: statusCode )
+        return
+    }
+    
+    
+    })
+    }
+
+    
     func doCancelEvent(objEventID: ShowEventBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         var strEventID = String(objEventID.id)
         strURL =  EVENT + String(objEventID.id) + CANCEL_EVENT
@@ -204,7 +253,8 @@ class DAOPostAPIs: DAOBase {
             
         })
         
-    }
+   
 
 
+}
 }

@@ -31,6 +31,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var labelBusiness: UILabel!
     @IBOutlet weak var labelJobTitle: UILabel!
     
+    @IBOutlet weak var labelUserName: UILabel!
+    @IBOutlet weak var mainLabelBusiness: UILabel!
+    @IBOutlet weak var mainLabelJobTitle: UILabel!
     
     @IBOutlet weak var cancelClaim: UIButton!
     @IBOutlet weak var cancelEvent: UIButton!
@@ -39,18 +42,26 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var btnLinkLocation: UIButton!
     @IBOutlet weak var btnLinkCreatedBy: UIButton!
     
+    @IBOutlet weak var btnMessage: UIButton!
+    @IBOutlet weak var btnAccept: UIButton!
+    @IBOutlet weak var btnReject: UIButton!
+    
+    
     @IBOutlet weak var tableView: UITableView!
    
    
     var claimBeanArray: [ClaimListClaimBeanBean]?
-   // var claimBeanDetail: [ClaimListClaimBeanBean]?
+   
     var name = ["claim"]
+    var selectedClaimId:Int = 0
+     var selectedEventId:Int = 0
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //TODO:API Call
         
-//        gClaimEventId = Int(gObjShowEventBean.id)
+    
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         
@@ -62,8 +73,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         super.viewDidLoad()
         
         
+         self.labelUserName.hidden = true
+         self.mainLabelBusiness.hidden = true
+         self.mainLabelJobTitle.hidden = true
          self.labelBusiness.hidden = true
          self.labelJobTitle.hidden = true
+         self.tableView.hidden = true
+        
+        self.btnMessage.hidden = true
+        self.btnAccept.hidden = true
+        self.btnReject.hidden = true
         
         txtTitle.font = UIFont.boldSystemFontOfSize(15)
         labeltext1.font = UIFont.boldSystemFontOfSize(15)
@@ -80,7 +99,6 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         navigationBar.delegate = self;
         backToView = "HomeID"
       
-
         
         if(gBtnRadioValue == events || gObjShowEventBean != nil) {
             
@@ -94,6 +112,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
             btnLinkLocation.setTitle(gObjShowEventBean.loc_name, forState: .Normal)
             btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, forState: .Normal)
+            
             if (gObjShowEventBean.active == false)
             {
                 var titleLength = gObjShowEventBean.title.characters.count
@@ -103,20 +122,19 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 self.txtTitle.attributedText = attributedString
    
             }
+            
             else{
             self.txtTitle.text = gObjShowEventBean.title
             }
-            //  self.txtText1.text = gObjShowEventBean.speaker
+           
+            //self.txtText1.text = gObjShowEventBean.speaker
             self.txtText2.text = gObjShowEventBean.event_start
             self.txtText3.text = gObjShowEventBean.event_end
-           // self.txtText4.text = gObjShowEventBean.loc_name
+            //self.txtText4.text = gObjShowEventBean.loc_name
             //self.txtText5.text = gObjShowEventBean.user_name
             self.txtText6.text = gObjShowEventBean.content
             
-            if (gObjShowEventBean.claim_id == 1)
-            {
-                
-            }
+          
             
             
             
@@ -183,12 +201,21 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     }
     
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
-        if(claimBeanArray?.count > 0){
-        var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
-        
-        (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
-        (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
+        if(claimBeanArray?.count > 0 && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
+            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
+            
+            
+            self.tableView.hidden  = false
+            
+            var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
+            if((claimDisplayBean.claim_id) != nil){}
+            (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
+            (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
            
+        }
+        else{
+            self.tableView.hidden = true
+        
         }
         
     }
@@ -216,10 +243,71 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             testfacade.doTask(self,action: DelphosAction.CLAIM_LIST_DETAILS)
            
         self.tableView.hidden = true
+        self.mainLabelJobTitle.hidden = false
+        self.mainLabelBusiness.hidden = false
+        self.labelUserName.hidden = false
         self.labelBusiness.hidden = false
         self.labelJobTitle.hidden = false
+        self.editEvent.hidden = true
+        self.cancelEvent.hidden = true
+        self.btnMessage.hidden = false
+        self.btnAccept.hidden = false
+        self.btnReject.hidden = false
+       
     }
 
+    @IBAction func btnSendMessage(sender: AnyObject) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("MessageId") as! MessageController
+       
+        self.presentViewController(nextViewController,animated:true,completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+       
+        
+    }
+    @IBAction func btnTouchAccept(sender: AnyObject) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.CLAIM_ACCEPT)
+        
+        
+        self.labelUserName.hidden = true
+        self.mainLabelBusiness.hidden = true
+        self.mainLabelJobTitle.hidden = true
+        self.labelBusiness.hidden = true
+        self.labelJobTitle.hidden = true
+        self.tableView.hidden = true
+        
+        self.btnMessage.hidden = true
+        self.btnAccept.hidden = true
+        self.btnReject.hidden = true
+        self.editEvent.hidden = false
+        self.cancelEvent.hidden = false
+        
+    }
+    
+    
+    @IBAction func btnTouchReject(sender: AnyObject) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.CLAIM_REJECT)
+        
+        self.labelUserName.hidden = true
+        self.mainLabelBusiness.hidden = true
+        self.mainLabelJobTitle.hidden = true
+        self.labelBusiness.hidden = true
+        self.labelJobTitle.hidden = true
+        self.tableView.hidden = true
+        
+        self.btnMessage.hidden = true
+        self.btnAccept.hidden = true
+        self.btnReject.hidden = true
+        self.editEvent.hidden = false
+        self.cancelEvent.hidden = false
+        
+    }
     
     
     
@@ -230,6 +318,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.presentViewController(nextViewController,animated:true,completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
     @IBAction func btnClaim(sender: AnyObject) {
          
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

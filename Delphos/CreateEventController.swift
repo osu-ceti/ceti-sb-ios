@@ -401,10 +401,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a zzz"
         var startDateTimeMerge  = startDate.text! + " " + startTime.text!
-        var  startDateAndTime = dateFormatter.dateFromString(startDateTimeMerge)!
+        startDateAndTime = dateFormatter.dateFromString(startDateTimeMerge)!
         
         var endDateTimeMerge  = endDate.text! + " " + endTime.text!
-        var  endDateAndTime = dateFormatter.dateFromString(endDateTimeMerge)!
+        endDateAndTime = dateFormatter.dateFromString(endDateTimeMerge)!
         
         
         if(txtTitle.text == "") {
