@@ -17,15 +17,31 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
       var schoolBeanArray: [userListBean]! = []
     
     @IBOutlet weak var tableVIew: UITableView!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //Adding Navbar
+        //        menus = regularMenu
+        //        rightViewController.isRegister = false
+        //        rightViewController.tableView.reloadData()
+        
+        self.isBackEnabled = true
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
+        
+        backToController = gObjHomeController
+    }
+    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Adding Navbar
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
-        navigationBar.delegate = self;
-        backToView = "HomeID"
-       
+//        setNavBar(self.view.frame.size.width)
+//        searchBar.delegate = self
+//        navigationBar.delegate = self;
+//        backToView = "HomeID"
+//       
         
         self.tableVIew.dataSource = self
         tableVIew.delegate = self

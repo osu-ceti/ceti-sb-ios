@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QuartzCore
 
 
 class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate {
@@ -33,18 +32,26 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var tableView: UITableView!
    // var radioButtonController: SSRadioButtonsController?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         //Adding Navbar
+        menus = regularMenu
+        rightViewController.isRegister = false
+        rightViewController.tableView.reloadData()
+        
         self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
-        navigationBar.delegate = self;
+       
         
-        backToView = ""
-               
-        radioButtonController!.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+         navigationItem.title = "School-Business"
+        
+//
+     //   radioButtonController!.delegate = self
 
         
         self.tableView.dataSource = self
@@ -82,9 +89,13 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     
     @IBAction func btnCreateEvent(sender: UIButton) {
-    
-        let goToCreateEvent = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
-        self.presentViewController(goToCreateEvent, animated: true, completion: nil)
+        if(gObjCreateEventController == nil){
+            gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
+        }
+        self.slideMenuController()?.changeMainViewController(gObjCreateEventController, close: false)
+//
+//        let goToCreateEvent = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
+//        self.presentViewController(goToCreateEvent, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldDelegate, SSRadioButtonControllerDelegate {
+class RegisterController: NavController, UITextFieldDelegate {
     
     @IBOutlet weak var schoolbusiness: UILabel!
     @IBOutlet weak var txtName: UITextField!
@@ -20,53 +20,75 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
     @IBOutlet weak var radioSpeaker: SSRadioButton!
     @IBOutlet weak var radioBoth: SSRadioButton!
     let checkCharacter = NSCharacterSet.letterCharacterSet()
-    var radioButtonController: SSRadioButtonsController?
+    //var radioButtonController: SSRadioButtonsController?
     
     @IBOutlet weak var requiredField: UILabel!
     
     
     var arrRole = ["Speaker", "Teacher" ,"Both"]
     
-    var navigationBar: UINavigationBar = UINavigationBar()
-    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-    var searchButton : UIBarButtonItem = UIBarButtonItem()
-    var searchBarItem = UIBarButtonItem()
-    var searchButtonItem = UIBarButtonItem()
+    //var navigationBar: UINavigationBar = UINavigationBar()
+//    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+//    var searchButton : UIBarButtonItem = UIBarButtonItem()
+//    var searchBarItem = UIBarButtonItem()
+//    var searchButtonItem = UIBarButtonItem()
    // var backButton = UIButton(frame: CGRectMake(0,40,40,0))
    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Adding SideMenu
+        menus = gRegisterMenu
+        rightViewController.isRegister = true
+        rightViewController.tableView.reloadData()
+        
+        //Adding Navbar
+        self.isBackEnabled = true
+        self.isSearchEnabled = false
+        
+        setNavBar(self.view.frame.size.width)
+        //searchBar.delegate = self
+        let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
+       self.backToController = UINavigationController(rootViewController: loginController)
+        self.shouldClose = true
+        //backToView = "Back"
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         gBtnRegisterRadio = ""
         self.requiredField.hidden = true
         // Create the navigation bar
-        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
-        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
-        navigationBar.delegate = self;
-        navigationBar.layer.shadowOpacity = 4
-        navigationBar.layer.shadowRadius  = 2
-        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
+//        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
+//        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+//        navigationBar.delegate = self;
+//        navigationBar.layer.shadowOpacity = 4
+//        navigationBar.layer.shadowRadius  = 2
+//        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
         // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
-        navigationItem.title = "School-Business"
-       
-        searchButtonItem = UIBarButtonItem(customView:searchBar)
+//        let navigationItem = UINavigationItem()
+//        navigationItem.title = "School-Business"
+//       
+//        searchButtonItem = UIBarButtonItem(customView:searchBar)
         // Create left and right button for navigation item
         
        // searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: "btnSearchClick:")
         
-        let backimage = UIImage(contentsOfFile:"backarrow")
-       searchButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: "back:")
+//        let backimage = UIImage(contentsOfFile:"backarrow")
+//       searchButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: "back:")
         
         // Create two buttons for the navigation item
-        navigationItem.leftBarButtonItem = searchButton
-        
-        // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
-        
-        // Make the navigation bar a subview of the current view controller
-        self.view.addSubview(navigationBar)
-        
+//        navigationItem.leftBarButtonItem = searchButton
+//        
+//        // Assign the navigation item to the navigation bar
+//        navigationBar.items = [navigationItem]
+//        
+//        // Make the navigation bar a subview of the current view controller
+//        self.view.addSubview(navigationBar)
+//        
 
         
         radioButtonController = SSRadioButtonsController(buttons: radioTeacher, radioSpeaker,radioBoth)
@@ -104,13 +126,21 @@ class RegisterController: UIViewController,UINavigationBarDelegate, UITextFieldD
         txtConformPassword.layer.addSublayer(ConformPasswordLine)
 
     }
-    func back(sender: UIBarButtonItem){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("loginId") as! ViewController
-        self.presentViewController(nextViewController,animated:true,completion: nil)
-        self.navigationController?.popViewControllerAnimated(true)
-    
-    }
+//    func back(sender: UIBarButtonItem){
+////        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+////        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("loginId") as! LoginController
+////        self.presentViewController(nextViewController,animated:true,completion: nil)
+////        self.navigationController?.popViewControllerAnimated(true)
+//        
+//        var loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
+//        
+//        let loginControllerNav = UINavigationController(rootViewController: loginController)
+//        
+//        self.slideMenuController()?.changeMainViewController(loginControllerNav, close: false)
+//        
+//
+//    
+//    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

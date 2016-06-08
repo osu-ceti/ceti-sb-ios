@@ -27,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // create viewController code...
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
+        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("loginId") as! LoginController
        
-        let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
+         rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
         
         let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
-
+        UINavigationBar.appearance().tintColor = UIColor.blueColor()
         
         
         
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-       // self.createMenuView()
+        self.createMenuView()
         return true
     }
 

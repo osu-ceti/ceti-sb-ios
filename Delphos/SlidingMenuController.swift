@@ -100,6 +100,7 @@ class SlidingMenuController: UIViewController, UIGestureRecognizerDelegate {
     deinit { }
     
     func initView() {
+        
         mainContainerView = UIView(frame: self.view.bounds)
         mainContainerView.backgroundColor = UIColor.clearColor()
         mainContainerView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
@@ -139,6 +140,9 @@ class SlidingMenuController: UIViewController, UIGestureRecognizerDelegate {
         
         self.addLeftGestures()
         self.addRightGestures()
+        
+        
+        
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -851,9 +855,11 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem = leftButton;
     }
     
-    func addRightBarButtonWithImage(buttonImage: UIImage) {
+    func addRightBarButtonWithImage(buttonImage: UIImage) -> UIBarButtonItem{
         let rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Bordered, target: self, action: "toggleRight")
-        self.navigationItem.rightBarButtonItem = rightButton;
+       // self.navigationItem.rightBarButtonItem = rightButton;
+        return rightButton
+        
     }
     
     func addLeftButtonToRightToggle(buttonImage: UIImage) {

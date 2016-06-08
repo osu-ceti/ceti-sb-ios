@@ -9,14 +9,14 @@
 import UIKit
 import ObjectMapper
 
-class ViewController: UIViewController,UINavigationBarDelegate {
+class LoginController: UIViewController {
     @IBOutlet weak var userTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var schoolbusiness: UILabel!
     
     @IBOutlet weak var switchRememberme: UISwitch!
    
-    var navigationBar: UINavigationBar = UINavigationBar()
+   // var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
    // var searchButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
@@ -30,14 +30,14 @@ class ViewController: UIViewController,UINavigationBarDelegate {
         self.requiredError.hidden = true
        
         // Create the navigation bar
-        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
-        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
-        navigationBar.delegate = self;
-        navigationBar.layer.shadowOpacity = 4
-        navigationBar.layer.shadowRadius  = 2
-        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
+        //navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
+//        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+//        navigationBar.delegate = self;
+//        navigationBar.layer.shadowOpacity = 4
+//        navigationBar.layer.shadowRadius  = 2
+//        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
+//        // Create a navigation item with a title
+//        let navigationItem = UINavigationItem()
         navigationItem.title = "School-Business"
         searchButtonItem = UIBarButtonItem(customView:searchBar)
         // Create left and right button for navigation item
@@ -48,10 +48,10 @@ class ViewController: UIViewController,UINavigationBarDelegate {
         //navigationItem.leftBarButtonItem = searchButton
         
         // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
+        //navigationBar.items = [navigationItem]
         
         // Make the navigation bar a subview of the current view controller
-        self.view.addSubview(navigationBar)
+       // self.view.addSubview(navigationBar)
 
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -99,7 +99,10 @@ class ViewController: UIViewController,UINavigationBarDelegate {
 //    }
     
 
-  
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+       // self.setNavigationBarItem()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -141,9 +144,15 @@ class ViewController: UIViewController,UINavigationBarDelegate {
    
     @IBAction func btnRegister(sender: UIButton) {
         
-     
-            let goToRegisterController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
-            self.presentViewController(goToRegisterController, animated: true, completion: nil)
+        var registerController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
+        
+        let registerControllerNav = UINavigationController(rootViewController: registerController)
+        
+        self.slideMenuController()?.changeMainViewController(registerControllerNav, close: false)
+        
+//            let goToRegisterController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
+//            self.presentViewController(goToRegisterController, animated: true, completion: nil)
+        
         }
     
 }

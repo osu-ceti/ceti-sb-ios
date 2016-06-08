@@ -41,3 +41,7 @@ var gCancelClaim:String!
 var gClaimDetailId:Int!
 
 
+var gFontName = "Times New Roman"
+var gSearchEventsRadioTitle = "Events"
+var gSearchSchoolsRadioTitle = "Schools"
+var gSearchUsersRadioTitle = "Users"

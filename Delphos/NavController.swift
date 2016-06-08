@@ -9,60 +9,80 @@
 import UIKit
 class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate{
     
-    var navigationBar: UINavigationBar = UINavigationBar()
+    //var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
     var searchButton : UIBarButtonItem = UIBarButtonItem()
     var backButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
     var menuButton : UIBarButtonItem = UIBarButtonItem()
-    var backToView: String = "loginId"
+    //var backToView: String = "loginId"
     var searchView: UIView = UIView()
     var radioButtonController: SSRadioButtonsController?
     var isBackEnabled:Bool = true
-  
+    var isSearchEnabled:Bool = true
+    var backToController : UIViewController!
+    var shouldClose : Bool! = true
     
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    
+    
+    func buildRadioButton(title: String, position:CGRect, actionCallback:Selector) ->SSRadioButton{
+        
+        let eventsRadioBtn = SSRadioButton()
+        eventsRadioBtn.setTitle(title, forState: .Normal)
+        eventsRadioBtn.circleColor = UIColor.blackColor()
+        eventsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        eventsRadioBtn.frame = position
+        eventsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
+        eventsRadioBtn.addTarget(self, action: actionCallback, forControlEvents: UIControlEvents.TouchUpInside)
+        return eventsRadioBtn
+    }
     
     func setNavBar(width: CGFloat){
+        
+        searchBar.delegate = self
         searchView.frame = CGRectMake(0, 17+44, self.view.frame.size.width, 44);
         let label = UILabel(frame: CGRectMake(0, 0, 110, 21))
         label.textAlignment = NSTextAlignment.Left
         label.text = "Search for:"
         label.textColor = UIColor.blackColor()
-        
-        let eventsRadioBtn = SSRadioButton()
-        eventsRadioBtn.setTitle("Events", forState: .Normal)
-        eventsRadioBtn.circleColor = UIColor.blackColor()
-        eventsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        eventsRadioBtn.frame = CGRectMake(85, 0, 60, 21)
-        eventsRadioBtn.titleLabel?.font = UIFont(name: "Times New Roman", size: 15)
-        eventsRadioBtn.addTarget(self, action: #selector(NavController.eventSearch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//        
+//        let eventsRadioBtn = SSRadioButton()
+//        eventsRadioBtn.setTitle("Events", forState: .Normal)
+//        eventsRadioBtn.circleColor = UIColor.blackColor()
+//        eventsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        eventsRadioBtn.frame = CGRectMake(85, 0, 60, 21)
+//        eventsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
+//        eventsRadioBtn.addTarget(self, action: #selector(NavController.eventSearch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
+        
 
-        let schoolsRadioBtn = SSRadioButton()
-        schoolsRadioBtn.setTitle("Schools", forState: .Normal)
-        schoolsRadioBtn.circleColor = UIColor.blackColor()
-        schoolsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        schoolsRadioBtn.frame = CGRectMake(150, 0, 70, 21)
-        schoolsRadioBtn.titleLabel?.font = UIFont(name: "Times New Roman", size: 15)
-        schoolsRadioBtn.addTarget(self, action: #selector(NavController.btnSchool(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//        let schoolsRadioBtn = SSRadioButton()
+//        schoolsRadioBtn.setTitle("Schools", forState: .Normal)
+//        schoolsRadioBtn.circleColor = UIColor.blackColor()
+//        schoolsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        schoolsRadioBtn.frame = CGRectMake(150, 0, 70, 21)
+//        schoolsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
+//        schoolsRadioBtn.addTarget(self, action: #selector(NavController.btnSchool(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         
-        let usersRadioBtn = SSRadioButton()
-        usersRadioBtn.setTitle("Users", forState: .Normal)
-        usersRadioBtn.circleColor = UIColor.blackColor()
-        usersRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        usersRadioBtn.frame = CGRectMake(230, 0, 60, 21)
-        usersRadioBtn.titleLabel?.font = UIFont(name: "Times New Roman", size: 15)
-        usersRadioBtn.addTarget(self, action: #selector(NavController.btnUsers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//        let usersRadioBtn = SSRadioButton()
+//        usersRadioBtn.setTitle("Users", forState: .Normal)
+//        usersRadioBtn.circleColor = UIColor.blackColor()
+//        usersRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        usersRadioBtn.frame = CGRectMake(230, 0, 60, 21)
+//        usersRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
+//        usersRadioBtn.addTarget(self, action: #selector(NavController.btnUsers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
+        
+        let eventsRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(85, 0, 60, 21),actionCallback: #selector(NavController.eventSearch(_:)))
+        
+        let schoolsRadioBtn = buildRadioButton(gSearchSchoolsRadioTitle,position: CGRectMake(150, 0, 70, 21),actionCallback: #selector(NavController.btnSchool(_:)))
+        
+        let usersRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
         
         radioButtonController = SSRadioButtonsController(buttons: eventsRadioBtn, schoolsRadioBtn, usersRadioBtn)
         
-       // radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = true
 
         
@@ -74,33 +94,28 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
         searchView.hidden = true
         
-        
-        
-        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, width , 44))
-        navigationBar.backgroundColor = UIColor.clearColor()
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
+        let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
-        searchButtonItem = UIBarButtonItem(customView:searchBar)
-        // Create left and right button for navigation item
-        
-        searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
-       // menuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: #selector(NavController.menuButtonClick(_:)))
-        
-        // Create two buttons for the navigation item
-        //        let backimage = UIImage(contentsOfFile:"backarrow")
+       
         if(isBackEnabled){
-            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: nil, action: #selector(NavController.back(_:)))
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToSomeController(_:)))
         
             navigationItem.leftBarButtonItem = backButton
         }
-        navigationItem.rightBarButtonItems = [searchButton, menuButton]
-        // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
+        let menuButton = self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
         
-        // Make the navigation bar a subview of the current view controller
-        self.view.addSubview(navigationBar)
+        if(isSearchEnabled){
+            searchButtonItem = UIBarButtonItem(customView:searchBar)
+            searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
+
+            navigationItem.rightBarButtonItems = [menuButton, searchButton, searchButton]
+        }
+        else{
+            navigationItem.rightBarButtonItems = [menuButton]
+        }
+        
         self.view.addSubview(searchView)
+        rightViewController.tableView.reloadData()
 
     }
     func btnSearchClick(sender: UIBarButtonItem) {
@@ -111,7 +126,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchBar.showsCancelButton = true
         
         
-        navigationBar.items = [navigationItem]
+        //navigationBar.items = [navigationItem]
         searchView.hidden = false
 
     }
@@ -133,7 +148,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
         
-        navigationBar.items = [navigationItem]
+       // navigationBar.items = [navigationItem]
         searchView.hidden = true
 
     }
@@ -147,12 +162,12 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     }
     
     
-    func back(sender: UIBarButtonItem){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier(backToView) as! HomeController
+    func backToSomeController(sender: UIBarButtonItem){
+        if(backToController == nil){
+            backToController = self.fetchNavController(gStrHomeControllerID)
+        }
         
-        self.presentViewController(nextViewController,animated:true,completion: nil)
-        self.navigationController?.popViewControllerAnimated(true)
+        self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)     
         
     }
     

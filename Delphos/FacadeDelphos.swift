@@ -22,13 +22,13 @@ import Swift
  */
 class FacadeDelphos: NSObject {
     
-    private let delegateDiphos: DelegateDiphos
+    private let delegateDiphos: DelegateDelphos
     
     /**
      * Constructor to initialize Delegate class
      */
     override init() {
-        delegateDiphos = DelegateDiphos()
+        delegateDiphos = DelegateDelphos()
     }
     
     /**

@@ -56,11 +56,22 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var selectedClaimId:Int = 0
      var selectedEventId:Int = 0
     
-    
+   
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO:API Call
+        //Adding Navbar
+//        menus = regularMenu
+//        rightViewController.isRegister = false
+//        rightViewController.tableView.reloadData()
         
+        self.isBackEnabled = true
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
+        
+        backToController = gObjHomeController
+    
+    
+    
     
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
@@ -92,13 +103,6 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         labelText5.font = UIFont.boldSystemFontOfSize(15)
         labelText6.font = UIFont.boldSystemFontOfSize(15)
     
-        
-        //Adding Navbar
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
-        navigationBar.delegate = self;
-        backToView = "HomeID"
-      
         
         if(gBtnRadioValue == events || gObjShowEventBean != nil) {
             
@@ -312,11 +316,21 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     
     @IBAction func btnEditEvent(sender: AnyObject) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
-        nextViewController.isEdit = true
-        self.presentViewController(nextViewController,animated:true,completion: nil)
-        self.navigationController?.popViewControllerAnimated(true)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+//        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
+//        nextViewController.isEdit = true
+//        self.presentViewController(nextViewController,animated:true,completion: nil)
+//        self.navigationController?.popViewControllerAnimated(true)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.EDIT_EVENT_SHOW)
+
+        
+//        if(gObjCreateEventController == nil){
+//            gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
+//        }
+//        self.slideMenuController()?.changeMainViewController(gObjCreateEventController, close: false)
     }
     
     @IBAction func btnClaim(sender: AnyObject) {

@@ -12,7 +12,7 @@ import ObjectMapper
 /**
  * Delegate class that delegates control to all Models.
  */
-class DelegateDiphos: NSObject {
+class DelegateDelphos: NSObject {
     
     var doPostAPIs: DAOPostAPIs
     var doGetAPIs: DAOGetAPIs
@@ -29,7 +29,20 @@ class DelegateDiphos: NSObject {
             objCurrentController.presentViewController(alertView, animated: true, completion: nil)
         })
     }
+    
+    func instantiateVC(controllerId: String) -> UIViewController{
+        return  gObjStoryBoard.instantiateViewControllerWithIdentifier(controllerId)
 
+    }
+
+    func fetchNavController(controllerId: String) -> UINavigationController{
+        return UINavigationController( rootViewController: instantiateVC(controllerId))
+    }
+    
+    func doNavigate(objCurrentController: UIViewController,toController: UINavigationController, close: Bool)->Void{
+        
+        objCurrentController.slideMenuController()?.changeMainViewController(toController, close: close)
+    }
     
     func delegateControl(objCurrentController: UIViewController, action enmAction: DelphosAction) {
        
@@ -56,38 +69,47 @@ class DelegateDiphos: NSObject {
         case .SEARCH_EVENT:
             print("SEARCH_EVENT")
             searchEvent(objCurrentController)
+            
         case.CREATE_EVENT:
             print("CREATE_EVENT")
             createEvent(objCurrentController)
+            
         case .SHOW_SEARCH:
             print("SHOW_SEARCH")
             showSearch(objCurrentController)
             
         case .CLAIM_EVENT:
-            print("SHOW_SEARCH")
+            print("CLAIM_EVENT")
             claimEvent(objCurrentController)
             
         case .CANCEL_CLAIM:
             print("SHOW_SEARCH")
             cancelClaim(objCurrentController)
-//        case .EDIT_EVENT:
-//            print("Edit_Event")
-//            editEvent(objCurrentController)
+            
+        case .EDIT_EVENT_SHOW:
+            print("EDIT_EVENT_SHOW")
+            editEvent(objCurrentController)
+            
         case .CANCEL_EVENT:
             print("DELETE EVENT")
             cancelEvent(objCurrentController)
+            
         case .CLAIM_VIEW:
             print("claim view")
              showClaimView(objCurrentController)
+            
         case .CLAIM_LIST_DETAILS:
             print("CLAIM_LIST_DETAILS")
             showClaimListDetails(objCurrentController)
+            
         case .CLAIM_ACCEPT:
             print("CLAIM ACCEPT")
             claimAccept(objCurrentController)
+            
         case .CLAIM_REJECT:
             print("CLAIM REJECT")
              claimReject(objCurrentController)
+            
         default:
             print("Error in delegate enum")
         
@@ -95,6 +117,13 @@ class DelegateDiphos: NSObject {
 
         }
     }
+    func editEvent(objCurrentContoller: UIViewController){
+        var editEventController:CreateEventController = instantiateVC(gStrCreateEventControllerID) as! CreateEventController
+        editEventController.isEdit = true
+        doNavigate(objCurrentContoller, toController: UINavigationController(rootViewController: editEventController),close: true)
+        
+    }
+    
     func createEvent(objCurrentContoller: UIViewController){
         let createEventController = objCurrentContoller as! CreateEventController
         let strTitle = createEventController.txtTitle.text
@@ -166,9 +195,10 @@ class DelegateDiphos: NSObject {
         }
         
     }
+   
     func login(objCurrentContoller: UIViewController) -> Bool {
         var boolLogin = false;
-        let loginController = objCurrentContoller as! ViewController
+        let loginController = objCurrentContoller as! LoginController
         
         let strUser = loginController.userTxt.text
         let strPassword = loginController.passwordTxt.text
@@ -188,11 +218,20 @@ class DelegateDiphos: NSObject {
                 boolLogin = true;
                    dispatch_async(dispatch_get_main_queue(), {
                     
-                let goToEventDisplay = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-                  
+//                var homeController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
+//                    
+//                    let homeControllerNav = UINavigationController(rootViewController: homeController)
+
+                    if(gObjHomeController == nil){
+                        gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    }
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                 
+                    
                     gObjUsers = loginResult as! UserBean
-                   objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
+//                   objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
                 })
+                
             }
             else if statusCode > 200{
                 print("Login failure")
@@ -280,9 +319,14 @@ class DelegateDiphos: NSObject {
                 boolRegister = true
                
                 dispatch_async(dispatch_get_main_queue(), {
-                  
-                    let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! ViewController
-                    objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
+
+                   // self.showAlert(objCurrentContoller, strMessage: "Registration Success")
+//                    let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
+//                    objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
+                    if(gObjLoginController == nil){
+                        gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
+                    }
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
             }
             else if(statusCode > 200) {
@@ -301,8 +345,13 @@ class DelegateDiphos: NSObject {
     func showEventUI(objCurrentContoller: UIViewController) {
     
         dispatch_async(dispatch_get_main_queue(), {
-        let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
-        objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+
+            
+            if(gObjEventShowController == nil){
+                gObjEventShowController = self.self.self.fetchNavController(gStrEventShowControllerID)
+            }
+            
+            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
         })
     }
     
@@ -413,23 +462,30 @@ class DelegateDiphos: NSObject {
             if(statusCode == 200) {
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    let goToSearchController = objCurrentController.storyboard?.instantiateViewControllerWithIdentifier("searchID") as! SearchController
+//                    let goToSearchController = objCurrentController.storyboard?.instantiateViewControllerWithIdentifier("searchID") as! SearchController
+                    
+                    if(gObjSearchController == nil){
+                        gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
+                    }
+                    
+                    
                     if(gBtnRadioValue == "events") {
                         gObjEventDisplayBean = result as! EventDisplayBean
-                         goToSearchController.eventBeanArray = gObjEventDisplayBean.events
+                         gObjSearchController.eventBeanArray = gObjEventDisplayBean.events
                     }
                     else if(gBtnRadioValue == "Schools") {
                         gObjUsersBean = result as! usersBean
-                        goToSearchController.schoolBeanArray = gObjUsersBean.users
+                        gObjSearchController.schoolBeanArray = gObjUsersBean.users
                     }
                     else if(gBtnRadioValue == "users") {
                         gObjUsersBean = result as! usersBean
-                         goToSearchController.usersBeanArray = gObjUsersBean.users
+                         gObjSearchController.usersBeanArray = gObjUsersBean.users
                     }
                    
+                    objCurrentController.slideMenuController()?.changeMainViewController(UINavigationController(rootViewController: gObjSearchController), close: false)
                     
                     //      print(eventDisplayController.eventBeanArray);
-                     objCurrentController.presentViewController(goToSearchController, animated: true, completion: nil)
+//                     objCurrentController.presentViewController(goToSearchController, animated: true, completion: nil)
                     //objEventDisplayController.tableView.reloadData()
                     
                 })
@@ -447,7 +503,7 @@ class DelegateDiphos: NSObject {
         doGetAPIs.getSearchEventsAndUsers(gBtnRadioValue, strsearchID: strShowSearch,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == 200) {
                 dispatch_async(dispatch_get_main_queue(), {
-                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+//                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
                     if(gBtnRadioValue == events) {
                         gObjShowEventBean = result as! ShowEventBean
                     } else if(gBtnRadioValue == schools) {
@@ -456,8 +512,8 @@ class DelegateDiphos: NSObject {
                          var objUserBean = result as! usersBean
                         gObjSearchUserListBean = objUserBean.user
                     }
-                    
-                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+                    self.showEventUI(objCurrentContoller)
+//                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
                 })
             }
         })
@@ -475,9 +531,13 @@ class DelegateDiphos: NSObject {
             
             if (statusCode == 200){
                 print("claimed")
+                if(gObjHomeController == nil){
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                }
+                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 
-                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-                objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+//                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
+//                objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
                 
             } else {
                 print("not claimed")
@@ -508,8 +568,13 @@ class DelegateDiphos: NSObject {
     doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
         if (statusCode == 200){
             print("Cancel Events")
-            let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-            objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+            
+            if(gObjHomeController == nil){
+                gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+            }
+            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+//            let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
+//            objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
         
         }
         else {

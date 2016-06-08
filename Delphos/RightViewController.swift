@@ -24,9 +24,10 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         case Settings
         case Profile
         case Logout
+        
     }
-    @IBOutlet weak var tableView: UITableView!
-    var menus = ["Home", "Settings", "Profile", "Logout"]
+    @IBOutlet var tableView: UITableView!
+    var isRegister: Bool = false
     
     var homeController: UIViewController!
     
@@ -38,15 +39,22 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         super.init(coder: aDecoder)
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gObjHomeController = fetchNavController(gStrHomeControllerID)
+        
+        gObjLoginController = fetchNavController(gStrLoginControllerID) 
+        
         // self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         
-        let homeController = storyboard.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-        self.homeController = UINavigationController(rootViewController: homeController)
+//        
+//        gObjHomeController = storyboard.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
+//        self.homeController = UINavigationController(rootViewController: homeController)
        
         
     }
@@ -73,18 +81,23 @@ class RightViewController: UIViewController, UIWebViewDelegate {
             
             switch menu {
             case .Home:
-                self.slideMenuController()?.changeMainViewController(self.homeController, close: true)
+                if(isRegister){
+                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)                    
+                }
+                else{
+                    self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                }
                 break
+                
             case .Settings:
-                self.slideMenuController()?.changeMainViewController(self.homeController, close: true)
+                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 break
             case .Profile:
-                self.slideMenuController()?.changeMainViewController(self.homeController, close: true)
+                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 break
             case .Logout:
-                self.slideMenuController()?.changeMainViewController(self.homeController, close: true)
+                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 break
-             default:break
                 
             }
         }

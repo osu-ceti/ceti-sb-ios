@@ -14,22 +14,25 @@ import QuartzCore
 
 
 class MessageController:  NavController  {
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         //Adding Navbar
+        menus = regularMenu
+//        rightViewController.isRegister = false
+//        rightViewController.tableView.reloadData()
+//        
         self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
-        navigationBar.delegate = self;
         
-        backToView = ""
+        
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
         
         radioButtonController!.delegate = self
-        
-        
         
         
         

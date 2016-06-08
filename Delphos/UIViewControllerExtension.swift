@@ -10,4 +10,9 @@ extension UIViewController{
         self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
        
     }
+    func fetchNavController(controllerId: String) -> UINavigationController{
+       
+        let objViewController = gObjStoryBoard.instantiateViewControllerWithIdentifier(controllerId)
+        return UINavigationController( rootViewController: objViewController)
+    }
 }

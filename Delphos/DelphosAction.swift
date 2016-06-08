@@ -20,6 +20,7 @@ enum DelphosAction
     case CLAIM_EVENT
     case CANCEL_CLAIM
     case EDIT_EVENT
+    case EDIT_EVENT_SHOW
     case CANCEL_EVENT
     case CLAIM_VIEW
     case CLAIM_LIST_DETAILS
