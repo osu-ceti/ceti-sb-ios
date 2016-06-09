@@ -22,21 +22,20 @@ import Swift
  */
 class FacadeDelphos: NSObject {
     
-    private let delegateDiphos: DelegateDelphos
+    private let delegateDiphos: DelegateController
     
     /**
      * Constructor to initialize Delegate class
      */
     override init() {
-        delegateDiphos = DelegateDelphos()
+        delegateDiphos = DelegateController()
     }
     
     /**
-     * Relinquish control to Delegate class
+     * Relinquish control to Delegate class. This Facade class is added to support internationalization
      */
     func doTask(objCurrentController: UIViewController, action enmAction: DelphosAction)
     {
-        print("Test facade call")
         //call to delegate control
         delegateDiphos.delegateControl(objCurrentController,action: enmAction)
     }

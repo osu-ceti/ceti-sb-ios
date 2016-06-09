@@ -27,6 +27,11 @@
 		0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */; };
 		0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */; };
 		0FE947CE1D05C803009402D6 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE947CD1D05C803009402D6 /* MessageController.swift */; };
+		84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCA1D09527C00C614C2 /* BaseDelegate.swift */; };
+		84799FCD1D09528E00C614C2 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCC1D09528E00C614C2 /* EventDelegate.swift */; };
+		84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCE1D09529B00C614C2 /* UserDelegate.swift */; };
+		84799FD11D09952D00C614C2 /* ClaimsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FD01D09952D00C614C2 /* ClaimsDelegate.swift */; };
+		84799FD31D09961500C614C2 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FD21D09961500C614C2 /* SearchDelegate.swift */; };
 		84BA187E1D03552A009DC8C9 /* DelphosGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA187D1D03552A009DC8C9 /* DelphosGlobals.swift */; };
 		F57260411CEC2F18007078C3 /* ClaimBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57260401CEC2F18007078C3 /* ClaimBean.swift */; };
 		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
@@ -46,7 +51,7 @@
 		F599843E1CDC9F120055C8D3 /* SchoolBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843D1CDC9F120055C8D3 /* SchoolBusiness.swift */; };
 		F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F599843F1CDCC3360055C8D3 /* RegisterController.swift */; };
 		F59984431CDCCDC40055C8D3 /* FacadeDelphos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */; };
-		F59984451CDCCDDF0055C8D3 /* DelegateDelphos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984441CDCCDDF0055C8D3 /* DelegateDelphos.swift */; };
+		F59984451CDCCDDF0055C8D3 /* DelegateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59984441CDCCDDF0055C8D3 /* DelegateController.swift */; };
 		F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE791CDC6CD800419419 /* AppDelegate.swift */; };
 		F5A2EE7C1CDC6CD800419419 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2EE7B1CDC6CD800419419 /* LoginController.swift */; };
 		F5A2EE811CDC6CD800419419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5A2EE801CDC6CD800419419 /* Assets.xcassets */; };
@@ -58,9 +63,8 @@
 		F5AFC0561CE0BB6300C95687 /* EventDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */; };
 		F5AFC0581CE0BD0E00C95687 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58BBAD91CE07444000A3D2A /* HomeController.swift */; };
 		F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598EA1CDDBFB2000C3F58 /* DelphosAction.swift */; };
-		F5C598EE1CDDE674000C3F58 /* DAOPostAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */; };
+		F5C598EE1CDDE674000C3F58 /* DAOServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598ED1CDDE674000C3F58 /* DAOServices.swift */; };
 		F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */; };
-		F5C598F21CDDE6FB000C3F58 /* DAOGetAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598F11CDDE6FB000C3F58 /* DAOGetAPIs.swift */; };
 		F5C598F41CDDE78C000C3F58 /* DAOErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598F31CDDE78C000C3F58 /* DAOErrorCodes.swift */; };
 		F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */; };
 		F5E06FD91CED9BAB00E3D83B /* ClaimEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E06FD81CED9BAB00E3D83B /* ClaimEventBean.swift */; };
@@ -167,6 +171,11 @@
 		0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultEvent.swift; sourceTree = "<group>"; };
 		0FE947CD1D05C803009402D6 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = ObjectMapper/ObjectMapper.xcodeproj; sourceTree = "<group>"; };
+		84799FCA1D09527C00C614C2 /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
+		84799FCC1D09528E00C614C2 /* EventDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
+		84799FCE1D09529B00C614C2 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
+		84799FD01D09952D00C614C2 /* ClaimsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimsDelegate.swift; sourceTree = "<group>"; };
+		84799FD21D09961500C614C2 /* SearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		84BA187D1D03552A009DC8C9 /* DelphosGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosGlobals.swift; sourceTree = "<group>"; };
 		F57260401CEC2F18007078C3 /* ClaimBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimBean.swift; sourceTree = "<group>"; };
 		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
@@ -186,7 +195,7 @@
 		F599843D1CDC9F120055C8D3 /* SchoolBusiness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolBusiness.swift; sourceTree = "<group>"; };
 		F599843F1CDCC3360055C8D3 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacadeDelphos.swift; sourceTree = "<group>"; };
-		F59984441CDCCDDF0055C8D3 /* DelegateDelphos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateDelphos.swift; sourceTree = "<group>"; };
+		F59984441CDCCDDF0055C8D3 /* DelegateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateController.swift; sourceTree = "<group>"; };
 		F5A2EE761CDC6CD800419419 /* Delphos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delphos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A2EE791CDC6CD800419419 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5A2EE7B1CDC6CD800419419 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -202,9 +211,8 @@
 		F5AFC04A1CE0A1A700C95687 /* EventDisplayBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDisplayBean.swift; sourceTree = "<group>"; };
 		F5AFC0541CE0B56D00C95687 /* EventDsiplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDsiplayCell.swift; sourceTree = "<group>"; };
 		F5C598EA1CDDBFB2000C3F58 /* DelphosAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosAction.swift; sourceTree = "<group>"; };
-		F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOPostAPIs.swift; sourceTree = "<group>"; };
+		F5C598ED1CDDE674000C3F58 /* DAOServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOServices.swift; sourceTree = "<group>"; };
 		F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOBase.swift; sourceTree = "<group>"; };
-		F5C598F11CDDE6FB000C3F58 /* DAOGetAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOGetAPIs.swift; sourceTree = "<group>"; };
 		F5C598F31CDDE78C000C3F58 /* DAOErrorCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOErrorCodes.swift; sourceTree = "<group>"; };
 		F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBean.swift; sourceTree = "<group>"; };
 		F5E06FD81CED9BAB00E3D83B /* ClaimEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimEventBean.swift; sourceTree = "<group>"; };
@@ -293,7 +301,12 @@
 			isa = PBXGroup;
 			children = (
 				F59984421CDCCDC40055C8D3 /* FacadeDelphos.swift */,
-				F59984441CDCCDDF0055C8D3 /* DelegateDelphos.swift */,
+				F59984441CDCCDDF0055C8D3 /* DelegateController.swift */,
+				84799FCA1D09527C00C614C2 /* BaseDelegate.swift */,
+				84799FCC1D09528E00C614C2 /* EventDelegate.swift */,
+				84799FCE1D09529B00C614C2 /* UserDelegate.swift */,
+				84799FD01D09952D00C614C2 /* ClaimsDelegate.swift */,
+				84799FD21D09961500C614C2 /* SearchDelegate.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -368,9 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				F599843D1CDC9F120055C8D3 /* SchoolBusiness.swift */,
-				F5C598ED1CDDE674000C3F58 /* DAOPostAPIs.swift */,
+				F5C598ED1CDDE674000C3F58 /* DAOServices.swift */,
 				F5C598EF1CDDE6AD000C3F58 /* DAOBase.swift */,
-				F5C598F11CDDE6FB000C3F58 /* DAOGetAPIs.swift */,
 				F5C598F31CDDE78C000C3F58 /* DAOErrorCodes.swift */,
 			);
 			name = Data;
@@ -599,6 +611,7 @@
 				0F9E4F241CF47236004FC736 /* NavController.swift in Sources */,
 				0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */,
 				0FE947CE1D05C803009402D6 /* MessageController.swift in Sources */,
+				84799FCD1D09528E00C614C2 /* EventDelegate.swift in Sources */,
 				0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */,
 				0F8B11FE1D0001330030CE82 /* ClaimListBean.swift in Sources */,
 				F58F69951CEAF41C00C4ED91 /* BadgesBean.swift in Sources */,
@@ -607,6 +620,7 @@
 				F5A2EE7C1CDC6CD800419419 /* LoginController.swift in Sources */,
 				F58061571CE46941004BF043 /* EventShowController.swift in Sources */,
 				0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */,
+				84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */,
 				F57260411CEC2F18007078C3 /* ClaimBean.swift in Sources */,
 				0F9E4F191CF31D4A004FC736 /* DelphosEnums.swift in Sources */,
 				F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */,
@@ -615,6 +629,7 @@
 				0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */,
 				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
 				0F8B12061D00061B0030CE82 /* ClaimListClaimBean.swift in Sources */,
+				84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */,
 				0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */,
 				F580616C1CE5E73F004BF043 /* SearchControllerCell.swift in Sources */,
 				0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */,
@@ -628,22 +643,23 @@
 				F5E06FD91CED9BAB00E3D83B /* ClaimEventBean.swift in Sources */,
 				F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */,
 				F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */,
-				F5C598F21CDDE6FB000C3F58 /* DAOGetAPIs.swift in Sources */,
 				0F9E4F1F1CF33A9C004FC736 /* UIViewControllerExtension.swift in Sources */,
 				F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */,
 				F58F698D1CEAF2DB00C4ED91 /* searchUserListBean.swift in Sources */,
 				F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */,
 				F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */,
+				84799FD11D09952D00C614C2 /* ClaimsDelegate.swift in Sources */,
 				0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */,
 				0FB713D11CF97A5400C0C77F /* SearchEventBean.swift in Sources */,
 				F58061731CE5F93C004BF043 /* userListBean.swift in Sources */,
 				F599843E1CDC9F120055C8D3 /* SchoolBusiness.swift in Sources */,
 				F58BBADA1CE07444000A3D2A /* HomeController.swift in Sources */,
+				84799FD31D09961500C614C2 /* SearchDelegate.swift in Sources */,
 				F59984431CDCCDC40055C8D3 /* FacadeDelphos.swift in Sources */,
-				F5C598EE1CDDE674000C3F58 /* DAOPostAPIs.swift in Sources */,
+				F5C598EE1CDDE674000C3F58 /* DAOServices.swift in Sources */,
 				F580616A1CE5E2B9004BF043 /* SearchController.swift in Sources */,
 				F5C598F41CDDE78C000C3F58 /* DAOErrorCodes.swift in Sources */,
-				F59984451CDCCDDF0055C8D3 /* DelegateDelphos.swift in Sources */,
+				F59984451CDCCDDF0055C8D3 /* DelegateController.swift in Sources */,
 				F58BBAD71CE06280000A3D2A /* UserBean.swift in Sources */,
 				F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */,
 			);

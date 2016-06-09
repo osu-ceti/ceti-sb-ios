@@ -10,6 +10,9 @@ import UIKit
 
 var gObjStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
+var doPostAPIs: DAOServices!
+var doGetAPIs: DAOServices!
+
 var gObjHomeController : UINavigationController!
 var gStrHomeControllerID: String = "HomeID"
 
