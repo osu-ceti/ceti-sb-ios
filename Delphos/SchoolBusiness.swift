@@ -56,6 +56,7 @@ let CANCEL_CLAIMS = "/cancel"
 let CANCEL_EVENT = "/cancel"
 let TEACHER_CONFIRM = "teacher_confirm"
 let REJECT = "reject"
+let SEND_MESSAGE = "send_message"
 
 
 

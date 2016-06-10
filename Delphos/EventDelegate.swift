@@ -160,9 +160,9 @@ class EventDelegate: BaseDelegate{
             if (statusCode == SUCCESS){
                 print("Cancel Events")
                 
-                if(gObjHomeController == nil){
+               // if(gObjHomeController == nil){
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                }
+               // }
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 //            let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
                 //            objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)

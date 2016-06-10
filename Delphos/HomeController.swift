@@ -48,12 +48,11 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         navigationItem.title = "School-Business"
-        
-//
-     //   radioButtonController!.delegate = self
-
-        
+      
+        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        view.backgroundColor = bgColor
+        self.tableView.backgroundColor = bgColor
+   
         self.tableView.dataSource = self
         tableView.delegate = self
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -71,17 +70,17 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         else{
             self.btnCreateEvent.hidden = true
         }
-              
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
-        let context = UIGraphicsGetCurrentContext()
         
-        CGContextMoveToPoint(context, 10, 50)
-        CGContextAddLineToPoint(context, 20, 100)
-        
-        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
-        CGContextStrokePath(context)
+//        let img = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
+//        let context = UIGraphicsGetCurrentContext()
+//        
+//        CGContextMoveToPoint(context, 10, 50)
+//        CGContextAddLineToPoint(context, 20, 100)
+//        
+//        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
+//        CGContextStrokePath(context)
         
 
         
@@ -89,9 +88,9 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     
     @IBAction func btnCreateEvent(sender: UIButton) {
-        if(gObjCreateEventController == nil){
+       // if(gObjCreateEventController == nil){
             gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
-        }
+        //}
         self.slideMenuController()?.changeMainViewController(gObjCreateEventController, close: false)
 //
 //        let goToCreateEvent = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
@@ -192,7 +191,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     }
     
      func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
-       
+        cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
          var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
         
       (cell as! EventDisplayCell).eventName!.text = String(eventDisplayBean.event_title)

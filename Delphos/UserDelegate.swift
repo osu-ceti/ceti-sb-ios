@@ -37,9 +37,9 @@ class UserDelegate:BaseDelegate{
                     //
                     //                    let homeControllerNav = UINavigationController(rootViewController: homeController)
                     
-                    if(gObjHomeController == nil){
+                   // if(gObjHomeController == nil){
                         gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                    }
+                   // }
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                     
                     
@@ -95,9 +95,9 @@ class UserDelegate:BaseDelegate{
                     // self.showAlert(objCurrentContoller, strMessage: "Registration Success")
                     //                    let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
                     //                    objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
-                    if(gObjLoginController == nil){
+                    //if(gObjLoginController == nil){
                         gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
-                    }
+                    //}
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
             }

@@ -51,7 +51,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     //let dataTimeZone = NSTimeZone.knownTimeZoneNames()
    // var timeAbb = iOStimeZones?.abbreviation
     let iOStimeZones = ["Eastern Time (US & Canada)"]
-    
+
     @IBOutlet var scrolview: UIScrollView!
    
     @IBOutlet weak var timeZonePicker: UIPickerView!
@@ -388,7 +388,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     {
         super.viewDidAppear(animated);
         
-        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 500)
+        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 700)
         scrolview.scrollEnabled = true
         //view.addSubview(scrolview)
     }

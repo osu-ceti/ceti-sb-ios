@@ -50,6 +50,7 @@ class  ShowEventBean: Mappable {
     
     var user_name: String!
     
+    var event_id:Int!//on click event claim response
     
     required init()
     {
@@ -96,6 +97,9 @@ class  ShowEventBean: Mappable {
         user_id    <- map["user_id"]
         
         user_name    <- map["user_name"]
+        
+        event_id    <- map["event_id"]
+
         
     }
 }

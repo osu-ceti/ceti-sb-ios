@@ -14,7 +14,9 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []
     var usersBeanArray: [userListBean]! = []
-      var schoolBeanArray: [userListBean]! = []
+    var schoolBeanArray: [userListBean]! = []
+    
+    @IBOutlet weak var eventFound: UILabel!
     
     @IBOutlet weak var tableVIew: UITableView!
     
@@ -42,10 +44,15 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
 //        navigationBar.delegate = self;
 //        backToView = "HomeID"
 //       
-        
+        self.eventFound.hidden = true
         self.tableVIew.dataSource = self
         tableVIew.delegate = self
         self.tableVIew.tableFooterView = UIView()
+        
+        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        view.backgroundColor = bgColor
+        self.tableVIew.backgroundColor = bgColor
+       
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,20 +73,29 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
             return usersBeanArray.count
             
         }
-        return 0
+        return 1
     }
     
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+       
         if(eventBeanArray.count > 0) {
             var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
-        
+            //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(eventDisplayBean.event_title)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(eventDisplayBean.id)
-        } else if(usersBeanArray.count > 0) {
+            (cell as! SearchControllerCell).startdate!.text = String(eventDisplayBean.event_start)
+                  } else if(usersBeanArray.count > 0) {
             var usersListBean: userListBean! = usersBeanArray[indexPath.row]
             
             (cell as! SearchControllerCell).txtTitle!.text = String(usersListBean.name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(usersListBean.id)
+            (cell as! SearchControllerCell).startdate.hidden = true
+        }
+        else{
+             cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+           self.eventFound.hidden = false
+             (cell as! SearchControllerCell).txtTitle.hidden = true
+            (cell as! SearchControllerCell).startdate.hidden = true
         }
         
         
@@ -100,11 +116,14 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         print("currentCell", currentCell.txtIdHidden.text!)
         
         gSearchValue = Int(currentCell.txtIdHidden.text!)
+             
+        
         dispatch_async(dispatch_get_main_queue(), {
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.SHOW_SEARCH)
         })
+     
     }
 }

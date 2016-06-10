@@ -9,15 +9,50 @@
 import UIKit
 
 class ClaimsDelegate: BaseDelegate {
-    func showClaimView(objCurrentContoller: UIViewController) {
+    func showClaimAllList(objCurrentContoller: UIViewController) {
         //var strClaimEventId: String = String(gObjShowEventBean.id)
         
         doGetAPIs.getClaimView(String(gObjShowEventBean.id),callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                 dispatch_async(dispatch_get_main_queue(), {
-                    var claimsList = result as! ClaimListBean
-                    (objCurrentContoller as! EventShowController).claimBeanArray = claimsList.claims
+                     gClaimsList = result as! ClaimListBean
+                    (objCurrentContoller as! EventShowController).claimBeanArray = gClaimsList.claims
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
+                  
+                    if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
+                    
+                        if (gObjUserBean.id == gObjShowEventBean.speaker_id)
+                        {
+                                (objCurrentContoller as! EventShowController).self.cancelClaim.hidden = false
+                                (objCurrentContoller as! EventShowController).self.claim.hidden = true
+                        }
+                        else {
+                            if(gObjShowEventBean.speaker_id != 0){
+                                (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
+                                (objCurrentContoller as! EventShowController).claim.hidden = true
+                            }
+                            else{
+                                var match:Bool = false
+                                for claimUser in gClaimsList.claims{
+                                    if(gObjUserBean.id == claimUser.user_id)
+                                    {
+                                        match = true
+                                        (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
+                                        (objCurrentContoller as! EventShowController).claim.hidden = false
+                                        (objCurrentContoller as! EventShowController).claim.setTitle( "Claim Pending", forState: .Normal)
+                                        (objCurrentContoller as! EventShowController).claim.enabled = false
+                                        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
+                                    }
+                                }
+                                if( match == false){
+                                
+                                    //Did no apply
+                                    (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
+                                    (objCurrentContoller as! EventShowController).claim.hidden = false
+                                }
+                            }
+                        }
+                    }
                 })
             }
         })
@@ -30,18 +65,18 @@ class ClaimsDelegate: BaseDelegate {
                 var objEventShowController = objCurrentContoller as! EventShowController
                 
                 dispatch_async(dispatch_get_main_queue(), {
+                   // gClaimsList = result as! ClaimListBean
+
+                    gClaimsListDetails = result as! ClaimListClaimBeanBean
+                    objEventShowController.labelBusiness.text! = String(gClaimsListDetails.business)
+                    objEventShowController.labelJobTitle.text! = String(gClaimsListDetails.job_title)
+                    objEventShowController.labelUserName.text! = String(gClaimsListDetails.user_name)
+                    objEventShowController.selectedClaimId = gClaimsListDetails.claim_id
+                    objEventShowController.selectedEventId = gClaimsListDetails.event_id
                     
-                    var  claimsListDetails = result as! ClaimListClaimBeanBean
-                    objEventShowController.labelBusiness.text! = String(claimsListDetails.business)
-                    objEventShowController.labelJobTitle.text! = String(claimsListDetails.job_title)
-                    objEventShowController.labelUserName.text! = String(claimsListDetails.user_name)
-                    objEventShowController.selectedClaimId = claimsListDetails.claim_id
-                    objEventShowController.selectedEventId = claimsListDetails.event_id
-                    
-                    
-                    // (objCurrentContoller as! EventShowController).claimBeanDetail = gclaimsListDetails
+                   // (objCurrentContoller as! EventShowController).claimBeanDetail = gclaimsListDetails
                     // (objCurrentContoller as! EventShowController).tableView.reloadData()
-                    
+                  
                     
                 })
             }
@@ -60,6 +95,7 @@ class ClaimsDelegate: BaseDelegate {
         doPostAPIs.doAcceptClaim(strClaimEventId,strClaimid: strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                 // var objEventShowController = objCurrentContoller as! EventShowController
+                self.showAlert(objCurrentContoller, strMessage: "Accept")
                 
             }
             else{
@@ -100,9 +136,9 @@ class ClaimsDelegate: BaseDelegate {
             
             if (statusCode == SUCCESS){
                 print("claimed")
-                if(gObjHomeController == nil){
+                //if(gObjHomeController == nil){
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                }
+                //}
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 
                 //                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
@@ -110,11 +146,51 @@ class ClaimsDelegate: BaseDelegate {
                 
             } else {
                 print("not claimed")
+                 self.showAlert(objCurrentContoller, strMessage: "Not Claim")
             }
         }
         return true
     }
+    func sendMessage(objCurrentContoller: UIViewController)  {
+        
+        var strSendMessage:String = String((objCurrentContoller as! MessageController).txtSendMessage)
+        var strUserId:String = String(gUserId)
+        
+        var objInputBean:SendMessageBean = SendMessageBean()
+        
+        objInputBean.id = Int(strUserId)
+        objInputBean.user_message = strSendMessage
+        //
+        //        var objInputParamBean:ClaimSendMessageBean = ClaimSendMessageBean()
+        //
+        //        objInputParamBean.message = objInputBean
+        doPostAPIs.doSendMessage(objInputBean){ (loginResult: AnyObject, statusCode: Int) in
+            
+            if (statusCode == 200){
+                print("SEND MESSAGE")
+                 self.showAlert(objCurrentContoller, strMessage: "Message Sent")
+                
+            } else {
+                print("NOT SEND MESSAGE")
+                self.showAlert(objCurrentContoller, strMessage: "NOT SEND MESSAGE")
+                
+            }
+        }
+        
+    }
     
+    func messageClick(objCurrentContoller: UIViewController){
+        print("Send Message")
+        
+       // if(gObjMessageController == nil){
+            gObjMessageController = self.fetchNavController(gStrMessageControllerID)
+        //}
+        doNavigate(objCurrentContoller, toController: gObjMessageController, close: true)
+        
+        //        objCurrentContoller.slideMenuController()?.changeMainViewController(gObjMessageController, close: false)
+        //    
+    }
+
     func cancelClaim(objCurrentContoller: UIViewController) -> Bool {
         
         //   var claimID = gObjShowEventBean.claim_id
@@ -122,8 +198,13 @@ class ClaimsDelegate: BaseDelegate {
         doPostAPIs.doCancelClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             if (statusCode == SUCCESS){
                 print("Cancel claimed")
+                //if(gObjHomeController == nil){
+                gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                //}
+                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
             } else {
                 print("not claimed")
+                self.showAlert(objCurrentContoller, strMessage: "Not Claimed")
             }
         }
         

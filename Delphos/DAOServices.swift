@@ -352,9 +352,11 @@ class DAOServices: DAOBase {
     
     func doClaim(objShowEventBean: ShowEventBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("doClaim")
-     //   var events = String(objClaimBean.event_id)
+      // var event_id = String(gObjUsers.id)
+       // var user_id = String(gObjShowEventBean.user_id)
         strURL =  CREATE_CLAIMS
             //+ events + USER_CLAIM + String(objClaimBean.user_id)
+         // strURL =  CREATE_CLAIMS + "?" + "event_id=" + event_id + "&" + "user_id=" + user_id
         let JSONString = Mapper().toJSONString(objShowEventBean, prettyPrint: true)
         
         doPost(JSONString!, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
@@ -421,6 +423,31 @@ class DAOServices: DAOBase {
         
     })
     }
+    func doSendMessage(objSendMessage : SendMessageBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        let JSONString = Mapper().toJSONString(objSendMessage, prettyPrint: true)
+
+        
+        var strUserId = String(gClaimDetailId)
+        strURL =  SEND_MESSAGE + "/" + strUserId
+        
+        doPost(JSONString!,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status){
+                var claimEventBean = Mapper<ClaimEventBean>().map(jsonResult)!
+                callBack?(result: claimEventBean, statusCode: statusCode )
+                return
+            }
+            else {
+                //println(jsonResult)
+               var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+    }
+    
     func doRejectClaim(strClaimid:String,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
     
    

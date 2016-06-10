@@ -29,6 +29,7 @@ class DelegateController: BaseDelegate {
         objEventDelegate = EventDelegate()
         objClaimsDelegate = ClaimsDelegate()
         objUserDelegate = UserDelegate()
+        objSearchDelegate = SearchDelegate()
     }
         
     
@@ -83,9 +84,9 @@ class DelegateController: BaseDelegate {
             print("DELETE EVENT")
             objEventDelegate.cancelEvent(objCurrentController)
             
-        case .CLAIM_VIEW:
-            print("claim view")
-             objClaimsDelegate.showClaimView(objCurrentController)
+        case .CLAIM_LIST:
+            print("claim All List ")
+             objClaimsDelegate.showClaimAllList(objCurrentController)
             
         case .CLAIM_LIST_DETAILS:
             print("CLAIM_LIST_DETAILS")
@@ -98,6 +99,12 @@ class DelegateController: BaseDelegate {
         case .CLAIM_REJECT:
             print("CLAIM REJECT")
              objClaimsDelegate.claimReject(objCurrentController)
+        
+        case .SEND_MESSAGE:
+            objClaimsDelegate.sendMessage(objCurrentController)
+            
+        case .VIEW_MESSAGE_CONTROLLER:
+           objClaimsDelegate.messageClick(objCurrentController)
             
         default:
             print("Error in delegate enum")

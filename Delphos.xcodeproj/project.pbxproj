@@ -11,6 +11,7 @@
 		0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */; };
 		0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */; };
 		0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */; };
+		0F34E1271D08110000CE660B /* SendMessageResBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F34E1261D08110000CE660B /* SendMessageResBean.swift */; };
 		0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B271CEAFBE0000ED18F /* CreateEventController.swift */; };
 		0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */; };
 		0F8B11FE1D0001330030CE82 /* ClaimListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */; };
@@ -24,6 +25,7 @@
 		0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF601CEC3C900094EC79 /* EventBean.swift */; };
 		0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF631CEC5E050094EC79 /* CreateBean.swift */; };
 		0FB713D11CF97A5400C0C77F /* SearchEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */; };
+		0FC3A6761D07FC33009420DF /* SendMessageBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3A6751D07FC33009420DF /* SendMessageBean.swift */; };
 		0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */; };
 		0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */; };
 		0FE947CE1D05C803009402D6 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE947CD1D05C803009402D6 /* MessageController.swift */; };
@@ -71,54 +73,61 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		84725DE81CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E0551D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6AAC8F7619F03C2900E7A677;
 			remoteInfo = "ObjectMapper-iOS";
 		};
-		84725DEA1CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E0571D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CD1602FF1AC023D5000CD69A;
 			remoteInfo = "ObjectMapper-Mac";
 		};
-		84725DEC1CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E0591D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6A2AD03D1B2C78540097E150;
 			remoteInfo = "ObjectMapper-watchOS";
 		};
-		84725DEE1CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E05B1D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6A05B7A61BE274BE00F19B53;
 			remoteInfo = "ObjectMapper-tvOS";
 		};
-		84725DF01CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E05D1D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6AAC8F8119F03C2900E7A677;
 			remoteInfo = "ObjectMapper-iOSTests";
 		};
-		84725DF21CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E05F1D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CD1603091AC023D6000CD69A;
 			remoteInfo = "ObjectMapper-MacTests";
 		};
-		84725DF41CFD68B400AEDC55 /* PBXContainerItemProxy */ = {
+		0F34E0611D0982930095C32F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6A05B7AF1BE274BE00F19B53;
 			remoteInfo = "ObjectMapper-tvOSTests";
+		};
+		0F34E0631D0988910095C32F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AAC8F7519F03C2900E7A677;
+			remoteInfo = "ObjectMapper-iOS";
 		};
 		F5A2EE8B1CDC6CD800419419 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -154,6 +163,8 @@
 		0F1C22FD1CE728D20052AA17 /* SSRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButton.swift; path = SSRadioButtonController/SSRadioButton.swift; sourceTree = "<group>"; };
 		0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButtonsController.swift; path = SSRadioButtonController/SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelEventBean.swift; sourceTree = "<group>"; };
+		0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = ObjectMapper/ObjectMapper.xcodeproj; sourceTree = "<group>"; };
+		0F34E1261D08110000CE660B /* SendMessageResBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageResBean.swift; sourceTree = "<group>"; };
 		0F500B271CEAFBE0000ED18F /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventBean.swift; sourceTree = "<group>"; };
 		0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimListBean.swift; sourceTree = "<group>"; };
@@ -167,6 +178,7 @@
 		0FB1DF601CEC3C900094EC79 /* EventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBean.swift; sourceTree = "<group>"; };
 		0FB1DF631CEC5E050094EC79 /* CreateBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBean.swift; sourceTree = "<group>"; };
 		0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventBean.swift; sourceTree = "<group>"; };
+		0FC3A6751D07FC33009420DF /* SendMessageBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageBean.swift; sourceTree = "<group>"; };
 		0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultBean.swift; sourceTree = "<group>"; };
 		0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultEvent.swift; sourceTree = "<group>"; };
 		0FE947CD1D05C803009402D6 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
@@ -252,16 +264,16 @@
 			name = SSRadioButtonController;
 			sourceTree = "<group>";
 		};
-		84725DDF1CFD68B400AEDC55 /* Products */ = {
+		0F34E04C1D0982930095C32F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84725DE91CFD68B400AEDC55 /* ObjectMapper.framework */,
-				84725DEB1CFD68B400AEDC55 /* ObjectMapper.framework */,
-				84725DED1CFD68B400AEDC55 /* ObjectMapper.framework */,
-				84725DEF1CFD68B400AEDC55 /* ObjectMapper.framework */,
-				84725DF11CFD68B400AEDC55 /* ObjectMapper-iOSTests.xctest */,
-				84725DF31CFD68B400AEDC55 /* ObjectMapper-MacTests.xctest */,
-				84725DF51CFD68B400AEDC55 /* ObjectMapper-tvOSTests.xctest */,
+				0F34E0561D0982930095C32F /* ObjectMapper.framework */,
+				0F34E0581D0982930095C32F /* ObjectMapper.framework */,
+				0F34E05A1D0982930095C32F /* ObjectMapper.framework */,
+				0F34E05C1D0982930095C32F /* ObjectMapper.framework */,
+				0F34E05E1D0982930095C32F /* ObjectMapper-iOSTests.xctest */,
+				0F34E0601D0982930095C32F /* ObjectMapper-MacTests.xctest */,
+				0F34E0621D0982930095C32F /* ObjectMapper-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -314,7 +326,7 @@
 		F5A2EE6D1CDC6CD800419419 = {
 			isa = PBXGroup;
 			children = (
-				84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */,
+				0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */,
 				0F1C22FC1CE728AF0052AA17 /* SSRadioButtonController */,
 				F5A2EE781CDC6CD800419419 /* Delphos */,
 				F5A2EE8D1CDC6CD800419419 /* DelphosTests */,
@@ -413,6 +425,8 @@
 				0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */,
 				0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */,
 				0F8B12051D00061B0030CE82 /* ClaimListClaimBean.swift */,
+				0FC3A6751D07FC33009420DF /* SendMessageBean.swift */,
+				0F34E1261D08110000CE660B /* SendMessageResBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -432,6 +446,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0F34E0641D0988910095C32F /* PBXTargetDependency */,
 			);
 			name = Delphos;
 			productName = Delphos;
@@ -511,8 +526,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 84725DDF1CFD68B400AEDC55 /* Products */;
-					ProjectRef = 84725DDE1CFD68B400AEDC55 /* ObjectMapper.xcodeproj */;
+					ProductGroup = 0F34E04C1D0982930095C32F /* Products */;
+					ProjectRef = 0F34E04B1D0982930095C32F /* ObjectMapper.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -525,53 +540,53 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		84725DE91CFD68B400AEDC55 /* ObjectMapper.framework */ = {
+		0F34E0561D0982930095C32F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 84725DE81CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E0551D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		84725DEB1CFD68B400AEDC55 /* ObjectMapper.framework */ = {
+		0F34E0581D0982930095C32F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 84725DEA1CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E0571D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		84725DED1CFD68B400AEDC55 /* ObjectMapper.framework */ = {
+		0F34E05A1D0982930095C32F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 84725DEC1CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E0591D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		84725DEF1CFD68B400AEDC55 /* ObjectMapper.framework */ = {
+		0F34E05C1D0982930095C32F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 84725DEE1CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E05B1D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		84725DF11CFD68B400AEDC55 /* ObjectMapper-iOSTests.xctest */ = {
+		0F34E05E1D0982930095C32F /* ObjectMapper-iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "ObjectMapper-iOSTests.xctest";
-			remoteRef = 84725DF01CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E05D1D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		84725DF31CFD68B400AEDC55 /* ObjectMapper-MacTests.xctest */ = {
+		0F34E0601D0982930095C32F /* ObjectMapper-MacTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "ObjectMapper-MacTests.xctest";
-			remoteRef = 84725DF21CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E05F1D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		84725DF51CFD68B400AEDC55 /* ObjectMapper-tvOSTests.xctest */ = {
+		0F34E0621D0982930095C32F /* ObjectMapper-tvOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "ObjectMapper-tvOSTests.xctest";
-			remoteRef = 84725DF41CFD68B400AEDC55 /* PBXContainerItemProxy */;
+			remoteRef = 0F34E0611D0982930095C32F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -615,6 +630,7 @@
 				0F1C22FE1CE728D20052AA17 /* SSRadioButton.swift in Sources */,
 				0F8B11FE1D0001330030CE82 /* ClaimListBean.swift in Sources */,
 				F58F69951CEAF41C00C4ED91 /* BadgesBean.swift in Sources */,
+				0F34E1271D08110000CE660B /* SendMessageResBean.swift in Sources */,
 				F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */,
 				0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */,
 				F5A2EE7C1CDC6CD800419419 /* LoginController.swift in Sources */,
@@ -660,6 +676,7 @@
 				F580616A1CE5E2B9004BF043 /* SearchController.swift in Sources */,
 				F5C598F41CDDE78C000C3F58 /* DAOErrorCodes.swift in Sources */,
 				F59984451CDCCDDF0055C8D3 /* DelegateController.swift in Sources */,
+				0FC3A6761D07FC33009420DF /* SendMessageBean.swift in Sources */,
 				F58BBAD71CE06280000A3D2A /* UserBean.swift in Sources */,
 				F58BBACD1CE05B24000A3D2A /* LoginBean.swift in Sources */,
 			);
@@ -686,6 +703,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0F34E0641D0988910095C32F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjectMapper-iOS";
+			targetProxy = 0F34E0631D0988910095C32F /* PBXContainerItemProxy */;
+		};
 		F5A2EE8C1CDC6CD800419419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F5A2EE751CDC6CD800419419 /* Delphos */;

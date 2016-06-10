@@ -15,6 +15,8 @@ class SearchControllerCell: UITableViewCell {
     @IBOutlet weak var txtTitle: UILabel!
     @IBOutlet weak var txtIdHidden: UILabel!
     
+      @IBOutlet weak var startdate: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

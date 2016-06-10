@@ -28,6 +28,9 @@ var gStrCreateEventControllerID: String = "CreateEventId"
 var gObjSearchController : SearchController!
 var gStrSearchControllerID: String = "searchID"
 
+var gObjMessageController : UINavigationController!
+var gStrMessageControllerID: String = "MessageId"
+
 var rightViewController: RightViewController!
 
 

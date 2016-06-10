@@ -39,9 +39,24 @@ var gCancelEvent:String!
 var gCancelClaim:String!
 
 var gClaimDetailId:Int!
+var gClaimUserName:String!
+var gUserId:Int!
+
+
+
 
 
 var gFontName = "Times New Roman"
 var gSearchEventsRadioTitle = "Events"
 var gSearchSchoolsRadioTitle = "Schools"
 var gSearchUsersRadioTitle = "Users"
+
+var gSpeakerId:Int!
+
+var gClaimsListDetails:ClaimListClaimBeanBean!
+
+var gClaimsList:ClaimListBean!
+
+
+
+

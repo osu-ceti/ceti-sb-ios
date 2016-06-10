@@ -22,9 +22,9 @@ class SearchDelegate: BaseDelegate {
                     
                     //                    let goToSearchController = objCurrentController.storyboard?.instantiateViewControllerWithIdentifier("searchID") as! SearchController
                     
-                    if(gObjSearchController == nil){
+                    //if(gObjSearchController == nil){
                         gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
-                    }
+                    //}
                     
                     
                     if(gBtnRadioValue == "events") {

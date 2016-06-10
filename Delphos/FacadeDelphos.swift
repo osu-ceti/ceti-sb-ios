@@ -22,13 +22,15 @@ import Swift
  */
 class FacadeDelphos: NSObject {
     
-    private let delegateDiphos: DelegateController
+   
+    
+    private let delegateDelphos: DelegateController
     
     /**
      * Constructor to initialize Delegate class
      */
     override init() {
-        delegateDiphos = DelegateController()
+        delegateDelphos = DelegateController()
     }
     
     /**
@@ -37,7 +39,7 @@ class FacadeDelphos: NSObject {
     func doTask(objCurrentController: UIViewController, action enmAction: DelphosAction)
     {
         //call to delegate control
-        delegateDiphos.delegateControl(objCurrentController,action: enmAction)
+        delegateDelphos.delegateControl(objCurrentController,action: enmAction)
     }
     
 }

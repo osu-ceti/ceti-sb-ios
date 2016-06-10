@@ -37,9 +37,9 @@ class BaseDelegate: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             
             
-            if(gObjEventShowController == nil){
+            //if(gObjEventShowController == nil){
                 gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
-            }
+            //}
             
             objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
         })

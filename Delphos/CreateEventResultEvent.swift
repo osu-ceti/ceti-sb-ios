@@ -48,7 +48,7 @@ class  CreateEventResultEventBean: Mappable {
     
     var user_name: String!
 
-    var claim_id:String!
+    var claim_id:Int!
     
     required init()
     {

@@ -15,8 +15,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var backButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
-    var menuButton : UIBarButtonItem = UIBarButtonItem()
-    //var backToView: String = "loginId"
+    var menuButton : UIBarButtonItem!
     var searchView: UIView = UIView()
     var radioButtonController: SSRadioButtonsController?
     var isBackEnabled:Bool = true
@@ -79,7 +78,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
         let schoolsRadioBtn = buildRadioButton(gSearchSchoolsRadioTitle,position: CGRectMake(150, 0, 70, 21),actionCallback: #selector(NavController.btnSchool(_:)))
         
-        let usersRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
+        let usersRadioBtn = buildRadioButton(gSearchUsersRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
         
         radioButtonController = SSRadioButtonsController(buttons: eventsRadioBtn, schoolsRadioBtn, usersRadioBtn)
         
@@ -102,13 +101,13 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
             navigationItem.leftBarButtonItem = backButton
         }
-        let menuButton = self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
+        menuButton = self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
         
         if(isSearchEnabled){
             searchButtonItem = UIBarButtonItem(customView:searchBar)
             searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
 
-            navigationItem.rightBarButtonItems = [menuButton, searchButton, searchButton]
+            navigationItem.rightBarButtonItems = [menuButton, searchButton]
         }
         else{
             navigationItem.rightBarButtonItems = [menuButton]
@@ -120,7 +119,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     }
     func btnSearchClick(sender: UIBarButtonItem) {
         navigationItem.titleView = searchBar
-        navigationItem.rightBarButtonItem = nil
+        navigationItem.rightBarButtonItems = nil
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
@@ -141,12 +140,13 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         navigationItem.titleView = nil
-        navigationItem.rightBarButtonItems = [searchButton, menuButton]
+        navigationItem.rightBarButtonItems = [menuButton,searchButton]
         navigationItem.title = "School-Business"
-        searchBar.text = " "
+        searchBar.text = ""
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
-        searchBar.showsCancelButton = true
+        searchBar.showsCancelButton = false
+        
         
        // navigationBar.items = [navigationItem]
         searchView.hidden = true
