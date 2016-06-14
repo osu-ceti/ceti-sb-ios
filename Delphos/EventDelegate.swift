@@ -103,6 +103,7 @@ class EventDelegate: BaseDelegate{
                 gObjShowEventBean.updated_at = resultBean.updated_at
                 gObjShowEventBean.content = resultBean.content
                 gObjShowEventBean.title = resultBean.title
+                
                 gObjShowEventBean.event_start = resultBean.event_start
                 gObjShowEventBean.event_end = resultBean.event_end
                 gObjShowEventBean.loc_id = resultBean.loc_id
@@ -112,7 +113,7 @@ class EventDelegate: BaseDelegate{
                 gObjShowEventBean.active = resultBean.active
                 gObjShowEventBean.time_zone = resultBean.time_zone
                 gObjShowEventBean.complete = resultBean.complete
-                gObjShowEventBean.claim_id = 1
+                gObjShowEventBean.claim_id = 0
                 self.showEventUI(objCurrentContoller)
                 
                 
@@ -161,6 +162,7 @@ class EventDelegate: BaseDelegate{
                 print("Cancel Events")
                 
                // if(gObjHomeController == nil){
+                    self.showAlert(objCurrentContoller, strMessage: "Event Cancel ")
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                // }
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
@@ -169,7 +171,9 @@ class EventDelegate: BaseDelegate{
                 
             }
             else {
+                 self.showAlert(objCurrentContoller, strMessage: "Event Not Cancel ")
                 print("not Cancel Event")
+               
             }
         }
         

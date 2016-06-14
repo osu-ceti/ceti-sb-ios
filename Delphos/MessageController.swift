@@ -50,6 +50,7 @@ class MessageController:  NavController  {
     
     @IBAction func touchSendMessage(sender: AnyObject) {
         
+        showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SEND_MESSAGE)

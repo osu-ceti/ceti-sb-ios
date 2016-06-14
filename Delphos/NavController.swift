@@ -23,7 +23,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var backToController : UIViewController!
     var shouldClose : Bool! = true
     
-    
+    var overlayView = UIView()
+    var activityIndicator = UIActivityIndicatorView()
+
     
     func buildRadioButton(title: String, position:CGRect, actionCallback:Selector) ->SSRadioButton{
         
@@ -81,7 +83,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         let usersRadioBtn = buildRadioButton(gSearchUsersRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
         
         radioButtonController = SSRadioButtonsController(buttons: eventsRadioBtn, schoolsRadioBtn, usersRadioBtn)
-        
+        //radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = true
 
         
@@ -171,6 +173,42 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
     }
     
+    func didSelectButton(aButton: UIButton?) {
+        print(aButton)
+    }
+    
+    func btnAdd(sender:UIButton) {
+        print("clicked")
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    //Loader funvtion
+    func showOverlay(view: UIView) {
+        
+        overlayView.frame = CGRectMake(0, 0, 80, 80)
+        overlayView.center = view.center
+        overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
+        overlayView.clipsToBounds = true
+        overlayView.layer.cornerRadius = 10
+        
+        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
+        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+        activityIndicator.color = UIColor.blackColor()
+        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
+        
+        overlayView.addSubview(activityIndicator)
+        view.addSubview(overlayView)
+        
+        activityIndicator.startAnimating()
+    }
+    
+    func hideOverlayView() {
+        activityIndicator.stopAnimating()
+        overlayView.removeFromSuperview()
+    }
+
     
     func menuButtonClick(sender: UIBarButtonItem){
         

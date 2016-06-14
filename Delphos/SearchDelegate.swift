@@ -20,20 +20,16 @@ class SearchDelegate: BaseDelegate {
             if(statusCode == SUCCESS) {
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    //                    let goToSearchController = objCurrentController.storyboard?.instantiateViewControllerWithIdentifier("searchID") as! SearchController
                     
-                    //if(gObjSearchController == nil){
-                        gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
-                    //}
-                    
-                    
+                    gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
+                   
                     if(gBtnRadioValue == "events") {
                         gObjEventDisplayBean = result as! EventDisplayBean
                         gObjSearchController.eventBeanArray = gObjEventDisplayBean.events
                     }
                     else if(gBtnRadioValue == "schools") {
-                        gObjUsersBean = result as! usersBean
-                        gObjSearchController.schoolBeanArray = gObjUsersBean.users
+                       // gObjUsersBean = result as! usersBean
+                        //gObjSearchController.schoolBeanArray = gObjUsersBean.users
                     }
                     else if(gBtnRadioValue == "users") {
                         gObjUsersBean = result as! usersBean
@@ -64,13 +60,20 @@ class SearchDelegate: BaseDelegate {
                     //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
                     if(gBtnRadioValue == events) {
                         gObjShowEventBean = result as! ShowEventBean
+                         self.showEventUI(objCurrentContoller)
                     } else if(gBtnRadioValue == schools) {
                         
                     } else if(gBtnRadioValue == users) {
                         var objUserBean = result as! usersBean
                         gObjSearchUserListBean = objUserBean.user
+                        
+                        gObjUserProfileController = self.fetchNavController(gStrUserProfileControllerID)
+                        
+                         objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)
+
                     }
-                    self.showEventUI(objCurrentContoller)
+                    
+                   
                     //                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
                 })
             }

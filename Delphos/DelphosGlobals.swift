@@ -31,6 +31,9 @@ var gStrSearchControllerID: String = "searchID"
 var gObjMessageController : UINavigationController!
 var gStrMessageControllerID: String = "MessageId"
 
+var gObjUserProfileController : UINavigationController!
+var gStrUserProfileControllerID: String = "UserProfileId"
+
 var rightViewController: RightViewController!
 
 

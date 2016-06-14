@@ -30,6 +30,7 @@
 		0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */; };
 		0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */; };
 		0FE947CE1D05C803009402D6 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE947CD1D05C803009402D6 /* MessageController.swift */; };
+		0FFEC95D1D0EB1A400E4A1E0 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFEC95C1D0EB1A400E4A1E0 /* UserProfileController.swift */; };
 		84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCA1D09527C00C614C2 /* BaseDelegate.swift */; };
 		84799FCD1D09528E00C614C2 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCC1D09528E00C614C2 /* EventDelegate.swift */; };
 		84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCE1D09529B00C614C2 /* UserDelegate.swift */; };
@@ -193,6 +194,7 @@
 		0FD8A7BE1CEF00F200A43790 /* CreateEventResultBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultBean.swift; sourceTree = "<group>"; };
 		0FD8A7C61CEF013C00A43790 /* CreateEventResultEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResultEvent.swift; sourceTree = "<group>"; };
 		0FE947CD1D05C803009402D6 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
+		0FFEC95C1D0EB1A400E4A1E0 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		84799FCA1D09527C00C614C2 /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		84799FCC1D09528E00C614C2 /* EventDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
 		84799FCE1D09529B00C614C2 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				0F9E4F231CF47236004FC736 /* NavController.swift */,
 				0F14C3891CFF0DAB002C6912 /* EventShowControllerCells.swift */,
 				0FE947CD1D05C803009402D6 /* MessageController.swift */,
+				0FFEC95C1D0EB1A400E4A1E0 /* UserProfileController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */,
 				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
 				0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */,
+				0FFEC95D1D0EB1A400E4A1E0 /* UserProfileController.swift in Sources */,
 				F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */,
 				84BA187E1D03552A009DC8C9 /* DelphosGlobals.swift in Sources */,
 				0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */,

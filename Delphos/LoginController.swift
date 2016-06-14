@@ -58,17 +58,14 @@ class LoginController: UIViewController {
         var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
         view.backgroundColor = color
-//        schoolbusiness.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-//        schoolbusiness.layer.shadowOpacity = 4
-//        schoolbusiness.layer.shadowRadius  = 2
-//        schoolbusiness.layer.shadowOffset = CGSizeMake(2, 2);
+
         userTxt.text = "jith87@gmail.com"
         passwordTxt.text = "ontojith"
        
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
-        //Bottom border
         
-
+        
+        //Bottom border
         
         var bottomLine = CALayer()
         
@@ -90,13 +87,7 @@ class LoginController: UIViewController {
       
 
     }
-//    func showAlert(objCurrentController: UIViewController, strMessage: String) {
-//        dispatch_async(dispatch_get_main_queue(), {
-//            let alertView = UIAlertController(title: "Error", message: strMessage, preferredStyle: .Alert)
-//            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-//            objCurrentController.presentViewController(alertView, animated: true, completion: nil)
-//        })
-//    }
+
     
 
     override func viewWillAppear(animated: Bool) {

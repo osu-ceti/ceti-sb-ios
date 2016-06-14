@@ -427,10 +427,15 @@ class DAOBase: NSObject {
         //2. Create Event - "2016-04-07T13:02:16.247Z"
         //We will convert format 2 to format 1 here
         
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        //dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
         
         let eventStartDate =  dateFormatter.dateFromString(dateStr)
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
+        //dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a zzz"
         
         return dateFormatter.stringFromDate(eventStartDate!)
 

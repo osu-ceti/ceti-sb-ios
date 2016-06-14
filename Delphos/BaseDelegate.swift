@@ -12,7 +12,7 @@ class BaseDelegate: NSObject {
     
     func showAlert(objCurrentController: UIViewController, strMessage: String) {
         dispatch_async(dispatch_get_main_queue(), {
-            let alertView = UIAlertController(title: "Error", message: strMessage, preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "", message: strMessage, preferredStyle: .Alert)
             alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
             objCurrentController.presentViewController(alertView, animated: true, completion: nil)
         })

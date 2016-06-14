@@ -93,9 +93,23 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         }
         else{
              cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-           self.eventFound.hidden = false
-             (cell as! SearchControllerCell).txtTitle.hidden = true
-            (cell as! SearchControllerCell).startdate.hidden = true
+           if(gBtnRadioValue == "events") {
+             self.eventFound.hidden = false
+            self.tableVIew.hidden = true
+            self.eventFound.text = "No Events Found"
+            }
+           else if(gBtnRadioValue == "users") {
+             self.eventFound.hidden = false
+             self.tableVIew.hidden = true
+             self.eventFound.text = "No User Found"
+            }
+           else{
+            self.eventFound.hidden = false
+             self.tableVIew.hidden = true
+            self.eventFound.text = "No School Found"
+            }
+            //(cell as! SearchControllerCell).txtTitle.hidden = true
+            //(cell as! SearchControllerCell).startdate.hidden = true
         }
         
         

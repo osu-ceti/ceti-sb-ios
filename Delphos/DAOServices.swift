@@ -196,7 +196,7 @@ class DAOServices: DAOBase {
                     showEventBean = Mapper<usersBean>().map(jsonResult)
                 }
                 
-                callBack?(result: showEventBean!, statusCode: statusCode )
+                 callBack?(result: showEventBean!, statusCode: statusCode )
                 
                 return
             }
@@ -480,11 +480,12 @@ class DAOServices: DAOBase {
         
         doDelete(strEventID, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             if(status) {
+                print(jsonResult)
                 var cancelEventBean = Mapper<CancelEventBean>().map(jsonResult)!
                 callBack?(result: cancelEventBean, statusCode: statusCode )
                 return
             } else {
-                //println(jsonResult)
+                print(jsonResult)
                 var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return

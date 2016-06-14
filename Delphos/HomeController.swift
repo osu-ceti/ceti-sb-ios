@@ -105,15 +105,6 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
   
   
 
-
-    func didSelectButton(aButton: UIButton?) {
-        print(aButton)
-    }
-
-    func btnAdd(sender:UIButton) {
-        print("clicked")
-    }
-
     
    
     func getEventsList(){
@@ -128,7 +119,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
  
         bottomLineAll.frame = CGRectMake(0, btnAllEvent.frame.size.height - 1.0, btnAllEvent.frame.size.width, 1)
         bottomLineAll.borderWidth = 2.0
-        bottomLineAll.borderColor = UIColor.blueColor().CGColor
+        bottomLineAll.borderColor = UIColor.greenColor().CGColor
         btnAllEvent.layer.addSublayer(bottomLineAll)
        
        
@@ -143,7 +134,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         bottomLineApproval.frame = CGRectMake(0, btnApprovalEvent.frame.size.height - 1.0, btnApprovalEvent.frame.size.width, 1)
         bottomLineApproval.borderWidth = 2.0
-        bottomLineApproval.borderColor = UIColor.blueColor().CGColor
+        bottomLineApproval.borderColor = UIColor.greenColor().CGColor
         btnApprovalEvent.layer.addSublayer(bottomLineApproval)
        
         bottomLineClaim.borderColor = UIColor.clearColor().CGColor
@@ -157,7 +148,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         bottomLineClaim.frame = CGRectMake(0, btnClaimEvent.frame.size.height - 1.0, btnClaimEvent.frame.size.width, 1)
         bottomLineClaim.borderWidth = 2.0
-        bottomLineClaim.borderColor = UIColor.blueColor().CGColor
+        bottomLineClaim.borderColor = UIColor.greenColor().CGColor
         btnClaimEvent.layer.addSublayer(bottomLineClaim)
         
         bottomLineAll.borderColor = UIColor.clearColor().CGColor
@@ -171,7 +162,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         bottomLineConfirm.frame = CGRectMake(0, btnConfirmEvent.frame.size.height - 1.0, btnConfirmEvent.frame.size.width, 1)
         bottomLineConfirm.borderWidth = 2.0
-        bottomLineConfirm.borderColor = UIColor.blueColor().CGColor
+        bottomLineConfirm.borderColor = UIColor.greenColor().CGColor
         btnConfirmEvent.layer.addSublayer(bottomLineConfirm)
         
         bottomLineAll.borderColor = UIColor.clearColor().CGColor

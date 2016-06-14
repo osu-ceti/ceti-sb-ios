@@ -17,38 +17,53 @@ class ClaimsDelegate: BaseDelegate {
                 dispatch_async(dispatch_get_main_queue(), {
                      gClaimsList = result as! ClaimListBean
                     (objCurrentContoller as! EventShowController).claimBeanArray = gClaimsList.claims
+                   var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
                   
+                    func ApprovalClaimPending(){
+                        (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
+                        (objCurrentContoller as! EventShowController).claim.hidden = false
+                        (objCurrentContoller as! EventShowController).claim.setTitle( "Approval Claim Pending", forState: .Normal)
+                        (objCurrentContoller as! EventShowController).claim.enabled = false
+                        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
+                    }
                     if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
+                            //Applied already
                                 (objCurrentContoller as! EventShowController).self.cancelClaim.hidden = false
                                 (objCurrentContoller as! EventShowController).self.claim.hidden = true
+                            
                         }
-                        else {
+                         else {
                             if(gObjShowEventBean.speaker_id != 0){
+                                //Approved
                                 (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
                                 (objCurrentContoller as! EventShowController).claim.hidden = true
                             }
                             else{
                                 var match:Bool = false
+                                
                                 for claimUser in gClaimsList.claims{
                                     if(gObjUserBean.id == claimUser.user_id)
                                     {
+                                        //Approval Pending
                                         match = true
-                                        (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
-                                        (objCurrentContoller as! EventShowController).claim.hidden = false
-                                        (objCurrentContoller as! EventShowController).claim.setTitle( "Claim Pending", forState: .Normal)
-                                        (objCurrentContoller as! EventShowController).claim.enabled = false
-                                        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
+                                       ApprovalClaimPending()
                                     }
+                                    
+                                    
                                 }
-                                if( match == false){
+                                if( match == false && gObjShowEventBean.claim_id == 0){
                                 
-                                    //Did no apply
+                                    //Did not apply
                                     (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
                                     (objCurrentContoller as! EventShowController).claim.hidden = false
+                                }
+                                else{
+                                    //Rejected
+                                   ApprovalClaimPending()
                                 }
                             }
                         }
@@ -94,13 +109,16 @@ class ClaimsDelegate: BaseDelegate {
         
         doPostAPIs.doAcceptClaim(strClaimEventId,strClaimid: strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
+                (objCurrentContoller as! EventShowController).hideOverlayView()
                 // var objEventShowController = objCurrentContoller as! EventShowController
                 self.showAlert(objCurrentContoller, strMessage: "Accept")
+//                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+//                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
                 
             }
             else{
                 // print("Error in Accept Claim")
-                self.showAlert(objCurrentContoller, strMessage: "Error in Accept Claim")
+                self.showAlert(objCurrentContoller, strMessage: "Claim Not Accept")
             }
         })
         
@@ -114,11 +132,15 @@ class ClaimsDelegate: BaseDelegate {
         doPostAPIs.doRejectClaim(strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                 // var objEventShowController = objCurrentContoller as! EventShowController
-                
+                //(objCurrentContoller as! EventShowController).hideOverlayView()
+                self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
+//                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+//                
+//                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
             }
             else{
                 // print("Error in Accept Claim")
-                self.showAlert(objCurrentContoller, strMessage: "Error in Reject Claim")
+                self.showAlert(objCurrentContoller, strMessage: "Claim Not Reject")
             }
         })
         
@@ -137,6 +159,7 @@ class ClaimsDelegate: BaseDelegate {
             if (statusCode == SUCCESS){
                 print("claimed")
                 //if(gObjHomeController == nil){
+                   self.showAlert(objCurrentContoller, strMessage: "claimed")
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                 //}
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
@@ -166,7 +189,7 @@ class ClaimsDelegate: BaseDelegate {
         //        objInputParamBean.message = objInputBean
         doPostAPIs.doSendMessage(objInputBean){ (loginResult: AnyObject, statusCode: Int) in
             
-            if (statusCode == 200){
+            if (statusCode == SUCCESS){
                 print("SEND MESSAGE")
                  self.showAlert(objCurrentContoller, strMessage: "Message Sent")
                 
@@ -199,12 +222,18 @@ class ClaimsDelegate: BaseDelegate {
             if (statusCode == SUCCESS){
                 print("Cancel claimed")
                 //if(gObjHomeController == nil){
+                self.showAlert(objCurrentContoller, strMessage: "Claim Canceled")
+
                 gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                //}
+                               //}
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
             } else {
                 print("not claimed")
-                self.showAlert(objCurrentContoller, strMessage: "Not Claimed")
+                
+                self.showAlert(objCurrentContoller, strMessage: "Claim Not Cancel")
+                gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+            
             }
         }
         

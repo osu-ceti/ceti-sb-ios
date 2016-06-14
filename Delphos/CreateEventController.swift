@@ -37,13 +37,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
     var currentDate = NSDate()
 
-    var dateFormatter   = NSDateFormatter()
-    var endDatevalid   = NSDate()
-    var startDatevalid  = NSDate()
-    var startTimeValid  = NSDate()
-    var endTimeValid    = NSDate()
-    var startDateAndTime = NSDate()
-    var endDateAndTime = NSDate()
+    var dateFormatter       = NSDateFormatter()
+    var endDatevalid        = NSDate()
+    var startDatevalid      = NSDate()
+    var startTimeValid      = NSDate()
+    var endTimeValid        = NSDate()
+    var startDateAndTime    = NSDate()
+    var endDateAndTime      = NSDate()
     
     var isEdit = false
     var eventId = 0
@@ -76,8 +76,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         super.viewDidLoad()
         
         self.requiredError.hidden = true
-       
-       // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))
+      
+             // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))
         //self.view.addSubview(txtTitle)
         
                 //Adding Navbar
@@ -112,6 +112,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         let startTimeSet = currentDate.dateByAddingTimeInterval(60*60);
         let endTimeSet = currentDate.dateByAddingTimeInterval(60*120);
         
+       // let checkCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
         
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gTimeFormat
@@ -397,17 +398,19 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func touchReqTitle(sender: AnyObject) {
+        @IBAction func touchReqTitle(sender: AnyObject) {
+   
         self.requiredError.hidden = true
     }
     @IBAction func touchReqContent(sender: AnyObject) {
+   
         self.requiredError.hidden = true
 
     }
-    @IBAction func touchReqTag(sender: AnyObject) {
-        self.requiredError.hidden = true
-
-    }
+//    @IBAction func touchReqTag(sender: AnyObject) {
+//        self.requiredError.hidden = true
+//
+//    }
     @IBAction func btnPostEvent(sender: UIButton) {
         
         //dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -415,7 +418,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
        // var currentDateValidate = dateFormatter.stringFromDate(currentDateCheck)
         
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a zzz"
+        dateFormatter.dateFormat = gDateTimeFormat
         var startDateTimeMerge  = startDate.text! + " " + startTime.text!
         startDateAndTime = dateFormatter.dateFromString(startDateTimeMerge)!
         
@@ -434,7 +437,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //        }
         else if (txtContents.text == "") {
             self.requiredError.hidden = false
-            self.requiredError.text = "Required Contests"
+            self.requiredError.text = "Required Contents"
         }
 //        else if (stratDateValidate!.compare(currentDateValidate) == NSComparisonResult.OrderedSame) {
 //            print("Same dates")
@@ -461,6 +464,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
         else
         {
+            showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             if(isEdit){

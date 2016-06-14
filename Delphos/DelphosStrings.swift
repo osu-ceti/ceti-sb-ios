@@ -30,8 +30,10 @@ var events = "events"
 var schools = "schools"
 var users = "users"
 
-var gTimeFormat = "HH:mm a zzz"
+var gTimeFormat = "hh:mm a zzz"
 var gDateFormat = "YYYY-MM-dd"
+
+var gDateTimeFormat = gDateFormat + " " + gTimeFormat
 var gSplitDateTime = "T"
 var gClaim: String!
 var gEditEvent:String!
@@ -52,6 +54,7 @@ var gSearchSchoolsRadioTitle = "Schools"
 var gSearchUsersRadioTitle = "Users"
 
 var gSpeakerId:Int!
+var gSpeakerName:String!
 
 var gClaimsListDetails:ClaimListClaimBeanBean!
 

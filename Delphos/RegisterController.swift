@@ -20,7 +20,7 @@ class RegisterController: NavController, UITextFieldDelegate {
     @IBOutlet weak var radioSpeaker: SSRadioButton!
     @IBOutlet weak var radioBoth: SSRadioButton!
     let checkCharacter = NSCharacterSet.letterCharacterSet()
-    //var radioButtonController: SSRadioButtonsController?
+    var radioButtonControllerLocal: SSRadioButtonsController?
     
     @IBOutlet weak var requiredField: UILabel!
     
@@ -89,11 +89,12 @@ class RegisterController: NavController, UITextFieldDelegate {
 //        // Make the navigation bar a subview of the current view controller
 //        self.view.addSubview(navigationBar)
 //        
-
         
-        radioButtonController = SSRadioButtonsController(buttons: radioTeacher, radioSpeaker,radioBoth)
-        radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = true
+      
+        
+        radioButtonControllerLocal = SSRadioButtonsController(buttons: radioTeacher,radioSpeaker,radioBoth)
+        radioButtonControllerLocal!.delegate = self
+        radioButtonControllerLocal!.shouldLetDeSelect = true
         
         var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
@@ -126,36 +127,14 @@ class RegisterController: NavController, UITextFieldDelegate {
         txtConformPassword.layer.addSublayer(ConformPasswordLine)
 
     }
-//    func back(sender: UIBarButtonItem){
-////        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-////        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("loginId") as! LoginController
-////        self.presentViewController(nextViewController,animated:true,completion: nil)
-////        self.navigationController?.popViewControllerAnimated(true)
-//        
-//        var loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
-//        
-//        let loginControllerNav = UINavigationController(rootViewController: loginController)
-//        
-//        self.slideMenuController()?.changeMainViewController(loginControllerNav, close: false)
-//        
-//
-//    
-//    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
+   
     
-    func didSelectButton(aButton: UIButton?) {
-        print(aButton)
-    }
-        
-    func btnAdd(sender:UIButton) {
-        print("clicked")
-    }
+    
 
     @IBAction func btnTeacher(sender: UIButton) {
         gBtnRegisterRadio = "Teacher"
+      
         
     }
     
@@ -243,7 +222,7 @@ class RegisterController: NavController, UITextFieldDelegate {
             self.requiredField.text = "Required Role"
         }
         else {
-            
+            showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.REGISTER)

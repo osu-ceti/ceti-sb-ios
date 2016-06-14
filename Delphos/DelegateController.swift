@@ -73,7 +73,7 @@ class DelegateController: BaseDelegate {
             objClaimsDelegate.claimEvent(objCurrentController)
             
         case .CANCEL_CLAIM:
-            print("SHOW_SEARCH")
+            print("CANCEL CLAIM")
             objClaimsDelegate.cancelClaim(objCurrentController)
             
         case .EDIT_EVENT_SHOW:
@@ -81,7 +81,7 @@ class DelegateController: BaseDelegate {
             objEventDelegate.editEvent(objCurrentController)
             
         case .CANCEL_EVENT:
-            print("DELETE EVENT")
+            print("DELETE_EVENT")
             objEventDelegate.cancelEvent(objCurrentController)
             
         case .CLAIM_LIST:
