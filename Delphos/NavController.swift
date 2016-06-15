@@ -121,7 +121,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     }
     func btnSearchClick(sender: UIBarButtonItem) {
         navigationItem.titleView = searchBar
-        navigationItem.rightBarButtonItems = nil
+        navigationItem.rightBarButtonItems = [menuButton,searchButton]
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
@@ -165,9 +165,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     
     func backToSomeController(sender: UIBarButtonItem){
-        if(backToController == nil){
+        //if(backToController == nil){
             backToController = self.fetchNavController(gStrHomeControllerID)
-        }
+       // }
         
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)     
         

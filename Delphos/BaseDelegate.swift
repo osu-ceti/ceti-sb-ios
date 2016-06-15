@@ -29,7 +29,9 @@ class BaseDelegate: NSObject {
     
     func doNavigate(objCurrentController: UIViewController,toController: UINavigationController, close: Bool)->Void{
         
-        objCurrentController.slideMenuController()?.changeMainViewController(toController, close: close)
+        dispatch_async(dispatch_get_main_queue(), {
+            objCurrentController.slideMenuController()?.changeMainViewController(toController, close: close)
+        })
     }
 
     func showEventUI(objCurrentContoller: UIViewController) {

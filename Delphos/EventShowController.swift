@@ -52,6 +52,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
    
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
+   // var acceptClaimBeanDetails: ShowEventBean?
    
     var name = ["claim"]
     var selectedClaimId:Int = 0
@@ -175,7 +176,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.cancelEvent.hidden = false
                     self.claim.hidden = true
                     self.cancelClaim.hidden = true
-                
+                   
+                    
                     gCancelEvent = "cancelEvent "
                     gEditEvent = "EditEvent"
                     cancelEvent.setTitle( "Cancel Event", forState: .Normal)
@@ -186,7 +188,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.editEvent.hidden = true
                     self.cancelEvent.hidden = true
                     self.claim.hidden = false
-                    self.cancelClaim.hidden = false
+                    self.cancelClaim.hidden = true
                 }
 
             }
@@ -260,20 +262,21 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
          //cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        
-        if(claimBeanArray?.count > 0 &&  gSpeakerId == 0 &&
-            (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
+        if(gObjUserBean.id == gObjShowEventBean.user_id){
+            if(claimBeanArray?.count > 0 &&  gSpeakerId == 0 &&
+                (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
             
-            self.labelClaims.hidden = false
-            self.tableView.hidden  = false
+                self.labelClaims.hidden = false
+                self.tableView.hidden  = false
             
-            var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
+                var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
                       
-            gClaimUserName = claimDisplayBean.user_name
-            (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
-            (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
-           
+                gClaimUserName = claimDisplayBean.user_name
+                (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
+                (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
+                
+            }
         }
         else{
             self.tableView.hidden = true
@@ -312,10 +315,21 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.labelJobTitle.hidden = false
         self.editEvent.hidden = true
         self.cancelEvent.hidden = true
-        self.btnMessage.hidden = false
-        self.btnAccept.hidden = false
-        self.btnReject.hidden = false
        
+        self.claim.hidden = true
+        self.cancelClaim.hidden = true
+        if(gObjUserBean.id == gObjShowEventBean.user_id){
+            self.btnMessage.hidden = false
+            self.btnAccept.hidden = false
+            self.btnReject.hidden = false
+        }
+        else{
+            self.btnMessage.hidden = true
+            self.btnAccept.hidden = true
+            self.btnReject.hidden = true
+        
+        }
+        
     }
 
     @IBAction func btnSendMessage(sender: AnyObject) {
@@ -334,8 +348,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.CLAIM_ACCEPT)
+         // var claimAcceptDisplayBean: ShowEventBean! = acceptClaimBeanArray![1]
         
         
+       
+
         self.labelUserName.hidden = true
         self.mainLabelBusiness.hidden = true
         self.mainLabelJobTitle.hidden = true
@@ -378,21 +395,13 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     
     @IBAction func btnEditEvent(sender: AnyObject) {
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-//        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
-//        nextViewController.isEdit = true
-//        self.presentViewController(nextViewController,animated:true,completion: nil)
-//        self.navigationController?.popViewControllerAnimated(true)
         showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.EDIT_EVENT_SHOW)
 
         
-//        if(gObjCreateEventController == nil){
-//            gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
-//        }
-//        self.slideMenuController()?.changeMainViewController(gObjCreateEventController, close: false)
+
     }
     @IBAction func btnClaim(sender: AnyObject) {
         
@@ -405,7 +414,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
        
     }
     
-    @IBAction func btnCancelEvent(sender: AnyObject) {
+    @IBAction func btnCancelClaim(sender: AnyObject) {
+   
         showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()

@@ -409,12 +409,13 @@ class DAOServices: DAOBase {
         doPost(strEventId,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var claimEventBean = Mapper<ClaimEventBean>().map(jsonResult)!
-                callBack?(result: claimEventBean, statusCode: statusCode )
-                return
+              print(jsonResult)
+                 var acceptEventbean = Mapper<ClaimAcceptBean>().map(jsonResult)!
+                 callBack?(result: acceptEventbean, statusCode: statusCode )
+                 return
             }
             else {
-                //println(jsonResult)
+                //print(jsonResult)
                 var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return

@@ -137,10 +137,6 @@ class EventDelegate: BaseDelegate{
                 gObjShowEventBean = result as! ShowEventBean
                 self.showEventUI(objCurrentContoller)
                 
-                //                 dispatch_async(dispatch_get_main_queue(), {
-                //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
-                //                    objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
-                //                })
             }
         })
     }
@@ -159,15 +155,14 @@ class EventDelegate: BaseDelegate{
         
         doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             if (statusCode == SUCCESS){
-                print("Cancel Events")
-                
+                print("Cancel Event")
+                 dispatch_async(dispatch_get_main_queue(), {
                // if(gObjHomeController == nil){
                     self.showAlert(objCurrentContoller, strMessage: "Event Cancel ")
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                // }
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
-                //            let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-                //            objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+                })
                 
             }
             else {

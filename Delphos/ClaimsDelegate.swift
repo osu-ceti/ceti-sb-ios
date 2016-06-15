@@ -9,8 +9,21 @@
 import UIKit
 
 class ClaimsDelegate: BaseDelegate {
+    
+    func showClaimApprovalPendingUI(objCurrentContoller: UIViewController){
+        (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
+        (objCurrentContoller as! EventShowController).claim.hidden = false
+        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Approval Pending", forState: .Normal)
+        (objCurrentContoller as! EventShowController).claim.enabled = false
+        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
+    }
+
+    
+    
     func showClaimAllList(objCurrentContoller: UIViewController) {
         //var strClaimEventId: String = String(gObjShowEventBean.id)
+        
+        
         
         doGetAPIs.getClaimView(String(gObjShowEventBean.id),callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -20,14 +33,8 @@ class ClaimsDelegate: BaseDelegate {
                    var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
                   
-                    func ApprovalClaimPending(){
-                        (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
-                        (objCurrentContoller as! EventShowController).claim.hidden = false
-                        (objCurrentContoller as! EventShowController).claim.setTitle( "Approval Claim Pending", forState: .Normal)
-                        (objCurrentContoller as! EventShowController).claim.enabled = false
-                        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
-                    }
-                    if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
+                       if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
+                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
@@ -50,20 +57,23 @@ class ClaimsDelegate: BaseDelegate {
                                     {
                                         //Approval Pending
                                         match = true
-                                       ApprovalClaimPending()
+                                       self.showClaimApprovalPendingUI(objCurrentContoller)
                                     }
                                     
                                     
                                 }
-                                if( match == false && gObjShowEventBean.claim_id == 0){
-                                
-                                    //Did not apply
-                                    (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
-                                    (objCurrentContoller as! EventShowController).claim.hidden = false
-                                }
-                                else{
-                                    //Rejected
-                                   ApprovalClaimPending()
+                                if(gObjUserBean.id != gObjShowEventBean.user_id){
+                                    if( match == false && gObjShowEventBean.claim_id == 0){
+                                   
+                                        //Did not apply
+                                        (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
+                                        (objCurrentContoller as! EventShowController).claim.hidden = false
+                                    
+                                    }
+                                    else{
+                                        //Rejected
+                                        self.showClaimApprovalPendingUI(objCurrentContoller)
+                                    }
                                 }
                             }
                         }
@@ -109,16 +119,24 @@ class ClaimsDelegate: BaseDelegate {
         
         doPostAPIs.doAcceptClaim(strClaimEventId,strClaimid: strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
-                (objCurrentContoller as! EventShowController).hideOverlayView()
-                // var objEventShowController = objCurrentContoller as! EventShowController
-                self.showAlert(objCurrentContoller, strMessage: "Accept")
-//                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
-//                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
                 
+               self.showAlert(objCurrentContoller, strMessage: "Claim Accepted")
+             
+                dispatch_async(dispatch_get_main_queue(), {
+                gEventAcceptBean = result as! ClaimAcceptBean
+                
+                
+               (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, forState: .Normal)
+                 (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, forState: .Normal)
+                (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, forState: .Normal)
+                    (objCurrentContoller as! EventShowController).tableView.hidden = true
+                })
+               
             }
             else{
                 // print("Error in Accept Claim")
                 self.showAlert(objCurrentContoller, strMessage: "Claim Not Accept")
+                
             }
         })
         
@@ -131,12 +149,20 @@ class ClaimsDelegate: BaseDelegate {
         
         doPostAPIs.doRejectClaim(strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
-                // var objEventShowController = objCurrentContoller as! EventShowController
-                //(objCurrentContoller as! EventShowController).hideOverlayView()
+               
+                print("Claim Rejected")
                 self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
-//                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
-//                
-//                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
+
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+                     
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+                     //(objCurrentContoller as! EventShowController).tableView.reloadData()
+                    //(objCurrentContoller as! EventShowController).tableView.hidden = false
+                    })
+            
+            
             }
             else{
                 // print("Error in Accept Claim")
@@ -149,25 +175,22 @@ class ClaimsDelegate: BaseDelegate {
     
     func claimEvent(objCurrentContoller: UIViewController) -> Bool {
         
-        //  var objShowEventBean: ShowEventBean = ShowEventBean()
-        
-        // objClaimBean.user_id = gObjUsers.id
-        // objClaimBean.event_id = gObjShowEventBean.user_id
+      
         //DOA calls
         doPostAPIs.doClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
                 print("claimed")
-                //if(gObjHomeController == nil){
-                   self.showAlert(objCurrentContoller, strMessage: "claimed")
+               
+                self.showAlert(objCurrentContoller, strMessage: "Event Claimed")
+                dispatch_async(dispatch_get_main_queue(), {
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                //}
-                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 
-                //                let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-                //                objCurrentContoller.presentViewController(goToEventShowController, animated: true, completion: nil)
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                })
                 
-            } else {
+            }
+            else {
                 print("not claimed")
                  self.showAlert(objCurrentContoller, strMessage: "Not Claim")
             }
@@ -205,6 +228,7 @@ class ClaimsDelegate: BaseDelegate {
     func messageClick(objCurrentContoller: UIViewController){
         print("Send Message")
         
+        
        // if(gObjMessageController == nil){
             gObjMessageController = self.fetchNavController(gStrMessageControllerID)
         //}
@@ -223,16 +247,20 @@ class ClaimsDelegate: BaseDelegate {
                 print("Cancel claimed")
                 //if(gObjHomeController == nil){
                 self.showAlert(objCurrentContoller, strMessage: "Claim Canceled")
-
-                gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                dispatch_async(dispatch_get_main_queue(), {
+                
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                                //}
-                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                })
             } else {
                 print("not claimed")
                 
                 self.showAlert(objCurrentContoller, strMessage: "Claim Not Cancel")
-                gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                dispatch_async(dispatch_get_main_queue(), {
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                })
             
             }
         }

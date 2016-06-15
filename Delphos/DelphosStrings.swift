@@ -60,6 +60,8 @@ var gClaimsListDetails:ClaimListClaimBeanBean!
 
 var gClaimsList:ClaimListBean!
 
+var gEventAcceptBean:ClaimAcceptBean!
+
 
 
 

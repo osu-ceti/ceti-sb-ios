@@ -101,12 +101,12 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
            else if(gBtnRadioValue == "users") {
              self.eventFound.hidden = false
              self.tableVIew.hidden = true
-             self.eventFound.text = "No User Found"
+             self.eventFound.text = "No Users Found"
             }
            else{
             self.eventFound.hidden = false
              self.tableVIew.hidden = true
-            self.eventFound.text = "No School Found"
+            self.eventFound.text = "No Schools Found"
             }
             //(cell as! SearchControllerCell).txtTitle.hidden = true
             //(cell as! SearchControllerCell).startdate.hidden = true
