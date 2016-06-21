@@ -200,8 +200,15 @@ class ClaimsDelegate: BaseDelegate {
     func sendMessage(objCurrentContoller: UIViewController)  {
         
         var strSendMessage:String = String((objCurrentContoller as! MessageController).txtSendMessage)
-        var strUserId:String = String(gUserId)
+        var strUserId:String!
         
+        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
+            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+             strUserId = String(gClaimUser_id)
+        }
+        else{
+             strUserId = String(gObjShowEventBean.user_id)
+        }
         var objInputBean:SendMessageBean = SendMessageBean()
         
         objInputBean.id = Int(strUserId)

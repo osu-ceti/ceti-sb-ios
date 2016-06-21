@@ -20,6 +20,7 @@ class DelegateController: BaseDelegate {
     var objClaimsDelegate : ClaimsDelegate!
     var objUserDelegate : UserDelegate!
     var objSearchDelegate : SearchDelegate!
+    var objSchoolDelegate : SchoolDelegate!
     
     
     override init() {
@@ -30,8 +31,10 @@ class DelegateController: BaseDelegate {
         objClaimsDelegate = ClaimsDelegate()
         objUserDelegate = UserDelegate()
         objSearchDelegate = SearchDelegate()
+        objSchoolDelegate = SchoolDelegate()
+
     }
-        
+    
     
     
     func delegateControl(objCurrentController: UIViewController, action enmAction: DelphosAction) {
@@ -101,10 +104,28 @@ class DelegateController: BaseDelegate {
              objClaimsDelegate.claimReject(objCurrentController)
         
         case .SEND_MESSAGE:
+             print("SEND MESSAGE")
             objClaimsDelegate.sendMessage(objCurrentController)
             
         case .VIEW_MESSAGE_CONTROLLER:
+             print("VIEW_MESSAGE_CONTROLLER")
            objClaimsDelegate.messageClick(objCurrentController)
+            
+        case .SHOW_USER_PROFILE:
+             print("SHOW_USER_PROFILE")
+            objUserDelegate.userProfile(objCurrentController)
+
+        case .SHOW_SCHOOL_PROFILE:
+             print("SHOW_SCHOOL_PROFILE")
+            objSchoolDelegate.schoolProfile(objCurrentController)
+            
+        case .SIGN_OUT:
+             print("SIGN_OUT")
+             objUserDelegate.signOut(objCurrentController)
+          
+        case .SHOW_MAKE_MY_SCHOOL:
+            print("SHOW_MAKE_MY_SCHOOL")
+            objSchoolDelegate.showMakeMySchool(objCurrentController)
             
         default:
             print("Error in delegate enum")

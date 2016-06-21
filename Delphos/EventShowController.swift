@@ -273,6 +273,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
                       
                 gClaimUserName = claimDisplayBean.user_name
+                gClaimUser_id = claimDisplayBean.user_id
                 (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
                 (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
                 
@@ -428,4 +429,22 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         testfacade.doTask(self,action: DelphosAction.CANCEL_EVENT)
         
     }
+    @IBAction func btnSpeaker(sender: AnyObject) {
+    }
+    @IBAction func btnLocation(sender: AnyObject) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+        
+
+    }
+    @IBAction func btnCreatedBy(sender: AnyObject) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+
+    }
+    
 }

@@ -43,7 +43,7 @@ var gCancelClaim:String!
 var gClaimDetailId:Int!
 var gClaimUserName:String!
 var gUserId:Int!
-
+var gClaimUser_id:Int!
 
 
 
@@ -62,6 +62,10 @@ var gClaimsList:ClaimListBean!
 
 var gEventAcceptBean:ClaimAcceptBean!
 
+var gObjUserDisplayBean : EventBean!
 
+var gObjSearchSchoolListBean : searchSchoolListBean!
+
+var gObjSchoolImage:String!
 
 

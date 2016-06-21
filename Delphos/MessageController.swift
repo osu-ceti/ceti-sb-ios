@@ -19,6 +19,7 @@ class MessageController:  NavController  {
 
     @IBOutlet weak var txtSendMessage: UITextField!
     
+    @IBOutlet weak var tableview: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +36,16 @@ class MessageController:  NavController  {
         view.backgroundColor = bgColor
 
         
-        if(gClaimUserName.characters.count > 0)
-        {
+        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
+            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+       
             self.messageViewUserName.text = gClaimUserName
         }
+        else if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
+            
+            self.messageViewUserName.text = gObjShowEventBean.user_name
         
-        
+        }
         
     }
     override func awakeFromNib() {
@@ -50,7 +55,7 @@ class MessageController:  NavController  {
     
     @IBAction func touchSendMessage(sender: AnyObject) {
         
-        showOverlay(self.view)
+        //showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SEND_MESSAGE)

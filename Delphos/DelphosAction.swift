@@ -28,4 +28,8 @@ enum DelphosAction
     case CLAIM_REJECT
     case SEND_MESSAGE
     case VIEW_MESSAGE_CONTROLLER
+    case SHOW_USER_PROFILE
+    case SHOW_SCHOOL_PROFILE
+    case SIGN_OUT
+    case SHOW_MAKE_MY_SCHOOL
 }

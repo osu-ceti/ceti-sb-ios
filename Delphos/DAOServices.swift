@@ -233,7 +233,7 @@ class DAOServices: DAOBase {
         print("doLogin")
         strURL =  LOGIN_URL
         let JSONString = Mapper().toJSONString(objLoginParam, prettyPrint: true)
-        
+        print(JSONString)
         doPost(JSONString!, addAuthHeader: false,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
@@ -425,10 +425,11 @@ class DAOServices: DAOBase {
     })
     }
     func doSendMessage(objSendMessage : SendMessageBean,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
         let JSONString = Mapper().toJSONString(objSendMessage, prettyPrint: true)
 
         
-        var strUserId = String(gClaimDetailId)
+        var strUserId = String(objSendMessage.id)
         strURL =  SEND_MESSAGE + "/" + strUserId
         
         doPost(JSONString!,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
@@ -499,4 +500,124 @@ class DAOServices: DAOBase {
 
 
 }
+    
+    
+    func getUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("getEvent")
+        strURL =   DEV_TARGET + USERS + strUserID
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<usersBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    
+    func getSchoolProfile(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("getEvent")
+        strURL =  DEV_TARGET + SCHOOL + strSchoolID
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
+    
+    
+    
+    
+    func doSignOut(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        var strEmptyJson = "{}"
+        strURL =   USERS + SIGN_OUT
+        gBoolSignOut = true
+        
+        //let JSONString = Mapper().toJSONString(strClaimID:nil, prettyPrint: true)
+        
+        doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            if(status) {
+                var signoutBean = Mapper<SignoutResponseBean>().map(jsonResult)!
+               callBack?(result: signoutBean, statusCode: statusCode )
+                return
+            } else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+        
+    }
+    
+    
+    
+    func getMakeMySchool(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("getEvent")
+        strURL =  DEV_TARGET + SCHOOL + MAKE_MINE + strSchoolID
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
+    
 }

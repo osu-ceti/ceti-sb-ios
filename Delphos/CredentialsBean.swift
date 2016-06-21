@@ -28,6 +28,8 @@ class  CredentialsBean: Mappable {
     
     var password_confirmation: String?
     
+    var id: Int!
+    
     
     required init()
     {
@@ -52,6 +54,9 @@ class  CredentialsBean: Mappable {
         school_id   <- map["school_id"]
         
         password_confirmation <- map["password_confirmation"]
+        
+        //dummy
+        id             <- map["id"]
 
         
     }

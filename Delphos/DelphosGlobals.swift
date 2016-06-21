@@ -19,6 +19,9 @@ var gStrHomeControllerID: String = "HomeID"
 var gObjLoginController : UINavigationController!
 var gStrLoginControllerID: String = "loginId"
 
+var gObjRegisterController : UINavigationController!
+var gStrRegisterControllerID: String = "RegisterId"
+
 var gObjEventShowController : UINavigationController!
 var gStrEventShowControllerID: String = "eventShowID"
 
@@ -31,8 +34,16 @@ var gStrSearchControllerID: String = "searchID"
 var gObjMessageController : UINavigationController!
 var gStrMessageControllerID: String = "MessageId"
 
-var gObjUserProfileController : UINavigationController!
+//var gObjUserProfileController : UINavigationController!
+var gObjUserProfileController : UserProfileController!
 var gStrUserProfileControllerID: String = "UserProfileId"
+
+//var gObjSchoolProfileController : UINavigationController!
+var gObjSchoolProfileController : SchoolProfileController!
+var gStrSchoolProfileControllerID: String = "SchoolProfileControllerId"
+
+var gObjPublicProfileController : UINavigationController!
+var gStrPublicProfileControllerID: String = "PublicProfileControllerId"
 
 var rightViewController: RightViewController!
 
@@ -40,3 +51,5 @@ var rightViewController: RightViewController!
 var regularMenu = ["Home", "Settings", "Profile", "Logout"]
 var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
+
+var gBoolSignOut:Bool = false

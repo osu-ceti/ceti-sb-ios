@@ -56,18 +56,25 @@ class SearchDelegate: BaseDelegate {
         
         doGetAPIs.getSearchEventsAndUsers(gBtnRadioValue, strsearchID: strShowSearch,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
+                
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+                    
+                    gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
                     if(gBtnRadioValue == events) {
                         gObjShowEventBean = result as! ShowEventBean
                          self.showEventUI(objCurrentContoller)
                     } else if(gBtnRadioValue == schools) {
                         
                     } else if(gBtnRadioValue == users) {
+                       
                         var objUserBean = result as! usersBean
+                        
+                        gObjUserProfileController.eventBeanArray = objUserBean.events
                         gObjSearchUserListBean = objUserBean.user
                         
-                        gObjUserProfileController = self.fetchNavController(gStrUserProfileControllerID)
+                        //gObjUserProfileController = self.fetchNavController(gStrUserProfileControllerID)
                         
                          objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)
 

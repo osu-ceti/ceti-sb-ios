@@ -1,11 +1,10 @@
-/**
- * FileName     :   ErrorBean.swift
- * Created by   :   Venkat
- * Date Created :   5/19/2015
- * Description  :   ErrorBean Class to store ErrorBean details
- * returned from REST API JSON
- * All Copyrights reserved
- */
+//
+//  SchoolsBean.swift
+//  Delphos
+//
+//  Created by Babu on 6/17/16.
+//  Copyright © 2016 Ontoborn. All rights reserved.
+//
 
 import UIKit
 import ObjectMapper
@@ -14,14 +13,16 @@ import ObjectMapper
  * ErrorBean Class to store ErrorBean details
  * returned from REST API JSON
  */
-class usersBean: Mappable {
-   
+class SchoolsBean: Mappable {
+    
+    var badge_url:String!
+    
     var events: [EventBean]!
     
-    var users: [userListBean]!
-   
-    var user: searchUserListBean!
-
+   // var users: [userListBean]!
+    
+    var school: searchSchoolListBean!
+    
     
     required init()
     {
@@ -35,11 +36,14 @@ class usersBean: Mappable {
     // Mappable
     func mapping(map: Map) {
         
+         badge_url    <- map["badge_url"]
+        
         events    <- map["events"]
         
-        users    <- map["users"]
+       // users    <- map["users"]
         
-        user    <- map["user"]
-
+        school    <- map["school"]
+        
     }
 }
+

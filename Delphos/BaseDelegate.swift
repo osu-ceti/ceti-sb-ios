@@ -27,6 +27,11 @@ class BaseDelegate: NSObject {
         return UINavigationController( rootViewController: instantiateVC(controllerId))
     }
     
+    func getNavigationController(objController: UIViewController) -> UINavigationController{
+        return UINavigationController( rootViewController: objController)
+    }
+    
+    
     func doNavigate(objCurrentController: UIViewController,toController: UINavigationController, close: Bool)->Void{
         
         dispatch_async(dispatch_get_main_queue(), {

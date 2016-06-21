@@ -20,9 +20,9 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var noEventsFound: UILabel!
     
     var bottomLineAll      = CALayer()
-     var bottomLineApproval = CALayer()
-     var bottomLineClaim    = CALayer()
-     var bottomLineConfirm  = CALayer()
+    var bottomLineApproval = CALayer()
+    var bottomLineClaim    = CALayer()
+    var bottomLineConfirm  = CALayer()
     
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []

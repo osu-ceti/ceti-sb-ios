@@ -96,7 +96,11 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 break
             case .Logout:
-                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.SIGN_OUT)
+
                 break
                 
             }

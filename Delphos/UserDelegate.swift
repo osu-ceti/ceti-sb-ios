@@ -21,6 +21,7 @@ class UserDelegate:BaseDelegate{
         var objInputParamCredsBean: CredentialsBean = CredentialsBean()
         objInputParamCredsBean.email = strUser
         objInputParamCredsBean.password = strPassword
+        objInputParamCredsBean.id = 0
         objInputParamBean.user = objInputParamCredsBean
         //DOA calls
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
@@ -92,12 +93,8 @@ class UserDelegate:BaseDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    // self.showAlert(objCurrentContoller, strMessage: "Registration Success")
-                    //                    let goToLoginController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
-                    //                    objCurrentContoller.presentViewController(goToLoginController, animated: true, completion: nil)
-                    //if(gObjLoginController == nil){
-                        gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
-                    //}
+                 gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
+                   
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
             }
@@ -107,11 +104,75 @@ class UserDelegate:BaseDelegate{
             else{
                 
                 self.showAlert(objCurrentContoller, strMessage: "Failed to Register")
-                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                })
+
             }
             
         }
         return boolRegister
     }
+    
+    
+    func userProfile(objCurrentContoller: UIViewController) {
+        var strUserId: String = String(gObjShowEventBean.user_id)
+        
+        doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == SUCCESS) {
+                gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
+                
+                
+                var objUserBean = result as! usersBean
+                
+                gObjUserProfileController.eventBeanArray = objUserBean.events
+                gObjSearchUserListBean = objUserBean.user
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    var objUserProfileControllerNav = self.getNavigationController(gObjUserProfileController)
+                    //}
+                    
+                    self.doNavigate(objCurrentContoller, toController: objUserProfileControllerNav,  close: true)
+                    
+                })
+                
+            }
+        })
+    }
+    
+        
+    
+    func signOut(objCurrentContoller: UIViewController) -> Bool {
+        
+        
+        
+        doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
+            if (statusCode == SUCCESS){
+                print("sign out")
+                gObjUserBean = nil
+                var object = SignoutResult as! SignoutResponseBean
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+                     
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+                })
+
+               
+               
+            } else {
+            
+             print("Did not sign out")
+            }
+        }
+        
+        return true
+    }
+
     
 }

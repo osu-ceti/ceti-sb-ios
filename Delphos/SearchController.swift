@@ -89,8 +89,8 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
             
             (cell as! SearchControllerCell).txtTitle!.text = String(usersListBean.name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(usersListBean.id)
-            (cell as! SearchControllerCell).startdate.hidden = true
-        }
+            (cell as! SearchControllerCell).startdate!.text = usersListBean.association
+                    }
         else{
              cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
            if(gBtnRadioValue == "events") {

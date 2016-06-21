@@ -158,8 +158,13 @@ class DAOBase: NSObject {
         
         var strStatusCode: Int!
         
+        var urlString = DEV_TARGET + strURL
         
-        objRequest.URL = NSURL(string: DEV_TARGET+strURL)
+        if(gBoolSignOut){
+            urlString = DEV_TARGET_NO_API + strURL
+        }
+        
+        objRequest.URL = NSURL(string: urlString)
         
         objRequest.HTTPMethod = method
         
