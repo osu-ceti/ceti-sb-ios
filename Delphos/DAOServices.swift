@@ -599,7 +599,37 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    print(jsonResult)
-                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                var showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
+    func doEditProfile(objUserProfile: MakeMySchoolListBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("PUT USER PROFILE")
+        strURL =  USER_PROFILE
+       
+        let userJSONString = Mapper().toJSONString(objUserProfile, prettyPrint: true)
+        doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
                 

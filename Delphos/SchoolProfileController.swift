@@ -62,7 +62,12 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
-        schoolImage.image = UIImage(named:"gObjSchoolImage")
+        let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + gObjSchoolImage)
+        var data = NSData(contentsOfURL:url!)
+        if data != nil {
+           self.schoolImage.image = UIImage(data:data!)
+        }
+       // schoolImage.image = UIImage(named:"gObjSchoolImage")
         self.schoolNameLabel.text = gObjSearchSchoolListBean.name
         
         self.labelAddress.text = "Address:"

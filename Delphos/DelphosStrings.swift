@@ -68,4 +68,4 @@ var gObjSearchSchoolListBean : searchSchoolListBean!
 
 var gObjSchoolImage:String!
 
-
+var gObjMakeMySchoolListBean : MakeMySchoolListBean!

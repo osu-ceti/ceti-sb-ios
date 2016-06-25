@@ -173,6 +173,62 @@ class UserDelegate:BaseDelegate{
         
         return true
     }
+    func editUserProfile(objCurrentContoller: UIViewController)  {
+        
+        let publicProfileController = objCurrentContoller as! PublicProfileController
+        var strUserName = gObjMakeMySchoolListBean.name
+        var strSchoolId = gObjMakeMySchoolListBean.school_id
+        var strgrades = publicProfileController.txtProfileGrades.text
+        var strBiography = publicProfileController.txtProfileBiography.text
+        var strJobTitle = publicProfileController.txtProfileJobTItle.text
+        var strBusiness = publicProfileController.txtProfileBusiness.text
+        
+        
+        var objInputParamBean: MakeMySchoolListBean = MakeMySchoolListBean()
+        objInputParamBean.id = gObjMakeMySchoolListBean.id
+        objInputParamBean.name = strUserName
+        objInputParamBean.school_id = strSchoolId
+        objInputParamBean.grades = strgrades
+        objInputParamBean.biography = strBiography
+        objInputParamBean.job_title = strJobTitle
+        objInputParamBean.business = strBusiness
+        
+       
+        
+        doPostAPIs.doEditProfile(objInputParamBean){ (result: AnyObject, statusCode: Int) in
+            if(statusCode == SUCCESS) {
+                print("Save profile")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    var objUserResponse = result as! EditUserProfileBean
+                    
+                   
+                    
+                    
+                    (objCurrentContoller as! PublicProfileController).labelProfileGrades.text = objUserResponse.user.grades
+                    
+                    (objCurrentContoller as! PublicProfileController).labelProfileBiography.text = objUserResponse.user.biography
+                    
+                    (objCurrentContoller as! PublicProfileController).labelProfileJobTitle.text = objUserResponse.user.job_title
+                   (objCurrentContoller as! PublicProfileController).labelProfileBusiness.text = objUserResponse.user.business
+                    
+//                    
+//                    gObjPublicProfileController = self.fetchNavController(gStrPublicProfileControllerID)
+//                    
+//                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjPublicProfileController, close: true)
+//               
+                })
 
+            }
+            else{
+                
+               print("NOt Save profile")
+                
+            }
+            
+        }
+       
+    }
+    
     
 }

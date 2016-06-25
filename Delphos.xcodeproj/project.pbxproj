@@ -12,6 +12,7 @@
 		0F1C23001CE728E60052AA17 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */; };
 		0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */; };
 		0F34E1271D08110000CE660B /* SendMessageResBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F34E1261D08110000CE660B /* SendMessageResBean.swift */; };
+		0F46C34D1D1D59E300D0163C /* EditUserProfileBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */; };
 		0F488A691D1521AA00A72291 /* SchoolProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */; };
 		0F488A711D15566D00A72291 /* SchoolDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A701D15566D00A72291 /* SchoolDelegate.swift */; };
 		0F488A731D1570E600A72291 /* SignoutResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A721D1570E600A72291 /* SignoutResponseBean.swift */; };
@@ -187,6 +188,7 @@
 		0F1C22FF1CE728E60052AA17 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSRadioButtonsController.swift; path = SSRadioButtonController/SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelEventBean.swift; sourceTree = "<group>"; };
 		0F34E1261D08110000CE660B /* SendMessageResBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageResBean.swift; sourceTree = "<group>"; };
+		0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileBean.swift; sourceTree = "<group>"; };
 		0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolProfileCell.swift; sourceTree = "<group>"; };
 		0F488A701D15566D00A72291 /* SchoolDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolDelegate.swift; sourceTree = "<group>"; };
 		0F488A721D1570E600A72291 /* SignoutResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutResponseBean.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				0F488A721D1570E600A72291 /* SignoutResponseBean.swift */,
 				0FE721841D19297F00D5994D /* MakeMySchoolListBean.swift */,
 				0FE7218C1D192F7300D5994D /* MakeMySchoolBean.swift */,
+				0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				0F34E1271D08110000CE660B /* SendMessageResBean.swift in Sources */,
 				F59984401CDCC3360055C8D3 /* RegisterController.swift in Sources */,
 				0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */,
+				0F46C34D1D1D59E300D0163C /* EditUserProfileBean.swift in Sources */,
 				F5A2EE7C1CDC6CD800419419 /* LoginController.swift in Sources */,
 				F58061571CE46941004BF043 /* EventShowController.swift in Sources */,
 				0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */,

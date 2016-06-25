@@ -28,6 +28,7 @@ let POST = "POST"
 let GET = "GET"
 let PATCH = "PATCH"
 let DELETE = "DELETE"
+let PUT = "PUT"
 
 
 
@@ -61,6 +62,7 @@ let REJECT = "reject"
 let SEND_MESSAGE = "send_message"
 let SIGN_OUT = "sign_out"
 let MAKE_MINE = "make_mine/"
+let USER_PROFILE = "users"
 
 func getTarget() -> String {
     if(DEBUG) {

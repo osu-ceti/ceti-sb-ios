@@ -48,7 +48,8 @@ class SchoolDelegate:BaseDelegate{
         doGetAPIs.getMakeMySchool(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
              
-                 //var objMakeMySchoolBean = result as! MakeMySchoolBean
+                 var objMakeMySchoolBean = result as! MakeMySchoolBean
+               gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
                 print("Make my school")
                 
                 dispatch_async(dispatch_get_main_queue(), {
