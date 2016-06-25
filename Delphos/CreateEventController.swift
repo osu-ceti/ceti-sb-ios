@@ -116,10 +116,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gTimeFormat
+       
         startTime.text = dateFormatter.stringFromDate(startTimeSet)
         endTime.text = dateFormatter.stringFromDate(endTimeSet)
+       
         self.startTimePicker.setDate(startTimeSet, animated: false)
         self.endTimePicker.setDate(endTimeSet, animated: false)
+        
         txtTimeZone.text = "Eastern Time (US & Canada)"
       
         self.startTime.hidden = true
@@ -329,8 +332,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         // To resign the inputView on clicking done.
     }
     
-    
     @IBAction func startTimePickerChange(sender: AnyObject) {
+    
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gTimeFormat
         startTimeValid = sender.date
@@ -340,6 +343,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
     
     @IBAction func endTimePickerChange(sender: AnyObject) {
+   
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gTimeFormat
         endTimeValid = sender.date

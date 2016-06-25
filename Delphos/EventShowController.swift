@@ -171,6 +171,13 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.claim.hidden = true
                     self.cancelClaim.hidden = true
                 }
+                else if (gObjShowEventBean.active == false)
+                {
+                    self.editEvent.hidden = true
+                    self.cancelEvent.hidden = true
+                    self.claim.hidden = true
+                    self.cancelClaim.hidden = true
+                }
                 else if(gObjUserBean.id == gObjShowEventBean.user_id){
                     self.editEvent.hidden = false
                     self.cancelEvent.hidden = false

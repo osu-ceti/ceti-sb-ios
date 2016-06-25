@@ -33,8 +33,8 @@ class ClaimsDelegate: BaseDelegate {
                    var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
                   
-                       if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
-                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+                       if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
+                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH) ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
