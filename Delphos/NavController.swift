@@ -22,6 +22,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var isSearchEnabled:Bool = true
     var backToController : UIViewController!
     var shouldClose : Bool! = true
+    var backBtoonNav: String!
     
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
@@ -98,12 +99,22 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
        
+        if(backBtoonNav != nil){
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToNavController(_:)))
+            
+            navigationItem.leftBarButtonItem = backButton
+        
+        }
+        
+        
         if(isBackEnabled){
             backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToSomeController(_:)))
         
             navigationItem.leftBarButtonItem = backButton
         }
         menuButton = self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
+        
+        
         
         if(isSearchEnabled){
             searchButtonItem = UIBarButtonItem(customView:searchBar)
@@ -170,6 +181,15 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
        // }
         
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)     
+        
+    }
+    
+    func backToNavController(sender: UIBarButtonItem){
+        //if(backToController == nil){
+        backToController = self.fetchNavController(backBtoonNav)
+        // }
+        
+        self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
         
     }
     

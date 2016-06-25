@@ -11,19 +11,30 @@ import UIKit
 class RegisterController: NavController, UITextFieldDelegate {
     
     @IBOutlet weak var schoolbusiness: UILabel!
-    @IBOutlet weak var txtName: UITextField!
-    @IBOutlet weak var txtPassword: UITextField!
-    @IBOutlet weak var txtEmail: UITextField!
-    @IBOutlet weak var txtConformPassword: UITextField!
+   
     
-    @IBOutlet weak var radioTeacher: SSRadioButton!
-    @IBOutlet weak var radioSpeaker: SSRadioButton!
-    @IBOutlet weak var radioBoth: SSRadioButton!
+    @IBOutlet var txtName: UITextField!
+    
+    @IBOutlet var txtEmail: UITextField!
+    @IBOutlet var txtPassword: UITextField!
+   
+    @IBOutlet var txtConformPassword: UITextField!
+    
+    @IBOutlet var radioTeacher: SSRadioButton!
+    @IBOutlet var radioSpeaker: SSRadioButton!
+    @IBOutlet var radioBoth: SSRadioButton!
+    
+   // @IBOutlet weak var radioTeacher: SSRadioButton!
+   // @IBOutlet weak var radioSpeaker: SSRadioButton!
+    //@IBOutlet weak var radioBoth: SSRadioButton!
     let checkCharacter = NSCharacterSet.letterCharacterSet()
     var radioButtonControllerLocal: SSRadioButtonsController?
     
-    @IBOutlet weak var requiredField: UILabel!
+    @IBOutlet var requiredField: UILabel!
+    @IBOutlet var btnRegister: UIButton!
+   
     
+    @IBOutlet var scrollView: UIScrollView!
     
     var arrRole = ["Speaker", "Teacher" ,"Both"]
     
@@ -44,9 +55,9 @@ class RegisterController: NavController, UITextFieldDelegate {
         rightViewController.tableView.reloadData()
         
         //Adding Navbar
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         self.isSearchEnabled = false
-        
+        backBtoonNav = "loginId"
         setNavBar(self.view.frame.size.width)
         //searchBar.delegate = self
         let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
@@ -55,6 +66,14 @@ class RegisterController: NavController, UITextFieldDelegate {
         //backToView = "Back"
     }
     
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnRegister.frame.origin.y + 700)
+        scrollView.scrollEnabled = true
+        //view.addSubview(scrolview)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,16 +129,19 @@ class RegisterController: NavController, UITextFieldDelegate {
         bottomLine.backgroundColor = UIColor.blackColor().CGColor
         txtName.borderStyle = UITextBorderStyle.None
         txtName.layer.addSublayer(bottomLine)
+        
         var textboxLine = CALayer()
         textboxLine.frame = CGRectMake(0.0, txtEmail.frame.height - 1, txtEmail.frame.width, 1.0)
         textboxLine.backgroundColor = UIColor.blackColor().CGColor
         txtEmail.borderStyle = UITextBorderStyle.None
         txtEmail.layer.addSublayer(textboxLine)
+       
         var PasswordLine = CALayer()
         PasswordLine.frame = CGRectMake(0.0, txtPassword.frame.height - 1, txtPassword.frame.width, 1.0)
         PasswordLine.backgroundColor = UIColor.blackColor().CGColor
         txtPassword.borderStyle = UITextBorderStyle.None
         txtPassword.layer.addSublayer(PasswordLine)
+       
         var ConformPasswordLine = CALayer()
         ConformPasswordLine.frame = CGRectMake(0.0, txtConformPassword.frame.height - 1, txtConformPassword.frame.width, 1.0)
         ConformPasswordLine.backgroundColor = UIColor.blackColor().CGColor

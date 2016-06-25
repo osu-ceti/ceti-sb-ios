@@ -34,13 +34,8 @@ class UserDelegate:BaseDelegate{
                 boolLogin = true;
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    //                var homeController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-                    //
-                    //                    let homeControllerNav = UINavigationController(rootViewController: homeController)
-                    
-                   // if(gObjHomeController == nil){
-                        gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                   // }
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                  
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                     
                     
@@ -93,7 +88,11 @@ class UserDelegate:BaseDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                 gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
+                   // gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    
+                    //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+
+                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
                    
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
