@@ -39,7 +39,7 @@ class MessageController:  NavController  {
         if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
             RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
        
-            self.messageViewUserName.text = gClaimUserName
+            self.messageViewUserName.text = gClaimSpeakerName
         }
         else if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
             

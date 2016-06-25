@@ -310,7 +310,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
         gClaimDetailId = Int(currentCell.userId.text!)
         gUserId = Int(currentCell.userId.text!)
-        
+        gClaimSpeakerName = String(currentCell.claimUserName.text!)
+
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.CLAIM_LIST_DETAILS)
