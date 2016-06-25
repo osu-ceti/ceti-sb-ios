@@ -123,7 +123,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
  
         bottomLineAll.frame = CGRectMake(0, btnAllEvent.frame.size.height - 1.0, btnAllEvent.frame.size.width, 1)
         bottomLineAll.borderWidth = 2.0
-        bottomLineAll.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
         btnAllEvent.layer.addSublayer(bottomLineAll)
        
        
@@ -138,7 +138,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         bottomLineApproval.frame = CGRectMake(0, btnApprovalEvent.frame.size.height - 1.0, btnApprovalEvent.frame.size.width, 1)
         bottomLineApproval.borderWidth = 2.0
-        bottomLineApproval.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineApproval.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
         btnApprovalEvent.layer.addSublayer(bottomLineApproval)
        
         bottomLineClaim.borderColor = UIColor.clearColor().CGColor
@@ -152,7 +152,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         bottomLineClaim.frame = CGRectMake(0, btnClaimEvent.frame.size.height - 1.0, btnClaimEvent.frame.size.width, 1)
         bottomLineClaim.borderWidth = 2.0
-        bottomLineClaim.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineClaim.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
         btnClaimEvent.layer.addSublayer(bottomLineClaim)
         
         bottomLineAll.borderColor = UIColor.clearColor().CGColor
@@ -166,7 +166,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         bottomLineConfirm.frame = CGRectMake(0, btnConfirmEvent.frame.size.height - 1.0, btnConfirmEvent.frame.size.width, 1)
         bottomLineConfirm.borderWidth = 2.0
-        bottomLineConfirm.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineConfirm.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
         btnConfirmEvent.layer.addSublayer(bottomLineConfirm)
         
         bottomLineAll.borderColor = UIColor.clearColor().CGColor
@@ -190,7 +190,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     }
     
      func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
-        cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+       
         
         if(eventBeanArray.count > 0){
             self.tableView.hidden = false
