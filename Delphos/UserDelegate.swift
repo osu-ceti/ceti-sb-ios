@@ -89,6 +89,7 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
+                print("Register")
                 boolRegister = true
                 
                 dispatch_async(dispatch_get_main_queue(), {

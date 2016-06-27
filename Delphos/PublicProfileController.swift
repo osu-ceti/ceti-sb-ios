@@ -13,30 +13,34 @@ import UIKit
 
 class PublicProfileController:  NavController{
     
+    
+    
+    
     @IBOutlet var labelProfileName: UILabel!
     @IBOutlet var labelProfileSchool: UILabel!
+    
     @IBOutlet var labelProfileGrades: UILabel!
     @IBOutlet var labelProfileBiography: UILabel!
     @IBOutlet var labelProfileJobTitle: UILabel!
     @IBOutlet var labelProfileBusiness: UILabel!
     
-    
     @IBOutlet var labelProfileEmail: UILabel!
     @IBOutlet var labelProfileRole: UILabel!
-    
     
     @IBOutlet var txtProfileId: UITextField!
     @IBOutlet var txtProfileGrades: UITextField!
     @IBOutlet var txtProfileBiography: UITextField!
-    @IBOutlet var txtProfileJobTItle: UITextField!
+    @IBOutlet var txtProfileJobTItle: UITextField!   
     @IBOutlet var txtProfileBusiness: UITextField!
-    
+   
+   
     @IBOutlet var btnSaveProfile: UIButton!
     @IBOutlet var btnFindMySchool: UIButton!
-    
     @IBOutlet var btnEditProfile: UIButton!
     @IBOutlet var btnEditAccount: UIButton!
     
+    
+    @IBOutlet var scrollView: UIScrollView!
     
     var userProfileBean: UserBean!
     
@@ -75,7 +79,8 @@ class PublicProfileController:  NavController{
          self.btnEditAccount.hidden = false
         if (userProfileBean != nil){
          self.labelProfileName.text = userProfileBean.name
-         self.labelProfileSchool.text = String(userProfileBean.school_name)
+         self.labelProfileSchool.text = userProfileBean.school_name
+            
          self.labelProfileGrades.text = userProfileBean.grades
          self.labelProfileBiography.text = userProfileBean.biography
          self.labelProfileJobTitle.text = userProfileBean.job_title
@@ -115,7 +120,15 @@ class PublicProfileController:  NavController{
         
         
     }
-    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.y + 500)
+        //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
+        scrollView.scrollEnabled = true
+        //view.addSubview(scrolview)
+    }
     @IBAction func btnEditProfileClick(sender: AnyObject) {
         
         self.txtProfileGrades.hidden    = false
