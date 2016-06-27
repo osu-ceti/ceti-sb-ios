@@ -20,7 +20,7 @@ class UserBean: Mappable {
     
     var biography: String!
     var business: String!
-    var created_at: String!
+    var created_at: String?
     
     var current_sign_in_at: String!
     
@@ -29,26 +29,26 @@ class UserBean: Mappable {
     var deleted_at: String!
     
     var email: String!
-    var encrypted_password: String!
+    var encrypted_password: String?
     var grades: String!
     var id: Int!
     var job_title: String!
     var last_sign_in_at: String!
     
     var last_sign_in_ip: String!
-    var name: String!
-    var remember_created_at: String!
-    var reset_password_sent_at: String!
-    var reset_password_token: String!
+    var name: String?
+    var remember_created_at: String?
+    var reset_password_sent_at: String?
+    var reset_password_token: String?
     var role: Int!
     var school_id: Int!
     var school_name: String!
     var set_claims: Int!
     var set_confirm: Int!
-    var set_updates: Int!
-    var sign_in_count: Int!
-    var speaking_category: String!
-    var updated_at: String!
+    var set_updates: Int?
+    var sign_in_count: Int?
+    var speaking_category: String?
+    var updated_at: String?
     
     
     required init()

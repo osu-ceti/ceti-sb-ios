@@ -25,6 +25,7 @@ class PublicProfileController:  NavController{
     @IBOutlet var labelProfileRole: UILabel!
     
     
+    @IBOutlet var txtProfileId: UITextField!
     @IBOutlet var txtProfileGrades: UITextField!
     @IBOutlet var txtProfileBiography: UITextField!
     @IBOutlet var txtProfileJobTItle: UITextField!
@@ -35,6 +36,9 @@ class PublicProfileController:  NavController{
     
     @IBOutlet var btnEditProfile: UIButton!
     @IBOutlet var btnEditAccount: UIButton!
+    
+    
+    var userProfileBean: UserBean!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,16 +73,45 @@ class PublicProfileController:  NavController{
         
          self.btnEditProfile.hidden = false
          self.btnEditAccount.hidden = false
+        if (userProfileBean != nil){
+         self.labelProfileName.text = userProfileBean.name
+         self.labelProfileSchool.text = String(userProfileBean.school_name)
+         self.labelProfileGrades.text = userProfileBean.grades
+         self.labelProfileBiography.text = userProfileBean.biography
+         self.labelProfileJobTitle.text = userProfileBean.job_title
+         self.labelProfileBusiness.text = userProfileBean.business
         
-         self.labelProfileName.text = gObjMakeMySchoolListBean.name
-         self.labelProfileSchool.text = String(gObjMakeMySchoolListBean.school_id)
-         self.labelProfileGrades.text = gObjMakeMySchoolListBean.grades
-         self.labelProfileBiography.text = gObjMakeMySchoolListBean.biography
-         self.labelProfileJobTitle.text = gObjMakeMySchoolListBean.job_title
-         self.labelProfileBusiness.text = gObjMakeMySchoolListBean.business
-        
-         self.labelProfileEmail.text = gObjMakeMySchoolListBean.email
-         self.labelProfileRole.text = gObjMakeMySchoolListBean.role
+         self.labelProfileEmail.text = userProfileBean.email
+            if (userProfileBean.role == 1){
+            self.labelProfileRole.text = "TEACHER"
+                }
+            else if(userProfileBean.role == 2){
+                 self.labelProfileRole.text = "SPEAKER"
+            }
+            else{
+                 self.labelProfileRole.text = "BOTH"
+            }
+        }
+        else{
+            
+            if (gObjMakeMySchoolListBean.school_id == 2)
+            {
+                self.labelProfileSchool.text = "Delphos School"
+            }
+            else{
+                self.labelProfileSchool.text = "Delphos School"
+            }
+            self.labelProfileName.text = gObjMakeMySchoolListBean.name
+            
+            self.labelProfileGrades.text = gObjMakeMySchoolListBean.grades
+            self.labelProfileBiography.text = gObjMakeMySchoolListBean.biography
+            self.labelProfileJobTitle.text = gObjMakeMySchoolListBean.job_title
+            self.labelProfileBusiness.text = gObjMakeMySchoolListBean.business
+            
+            self.labelProfileEmail.text = gObjMakeMySchoolListBean.email
+            self.labelProfileRole.text = gObjMakeMySchoolListBean.role
+
+        }
         
         
     }
@@ -89,12 +122,21 @@ class PublicProfileController:  NavController{
         self.txtProfileBiography.hidden = false
         self.txtProfileJobTItle.hidden  = false
         self.txtProfileBusiness.hidden  = false
+        if (userProfileBean != nil){
+            self.txtProfileId.text = String(userProfileBean.id)
+            self.txtProfileGrades.text = userProfileBean.grades
+            self.txtProfileBiography.text = userProfileBean.biography
+            self.txtProfileJobTItle.text = userProfileBean.job_title
+            self.txtProfileBusiness.text = userProfileBean.business
         
-        self.txtProfileGrades.text = gObjMakeMySchoolListBean.grades
-        self.txtProfileBiography.text = gObjMakeMySchoolListBean.biography
-        self.txtProfileJobTItle.text = gObjMakeMySchoolListBean.job_title
-        self.txtProfileBusiness.text = gObjMakeMySchoolListBean.business
-        
+        }
+        else{
+             self.txtProfileId.text = String(gObjMakeMySchoolListBean.id)
+            self.txtProfileGrades.text = gObjMakeMySchoolListBean.grades
+            self.txtProfileBiography.text = gObjMakeMySchoolListBean.biography
+            self.txtProfileJobTItle.text = gObjMakeMySchoolListBean.job_title
+            self.txtProfileBusiness.text = gObjMakeMySchoolListBean.business
+        }
         self.labelProfileGrades.hidden = true
         self.labelProfileBiography.hidden = true
         self.labelProfileJobTitle.hidden = true

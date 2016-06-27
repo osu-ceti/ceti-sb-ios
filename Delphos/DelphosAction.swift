@@ -33,4 +33,5 @@ enum DelphosAction
     case SIGN_OUT
     case SHOW_MAKE_MY_SCHOOL
     case EDIT_USER_PROFILE
+    case USER_PROFILE
 }

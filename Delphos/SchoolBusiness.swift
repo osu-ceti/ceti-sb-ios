@@ -63,6 +63,7 @@ let SEND_MESSAGE = "send_message"
 let SIGN_OUT = "sign_out"
 let MAKE_MINE = "make_mine/"
 let USER_PROFILE = "users"
+let PROFILE = "profile"
 
 func getTarget() -> String {
     if(DEBUG) {

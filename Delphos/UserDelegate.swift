@@ -176,18 +176,20 @@ class UserDelegate:BaseDelegate{
     func editUserProfile(objCurrentContoller: UIViewController)  {
         
         let publicProfileController = objCurrentContoller as! PublicProfileController
-        var strUserName = gObjMakeMySchoolListBean.name
-        var strSchoolId = gObjMakeMySchoolListBean.school_id
+        
+       // var strUserName = gObjMakeMySchoolListBean.name
+        var strProfileId = publicProfileController.txtProfileId.text
+        
         var strgrades = publicProfileController.txtProfileGrades.text
         var strBiography = publicProfileController.txtProfileBiography.text
         var strJobTitle = publicProfileController.txtProfileJobTItle.text
         var strBusiness = publicProfileController.txtProfileBusiness.text
-        
-        
+       
+       
         var objInputParamBean: MakeMySchoolListBean = MakeMySchoolListBean()
-        objInputParamBean.id = gObjMakeMySchoolListBean.id
-        objInputParamBean.name = strUserName
-        objInputParamBean.school_id = strSchoolId
+     
+      
+        objInputParamBean.id = Int(strProfileId!)
         objInputParamBean.grades = strgrades
         objInputParamBean.biography = strBiography
         objInputParamBean.job_title = strJobTitle
@@ -203,15 +205,24 @@ class UserDelegate:BaseDelegate{
                     var objUserResponse = result as! EditUserProfileBean
                     
                    
-                    
-                    
-                    (objCurrentContoller as! PublicProfileController).labelProfileGrades.text = objUserResponse.user.grades
-                    
-                    (objCurrentContoller as! PublicProfileController).labelProfileBiography.text = objUserResponse.user.biography
-                    
-                    (objCurrentContoller as! PublicProfileController).labelProfileJobTitle.text = objUserResponse.user.job_title
-                   (objCurrentContoller as! PublicProfileController).labelProfileBusiness.text = objUserResponse.user.business
-                    
+                    var objectcontroller = objCurrentContoller as! PublicProfileController
+                    objectcontroller.labelProfileGrades.text = objUserResponse.user.grades
+                    objectcontroller.labelProfileBiography.text = objUserResponse.user.biography
+                    objectcontroller.labelProfileJobTitle.text = objUserResponse.user.job_title
+                    objectcontroller.labelProfileBusiness.text = objUserResponse.user.business
+                   
+                    if(objectcontroller.userProfileBean != nil){
+                        objectcontroller.userProfileBean.grades = objUserResponse.user.grades
+                        objectcontroller.userProfileBean.biography = objUserResponse.user.biography
+                        objectcontroller.userProfileBean.job_title = objUserResponse.user.job_title
+                        objectcontroller.userProfileBean.business = objUserResponse.user.business
+                    }
+                    else{
+                    gObjMakeMySchoolListBean.grades = objUserResponse.user.grades
+                    gObjMakeMySchoolListBean.biography = objUserResponse.user.biography
+                    gObjMakeMySchoolListBean.job_title = objUserResponse.user.job_title
+                    gObjMakeMySchoolListBean.business = objUserResponse.user.business
+                    }
 //                    
 //                    gObjPublicProfileController = self.fetchNavController(gStrPublicProfileControllerID)
 //                    
@@ -229,6 +240,29 @@ class UserDelegate:BaseDelegate{
         }
        
     }
-    
+    func menuUserProfile(objCurrentContoller: UIViewController) {
+       var strUserId: String = String(0)
+        
+        doGetAPIs.getMenuUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == SUCCESS) {
+                gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
+                
+                
+                var objUserBean = result as! UserBean
+                
+                gObjPublicProfileController.userProfileBean = objUserBean
+             
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    var objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
+                   
+                    
+                    self.doNavigate(objCurrentContoller, toController: objPublicProfileControllerNav,  close: true)
+                    
+                })
+                
+            }
+        })
+    }
     
 }
