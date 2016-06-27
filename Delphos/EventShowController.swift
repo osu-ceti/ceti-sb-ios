@@ -10,45 +10,58 @@ import UIKit
 import ObjectMapper
 
 class EventShowController: NavController, UITableViewDataSource, UITableViewDelegate {
-
-    @IBOutlet weak var labeltext1: UILabel!
-    @IBOutlet weak var labelText2: UILabel!
-    @IBOutlet weak var labelText4: UILabel!
-    @IBOutlet weak var labelText5: UILabel!
-    @IBOutlet weak var labelText6: UILabel!
-    @IBOutlet weak var labelText3: UILabel!
-
-    @IBOutlet weak var txtText1: UILabel!
-    @IBOutlet weak var txtText2: UILabel!
-    @IBOutlet weak var txtText3: UILabel!
-    @IBOutlet weak var txtText4: UILabel!
-    @IBOutlet weak var txtText5: UILabel!
-    @IBOutlet weak var txtText6: UILabel!
-    @IBOutlet weak var txtTitle: UILabel!
-    @IBOutlet weak var claim: UIButton!
-    @IBOutlet weak var editEvent: UIButton!
    
-    @IBOutlet weak var labelBusiness: UILabel!
-    @IBOutlet weak var labelJobTitle: UILabel!
+    @IBOutlet var labeltext1: UILabel!
+
+    @IBOutlet var labelText2: UILabel!
+   
+    @IBOutlet var labelText3: UILabel!
+    @IBOutlet var labelText4: UILabel!
+    @IBOutlet var labelText5: UILabel!
     
-    @IBOutlet weak var labelUserName: UILabel!
-    @IBOutlet weak var mainLabelBusiness: UILabel!
-       
+    @IBOutlet var labelText6: UILabel!
+    
+    @IBOutlet var txtText2: UILabel!
+    @IBOutlet var txtText3: UILabel!
+    
+    @IBOutlet var txtText6: UILabel!
+    
+   
+    
+    @IBOutlet var txtTitle: UILabel!
+    
+    @IBOutlet var editEvent: UIButton!
+    @IBOutlet var cancelEvent: UIButton!
+    @IBOutlet var claim: UIButton!
+    @IBOutlet var cancelClaim: UIButton!
+
+ 
+   
+   
     @IBOutlet weak var mainLabelJobTitle: UILabel!
-    @IBOutlet weak var cancelClaim: UIButton!
-    @IBOutlet weak var cancelEvent: UIButton!
+    @IBOutlet weak var mainLabelBusiness: UILabel!
+    @IBOutlet weak var labelUserName: UILabel!
+       
    
-    @IBOutlet weak var btnLinkSpeaker: UIButton!
-    @IBOutlet weak var btnLinkLocation: UIButton!
-    @IBOutlet weak var btnLinkCreatedBy: UIButton!
+    @IBOutlet weak var labelJobTitle: UILabel!
+    @IBOutlet weak var labelBusiness: UILabel!
+   
     
-    @IBOutlet weak var btnMessage: UIButton!
-    @IBOutlet weak var btnAccept: UIButton!
-    @IBOutlet weak var btnReject: UIButton!
+    @IBOutlet var btnLinkSpeaker: UIButton!
+    @IBOutlet var btnLinkLocation: UIButton!
+    @IBOutlet var btnLinkCreatedBy: UIButton!
     
-    @IBOutlet weak var labelClaims: UILabel!
+    @IBOutlet var btnAccept: UIButton!
+    @IBOutlet var btnMessage: UIButton!
+    @IBOutlet var btnReject: UIButton!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var labelClaims: UILabel!
+    
+   
+    @IBOutlet var tableView: UITableView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+   
    
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
@@ -81,6 +94,14 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
         
     }
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 700)
+        scrollView.scrollEnabled = true
+        //view.addSubview(scrolview)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,16 +130,18 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gDateTimeFormat
         
-        txtTitle.font = UIFont.boldSystemFontOfSize(15)
-        labeltext1.font = UIFont.boldSystemFontOfSize(15)
-        labelText2.font = UIFont.boldSystemFontOfSize(15)
-        labelText3.font = UIFont.boldSystemFontOfSize(15)
-        labelText4.font = UIFont.boldSystemFontOfSize(15)
-        labelText5.font = UIFont.boldSystemFontOfSize(15)
-        labelText6.font = UIFont.boldSystemFontOfSize(15)
+//        txtTitle.font = UIFont.boldSystemFontOfSize(15)
+//        labeltext1.font = UIFont.boldSystemFontOfSize(15)
+//        labelText2.font = UIFont.boldSystemFontOfSize(15)
+//        labelText3.font = UIFont.boldSystemFontOfSize(15)
+//        labelText4.font = UIFont.boldSystemFontOfSize(15)
+//        labelText5.font = UIFont.boldSystemFontOfSize(15)
+//        labelText6.font = UIFont.boldSystemFontOfSize(15)
     
         
         if(gBtnRadioValue == events || gObjShowEventBean != nil) {
+            
+
             
             self.labeltext1.text = "Speaker:"
             self.labelText2.text = "Event Start:"
@@ -227,7 +250,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.labelText6.hidden = true
             
             self.txtTitle.text = gObjSearchUserListBean.name
-            self.txtText1.text = gObjSearchUserListBean.role
+           // self.txtText1.text = gObjSearchUserListBean.role
             self.txtText2.text = gObjSearchUserListBean.biography
         }
         

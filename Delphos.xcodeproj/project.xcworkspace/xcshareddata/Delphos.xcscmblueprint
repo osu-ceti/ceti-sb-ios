@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5B7A3239738E4CCA096F8492F3B17E3B012105A5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5B7A3239738E4CCA096F8492F3B17E3B012105A5" : 0,
+    "58AAB0051E2B4EEDF1845A552012E6D0EBAD9127" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "95E6793F-92DB-4781-B261-753972407F4C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5B7A3239738E4CCA096F8492F3B17E3B012105A5" : "ceti-sb-ios\/",
+    "58AAB0051E2B4EEDF1845A552012E6D0EBAD9127" : "ceti-sb-ios\/ObjectMapper\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Delphos",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Delphos.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Hearst-DD\/ObjectMapper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "58AAB0051E2B4EEDF1845A552012E6D0EBAD9127"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/osu-ceti\/ceti-sb-ios",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5B7A3239738E4CCA096F8492F3B17E3B012105A5"
+    }
+  ]
+}
