@@ -22,6 +22,7 @@ class usersBean: Mappable {
    
     var user: searchUserListBean!
 
+    var data: UserBean!
     
     required init()
     {
@@ -40,6 +41,8 @@ class usersBean: Mappable {
         users    <- map["users"]
         
         user    <- map["user"]
+        
+        data    <- map["data"]
 
     }
 }

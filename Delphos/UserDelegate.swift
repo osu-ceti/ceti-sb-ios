@@ -84,8 +84,10 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
+                print("Register")
                 boolRegister = true
-                
+                 var objUserBean = loginResult as! usersBean
+                gObjUserBean = objUserBean.data
                 dispatch_async(dispatch_get_main_queue(), {
                     
                    // gObjHomeController = self.fetchNavController(gStrHomeControllerID)

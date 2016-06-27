@@ -258,7 +258,7 @@ class DAOServices: DAOBase {
         doPost(JSONString!, addAuthHeader: false,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var userBean = Mapper<UserBean>().map(jsonResult)!
+                var userBean = Mapper<usersBean>().map(jsonResult)!
                 callBack?(result: userBean, statusCode: statusCode )
                 return
             }
