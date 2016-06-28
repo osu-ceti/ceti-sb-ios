@@ -53,4 +53,5 @@ var regularMenu = ["Home", "Settings", "Profile", "Logout"]
 var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 
-var gBoolSignOut:Bool = false
+var gEmptyJSON = "{}"
+

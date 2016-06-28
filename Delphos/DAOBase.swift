@@ -49,6 +49,17 @@ class DAOBase: NSObject {
         
         objRequest.HTTPMethod = "GET"
         objRequest.addValue("0", forHTTPHeaderField: "Content-Length")
+        //objRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //objRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        
+        if (addAuthHeader) {
+            
+            objRequest.setValue(gObjUserBean.email, forHTTPHeaderField: "X-User-Email")
+            
+            objRequest.setValue(gObjUserBean.authentication_token, forHTTPHeaderField: "X-User-Token")
+        }
+
         
         // sending AsynchronousRequest
         print("DoGet - doGet:\(strURL)")
@@ -165,15 +176,16 @@ class DAOBase: NSObject {
         
         var urlString = DEV_TARGET + strURL
         
-        if(gBoolSignOut){
-            urlString = DEV_TARGET_NO_API + strURL
-        }
+//        if(gBoolSignOut){
+//            urlString = DEV_TARGET_NO_API + strURL
+//        }
         
         objRequest.URL = NSURL(string: urlString)
         
         objRequest.HTTPMethod = method
         
         objRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        objRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         
         if (addAuthHeader) {
             
@@ -195,7 +207,9 @@ class DAOBase: NSObject {
         let session = NSURLSession.sharedSession()
         
         // println("hold request proceeding")
-        let task = session.dataTaskWithRequest(objRequest) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
+        let task = session.dataTaskWithRequest(objRequest)
+            
+            { (data: NSData?, response: NSURLResponse?, error: NSError?) in
             
             if ((error) != nil)
             {
@@ -292,6 +306,7 @@ class DAOBase: NSObject {
                 }
             }
         }
+        print(task)
         task.resume()
     }
     
