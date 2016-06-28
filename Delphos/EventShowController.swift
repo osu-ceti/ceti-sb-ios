@@ -57,8 +57,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet var labelClaims: UILabel!
     
-   
     @IBOutlet var tableView: UITableView!
+   
+   
     
     @IBOutlet weak var scrollView: UIScrollView!
    
@@ -466,7 +467,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     @IBAction func btnSpeaker(sender: AnyObject) {
     }
     @IBAction func btnLocation(sender: AnyObject) {
-        
+         showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)

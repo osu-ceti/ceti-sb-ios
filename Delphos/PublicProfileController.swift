@@ -34,6 +34,9 @@ class PublicProfileController:  NavController{
     @IBOutlet var txtProfileBusiness: UITextField!
    
    
+    @IBOutlet var hideLabelGrades: UILabel!
+    @IBOutlet var hideLabelSchool: UILabel!
+    
     @IBOutlet var btnSaveProfile: UIButton!
     @IBOutlet var btnFindMySchool: UIButton!
     @IBOutlet var btnEditProfile: UIButton!
@@ -77,6 +80,27 @@ class PublicProfileController:  NavController{
         
          self.btnEditProfile.hidden = false
          self.btnEditAccount.hidden = false
+//        
+//        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
+//           
+//            self.labelProfileSchool.hidden = true
+//            self.labelProfileGrades.hidden = true
+//            self.hideLabelGrades.hidden = true
+//            self.hideLabelSchool.hidden = true
+//            self.txtProfileGrades.hidden = true
+//            
+//        
+//        }
+//        else{
+//            self.labelProfileSchool.hidden = false
+//            self.labelProfileGrades.hidden = false
+//            self.hideLabelGrades.hidden = false
+//            self.hideLabelSchool.hidden = false
+//            self.txtProfileGrades.hidden = false
+//        
+//        }
+        
+        
         if (userProfileBean != nil){
          self.labelProfileName.text = userProfileBean.name
          self.labelProfileSchool.text = userProfileBean.school_name
@@ -90,7 +114,7 @@ class PublicProfileController:  NavController{
             if (userProfileBean.role == 1){
             self.labelProfileRole.text = "TEACHER"
                 }
-            else if(userProfileBean.role == 2){
+            else if(gObjUserBean.role == 2){
                  self.labelProfileRole.text = "SPEAKER"
             }
             else{
@@ -99,12 +123,12 @@ class PublicProfileController:  NavController{
         }
         else{
             
-            if (gObjMakeMySchoolListBean.school_id == 2)
+            if (gObjUserBean.school_id == gObjMakeMySchoolListBean.school_id)
             {
-                self.labelProfileSchool.text = "Delphos School"
+                self.labelProfileSchool.text = gObjUserBean.school_name
             }
             else{
-                self.labelProfileSchool.text = "Delphos School"
+                self.labelProfileSchool.text = ""
             }
             self.labelProfileName.text = gObjMakeMySchoolListBean.name
             

@@ -95,25 +95,41 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.labelRole.text     = "Role:"
         self.labelBiography.text = "Biography:"
         
-        if(gObjSearchUserListBean.name != nil){
-            self.txtUserName.text     = gObjSearchUserListBean.name
-            btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, forState: .Normal)
-            
-            self.txtGrades.text       = gObjSearchUserListBean.grades
-            self.txtJobTitle.text     = gObjSearchUserListBean.job_title
-            self.txtBusiness!.text    = gObjSearchUserListBean.business
-            self.txtRole!.text        = gObjSearchUserListBean.role
-            self.txtBiography.text    = gObjSearchUserListBean.biography
-        }
+        self.txtUserName.text     = gObjSearchUserListBean.name
+        btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, forState: .Normal)
+        
+        self.txtGrades.text       = gObjSearchUserListBean.grades
+        self.txtJobTitle.text     = gObjSearchUserListBean.job_title
+        self.txtBusiness!.text    = gObjSearchUserListBean.business
+        self.txtRole!.text        = gObjSearchUserListBean.role
+        self.txtBiography.text    = gObjSearchUserListBean.biography
         if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
-        
+            
             self.btnContactUser.hidden = false
-        
+            
         }
         else{
-        
+            
             self.btnContactUser.hidden = true
         }
+        if(gObjSearchUserListBean.role == "Speaker"){
+        
+            self.labelSchool.hidden   = true
+            self.labelGrades.hidden   = true
+            self.btnLinkSchool.hidden = true
+            self.txtGrades.hidden = true
+            self.btnContactUser.hidden = false
+            
+           
+        }
+        else{
+            self.labelSchool.hidden   = false
+            self.labelGrades.hidden   = false
+            self.btnLinkSchool.hidden = false
+            self.txtGrades.hidden = false
+            
+        }
+       
         
     }
 
@@ -240,6 +256,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
 
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
+         showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
