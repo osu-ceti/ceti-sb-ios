@@ -76,7 +76,13 @@ class SearchDelegate: BaseDelegate {
                         
                         //gObjUserProfileController = self.fetchNavController(gStrUserProfileControllerID)
                         
-                         objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)
+                         //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)
+                        
+                        
+                        var objUserProfileControllerNav = self.getNavigationController(gObjUserProfileController)
+                        //}
+                        
+                        self.doNavigate(objCurrentContoller, toController: objUserProfileControllerNav,  close: true)
 
                     }
                     

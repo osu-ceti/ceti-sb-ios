@@ -42,7 +42,8 @@ var gStrUserProfileControllerID: String = "UserProfileId"
 var gObjSchoolProfileController : SchoolProfileController!
 var gStrSchoolProfileControllerID: String = "SchoolProfileControllerId"
 
-var gObjPublicProfileController : UINavigationController!
+//var gObjPublicProfileController : UINavigationController!
+var gObjPublicProfileController : PublicProfileController!
 var gStrPublicProfileControllerID: String = "PublicProfileControllerId"
 
 var rightViewController: RightViewController!

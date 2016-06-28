@@ -70,6 +70,8 @@ class searchUserListBean: Mappable {
         
         school_name    <- map["school_name"]
         
+        biography    <- map["biography"]
+        
         events    <- map["events"]
         
         badges    <- map["badges"]

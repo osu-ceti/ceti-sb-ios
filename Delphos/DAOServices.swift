@@ -258,7 +258,7 @@ class DAOServices: DAOBase {
         doPost(JSONString!, addAuthHeader: false,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var userBean = Mapper<UserBean>().map(jsonResult)!
+                var userBean = Mapper<usersBean>().map(jsonResult)!
                 callBack?(result: userBean, statusCode: statusCode )
                 return
             }
@@ -503,7 +503,7 @@ class DAOServices: DAOBase {
     
     
     func getUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("getEvent")
+        print("get user profile make my school")
         strURL =   DEV_TARGET + USERS + strUserID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
@@ -532,7 +532,7 @@ class DAOServices: DAOBase {
     }
     
     func getSchoolProfile(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("getEvent")
+        print("get school profile")
         strURL =  DEV_TARGET + SCHOOL + strSchoolID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
@@ -591,7 +591,7 @@ class DAOServices: DAOBase {
     
     
     func getMakeMySchool(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("getEvent")
+        print("get male my school")
         strURL =  DEV_TARGET + SCHOOL + MAKE_MINE + strSchoolID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
@@ -599,7 +599,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    print(jsonResult)
-                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                var showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
                 
@@ -619,5 +619,62 @@ class DAOServices: DAOBase {
         })
     }
 
+    func doEditProfile(objUserProfile: MakeMySchoolListBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("PUT USER PROFILE")
+        strURL =  USER_PROFILE
+       
+        let userJSONString = Mapper().toJSONString(objUserProfile, prettyPrint: true)
+        doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    func getMenuUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get user profile")
+        strURL =   DEV_TARGET + USERS + PROFILE
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<UserBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
 }

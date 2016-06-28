@@ -148,6 +148,11 @@ class DAOBase: NSObject {
         doUpdate(DELETE, strInputParamsJson: strInputParamsJson, addAuthHeader: addAuthHeader, callBack: callBack)
     }
     
+    func doPut(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
+        
+        doUpdate(PUT, strInputParamsJson: strInputParamsJson, addAuthHeader: addAuthHeader, callBack: callBack)
+    }
+    
     func doUpdate(method: String, strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
         
         let objRequest : NSMutableURLRequest = NSMutableURLRequest()

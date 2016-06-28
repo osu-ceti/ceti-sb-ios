@@ -45,6 +45,7 @@ var gClaimUserName:String!
 var gUserId:Int!
 var gClaimUser_id:Int!
 
+var gClaimSpeakerName:String!
 
 
 
@@ -68,4 +69,6 @@ var gObjSearchSchoolListBean : searchSchoolListBean!
 
 var gObjSchoolImage:String!
 
-var gClaimSpeakerName:String!
+
+var gObjMakeMySchoolListBean : MakeMySchoolListBean!
+
