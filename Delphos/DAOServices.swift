@@ -565,9 +565,9 @@ class DAOServices: DAOBase {
     
     
     func doSignOut(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        var strEmptyJson = "{}"
+        var strEmptyJson = gEmptyJSON
         strURL =   USERS + SIGN_OUT
-        gBoolSignOut = true
+       
         
         //let JSONString = Mapper().toJSONString(strClaimID:nil, prettyPrint: true)
         
