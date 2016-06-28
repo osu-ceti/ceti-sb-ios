@@ -16,10 +16,13 @@ import QuartzCore
 class MessageController:  NavController  {
 
     @IBOutlet weak var messageViewUserName: UILabel!
+   
 
     @IBOutlet weak var txtSendMessage: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var btnSendMessage: UIButton!
     
-    @IBOutlet weak var tableview: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +50,14 @@ class MessageController:  NavController  {
         
         }
         
+    }
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSendMessage.frame.origin.y + 300)
+        scrollView.scrollEnabled = true
+        //view.addSubview(scrolview)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
