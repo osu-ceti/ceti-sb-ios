@@ -923,9 +923,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "createMenuView()"
-            landmarkType = "5">
+            endingLineNumber = "25">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1004,7 +1002,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "403"
             endingLineNumber = "403"
+<<<<<<< HEAD
             landmarkName = "didReceiveMemoryWarning()"
+=======
+            landmarkName = "touchReqTitle(_:)"
+>>>>>>> Registration
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1610,7 +1612,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
             endingLineNumber = "152"
+<<<<<<< HEAD
             landmarkName = "searchBarCancelButtonClicked(_:)"
+=======
+            landmarkName = "searchBar(_:textDidChange:)"
+>>>>>>> Registration
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1626,7 +1632,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
             endingLineNumber = "131"
+<<<<<<< HEAD
             landmarkName = "btnSearchClick(_:)"
+=======
+            landmarkName = "setNavBar(_:)"
+>>>>>>> Registration
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1674,6 +1684,41 @@
             endingLineNumber = "63"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
+<<<<<<< HEAD
+=======
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delphos.RegisterController.viewWillAppear (Swift.Bool) -&gt; ()"
+                  moduleName = "Delphos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/RegisterController.swift"
+                  timestampString = "488711626.778793"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1215">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delphos.RegisterController.viewWillAppear (Swift.Bool) -&gt; ()"
+                  moduleName = "Delphos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/RegisterController.swift"
+                  timestampString = "488711626.778935"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1715">
+               </Location>
+            </Locations>
+>>>>>>> Registration
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1688,7 +1733,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
             endingLineNumber = "178"
+<<<<<<< HEAD
             landmarkName = "didSelectButton(_:)"
+=======
+            landmarkName = "backToSomeController(_:)"
+>>>>>>> Registration
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1698,6 +1747,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Delphos/NavController.swift"
             timestampString = "488723810.261037"
             startingColumnNumber = "9223372036854775807"
@@ -1705,6 +1755,15 @@
             startingLineNumber = "42"
             endingLineNumber = "42"
             landmarkName = "setNavBar(_:)"
+=======
+            filePath = "Delphos/UserDelegate.swift"
+            timestampString = "488711625.392418"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "register(_:)"
+>>>>>>> Registration
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
