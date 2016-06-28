@@ -202,10 +202,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtRole!.hidden = false
         self.txtBiography.hidden = false
         
-        self.btnContactUser.center = CGPointMake(160, 370 )
-        self.lineView.center = CGPointMake( 160, 410 )
-        self.labelEventFeed.center = CGPointMake(160,390 )
-        self.tableView.center = CGPointMake(160, 500)
+//        self.btnContactUser.center = CGPointMake(160, 370 )
+//        self.lineView.center = CGPointMake( 160, 410 )
+//        self.labelEventFeed.center = CGPointMake(160,390 )
+//        self.tableView.center = CGPointMake(160, 500)
         
     }
     @IBAction func btnBadges(sender: AnyObject) {
@@ -231,10 +231,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtRole!.hidden = true
         self.txtBiography.hidden = true
         
-        self.btnContactUser.center = CGPointMake(160, 160 )
-        self.labelEventFeed.center = CGPointMake(160, 180 )
-        self.tableView.center = CGPointMake(160, 280)
-        self.lineView.center = CGPointMake( 160, 190 )
+//        self.btnContactUser.center = CGPointMake(160, 160 )
+//        self.labelEventFeed.center = CGPointMake(160, 180 )
+//        self.tableView.center = CGPointMake(160, 280)
+//        self.lineView.center = CGPointMake( 160, 190 )
         
         
     }

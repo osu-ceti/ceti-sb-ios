@@ -168,6 +168,9 @@ class EventDelegate: BaseDelegate{
             else {
                  self.showAlert(objCurrentContoller, strMessage: "Event Not Cancel ")
                 print("not Cancel Event")
+//                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+//               
+//                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
                
             }
         }
