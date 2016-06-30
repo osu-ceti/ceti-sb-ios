@@ -131,13 +131,13 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gDateTimeFormat
         
-//        txtTitle.font = UIFont.boldSystemFontOfSize(15)
-//        labeltext1.font = UIFont.boldSystemFontOfSize(15)
-//        labelText2.font = UIFont.boldSystemFontOfSize(15)
-//        labelText3.font = UIFont.boldSystemFontOfSize(15)
-//        labelText4.font = UIFont.boldSystemFontOfSize(15)
-//        labelText5.font = UIFont.boldSystemFontOfSize(15)
-//        labelText6.font = UIFont.boldSystemFontOfSize(15)
+        txtTitle.font = UIFont.boldSystemFontOfSize(15)
+        labeltext1.font = UIFont.boldSystemFontOfSize(15)
+        labelText2.font = UIFont.boldSystemFontOfSize(15)
+        labelText3.font = UIFont.boldSystemFontOfSize(15)
+        labelText4.font = UIFont.boldSystemFontOfSize(15)
+        labelText5.font = UIFont.boldSystemFontOfSize(15)
+        labelText6.font = UIFont.boldSystemFontOfSize(15)
     
         
         if(gBtnRadioValue == events || gObjShowEventBean != nil) {
@@ -371,6 +371,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     @IBAction func btnSendMessage(sender: AnyObject) {
         
         //showOverlay(self.view)
+        gUserProfileMessage = false
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.VIEW_MESSAGE_CONTROLLER)
@@ -468,6 +469,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     }
     @IBAction func btnLocation(sender: AnyObject) {
          showOverlay(self.view)
+        gSchoolNameSelect = false
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)

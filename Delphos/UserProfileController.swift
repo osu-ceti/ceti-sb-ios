@@ -16,6 +16,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
    
     
     
+    @IBOutlet var labelNoEventFound: UILabel!
     @IBOutlet weak var labelSchool: UILabel!
     @IBOutlet weak var labelGrades: UILabel!
     @IBOutlet weak var labelJobTitle: UILabel!
@@ -79,6 +80,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         // navigationBar.delegate = self;
         //backToView = "HomeID"
       
+        gUserProfileMessage = false
+        gSchoolNameSelect = false
         self.tableView.dataSource = self
         tableView.delegate = self
         self.tableView.tableFooterView = UIView()
@@ -87,6 +90,15 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
+        self.labelNoEventFound.hidden = true
+        
+        txtUserName.font =  UIFont.boldSystemFontOfSize(15)
+        labelSchool.font = UIFont.boldSystemFontOfSize(15)
+        labelGrades.font = UIFont.boldSystemFontOfSize(15)
+        labelJobTitle.font = UIFont.boldSystemFontOfSize(15)
+        labelBusiness.font = UIFont.boldSystemFontOfSize(15)
+        labelRole.font = UIFont.boldSystemFontOfSize(15)
+        labelBiography.font = UIFont.boldSystemFontOfSize(15)
         
         self.labelSchool.text   = "School:"
         self.labelGrades.text   = "Grades:"
@@ -103,31 +115,57 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtBusiness!.text    = gObjSearchUserListBean.business
         self.txtRole!.text        = gObjSearchUserListBean.role
         self.txtBiography.text    = gObjSearchUserListBean.biography
-        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
+       
+        if(gObjUserBean.id == gObjSearchUserListBean.id){
             
-            self.btnContactUser.hidden = false
+            self.btnContactUser.hidden = true
             
         }
         else{
             
-            self.btnContactUser.hidden = true
+            self.btnContactUser.hidden = false
         }
-        if(gObjSearchUserListBean.role == "Speaker"){
         
+        if(gObjSearchUserListBean.role == "Teacher"){
+            self.labelSchool.text   = "School:"
+            self.labelGrades.text   = "Grades:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            self.labelRole.hidden     = true
+            self.labelBiography.hidden = true
+            
+            
+            self.txtJobTitle.text       = gObjSearchUserListBean.role
+            self.txtBusiness!.text      = gObjSearchUserListBean.biography
+            self.txtRole!.hidden        = true
+            self.txtBiography.hidden    = true
+           
+            
+           
+        }
+        else  if(gObjSearchUserListBean.role == "Speaker"){
+           
             self.labelSchool.hidden   = true
             self.labelGrades.hidden   = true
             self.btnLinkSchool.hidden = true
             self.txtGrades.hidden = true
-            self.btnContactUser.hidden = false
             
-           
+            
+            
         }
         else{
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            self.labelJobTitle.hidden = false
+            self.labelBusiness.hidden = false
+            
             self.labelSchool.hidden   = false
             self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = false
             self.txtGrades.hidden = false
-            
+
+        
+        
         }
        
         
@@ -149,19 +187,33 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return eventBeanArray!.count
-        // claimBeanArray!.count
+        if(eventBeanArray!.count > 0){
+            return eventBeanArray!.count
+            }
+        else{
+            return 1
+        }
         
     }
     
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
         
-          var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+        
+         if(eventBeanArray!.count > 0){
+            
+            self.tableView.hidden = false
+            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
         
         
-        (cell as! UserProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
-        (cell as! UserProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
-        (cell as! UserProfileCell).eventId!.text =  String(eventDisplayBean.id)
+            (cell as! UserProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
+            (cell as! UserProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
+            (cell as! UserProfileCell).eventId!.text =  String(eventDisplayBean.id)
+        }
+         else{
+           
+            self.tableView.hidden = true
+            self.labelNoEventFound.hidden = false
+        }
     }
     
     //function to return dynamic cell
@@ -257,6 +309,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
 
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
          showOverlay(self.view)
+         gSchoolNameSelect = true
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
@@ -265,7 +318,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     @IBAction func btnContactUserClick(sender: AnyObject) {
    
-        
+        gUserProfileMessage = true
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.VIEW_MESSAGE_CONTROLLER)

@@ -57,6 +57,10 @@ var gSearchUsersRadioTitle = "Users"
 var gSpeakerId:Int!
 var gSpeakerName:String!
 
+var gUserProfileMessage:Bool!
+
+var gSchoolNameSelect:Bool!
+
 var gClaimsListDetails:ClaimListClaimBeanBean!
 
 var gClaimsList:ClaimListBean!
@@ -71,4 +75,11 @@ var gObjSchoolImage:String!
 
 
 var gObjMakeMySchoolListBean : MakeMySchoolListBean!
+
+var gObjSchoolListBean : SchoolsDisplayBean!
+
+var gObjSchoolBean : SchoolsBean!
+
+
+
 

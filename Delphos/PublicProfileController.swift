@@ -34,8 +34,16 @@ class PublicProfileController:  NavController{
     @IBOutlet var txtProfileBusiness: UITextField!
    
    
+    @IBOutlet var hideLabelAccountSetting: UILabel!
+    @IBOutlet var hideLabelPublicProfile: UILabel!
+    @IBOutlet var hideLabelName: UILabel!
     @IBOutlet var hideLabelGrades: UILabel!
     @IBOutlet var hideLabelSchool: UILabel!
+    @IBOutlet var hideLabelJobTitle: UILabel!
+    @IBOutlet var hideLabelBusiness: UILabel!
+    @IBOutlet var hideLabelBio: UILabel!
+    @IBOutlet var hideLabelRole: UILabel!
+    @IBOutlet var hideLabelEmail: UILabel!
     
     @IBOutlet var btnSaveProfile: UIButton!
     @IBOutlet var btnFindMySchool: UIButton!
@@ -70,6 +78,17 @@ class PublicProfileController:  NavController{
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
+          hideLabelAccountSetting.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelPublicProfile.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelName.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelGrades.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelSchool.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelJobTitle.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelBusiness.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelBio.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelRole.font = UIFont.boldSystemFontOfSize(15)
+          hideLabelEmail.font = UIFont.boldSystemFontOfSize(15)
+        
          self.txtProfileGrades.hidden = true
          self.txtProfileBiography.hidden = true
          self.txtProfileJobTItle.hidden = true
@@ -80,7 +99,7 @@ class PublicProfileController:  NavController{
         
          self.btnEditProfile.hidden = false
          self.btnEditAccount.hidden = false
-//        
+//
 //        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
 //           
 //            self.labelProfileSchool.hidden = true

@@ -14,7 +14,8 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     var eventDisplayBean: EventDisplayBean!
     var eventBeanArray: [EventBean]! = []
     var usersBeanArray: [userListBean]! = []
-    var schoolBeanArray: [userListBean]! = []
+    var schoolsDisplayBean: SchoolsDisplayBean!
+    var schoolsBeanArray: [SchoolListBean]! = []
     
     @IBOutlet weak var eventFound: UILabel!
     
@@ -72,6 +73,8 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         } else if(usersBeanArray.count > 0) {
             return usersBeanArray.count
             
+        } else if (schoolsBeanArray.count > 0){
+            return schoolsBeanArray.count
         }
         return 1
     }
@@ -79,18 +82,30 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
        
         if(eventBeanArray.count > 0) {
+            
             var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
             //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(eventDisplayBean.event_title)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(eventDisplayBean.id)
             (cell as! SearchControllerCell).startdate!.text = String(eventDisplayBean.event_start)
-                  } else if(usersBeanArray.count > 0) {
+                  }
+        else if(usersBeanArray.count > 0) {
+            
             var usersListBean: userListBean! = usersBeanArray[indexPath.row]
             
             (cell as! SearchControllerCell).txtTitle!.text = String(usersListBean.name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(usersListBean.id)
             (cell as! SearchControllerCell).startdate!.text = usersListBean.association
-                    }
+        }
+        else if(schoolsBeanArray.count > 0){
+            var schoolsDisplayBean: SchoolListBean! = schoolsBeanArray[indexPath.row]
+            //(cell as! SearchControllerCell).startdate.hidden = false
+            (cell as! SearchControllerCell).txtTitle!.text = String(schoolsDisplayBean.school_name)
+            (cell as! SearchControllerCell).txtIdHidden!.text = String(schoolsDisplayBean.id)
+            (cell as! SearchControllerCell).startdate!.text = String(schoolsDisplayBean.city_state)
+        
+        
+        }
         else{
              cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
            if(gBtnRadioValue == "events") {

@@ -43,11 +43,12 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     func setNavBar(width: CGFloat){
         
         searchBar.delegate = self
-        searchView.frame = CGRectMake(0, 17+44, self.view.frame.size.width, 44);
-        let label = UILabel(frame: CGRectMake(0, 0, 110, 21))
+        searchView.frame = CGRectMake(0, 17+44, self.view.frame.size.width, 24);
+        let label = UILabel(frame: CGRectMake(0, 0, 200, 19))
         label.textAlignment = NSTextAlignment.Left
         label.text = "Search for:"
         label.textColor = UIColor.blackColor()
+        searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
 //        
 //        let eventsRadioBtn = SSRadioButton()
 //        eventsRadioBtn.setTitle("Events", forState: .Normal)
@@ -159,6 +160,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = false
+       
         
         
        // navigationBar.items = [navigationItem]
