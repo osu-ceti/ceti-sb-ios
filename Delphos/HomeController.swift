@@ -59,6 +59,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         self.tableView.dataSource = self
         tableView.delegate = self
+       
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.EVENT_ALL)

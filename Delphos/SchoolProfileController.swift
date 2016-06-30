@@ -68,7 +68,13 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         if data != nil {
            self.schoolImage.image = UIImage(data:data!)
         }
-       // schoolImage.image = UIImage(named:"gObjSchoolImage")
+         self.tableView.backgroundColor = bgColor
+        self.tableView.dataSource = self
+        tableView.delegate = self
+        
+        self.tableView.tableFooterView = UIView()
+       
+        //schoolImage.image = UIImage(named:"gObjSchoolImage")
         schoolNameLabel.font = UIFont.boldSystemFontOfSize(15)
         labelAddress.font = UIFont.boldSystemFontOfSize(15)
         labelCity.font = UIFont.boldSystemFontOfSize(15)

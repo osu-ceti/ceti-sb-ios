@@ -82,15 +82,19 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
       
         gUserProfileMessage = false
         gSchoolNameSelect = false
+        
+        
         self.tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.tableFooterView = UIView()
-        
-       
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
         self.labelNoEventFound.hidden = true
+        self.tableView.backgroundColor = bgColor
+        self.tableView.dataSource = self
+        tableView.delegate = self
+        
+        self.tableView.tableFooterView = UIView()
         
         txtUserName.font =  UIFont.boldSystemFontOfSize(15)
         labelSchool.font = UIFont.boldSystemFontOfSize(15)

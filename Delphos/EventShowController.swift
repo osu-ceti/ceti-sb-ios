@@ -126,7 +126,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
-     
+        self.tableView.backgroundColor = bgColor
+        self.tableView.dataSource = self
+        tableView.delegate = self
+        
+        self.tableView.tableFooterView = UIView()
         
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gDateTimeFormat
