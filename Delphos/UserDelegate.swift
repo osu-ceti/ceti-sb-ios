@@ -44,15 +44,28 @@ class UserDelegate:BaseDelegate{
                 })
                 
             }
-            else if statusCode > SUCCESS{
-                print("Login failure")
-                boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
-            }
-            else {
+            else if statusCode == unauthorized_request{
+                
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
+                
+
+                
+            }
+            else if statusCode == bad_request {
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:"Bad Request." )
+                
+
+              
+                
+            }
+            else{
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
             }
             
         }

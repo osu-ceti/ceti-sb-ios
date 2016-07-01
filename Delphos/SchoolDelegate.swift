@@ -14,8 +14,17 @@ import UIKit
 class SchoolDelegate:BaseDelegate{
 
     func schoolProfile(objCurrentContoller: UIViewController) {
-        var strSchoolId: String = String(gObjUserBean.school_id)
         
+      
+            var strSchoolId: String
+        if (gSchoolNameSelect == true)
+        {
+              strSchoolId = String(gObjSearchUserListBean.school_id)
+        }
+        else{
+            strSchoolId = String(gObjUserBean.school_id)
+        }
+
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                 gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController

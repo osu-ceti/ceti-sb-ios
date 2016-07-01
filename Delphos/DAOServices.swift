@@ -142,7 +142,7 @@ class DAOServices: DAOBase {
                     searchBean = Mapper<EventDisplayBean>().map(jsonResult)
                 }
                 else if(gBtnRadioValue == "schools") {
-                    searchBean = Mapper<SearchEventBean>().map(jsonResult)
+                    searchBean = Mapper<SchoolsDisplayBean>().map(jsonResult)
                 }
                 else if(gBtnRadioValue == "users") {
                     searchBean = Mapper<usersBean>().map(jsonResult)
@@ -191,6 +191,7 @@ class DAOServices: DAOBase {
                 if(gBtnRadioValue == events) {
                     showEventBean = Mapper<ShowEventBean>().map(jsonResult)
                 } else if(gBtnRadioValue == schools) {
+                     showEventBean = Mapper<SchoolsBean>().map(jsonResult)
                     
                 } else if(gBtnRadioValue == users) {
                     showEventBean = Mapper<usersBean>().map(jsonResult)

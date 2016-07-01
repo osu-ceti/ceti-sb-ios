@@ -28,8 +28,9 @@ class SearchDelegate: BaseDelegate {
                         gObjSearchController.eventBeanArray = gObjEventDisplayBean.events
                     }
                     else if(gBtnRadioValue == "schools") {
-                       // gObjUsersBean = result as! usersBean
-                        //gObjSearchController.schoolBeanArray = gObjUsersBean.users
+                       gObjSchoolListBean = result as! SchoolsDisplayBean
+                        // gObjUsersBean = result as! usersBean
+                        gObjSearchController.schoolsBeanArray = gObjSchoolListBean.schools
                     }
                     else if(gBtnRadioValue == "users") {
                         gObjUsersBean = result as! usersBean
@@ -66,7 +67,19 @@ class SearchDelegate: BaseDelegate {
                         gObjShowEventBean = result as! ShowEventBean
                          self.showEventUI(objCurrentContoller)
                     } else if(gBtnRadioValue == schools) {
+                        //gObjSchoolBean = result as! SchoolsBean
+                        gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                         
+                        
+                        var objSchoolBean = result as! SchoolsBean
+                        
+                        gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
+                        gObjSearchSchoolListBean = objSchoolBean.school
+                        gObjSchoolImage = objSchoolBean.badge_url
+                        var objSchoolProfileControllerNav = self.getNavigationController(gObjSchoolProfileController)
+                        
+                        
+                        self.doNavigate(objCurrentContoller, toController: objSchoolProfileControllerNav,  close: true)
                     } else if(gBtnRadioValue == users) {
                        
                         var objUserBean = result as! usersBean

@@ -16,6 +16,7 @@ var bad_request: Int! = 400;
 var unauthorized_request: Int! = 401;
 var apiKey_Expired: Int! = -1012;
 
+
 //Error Code Messages
 var SUCCESS_MSG: String = "Success";
 var BAD_REQUEST_MSG: String = "Bad Request";
