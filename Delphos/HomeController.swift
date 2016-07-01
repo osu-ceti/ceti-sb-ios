@@ -76,16 +76,10 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
             self.btnCreateEvent.hidden = true
         }
         
-//        let img = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
-//        let context = UIGraphicsGetCurrentContext()
-//        
-//        CGContextMoveToPoint(context, 10, 50)
-//        CGContextAddLineToPoint(context, 20, 100)
-//        
-//        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
-//        CGContextStrokePath(context)
+        bottomLineAll.frame = CGRectMake(0, btnAllEvent.frame.size.height - 1.0, btnAllEvent.frame.size.width, 1)
+        bottomLineAll.borderWidth = 2.0
+        bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
+        btnAllEvent.layer.addSublayer(bottomLineAll)
         
 
         

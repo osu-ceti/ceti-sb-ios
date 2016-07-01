@@ -393,7 +393,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     {
         super.viewDidAppear(animated);
         
-        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 700)
+        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 300)
         scrolview.scrollEnabled = true
         //view.addSubview(scrolview)
     }

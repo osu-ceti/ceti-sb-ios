@@ -99,7 +99,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 700)
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 250)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
     }

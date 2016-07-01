@@ -141,6 +141,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     
     //function to respond to row selection
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+         showOverlay(self.view)
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchControllerCell
         print("currentCell", currentCell.txtIdHidden.text!)
         
