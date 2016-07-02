@@ -45,6 +45,7 @@ var gClaimUserName:String!
 var gUserId:Int!
 var gClaimUser_id:Int!
 
+var gClaimSpeakerName:String!
 
 
 
@@ -55,6 +56,10 @@ var gSearchUsersRadioTitle = "Users"
 
 var gSpeakerId:Int!
 var gSpeakerName:String!
+
+var gUserProfileMessage:Bool!
+
+var gSchoolNameSelect:Bool!
 
 var gClaimsListDetails:ClaimListClaimBeanBean!
 
@@ -67,5 +72,14 @@ var gObjUserDisplayBean : EventBean!
 var gObjSearchSchoolListBean : searchSchoolListBean!
 
 var gObjSchoolImage:String!
+
+
+var gObjMakeMySchoolListBean : MakeMySchoolListBean!
+
+var gObjSchoolListBean : SchoolsDisplayBean!
+
+var gObjSchoolBean : SchoolsBean!
+
+
 
 

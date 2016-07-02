@@ -16,6 +16,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
    
     
     
+    @IBOutlet var labelNoEventFound: UILabel!
     @IBOutlet weak var labelSchool: UILabel!
     @IBOutlet weak var labelGrades: UILabel!
     @IBOutlet weak var labelJobTitle: UILabel!
@@ -79,14 +80,29 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         // navigationBar.delegate = self;
         //backToView = "HomeID"
       
+        gUserProfileMessage = false
+        gSchoolNameSelect = false
+        
+        
         self.tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.tableFooterView = UIView()
-        
-       
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
+        self.labelNoEventFound.hidden = true
+        self.tableView.backgroundColor = bgColor
+        self.tableView.dataSource = self
+        tableView.delegate = self
+        
+        self.tableView.tableFooterView = UIView()
+        
+        txtUserName.font =  UIFont.boldSystemFontOfSize(15)
+        labelSchool.font = UIFont.boldSystemFontOfSize(15)
+        labelGrades.font = UIFont.boldSystemFontOfSize(15)
+        labelJobTitle.font = UIFont.boldSystemFontOfSize(15)
+        labelBusiness.font = UIFont.boldSystemFontOfSize(15)
+        labelRole.font = UIFont.boldSystemFontOfSize(15)
+        labelBiography.font = UIFont.boldSystemFontOfSize(15)
         
         self.labelSchool.text   = "School:"
         self.labelGrades.text   = "Grades:"
@@ -95,25 +111,71 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.labelRole.text     = "Role:"
         self.labelBiography.text = "Biography:"
         
-        if(gObjSearchUserListBean.name != nil){
-            self.txtUserName.text     = gObjSearchUserListBean.name
-            btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, forState: .Normal)
+        self.txtUserName.text     = gObjSearchUserListBean.name
+        btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, forState: .Normal)
+        
+        self.txtGrades.text       = gObjSearchUserListBean.grades
+        self.txtJobTitle.text     = gObjSearchUserListBean.job_title
+        self.txtBusiness!.text    = gObjSearchUserListBean.business
+        self.txtRole!.text        = gObjSearchUserListBean.role
+        self.txtBiography.text    = gObjSearchUserListBean.biography
+       
+        if(gObjUserBean.id == gObjSearchUserListBean.id){
             
-            self.txtGrades.text       = gObjSearchUserListBean.grades
-            self.txtJobTitle.text     = gObjSearchUserListBean.job_title
-            self.txtBusiness!.text    = gObjSearchUserListBean.business
-            self.txtRole!.text        = gObjSearchUserListBean.role
-            self.txtBiography.text    = gObjSearchUserListBean.biography
-        }
-        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
-        
-            self.btnContactUser.hidden = false
-        
+            self.btnContactUser.hidden = true
+            
         }
         else{
-        
-            self.btnContactUser.hidden = true
+            
+            self.btnContactUser.hidden = false
         }
+        
+        if(gObjSearchUserListBean.role == "Teacher"){
+            self.labelSchool.text   = "School:"
+            self.labelGrades.text   = "Grades:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            self.labelRole.hidden     = true
+            self.labelBiography.hidden = true
+            
+            
+            self.txtJobTitle.text       = gObjSearchUserListBean.role
+            self.txtBusiness!.text      = gObjSearchUserListBean.biography
+            self.txtRole!.hidden        = true
+            self.txtBiography.hidden    = true
+           
+            
+           
+        }
+        else  if(gObjSearchUserListBean.role == "Speaker"){
+           
+            self.labelSchool.hidden   = true
+            self.labelGrades.hidden   = true
+            self.btnLinkSchool.hidden = true
+            self.txtGrades.hidden = true
+            
+            
+            
+        }
+        else{
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            self.labelJobTitle.hidden = false
+            self.labelBusiness.hidden = false
+            
+            self.labelSchool.hidden   = false
+            self.labelGrades.hidden   = false
+            self.btnLinkSchool.hidden = false
+            self.txtGrades.hidden = false
+
+        
+        
+        }
+        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height - 1.0, btnProfile.frame.size.width, 1)
+        bottomLineProfile.borderWidth = 2.0
+        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        btnProfile.layer.addSublayer(bottomLineProfile)
+
         
     }
 
@@ -133,19 +195,33 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return eventBeanArray!.count
-        // claimBeanArray!.count
+        if(eventBeanArray!.count > 0){
+            return eventBeanArray!.count
+            }
+        else{
+            return 1
+        }
         
     }
     
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
         
-          var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+        
+         if(eventBeanArray!.count > 0){
+            
+            self.tableView.hidden = false
+            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
         
         
-        (cell as! UserProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
-        (cell as! UserProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
-        (cell as! UserProfileCell).eventId!.text =  String(eventDisplayBean.id)
+            (cell as! UserProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
+            (cell as! UserProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
+            (cell as! UserProfileCell).eventId!.text =  String(eventDisplayBean.id)
+        }
+         else{
+           
+            self.tableView.hidden = true
+            self.labelNoEventFound.hidden = false
+        }
     }
     
     //function to return dynamic cell
@@ -202,10 +278,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtRole!.hidden = false
         self.txtBiography.hidden = false
         
-        self.btnContactUser.center = CGPointMake(160, 370 )
-        self.lineView.center = CGPointMake( 160, 410 )
-        self.labelEventFeed.center = CGPointMake(160,390 )
-        self.tableView.center = CGPointMake(160, 500)
+//        self.btnContactUser.center = CGPointMake(160, 370 )
+//        self.lineView.center = CGPointMake( 160, 410 )
+//        self.labelEventFeed.center = CGPointMake(160,390 )
+//        self.tableView.center = CGPointMake(160, 500)
         
     }
     @IBAction func btnBadges(sender: AnyObject) {
@@ -231,15 +307,17 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtRole!.hidden = true
         self.txtBiography.hidden = true
         
-        self.btnContactUser.center = CGPointMake(160, 160 )
-        self.labelEventFeed.center = CGPointMake(160, 180 )
-        self.tableView.center = CGPointMake(160, 280)
-        self.lineView.center = CGPointMake( 160, 190 )
+//        self.btnContactUser.center = CGPointMake(160, 160 )
+//        self.labelEventFeed.center = CGPointMake(160, 180 )
+//        self.tableView.center = CGPointMake(160, 280)
+//        self.lineView.center = CGPointMake( 160, 190 )
         
         
     }
 
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
+         showOverlay(self.view)
+         gSchoolNameSelect = true
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
@@ -248,7 +326,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     @IBAction func btnContactUserClick(sender: AnyObject) {
    
-        
+        gUserProfileMessage = true
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.VIEW_MESSAGE_CONTROLLER)

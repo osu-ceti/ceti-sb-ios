@@ -10,19 +10,30 @@ import UIKit
 import ObjectMapper
 
 class LoginController: UIViewController {
-    @IBOutlet weak var userTxt: UITextField!
-    @IBOutlet weak var passwordTxt: UITextField!
-    @IBOutlet weak var schoolbusiness: UILabel!
     
-    @IBOutlet weak var switchRememberme: UISwitch!
-   
+    @IBOutlet var userTxt: UITextField!
+    
+    @IBOutlet var passwordTxt: UITextField!
+    
+    @IBOutlet var switchRememberme: UISwitch!
+    
+    @IBOutlet var scrollView: UIScrollView!
+    
+//    @IBOutlet weak var userTxt: UITextField!
+//    @IBOutlet weak var passwordTxt: UITextField!
+//    //@IBOutlet weak var schoolbusiness: UILabel!
+//    
+    
+//    @IBOutlet weak var switchRememberme: UISwitch!
+//   
    // var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
    // var searchButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
 
-    @IBOutlet weak var requiredError: UILabel!
+    @IBOutlet var requiredError: UILabel!
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +70,9 @@ class LoginController: UIViewController {
         
         view.backgroundColor = color
 
-        userTxt.text = "jith87@gmail.com"
-        passwordTxt.text = "ontojith"
-       
+//        userTxt.text = "jith87@gmail.com"
+//        passwordTxt.text = "ontojith"
+//       
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
         
         
@@ -88,7 +99,15 @@ class LoginController: UIViewController {
 
     }
 
-    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.passwordTxt.frame.origin.y + 500)
+        scrollView.scrollEnabled = true
+        //view.addSubview(scrolview)
+    }
+
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

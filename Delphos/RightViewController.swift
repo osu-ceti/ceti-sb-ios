@@ -55,6 +55,12 @@ class RightViewController: UIViewController, UIWebViewDelegate {
 //        
 //        gObjHomeController = storyboard.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
 //        self.homeController = UINavigationController(rootViewController: homeController)
+        //var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+
+        //self.tableView.backgroundColor = bgColor
+       
+        
+        self.tableView.tableFooterView = UIView()
        
         
     }
@@ -93,7 +99,12 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 break
             case .Profile:
-                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+               // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.USER_PROFILE)
+                
+                
                 break
             case .Logout:
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)

@@ -1,8 +1,8 @@
 //
-//  SchoolsBean.swift
+//  EditUserProfileBean.swift
 //  Delphos
 //
-//  Created by Babu on 6/17/16.
+//  Created by Babu on 6/24/16.
 //  Copyright © 2016 Ontoborn. All rights reserved.
 //
 
@@ -13,16 +13,12 @@ import ObjectMapper
  * ErrorBean Class to store ErrorBean details
  * returned from REST API JSON
  */
-class SchoolsBean: Mappable {
+class EditUserProfileBean: Mappable {
     
-    var badge_url:String!
+  
+    var state:Int!
     
-    var events: [EventBean]!
-    
-   // var users: [userListBean]!
-    
-    var school: searchSchoolListBean!
-    
+    var user: searchUserListBean!
     
     
     required init()
@@ -37,13 +33,10 @@ class SchoolsBean: Mappable {
     // Mappable
     func mapping(map: Map) {
         
-         badge_url    <- map["badge_url"]
+        state    <- map["state"]
         
-        events    <- map["events"]
         
-       // users    <- map["users"]
-        
-        school    <- map["school"]
+        user    <- map["user"]
         
     }
 }

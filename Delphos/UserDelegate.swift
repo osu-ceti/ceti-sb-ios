@@ -34,13 +34,8 @@ class UserDelegate:BaseDelegate{
                 boolLogin = true;
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    //                var homeController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("HomeID") as! HomeController
-                    //
-                    //                    let homeControllerNav = UINavigationController(rootViewController: homeController)
-                    
-                   // if(gObjHomeController == nil){
-                        gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                   // }
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                  
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                     
                     
@@ -49,15 +44,28 @@ class UserDelegate:BaseDelegate{
                 })
                 
             }
-            else if statusCode > SUCCESS{
-                print("Login failure")
-                boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
-            }
-            else {
+            else if statusCode == unauthorized_request{
+                
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
+                
+
+                
+            }
+            else if statusCode == bad_request {
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:"Bad Request." )
+                
+
+              
+                
+            }
+            else{
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
             }
             
         }
@@ -89,11 +97,17 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
+                print("Register")
                 boolRegister = true
-                
+                 var objUserBean = loginResult as! usersBean
+                gObjUserBean = objUserBean.data
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                 gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
+                   // gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    
+                    //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+
+                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
                    
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
@@ -173,6 +187,96 @@ class UserDelegate:BaseDelegate{
         
         return true
     }
+    func editUserProfile(objCurrentContoller: UIViewController)  {
+        
+        let publicProfileController = objCurrentContoller as! PublicProfileController
+        
+       // var strUserName = gObjMakeMySchoolListBean.name
+        var strProfileId = publicProfileController.txtProfileId.text
+        
+        var strgrades = publicProfileController.txtProfileGrades.text
+        var strBiography = publicProfileController.txtProfileBiography.text
+        var strJobTitle = publicProfileController.txtProfileJobTItle.text
+        var strBusiness = publicProfileController.txtProfileBusiness.text
+       
+       
+        var objInputParamBean: MakeMySchoolListBean = MakeMySchoolListBean()
+     
+      
+        objInputParamBean.id = Int(strProfileId!)
+        objInputParamBean.grades = strgrades
+        objInputParamBean.biography = strBiography
+        objInputParamBean.job_title = strJobTitle
+        objInputParamBean.business = strBusiness
+        
+       
+        
+        doPostAPIs.doEditProfile(objInputParamBean){ (result: AnyObject, statusCode: Int) in
+            if(statusCode == SUCCESS) {
+                print("Save profile")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    var objUserResponse = result as! EditUserProfileBean
+                    
+                   
+                    var objectcontroller = objCurrentContoller as! PublicProfileController
+                    objectcontroller.labelProfileGrades.text = objUserResponse.user.grades
+                    objectcontroller.labelProfileBiography.text = objUserResponse.user.biography
+                    objectcontroller.labelProfileJobTitle.text = objUserResponse.user.job_title
+                    objectcontroller.labelProfileBusiness.text = objUserResponse.user.business
+                   
+                    if(objectcontroller.userProfileBean != nil){
+                        objectcontroller.userProfileBean.grades = objUserResponse.user.grades
+                        objectcontroller.userProfileBean.biography = objUserResponse.user.biography
+                        objectcontroller.userProfileBean.job_title = objUserResponse.user.job_title
+                        objectcontroller.userProfileBean.business = objUserResponse.user.business
+                    }
+                    else{
+                    gObjMakeMySchoolListBean.grades = objUserResponse.user.grades
+                    gObjMakeMySchoolListBean.biography = objUserResponse.user.biography
+                    gObjMakeMySchoolListBean.job_title = objUserResponse.user.job_title
+                    gObjMakeMySchoolListBean.business = objUserResponse.user.business
+                    }
+//                    
+//                    gObjPublicProfileController = self.fetchNavController(gStrPublicProfileControllerID)
+//                    
+//                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjPublicProfileController, close: true)
+//               
+                })
 
+            }
+            else{
+                
+               print("NOt Save profile")
+                
+            }
+            
+        }
+       
+    }
+    func menuUserProfile(objCurrentContoller: UIViewController) {
+       var strUserId: String = String(0)
+        
+        doGetAPIs.getMenuUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == SUCCESS) {
+                gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
+                
+                
+                var objUserBean = result as! UserBean
+                
+                gObjPublicProfileController.userProfileBean = objUserBean
+             
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    var objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
+                   
+                    
+                    self.doNavigate(objCurrentContoller, toController: objPublicProfileControllerNav,  close: true)
+                    
+                })
+                
+            }
+        })
+    }
     
 }

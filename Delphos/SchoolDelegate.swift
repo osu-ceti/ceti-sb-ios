@@ -14,8 +14,17 @@ import UIKit
 class SchoolDelegate:BaseDelegate{
 
     func schoolProfile(objCurrentContoller: UIViewController) {
-        var strSchoolId: String = String(gObjUserBean.school_id)
         
+      
+            var strSchoolId: String
+        if (gSchoolNameSelect == true)
+        {
+              strSchoolId = String(gObjSearchUserListBean.school_id)
+        }
+        else{
+            strSchoolId = String(gObjUserBean.school_id)
+        }
+
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                 gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
@@ -48,16 +57,22 @@ class SchoolDelegate:BaseDelegate{
         doGetAPIs.getMakeMySchool(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
              
-                 //var objMakeMySchoolBean = result as! MakeMySchoolBean
+                 var objMakeMySchoolBean = result as! MakeMySchoolBean
+               gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
                 print("Make my school")
-                
+                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    gObjPublicProfileController = self.fetchNavController(gStrPublicProfileControllerID)
+                   // gObjPublicProfileController = self.fetchNavController(gStrPublicProfileControllerID)
                     
-                   objCurrentContoller.slideMenuController()?.changeMainViewController(gObjPublicProfileController, close: true)
+                  // objCurrentContoller.slideMenuController()?.changeMainViewController(gObjPublicProfileController, close: true)
                     
                     
+                    var objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
+                    
+                    
+                    self.doNavigate(objCurrentContoller, toController: objPublicProfileControllerNav,  close: true)
+
                                   })
 
               

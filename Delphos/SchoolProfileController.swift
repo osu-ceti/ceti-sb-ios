@@ -17,6 +17,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     @IBOutlet var schoolNameLabel: UILabel!
     
     
+    @IBOutlet var labelNoEventFound: UILabel!
     @IBOutlet var labelAddress: UILabel!
     @IBOutlet var labelCity: UILabel!
     @IBOutlet var labelState: UILabel!
@@ -62,7 +63,27 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
-        schoolImage.image = UIImage(named:"gObjSchoolImage")
+        let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + gObjSchoolImage)
+        var data = NSData(contentsOfURL:url!)
+        if data != nil {
+           self.schoolImage.image = UIImage(data:data!)
+        }
+         self.tableView.backgroundColor = bgColor
+        self.tableView.dataSource = self
+        tableView.delegate = self
+        
+        self.tableView.tableFooterView = UIView()
+       
+        //schoolImage.image = UIImage(named:"gObjSchoolImage")
+        schoolNameLabel.font = UIFont.boldSystemFontOfSize(15)
+        labelAddress.font = UIFont.boldSystemFontOfSize(15)
+        labelCity.font = UIFont.boldSystemFontOfSize(15)
+        labelState.font = UIFont.boldSystemFontOfSize(15)
+        labelZip.font = UIFont.boldSystemFontOfSize(15)
+        labelPhone.font = UIFont.boldSystemFontOfSize(15)
+        
+        self.labelNoEventFound.hidden = true
+        
         self.schoolNameLabel.text = gObjSearchSchoolListBean.name
         
         self.labelAddress.text = "Address:"
@@ -97,19 +118,33 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return eventBeanArray!.count
-        // claimBeanArray!.count
-        
+        if(eventBeanArray!.count > 0){
+          
+            
+            return eventBeanArray!.count
+        }
+        else{
+            return 1
+        }
     }
     
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
         
-        var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+        if(eventBeanArray!.count > 0){
+            self.tableView.hidden = false
+            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+
+            (cell as! SchoolProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
+            (cell as! SchoolProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
+            (cell as! SchoolProfileCell).eventId!.text =  String(eventDisplayBean.id)
+        }
+        else{
+            
+            self.tableView.hidden = true
+            self.labelNoEventFound.hidden = false
+        }
+       
         
-        
-        (cell as! SchoolProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
-        (cell as! SchoolProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
-        (cell as! SchoolProfileCell).eventId!.text =  String(eventDisplayBean.id)
     }
     
     //function to return dynamic cell

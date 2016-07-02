@@ -108,24 +108,32 @@ class DelegateController: BaseDelegate {
             objClaimsDelegate.sendMessage(objCurrentController)
             
         case .VIEW_MESSAGE_CONTROLLER:
-             print("VIEW_MESSAGE_CONTROLLER")
+             print("VIEW MESSAGE CONTROLLER")
            objClaimsDelegate.messageClick(objCurrentController)
             
         case .SHOW_USER_PROFILE:
-             print("SHOW_USER_PROFILE")
+             print("SHOW USER PROFILE")
             objUserDelegate.userProfile(objCurrentController)
 
         case .SHOW_SCHOOL_PROFILE:
-             print("SHOW_SCHOOL_PROFILE")
+             print("SHOW SCHOOL PROFILE")
             objSchoolDelegate.schoolProfile(objCurrentController)
             
         case .SIGN_OUT:
-             print("SIGN_OUT")
+             print("SIGN OUT")
              objUserDelegate.signOut(objCurrentController)
           
         case .SHOW_MAKE_MY_SCHOOL:
-            print("SHOW_MAKE_MY_SCHOOL")
+            print("SHOW MAKE MY SCHOOL")
             objSchoolDelegate.showMakeMySchool(objCurrentController)
+        
+        case .EDIT_USER_PROFILE:
+            print("EDIT USER PROFILE")
+            objUserDelegate.editUserProfile(objCurrentController)
+            
+        case .USER_PROFILE:
+            print("Menu USER PROFILE")
+            objUserDelegate.menuUserProfile(objCurrentController)
             
         default:
             print("Error in delegate enum")

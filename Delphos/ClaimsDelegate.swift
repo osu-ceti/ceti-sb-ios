@@ -33,8 +33,8 @@ class ClaimsDelegate: BaseDelegate {
                    var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
                   
-                       if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
-                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+                       if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
+                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH) ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
@@ -199,15 +199,23 @@ class ClaimsDelegate: BaseDelegate {
     }
     func sendMessage(objCurrentContoller: UIViewController)  {
         
-        var strSendMessage:String = String((objCurrentContoller as! MessageController).txtSendMessage)
+        var strSendMessage:String = (objCurrentContoller as! MessageController).txtSendMessage.text!
         var strUserId:String!
         
-        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
-             strUserId = String(gClaimUser_id)
+        if( gUserProfileMessage == true){
+        
+                strUserId = String((objCurrentContoller as! MessageController).userMessageId)
+        
         }
         else{
-             strUserId = String(gObjShowEventBean.user_id)
+        
+            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
+                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+                strUserId = String(gClaimUser_id)
+            }
+            else{
+                strUserId = String(gObjShowEventBean.user_id)
+            }
         }
         var objInputBean:SendMessageBean = SendMessageBean()
         
@@ -235,6 +243,7 @@ class ClaimsDelegate: BaseDelegate {
     func messageClick(objCurrentContoller: UIViewController){
         print("Send Message")
         
+
         
        // if(gObjMessageController == nil){
             gObjMessageController = self.fetchNavController(gStrMessageControllerID)
