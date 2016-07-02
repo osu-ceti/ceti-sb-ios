@@ -175,10 +175,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         bottomLineProfile.borderWidth = 2.0
         bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
         btnProfile.layer.addSublayer(bottomLineProfile)
-<<<<<<< HEAD
-=======
 
->>>>>>> Sprint-3-Bugs
         
     }
 
