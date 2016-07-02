@@ -80,6 +80,11 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         bottomLineAll.borderWidth = 2.0
         bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
         btnAllEvent.layer.addSublayer(bottomLineAll)
+<<<<<<< HEAD
+=======
+        
+
+>>>>>>> Sprint-3-Bugs
         
     }
     

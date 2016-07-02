@@ -68,7 +68,7 @@ class MessageController:  NavController  {
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSendMessage.frame.origin.y + 400)
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSendMessage.frame.origin.y + 350)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
     }

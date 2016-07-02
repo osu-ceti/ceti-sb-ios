@@ -167,7 +167,7 @@ class PublicProfileController:  NavController{
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.y + 500)
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.y + 300)
         //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
