@@ -72,10 +72,15 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var selectedClaimId:Int = 0
     var selectedEventId:Int = 0
     var currentDate = NSDate()
+   
+    var dateFormatter = NSDateFormatter()
+    var minusCurrentDate = NSDate()
+    var endDate = NSDate()
     
-       override func viewWillAppear(animated: Bool) {
+         override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //Adding Navbar
+        
+            //Adding Navbar
 //        menus = regularMenu
 //        rightViewController.isRegister = false
 //        rightViewController.tableView.reloadData()
@@ -132,7 +137,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
         self.tableView.tableFooterView = UIView()
         
-        var dateFormatter = NSDateFormatter()
+//        var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gDateTimeFormat
         
         txtTitle.font = UIFont.boldSystemFontOfSize(15)
@@ -183,9 +188,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.txtText6.text   =    gObjShowEventBean.content
            
             
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a zzz"
-            let minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
-            var endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)
+            dateFormatter.dateFormat = gDateTimeFormat
+             minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
+             endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
             
             //self.setNavigationBarItem()
            
@@ -193,11 +198,12 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
                 
                 
-                if (endDate!.timeIntervalSinceReferenceDate < minusCurrentDate.timeIntervalSinceReferenceDate) {
+                if (endDate.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
                     self.editEvent.hidden = true
                     self.cancelEvent.hidden = true
                     self.claim.hidden = true
                     self.cancelClaim.hidden = true
+                    self.tableView.hidden = true
                     
                 }
                 else if (gObjShowEventBean.active == false)
@@ -300,10 +306,14 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
          //cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         if(gObjUserBean.id == gObjShowEventBean.user_id){
+           
             if(claimBeanArray?.count > 0 &&  gSpeakerId == 0 &&
                 (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
                     RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
-                if (gObjShowEventBean.active == true){
+                
+                if (gObjShowEventBean.active == true && endDate.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
+                    
+                   
                 
                     self.labelClaims.hidden = false
                     self.tableView.hidden  = false
@@ -312,6 +322,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                       
                     gClaimUserName = claimDisplayBean.user_name
                     gClaimUser_id = claimDisplayBean.user_id
+                    
                     (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
                     (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
                 }
@@ -470,8 +481,10 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(sender: AnyObject) {
+        
     }
-    @IBAction func btnLocation(sender: AnyObject) {
+    @IBAction func btnSchoolProfile(sender: AnyObject) {
+   
          showOverlay(self.view)
         gSchoolNameSelect = false
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -480,7 +493,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
 
     }
-    @IBAction func btnCreatedBy(sender: AnyObject) {
+    @IBAction func btnUserProfile(sender: AnyObject) {
+   
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()

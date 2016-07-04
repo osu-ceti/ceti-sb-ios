@@ -47,6 +47,9 @@ var gClaimUser_id:Int!
 
 var gClaimSpeakerName:String!
 
+var gNotificationCount:String!
+
+
 
 
 var gFontName = "Times New Roman"

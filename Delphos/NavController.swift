@@ -22,11 +22,14 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var isSearchEnabled:Bool = true
     var backToController : UIViewController!
     var shouldClose : Bool! = true
-    var backBtoonNav: String!
+    var backButtonNav: String!
+    var btnNotification : UIBarButtonItem = UIBarButtonItem()
     
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
-
+    
+     var notificationCount:String!
+   
     
     func buildRadioButton(title: String, position:CGRect, actionCallback:Selector) ->SSRadioButton{
         
@@ -100,7 +103,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
        
-        if(backBtoonNav != nil){
+        if(backButtonNav != nil){
             backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToNavController(_:)))
             
             navigationItem.leftBarButtonItem = backButton
@@ -115,16 +118,22 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         }
         menuButton = self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
         
+      
+        
+        gNotificationCount = "0"
+        
+        btnNotification = UIBarButtonItem(title : gNotificationCount,style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
+        
         
         
         if(isSearchEnabled){
             searchButtonItem = UIBarButtonItem(customView:searchBar)
             searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
 
-            navigationItem.rightBarButtonItems = [menuButton, searchButton]
+            navigationItem.rightBarButtonItems = [menuButton,btnNotification, searchButton]
         }
         else{
-            navigationItem.rightBarButtonItems = [menuButton]
+            navigationItem.rightBarButtonItems = [btnNotification,menuButton]
         }
         
         self.view.addSubview(searchView)
@@ -188,10 +197,18 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func backToNavController(sender: UIBarButtonItem){
         //if(backToController == nil){
-        backToController = self.fetchNavController(backBtoonNav)
+        backToController = self.fetchNavController(backButtonNav)
         // }
         
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
+        
+    }
+    func btnNotificationClick(sender: UIBarButtonItem){
+       
+        print(" Notification Click")
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_NOTIFICATION)
         
     }
     

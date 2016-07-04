@@ -70,9 +70,9 @@ class LoginController: UIViewController {
         
         view.backgroundColor = color
 
-//        userTxt.text = "jith87@gmail.com"
-//        passwordTxt.text = "ontojith"
-//       
+        userTxt.text = "jith87@gmail.com"
+        passwordTxt.text = "ontojith"
+//
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
         
         

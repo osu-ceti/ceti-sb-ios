@@ -41,9 +41,13 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         rightViewController.tableView.reloadData()
         
         self.isBackEnabled = false
+        
+       // self.gNotificationCount = "0"
+        
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
        
+         
         
     }
     
@@ -53,6 +57,8 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.tableView.backgroundColor = bgColor
+        
+       
         
         self.tableView.hidden = true
         self.noEventsFound.hidden = true

@@ -135,6 +135,10 @@ class DelegateController: BaseDelegate {
             print("Menu USER PROFILE")
             objUserDelegate.menuUserProfile(objCurrentController)
             
+        case .SHOW_NOTIFICATION:
+            print("SHOW NOTIFICATION")
+            objUserDelegate.showNotification(objCurrentController)
+            
         default:
             print("Error in delegate enum")
 
