@@ -86,7 +86,7 @@ class SearchDelegate: BaseDelegate {
                         
                         gObjUserProfileController.eventBeanArray = objUserBean.events
                         gObjSearchUserListBean = objUserBean.user
-                        
+                        gObjUserProfileController.userProfileBadgesBean = objUserBean.badges
                         //gObjUserProfileController = self.fetchNavController(gStrUserProfileControllerID)
                         
                          //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)

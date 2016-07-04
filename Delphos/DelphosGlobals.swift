@@ -50,10 +50,13 @@ var gObjNotificationController : NotificationController!
 //var gObjNotificationController : UINavigationController!
 var gStrNotificationControllerID: String = "NotificationControllerId"
 
+var gObjBadgesAwardController :UINavigationController!
+var gStrBadgesAwardControllerID: String = "BadgesAwardControllerId"
+
 var rightViewController: RightViewController!
 
 
-var regularMenu = ["Home", "Settings", "Profile", "Logout"]
+var regularMenu = ["Home", "Settings", "Profile", "Logout","PushNotification"]
 var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 

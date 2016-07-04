@@ -144,6 +144,7 @@ class UserDelegate:BaseDelegate{
                 
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
+               // gObjUserProfileController.userProfileBadgesBean = objUserBean.badges
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     

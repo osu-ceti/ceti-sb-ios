@@ -83,6 +83,8 @@ var gObjSchoolListBean : SchoolsDisplayBean!
 
 var gObjSchoolBean : SchoolsBean!
 
+var gObjUserProfileBadgesBean : UserProfileBadgesBean!
+
 
 
 

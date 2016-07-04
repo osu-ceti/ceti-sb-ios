@@ -24,7 +24,7 @@ class usersBean: Mappable {
 
     var data: UserBean!
     
-    var badge_url:String!
+    var badges:[UserProfileBadgesBean]!
     
     required init()
     {
@@ -46,7 +46,7 @@ class usersBean: Mappable {
         
         data    <- map["data"]
         
-        badge_url    <- map["badge_url"]
+        badges    <- map["badges"]
 
     }
 }

@@ -706,6 +706,33 @@ class DAOServices: DAOBase {
             }
         })
     }
+    func getAwardbadges(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get award badges")
+        strURL =  DEV_TARGET + USERS + AWARD_BADGES 
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
 
     
 }

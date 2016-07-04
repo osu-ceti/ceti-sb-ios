@@ -52,6 +52,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var eventDisplayBean: usersBean!
     var eventBeanArray: [EventBean]! = []
     var usersBeanArray: [userListBean]! = []
+    var userProfileBadgesBean:[UserProfileBadgesBean]! = []
     
     
     
@@ -83,6 +84,22 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         gUserProfileMessage = false
         gSchoolNameSelect = false
         
+        var badgesCount = userProfileBadgesBean.count
+        
+//        for var i = 0;i > badgesCount; i++ {
+//            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+//         
+//            let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + )
+//            var data = NSData(contentsOfURL:url!)
+//            if data != nil {
+//            
+//                self.schoolImage.image = UIImage(data:data!)
+//                
+//                
+//            }
+//
+//        
+//        }
         
         self.tableView.dataSource = self
         tableView.delegate = self
