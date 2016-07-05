@@ -18,6 +18,8 @@
 		0F488A731D1570E600A72291 /* SignoutResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A721D1570E600A72291 /* SignoutResponseBean.swift */; };
 		0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B271CEAFBE0000ED18F /* CreateEventController.swift */; };
 		0F500B301CEB4ED1000ED18F /* CreateEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */; };
+		0F561A321D2B9F3F002CCE12 /* BadgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F561A311D2B9F3F002CCE12 /* BadgeController.swift */; };
+		0F561A4A1D2BA213002CCE12 /* BadgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F561A491D2BA213002CCE12 /* BadgeDelegate.swift */; };
 		0F82C96A1D0BEA2C00339D1D /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 0F82C9581D0BE7F400339D1D /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0F8447061D2552F400155F8F /* SchoolListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8447051D2552F400155F8F /* SchoolListBean.swift */; };
 		0F84470E1D2555DC00155F8F /* SchoolsDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */; };
@@ -196,6 +198,8 @@
 		0F488A721D1570E600A72291 /* SignoutResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutResponseBean.swift; sourceTree = "<group>"; };
 		0F500B271CEAFBE0000ED18F /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		0F500B2F1CEB4ED1000ED18F /* CreateEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventBean.swift; sourceTree = "<group>"; };
+		0F561A311D2B9F3F002CCE12 /* BadgeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeController.swift; sourceTree = "<group>"; };
+		0F561A491D2BA213002CCE12 /* BadgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeDelegate.swift; sourceTree = "<group>"; };
 		0F82C94D1D0BE7F400339D1D /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = ObjectMapper/ObjectMapper.xcodeproj; sourceTree = "<group>"; };
 		0F8447051D2552F400155F8F /* SchoolListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolListBean.swift; sourceTree = "<group>"; };
 		0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolsDisplayBean.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */,
 				0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */,
 				0FE7218E1D196B7700D5994D /* PublicProfileController.swift */,
+				0F561A311D2B9F3F002CCE12 /* BadgeController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				84799FD01D09952D00C614C2 /* ClaimsDelegate.swift */,
 				84799FD21D09961500C614C2 /* SearchDelegate.swift */,
 				0F488A701D15566D00A72291 /* SchoolDelegate.swift */,
+				0F561A491D2BA213002CCE12 /* BadgeDelegate.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				0F9E4F191CF31D4A004FC736 /* DelphosEnums.swift in Sources */,
 				F599843C1CDC9D400055C8D3 /* DelphosStrings.swift in Sources */,
 				F5AFC04B1CE0A1A700C95687 /* EventDisplayBean.swift in Sources */,
+				0F561A4A1D2BA213002CCE12 /* BadgeDelegate.swift in Sources */,
 				F5C598F01CDDE6AD000C3F58 /* DAOBase.swift in Sources */,
 				0FD8A7C71CEF013C00A43790 /* CreateEventResultEvent.swift in Sources */,
 				0FE7218F1D196B7700D5994D /* PublicProfileController.swift in Sources */,
@@ -734,6 +741,7 @@
 				84799FD11D09952D00C614C2 /* ClaimsDelegate.swift in Sources */,
 				0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */,
 				0FB713D11CF97A5400C0C77F /* SearchEventBean.swift in Sources */,
+				0F561A321D2B9F3F002CCE12 /* BadgeController.swift in Sources */,
 				0F488A711D15566D00A72291 /* SchoolDelegate.swift in Sources */,
 				F58061731CE5F93C004BF043 /* userListBean.swift in Sources */,
 				F599843E1CDC9F120055C8D3 /* SchoolBusiness.swift in Sources */,
