@@ -733,7 +733,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="EQr-py-aO1">
-                                <rect key="frame" x="196" y="152" width="104" height="130"/>
+                                <rect key="frame" x="244" y="146" width="62" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>

@@ -87,7 +87,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         var badgesCount = userProfileBadgesBean.count
         
-        for var i = 0; i < badgesCount; i++ {
+        for var i = 1; i <= badgesCount; i++ {
             
             var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesBean[i]
          
@@ -95,12 +95,14 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             var badgesImage = NSData(contentsOfURL:url!)
             
             //var  viewBadgesImage: UIImage? =  UIImage(data:badgesImage!)
-            
-            
+
             
             if badgesImage != nil {
             
                 self.userBadges[i].image = UIImage(data:badgesImage!)
+//                userBadges[i].image = UIImage(data:badgesImage!)
+//                userBadges[i].frame = CGRect(x:20*i,y:200*i,width: 40,height:25)
+//                view.addSubview(userBadges[i])
             }
 
         
