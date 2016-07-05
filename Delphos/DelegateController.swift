@@ -21,7 +21,7 @@ class DelegateController: BaseDelegate {
     var objUserDelegate : UserDelegate!
     var objSearchDelegate : SearchDelegate!
     var objSchoolDelegate : SchoolDelegate!
-    
+    var objNotificationDelegate : NotificationDelegate!
     
     override init() {
         doPostAPIs = DAOServices()
@@ -32,6 +32,7 @@ class DelegateController: BaseDelegate {
         objUserDelegate = UserDelegate()
         objSearchDelegate = SearchDelegate()
         objSchoolDelegate = SchoolDelegate()
+        objNotificationDelegate = NotificationDelegate()
 
     }
     
@@ -134,6 +135,12 @@ class DelegateController: BaseDelegate {
         case .USER_PROFILE:
             print("Menu USER PROFILE")
             objUserDelegate.menuUserProfile(objCurrentController)
+            
+        case .SHOW_NOTIFICATION:
+            print("Menu USER PROFILE")
+            objNotificationDelegate.showNotification(objCurrentController)
+            
+
             
         default:
             print("Error in delegate enum")

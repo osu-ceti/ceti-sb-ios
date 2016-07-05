@@ -47,6 +47,9 @@ var gClaimUser_id:Int!
 
 var gClaimSpeakerName:String!
 
+var gNotificationCount:String!
+
+var gBadgesAwardToEvent:Bool!
 
 
 var gFontName = "Times New Roman"
@@ -79,6 +82,8 @@ var gObjMakeMySchoolListBean : MakeMySchoolListBean!
 var gObjSchoolListBean : SchoolsDisplayBean!
 
 var gObjSchoolBean : SchoolsBean!
+
+var gObjUserProfileBadgesBean : UserProfileBadgesBean!
 
 
 

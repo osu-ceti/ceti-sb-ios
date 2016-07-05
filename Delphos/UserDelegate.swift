@@ -144,6 +144,7 @@ class UserDelegate:BaseDelegate{
                 
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
+               // gObjUserProfileController.userProfileBadgesBean = objUserBean.badges
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -259,6 +260,7 @@ class UserDelegate:BaseDelegate{
         
         doGetAPIs.getMenuUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
+               
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 
                 
@@ -278,5 +280,7 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
+
+
     
 }

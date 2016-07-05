@@ -52,8 +52,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var eventDisplayBean: usersBean!
     var eventBeanArray: [EventBean]! = []
     var usersBeanArray: [userListBean]! = []
+    var userProfileBadgesBean:[UserProfileBadgesBean]! = []
     
     
+    @IBOutlet var userBadges: [UIImageView]!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,6 +85,28 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         gUserProfileMessage = false
         gSchoolNameSelect = false
         
+        var badgesCount = userProfileBadgesBean.count
+        
+        for var i = 1; i <= badgesCount; i++ {
+            
+            var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesBean[i]
+         
+            let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + imageDisplayBean.badge_url)
+            var badgesImage = NSData(contentsOfURL:url!)
+            
+            //var  viewBadgesImage: UIImage? =  UIImage(data:badgesImage!)
+
+            
+            if badgesImage != nil {
+            
+                self.userBadges[i].image = UIImage(data:badgesImage!)
+//                userBadges[i].image = UIImage(data:badgesImage!)
+//                userBadges[i].frame = CGRect(x:20*i,y:200*i,width: 40,height:25)
+//                view.addSubview(userBadges[i])
+            }
+
+        
+        }
         
         self.tableView.dataSource = self
         tableView.delegate = self

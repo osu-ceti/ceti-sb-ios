@@ -678,4 +678,34 @@ class DAOServices: DAOBase {
         })
     }
     
+    func getNotification(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get Notification")
+        strURL =   DEV_TARGET + NOTIFICATION
+       
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
+                
+                callBack?(result: showNotificationBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    
+    
 }

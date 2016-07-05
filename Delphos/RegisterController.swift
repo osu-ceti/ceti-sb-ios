@@ -57,7 +57,7 @@ class RegisterController: NavController, UITextFieldDelegate {
         //Adding Navbar
         self.isBackEnabled = false
         self.isSearchEnabled = false
-        backBtoonNav = "loginId"
+        backButtonNav = "loginId"
         setNavBar(self.view.frame.size.width)
         //searchBar.delegate = self
         let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
