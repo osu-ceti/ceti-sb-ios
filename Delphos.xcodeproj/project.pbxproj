@@ -564,6 +564,11 @@
 					F5A2EE751CDC6CD800419419 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 569PEYY6NW;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					F5A2EE891CDC6CD800419419 = {
 						CreatedOnToolsVersion = 7.3.1;
