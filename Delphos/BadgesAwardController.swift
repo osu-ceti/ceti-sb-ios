@@ -12,6 +12,9 @@ import ObjectMapper
 class BadgesAwardController: NavController {
     
     
+    @IBOutlet var btnAwardBadges: UIButton!
+    
+    @IBOutlet var btnDoNotAward: UIButton!
     
     
     override func viewWillAppear(animated: Bool) {
@@ -41,4 +44,25 @@ class BadgesAwardController: NavController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    @IBAction func btnAwardBadgesClick(sender: AnyObject) {
+        
+        
+        gBadgesAwardToEvent = true
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.BADGES_AWARD)
+        
+    }
+    
+    @IBAction func btnDoNotAwardClick(sender: AnyObject) {
+        
+        gBadgesAwardToEvent = false
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.BADGES_AWARD)
+        
+    }
+    
 }

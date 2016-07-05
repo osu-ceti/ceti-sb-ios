@@ -49,7 +49,7 @@ var gClaimSpeakerName:String!
 
 var gNotificationCount:String!
 
-
+var gBadgesAwardToEvent:Bool!
 
 
 var gFontName = "Times New Roman"

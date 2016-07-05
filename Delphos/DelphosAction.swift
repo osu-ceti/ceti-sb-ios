@@ -36,4 +36,5 @@ enum DelphosAction
     case USER_PROFILE
     case SHOW_NOTIFICATION
     case BADGES_AWARD
+    case VIEW_BADGES_AWARD
 }

@@ -18,10 +18,9 @@ class UserProfileBadgesBean: Mappable {
     
     var event_title: String!
     
+    var award:Bool?
     
-    
-    
-    
+    var event_id:Int?
     
     
     required init()
@@ -42,6 +41,10 @@ class UserProfileBadgesBean: Mappable {
         badge_url       <- map["badge_url"]
         
         event_title      <- map["event_title"]
+        
+        award           <- map["award"]
+        
+        event_id        <- map["event_id"]
         
         
     }

@@ -21,7 +21,7 @@ class DelegateController: BaseDelegate {
     var objUserDelegate : UserDelegate!
     var objSearchDelegate : SearchDelegate!
     var objSchoolDelegate : SchoolDelegate!
-    var objNotificationDelegate: NotificationDelegate!
+    var objNotificationDelegate : NotificationDelegate!
     
     override init() {
         doPostAPIs = DAOServices()
@@ -137,12 +137,8 @@ class DelegateController: BaseDelegate {
             objUserDelegate.menuUserProfile(objCurrentController)
             
         case .SHOW_NOTIFICATION:
-            print("SHOW NOTIFICATION")
-            objUserDelegate.showNotification(objCurrentController)
-            
-        case .BADGES_AWARD:
-            print("BADGES_AWARD")
-            objNotificationDelegate.viewBadgesAward(objCurrentController)
+            print("Menu USER PROFILE")
+            objNotificationDelegate.showNotification(objCurrentController)
             
 
             
