@@ -82,7 +82,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
        
         if(eventBeanArray.count > 0) {
-            
+           
             var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
             //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(eventDisplayBean.event_title)

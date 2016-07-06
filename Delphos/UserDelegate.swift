@@ -44,19 +44,19 @@ class UserDelegate:BaseDelegate{
                 })
                 
             }
-            else if statusCode == unauthorized_request{
+            else if statusCode == UNAUTHORIZED_REQUEST{
                 
                 print("Login failure")
                 boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
+                self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
 
                 
             }
-            else if statusCode == bad_request {
+            else if statusCode == BAD_REQUEST {
                 print("Login failure")
                 boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage:"Bad Request." )
+                self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
                 
 
               
@@ -65,7 +65,7 @@ class UserDelegate:BaseDelegate{
             else{
                 print("Login failure")
                 boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
+                self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
             }
             
         }
