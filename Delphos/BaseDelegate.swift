@@ -10,6 +10,14 @@ import UIKit
 import ObjectMapper
 class BaseDelegate: NSObject {
     
+    var doPostAPIs: DAOServices!
+    var doGetAPIs: DAOServices!
+    
+    override init() {
+        doPostAPIs = DAOServices()
+        doGetAPIs = doPostAPIs
+    }
+    
     func showAlert(objCurrentController: UIViewController, strMessage: String) {
         dispatch_async(dispatch_get_main_queue(), {
             let alertView = UIAlertController(title: "", message: strMessage, preferredStyle: .Alert)

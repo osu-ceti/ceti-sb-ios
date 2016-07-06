@@ -678,4 +678,36 @@ class DAOServices: DAOBase {
         })
     }
     
+    func doRegisterDevice(objDeviceBean: DeviceBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        strURL = REGISTER_DEVICE
+        let userJSONString = Mapper().toJSONString(objDeviceBean, prettyPrint: true)
+        doPost(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<DeviceBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+
+    }
+    
+    //POST APIs -- ENDS HERE
+    
 }

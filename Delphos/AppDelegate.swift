@@ -62,8 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
         print("DEVICE TOKEN = \(deviceToken)")
+        gStrDeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
+        print("Device Token = " + gStrDeviceToken)
+        
+        
+        
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

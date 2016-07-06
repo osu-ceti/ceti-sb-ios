@@ -11,7 +11,7 @@ import UIKit
 
 class UserDelegate:BaseDelegate{
     
-    func login(objCurrentContoller: UIViewController) -> Bool {
+    func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! LoginController
         
@@ -41,7 +41,10 @@ class UserDelegate:BaseDelegate{
                     
                     gObjUsers = loginResult as! UserBean
                     //                   objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
+                    callback(status: true)
                 })
+                
+                
                 
             }
             else if statusCode == unauthorized_request{
@@ -57,16 +60,13 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:"Bad Request." )
-                
-
-              
-                
             }
             else{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
             }
+             callback(status: boolLogin)
             
         }
         return boolLogin
