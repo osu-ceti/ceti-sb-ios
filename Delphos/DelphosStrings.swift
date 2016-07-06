@@ -47,7 +47,7 @@ var gClaimUser_id:Int!
 
 var gClaimSpeakerName:String!
 
-
+var gBadgesAwardToEvent:Bool!
 
 var gFontName = "Times New Roman"
 var gSearchEventsRadioTitle = "Events"

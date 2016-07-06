@@ -677,17 +677,16 @@ class DAOServices: DAOBase {
             }
         })
     }
-    
-    func doRegisterDevice(objDeviceBean: DeviceBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        
-        strURL = REGISTER_DEVICE
-        let userJSONString = Mapper().toJSONString(objDeviceBean, prettyPrint: true)
-        doPost(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+   
+    func getAwardbadges(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get award badges")
+        strURL =  DEV_TARGET + USERS + AWARD_BADGES
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             print(jsonResult);
             
             if(status) {
                 //    print(jsonResult)
-                var showEventBean = Mapper<DeviceBean>().map(jsonResult)
+                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
                 
@@ -705,9 +704,53 @@ class DAOServices: DAOBase {
                 
             }
         })
-
     }
     
-    //POST APIs -- ENDS HERE
-    
+    func postBadgesAward(strSchoolId:String,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        
+        
+        
+        //var award = true
+        var event_id:Int = 82
+        //var strUserId = String(objSendMessage.id)
+        
+        // var objAwardBadges : UserProfileBadgesBean
+        //        objAwardBadges.award = award
+        //        objAwardBadges.event_id = event_id
+        
+        var strAward = String(gBadgesAwardToEvent)
+        var strEventId = String(event_id)
+        
+        
+        var strSchoolId = String(0)
+        
+        var strSubUrl = "?" + "award=" + strAward
+        
+        var strSubUrl2 = "&" + "event_id=" + strEventId
+        
+        strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
+        
+        
+        
+        //var JSONString = Mapper().toJSONString(objAwardBadges, prettyPrint: true)
+        
+        doPost(strSchoolId,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status){
+                var claimEventBean = Mapper<ClaimEventBean>().map(jsonResult)!
+                callBack?(result: claimEventBean, statusCode: statusCode )
+                return
+            }
+            else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+    }
+
 }

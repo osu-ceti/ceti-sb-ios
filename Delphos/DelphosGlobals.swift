@@ -47,10 +47,15 @@ var gStrSchoolProfileControllerID: String = "SchoolProfileControllerId"
 var gObjPublicProfileController : PublicProfileController!
 var gStrPublicProfileControllerID: String = "PublicProfileControllerId"
 
+//var gObjBadgeController : BadgeController!
+var gObjBadgeController : UINavigationController!
+var gStrBadgeControllerID: String = "BadgeControllerId"
+
+
 var rightViewController: RightViewController!
 
 
-var regularMenu = ["Home", "Settings", "Profile", "Logout"]
+var regularMenu = ["Home", "Settings", "Profile", "Logout","PushNotification"]
 var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 

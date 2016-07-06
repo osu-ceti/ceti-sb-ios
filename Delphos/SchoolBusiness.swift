@@ -68,6 +68,7 @@ let MAKE_MINE = "make_mine/"
 let USER_PROFILE = "users"
 let PROFILE = "profile"
 let REGISTER_DEVICE = "register_device"
+let AWARD_BADGES = "award_badge"
 
 func getTarget() -> String {
     if(DEBUG) {

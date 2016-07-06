@@ -22,7 +22,7 @@ class DelegateController: BaseDelegate {
     var objSearchDelegate : SearchDelegate!
     var objSchoolDelegate : SchoolDelegate!
     var objPushNotificationDelegate : PushNotificationDelegate!
-    
+    var objBadgeDelegate : BadgeDelegate!
     
     override init() {
         
@@ -33,6 +33,7 @@ class DelegateController: BaseDelegate {
         objSearchDelegate = SearchDelegate()
         objSchoolDelegate = SchoolDelegate()
         objPushNotificationDelegate = PushNotificationDelegate()
+        objBadgeDelegate = BadgeDelegate()
 
     }
     
@@ -145,6 +146,14 @@ class DelegateController: BaseDelegate {
         case .REGISTER_DEVICE:
             print("Menu REGISTER DEVICE")
             objPushNotificationDelegate.registerDevice()
+
+        case .BADGE_AWARD:
+            print("BADGE AWARD")
+            objBadgeDelegate.badgesAward(objCurrentController)
+
+        case .VIEW_BADGE_AWARD:
+            print("VIEW BADGE AWARD")
+            objBadgeDelegate.viewBadgesAward(objCurrentController)
             
         default:
             print("Error in delegate enum")

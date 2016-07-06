@@ -35,4 +35,6 @@ enum DelphosAction
     case EDIT_USER_PROFILE
     case USER_PROFILE
     case REGISTER_DEVICE
+    case BADGE_AWARD
+    case VIEW_BADGE_AWARD
 }
