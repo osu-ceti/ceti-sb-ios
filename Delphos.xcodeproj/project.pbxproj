@@ -54,6 +54,9 @@
 		84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCE1D09529B00C614C2 /* UserDelegate.swift */; };
 		84799FD11D09952D00C614C2 /* ClaimsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FD01D09952D00C614C2 /* ClaimsDelegate.swift */; };
 		84799FD31D09961500C614C2 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FD21D09961500C614C2 /* SearchDelegate.swift */; };
+		84A5B1C11D2D3BF400090CFB /* PushNotificationBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B1C01D2D3BF400090CFB /* PushNotificationBean.swift */; };
+		84A5B1C31D2D3C2200090CFB /* PushAPSBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B1C21D2D3C2200090CFB /* PushAPSBean.swift */; };
+		84A5B1C51D2D3C5500090CFB /* PushDataBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B1C41D2D3C5500090CFB /* PushDataBean.swift */; };
 		84BA187E1D03552A009DC8C9 /* DelphosGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA187D1D03552A009DC8C9 /* DelphosGlobals.swift */; };
 		F57260411CEC2F18007078C3 /* ClaimBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57260401CEC2F18007078C3 /* ClaimBean.swift */; };
 		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
@@ -236,6 +239,9 @@
 		84799FCE1D09529B00C614C2 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
 		84799FD01D09952D00C614C2 /* ClaimsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimsDelegate.swift; sourceTree = "<group>"; };
 		84799FD21D09961500C614C2 /* SearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
+		84A5B1C01D2D3BF400090CFB /* PushNotificationBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationBean.swift; sourceTree = "<group>"; };
+		84A5B1C21D2D3C2200090CFB /* PushAPSBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAPSBean.swift; sourceTree = "<group>"; };
+		84A5B1C41D2D3C5500090CFB /* PushDataBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushDataBean.swift; sourceTree = "<group>"; };
 		84BA187D1D03552A009DC8C9 /* DelphosGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosGlobals.swift; sourceTree = "<group>"; };
 		F57260401CEC2F18007078C3 /* ClaimBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimBean.swift; sourceTree = "<group>"; };
 		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
@@ -489,7 +495,10 @@
 				0FA2A86A1D14252800342797 /* searchSchoolListBean.swift */,
 				0F488A721D1570E600A72291 /* SignoutResponseBean.swift */,
 				0FE721841D19297F00D5994D /* MakeMySchoolListBean.swift */,
+				84A5B1C41D2D3C5500090CFB /* PushDataBean.swift */,
+				84A5B1C01D2D3BF400090CFB /* PushNotificationBean.swift */,
 				0FE7218C1D192F7300D5994D /* MakeMySchoolBean.swift */,
+				84A5B1C21D2D3C2200090CFB /* PushAPSBean.swift */,
 				0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */,
 				0F8447051D2552F400155F8F /* SchoolListBean.swift */,
 				0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */,
@@ -571,6 +580,9 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 569PEYY6NW;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -727,6 +739,7 @@
 				84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */,
 				0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */,
 				0FE721851D19297F00D5994D /* MakeMySchoolListBean.swift in Sources */,
+				84A5B1C51D2D3C5500090CFB /* PushDataBean.swift in Sources */,
 				F580616C1CE5E73F004BF043 /* SearchControllerCell.swift in Sources */,
 				0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */,
 				0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */,
@@ -740,8 +753,10 @@
 				0FA2A8671D13CCE800342797 /* UserProfileCell.swift in Sources */,
 				0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */,
 				0F9E4F1D1CF32ACB004FC736 /* SlidingMenuController.swift in Sources */,
+				84A5B1C31D2D3C2200090CFB /* PushAPSBean.swift in Sources */,
 				F5E06FD91CED9BAB00E3D83B /* ClaimEventBean.swift in Sources */,
 				0FA2A86D1D142BD000342797 /* SchoolProfileController.swift in Sources */,
+				84A5B1C11D2D3BF400090CFB /* PushNotificationBean.swift in Sources */,
 				F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */,
 				F5C598EB1CDDBFB2000C3F58 /* DelphosAction.swift in Sources */,
 				0F9E4F1F1CF33A9C004FC736 /* UIViewControllerExtension.swift in Sources */,

@@ -43,4 +43,8 @@ class PushNotificationDelegate: BaseDelegate {
         //)
         
     }
+    
+    func handleRemoteNotification(){
+        
+    }
 }

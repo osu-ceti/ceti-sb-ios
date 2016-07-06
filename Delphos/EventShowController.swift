@@ -98,7 +98,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated);
-        
+        rootViewController = self
         scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 250)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)

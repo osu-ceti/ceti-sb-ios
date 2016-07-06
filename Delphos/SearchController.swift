@@ -38,7 +38,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         //Adding Navbar
 //        setNavBar(self.view.frame.size.width)
 //        searchBar.delegate = self

@@ -27,7 +27,7 @@ class MessageController:  NavController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         //Adding Navbar
         self.isBackEnabled = true
         
