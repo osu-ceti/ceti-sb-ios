@@ -50,9 +50,44 @@ class NotificationDelegate:BaseDelegate{
                 
                 
                 
+            }else{
+                print(" error Get Notification")
             }
         })
     }
+    
+    func showShareBadge(objCurrentContoller: UIViewController) {
+        
+       // var strUserId: String = String(0)
+        
+        doGetAPIs.getShareBadge({(result: AnyObject,statusCode: Int)  in
+            
+            if(statusCode == SUCCESS) {
+                
+                 gObjViewBadgeController = self.instantiateVC(gStrViewBadgeControllerID) as! ViewBadgeController
+               
+                var objBadgeBean = result as! UserProfileBadgesBean
+                viewBadgeBean = objBadgeBean
+              
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                      var objViewBadgeControllerNav = self.getNavigationController(gObjViewBadgeController)
+                    
+                    self.doNavigate(objCurrentContoller, toController: objViewBadgeControllerNav,  close: true)
+                    
+                })
+
+                
+                
+            }
+            else{
+                print(" error Get view badge")
+
+            }
+        })
+    }
+
 
 
 }

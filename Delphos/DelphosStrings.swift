@@ -51,6 +51,10 @@ var gNotificationCount:String!
 
 var gBadgesAwardToEvent:Bool!
 
+var gSearchUserProfile:Int!
+
+var gBadgeid:Int!
+
 
 var gFontName = "Times New Roman"
 var gSearchEventsRadioTitle = "Events"
@@ -84,6 +88,8 @@ var gObjSchoolListBean : SchoolsDisplayBean!
 var gObjSchoolBean : SchoolsBean!
 
 var gObjUserProfileBadgesBean : UserProfileBadgesBean!
+
+var viewBadgeBean:UserProfileBadgesBean!
 
 
 

@@ -140,6 +140,10 @@ class DelegateController: BaseDelegate {
             print("Menu USER PROFILE")
             objNotificationDelegate.showNotification(objCurrentController)
             
+            
+        case .SHOW_SHARE_BADGE:
+            print("SHOW SHARE BADGE")
+            objNotificationDelegate.showShareBadge(objCurrentController)
 
             
         default:

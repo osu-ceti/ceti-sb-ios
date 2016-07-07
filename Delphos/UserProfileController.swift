@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class UserProfileController:  NavController, UITableViewDataSource, UITableViewDelegate{
+class UserProfileController:  NavController, UITableViewDataSource, UITableViewDelegate,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
    
     
@@ -48,14 +48,15 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     @IBOutlet var btnContactUser: UIButton!
     
+    @IBOutlet var collectionView: UICollectionView!
     
     var eventDisplayBean: usersBean!
     var eventBeanArray: [EventBean]! = []
     var usersBeanArray: [userListBean]! = []
-    var userProfileBadgesBean:[UserProfileBadgesBean]! = []
+    var userProfileBadgesArray:[UserProfileBadgesBean]! = []
     
-    
-    @IBOutlet var userBadges: [UIImageView]!
+    var imageCounter :Int = 0
+    var imageData:[String] = [String]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -81,37 +82,19 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         searchBar.delegate = self
         // navigationBar.delegate = self;
         //backToView = "HomeID"
-      
+        
+      self.collectionView.hidden = true
         gUserProfileMessage = false
         gSchoolNameSelect = false
         
-        var badgesCount = userProfileBadgesBean.count
+       
         
-        for var i = 1; i <= badgesCount; i++ {
-            
-            var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesBean[i]
-         
-            let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + imageDisplayBean.badge_url)
-            var badgesImage = NSData(contentsOfURL:url!)
-            
-            //var  viewBadgesImage: UIImage? =  UIImage(data:badgesImage!)
-
-            
-            if badgesImage != nil {
-            
-                self.userBadges[i].image = UIImage(data:badgesImage!)
-//                userBadges[i].image = UIImage(data:badgesImage!)
-//                userBadges[i].frame = CGRect(x:20*i,y:200*i,width: 40,height:25)
-//                view.addSubview(userBadges[i])
-            }
-
-        
-        }
         
         self.tableView.dataSource = self
         tableView.delegate = self
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
+        collectionView.backgroundColor = bgColor
         
         self.labelNoEventFound.hidden = true
         self.tableView.backgroundColor = bgColor
@@ -143,6 +126,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtBusiness!.text    = gObjSearchUserListBean.business
         self.txtRole!.text        = gObjSearchUserListBean.role
         self.txtBiography.text    = gObjSearchUserListBean.biography
+        
+        gSearchUserProfile = gObjSearchUserListBean.id
        
         if(gObjUserBean.id == gObjSearchUserListBean.id){
             
@@ -302,6 +287,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtRole!.hidden = false
         self.txtBiography.hidden = false
         
+        self.collectionView.hidden = true
+        
 //        self.btnContactUser.center = CGPointMake(160, 370 )
 //        self.lineView.center = CGPointMake( 160, 410 )
 //        self.labelEventFeed.center = CGPointMake(160,390 )
@@ -316,6 +303,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         btnBadges.layer.addSublayer(bottomLineBadges)
         bottomLineProfile.borderColor = UIColor.clearColor().CGColor
         
+        self.collectionView.hidden = false
         
         self.labelSchool.hidden = true
         self.labelGrades.hidden = true
@@ -330,6 +318,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtBusiness!.hidden = true
         self.txtRole!.hidden = true
         self.txtBiography.hidden = true
+        
         
 //        self.btnContactUser.center = CGPointMake(160, 160 )
 //        self.labelEventFeed.center = CGPointMake(160, 180 )
@@ -355,5 +344,76 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.VIEW_MESSAGE_CONTROLLER)
+    
+}
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        
+        return 1
+        
     }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return userProfileBadgesArray.count
+        
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BdgeCellId", forIndexPath: indexPath) as! BadgeCollectionViewCell
+        
+        cell.backgroundColor = UIColor.whiteColor()
+        
+        var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesArray[indexPath.row]
+        
+        let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url)
+        var badgesImage = NSData(contentsOfURL:url!)
+        
+        
+        
+        cell.imgUserBadge.image = UIImage(data:badgesImage!)
+        cell.badgeId.text = String(imageDisplayBean.badge_id)
+        return cell
+        
+    }
+
+
+   
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                      
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+       
+        return CGSize(width: 70, height: 60)
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!)
+    {
+       
+      
+       var selectCell = collectionView.cellForItemAtIndexPath(indexPath) as! BadgeCollectionViewCell
+        
+        //selectCell.backgroundColor = UIColor.blueColor()
+        
+        print("select", selectCell.badgeId.text!)
+         gBadgeid = Int(selectCell.badgeId.text!)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_SHARE_BADGE)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -53,6 +53,9 @@ var gStrNotificationControllerID: String = "NotificationControllerId"
 var gObjBadgesAwardController :UINavigationController!
 var gStrBadgesAwardControllerID: String = "BadgesAwardControllerId"
 
+var gObjViewBadgeController :ViewBadgeController!
+var gStrViewBadgeControllerID: String = "ViewBadgeControllerId"
+
 var rightViewController: RightViewController!
 
 
