@@ -1,4 +1,4 @@
-//
+    //
 //  DelegateDlphos.swift
 //  Delphos
 //
@@ -139,6 +139,10 @@ class DelegateController: BaseDelegate {
         case .SHOW_NOTIFICATION:
             print("Menu USER PROFILE")
             objNotificationDelegate.showNotification(objCurrentController)
+            
+        case .MARK_ALL_NOTIFICATION:
+            print("Menu USER PROFILE")
+            objNotificationDelegate.deleteNotification(objCurrentController)
             
 
             

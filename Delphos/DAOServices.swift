@@ -216,8 +216,150 @@ class DAOServices: DAOBase {
     }
     
     
+    func getUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get user profile make my school")
+        strURL =   DEV_TARGET + USERS + strUserID
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<usersBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
+    func getSchoolProfile(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get school profile")
+        strURL =  DEV_TARGET + SCHOOL + strSchoolID
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    func getMakeMySchool(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get male my school")
+        strURL =  DEV_TARGET + SCHOOL + MAKE_MINE + strSchoolID
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
+    func getMenuUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get user profile")
+        strURL =   DEV_TARGET + USERS + PROFILE
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<UserBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    
+    func getNotification(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get Notification")
+        strURL =   DEV_TARGET + NOTIFICATION
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
+                
+                callBack?(result: showNotificationBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
     //GET APIs -- ENDS HERE
     
     
@@ -501,65 +643,7 @@ class DAOServices: DAOBase {
 
 
 }
-    
-    
-    func getUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("get user profile make my school")
-        strURL =   DEV_TARGET + USERS + strUserID
-        
-        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
-            
-            if(status) {
-                //    print(jsonResult)
-                var showEventBean = Mapper<usersBean>().map(jsonResult)
-                
-                callBack?(result: showEventBean!, statusCode: statusCode )
-                
-                return
-            }
-            else {
-                
-                print(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
-                
-                callBack?(result: errorBean, statusCode: statusCode )
-                
-                return
-                
-                
-            }
-        })
-    }
-    
-    func getSchoolProfile(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("get school profile")
-        strURL =  DEV_TARGET + SCHOOL + strSchoolID
-        
-        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
-            
-            if(status) {
-                //    print(jsonResult)
-                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
-                
-                callBack?(result: showEventBean!, statusCode: statusCode )
-                
-                return
-            }
-            else {
-                
-                print(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
-                
-                callBack?(result: errorBean, statusCode: statusCode )
-                
-                return
-                
-                
-            }
-        })
-    }
+ 
 
     
     
@@ -591,34 +675,7 @@ class DAOServices: DAOBase {
     
     
     
-    func getMakeMySchool(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("get male my school")
-        strURL =  DEV_TARGET + SCHOOL + MAKE_MINE + strSchoolID
-        
-        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
-            
-            if(status) {
-                //    print(jsonResult)
-                var showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
-                
-                callBack?(result: showEventBean!, statusCode: statusCode )
-                
-                return
-            }
-            else {
-                
-                print(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
-                
-                callBack?(result: errorBean, statusCode: statusCode )
-                
-                return
-                
-                
-            }
-        })
-    }
+   
 
     func doEditProfile(objUserProfile: MakeMySchoolListBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("PUT USER PROFILE")
@@ -649,62 +706,31 @@ class DAOServices: DAOBase {
             }
         })
     }
-    func getMenuUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("get user profile")
-        strURL =   DEV_TARGET + USERS + PROFILE
-        
-        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
-            
-            if(status) {
-                //    print(jsonResult)
-                var showEventBean = Mapper<UserBean>().map(jsonResult)
-                
-                callBack?(result: showEventBean!, statusCode: statusCode )
-                
-                return
-            }
-            else {
-                
-                print(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
-                
-                callBack?(result: errorBean, statusCode: statusCode )
-                
-                return
-                
-                
-            }
-        })
-    }
     
-    func getNotification(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        print("get Notification")
-        strURL =   DEV_TARGET + NOTIFICATION
-       
-        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+    
+    func doDeleteNotification(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        var strEmptyJson = gEmptyJSON
+        strURL =   NOTIFICATION 
+        
+        
+        //let JSONString = Mapper().toJSONString(strClaimID:nil, prettyPrint: true)
+        
+        doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status) {
-                //    print(jsonResult)
-                var showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
-                
-                callBack?(result: showNotificationBean!, statusCode: statusCode )
-                
+                var signoutBean = Mapper<SignoutResponseBean>().map(jsonResult)!
+                callBack?(result: signoutBean, statusCode: statusCode )
                 return
-            }
-            else {
-                
-                print(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
-                
+            } else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
-                
                 return
-                
-                
             }
+            
+            
         })
+        
     }
     
     

@@ -34,30 +34,45 @@ var gTimeFormat = "hh:mm a zzz"
 var gDateFormat = "YYYY-MM-dd"
 
 var gDateTimeFormat = gDateFormat + " " + gTimeFormat
+
 var gSplitDateTime = "T"
+
 var gClaim: String!
+
 var gEditEvent:String!
+
 var gCancelEvent:String!
+
 var gCancelClaim:String!
 
 var gClaimDetailId:Int!
+
 var gClaimUserName:String!
+
 var gUserId:Int!
+
 var gClaimUser_id:Int!
 
 var gClaimSpeakerName:String!
 
-var gNotificationCount:String!
+var gNotificationCount:Int!
 
 var gBadgesAwardToEvent:Bool!
 
+var gNotificationNType:Int!
+
+var gActUserId:Int! = 0
 
 var gFontName = "Times New Roman"
+
 var gSearchEventsRadioTitle = "Events"
+
 var gSearchSchoolsRadioTitle = "Schools"
+
 var gSearchUsersRadioTitle = "Users"
 
 var gSpeakerId:Int!
+
 var gSpeakerName:String!
 
 var gUserProfileMessage:Bool!

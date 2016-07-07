@@ -23,3 +23,19 @@ enum RoleType: UInt{
 
 
 }
+
+enum NOTIFICATION_TYPE:Int{
+
+    case CLAIM              = 0
+    case CONFIRM_SPEAKER    = 1
+    case EVENT_UPDATE       = 2
+    case MESSAGE            = 3
+    case AWARD_BADGE        = 4
+    case NEW_BADGE          = 5
+    case CANCEL             = 6
+    case REJECT_CLAIM       = 7
+    case CANCEL_CLAIM       = 8
+    case CANCEL_SPEAKER     = 9
+
+}
+

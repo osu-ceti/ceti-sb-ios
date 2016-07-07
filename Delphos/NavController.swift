@@ -120,9 +120,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
       
         
-        gNotificationCount = "0"
+        //gNotificationCount = "0"
         
-        btnNotification = UIBarButtonItem(title : gNotificationCount,style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
+        btnNotification = UIBarButtonItem(title : "0",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
         
         
         

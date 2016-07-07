@@ -193,6 +193,12 @@ class ClaimsDelegate: BaseDelegate {
             else {
                 print("not claimed")
                  self.showAlert(objCurrentContoller, strMessage: "Not Claim")
+              //(objCurrentContoller as! NavController).hideOverlayView()
+                dispatch_async(dispatch_get_main_queue(), {
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                })
             }
         }
         return true
@@ -201,8 +207,9 @@ class ClaimsDelegate: BaseDelegate {
         
         var strSendMessage:String = (objCurrentContoller as! MessageController).txtSendMessage.text!
         var strUserId:String!
+       
         
-        if( gUserProfileMessage == true){
+         if( gUserProfileMessage == true){
         
                 strUserId = String((objCurrentContoller as! MessageController).userMessageId)
         
@@ -229,7 +236,9 @@ class ClaimsDelegate: BaseDelegate {
             
             if (statusCode == SUCCESS){
                 print("SEND MESSAGE")
+                
                  self.showAlert(objCurrentContoller, strMessage: "Message Sent")
+                gActUserId = 0
                 
             } else {
                 print("NOT SEND MESSAGE")

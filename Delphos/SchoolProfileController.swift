@@ -68,6 +68,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         if data != nil {
            self.schoolImage.image = UIImage(data:data!)
         }
+        
          self.tableView.backgroundColor = bgColor
         self.tableView.dataSource = self
         tableView.delegate = self
