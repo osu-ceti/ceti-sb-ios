@@ -77,6 +77,7 @@ class RegisterController: NavController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        rootViewController = self
         // Do any additional setup after loading the view, typically from a nib.
         gBtnRegisterRadio = ""
         self.requiredField.hidden = true

@@ -9,9 +9,10 @@
 import UIKit
 
 var gObjStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+var rootViewController: UIViewController!
 
-var doPostAPIs: DAOServices!
-var doGetAPIs: DAOServices!
+
+var gStrDeviceToken: String!
 
 var gObjHomeController : UINavigationController!
 var gStrHomeControllerID: String = "HomeID"
@@ -59,4 +60,6 @@ var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 
 var gEmptyJSON = "{}"
+
+var gObjNotificationInfo: AnyObject?
 

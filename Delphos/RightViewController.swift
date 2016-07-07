@@ -44,7 +44,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         gObjHomeController = fetchNavController(gStrHomeControllerID)
         
         gObjLoginController = fetchNavController(gStrLoginControllerID) 
@@ -89,7 +89,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
             switch menu {
             case .Home:
                 if(isRegister){
-                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)                    
+                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 }
                 else{
                     self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)

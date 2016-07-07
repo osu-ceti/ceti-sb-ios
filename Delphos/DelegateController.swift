@@ -21,17 +21,18 @@ class DelegateController: BaseDelegate {
     var objUserDelegate : UserDelegate!
     var objSearchDelegate : SearchDelegate!
     var objSchoolDelegate : SchoolDelegate!
+    var objPushNotificationDelegate : PushNotificationDelegate!
     var objBadgeDelegate : BadgeDelegate!
     
     override init() {
-        doPostAPIs = DAOServices()
-        doGetAPIs = doPostAPIs
+        
         
         objEventDelegate = EventDelegate()
         objClaimsDelegate = ClaimsDelegate()
         objUserDelegate = UserDelegate()
         objSearchDelegate = SearchDelegate()
         objSchoolDelegate = SchoolDelegate()
+        objPushNotificationDelegate = PushNotificationDelegate()
         objBadgeDelegate = BadgeDelegate()
 
     }
@@ -46,7 +47,13 @@ class DelegateController: BaseDelegate {
         {
         case .LOGIN:
             print("Login")
-            objUserDelegate.login(objCurrentController)
+            objUserDelegate.login(objCurrentController, callback: {(status:Bool)
+                in
+                if(status){
+                    //Register Device
+                    self.delegateControl(objCurrentController,action: DelphosAction.REGISTER_DEVICE)
+                }
+            })
             
         case .EVENT_ALL:
             print("Event All")
@@ -136,6 +143,10 @@ class DelegateController: BaseDelegate {
             print("Menu USER PROFILE")
             objUserDelegate.menuUserProfile(objCurrentController)
             
+        case .REGISTER_DEVICE:
+            print("Menu REGISTER DEVICE")
+            objPushNotificationDelegate.registerDevice()
+
         case .BADGE_AWARD:
             print("BADGE AWARD")
             objBadgeDelegate.badgesAward(objCurrentController)

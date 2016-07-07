@@ -62,8 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
         print("DEVICE TOKEN = \(deviceToken)")
+        gStrDeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
+        print("Device Token = " + gStrDeviceToken)
+        
+        
+        
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -72,8 +77,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print(userInfo)
+    func application(application: UIApplication, didReceiveRemoteNotification notificationInfo: [NSObject : AnyObject]) {
+        print("Entering didReceiveRemoteNotification\n")
+        print(notificationInfo)
+//        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification notificationInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Entering fetchCompletionHandler\n")
+        print(notificationInfo)
+        gObjNotificationInfo = notificationInfo
+        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -92,6 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print(window?.rootViewController)
     }
 
     func applicationWillTerminate(application: UIApplication) {
