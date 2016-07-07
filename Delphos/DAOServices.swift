@@ -706,28 +706,17 @@ class DAOServices: DAOBase {
         })
     }
     
-    func postBadgesAward(strSchoolId:String,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    func postBadgesAward(badgesAwardToEvent:Bool, eventId:Int, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         
+    
         
+        let strAward = String(badgesAwardToEvent)
+        let strEventId = String(eventId)
+ 
         
+        let strSubUrl = "?" + "award=" + strAward
         
-        //var award = true
-        var event_id:Int = 82
-        //var strUserId = String(objSendMessage.id)
-        
-        // var objAwardBadges : UserProfileBadgesBean
-        //        objAwardBadges.award = award
-        //        objAwardBadges.event_id = event_id
-        
-        var strAward = String(gBadgesAwardToEvent)
-        var strEventId = String(event_id)
-        
-        
-        var strSchoolId = String(0)
-        
-        var strSubUrl = "?" + "award=" + strAward
-        
-        var strSubUrl2 = "&" + "event_id=" + strEventId
+        let strSubUrl2 = "&" + "event_id=" + strEventId
         
         strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
         
@@ -735,16 +724,16 @@ class DAOServices: DAOBase {
         
         //var JSONString = Mapper().toJSONString(objAwardBadges, prettyPrint: true)
         
-        doPost(strSchoolId,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+        doPost(nil,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var claimEventBean = Mapper<ClaimEventBean>().map(jsonResult)!
-                callBack?(result: claimEventBean, statusCode: statusCode )
+                let awardBadgeResponseBean = Mapper<AwardBadgeResponse>().map(jsonResult)!
+                callBack?(result: awardBadgeResponseBean, statusCode: statusCode )
                 return
             }
             else {
                 //println(jsonResult)
-                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
             }

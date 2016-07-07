@@ -46,6 +46,18 @@ class BadgeDelegate:BaseDelegate{
             
                 rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
             }
+            else {
+                let objBadgesController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController
+                objBadgesController.txtEventName = "test"
+                objBadgesController.eventId = 3
+                objBadgesController.txtSpeakerName = "speaker"
+                objBadgesController.badgeUrl = "def_school_badge_small.jpg"
+                gObjBadgeController = self.getNavigationController(objBadgesController)
+                
+                
+                rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
+            
+            }
         })
         
         
@@ -55,19 +67,18 @@ class BadgeDelegate:BaseDelegate{
     
     func badgesAward(objCurrentContoller: UIViewController) {
         
-        var strSchoolId = String(0)
-        doPostAPIs.postBadgesAward(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
+        var badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
+        var eventId = (objCurrentContoller as! BadgeController).eventId
+        
+        doPostAPIs.postBadgesAward(badgesAwardToEvent,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
+           
             if(statusCode == SUCCESS) {
-                
-                
-                
-                
-                
+          
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    gObjBadgeController = self.fetchNavController(gStrBadgeControllerID)
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
-                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjBadgeController, close: false)
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 })
                 
             }

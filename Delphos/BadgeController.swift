@@ -31,7 +31,7 @@ class BadgeController: NavController {
     var eventId:Int?
     var txtSpeakerName: String?
     var badgeUrl:String?
-    
+    var badgesAwardToEvent:Bool!
     
     
     override func viewWillAppear(animated: Bool) {
@@ -76,7 +76,8 @@ class BadgeController: NavController {
     @IBAction func btnAwardBadgesClick(sender: AnyObject) {
         
         
-        gBadgesAwardToEvent = true
+        badgesAwardToEvent = true
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.BADGE_AWARD)
@@ -85,7 +86,7 @@ class BadgeController: NavController {
     
     @IBAction func btnDoNotAwardClick(sender: AnyObject) {
         
-        gBadgesAwardToEvent = false
+        badgesAwardToEvent = false
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.BADGE_AWARD)

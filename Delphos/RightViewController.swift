@@ -116,6 +116,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 break
             case .PushNotification:
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
                 testfacade.doTask(self,action: DelphosAction.VIEW_BADGE_AWARD)

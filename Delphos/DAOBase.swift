@@ -144,7 +144,7 @@ class DAOBase: NSObject {
     /**
      *  Method call to the POST API
      */
-    func doPost(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
+    func doPost(strInputParamsJson: String?, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
         
         doUpdate(POST, strInputParamsJson: strInputParamsJson, addAuthHeader: addAuthHeader, callBack: callBack)
     }
@@ -164,7 +164,7 @@ class DAOBase: NSObject {
         doUpdate(PUT, strInputParamsJson: strInputParamsJson, addAuthHeader: addAuthHeader, callBack: callBack)
     }
     
-    func doUpdate(method: String, strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
+    func doUpdate(method: String, strInputParamsJson: String?, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
         
         let objRequest : NSMutableURLRequest = NSMutableURLRequest()
         
@@ -195,10 +195,10 @@ class DAOBase: NSObject {
         }
         
         
-        if strInputParamsJson != "" {
+        if (strInputParamsJson != nil && strInputParamsJson != "") {
             print("DoPost-InputParamJson\(strInputParamsJson)")
             
-            objRequest.HTTPBody = strInputParamsJson.dataUsingEncoding(NSUTF8StringEncoding)
+            objRequest.HTTPBody = strInputParamsJson!.dataUsingEncoding(NSUTF8StringEncoding)
         }
         
         // sending synchronousRequest
