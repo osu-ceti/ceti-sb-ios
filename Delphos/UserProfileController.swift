@@ -55,8 +55,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var usersBeanArray: [userListBean]! = []
     var userProfileBadgesArray:[UserProfileBadgesBean]! = []
     
-    var imageCounter :Int = 0
-    var imageData:[String] = [String]()
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -87,8 +86,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         gUserProfileMessage = false
         gSchoolNameSelect = false
         
-       
-        
+
         
         self.tableView.dataSource = self
         tableView.delegate = self

@@ -28,14 +28,17 @@ class NotificationDelegate:BaseDelegate{
                 
                 
                 var objnotificationBean = result as! NotificationBean
+                //(objCurrentContoller as! NotificationController).countNotification = Int(objnotificationBean.count)
+                
+                gNotificationCount = objnotificationBean.count
                 //var notificationCount = objnotificationBean.count
                 
-                if(objnotificationBean.count != nil){
-                    gNotificationCount = String(objnotificationBean.count)
-                }
-                else{
-                    gNotificationCount = "0"
-                }
+//                if(objnotificationBean.count != nil){
+//                    gNotificationCount = String(objnotificationBean.count)
+//                }
+//                else{
+//                    gNotificationCount = "0"
+//                }
                 
                 gObjNotificationController.notificationArray = objnotificationBean.notifications
                 
@@ -55,8 +58,7 @@ class NotificationDelegate:BaseDelegate{
             }
         })
     }
-    
-    func showShareBadge(objCurrentContoller: UIViewController) {
+func showShareBadge(objCurrentContoller: UIViewController) {
         
        // var strUserId: String = String(0)
         
@@ -86,6 +88,36 @@ class NotificationDelegate:BaseDelegate{
 
             }
         })
+    }
+
+func deleteNotification(objCurrentContoller: UIViewController)  {
+        
+       
+        
+        doPostAPIs.doDeleteNotification({(result: AnyObject,statusCode: Int)   in
+           
+            if(statusCode == SUCCESS) {
+                
+                print("MARK ALL Notification AS READ")
+               // self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
+                
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    
+//                    gObjNotificationControllerNav = self.fetchNavController(gStrNotificationControllerID)
+//                    
+//                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjNotificationControllerNav, close: true)
+//                   
+//                })
+                
+                
+            }
+            else{
+                 print("NOT MARK ALL Notification AS READ")
+                //self.showAlert(objCurrentContoller, strMessage: "NOT MARK ALL Notification AS READ")
+            }
+        })
+        
+        
     }
 
 

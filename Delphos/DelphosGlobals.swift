@@ -42,12 +42,12 @@ var gStrUserProfileControllerID: String = "UserProfileId"
 var gObjSchoolProfileController : SchoolProfileController!
 var gStrSchoolProfileControllerID: String = "SchoolProfileControllerId"
 
-//var gObjPublicProfileController : UINavigationController!
+//var gObjPublicProfileControllerNav : UINavigationController!
 var gObjPublicProfileController : PublicProfileController!
 var gStrPublicProfileControllerID: String = "PublicProfileControllerId"
 
 var gObjNotificationController : NotificationController!
-//var gObjNotificationController : UINavigationController!
+var gObjNotificationControllerNav : UINavigationController!
 var gStrNotificationControllerID: String = "NotificationControllerId"
 
 var gObjBadgesAwardController :UINavigationController!

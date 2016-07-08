@@ -120,9 +120,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
       
         
-        gNotificationCount = "0"
+        //gNotificationCount = "0"
         
-        btnNotification = UIBarButtonItem(title : gNotificationCount,style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
+        btnNotification = UIBarButtonItem(title : "0",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
         
         
         
@@ -142,7 +142,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     }
     func btnSearchClick(sender: UIBarButtonItem) {
         navigationItem.titleView = searchBar
-        navigationItem.rightBarButtonItems = [menuButton,searchButton]
+        navigationItem.rightBarButtonItems = [menuButton,btnNotification,searchButton]
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
@@ -163,7 +163,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         navigationItem.titleView = nil
-        navigationItem.rightBarButtonItems = [menuButton,searchButton]
+        navigationItem.rightBarButtonItems = [menuButton,btnNotification,searchButton]
         navigationItem.title = "School-Business"
         searchBar.text = ""
         searchBar.sizeToFit()

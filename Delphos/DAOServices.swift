@@ -218,6 +218,7 @@ class DAOServices: DAOBase {
     func getShareBadge(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("get share badge")
         var strUserProfileId = String(gSearchUserProfile)
+       
         var strBadgeid = String(gBadgeid)
         strURL = DEV_TARGET + USERS + strUserProfileId + "/" + BADGES + "/" + strBadgeid
         
@@ -736,5 +737,29 @@ class DAOServices: DAOBase {
         })
     }
     
+    func doDeleteNotification(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        var strEmptyJson = gEmptyJSON
+        strURL =   NOTIFICATION
+        
+        
+        //let JSONString = Mapper().toJSONString(strClaimID:nil, prettyPrint: true)
+        
+        doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status) {
+                var signoutBean = Mapper<SignoutResponseBean>().map(jsonResult)!
+                callBack?(result: signoutBean, statusCode: statusCode )
+                return
+            } else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+        
+    }
     
 }
