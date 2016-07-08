@@ -121,7 +121,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.VIEW_BADGE_AWARD)
+                testfacade.doTask(self,action: DelphosAction.HANDLE_NOTIFICATION)
                 
                 break
 

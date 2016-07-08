@@ -170,6 +170,7 @@ class SlidingMenuController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = UIRectEdge.None
+        rootViewController = self
     }
     
     override func viewWillLayoutSubviews() {
