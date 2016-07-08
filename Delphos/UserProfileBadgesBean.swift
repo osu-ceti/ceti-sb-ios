@@ -16,11 +16,23 @@ class UserProfileBadgesBean: Mappable {
     var badge_url: String!
     
     
-    var event_title: String!
+    var event_title: String?
     
     var award:Bool?
     
     var event_id:Int?
+    
+    var event_name:String?
+    
+    var event_owner:String?
+    
+    var event_owner_id:Int?
+    
+    var school_name:String?
+    
+    var user_id:Int?
+    
+    var user_name:String?
     
     
     required init()
@@ -46,7 +58,17 @@ class UserProfileBadgesBean: Mappable {
         
         event_id        <- map["event_id"]
         
+        event_name        <- map["event_name"]
         
+        event_owner        <- map["event_owner"]
+       
+        event_owner_id        <- map["event_owner_id"]
+       
+        school_name        <- map["school_name"]
+        
+        user_id        <- map["user_id"]
+        
+         user_name        <- map["user_name"]
     }
     
 }

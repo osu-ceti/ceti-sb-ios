@@ -215,7 +215,36 @@ class DAOServices: DAOBase {
         })
     }
     
-    
+    func getShareBadge(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get share badge")
+        var strUserProfileId = String(gSearchUserProfile)
+        var strBadgeid = String(gBadgeid)
+        strURL = DEV_TARGET + USERS + strUserProfileId + "/" + BADGES + "/" + strBadgeid
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showBadgeBean = Mapper<UserProfileBadgesBean>().map(jsonResult)
+                
+                callBack?(result: showBadgeBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
     
     //GET APIs -- ENDS HERE
