@@ -37,7 +37,7 @@ class LoginController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         rootViewController = self
         self.requiredError.hidden = true
        
         // Create the navigation bar

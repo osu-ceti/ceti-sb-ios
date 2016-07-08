@@ -30,7 +30,7 @@ class NotificationController: NavController {
         //        menus = regularMenu
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
-        
+         rootViewController = self
         self.isBackEnabled = true
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
