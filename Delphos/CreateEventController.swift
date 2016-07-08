@@ -74,7 +74,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         self.requiredError.hidden = true
       
              // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))

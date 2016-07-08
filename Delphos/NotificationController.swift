@@ -211,13 +211,13 @@ class NotificationController: NavController {
 
             
             case NOTIFICATION_TYPE.AWARD_BADGE.rawValue :
-            
+                
                 //award_badge
                 dispatch_async(dispatch_get_main_queue(), {
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.VIEW_BADGES_AWARD)
+                testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
                 })
            
             

@@ -10,6 +10,14 @@ import UIKit
 import ObjectMapper
 class BaseDelegate: NSObject {
     
+    var doPostAPIs: DAOServices!
+    var doGetAPIs: DAOServices!
+    
+    override init() {
+        doPostAPIs = DAOServices()
+        doGetAPIs = doPostAPIs
+    }
+    
     func showAlert(objCurrentController: UIViewController, strMessage: String) {
         dispatch_async(dispatch_get_main_queue(), {
             let alertView = UIAlertController(title: "", message: strMessage, preferredStyle: .Alert)
@@ -52,4 +60,35 @@ class BaseDelegate: NSObject {
         })
     }
     
+    func showEvent(objCurrentContoller: UIViewController) {
+        var strUserDetail: String = String(gEventID)
+        
+        doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
+            if(statusCode == SUCCESS) {
+                gObjShowEventBean = result as! ShowEventBean
+                self.showEventUI(objCurrentContoller)
+                
+            }
+        })
+    }
+    
+    func showAwardBadge(event_name: String,
+                        event_id: Int, speaker_name: String, badge_url: String) {
+       
+       
+        
+        let objBadgesController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController
+        
+        objBadgesController.txtEventName = event_name
+        objBadgesController.eventId = event_id
+        objBadgesController.txtSpeakerName = speaker_name
+        objBadgesController.badgeUrl = badge_url
+        
+        gObjBadgeController = self.getNavigationController(objBadgesController)
+        
+        
+        rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
+
+    
+    }
 }

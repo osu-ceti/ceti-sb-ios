@@ -91,9 +91,7 @@ class LoginController: UIViewController {
         passwordTxt.borderStyle = UITextBorderStyle.None
         passwordTxt.layer.addSublayer(textboxLine)
         
-        
-        
-               
+        rootViewController = self            
         
       
 

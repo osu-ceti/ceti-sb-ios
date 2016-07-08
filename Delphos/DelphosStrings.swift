@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 var gObjEventBean : HomeController!
@@ -55,7 +56,10 @@ var gClaimUser_id:Int!
 
 var gClaimSpeakerName:String!
 
+
 var gNotificationCount:Int!
+
+var gBtnNotificationCount:UIBarButtonItem  = UIBarButtonItem()
 
 var gBadgesAwardToEvent:Bool!
 
@@ -65,6 +69,8 @@ var gBadgeid:Int!
 
 var gSearchUserProfile:Int!
 var gActUserId:Int! = 0
+
+
 
 var gFontName = "Times New Roman"
 

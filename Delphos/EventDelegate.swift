@@ -129,18 +129,7 @@ class EventDelegate: BaseDelegate{
         
     }
     
-    func showEvent(objCurrentContoller: UIViewController) {
-        var strUserDetail: String = String(gEventID)
-        
-        doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
-            if(statusCode == SUCCESS) {
-                gObjShowEventBean = result as! ShowEventBean
-                self.showEventUI(objCurrentContoller)
-                
-            }
-        })
-    }
-    
+       
     
     func editEvent(objCurrentContoller: UIViewController){
         var editEventController:CreateEventController = instantiateVC(gStrCreateEventControllerID) as! CreateEventController

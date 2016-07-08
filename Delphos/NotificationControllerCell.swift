@@ -16,6 +16,8 @@ class NotificationControllerCell: UITableViewCell {
     @IBOutlet var eventName: UILabel!
     @IBOutlet var eventId: UILabel!
     
+    
+    
     @IBOutlet var UserNotificationType: UILabel!
     
     override func awakeFromNib() {

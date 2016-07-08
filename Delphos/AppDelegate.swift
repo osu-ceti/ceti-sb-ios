@@ -42,12 +42,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = slideMenuController
         self.window?.makeKeyAndVisible()
     }
+    
+    func registerForPushNotifications(application: UIApplication){
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
+        let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        application.registerUserNotificationSettings(pushNotificationSettings)
+        application.registerForRemoteNotifications()
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        //Creating SlideMenuController
         self.createMenuView()
+        
+        //Register for Push  Notifications
+        self.registerForPushNotifications(application)
+        
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
+        print("DEVICE TOKEN = \(deviceToken)")
+        gStrDeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
+        print("Device Token = " + gStrDeviceToken)
+        
+        
+        
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print(error)
+    }
+    
+    
+   
+    func application(application: UIApplication, didReceiveRemoteNotification notificationInfo: [NSObject : AnyObject]) {
+        print("Entering didReceiveRemoteNotification\n")
+        print(notificationInfo)
+//        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification notificationInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Entering fetchCompletionHandler\n")
+        print(notificationInfo)
+        gObjNotificationInfo = notificationInfo
+        facade.doTask(UIViewController(), action: DelphosAction.HANDLE_NOTIFICATION)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -66,6 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print(window?.rootViewController)
     }
 
     func applicationWillTerminate(application: UIApplication) {

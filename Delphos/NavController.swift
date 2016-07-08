@@ -23,7 +23,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var backToController : UIViewController!
     var shouldClose : Bool! = true
     var backButtonNav: String!
-    var btnNotification : UIBarButtonItem = UIBarButtonItem()
+   // var btnNotification : UIBarButtonItem = UIBarButtonItem()
     
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
@@ -120,9 +120,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
       
         
-        //gNotificationCount = "0"
+        gNotificationCount = 0
         
-        btnNotification = UIBarButtonItem(title : "0",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
+        gBtnNotificationCount = UIBarButtonItem(title : String(gNotificationCount),style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
         
         
         
@@ -130,10 +130,10 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
             searchButtonItem = UIBarButtonItem(customView:searchBar)
             searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
 
-            navigationItem.rightBarButtonItems = [menuButton,btnNotification, searchButton]
+            navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount, searchButton]
         }
         else{
-            navigationItem.rightBarButtonItems = [btnNotification,menuButton]
+            navigationItem.rightBarButtonItems = [gBtnNotificationCount,menuButton]
         }
         
         self.view.addSubview(searchView)
@@ -142,7 +142,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     }
     func btnSearchClick(sender: UIBarButtonItem) {
         navigationItem.titleView = searchBar
-        navigationItem.rightBarButtonItems = [menuButton,btnNotification,searchButton]
+        navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
@@ -163,7 +163,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         navigationItem.titleView = nil
-        navigationItem.rightBarButtonItems = [menuButton,btnNotification,searchButton]
+        navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         navigationItem.title = "School-Business"
         searchBar.text = ""
         searchBar.sizeToFit()

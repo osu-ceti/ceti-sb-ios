@@ -67,9 +67,14 @@ let SIGN_OUT = "sign_out"
 let MAKE_MINE = "make_mine/"
 let USER_PROFILE = "users"
 let PROFILE = "profile"
+
 let NOTIFICATION = "notifications"
 let AWARD_BADGES = "award_badge"
 let BADGES = "badges"
+
+let REGISTER_DEVICE = "register_device"
+
+
 
 func getTarget() -> String {
     if(DEBUG) {

@@ -103,7 +103,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated);
-        
+        rootViewController = self
         scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 250)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
@@ -160,6 +160,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.labelText5.text = "Created By:"
             self.labelText6.text = "Content:"
            gSpeakerId = Int(gObjShowEventBean.speaker_id)
+            
             gSpeakerName =  String(gObjShowEventBean.speaker)
 
             btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)

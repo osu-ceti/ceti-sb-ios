@@ -44,7 +44,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         gObjHomeController = fetchNavController(gStrHomeControllerID)
         
         gObjLoginController = fetchNavController(gStrLoginControllerID) 
@@ -89,7 +89,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
             switch menu {
             case .Home:
                 if(isRegister){
-                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)                    
+                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 }
                 else{
                     self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
@@ -115,13 +115,16 @@ class RightViewController: UIViewController, UIWebViewDelegate {
 
                 break
             case .PushNotification:
+
+              // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.VIEW_BADGES_AWARD)
-
-                break
+                testfacade.doTask(self,action: DelphosAction.VIEW_BADGE_AWARD)
                 
+                break
+
             }
         }
     }
