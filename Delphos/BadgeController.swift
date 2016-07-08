@@ -33,6 +33,7 @@ class BadgeController: NavController {
     var badgeUrl:String?
     var badgesAwardToEvent:Bool!
     
+    @IBOutlet var scrollView: UIScrollView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -71,7 +72,14 @@ class BadgeController: NavController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        rootViewController = self
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnDoNotAward.frame.origin.y + 220)
+        scrollView.scrollEnabled = true
+        //view.addSubview(scrolview)
+    }
     
     @IBAction func btnAwardBadgesClick(sender: AnyObject) {
         

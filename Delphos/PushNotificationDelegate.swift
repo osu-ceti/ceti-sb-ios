@@ -18,7 +18,7 @@ class PushNotificationDelegate: BaseDelegate {
         
         doPostAPIs.doRegisterDevice(objDeviceBean, callBack:{(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
-                print("Successfully registered")
+               // print("Successfully registered")
 //                gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
 //                
 //                
