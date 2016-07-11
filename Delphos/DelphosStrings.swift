@@ -2,30 +2,20 @@
 //  DelphosStrings.swift
 //  Delphos
 //
-//  Created by Prabhu on 5/6/16.
+//  Created by lingaadm on 7/11/16.
 //  Copyright © 2016 Ontoborn. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
 
-var gObjEventBean : HomeController!
-var gObjEventDisplayBean : EventDisplayBean!
-var gObjUsersBean : usersBean!
-var gEventID : Int!
-var gObjShowEventBean: ShowEventBean!
-var gBtnRadioValue: String!
-var gBtnRegisterRadio: String!
-var gObjUserBean : UserBean!
+var gFontName = "Times New Roman"
 
-var gObjSearchUserListBean : searchUserListBean!
-var gSearchValue: Int!
-var gObjUsers: UserBean!
+var gSearchEventsRadioTitle = "Events"
 
-var gObjCreateEvent : CreateEventBean!
+var gSearchSchoolsRadioTitle = "Schools"
 
-var gClaimEventId : Int!
+var gSearchUsersRadioTitle = "Users"
 
 var events = "events"
 var schools = "schools"
@@ -38,79 +28,4 @@ var gDateTimeFormat = gDateFormat + " " + gTimeFormat
 
 var gSplitDateTime = "T"
 
-var gClaim: String!
-
-var gEditEvent:String!
-
-var gCancelEvent:String!
-
-var gCancelClaim:String!
-
-var gClaimDetailId:Int!
-
-var gClaimUserName:String!
-
-var gUserId:Int!
-
-var gClaimUser_id:Int!
-
-var gClaimSpeakerName:String!
-
-
-var gNotificationCount:Int!
-
-var gBtnNotificationCount:UIBarButtonItem  = UIBarButtonItem()
-
-var gBadgesAwardToEvent:Bool!
-
-var gNotificationNType:Int!
-
-var gBadgeid:Int!
-
-var gSearchUserProfile:Int!
-var gActUserId:Int! = 0
-
-
-
-var gFontName = "Times New Roman"
-
-var gSearchEventsRadioTitle = "Events"
-
-var gSearchSchoolsRadioTitle = "Schools"
-
-var gSearchUsersRadioTitle = "Users"
-
-var gSpeakerId:Int!
-
-var gSpeakerName:String!
-
-var gUserProfileMessage:Bool!
-
-var gSchoolNameSelect:Bool!
-
-var gClaimsListDetails:ClaimListClaimBeanBean!
-
-var gClaimsList:ClaimListBean!
-
-var gEventAcceptBean:ClaimAcceptBean!
-
-var gObjUserDisplayBean : EventBean!
-
-var gObjSearchSchoolListBean : searchSchoolListBean!
-
-var gObjSchoolImage:String!
-
-
-var gObjMakeMySchoolListBean : MakeMySchoolListBean!
-
-var gObjSchoolListBean : SchoolsDisplayBean!
-
-var gObjSchoolBean : SchoolsBean!
-
-var gObjUserProfileBadgesBean : UserProfileBadgesBean!
-
-var viewBadgeBean:UserProfileBadgesBean!
-
-
-
-
+var MSG_AWARDED = "Bagde has been awarded"

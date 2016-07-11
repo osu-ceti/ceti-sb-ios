@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Entering didReceiveRemoteNotification\n")
         print(notificationInfo)
         gObjNotificationInfo = notificationInfo
-        facade.doTask(UIViewController(), action: DelphosAction.HANDLE_NOTIFICATION)	
+        facade.doTask(UIViewController(), action: DelphosAction.HANDLE_NOTIFICATION)
 //        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
         
     }
