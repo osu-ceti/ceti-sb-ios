@@ -36,12 +36,12 @@ class PushNotificationDelegate: BaseDelegate {
         
         dispatch_async(dispatch_get_main_queue(), {
             
-            gBtnNotificationCount.title = String(pushNotificationBean!.data?.count)
+            gBtnNotificationCount.title =  String(pushNotificationBean!.data?.count)
             
             if(pushNotificationBean != nil && pushNotificationBean!.data?.n_type == "award_badge"){
                 
-                self.showAlert(rootViewController, strMessage: MSG_AWARDED)
                 
+                print(rootViewController)
                 self.showAwardBadge((pushNotificationBean!.data?.event_name)!,
                     event_id: (pushNotificationBean!.data?.event_id)!, speaker_name: (pushNotificationBean!.data?.speaker_name)!, badge_url: (pushNotificationBean!.data?.badge_url)!)
                 

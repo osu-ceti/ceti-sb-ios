@@ -89,9 +89,11 @@ class RightViewController: UIViewController, UIWebViewDelegate {
             switch menu {
             case .Home:
                 if(isRegister){
+                    rootViewController = gObjLoginController
                     self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 }
                 else{
+                    rootViewController = gObjHomeController
                     self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 }
                 break

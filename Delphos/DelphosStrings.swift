@@ -22,7 +22,7 @@ var schools = "schools"
 var users = "users"
 
 var gTimeFormat = "hh:mm a zzz"
-var gDateFormat = "YYYY-MM-dd"
+var gDateFormat = "yyyy-MM-dd"
 
 var gDateTimeFormat = gDateFormat + " " + gTimeFormat
 

@@ -9,8 +9,8 @@ import UIKit
 import ObjectMapper
 
 class PushNotificationBean: Mappable {
-    var aps:        PushAPSBean?
-    var data:       PushDataBean?
+    var aps:        PushAPSBean!
+    var data:       PushDataBean!
     
     required init()
     {

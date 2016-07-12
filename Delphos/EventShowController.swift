@@ -187,13 +187,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             //self.txtText4.text =    gObjShowEventBean.loc_name
             //self.txtText5.text =    gObjShowEventBean.user_name
             self.txtText6.text   =    gObjShowEventBean.content
-           
-            
+            minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
+
+            print("End Date = " + gObjShowEventBean.event_end)
+
             dateFormatter.dateFormat = gDateTimeFormat
-             minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
-             endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
+
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+
+            endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
             
-            //self.setNavigationBarItem()
            
             if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
                 RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
