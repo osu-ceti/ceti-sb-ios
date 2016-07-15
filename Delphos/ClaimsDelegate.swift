@@ -13,7 +13,8 @@ class ClaimsDelegate: BaseDelegate {
     func showClaimApprovalPendingUI(objCurrentContoller: UIViewController){
         (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
         (objCurrentContoller as! EventShowController).claim.hidden = false
-        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Approval Pending", forState: .Normal)
+        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Pending Approval ", forState: .Normal)
+        
         (objCurrentContoller as! EventShowController).claim.enabled = false
         (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
     }
@@ -27,13 +28,27 @@ class ClaimsDelegate: BaseDelegate {
         
         doGetAPIs.getClaimView(String(gObjShowEventBean.id),callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
+                
                 dispatch_async(dispatch_get_main_queue(), {
-                     gClaimsList = result as! ClaimListBean
+                    
+                    gClaimsList = result as! ClaimListBean
                     (objCurrentContoller as! EventShowController).claimBeanArray = gClaimsList.claims
-                   var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
-                    (objCurrentContoller as! EventShowController).tableView.reloadData()
                   
-                       if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
+                    var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
+                    
+                    (objCurrentContoller as! EventShowController).tableView.reloadData()
+                    
+                    var startDate = NSDate()
+                    var currentDate = NSDate()
+                    
+                    startDate = (objCurrentContoller as! EventShowController).startDateAndTime
+                    currentDate = (objCurrentContoller as! EventShowController).currentDate
+                    
+                   if (startDate.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
+                        
+                        
+                    
+                    if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
                         RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH) ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
@@ -77,6 +92,7 @@ class ClaimsDelegate: BaseDelegate {
                                 }
                             }
                         }
+                    }
                     }
                 })
             }
@@ -167,6 +183,13 @@ class ClaimsDelegate: BaseDelegate {
             else{
                 // print("Error in Accept Claim")
                 self.showAlert(objCurrentContoller, strMessage: "Claim Not Reject")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+                   
+                })
             }
         })
         
@@ -191,8 +214,16 @@ class ClaimsDelegate: BaseDelegate {
                 
             }
             else {
-                print("not claimed")
-                 self.showAlert(objCurrentContoller, strMessage: "Not Claim")
+                print("Event is not claimed")
+                 self.showAlert(objCurrentContoller, strMessage: "Event is Not Claim")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+                    
+                })
+
             }
         }
         return true

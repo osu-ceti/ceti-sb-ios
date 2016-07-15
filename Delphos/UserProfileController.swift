@@ -41,6 +41,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
       
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var labelNoBadges: UILabel!
+    
     @IBOutlet var btnProfile: UIButton!
     @IBOutlet var btnBadges: UIButton!
     var bottomLineProfile      = CALayer()
@@ -55,6 +57,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var usersBeanArray: [userListBean]! = []
     var userProfileBadgesArray:[UserProfileBadgesBean]! = []
     
+    var schoolProfileId:Int!
 
     
     override func viewWillAppear(animated: Bool) {
@@ -83,11 +86,11 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         // navigationBar.delegate = self;
         //backToView = "HomeID"
         
-      self.collectionView.hidden = true
+        self.collectionView.hidden = true
         gUserProfileMessage = false
         gSchoolNameSelect = false
         
-
+        self.labelNoBadges.hidden = true
         
         self.tableView.dataSource = self
         tableView.delegate = self
@@ -139,6 +142,9 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         
         if(gObjSearchUserListBean.role == "Teacher"){
+           
+           
+            
             self.labelSchool.text   = "School:"
             self.labelGrades.text   = "Grades:"
             self.labelJobTitle.text = "Role:"
@@ -152,10 +158,13 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.txtRole!.hidden        = true
             self.txtBiography.hidden    = true
            
+           
             
            
         }
         else  if(gObjSearchUserListBean.role == "Speaker"){
+            
+           
            
             self.labelSchool.hidden   = true
             self.labelGrades.hidden   = true
@@ -257,7 +266,81 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         })
     }
     
-
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        
+        return 1
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if (userProfileBadgesArray.count > 0){
+            return userProfileBadgesArray.count
+        }
+        else{
+            return 1
+        }
+        
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BdgeCellId", forIndexPath: indexPath) as! BadgeCollectionViewCell
+        
+        
+        if (userProfileBadgesArray.count > 0){
+            self.labelNoBadges.hidden = true
+            
+            cell.backgroundColor = UIColor.whiteColor()
+            var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesArray[indexPath.row]
+            
+            let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url)
+            var badgesImage = NSData(contentsOfURL:url!)
+            
+            
+            
+            cell.imgUserBadge.image = UIImage(data:badgesImage!)
+            cell.badgeId.text = String(imageDisplayBean.badge_id)
+        }
+        //        else{
+        //            self.labelNoBadges.hidden = false
+        //        }
+        return cell
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        
+                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        return CGSize(width: 70, height: 60)
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!)
+    {
+        
+        
+        var selectCell = collectionView.cellForItemAtIndexPath(indexPath) as! BadgeCollectionViewCell
+        
+        //selectCell.backgroundColor = UIColor.blueColor()
+        
+        print("select", selectCell.badgeId.text!)
+        gBadgeid = Int(selectCell.badgeId.text!)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_SHARE_BADGE)
+    }
     
     
     
@@ -271,28 +354,70 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         btnProfile.layer.addSublayer(bottomLineProfile)
        // self.tableView.center =
         bottomLineBadges.borderColor = UIColor.clearColor().CGColor
-
-        self.labelSchool.hidden = false
-        self.labelGrades.hidden = false
-        self.labelJobTitle.hidden = false
-        self.labelBusiness.hidden = false
-        self.labelRole.hidden = false
-        self.labelBiography.hidden = false
-        
-        self.btnLinkSchool.hidden = false
-        self.txtGrades.hidden = false
-        self.txtJobTitle.hidden = false
-        self.txtBusiness!.hidden = false
-        self.txtRole!.hidden = false
-        self.txtBiography.hidden = false
         
         self.collectionView.hidden = true
+        self.labelNoBadges.hidden = true        
         
-//        self.btnContactUser.center = CGPointMake(160, 370 )
-//        self.lineView.center = CGPointMake( 160, 410 )
-//        self.labelEventFeed.center = CGPointMake(160,390 )
-//        self.tableView.center = CGPointMake(160, 500)
-        
+        if(gObjSearchUserListBean.role == "Teacher"){
+            
+            self.labelSchool.text   = "School:"
+            self.labelGrades.text   = "Grades:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            self.labelRole.hidden     = true
+            self.labelBiography.hidden = true
+            
+            
+            self.txtJobTitle.text       = gObjSearchUserListBean.role
+            self.txtBusiness!.text      = gObjSearchUserListBean.biography
+            self.txtRole!.hidden        = true
+            self.txtBiography.hidden    = true
+            
+            self.labelSchool.hidden   = false
+            self.labelGrades.hidden   = false
+            self.labelJobTitle.hidden = false
+            self.labelBusiness.hidden = false
+            
+            self.btnLinkSchool.hidden = false
+            self.txtGrades.hidden = false
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            
+            
+        }
+        else if(gObjSearchUserListBean.role == "Speaker"){
+            
+            self.labelSchool.hidden   = true
+            self.labelGrades.hidden   = true
+            self.btnLinkSchool.hidden = true
+            self.txtGrades.hidden = true
+            
+            self.labelJobTitle.hidden = false
+            self.labelBusiness.hidden = false
+            self.labelRole.hidden = false
+            self.labelBiography.hidden = false
+            
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            self.txtRole!.hidden = false
+            self.txtBiography.hidden = false
+            
+            
+        }
+        else{
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            self.labelJobTitle.hidden = false
+            self.labelBusiness.hidden = false
+            
+            self.labelSchool.hidden   = false
+            self.labelGrades.hidden   = false
+            self.btnLinkSchool.hidden = false
+            self.txtGrades.hidden = false
+
+
+        }
+
     }
     @IBAction func btnBadges(sender: AnyObject) {
         
@@ -302,6 +427,14 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         btnBadges.layer.addSublayer(bottomLineBadges)
         bottomLineProfile.borderColor = UIColor.clearColor().CGColor
         
+        if (userProfileBadgesArray.count > 0){
+            
+            self.labelNoBadges.hidden = true
+        }
+        else{
+            self.labelNoBadges.hidden = false
+        }
+
         self.collectionView.hidden = false
         
         self.labelSchool.hidden = true
@@ -319,10 +452,6 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtBiography.hidden = true
         
         
-//        self.btnContactUser.center = CGPointMake(160, 160 )
-//        self.labelEventFeed.center = CGPointMake(160, 180 )
-//        self.tableView.center = CGPointMake(160, 280)
-//        self.lineView.center = CGPointMake( 160, 190 )
         
         
     }
@@ -330,6 +459,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
          showOverlay(self.view)
          gSchoolNameSelect = true
+        
+        schoolProfileId = gObjSearchUserListBean.school_id
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
@@ -346,66 +477,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
 }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        
-        return 1
-        
-    }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return userProfileBadgesArray.count
-        
-    }
-    
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BdgeCellId", forIndexPath: indexPath) as! BadgeCollectionViewCell
-        
-        cell.backgroundColor = UIColor.whiteColor()
-        
-        var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesArray[indexPath.row]
-        
-        let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url)
-        var badgesImage = NSData(contentsOfURL:url!)
-        
-        
-        
-        cell.imgUserBadge.image = UIImage(data:badgesImage!)
-        cell.badgeId.text = String(imageDisplayBean.badge_id)
-        return cell
-        
-    }
-
-
-   
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                      
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-       
-        return CGSize(width: 70, height: 60)
-        
-    }
-    
-    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!)
-    {
-       
-      
-       var selectCell = collectionView.cellForItemAtIndexPath(indexPath) as! BadgeCollectionViewCell
-        
-        //selectCell.backgroundColor = UIColor.blueColor()
-        
-        print("select", selectCell.badgeId.text!)
-         gBadgeid = Int(selectCell.badgeId.text!)
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_SHARE_BADGE)
-    }
     
     
     

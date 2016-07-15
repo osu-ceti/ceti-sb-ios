@@ -49,7 +49,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchView.frame = CGRectMake(0, 17+44, self.view.frame.size.width, 24);
         let label = UILabel(frame: CGRectMake(0, 0, 200, 19))
         label.textAlignment = NSTextAlignment.Left
-        label.text = "Search for:"
+        label.text = "Search for: "
         label.textColor = UIColor.blackColor()
         searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
 //        
@@ -119,8 +119,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         menuButton = self.addRightBarButtonWithImage(UIImage(named: "menu_btn")!)
         
       
-        
-        gNotificationCount = 0
+       
         
         gBtnNotificationCount = UIBarButtonItem(title : String(gNotificationCount),style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
         

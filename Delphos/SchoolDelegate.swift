@@ -17,12 +17,15 @@ class SchoolDelegate:BaseDelegate{
         
       
             var strSchoolId: String
+        
         if (gSchoolNameSelect == true)
         {
-              strSchoolId = String(gObjSearchUserListBean.school_id)
+              //strSchoolId = String(gObjSearchUserListBean.school_id)
+            strSchoolId = String((objCurrentContoller as!  UserProfileController).schoolProfileId)
         }
         else{
-            strSchoolId = String(gObjUserBean.school_id)
+           // strSchoolId = String(gObjUserBean.school_id)
+             strSchoolId = String((objCurrentContoller as!  EventShowController).schoolProfileId)
         }
 
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in

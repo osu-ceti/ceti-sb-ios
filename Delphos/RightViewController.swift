@@ -24,7 +24,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         case Settings
         case Profile
         case Logout
-        case PushNotification
+       // case PushNotification
         
     }
     @IBOutlet var tableView: UITableView!
@@ -116,16 +116,16 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 testfacade.doTask(self,action: DelphosAction.SIGN_OUT)
 
                 break
-            case .PushNotification:
-
-              // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
-
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.HANDLE_NOTIFICATION)
-                
-                break
+//            case .PushNotification:
+//
+//              // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+//
+//                
+//                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//                let testfacade = appDelegate.getObjFacade()
+//                testfacade.doTask(self,action: DelphosAction.HANDLE_NOTIFICATION)
+//                
+//                break
 
             }
         }

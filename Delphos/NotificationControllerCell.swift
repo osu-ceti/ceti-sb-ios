@@ -16,6 +16,7 @@ class NotificationControllerCell: UITableViewCell {
     @IBOutlet var eventName: UILabel!
     @IBOutlet var eventId: UILabel!
     
+    @IBOutlet var id: UILabel!
     
     
     @IBOutlet var UserNotificationType: UILabel!

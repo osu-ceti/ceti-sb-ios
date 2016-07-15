@@ -11,7 +11,7 @@ import ObjectMapper
 class PushDataBean: Mappable {
     
     var badge_url:      String?
-    var count:          Int?
+    var count:          Int!
     var event_id:       Int?
     var event_name:     String?
     var message:        String?

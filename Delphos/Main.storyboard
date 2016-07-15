@@ -496,13 +496,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Szk-FS-xoL">
-                                                    <rect key="frame" x="17" y="18" width="295" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RnQ-HL-4iS">
                                                     <rect key="frame" x="181" y="11" width="55" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -517,6 +510,20 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WIG-2n-ay8">
+                                                    <rect key="frame" x="244" y="12" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Szk-FS-xoL">
+                                                    <rect key="frame" x="17" y="18" width="295" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -524,6 +531,7 @@
                                             <outlet property="actUSerName" destination="w2P-om-MqC" id="YoS-mN-SFm"/>
                                             <outlet property="eventId" destination="RnQ-HL-4iS" id="trv-kr-yds"/>
                                             <outlet property="eventName" destination="Szk-FS-xoL" id="MLa-4p-g6m"/>
+                                            <outlet property="id" destination="WIG-2n-ay8" id="gur-jo-uLz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -745,7 +753,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YEc-i0-KJg">
-                                <rect key="frame" x="4" y="162" width="304" height="72"/>
+                                <rect key="frame" x="4" y="163" width="304" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="52P-8W-nxb">
                                     <size key="itemSize" width="128" height="59"/>
@@ -786,6 +794,13 @@
                                     <outlet property="delegate" destination="m2X-tJ-2hg" id="xUI-k6-LLU"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't earned any Badges yet!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AqD-0S-BsA">
+                                <rect key="frame" x="9" y="163" width="274" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -800,6 +815,7 @@
                         <outlet property="labelEventFeed" destination="5sT-C3-m9W" id="4HG-SQ-mwt"/>
                         <outlet property="labelGrades" destination="0DN-fX-Kh7" id="tXT-xv-JUF"/>
                         <outlet property="labelJobTitle" destination="Yf1-Vz-52z" id="cqn-RP-uBH"/>
+                        <outlet property="labelNoBadges" destination="AqD-0S-BsA" id="V7H-Oj-dZ9"/>
                         <outlet property="labelNoEventFound" destination="uod-bd-ePZ" id="Axl-Bf-8ZW"/>
                         <outlet property="labelRole" destination="H55-in-9S0" id="VAG-63-PJK"/>
                         <outlet property="labelSchool" destination="EUI-Q3-Mo0" id="9vg-bs-IO9"/>
@@ -1817,8 +1833,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="41" sectionHeaderHeight="28" sectionFooterHeight="28" id="SMM-fp-qYx">
-                                <rect key="frame" x="0.0" y="46" width="320" height="443"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchId" rowHeight="41" id="Am0-PP-65K" customClass="SearchControllerCell" customModule="Delphos" customModuleProvider="target">
@@ -1882,7 +1898,7 @@
             </objects>
             <point key="canvasLocation" x="2939" y="136"/>
         </scene>
-	<!--View Badge Controller-->
+        <!--View Badge Controller-->
         <scene sceneID="pxZ-Fs-YOq">
             <objects>
                 <viewController storyboardIdentifier="ViewBadgeControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dFA-8t-AWV" customClass="ViewBadgeController" customModule="Delphos" customModuleProvider="target" sceneMemberID="viewController">
@@ -1923,7 +1939,7 @@ UwhIQVJFA
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1y6-zM-7OZ">
                                 <rect key="frame" x="40" y="92" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1937,7 +1953,7 @@ UwhIQVJFA
             </objects>
             <point key="canvasLocation" x="3296" y="141"/>
         </scene>
-		 <!--Badge Controller-->
+        <!--Badge Controller-->
         <scene sceneID="Jpu-Jc-pR3">
             <objects>
                 <viewController storyboardIdentifier="BadgeControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ao8-XU-OmA" customClass="BadgeController" customModule="Delphos" customModuleProvider="target" sceneMemberID="viewController">
@@ -1949,7 +1965,7 @@ UwhIQVJFA
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Award Badges To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cIB-Lq-B6y">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Award Badge To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cIB-Lq-B6y">
                                         <rect key="frame" x="44" y="124" width="190" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>

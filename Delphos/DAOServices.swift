@@ -735,7 +735,7 @@ class DAOServices: DAOBase {
             }
         })
     }
-    func getNotification(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    func getNotification( callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("get Notification")
         strURL =   DEV_TARGET + NOTIFICATION
        
@@ -789,11 +789,18 @@ class DAOServices: DAOBase {
     }
     func postBadgesAward(badgesAwardToEvent:Bool, eventId:Int, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         
-    
+        let strAward:String
+        if(badgesAwardToEvent)
+        {
+            strAward = "true"
+        }
+        else{
+            strAward = "false"
+        }
         
-        let strAward = String(badgesAwardToEvent)
+        //let strAward = String(badgesAwardToEvent)
         let strEventId = String(eventId)
- 
+        
         
         let strSubUrl = "?" + "award=" + strAward
         
@@ -852,5 +859,35 @@ class DAOServices: DAOBase {
         })
         
     }
+    func doReadNotification(strId: String , callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        strURL = NOTIFICATION + "/" + strId
+            
+        doPost(gEmptyJSON, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<DeviceBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+        
+    }
+
     
 }

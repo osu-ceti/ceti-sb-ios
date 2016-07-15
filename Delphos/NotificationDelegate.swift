@@ -17,32 +17,26 @@ class NotificationDelegate:BaseDelegate{
 
     func showNotification(objCurrentContoller: UIViewController) {
         
-        var strUserId: String = String(0)
         
-        doGetAPIs.getNotification(strUserId,callBack: {(result: AnyObject,statusCode: Int)  in
+        doGetAPIs.getNotification( {(result: AnyObject,statusCode: Int)  in
             
             if(statusCode == SUCCESS) {
                 //var objNotificationBean = result as! NotificationBean!
                 
+                
                 gObjNotificationController = self.instantiateVC(gStrNotificationControllerID) as! NotificationController
                 
                 
-                var objnotificationBean = result as! NotificationBean
-                //(objCurrentContoller as! NotificationController).countNotification = Int(objnotificationBean.count)
+                let objnotificationBean = result as! NotificationBean
+   
                 
                 gNotificationCount = objnotificationBean.count
-                //var notificationCount = objnotificationBean.count
                 
-//                if(objnotificationBean.count != nil){
-//                    gNotificationCount = String(objnotificationBean.count)
-//                }
-//                else{
-//                    gNotificationCount = "0"
-//                }
                 
                 gObjNotificationController.notificationArray = objnotificationBean.notifications
                 
                 dispatch_async(dispatch_get_main_queue(), {
+                  
                     
                     var objNotificationControllerNav = self.getNavigationController(gObjNotificationController)
                     
@@ -119,7 +113,24 @@ func deleteNotification(objCurrentContoller: UIViewController)  {
         
         
     }
+    func readNotification(objCurrentContoller: UIViewController)  {
+        
+        var strid = String((objCurrentContoller as! NotificationController).notificationId)
+        
+        doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
+            
+            if(statusCode == SUCCESS) {
+                
+                           }
+            else{
+               
+            }
+       
+        
+        
+    }
 
 
+    }
 
 }
