@@ -66,7 +66,7 @@ var gStrBadgeControllerID: String = "BadgeControllerId"
 var rightViewController: RightViewController!
 
 
-var regularMenu = ["Home", "Settings", "Profile", "Logout","PushNotification"]
+var regularMenu = ["Home", "Settings", "Profile", "Logout"]
 var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 

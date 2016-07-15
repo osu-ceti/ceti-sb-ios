@@ -63,7 +63,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
    
-   
+    var strUserId:Int!
+    var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
    // var acceptClaimBeanDetails: ShowEventBean?
@@ -76,6 +77,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var dateFormatter = NSDateFormatter()
     var minusCurrentDate = NSDate()
     var endDate = NSDate()
+    var startDateAndTime = NSDate()
     
          override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -197,12 +199,13 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
             endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
             
+            startDateAndTime = dateFormatter.dateFromString(gObjShowEventBean.event_start)!
            
             if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
                 RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
                 
                 
-                if (endDate.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
+                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
                     self.editEvent.hidden = true
                     self.cancelEvent.hidden = true
                     self.claim.hidden = true
@@ -238,6 +241,18 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.cancelClaim.hidden = true
                 }
 
+            }else{
+                
+                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
+                    self.editEvent.hidden = true
+                    self.cancelEvent.hidden = true
+                    self.claim.hidden = true
+                    self.cancelClaim.hidden = true
+                    self.tableView.hidden = true
+                    
+                }
+
+            
             }
 //            else if (gObjUserBean.id == gObjShowEventBean.speaker_id) {
 //                
@@ -315,7 +330,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
                     RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
                 
-                if (gObjShowEventBean.active == true && endDate.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
+                if (gObjShowEventBean.active == true && startDateAndTime.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
                     
                    
                 
@@ -433,6 +448,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.CLAIM_REJECT)
         
+        
         self.labelUserName.hidden = true
         self.mainLabelBusiness.hidden = true
         self.mainLabelJobTitle.hidden = true
@@ -485,12 +501,20 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(sender: AnyObject) {
-        
+         strUserId  = gSpeakerId
+        showOverlay(self.view)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+
     }
     @IBAction func btnSchoolProfile(sender: AnyObject) {
    
          showOverlay(self.view)
+        
         gSchoolNameSelect = false
+        schoolProfileId = gObjShowEventBean.loc_id
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
@@ -499,7 +523,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     }
     @IBAction func btnUserProfile(sender: AnyObject) {
    
-        
+         strUserId = gObjShowEventBean.user_id
+        showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)

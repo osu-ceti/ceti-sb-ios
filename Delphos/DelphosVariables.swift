@@ -48,7 +48,7 @@ var gClaimUser_id:Int!
 var gClaimSpeakerName:String!
 
 
-var gNotificationCount:Int!
+var gNotificationCount:Int! = 0
 
 var gBtnNotificationCount:UIBarButtonItem  = UIBarButtonItem()
 

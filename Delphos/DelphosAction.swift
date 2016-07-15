@@ -45,6 +45,8 @@ enum DelphosAction
     case BADGE_AWARD
     case VIEW_BADGE_AWARD
     
+    case READ_NOTIFICATION
+    
     
 
 }

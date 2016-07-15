@@ -134,7 +134,8 @@ class UserDelegate:BaseDelegate{
     
     
     func userProfile(objCurrentContoller: UIViewController) {
-        var strUserId: String = String(gObjShowEventBean.user_id)
+        
+        let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -145,7 +146,7 @@ class UserDelegate:BaseDelegate{
                 
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
-               // gObjUserProfileController.userProfileBadgesBean = objUserBean.badges
+                gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     

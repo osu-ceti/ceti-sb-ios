@@ -63,10 +63,14 @@ class SearchDelegate: BaseDelegate {
                     //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
                     
                     gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
+                    
                     if(gBtnRadioValue == events) {
+                        
                         gObjShowEventBean = result as! ShowEventBean
-                         self.showEventUI(objCurrentContoller)
-                    } else if(gBtnRadioValue == schools) {
+                        self.showEventUI(objCurrentContoller)
+                    }
+                    else if(gBtnRadioValue == schools) {
+                        
                         //gObjSchoolBean = result as! SchoolsBean
                         gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                         
@@ -80,7 +84,9 @@ class SearchDelegate: BaseDelegate {
                         
                         
                         self.doNavigate(objCurrentContoller, toController: objSchoolProfileControllerNav,  close: true)
-                    } else if(gBtnRadioValue == users) {
+                        
+                    }
+                    else if(gBtnRadioValue == users) {
                        
                         var objUserBean = result as! usersBean
                         

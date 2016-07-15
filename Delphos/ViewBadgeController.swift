@@ -52,7 +52,7 @@ class ViewBadgeController: NavController {
         }
 
         self.labelData.text = viewBadgeBean.event_owner! +
-        " was awarded a badge! for speaking at the event" + viewBadgeBean.event_name!
+        " awarded " + viewBadgeBean.user_name!  + " a badge for speaking at the event: " + viewBadgeBean.event_name!
         + ", at " + viewBadgeBean.school_name!
         
         

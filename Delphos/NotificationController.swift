@@ -20,6 +20,7 @@ class NotificationController: NavController {
     var notificationArray: [NotificationListBean]! = []
     
     var actUserId:Int!
+    var notificationId:Int!
     
     @IBOutlet var btnMarkAllNotification: UIButton!
     
@@ -94,8 +95,10 @@ class NotificationController: NavController {
         
         (cell as! NotificationControllerCell).eventId!.text = String(notificationDisplayBean.event_id)
         (cell as! NotificationControllerCell).UserNotificationType!.text = String(notificationDisplayBean.n_type)
+       
+        (cell as! NotificationControllerCell).id!.text = String(notificationDisplayBean.id)
         
-
+        
         gNotificationNType = notificationDisplayBean.n_type
         actUserId = Int(notificationDisplayBean.act_user_id)
         
@@ -202,10 +205,18 @@ class NotificationController: NavController {
         print("currentCell", selectCell.eventId.text!)
         
         gEventID = Int(selectCell.eventId.text!)
+        
+        notificationId = Int(selectCell.id.text!)
        
         gNotificationNType = Int(selectCell.UserNotificationType.text!)
        
-        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.READ_NOTIFICATION)
+        })
+
         
         switch gNotificationNType {
 

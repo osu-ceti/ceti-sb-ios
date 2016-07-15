@@ -32,11 +32,18 @@ class PushNotificationDelegate: BaseDelegate {
     }
     
     func handleRemoteNotification(objCurrentContoller: UIViewController) {
+        
         let pushNotificationBean = Mapper<PushNotificationBean>().map(gObjNotificationInfo)
         
         dispatch_async(dispatch_get_main_queue(), {
             
-            gBtnNotificationCount.title =  String(pushNotificationBean!.data?.count)
+           // var titleCount = String(pushNotificationBean!.data?.count)
+            
+            
+            gBtnNotificationCount.title = String(pushNotificationBean!.data!.count)
+                
+           
+            //gBtnNotificationCount.title = titleCount
             
             if(pushNotificationBean != nil && pushNotificationBean!.data?.n_type == "award_badge"){
                 
@@ -47,9 +54,15 @@ class PushNotificationDelegate: BaseDelegate {
                 
             }
             else {
+                 let objBadgesController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController
                 
-                gEventID = pushNotificationBean!.data?.event_id
-                self.showEvent(rootViewController)
+                gObjBadgeController = self.getNavigationController(objBadgesController)
+                
+                
+                rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
+
+//                gEventID = pushNotificationBean!.data?.event_id
+//                self.showEvent(rootViewController)
                 
                 
             }
