@@ -24,7 +24,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         case Settings
         case Profile
         case Logout
-       // case PushNotification
+        //case PushNotification
         
     }
     @IBOutlet var tableView: UITableView!

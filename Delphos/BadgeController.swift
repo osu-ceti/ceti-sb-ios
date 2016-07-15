@@ -58,11 +58,12 @@ class BadgeController: NavController {
         eventName.text = txtEventName
         speakerName.text = txtSpeakerName
         
-//        let url = NSURL(string:AWS_S3 + badgeUrl!)
-//        var data = NSData(contentsOfURL:url!)
-//        if data != nil {
-//            self.badgeImage.image = UIImage(data:data!)
-//        }
+       // badgeUrl
+        let url = NSURL(string:AWS_S3 + badgeUrl!)
+        var data = NSData(contentsOfURL:url!)
+        if data != nil {
+            self.badgeImage.image = UIImage(data:data!)
+        }
 
         
     }
