@@ -63,7 +63,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
    
-   
+    var strUserId:Int!
+    var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
    // var acceptClaimBeanDetails: ShowEventBean?
@@ -72,10 +73,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var selectedClaimId:Int = 0
     var selectedEventId:Int = 0
     var currentDate = NSDate()
+   
+    var dateFormatter = NSDateFormatter()
+    var minusCurrentDate = NSDate()
+    var endDate = NSDate()
+    var startDateAndTime = NSDate()
     
-       override func viewWillAppear(animated: Bool) {
+         override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //Adding Navbar
+        
+            //Adding Navbar
 //        menus = regularMenu
 //        rightViewController.isRegister = false
 //        rightViewController.tableView.reloadData()
@@ -98,7 +105,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated);
-        
+        rootViewController = self
         scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 250)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
@@ -132,7 +139,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
         self.tableView.tableFooterView = UIView()
         
-        var dateFormatter = NSDateFormatter()
+//        var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gDateTimeFormat
         
         txtTitle.font = UIFont.boldSystemFontOfSize(15)
@@ -155,6 +162,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.labelText5.text = "Created By:"
             self.labelText6.text = "Content:"
            gSpeakerId = Int(gObjShowEventBean.speaker_id)
+            
             gSpeakerName =  String(gObjShowEventBean.speaker)
 
             btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
@@ -181,23 +189,28 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             //self.txtText4.text =    gObjShowEventBean.loc_name
             //self.txtText5.text =    gObjShowEventBean.user_name
             self.txtText6.text   =    gObjShowEventBean.content
-           
+            minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
+
+            print("End Date = " + gObjShowEventBean.event_end)
+
+            dateFormatter.dateFormat = gDateTimeFormat
+
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+
+            endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
             
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a zzz"
-            let minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
-            var endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)
-            
-            //self.setNavigationBarItem()
+            startDateAndTime = dateFormatter.dateFromString(gObjShowEventBean.event_start)!
            
             if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
                 RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
                 
                 
-                if (endDate!.timeIntervalSinceReferenceDate < minusCurrentDate.timeIntervalSinceReferenceDate) {
+                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
                     self.editEvent.hidden = true
                     self.cancelEvent.hidden = true
                     self.claim.hidden = true
                     self.cancelClaim.hidden = true
+                    self.tableView.hidden = true
                     
                 }
                 else if (gObjShowEventBean.active == false)
@@ -228,6 +241,18 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.cancelClaim.hidden = true
                 }
 
+            }else{
+                
+                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
+                    self.editEvent.hidden = true
+                    self.cancelEvent.hidden = true
+                    self.claim.hidden = true
+                    self.cancelClaim.hidden = true
+                    self.tableView.hidden = true
+                    
+                }
+
+            
             }
 //            else if (gObjUserBean.id == gObjShowEventBean.speaker_id) {
 //                
@@ -300,10 +325,14 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
          //cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         if(gObjUserBean.id == gObjShowEventBean.user_id){
+           
             if(claimBeanArray?.count > 0 &&  gSpeakerId == 0 &&
                 (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
                     RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
-                if (gObjShowEventBean.active == true){
+                
+                if (gObjShowEventBean.active == true && startDateAndTime.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
+                    
+                   
                 
                     self.labelClaims.hidden = false
                     self.tableView.hidden  = false
@@ -312,6 +341,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                       
                     gClaimUserName = claimDisplayBean.user_name
                     gClaimUser_id = claimDisplayBean.user_id
+                    
                     (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
                     (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
                 }
@@ -418,6 +448,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.CLAIM_REJECT)
         
+        
         self.labelUserName.hidden = true
         self.mainLabelBusiness.hidden = true
         self.mainLabelJobTitle.hidden = true
@@ -470,18 +501,30 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(sender: AnyObject) {
+         strUserId  = gSpeakerId
+        showOverlay(self.view)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+
     }
-    @IBAction func btnLocation(sender: AnyObject) {
+    @IBAction func btnSchoolProfile(sender: AnyObject) {
+   
          showOverlay(self.view)
+        
         gSchoolNameSelect = false
+        schoolProfileId = gObjShowEventBean.loc_id
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
         
 
     }
-    @IBAction func btnCreatedBy(sender: AnyObject) {
-        
+    @IBAction func btnUserProfile(sender: AnyObject) {
+   
+         strUserId = gObjShowEventBean.user_id
+        showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)

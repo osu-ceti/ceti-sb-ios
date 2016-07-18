@@ -17,12 +17,15 @@ class SchoolDelegate:BaseDelegate{
         
       
             var strSchoolId: String
+        
         if (gSchoolNameSelect == true)
         {
-              strSchoolId = String(gObjSearchUserListBean.school_id)
+              //strSchoolId = String(gObjSearchUserListBean.school_id)
+            strSchoolId = String((objCurrentContoller as!  UserProfileController).schoolProfileId)
         }
         else{
-            strSchoolId = String(gObjUserBean.school_id)
+           // strSchoolId = String(gObjUserBean.school_id)
+             strSchoolId = String((objCurrentContoller as!  EventShowController).schoolProfileId)
         }
 
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
@@ -35,7 +38,7 @@ class SchoolDelegate:BaseDelegate{
                 gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
                 gObjSearchSchoolListBean = objSchoolBean.school
                 gObjSchoolImage = objSchoolBean.badge_url
-               // gObjSchoolProfileController .schoolImage.image = UIImage(named:"objSchoolBean.badge_url")
+               
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -58,22 +61,20 @@ class SchoolDelegate:BaseDelegate{
             if(statusCode == SUCCESS) {
              
                  var objMakeMySchoolBean = result as! MakeMySchoolBean
-               gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
+                gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
+               
                 print("Make my school")
-                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
+               
+                gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 dispatch_async(dispatch_get_main_queue(), {
-                    
-                   // gObjPublicProfileController = self.fetchNavController(gStrPublicProfileControllerID)
-                    
-                  // objCurrentContoller.slideMenuController()?.changeMainViewController(gObjPublicProfileController, close: true)
-                    
+
                     
                     var objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
                     
                     
                     self.doNavigate(objCurrentContoller, toController: objPublicProfileControllerNav,  close: true)
 
-                                  })
+                 })
 
               
                 

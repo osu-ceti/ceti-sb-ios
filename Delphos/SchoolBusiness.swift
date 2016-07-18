@@ -15,7 +15,7 @@ let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
 //let DEV_URL: String = "http://192.168.1.3:3000"
 //let DEV_TARGET: String  =  "http://192.168.1.3:3000/api/"
 let DEV_TARGET_NO_API: String  =  "http://192.168.1.3:3000/"
-
+	
 //let DEV_URL: String = "https://www.school2biz.com";
 //let DEV_TARGET: String =  "https://www.school2biz.com/api/"
 
@@ -67,6 +67,14 @@ let SIGN_OUT = "sign_out"
 let MAKE_MINE = "make_mine/"
 let USER_PROFILE = "users"
 let PROFILE = "profile"
+
+let NOTIFICATION = "notifications"
+let AWARD_BADGES = "award_badge"
+let BADGES = "badges"
+
+let REGISTER_DEVICE = "register_device"
+
+
 
 func getTarget() -> String {
     if(DEBUG) {

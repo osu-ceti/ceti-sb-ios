@@ -24,12 +24,14 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         case Settings
         case Profile
         case Logout
+        //case PushNotification
         
     }
     @IBOutlet var tableView: UITableView!
     var isRegister: Bool = false
     
     var homeController: UIViewController!
+    
     
     convenience init() {
         self.init()
@@ -43,7 +45,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         gObjHomeController = fetchNavController(gStrHomeControllerID)
         
         gObjLoginController = fetchNavController(gStrLoginControllerID) 
@@ -88,9 +90,11 @@ class RightViewController: UIViewController, UIWebViewDelegate {
             switch menu {
             case .Home:
                 if(isRegister){
-                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)                    
+                    rootViewController = gObjLoginController
+                    self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 }
                 else{
+                    rootViewController = gObjHomeController
                     self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 }
                 break
@@ -113,8 +117,20 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 testfacade.doTask(self,action: DelphosAction.SIGN_OUT)
 
                 break
-                
+//            case .PushNotification:
+//
+//              // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+//
+//                
+//                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//                let testfacade = appDelegate.getObjFacade()
+//                testfacade.doTask(self,action: DelphosAction.HANDLE_NOTIFICATION)
+//                
+//                break
+
             }
         }
     }
+    
+   
    }

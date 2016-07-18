@@ -21,17 +21,25 @@ class DelegateController: BaseDelegate {
     var objUserDelegate : UserDelegate!
     var objSearchDelegate : SearchDelegate!
     var objSchoolDelegate : SchoolDelegate!
-    
+    var objNotificationDelegate : NotificationDelegate!
+    var objPushNotificationDelegate : PushNotificationDelegate!
+    var objBadgeDelegate : BadgeDelegate!
+
     
     override init() {
-        doPostAPIs = DAOServices()
-        doGetAPIs = doPostAPIs
+        
         
         objEventDelegate = EventDelegate()
         objClaimsDelegate = ClaimsDelegate()
         objUserDelegate = UserDelegate()
         objSearchDelegate = SearchDelegate()
         objSchoolDelegate = SchoolDelegate()
+
+        objNotificationDelegate = NotificationDelegate()
+
+        objPushNotificationDelegate = PushNotificationDelegate()
+        objBadgeDelegate = BadgeDelegate()
+
 
     }
     
@@ -45,7 +53,13 @@ class DelegateController: BaseDelegate {
         {
         case .LOGIN:
             print("Login")
-            objUserDelegate.login(objCurrentController)
+            objUserDelegate.login(objCurrentController, callback: {(status:Bool)
+                in
+                if(status){
+                    //Register Device
+                    self.delegateControl(objCurrentController,action: DelphosAction.REGISTER_DEVICE)
+                }
+            })
             
         case .EVENT_ALL:
             print("Event All")
@@ -134,6 +148,42 @@ class DelegateController: BaseDelegate {
         case .USER_PROFILE:
             print("Menu USER PROFILE")
             objUserDelegate.menuUserProfile(objCurrentController)
+            
+
+        case .SHOW_NOTIFICATION:
+            print("Menu USER PROFILE")
+            objNotificationDelegate.showNotification(objCurrentController)
+            
+            
+        case .SHOW_SHARE_BADGE:
+            print("SHOW SHARE BADGE")
+            objNotificationDelegate.showShareBadge(objCurrentController)
+
+
+        case .REGISTER_DEVICE:
+            print("Menu REGISTER DEVICE")
+            objPushNotificationDelegate.registerDevice()
+
+        case .BADGE_AWARD:
+            print("BADGE AWARD")
+            objBadgeDelegate.badgesAward(objCurrentController)
+
+        case .HANDLE_NOTIFICATION:
+            print("HANDLE NOTIFICATION")
+            objPushNotificationDelegate.handleRemoteNotification(objCurrentController)
+
+        case .VIEW_BADGE_AWARD:
+            print("HANDLE NOTIFICATION")
+            objBadgeDelegate.viewAwardBadge(objCurrentController)
+            
+        case .READ_NOTIFICATION:
+            print("READ NOTIFICATION")
+            objNotificationDelegate.readNotification(objCurrentController)
+            
+        case .MARK_ALL_NOTIFICATION:
+            print("MARK ALL NOTIFICATION")
+            objNotificationDelegate.deleteNotification(objCurrentController)
+
             
         default:
             print("Error in delegate enum")

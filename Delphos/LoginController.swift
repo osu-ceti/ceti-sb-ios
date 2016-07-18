@@ -37,7 +37,7 @@ class LoginController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         rootViewController = self
         self.requiredError.hidden = true
        
         // Create the navigation bar
@@ -72,7 +72,7 @@ class LoginController: UIViewController {
 
 //        userTxt.text = "jith87@gmail.com"
 //        passwordTxt.text = "ontojith"
-//       
+
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
         
         
@@ -91,9 +91,7 @@ class LoginController: UIViewController {
         passwordTxt.borderStyle = UITextBorderStyle.None
         passwordTxt.layer.addSublayer(textboxLine)
         
-        
-        
-               
+        rootViewController = self            
         
       
 

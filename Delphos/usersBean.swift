@@ -24,6 +24,8 @@ class usersBean: Mappable {
 
     var data: UserBean!
     
+    var badges:[UserProfileBadgesBean]!
+    
     required init()
     {
         //Do not remove required for Initialization
@@ -43,6 +45,8 @@ class usersBean: Mappable {
         user    <- map["user"]
         
         data    <- map["data"]
+        
+        badges    <- map["badges"]
 
     }
 }

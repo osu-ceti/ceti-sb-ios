@@ -11,7 +11,7 @@ import UIKit
 
 class UserDelegate:BaseDelegate{
     
-    func login(objCurrentContoller: UIViewController) -> Bool {
+    func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! LoginController
         
@@ -41,32 +41,33 @@ class UserDelegate:BaseDelegate{
                     
                     gObjUsers = loginResult as! UserBean
                     //                   objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
+                    callback(status: true)
                 })
                 
+                
+                
             }
-            else if statusCode == unauthorized_request{
+            else if statusCode == UNAUTHORIZED_REQUEST{
                 
                 print("Login failure")
                 boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
+                self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
 
                 
             }
-            else if statusCode == bad_request {
+            else if statusCode == BAD_REQUEST {
                 print("Login failure")
                 boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage:"Bad Request." )
-                
-
-              
-                
+                self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
+   
             }
             else{
                 print("Login failure")
                 boolLogin = false;
-                self.showAlert(objCurrentContoller, strMessage:"Could not connect to the server." )
+                self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
             }
+             callback(status: boolLogin)
             
         }
         return boolLogin
@@ -133,7 +134,8 @@ class UserDelegate:BaseDelegate{
     
     
     func userProfile(objCurrentContoller: UIViewController) {
-        var strUserId: String = String(gObjShowEventBean.user_id)
+        
+        let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -144,6 +146,7 @@ class UserDelegate:BaseDelegate{
                 
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
+                gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -259,6 +262,7 @@ class UserDelegate:BaseDelegate{
         
         doGetAPIs.getMenuUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
+               
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 
                 
@@ -278,5 +282,7 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
+
+
     
 }

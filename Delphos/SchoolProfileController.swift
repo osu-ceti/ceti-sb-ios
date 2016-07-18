@@ -58,7 +58,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
@@ -68,6 +68,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         if data != nil {
            self.schoolImage.image = UIImage(data:data!)
         }
+        
          self.tableView.backgroundColor = bgColor
         self.tableView.dataSource = self
         tableView.delegate = self

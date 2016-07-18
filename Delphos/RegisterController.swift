@@ -57,7 +57,7 @@ class RegisterController: NavController, UITextFieldDelegate {
         //Adding Navbar
         self.isBackEnabled = false
         self.isSearchEnabled = false
-        backBtoonNav = "loginId"
+        backButtonNav = "loginId"
         setNavBar(self.view.frame.size.width)
         //searchBar.delegate = self
         let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
@@ -77,6 +77,7 @@ class RegisterController: NavController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        rootViewController = self
         // Do any additional setup after loading the view, typically from a nib.
         gBtnRegisterRadio = ""
         self.requiredField.hidden = true

@@ -27,7 +27,7 @@ class MessageController:  NavController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rootViewController = self
         //Adding Navbar
         self.isBackEnabled = true
         
@@ -40,9 +40,10 @@ class MessageController:  NavController  {
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
-        messageViewUserName.font = UIFont.boldSystemFontOfSize(15)
+         messageViewUserName.font = UIFont.boldSystemFontOfSize(15)
          labelSendMessage.font = UIFont.boldSystemFontOfSize(15)
         
+       
         if (gUserProfileMessage == true)
         {
             self.messageViewUserName.text = gObjSearchUserListBean.name

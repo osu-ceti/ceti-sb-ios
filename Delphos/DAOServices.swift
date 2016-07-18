@@ -215,7 +215,37 @@ class DAOServices: DAOBase {
         })
     }
     
-    
+    func getShareBadge(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get share badge")
+        var strUserProfileId = String(gSearchUserProfile)
+       
+        var strBadgeid = String(gBadgeid)
+        strURL = DEV_TARGET + USERS + strUserProfileId + "/" + BADGES + "/" + strBadgeid
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showBadgeBean = Mapper<UserProfileBadgesBean>().map(jsonResult)
+                
+                callBack?(result: showBadgeBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
     
     //GET APIs -- ENDS HERE
@@ -677,5 +707,187 @@ class DAOServices: DAOBase {
             }
         })
     }
+   
+    func getAwardbadges(strSchoolID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get award badges")
+        strURL =  DEV_TARGET + USERS + AWARD_BADGES
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    func getNotification( callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get Notification")
+        strURL =   DEV_TARGET + NOTIFICATION
+       
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
+                
+                callBack?(result: showNotificationBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+    func doDeleteNotification(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        var strEmptyJson = gEmptyJSON
+        strURL =   NOTIFICATION
+        
+        
+        //let JSONString = Mapper().toJSONString(strClaimID:nil, prettyPrint: true)
+        
+        doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status) {
+                var signoutBean = Mapper<SignoutResponseBean>().map(jsonResult)!
+                callBack?(result: signoutBean, statusCode: statusCode )
+                return
+            } else {
+                //println(jsonResult)
+                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+        
+    }
+    func postBadgesAward(badgesAwardToEvent:Bool, eventId:Int, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        let strAward:String
+        if(badgesAwardToEvent)
+        {
+            strAward = "true"
+        }
+        else{
+            strAward = "false"
+        }
+        
+        //let strAward = String(badgesAwardToEvent)
+        let strEventId = String(eventId)
+        
+        
+        let strSubUrl = "?" + "award=" + strAward
+        
+        let strSubUrl2 = "&" + "event_id=" + strEventId
+        
+        strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
+        
+        
+        
+        //var JSONString = Mapper().toJSONString(objAwardBadges, prettyPrint: true)
+        
+        doPost(nil,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
+            
+            if(status){
+                let awardBadgeResponseBean = Mapper<AwardBadgeResponse>().map(jsonResult)!
+                callBack?(result: awardBadgeResponseBean, statusCode: statusCode )
+                return
+            }
+            else {
+                //println(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                callBack?(result: errorBean, statusCode: statusCode )
+                return
+            }
+            
+            
+        })
+    }
+    
+    func doRegisterDevice(objDeviceBean: DeviceBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        strURL = REGISTER_DEVICE
+        let userJSONString = Mapper().toJSONString(objDeviceBean, prettyPrint: true)
+        doPost(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<DeviceBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+        
+    }
+    func doReadNotification(strId: String , callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        
+        strURL = NOTIFICATION + "/" + strId
+            
+        doPost(gEmptyJSON, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<DeviceBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+        
+    }
+
     
 }

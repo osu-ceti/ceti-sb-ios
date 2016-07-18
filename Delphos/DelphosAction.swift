@@ -34,4 +34,19 @@ enum DelphosAction
     case SHOW_MAKE_MY_SCHOOL
     case EDIT_USER_PROFILE
     case USER_PROFILE
+
+    case SHOW_NOTIFICATION
+    case BADGES_AWARD
+    case HANDLE_NOTIFICATION
+    case MARK_ALL_NOTIFICATION
+    case SHOW_SHARE_BADGE
+
+    case REGISTER_DEVICE
+    case BADGE_AWARD
+    case VIEW_BADGE_AWARD
+    
+    case READ_NOTIFICATION
+    
+    
+
 }

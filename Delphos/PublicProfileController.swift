@@ -57,6 +57,7 @@ class PublicProfileController:  NavController{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        rootViewController = self
         //Adding Navbar
         //        menus = regularMenu
         //        rightViewController.isRegister = false

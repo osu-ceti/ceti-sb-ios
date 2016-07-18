@@ -9,9 +9,10 @@
 import UIKit
 
 var gObjStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+var rootViewController: UIViewController!
 
-var doPostAPIs: DAOServices!
-var doGetAPIs: DAOServices!
+
+var gStrDeviceToken: String!
 
 var gObjHomeController : UINavigationController!
 var gStrHomeControllerID: String = "HomeID"
@@ -42,9 +43,25 @@ var gStrUserProfileControllerID: String = "UserProfileId"
 var gObjSchoolProfileController : SchoolProfileController!
 var gStrSchoolProfileControllerID: String = "SchoolProfileControllerId"
 
-//var gObjPublicProfileController : UINavigationController!
+//var gObjPublicProfileControllerNav : UINavigationController!
 var gObjPublicProfileController : PublicProfileController!
 var gStrPublicProfileControllerID: String = "PublicProfileControllerId"
+
+
+var gObjNotificationController : NotificationController!
+var gObjNotificationControllerNav : UINavigationController!
+var gStrNotificationControllerID: String = "NotificationControllerId"
+
+var gObjBadgesAwardController :UINavigationController!
+var gStrBadgesAwardControllerID: String = "BadgesAwardControllerId"
+
+var gObjViewBadgeController :ViewBadgeController!
+var gStrViewBadgeControllerID: String = "ViewBadgeControllerId"
+
+//var gObjBadgeController : BadgeController!
+var gObjBadgeController : UINavigationController!
+var gStrBadgeControllerID: String = "BadgeControllerId"
+
 
 var rightViewController: RightViewController!
 
@@ -54,4 +71,6 @@ var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 
 var gEmptyJSON = "{}"
+
+var gObjNotificationInfo: AnyObject?
 
