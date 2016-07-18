@@ -15,10 +15,10 @@ class BadgeDelegate:BaseDelegate{
     func badgesAward(objCurrentContoller: UIViewController) {
         
         var badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
-        //var eventId = (objCurrentContoller as! BadgeController).eventId
+        var eventId = (objCurrentContoller as! BadgeController).eventId
         
-        var eventId = 309
-        doPostAPIs.postBadgesAward(badgesAwardToEvent,eventId: eventId,callBack: {(result: AnyObject,statusCode: Int)   in
+        //var eventId = 309
+        doPostAPIs.postBadgesAward(badgesAwardToEvent,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
            
             if(statusCode == SUCCESS) {
           

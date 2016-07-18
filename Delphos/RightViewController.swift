@@ -32,6 +32,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     
     var homeController: UIViewController!
     
+    
     convenience init() {
         self.init()
     }
@@ -130,4 +131,6 @@ class RightViewController: UIViewController, UIWebViewDelegate {
             }
         }
     }
+    
+   
    }
