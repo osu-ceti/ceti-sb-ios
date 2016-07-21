@@ -258,9 +258,9 @@ class UserDelegate:BaseDelegate{
        
     }
     func menuUserProfile(objCurrentContoller: UIViewController) {
-       var strUserId: String = String(0)
+       
         
-        doGetAPIs.getMenuUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
+        doGetAPIs.getMenuUserProfile( {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
@@ -282,6 +282,68 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
+    
+    func viewSettings(objCurrentContoller: UIViewController) {
+        
+        
+        doGetAPIs.getSettings({(result: AnyObject,statusCode: Int)   in
+            if(statusCode == SUCCESS) {
+                
+                gObjSettingsController = self.instantiateVC(gStrSettingsControllerID) as! SettingsController
+                
+
+                let objSettingBean = result as! ViewSettingsResponse
+                
+              gObjSettingsController.settingsBean = objSettingBean
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    let objSettingsControllerNav = self.getNavigationController(gObjSettingsController)
+                    
+                    
+                    self.doNavigate(objCurrentContoller, toController: objSettingsControllerNav,  close: true)
+                    
+                })
+                
+            }
+        })
+    }
+    
+    func saveSettings(objCurrentContoller: UIViewController)  {
+        
+        let publicProfileController = objCurrentContoller as! SettingsController
+        
+
+        
+        let objSettingsInputParamBean: SettingsListBean = SettingsListBean()
+        
+        
+        objSettingsInputParamBean.set_updates = publicProfileController.radioEventUpdateBean
+        objSettingsInputParamBean.set_confirm = publicProfileController.radioComfirmationsBean
+        objSettingsInputParamBean.set_claims = publicProfileController.radioEventClaimBean
+        
+         let objSettingsInputBean: SettingsBean = SettingsBean()
+        
+        objSettingsInputBean.user = objSettingsInputParamBean
+        
+        doPostAPIs.doSaveSettings(objSettingsInputBean){ (result: AnyObject, statusCode: Int) in
+            if(statusCode == SUCCESS) {
+                print("Save Settings")
+                self.showAlert(objCurrentContoller, strMessage: "Settings Saved")
+                
+                    
+            }
+              else{
+                
+                print("NOt Save Settings")
+                
+            }
+            
+        }
+        
+    }
+
+
 
 
     

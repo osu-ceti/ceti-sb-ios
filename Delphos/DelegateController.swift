@@ -184,7 +184,15 @@ class DelegateController: BaseDelegate {
             print("MARK ALL NOTIFICATION")
             objNotificationDelegate.deleteNotification(objCurrentController)
 
+        case .VIEW_SETTINGS:
+            print("SAVE SETTINGS")
+           objUserDelegate.viewSettings(objCurrentController)
             
+        case .SAVE_SETTINGS:
+            print("SAVE SETTINGS")
+            objUserDelegate.saveSettings(objCurrentController)
+            
+      
         default:
             print("Error in delegate enum")
 
