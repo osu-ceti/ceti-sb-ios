@@ -46,7 +46,8 @@ enum DelphosAction
     case VIEW_BADGE_AWARD
     
     case READ_NOTIFICATION
-    
+    case VIEW_ACCOUNT_EDIT
+    case EDIT_PROFILE_ACCOUNT
     
 
 }

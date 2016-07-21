@@ -259,6 +259,13 @@ class PublicProfileController:  NavController{
         // Initialization code
 }
     
+    @IBAction func btnAccountEditClick(sender: AnyObject) {
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.VIEW_ACCOUNT_EDIT)
+    }
     
     
 }

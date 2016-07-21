@@ -51,6 +51,7 @@ class UserBean: Mappable {
     var updated_at: String?
     
     
+    
     required init()
     {
         //Do not remove required for Initialization

@@ -59,11 +59,8 @@ var gNotificationNType:Int!
 var gBadgeid:Int!
 
 var gSearchUserProfile:Int!
+
 var gActUserId:Int! = 0
-
-
-
-
 
 var gSpeakerId:Int!
 
@@ -95,6 +92,8 @@ var gObjSchoolBean : SchoolsBean!
 var gObjUserProfileBadgesBean : UserProfileBadgesBean!
 
 var viewBadgeBean:UserProfileBadgesBean!
+
+var gPublicEditaccountBean: UserBean!
 
 
 

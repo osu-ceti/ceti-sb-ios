@@ -258,7 +258,7 @@ class UserDelegate:BaseDelegate{
        
     }
     func menuUserProfile(objCurrentContoller: UIViewController) {
-       var strUserId: String = String(0)
+       let strUserId: String = String(0)
         
         doGetAPIs.getMenuUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -266,7 +266,8 @@ class UserDelegate:BaseDelegate{
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 
                 
-                var objUserBean = result as! UserBean
+                let objUserBean = result as! UserBean
+                gPublicEditaccountBean = result as! UserBean
                 
                 gObjPublicProfileController.userProfileBean = objUserBean
              
@@ -281,6 +282,67 @@ class UserDelegate:BaseDelegate{
                 
             }
         })
+    }
+    func viewAccountEdit(objCurrentContoller: UIViewController) {
+    
+       
+        
+        gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController
+       gObjAccountEditController.userAccountEditBean = gPublicEditaccountBean
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
+            
+            
+            self.doNavigate(objCurrentContoller, toController: gObjAccountEditControllerNav,  close: true)
+            
+        })
+        
+
+    
+    }
+    func accountEdit(objCurrentContoller: UIViewController)  {
+        
+        let accountController = objCurrentContoller as! AccountEditController
+        
+        // var strUserName = gObjMakeMySchoolListBean.name
+        let accountId = accountController.accountEditId
+        let strTxtName = accountController.txtName.text
+        let strTxtEmail = accountController.txtEmail.text
+        let strTxtRole = accountController.txtRole
+        
+        let strNewpassword = accountController.txtNewPassword.text
+        let strConfirmPassword = accountController.txtConfirmPassword.text
+        let strCurrentPassword = accountController.txtCurrentPassword.text
+        
+        
+        
+        let objAccountInputBean: AccountEditBean = AccountEditBean()
+        
+        objAccountInputBean.name = strTxtName
+        objAccountInputBean.email = strTxtEmail
+        objAccountInputBean.password = strNewpassword
+        objAccountInputBean.confirm_password = strConfirmPassword
+        objAccountInputBean.current_password = strCurrentPassword
+        //objAccountInputBean.id = accountId
+        objAccountInputBean.role = strTxtRole
+        var objAccountBean: AccountEditListBean = AccountEditListBean()
+        
+        objAccountBean.user = objAccountInputBean
+        
+        doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
+            if(statusCode == SUCCESS) {
+                print("EDIT ACCOUNT profile")
+                
+            }
+                else{
+                print("Not EDIT ACCOUNT profile")
+                
+            }
+            
+        }
+        
     }
 
 

@@ -184,6 +184,13 @@ class DelegateController: BaseDelegate {
             print("MARK ALL NOTIFICATION")
             objNotificationDelegate.deleteNotification(objCurrentController)
 
+        case .VIEW_ACCOUNT_EDIT:
+            print("VIEW ACCOUNT EDIT")
+            objUserDelegate.viewAccountEdit(objCurrentController)
+            
+        case .EDIT_PROFILE_ACCOUNT:
+            print("VIEW ACCOUNT EDIT")
+            objUserDelegate.accountEdit(objCurrentController)
             
         default:
             print("Error in delegate enum")

@@ -71,6 +71,7 @@ let PROFILE = "profile"
 let NOTIFICATION = "notifications"
 let AWARD_BADGES = "award_badge"
 let BADGES = "badges"
+let ACCOUNT = "account"
 
 let REGISTER_DEVICE = "register_device"
 
