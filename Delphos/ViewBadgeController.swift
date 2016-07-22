@@ -17,6 +17,12 @@ class ViewBadgeController: NavController {
     @IBOutlet var labelData: UILabel!
     
     
+    
+    @IBOutlet var btnShareBadge: UIButton!
+   
+    
+    var data = NSData()
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
@@ -46,9 +52,9 @@ class ViewBadgeController: NavController {
       
         
         let url = NSURL(string: AWS_S3 + viewBadgeBean.badge_url)
-        var data = NSData(contentsOfURL:url!)
-        if data != nil {
-            self.imgbadge.image = UIImage(data:data!)
+         data = NSData(contentsOfURL:url!)!
+        if data != "" {
+            self.imgbadge.image = UIImage(data:data)
         }
 
         self.labelData.text = viewBadgeBean.event_owner! +
@@ -64,5 +70,20 @@ class ViewBadgeController: NavController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func btnShareBadgeClick(sender: AnyObject) {
+        print("share")
+        
+        let shareData =  viewBadgeBean.event_owner! +
+            " awarded " + viewBadgeBean.user_name!  + " a badge for speaking at the event: " + viewBadgeBean.event_name!
+            + ", at " + viewBadgeBean.school_name!
+        
+        let imageUrl: UIImage = UIImage(data: data)!
+        
+        let shareVC: UIActivityViewController = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
+        self.presentViewController(shareVC, animated: true, completion: nil)
+        
+    }
+   
 
 }

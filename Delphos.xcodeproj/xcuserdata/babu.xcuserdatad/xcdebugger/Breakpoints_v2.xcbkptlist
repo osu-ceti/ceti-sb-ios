@@ -33,6 +33,38 @@
             endingLineNumber = "690"
             landmarkName = "getNotification(_:callBack:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delphos.DAOServices.doEditProfile (Delphos.MakeMySchoolListBean, callBack : Swift.Optional&lt;(result : Swift.AnyObject, statusCode : Swift.Int) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "Delphos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/DAOServices.swift"
+                  timestampString = "490801267.902285"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "690"
+                  endingLineNumber = "690"
+                  offsetFromSymbolStart = "656">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delphos.DAOServices.(doEditProfile (Delphos.MakeMySchoolListBean, callBack : Swift.Optional&lt;(result : Swift.AnyObject, statusCode : Swift.Int) -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Delphos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/DAOServices.swift"
+                  timestampString = "490801267.90272"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "691"
+                  endingLineNumber = "691"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -129,38 +161,6 @@
             endingLineNumber = "147"
             landmarkName = "userProfile(_:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Delphos.UserDelegate.(userProfile (__ObjC.UIViewController) -&gt; ()).(closure #1)"
-                  moduleName = "Delphos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/UserDelegate.swift"
-                  timestampString = "489402002.550009"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
-                  offsetFromSymbolStart = "668">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Delphos.UserDelegate.(userProfile (__ObjC.UIViewController) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "Delphos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/UserDelegate.swift"
-                  timestampString = "489402002.550305"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "19">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
