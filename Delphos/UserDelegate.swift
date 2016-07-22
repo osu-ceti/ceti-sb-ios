@@ -337,6 +337,8 @@ class UserDelegate:BaseDelegate{
                 print("Account Edited")
                 self.showAlert(objCurrentContoller, strMessage:"Account Edited")
                 
+                gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     var gObjPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
@@ -348,16 +350,20 @@ class UserDelegate:BaseDelegate{
                 
             }
                 else{
-                self.showAlert(objCurrentContoller, strMessage:"Account Edited ")
+                self.showAlert(objCurrentContoller, strMessage:"Not Account Edited ")
                 print("Not Account Edited")
+             
                 
-                 dispatch_async(dispatch_get_main_queue(), {
-                
-                    var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
-                
-                
-                    self.doNavigate(objCurrentContoller, toController: gObjAccountEditControllerNav,  close: true)
-                    
+//                gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController
+//                
+                dispatch_async(dispatch_get_main_queue(), {
+                 (objCurrentContoller as! AccountEditController).hideOverlayView()
+//                
+//                    var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
+//                
+//                
+//                    self.doNavigate(objCurrentContoller, toController: gObjAccountEditControllerNav,  close: true)
+//                    
                   })
                 
                 

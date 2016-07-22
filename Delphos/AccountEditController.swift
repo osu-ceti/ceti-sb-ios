@@ -140,6 +140,10 @@ class AccountEditController: NavController {
         
         
     }
+    func hideOverlayView() {
+        activityIndicator.stopAnimating()
+        overlayView.removeFromSuperview()
+    }
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated);
@@ -254,7 +258,7 @@ class AccountEditController: NavController {
 //                    self.requiredField.text = "Required Role"
 //                }
                 else{
-                
+                    showOverlay(self.view)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
                     testfacade.doTask(self,action: DelphosAction.EDIT_PROFILE_ACCOUNT)
