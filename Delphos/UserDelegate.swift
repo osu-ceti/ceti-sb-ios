@@ -333,11 +333,33 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
-                print("EDIT ACCOUNT profile")
+                
+                print("Account Edited")
+                self.showAlert(objCurrentContoller, strMessage:"Account Edited")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    var gObjPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
+                    
+                    
+                    self.doNavigate(objCurrentContoller, toController: gObjPublicProfileControllerNav,  close: true)
+                    
+                })
                 
             }
                 else{
-                print("Not EDIT ACCOUNT profile")
+                self.showAlert(objCurrentContoller, strMessage:"Account Edited ")
+                print("Not Account Edited")
+                
+                 dispatch_async(dispatch_get_main_queue(), {
+                
+                    var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
+                
+                
+                    self.doNavigate(objCurrentContoller, toController: gObjAccountEditControllerNav,  close: true)
+                    
+                  })
+                
                 
             }
             
