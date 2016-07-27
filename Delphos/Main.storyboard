@@ -101,6 +101,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Oyn-1w-8Me"/>
                     <connections>
+                        <outlet property="btnRegister" destination="LO9-Ak-N6M" id="RPM-3L-m6n"/>
+                        <outlet property="btnSignIn" destination="Yog-Zp-VLS" id="a8Y-nf-oUP"/>
+                        <outlet property="labelRememberMe" destination="HuM-zf-04k" id="uOD-RX-AbR"/>
                         <outlet property="passwordTxt" destination="QEY-aC-L3Z" id="dGX-5s-AoK"/>
                         <outlet property="requiredError" destination="usX-dD-bbP" id="Zq1-LH-MLX"/>
                         <outlet property="scrollView" destination="KS9-Ue-fP4" id="2zr-3A-Gha"/>

@@ -246,6 +246,7 @@ class DAOServices: DAOBase {
             }
         })
     }
+  
     
     func getSettings(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("get Settings")

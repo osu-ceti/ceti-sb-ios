@@ -47,9 +47,11 @@ enum DelphosAction
     
     case READ_NOTIFICATION
 
+
     
     case VIEW_SETTINGS
     case SAVE_SETTINGS
+
     
 
     case VIEW_ACCOUNT_EDIT
