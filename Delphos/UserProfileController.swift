@@ -42,6 +42,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     @IBOutlet var tableView: UITableView!
     
     @IBOutlet var labelNoBadges: UILabel!
+   
     
     @IBOutlet var btnProfile: UIButton!
     @IBOutlet var btnBadges: UIButton!
@@ -97,6 +98,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         collectionView.backgroundColor = bgColor
+        collectionView.dataSource = self
         
         self.labelNoEventFound.hidden = true
         self.tableView.backgroundColor = bgColor
@@ -317,14 +319,15 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     
     
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        
-                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        return CGSize(width: 70, height: 60)
-        
-    }
+//    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+//                        
+//                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> Void {
+//        //CGSize(width: 50, height: 40)
+//
+//        
+//        return
+//    }
     
     func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!)
     {
