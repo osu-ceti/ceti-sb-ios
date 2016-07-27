@@ -62,11 +62,17 @@ var gStrViewBadgeControllerID: String = "ViewBadgeControllerId"
 var gObjBadgeController : UINavigationController!
 var gStrBadgeControllerID: String = "BadgeControllerId"
 
+
 var gObjSettingsController : SettingsController!
 //var gObjSettingsController : UINavigationController!
 var gStrSettingsControllerID: String = "SettingsControllerId"
 
 
+
+
+var gObjAccountEditController : AccountEditController!
+//var gObjAccountEditControllerNav : UINavigationController!
+var gStrAccountEditControllerID: String = "AccountEditControllerId"
 
 
 var rightViewController: RightViewController!

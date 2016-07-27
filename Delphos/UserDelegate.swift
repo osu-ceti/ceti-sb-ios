@@ -258,15 +258,15 @@ class UserDelegate:BaseDelegate{
        
     }
     func menuUserProfile(objCurrentContoller: UIViewController) {
-       
-        
+
         doGetAPIs.getMenuUserProfile( {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 
                 
-                var objUserBean = result as! UserBean
+                let objUserBean = result as! UserBean
+                gPublicEditaccountBean = result as! UserBean
                 
                 gObjPublicProfileController.userProfileBean = objUserBean
              
@@ -282,6 +282,7 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
+
     
     func viewSettings(objCurrentContoller: UIViewController) {
         
@@ -336,15 +337,98 @@ class UserDelegate:BaseDelegate{
               else{
                 
                 print("NOt Save Settings")
-                
             }
-            
         }
-        
     }
 
-
-
+    func viewAccountEdit(objCurrentContoller: UIViewController) {
+    
+       
+        
+        gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController
+       gObjAccountEditController.userAccountEditBean = gPublicEditaccountBean
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
+            
+            
+            self.doNavigate(objCurrentContoller, toController: gObjAccountEditControllerNav,  close: true)
+            
+        })
+        
 
     
+    }
+    func accountEdit(objCurrentContoller: UIViewController)  {
+        
+        let accountController = objCurrentContoller as! AccountEditController
+        
+        // var strUserName = gObjMakeMySchoolListBean.name
+        let accountId = accountController.accountEditId
+        let strTxtName = accountController.txtName.text
+        let strTxtEmail = accountController.txtEmail.text
+        let strTxtRole = accountController.txtRole
+        
+        let strNewpassword = accountController.txtNewPassword.text
+        let strConfirmPassword = accountController.txtConfirmPassword.text
+        let strCurrentPassword = accountController.txtCurrentPassword.text
+        
+        
+        
+        let objAccountInputBean: AccountEditBean = AccountEditBean()
+        
+        objAccountInputBean.name = strTxtName
+        objAccountInputBean.email = strTxtEmail
+        objAccountInputBean.password = strNewpassword
+        objAccountInputBean.confirm_password = strConfirmPassword
+        objAccountInputBean.current_password = strCurrentPassword
+        //objAccountInputBean.id = accountId
+        objAccountInputBean.role = strTxtRole
+        var objAccountBean: AccountEditListBean = AccountEditListBean()
+        
+        objAccountBean.user = objAccountInputBean
+        
+        doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
+            if(statusCode == SUCCESS) {
+                
+                print("Account Edited")
+                self.showAlert(objCurrentContoller, strMessage:"Account Edited")
+                
+                gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                    
+                   // var gObjPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
+                    
+                    
+                   // self.doNavigate(objCurrentContoller, toController: gObjPublicProfileControllerNav,  close: true)
+                    
+                })
+                
+            }
+                else{
+                self.showAlert(objCurrentContoller, strMessage:"Not Account Edited ")
+                print("Not Account Edited")
+             
+                
+//                gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController
+//                
+                dispatch_async(dispatch_get_main_queue(), {
+                 (objCurrentContoller as! AccountEditController).hideOverlayView()
+//                
+//                    var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
+//                
+//                
+//                    self.doNavigate(objCurrentContoller, toController: gObjAccountEditControllerNav,  close: true)
+//                    
+                  })
+
+            }
+        }
+    }
 }

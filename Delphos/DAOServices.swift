@@ -920,6 +920,7 @@ class DAOServices: DAOBase {
         })
         
     }
+
     func doSaveSettings(objSaveSetting: SettingsBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("save setting PROFILE")
         strURL = USERS + SETTINGS
@@ -933,6 +934,37 @@ class DAOServices: DAOBase {
                 var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
+    func doEditProfileAccount(objEditAccount: AccountEditListBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("PUT EDIT ACCOUNT PROFILE")
+        strURL =  ACCOUNT
+        
+        let userJSONString = Mapper().toJSONString(objEditAccount, prettyPrint: true)
+        doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            
+            //print(jsonResult);
+            
+            if(status) {
+                print(jsonResult)
+                let showAccountEditBean = Mapper<AccountEditResponseBean>().map(jsonResult)
+                
+                callBack?(result: showAccountEditBean!, statusCode: statusCode )
+
                 
                 return
             }
