@@ -101,6 +101,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Oyn-1w-8Me"/>
                     <connections>
+                        <outlet property="btnRegister" destination="LO9-Ak-N6M" id="RPM-3L-m6n"/>
+                        <outlet property="btnSignIn" destination="Yog-Zp-VLS" id="a8Y-nf-oUP"/>
+                        <outlet property="labelRememberMe" destination="HuM-zf-04k" id="uOD-RX-AbR"/>
                         <outlet property="passwordTxt" destination="QEY-aC-L3Z" id="dGX-5s-AoK"/>
                         <outlet property="requiredError" destination="usX-dD-bbP" id="Zq1-LH-MLX"/>
                         <outlet property="scrollView" destination="KS9-Ue-fP4" id="2zr-3A-Gha"/>
@@ -514,7 +517,7 @@
                                                     <rect key="frame" x="244" y="12" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Szk-FS-xoL">
@@ -798,7 +801,7 @@
                                 <rect key="frame" x="9" y="163" width="274" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

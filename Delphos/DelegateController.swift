@@ -183,7 +183,8 @@ class DelegateController: BaseDelegate {
         case .MARK_ALL_NOTIFICATION:
             print("MARK ALL NOTIFICATION")
             objNotificationDelegate.deleteNotification(objCurrentController)
-
+            
+       
             
         default:
             print("Error in delegate enum")

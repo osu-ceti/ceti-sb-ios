@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Security
 
 
 class UserDelegate:BaseDelegate{
@@ -14,9 +15,20 @@ class UserDelegate:BaseDelegate{
     func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! LoginController
+        let strUser :String
         
-        let strUser = loginController.userTxt.text
-        let strPassword = loginController.passwordTxt.text
+        let strPassword:String
+        
+        if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
+            NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+             strUser = loginController.userNameData
+             strPassword = loginController.userPasswordData
+        }
+        else{
+        
+         strUser = loginController.userTxt.text!
+         strPassword = loginController.passwordTxt.text!
+        }
         var objInputParamBean: LoginBean = LoginBean()
         var objInputParamCredsBean: CredentialsBean = CredentialsBean()
         objInputParamCredsBean.email = strUser
@@ -30,7 +42,36 @@ class UserDelegate:BaseDelegate{
                 print("Login Sucessfull")
                 gObjUserBean = loginResult as! UserBean
                 
+                if(loginController.switchRememberme.on)
+                {
+                    
+                    print("save data")
+                    
+                    print("switch button=",loginController.switchRememberme.on)
+                   
+                    //Save username password data
+                    let userNameKey = strUser
+                    let userPasswordKey = strPassword
+                    
+                    let defaultUser = NSUserDefaults.standardUserDefaults()
+                    defaultUser.setObject(userNameKey, forKey:"userNameKey")
+                    
+                    let defaultPassowrd = NSUserDefaults.standardUserDefaults()
+                    defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
+                    
+                    
+                    print(defaultPassowrd)
+                    print(defaultUser)
+                    
+                   
+                }
+                else {
+                     print("Data Not Save ")
+                     NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
+                     NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
+                   
                 
+                }
                 boolLogin = true;
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -170,6 +211,10 @@ class UserDelegate:BaseDelegate{
         doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
             if (statusCode == SUCCESS){
                 print("sign out")
+                
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
+                print("Clear Login Data")
                 gObjUserBean = nil
                 var object = SignoutResult as! SignoutResponseBean
                 
@@ -282,7 +327,5 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
-
-
-    
+ 
 }

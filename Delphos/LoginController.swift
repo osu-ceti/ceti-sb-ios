@@ -19,12 +19,19 @@ class LoginController: UIViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     
-//    @IBOutlet weak var userTxt: UITextField!
-//    @IBOutlet weak var passwordTxt: UITextField!
-//    //@IBOutlet weak var schoolbusiness: UILabel!
-//    
+     @IBOutlet var btnResetPassword: UIButton!
     
-//    @IBOutlet weak var switchRememberme: UISwitch!
+    @IBOutlet var labelRememberMe: UILabel!
+    @IBOutlet var btnSignIn: UIButton!
+     @IBOutlet var btnRegister: UIButton!
+   
+    var userNameData:String!
+    
+   
+    var userPasswordData:String!
+    
+    @IBOutlet var btnForgetPassword: UIButton!
+   
 //   
    // var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
@@ -38,8 +45,23 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          rootViewController = self
-        self.requiredError.hidden = true
+         self.requiredError.hidden = true
+        
+        
+        if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
+            NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+        
+             userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
+             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
        
+             print("userNamedata====",userNameData)
+             print("passwordData====",userPasswordData)
+            
+             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+             let testfacade = appDelegate.getObjFacade()
+             testfacade.doTask(self,action: DelphosAction.LOGIN)
+            }
+        
         // Create the navigation bar
         //navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
 //        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
@@ -74,7 +96,7 @@ class LoginController: UIViewController {
 //        passwordTxt.text = "ontojith"
 
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
-        
+       
         
         //Bottom border
         
@@ -148,6 +170,8 @@ class LoginController: UIViewController {
         }
     }
 
+   
+  
    
    
     @IBAction func btnRegister(sender: UIButton) {
