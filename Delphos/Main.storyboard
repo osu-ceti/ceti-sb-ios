@@ -90,6 +90,20 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Forgot password"/>
+                                        <connections>
+                                            <action selector="btnForgetPasswordClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kYD-xk-zTP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WCd-Go-RsS">
+                                        <rect key="frame" x="43" y="336" width="245" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Reset Password">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnResetPasswordClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iIQ-lk-DII"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <connections>
@@ -101,9 +115,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Oyn-1w-8Me"/>
                     <connections>
-                        <outlet property="btnRegister" destination="LO9-Ak-N6M" id="RPM-3L-m6n"/>
-                        <outlet property="btnSignIn" destination="Yog-Zp-VLS" id="a8Y-nf-oUP"/>
-                        <outlet property="labelRememberMe" destination="HuM-zf-04k" id="uOD-RX-AbR"/>
+
+                        <outlet property="btnForgetPassword" destination="hhg-ik-qzz" id="80w-kX-J64"/>
+                        <outlet property="btnRegister" destination="LO9-Ak-N6M" id="h1j-bV-h6m"/>
+                        <outlet property="btnResetPassword" destination="WCd-Go-RsS" id="bBO-D6-ba8"/>
+                        <outlet property="btnSignIn" destination="Yog-Zp-VLS" id="bsE-pg-YjH"/>
+                        <outlet property="labelRememberMe" destination="HuM-zf-04k" id="w9h-Co-Poq"/>
+
                         <outlet property="passwordTxt" destination="QEY-aC-L3Z" id="dGX-5s-AoK"/>
                         <outlet property="requiredError" destination="usX-dD-bbP" id="Zq1-LH-MLX"/>
                         <outlet property="scrollView" destination="KS9-Ue-fP4" id="2zr-3A-Gha"/>

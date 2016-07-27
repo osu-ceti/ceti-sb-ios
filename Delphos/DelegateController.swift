@@ -185,6 +185,7 @@ class DelegateController: BaseDelegate {
             objNotificationDelegate.deleteNotification(objCurrentController)
 
 
+
         case .VIEW_SETTINGS:
             print("SAVE SETTINGS")
            objUserDelegate.viewSettings(objCurrentController)
@@ -201,6 +202,11 @@ class DelegateController: BaseDelegate {
         case .SAVE_SETTINGS:
             print("SAVE SETTINGS")
             objUserDelegate.saveSettings(objCurrentController)
+
+
+        case .RESET_FORGET_PASSWORD:
+            print("RESET FORGET PASSWORD")
+            objUserDelegate.resetPassword(objCurrentController)
 
             
       

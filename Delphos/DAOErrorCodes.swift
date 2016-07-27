@@ -16,6 +16,7 @@ var BAD_REQUEST: Int! = 400;
 var UNAUTHORIZED_REQUEST: Int! = 401;
 var APIKEY_EXPIRED: Int! = -1012;
 var CONNECTION_FAILED:Int! = -1004;
+var RESET_SUCCESS: Int = 201;
 
 
 //Error Code Messages

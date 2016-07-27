@@ -327,6 +327,7 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
+
     
     func viewSettings(objCurrentContoller: UIViewController) {
         
@@ -401,9 +402,59 @@ class UserDelegate:BaseDelegate{
             
         })
         
-
-    
+           
+        
+        
     }
+    func resetPassword(objCurrentContoller: UIViewController)  {
+        
+        let loginController = objCurrentContoller as! LoginController
+        
+        let strResetEmail = loginController.userTxt.text
+        
+        
+        let objResetInputParamBean: ResetPasswordListBean = ResetPasswordListBean()
+        
+        
+        objResetInputParamBean.email = strResetEmail
+        
+        let objResetPasswordBean: ResetPasswordBean = ResetPasswordBean()
+        
+        objResetPasswordBean.utf8 = ""
+        objResetPasswordBean.authenticity_token = ""
+        
+        objResetPasswordBean.user = objResetInputParamBean
+        objResetPasswordBean.commit = "Reset Password"
+        
+        doPostAPIs.doResetPassword(objResetPasswordBean){ (result: AnyObject, statusCode: Int) in
+            if(statusCode == RESET_SUCCESS) {
+                print("Password Reseted")
+                self.showAlert(objCurrentContoller, strMessage: "Please check your email")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                   
+                    gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+                    
+                    
+                    
+                })
+                
+            }
+            else{
+                 self.showAlert(objCurrentContoller, strMessage: "Password Not Changed please try again later")
+                
+                 print("Password Not Changed")
+                gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+                
+                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+                
+            }
+            
+        }
+    }
+
     func accountEdit(objCurrentContoller: UIViewController)  {
         
         let accountController = objCurrentContoller as! AccountEditController

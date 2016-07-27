@@ -48,6 +48,7 @@ enum DelphosAction
     case READ_NOTIFICATION
 
 
+
     
     case VIEW_SETTINGS
     case SAVE_SETTINGS
@@ -56,6 +57,8 @@ enum DelphosAction
 
     case VIEW_ACCOUNT_EDIT
     case EDIT_PROFILE_ACCOUNT
+
+    case RESET_FORGET_PASSWORD
 
     
 

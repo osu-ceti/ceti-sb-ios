@@ -984,4 +984,34 @@ class DAOServices: DAOBase {
     }
 
     
+    func doResetPassword(objResetPassword: ResetPasswordBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("Reset Password")
+        strURL =   USERS + PASSWORD
+        
+        let userJSONString = Mapper().toJSONString(objResetPassword, prettyPrint: true)
+        doPost(userJSONString!, addAuthHeader: false,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
 }
