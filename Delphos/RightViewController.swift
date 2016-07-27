@@ -100,7 +100,10 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 break
                 
             case .Settings:
-                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.VIEW_SETTINGS)
                 break
             case .Profile:
                // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)

@@ -247,6 +247,38 @@ class DAOServices: DAOBase {
         })
     }
     
+    func getSettings(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("get Settings")
+        
+        
+        
+        strURL = DEV_TARGET + USERS +  SETTINGS
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                let showSettingsBean = Mapper<ViewSettingsResponse>().map(jsonResult)
+                
+                callBack?(result: showSettingsBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
+
+    
     
     //GET APIs -- ENDS HERE
     
@@ -679,7 +711,7 @@ class DAOServices: DAOBase {
             }
         })
     }
-    func getMenuUserProfile(strUserID: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    func getMenuUserProfile(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("get user profile")
         strURL =   DEV_TARGET + USERS + PROFILE
         
@@ -887,6 +919,35 @@ class DAOServices: DAOBase {
             }
         })
         
+    }
+    func doSaveSettings(objSaveSetting: SettingsBean, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        print("save setting PROFILE")
+        strURL = USERS + SETTINGS
+        
+        let userJSONString = Mapper().toJSONString(objSaveSetting, prettyPrint: true)
+        doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            print(jsonResult);
+            
+            if(status) {
+                //    print(jsonResult)
+                var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
+                
+                callBack?(result: showEventBean!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                print(jsonResult)
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
     }
 
     

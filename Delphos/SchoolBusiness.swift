@@ -74,6 +74,8 @@ let BADGES = "badges"
 
 let REGISTER_DEVICE = "register_device"
 
+let SETTINGS = "settings"
+
 
 
 func getTarget() -> String {
