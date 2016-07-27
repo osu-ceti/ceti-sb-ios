@@ -184,6 +184,9 @@ class DelegateController: BaseDelegate {
             print("MARK ALL NOTIFICATION")
             objNotificationDelegate.deleteNotification(objCurrentController)
 
+        case .RESET_FORGET_PASSWORD:
+            print("RESET FORGET PASSWORD")
+            objUserDelegate.resetPassword(objCurrentController)
             
         default:
             print("Error in delegate enum")

@@ -46,7 +46,7 @@ enum DelphosAction
     case VIEW_BADGE_AWARD
     
     case READ_NOTIFICATION
-    
+    case RESET_FORGET_PASSWORD
     
 
 }

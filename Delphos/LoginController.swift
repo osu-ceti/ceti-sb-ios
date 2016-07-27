@@ -19,13 +19,9 @@ class LoginController: UIViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     
-//    @IBOutlet weak var userTxt: UITextField!
-//    @IBOutlet weak var passwordTxt: UITextField!
-//    //@IBOutlet weak var schoolbusiness: UILabel!
-//    
-    
-//    @IBOutlet weak var switchRememberme: UISwitch!
-//   
+    @IBOutlet var btnForgetPassWord: UIButton!
+
+ 
    // var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
    // var searchButton : UIBarButtonItem = UIBarButtonItem()
@@ -34,41 +30,35 @@ class LoginController: UIViewController {
 
     @IBOutlet var requiredError: UILabel!
     
+    @IBOutlet var btnResetPassword: UIButton!
    
+    @IBOutlet var labelRememberMe: UILabel!
+    @IBOutlet var btnSignIn: UIButton!
+    @IBOutlet var btnRegister: UIButton!
+    
+    
+    @IBOutlet var btnForgetPassword: UIButton!
+    var overlayView = UIView()
+    var activityIndicator = UIActivityIndicatorView()
+    
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          rootViewController = self
         self.requiredError.hidden = true
        
-        // Create the navigation bar
-        //navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
-//        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
-//        navigationBar.delegate = self;
-//        navigationBar.layer.shadowOpacity = 4
-//        navigationBar.layer.shadowRadius  = 2
-//        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
-//        // Create a navigation item with a title
-//        let navigationItem = UINavigationItem()
+  
         navigationItem.title = "School-Business"
         searchButtonItem = UIBarButtonItem(customView:searchBar)
-        // Create left and right button for navigation item
+       
         
-        //searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "btnSearchClick:")
-        
-        // Create two buttons for the navigation item
-        //navigationItem.leftBarButtonItem = searchButton
-        
-        // Assign the navigation item to the navigation bar
-        //navigationBar.items = [navigationItem]
-        
-        // Make the navigation bar a subview of the current view controller
-       // self.view.addSubview(navigationBar)
-
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        let color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
         view.backgroundColor = color
+        
+        self.btnResetPassword.hidden = true
 
 //        userTxt.text = "jith87@gmail.com"
 //        passwordTxt.text = "ontojith"
@@ -78,14 +68,14 @@ class LoginController: UIViewController {
         
         //Bottom border
         
-        var bottomLine = CALayer()
+        let bottomLine = CALayer()
         
         bottomLine.frame = CGRectMake(0.0, userTxt.frame.height - 1, userTxt.frame.width, 1.0)
         bottomLine.backgroundColor = UIColor.blackColor().CGColor
         userTxt.borderStyle = UITextBorderStyle.None
         userTxt.layer.addSublayer(bottomLine)
         
-        var textboxLine = CALayer()
+        let textboxLine = CALayer()
         textboxLine.frame = CGRectMake(0.0, passwordTxt.frame.height - 1, passwordTxt.frame.width, 1.0)
         textboxLine.backgroundColor = UIColor.blackColor().CGColor
         passwordTxt.borderStyle = UITextBorderStyle.None
@@ -116,7 +106,24 @@ class LoginController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    func showOverlay(view: UIView) {
+        
+        overlayView.frame = CGRectMake(0, 0, 80, 80)
+        overlayView.center = view.center
+        overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
+        overlayView.clipsToBounds = true
+        overlayView.layer.cornerRadius = 10
+        
+        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
+        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+        activityIndicator.color = UIColor.blackColor()
+        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
+        
+        overlayView.addSubview(activityIndicator)
+        view.addSubview(overlayView)
+        
+        activityIndicator.startAnimating()
+    }
     
     @IBAction func touchEvent(sender: UITextField) {
         self.requiredError.hidden = true
@@ -148,7 +155,26 @@ class LoginController: UIViewController {
         }
     }
 
+    @IBAction func btnForgetPasswordClick(sender: AnyObject) {
+        
+        
+        self.btnResetPassword.hidden = false
+        
+        
+        self.passwordTxt.hidden = true
+        self.switchRememberme.hidden = true
+        self.btnRegister.hidden = true
+        self.btnSignIn.hidden = true
+        self.labelRememberMe.hidden = true
+        self.btnForgetPassword.hidden = true
+    }
    
+    @IBAction func btnResetPasswordClick(sender: AnyObject) {
+        self.showOverlay(self.view)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
+    }
    
     @IBAction func btnRegister(sender: UIButton) {
         

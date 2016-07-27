@@ -38,6 +38,8 @@
 		0FA2A8691D14245900342797 /* SchoolsBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A8681D14245900342797 /* SchoolsBean.swift */; };
 		0FA2A86B1D14252800342797 /* searchSchoolListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A86A1D14252800342797 /* searchSchoolListBean.swift */; };
 		0FA2A86D1D142BD000342797 /* SchoolProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */; };
+		0FAA768E1D488723009E20D5 /* ResetPasswordListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */; };
+		0FAA76901D48874F009E20D5 /* ResetPasswordBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */; };
 		0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF601CEC3C900094EC79 /* EventBean.swift */; };
 		0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF631CEC5E050094EC79 /* CreateBean.swift */; };
 		0FB713D11CF97A5400C0C77F /* SearchEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */; };
@@ -233,6 +235,8 @@
 		0FA2A8681D14245900342797 /* SchoolsBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolsBean.swift; sourceTree = "<group>"; };
 		0FA2A86A1D14252800342797 /* searchSchoolListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchSchoolListBean.swift; sourceTree = "<group>"; };
 		0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolProfileController.swift; sourceTree = "<group>"; };
+		0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordListBean.swift; sourceTree = "<group>"; };
+		0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordBean.swift; sourceTree = "<group>"; };
 		0FB1DF601CEC3C900094EC79 /* EventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBean.swift; sourceTree = "<group>"; };
 		0FB1DF631CEC5E050094EC79 /* CreateBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBean.swift; sourceTree = "<group>"; };
 		0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventBean.swift; sourceTree = "<group>"; };
@@ -533,6 +537,8 @@
 				0FB80E1D1D2A7E190093B4B1 /* UserProfileBadgesBean.swift */,
 				840AEF911D2BA6AB00400B6A /* DeviceBean.swift */,
 				0F88009D1D2E889E00E1236B /* AwardBadgeResponse.swift */,
+				0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */,
+				0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -738,6 +744,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FAA76901D48874F009E20D5 /* ResetPasswordBean.swift in Sources */,
 				8412621A1D33661900807F81 /* DelphosStrings.swift in Sources */,
 				0FFB24181D27C8140025CC05 /* NotificationControllerCell.swift in Sources */,
 				0F9E4F241CF47236004FC736 /* NavController.swift in Sources */,
@@ -770,6 +777,7 @@
 				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
 				0F8B12061D00061B0030CE82 /* ClaimListClaimBean.swift in Sources */,
 				84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */,
+				0FAA768E1D488723009E20D5 /* ResetPasswordListBean.swift in Sources */,
 				0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */,
 				0FE721851D19297F00D5994D /* MakeMySchoolListBean.swift in Sources */,
 				84A5B1C51D2D3C5500090CFB /* PushDataBean.swift in Sources */,
