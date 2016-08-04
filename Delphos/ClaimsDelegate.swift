@@ -261,10 +261,25 @@ class ClaimsDelegate: BaseDelegate {
             if (statusCode == SUCCESS){
                 print("SEND MESSAGE")
                  self.showAlert(objCurrentContoller, strMessage: "Message Sent")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjMessageController = self.fetchNavController(gStrMessageControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjMessageController, close: true)
+                })
+
+
                 
             } else {
                 print("NOT SEND MESSAGE")
                 self.showAlert(objCurrentContoller, strMessage: "NOT SEND MESSAGE")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjMessageController = self.fetchNavController(gStrMessageControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjMessageController, close: true)
+                })
+
                 
             }
         }

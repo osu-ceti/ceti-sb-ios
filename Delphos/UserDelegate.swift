@@ -35,12 +35,15 @@ class UserDelegate:BaseDelegate{
         objInputParamCredsBean.password = strPassword
         objInputParamCredsBean.id = 0
         objInputParamBean.user = objInputParamCredsBean
+        let defaultUser = NSUserDefaults.standardUserDefaults()
+        let defaultPassowrd = NSUserDefaults.standardUserDefaults()
         //DOA calls
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
                 print("Login Sucessfull")
                 gObjUserBean = loginResult as! UserBean
+                gPasswordCheck = strPassword
                 
                 if(loginController.switchRememberme.on)
                 {
@@ -53,10 +56,9 @@ class UserDelegate:BaseDelegate{
                     let userNameKey = strUser
                     let userPasswordKey = strPassword
                     
-                    let defaultUser = NSUserDefaults.standardUserDefaults()
+                    
                     defaultUser.setObject(userNameKey, forKey:"userNameKey")
                     
-                    let defaultPassowrd = NSUserDefaults.standardUserDefaults()
                     defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
                     
                     
@@ -67,8 +69,9 @@ class UserDelegate:BaseDelegate{
                 }
                 else {
                      print("Data Not Save ")
-                     NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
-                     NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
+                    
+                    defaultUser.removeObjectForKey("userNameKey")
+                    defaultPassowrd.removeObjectForKey("userPasswordKey")
                    
                 
                 }
@@ -94,7 +97,8 @@ class UserDelegate:BaseDelegate{
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
-
+                defaultUser.removeObjectForKey("userNameKey")
+                defaultPassowrd.removeObjectForKey("userPasswordKey")
                 
             }
             else if statusCode == BAD_REQUEST {
@@ -144,7 +148,7 @@ class UserDelegate:BaseDelegate{
                  var objUserBean = loginResult as! usersBean
                 gObjUserBean = objUserBean.data
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+                    self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
                    // gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
                     //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
@@ -154,12 +158,19 @@ class UserDelegate:BaseDelegate{
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
             }
-            else if(statusCode > SUCCESS) {
-                self.showAlert(objCurrentContoller, strMessage: "Could not connect to the server")
+            else if(statusCode == CONNECTION_FAILED) {
+                self.showAlert(objCurrentContoller, strMessage: SERVER_ERROR_MSG)
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                })
+                
             }
             else{
                 
-                self.showAlert(objCurrentContoller, strMessage: "Failed to Register")
+                self.showAlert(objCurrentContoller, strMessage: REGISTERATION_ERROR)
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
@@ -486,6 +497,13 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
+                let objEdiAccounttResult = result as! AccountEditResponseBean
+                
+                let objEditAccountUser = objEdiAccounttResult.user as! UserBean
+                
+                gObjUserBean.role = objEditAccountUser.role
+                gObjUserBean.name = objEditAccountUser.name
+                gObjUserBean.email = objEditAccountUser.email
                 
                 print("Account Edited")
                 self.showAlert(objCurrentContoller, strMessage:"Account Edited")

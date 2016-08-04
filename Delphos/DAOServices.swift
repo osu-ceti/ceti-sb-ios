@@ -301,13 +301,13 @@ class DAOServices: DAOBase {
         doPost(JSONString!, addAuthHeader: false,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var userBean = Mapper<UserBean>().map(jsonResult)!
+                let userBean = Mapper<UserBean>().map(jsonResult)!
                 callBack?(result: userBean, statusCode: statusCode )
                 return
             }
             else{
                 //println(jsonResult)
-                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
             }
@@ -662,8 +662,9 @@ class DAOServices: DAOBase {
             print(jsonResult);
             
             if(status) {
-                //    print(jsonResult)
-                var showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
+                print("json result")
+                print(jsonResult)
+                let showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
                 

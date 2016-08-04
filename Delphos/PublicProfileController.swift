@@ -148,7 +148,7 @@ class PublicProfileController:  NavController{
                 self.labelProfileSchool.text = gObjUserBean.school_name
             }
             else{
-                self.labelProfileSchool.text = ""
+                self.labelProfileSchool.text = gObjUserBean.school_name
             }
             self.labelProfileName.text = gObjMakeMySchoolListBean.name
             
@@ -247,7 +247,8 @@ class PublicProfileController:  NavController{
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            
+//            schoolsRadioBtn.selected = true
+//            eventsRadioBtn.selected = false
             gBtnRadioValue = "schools"
         
         

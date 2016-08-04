@@ -70,6 +70,8 @@ var gUserProfileMessage:Bool!
 
 var gSchoolNameSelect:Bool!
 
+var gPasswordCheck:String!
+
 var gClaimsListDetails:ClaimListClaimBeanBean!
 
 var gClaimsList:ClaimListBean!

@@ -38,6 +38,9 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     var eventDisplayBean: usersBean!
     var eventBeanArray: [EventBean]! = []
+    
+    var strSchoolId:String!
+    var makeMySchoolName:String!
    
     
     override func viewWillAppear(animated: Bool) {
@@ -175,6 +178,9 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
 
     
     @IBAction func makeMySchoolClick(sender: AnyObject) {
+        
+        strSchoolId =  String(gObjSearchSchoolListBean.id)
+        makeMySchoolName = gObjSearchSchoolListBean.name
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
