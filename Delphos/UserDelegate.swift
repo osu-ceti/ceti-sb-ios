@@ -12,6 +12,17 @@ import Security
 
 class UserDelegate:BaseDelegate{
     
+    func RedirectLoginPage(objCurrentContoller: UIViewController){
+        
+       //var loginController = objCurrentContoller as! LoginController
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+            
+            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+        })
+    }
+    
     func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! LoginController
@@ -21,6 +32,8 @@ class UserDelegate:BaseDelegate{
         
         if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
             NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+            
+           
              strUser = loginController.userNameData
              strPassword = loginController.userPasswordData
         }
@@ -100,17 +113,32 @@ class UserDelegate:BaseDelegate{
                 defaultUser.removeObjectForKey("userNameKey")
                 defaultPassowrd.removeObjectForKey("userPasswordKey")
                 
+                //loginController.activityIndicator.stopAnimating()
+                //loginController.overlayView.removeFromSuperview()
+                
+               self.RedirectLoginPage(objCurrentContoller)
             }
             else if statusCode == BAD_REQUEST {
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
-   
+                self.RedirectLoginPage(objCurrentContoller)
+                
             }
+            else if statusCode == CONNECTION_FAILED {
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
+                self.RedirectLoginPage(objCurrentContoller)
+                
+            }
+                
+                
             else{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
+                self.RedirectLoginPage(objCurrentContoller)
             }
              callback(status: boolLogin)
             

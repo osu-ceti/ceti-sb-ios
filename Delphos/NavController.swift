@@ -29,7 +29,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var activityIndicator = UIActivityIndicatorView()
     
      var notificationCount:String!
-    // var eventsRadioBtn = SSRadioButton()
+     var eventsRadioBtn = SSRadioButton()
+    var schoolsRadioBtn = SSRadioButton()
+    var usersRadioBtn = SSRadioButton()
    
     
     func buildRadioButton(title: String, position:CGRect, actionCallback:Selector) ->SSRadioButton{
@@ -82,11 +84,11 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
 //        usersRadioBtn.addTarget(self, action: #selector(NavController.btnUsers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         
-         let eventsRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(85, 0, 60, 21),actionCallback: #selector(NavController.eventSearch(_:)))
+          eventsRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(85, 0, 60, 21),actionCallback: #selector(NavController.eventSearch(_:)))
         
-        let schoolsRadioBtn = buildRadioButton(gSearchSchoolsRadioTitle,position: CGRectMake(150, 0, 70, 21),actionCallback: #selector(NavController.btnSchool(_:)))
+         schoolsRadioBtn = buildRadioButton(gSearchSchoolsRadioTitle,position: CGRectMake(150, 0, 70, 21),actionCallback: #selector(NavController.btnSchool(_:)))
         
-        let usersRadioBtn = buildRadioButton(gSearchUsersRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
+         usersRadioBtn = buildRadioButton(gSearchUsersRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
         
         radioButtonController = SSRadioButtonsController(buttons: eventsRadioBtn, schoolsRadioBtn, usersRadioBtn)
         //radioButtonController!.delegate = self

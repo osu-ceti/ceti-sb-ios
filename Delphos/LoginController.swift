@@ -60,6 +60,7 @@ class LoginController: UIViewController {
         
         if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
             NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+             showOverlay(self.view)
         
              userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
              userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
@@ -72,15 +73,7 @@ class LoginController: UIViewController {
              testfacade.doTask(self,action: DelphosAction.LOGIN)
             }
         
-        // Create the navigation bar
-        //navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
-//        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
-//        navigationBar.delegate = self;
-//        navigationBar.layer.shadowOpacity = 4
-//        navigationBar.layer.shadowRadius  = 2
-//        navigationBar.layer.shadowOffset = CGSizeMake(2, 2);
-//        // Create a navigation item with a title
-//        let navigationItem = UINavigationItem()
+     
 
         navigationItem.title = "School-Business"
         searchButtonItem = UIBarButtonItem(customView:searchBar)
@@ -92,8 +85,7 @@ class LoginController: UIViewController {
         
         self.btnResetPassword.hidden = true
 
-//        userTxt.text = "jith87@gmail.com"
-//        passwordTxt.text = "ontojith"
+
 
         switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
        
@@ -155,6 +147,10 @@ class LoginController: UIViewController {
         view.addSubview(overlayView)
         
         activityIndicator.startAnimating()
+    }
+    func hideOverlayView() {
+        activityIndicator.stopAnimating()
+        overlayView.removeFromSuperview()
     }
     
     @IBAction func touchEvent(sender: UITextField) {
@@ -218,8 +214,7 @@ class LoginController: UIViewController {
         
         self.slideMenuController()?.changeMainViewController(registerControllerNav, close: false)
         
-//            let goToRegisterController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
-//            self.presentViewController(goToRegisterController, animated: true, completion: nil)
+
         
         }
     

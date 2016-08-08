@@ -247,8 +247,8 @@ class PublicProfileController:  NavController{
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-//            schoolsRadioBtn.selected = true
-//            eventsRadioBtn.selected = false
+            schoolsRadioBtn.selected = true
+            eventsRadioBtn.selected = false
             gBtnRadioValue = "schools"
         
         
