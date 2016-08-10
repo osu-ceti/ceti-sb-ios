@@ -11,6 +11,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     
    
+    @IBOutlet var txtTimeZoneSelect: UITextField!
    
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtContents: UITextField!
@@ -29,9 +30,15 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var btnPostEvent: UIButton!
     
     
+   // @IBOutlet var txtStartTimeTouch: UITextField!
   
+    @IBOutlet var txtStartTime: UITextField!
+    @IBOutlet var txtEndTime: UITextField!
   
     var datePickerView = UIDatePicker()
+    var timePickerView = UIDatePicker()
+    var endTimePickerView = UIDatePicker()
+    
     func getCurrentDate() -> NSDate{
         return NSDate()
     }
@@ -48,11 +55,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     var isEdit = false
     var eventId = 0
 
-    //let dataTimeZone = NSTimeZone.knownTimeZoneNames()
-   // var timeAbb = iOStimeZones?.abbreviation
+   // let dataTimeZone = NSTimeZone.knownTimeZoneNames()
+    //var timeAbb = iOStimeZones?.abbreviation
     let iOStimeZones = ["Eastern Time (US & Canada)"]
 
     @IBOutlet var scrolview: UIScrollView!
+    
+    var newTimeZonePicker = UIPickerView()
    
     @IBOutlet weak var timeZonePicker: UIPickerView!
    
@@ -66,7 +75,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         //        rightViewController.tableView.reloadData()
         
         self.isBackEnabled = true
-        setNavBar(self.view.frame.size.width)
+        setNavBar1(self.view.frame.size.width,height: 0)
+        //setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
         backToController = gObjHomeController
@@ -120,14 +130,17 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         startTime.text = dateFormatter.stringFromDate(startTimeSet)
         endTime.text = dateFormatter.stringFromDate(endTimeSet)
        
+        txtStartTime.text = dateFormatter.stringFromDate(startTimeSet)
+        txtEndTime.text = dateFormatter.stringFromDate(endTimeSet)
+        
         self.startTimePicker.setDate(startTimeSet, animated: false)
         self.endTimePicker.setDate(endTimeSet, animated: false)
         
         txtTimeZone.text = "Eastern Time (US & Canada)"
-      
-        self.startTime.hidden = true
-        self.endTime.hidden = true
-        self.txtTimeZone.hidden = true
+        txtTimeZoneSelect.text = "Eastern Time (US & Canada)"
+        self.startTime.hidden = false
+        self.endTime.hidden = false
+        self.txtTimeZone.hidden = false
         
         
         var CurrentDateFormat = NSDateFormatter()
@@ -151,10 +164,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 
                 //Start Date and Time
                 
-                self.startTimePicker.date = eventStartDate!
-                
+                //self.startTimePicker.date = eventStartDate!
+                 //self.txtStartTime.text = gObjShowEventBean.event_start!
+               
                 dateFormatter.dateFormat = gTimeFormat
-                self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
+                //self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
+                
+                self.txtStartTime.text =  dateFormatter.stringFromDate(eventStartDate!)
                 
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 self.startDate.text =  dateFormatter.stringFromDate(eventStartDate!)
@@ -174,8 +190,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 self.endTimePicker.date = eventEndDate!
                 
                 dateFormatter.dateFormat = gTimeFormat
-                self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
-                
+               // self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
+                self.txtEndTime.text = dateFormatter.stringFromDate(eventEndDate!)
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 self.endDate.text =  dateFormatter.stringFromDate(eventEndDate!)
                 
@@ -257,6 +273,15 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             datePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
         }
         datePickerView.datePickerMode = UIDatePickerMode.Date
+        
+        dateFormatter.dateFormat = gDateFormat
+        let dtStartDate  = startDate.text!
+        if(dtStartDate != ""){
+            datePickerView.date = dateFormatter.dateFromString(dtStartDate)!
+        }
+        
+        
+        
         inputView.addSubview(datePickerView)
         
         let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
@@ -286,6 +311,12 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         }
         
         datePickerView.datePickerMode = UIDatePickerMode.Date
+        
+        dateFormatter.dateFormat = gDateFormat
+        let dtEndDate  = endDate.text!
+        if(dtEndDate != ""){
+            datePickerView.date = dateFormatter.dateFromString(dtEndDate)!
+        }
         inputView.addSubview(datePickerView)
         
         let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
@@ -329,30 +360,171 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     {
         startDate.resignFirstResponder() // To resign the inputView on clicking done.
         endDate.resignFirstResponder()
+        txtTimeZoneSelect.resignFirstResponder()
+        txtStartTime.resignFirstResponder()
+        txtEndTime.resignFirstResponder()
+        
         // To resign the inputView on clicking done.
+    }
+    
+    
+    @IBAction func startTimeClick(sender: UITextField) {
+        
+        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        
+        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        {
+            timePickerView = UIDatePicker(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+        }
+        else {
+            timePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+        }
+        
+        
+        timePickerView.datePickerMode = UIDatePickerMode.Time
+        
+        dateFormatter.dateFormat = gTimeFormat
+        let startTimePickerValue  = txtStartTime.text!
+        if(startTimePickerValue != ""){
+        timePickerView.date = dateFormatter.dateFromString(startTimePickerValue)!
+        }
+        inputView.addSubview(timePickerView)
+        
+        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
+        doneButton.setTitle("Done", forState: UIControlState.Normal)
+        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
+        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
+        inputView.addSubview(doneButton) // add Button to UIView
+        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        
+        sender.inputView = inputView
+        timePickerView.addTarget(self, action: Selector("handleStartTimePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func handleStartTimePicker(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+       dateFormatter.dateFormat = gTimeFormat
+        startTimeValid = sender.date
+        
+        txtStartTime.text = dateFormatter.stringFromDate(sender.date)
+        startTime.text = dateFormatter.stringFromDate(sender.date)
+    }
+    
+    @IBAction func endTimePicker(sender: UITextField) {
+       
+        
+        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        
+        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        {
+            endTimePickerView = UIDatePicker(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+        }
+        else {
+            endTimePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+        }
+        
+        
+        endTimePickerView.datePickerMode = UIDatePickerMode.Time
+        
+        dateFormatter.dateFormat = gTimeFormat
+        let endTimePickerValue  = txtEndTime.text!
+        if(endTimePickerValue != ""){
+        endTimePickerView.date = dateFormatter.dateFromString(endTimePickerValue)!
+        }
+        inputView.addSubview(endTimePickerView)
+        
+        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
+        doneButton.setTitle("Done", forState: UIControlState.Normal)
+        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
+        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
+        inputView.addSubview(doneButton) // add Button to UIView
+        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        
+        sender.inputView = inputView
+        endTimePickerView.addTarget(self, action: Selector("handleEndTimePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func handleEndTimePicker(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = gTimeFormat
+        endTimeValid = sender.date
+        
+        txtEndTime.text = dateFormatter.stringFromDate(sender.date)
+        endTime.text = dateFormatter.stringFromDate(sender.date)
     }
     
     @IBAction func startTimePickerChange(sender: AnyObject) {
     
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = gTimeFormat
-        startTimeValid = sender.date
-        var strDate = dateFormatter.stringFromDate(sender.date)
-        startTime.text = strDate
+//        var dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = gTimeFormat
+//        startTimeValid = sender.date
+//        var strDate = dateFormatter.stringFromDate(sender.date)
+//        startTime.text = strDate
 
     }
     
     @IBAction func endTimePickerChange(sender: AnyObject) {
    
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = gTimeFormat
-        endTimeValid = sender.date
-        var strDate = dateFormatter.stringFromDate(sender.date)
-       
-        endTime.text = strDate
+//        var dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = gTimeFormat
+//        endTimeValid = sender.date
+//        var strDate = dateFormatter.stringFromDate(sender.date)
+//       
+//        endTime.text = strDate
         
 
     }
+    
+    
+    
+    @IBAction func touchTimeZone(sender: UITextField) {
+        
+        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        
+        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        {
+            newTimeZonePicker = UIPickerView(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+        }
+        else {
+            newTimeZonePicker = UIPickerView(frame: CGRectMake(0, 40, 0, 0))
+        }
+       
+        newTimeZonePicker.dataSource = self
+        newTimeZonePicker.delegate = self
+       
+        
+        //datePickerView.datePickerMode = UIDatePickerMode.Date
+        
+        inputView.addSubview(newTimeZonePicker)
+        
+        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
+        doneButton.setTitle("Done", forState: UIControlState.Normal)
+        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
+        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
+        inputView.addSubview(doneButton) // add Button to UIView
+       
+//        let txtTime = UILabel(frame: CGRectMake((self.view.frame.size.width/6), 20, 250, 100))
+//        txtTime.text = "Eastern Time (US & Canada)"
+//        inputView.addSubview(txtTime)
+        
+        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        
+        sender.inputView = inputView
+       // datePickerView.addTarget(self, action: Selector("handleTimeZonePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+//    func handleTimeZonePicker(sender: UIPickerView) {
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = gDateFormat
+//        endDatevalid = sender.date
+//        endDate.text = dateFormatter.stringFromDate(sender.date)
+//    }
+
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -376,6 +548,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     {
         // selected value in Uipickerview in Swift
          txtTimeZone.text = iOStimeZones[row]
+        txtTimeZoneSelect.text = iOStimeZones[row]
        
         
     }
@@ -388,6 +561,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //        var strDate = dateFormatter.stringFromDate(sender.date)
 //        txtStartDate.text = strDate
 //    }
+    
+    
+    
     
     override func viewDidAppear(animated: Bool)
     {
@@ -450,12 +626,12 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         else if (startDateAndTime.compare(currentDate) == NSComparisonResult.OrderedAscending) {
             // print("Date1 is Later than Date2")
             self.requiredError.hidden = false
-            self.requiredError.text = "Invalid start Date and time"
+            self.requiredError.text = "Invalid Start date and time value. Please select a value at least 1 hour from now."
         }
        else if (startDateAndTime.timeIntervalSinceReferenceDate > endDateAndTime.timeIntervalSinceReferenceDate) {
             // print("Date1 is Later than Date2")
              self.requiredError.hidden = false
-            self.requiredError.text = "Invalid End Date and time"
+            self.requiredError.text = "Invalid! End Time"
         }
 //        else if startTimeValid.earlierDate(endTimeValid){
 //            self.requiredError.hidden = false

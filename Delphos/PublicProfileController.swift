@@ -57,6 +57,8 @@ class PublicProfileController:  NavController{
     
     var userProfileBean: UserBean!
     
+    @IBOutlet var changeLabelName: UILabel!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         rootViewController = self
@@ -92,6 +94,7 @@ class PublicProfileController:  NavController{
           hideLabelRole.font = UIFont.boldSystemFontOfSize(15)
           hideLabelEmail.font = UIFont.boldSystemFontOfSize(15)
         
+        self.changeLabelName.hidden = true
          self.txtProfileGrades.hidden = true
          self.txtProfileBiography.hidden = true
          self.txtProfileJobTItle.hidden = true
@@ -107,6 +110,7 @@ class PublicProfileController:  NavController{
         
         
         if (userProfileBean != nil){
+            
          self.labelProfileName.text = userProfileBean.name
          btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
          
@@ -122,6 +126,15 @@ class PublicProfileController:  NavController{
                 }
             else if(gObjUserBean.role == 2){
                  self.labelProfileRole.text = "SPEAKER"
+                
+                self.btnProfileSchoolLink.hidden = true
+                
+                 self.changeLabelName.hidden = false
+                self.labelProfileName.hidden = true
+                self.hideLabelName.hidden = true
+                
+                self.hideLabelSchool.text = "Name"
+                self.changeLabelName.text = userProfileBean.name
             }
             else{
                  self.labelProfileRole.text = "BOTH"
@@ -258,6 +271,7 @@ class PublicProfileController:  NavController{
     @IBAction func btnProfileSchoolClick(sender: AnyObject) {
         
         gSchoolId = userProfileBean.school_id
+         self.showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)

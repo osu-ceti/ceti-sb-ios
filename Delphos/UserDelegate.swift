@@ -177,17 +177,17 @@ class UserDelegate:BaseDelegate{
             if(statusCode == SUCCESS) {
                 print("Register")
                 boolRegister = true
-                 var objUserBean = loginResult as! usersBean
+                 var objUserBean = loginResult as! RegistrationResponseBean
                 gObjUserBean = objUserBean.data
                 dispatch_async(dispatch_get_main_queue(), {
                     self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
-                   // gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
-                    //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
 
-                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
-                   
-                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
+//                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
+//                   
+//                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
             }
             else if(statusCode == CONNECTION_FAILED) {

@@ -41,8 +41,11 @@ class SettingsController: NavController {
         //        rightViewController.tableView.reloadData()
         
         self.isBackEnabled = false
-        var view1 = UIView()
-        setNavBar(self.view.frame.size.width)
+        
+        var view1 = UIViewController()
+        setNavBar1(self.view.frame.size.width,height: 0)
+        
+        //setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
         backToController = gObjHomeController
