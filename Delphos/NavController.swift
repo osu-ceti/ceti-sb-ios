@@ -190,16 +190,16 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func backToSomeController(sender: UIBarButtonItem){
         //if(backToController == nil){
-            backToController = self.fetchNavController(gStrHomeControllerID)
+//            /gObjBackTocontroller = self.fetchNavController(gStrHomeControllerID)
        // }
         
-        self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)     
+        self.slideMenuController()?.changeMainViewController(gObjBackTocontroller, close: shouldClose)
         
     }
     
     func backToNavController(sender: UIBarButtonItem){
         //if(backToController == nil){
-        backToController = self.fetchNavController(backButtonNav)
+        //backToController = self.fetchNavController(backButtonNav)
         // }
         
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
@@ -258,14 +258,16 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func eventSearch(sender:UIButton){
         gBtnRadioValue = "events"
+         
     }
     
     func btnSchool(sender: UIButton) {
         gBtnRadioValue = "schools"
-    }
+            }
     
     func btnUsers(sender: UIButton) {
         gBtnRadioValue = "users"
+        
     }
 
 

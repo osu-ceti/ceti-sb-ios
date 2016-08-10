@@ -50,7 +50,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -62,6 +62,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         rootViewController = self
+         
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
@@ -166,6 +167,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var selectCell = tableView.cellForRowAtIndexPath(indexPath) as! SchoolProfileCell
         print("currentCell", selectCell.eventId.text!)
         
+        gObjBackTocontroller = gObjSchoolProfileNavController
         gEventID = Int(selectCell.eventId.text!)
         dispatch_async(dispatch_get_main_queue(), {
             

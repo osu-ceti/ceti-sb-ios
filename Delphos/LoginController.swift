@@ -176,7 +176,7 @@ class LoginController: UIViewController {
         }
             
         else{
-        
+        self.showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)

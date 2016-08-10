@@ -23,8 +23,9 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         case Home = 0
         case Settings
         case Profile
+        case ViewMyBadges
         case Logout
-        //case PushNotification
+       
         
     }
     @IBOutlet var tableView: UITableView!
@@ -113,6 +114,17 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 
                 
                 break
+            case .ViewMyBadges:
+                
+                // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                
+                gUserVIewBadgeId = gObjUserBean.id
+                //showOverlay(self.view)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+                
+                break
             case .Logout:
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -120,16 +132,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 testfacade.doTask(self,action: DelphosAction.SIGN_OUT)
 
                 break
-//            case .PushNotification:
-//
-//              // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
-//
-//                
-//                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//                let testfacade = appDelegate.getObjFacade()
-//                testfacade.doTask(self,action: DelphosAction.HANDLE_NOTIFICATION)
-//                
-//                break
+            
 
             }
         }

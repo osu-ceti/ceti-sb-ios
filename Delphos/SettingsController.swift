@@ -11,18 +11,21 @@ import ObjectMapper
 
 class SettingsController: NavController {
     
-   
     @IBOutlet var radioEventUpdate: SSRadioButton!
-    @IBOutlet var radioComfirmations: SSRadioButton!
+    @IBOutlet var radioComfirmations: SSRadioButton!    
     @IBOutlet var radioEventClaim: SSRadioButton!
     
+   
     @IBOutlet var btnSaveSettings: UIButton!
+    
+   
    
     var radioButtonControllerEventUpdate: SSRadioButtonsController?
     var radioButtonControllerComfirmations: SSRadioButtonsController?
     var radioButtonControllerEventClaim: SSRadioButtonsController?
     
     @IBOutlet var scrollView: UIScrollView!
+   
     
     var radioEventUpdateBean: Bool!
     var radioComfirmationsBean: Bool!
@@ -37,7 +40,8 @@ class SettingsController: NavController {
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
+        var view1 = UIView()
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -45,9 +49,7 @@ class SettingsController: NavController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        radioButtonControllerEventUpdate = SSRadioButtonsController(buttons: radioEventUpdate)
+               radioButtonControllerEventUpdate = SSRadioButtonsController(buttons: radioEventUpdate)
         radioButtonControllerEventUpdate!.delegate = self
         radioButtonControllerEventUpdate!.shouldLetDeSelect = true
         
@@ -138,7 +140,7 @@ class SettingsController: NavController {
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSaveSettings.frame.origin.y + 300)
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSaveSettings.frame.origin.y + 150)
         //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)

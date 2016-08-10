@@ -17,23 +17,14 @@ class SchoolDelegate:BaseDelegate{
         
       
             var strSchoolId: String
+        strSchoolId = String(gSchoolId)
         
-        if (gSchoolNameSelect == true)
-        {
-              //strSchoolId = String(gObjSearchUserListBean.school_id)
-            strSchoolId = String((objCurrentContoller as!  UserProfileController).schoolProfileId)
-        }
-        else{
-           // strSchoolId = String(gObjUserBean.school_id)
-             strSchoolId = String((objCurrentContoller as!  EventShowController).schoolProfileId)
-        }
-
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
                 gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                 
                 
-                var objSchoolBean = result as! SchoolsBean
+                let objSchoolBean = result as! SchoolsBean
                 
                 gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
                 gObjSearchSchoolListBean = objSchoolBean.school
@@ -42,10 +33,8 @@ class SchoolDelegate:BaseDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    var objSchoolProfileControllerNav = self.getNavigationController(gObjSchoolProfileController)
-                    //}
-                    
-                    self.doNavigate(objCurrentContoller, toController: objSchoolProfileControllerNav,  close: true)
+                    gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
+                    self.doNavigate(objCurrentContoller, toController: gObjSchoolProfileNavController,  close: true)
                 })
                 
             }

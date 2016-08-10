@@ -51,6 +51,7 @@ class UserDelegate:BaseDelegate{
         let defaultUser = NSUserDefaults.standardUserDefaults()
         let defaultPassowrd = NSUserDefaults.standardUserDefaults()
         //DOA calls
+        
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
@@ -88,7 +89,10 @@ class UserDelegate:BaseDelegate{
                    
                 
                 }
+                loginController.activityIndicator.stopAnimating()
+                loginController.overlayView.removeFromSuperview()
                 boolLogin = true;
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
@@ -215,7 +219,9 @@ class UserDelegate:BaseDelegate{
     
     func userProfile(objCurrentContoller: UIViewController) {
         
-        let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
+        let strUserId: String = String(gUserVIewBadgeId)
+       
+        //let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -230,10 +236,8 @@ class UserDelegate:BaseDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    var objUserProfileControllerNav = self.getNavigationController(gObjUserProfileController)
-                    //}
-                    
-                    self.doNavigate(objCurrentContoller, toController: objUserProfileControllerNav,  close: true)
+                    gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
+                    self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
                     
                 })
                 
