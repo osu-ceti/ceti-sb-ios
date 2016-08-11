@@ -218,7 +218,7 @@ class DAOBase: NSObject {
                 strStatus  = false
                 
                 let errorBean:ErrorBean = ErrorBean()
-                errorBean.description = "Empty Respsonse , Probable API key error"
+                errorBean.description = "Empty Respsonse , May be API key error"
                 errorBean.exception   =  error.debugDescription
                 errorBean.statusCode  =  error!.code
                 errorBean.reasonPhrase = "Check Status Code"
@@ -226,7 +226,7 @@ class DAOBase: NSObject {
                 //let dataToUse = NSJSONSerialization.JSONObjectWithData(errorBean as NSData, options:   NSJSONReadingOptions.AllowFragments, error: errorData) as! NSDictionary
                 let JSONString = Mapper().toJSON(errorBean)
                 
-                callBack?(jsonResult: JSONString, status: strStatus, statusCode: 401)
+                callBack?(jsonResult: JSONString, status: strStatus, statusCode: errorBean.statusCode)
                 
                 return
             }

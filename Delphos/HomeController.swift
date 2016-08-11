@@ -35,6 +35,8 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        gObjBackTocontroller = gObjHomeController
         //Adding Navbar
         menus = regularMenu
         rightViewController.isRegister = false

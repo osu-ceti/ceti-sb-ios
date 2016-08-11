@@ -12,6 +12,17 @@ import Security
 
 class UserDelegate:BaseDelegate{
     
+    func RedirectLoginPage(objCurrentContoller: UIViewController){
+        
+       //var loginController = objCurrentContoller as! LoginController
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+            
+            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+        })
+    }
+    
     func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! LoginController
@@ -21,6 +32,8 @@ class UserDelegate:BaseDelegate{
         
         if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
             NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+            
+           
              strUser = loginController.userNameData
              strPassword = loginController.userPasswordData
         }
@@ -35,12 +48,16 @@ class UserDelegate:BaseDelegate{
         objInputParamCredsBean.password = strPassword
         objInputParamCredsBean.id = 0
         objInputParamBean.user = objInputParamCredsBean
+        let defaultUser = NSUserDefaults.standardUserDefaults()
+        let defaultPassowrd = NSUserDefaults.standardUserDefaults()
         //DOA calls
+        
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
                 print("Login Sucessfull")
                 gObjUserBean = loginResult as! UserBean
+                gPasswordCheck = strPassword
                 
                 if(loginController.switchRememberme.on)
                 {
@@ -53,10 +70,9 @@ class UserDelegate:BaseDelegate{
                     let userNameKey = strUser
                     let userPasswordKey = strPassword
                     
-                    let defaultUser = NSUserDefaults.standardUserDefaults()
+                    
                     defaultUser.setObject(userNameKey, forKey:"userNameKey")
                     
-                    let defaultPassowrd = NSUserDefaults.standardUserDefaults()
                     defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
                     
                     
@@ -67,12 +83,16 @@ class UserDelegate:BaseDelegate{
                 }
                 else {
                      print("Data Not Save ")
-                     NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
-                     NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
+                    
+                    defaultUser.removeObjectForKey("userNameKey")
+                    defaultPassowrd.removeObjectForKey("userPasswordKey")
                    
                 
                 }
+                loginController.activityIndicator.stopAnimating()
+                loginController.overlayView.removeFromSuperview()
                 boolLogin = true;
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
@@ -94,19 +114,35 @@ class UserDelegate:BaseDelegate{
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
-
+                defaultUser.removeObjectForKey("userNameKey")
+                defaultPassowrd.removeObjectForKey("userPasswordKey")
                 
+                //loginController.activityIndicator.stopAnimating()
+                //loginController.overlayView.removeFromSuperview()
+                
+               self.RedirectLoginPage(objCurrentContoller)
             }
             else if statusCode == BAD_REQUEST {
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
-   
+                self.RedirectLoginPage(objCurrentContoller)
+                
             }
+            else if statusCode == CONNECTION_FAILED {
+                print("Login failure")
+                boolLogin = false;
+                self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
+                self.RedirectLoginPage(objCurrentContoller)
+                
+            }
+                
+                
             else{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
+                self.RedirectLoginPage(objCurrentContoller)
             }
              callback(status: boolLogin)
             
@@ -141,25 +177,32 @@ class UserDelegate:BaseDelegate{
             if(statusCode == SUCCESS) {
                 print("Register")
                 boolRegister = true
-                 var objUserBean = loginResult as! usersBean
+                 var objUserBean = loginResult as! RegistrationResponseBean
                 gObjUserBean = objUserBean.data
                 dispatch_async(dispatch_get_main_queue(), {
+                    self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
-                   // gObjHomeController = self.fetchNavController(gStrHomeControllerID)
-                    
-                    //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
 
-                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
-                   
-                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
+//                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
+//                   
+//                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: false)
                 })
             }
-            else if(statusCode > SUCCESS) {
-                self.showAlert(objCurrentContoller, strMessage: "Could not connect to the server")
+            else if(statusCode == CONNECTION_FAILED) {
+                self.showAlert(objCurrentContoller, strMessage: SERVER_ERROR_MSG)
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                })
+                
             }
             else{
                 
-                self.showAlert(objCurrentContoller, strMessage: "Failed to Register")
+                self.showAlert(objCurrentContoller, strMessage: REGISTERATION_ERROR)
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
@@ -176,7 +219,9 @@ class UserDelegate:BaseDelegate{
     
     func userProfile(objCurrentContoller: UIViewController) {
         
-        let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
+        let strUserId: String = String(gUserVIewBadgeId)
+       
+        //let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -191,10 +236,8 @@ class UserDelegate:BaseDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    var objUserProfileControllerNav = self.getNavigationController(gObjUserProfileController)
-                    //}
-                    
-                    self.doNavigate(objCurrentContoller, toController: objUserProfileControllerNav,  close: true)
+                    gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
+                    self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
                     
                 })
                 
@@ -486,6 +529,13 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
+                let objEdiAccounttResult = result as! AccountEditResponseBean
+                
+                let objEditAccountUser = objEdiAccounttResult.user as! UserBean
+                
+                gObjUserBean.role = objEditAccountUser.role
+                gObjUserBean.name = objEditAccountUser.name
+                gObjUserBean.email = objEditAccountUser.email
                 
                 print("Account Edited")
                 self.showAlert(objCurrentContoller, strMessage:"Account Edited")

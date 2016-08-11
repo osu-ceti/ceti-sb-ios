@@ -61,11 +61,11 @@ class AccountEditController: NavController {
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
-        backToController = gObjHomeController
+        
     }
     
     
@@ -204,7 +204,7 @@ class AccountEditController: NavController {
     }
     
     @IBAction func btnSaveAccountClick(sender: AnyObject) {
-        
+        var curPassword = txtCurrentPassword.text
         
         if(txtName.text == ""){
             self.requiredField.hidden = false
@@ -226,23 +226,23 @@ class AccountEditController: NavController {
                 
             }
             else{
-                if (txtNewPassword.text! == "")
-                {
-                    self.requiredField.hidden = false
-                    self.requiredField.text = "Required Password "
-                }
-                    
-                else if (txtNewPassword.text?.characters.count <= 7)
+//                if (txtNewPassword.text! == "")
+//                {
+//                    self.requiredField.hidden = false
+//                    self.requiredField.text = "Required Password "
+//                }
+                
+                if ((txtNewPassword.text! != "") && (txtNewPassword.text?.characters.count <= 7))
                 {
                     self.requiredField.hidden = false
                     self.requiredField.text = "Password Must have 8 character"
                 }
-                else if (txtConfirmPassword.text == "")
-                {
-                    self.requiredField.hidden = false
-                    self.requiredField.text = "Required ConfirmPassword"
-                }
-                else if (txtConfirmPassword.text != txtNewPassword.text!)
+//                else if (txtConfirmPassword.text == "")
+//                {
+//                    self.requiredField.hidden = false
+//                    self.requiredField.text = "Required ConfirmPassword"
+//                }
+                else if ((txtConfirmPassword.text != "") && (txtConfirmPassword.text != txtNewPassword.text!))
                 {
                     self.requiredField.hidden = false
                     self.requiredField.text = "ConfirmPassword does not match"
@@ -250,7 +250,12 @@ class AccountEditController: NavController {
                 else if (txtCurrentPassword.text == "")
                 {
                     self.requiredField.hidden = false
-                    self.requiredField.text = "Required CurrentPassword"
+                    self.requiredField.text = "Required Current Password"
+                }
+                else if (curPassword != gPasswordCheck)
+                {
+                    self.requiredField.hidden = false
+                    self.requiredField.text = "Current password is not match"
                 }
 //                else if (txtRole == "")
 //                {

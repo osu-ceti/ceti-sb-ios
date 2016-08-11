@@ -37,7 +37,10 @@ class SearchDelegate: BaseDelegate {
                         gObjSearchController.usersBeanArray = gObjUsersBean.users
                     }
                     
-                    objCurrentController.slideMenuController()?.changeMainViewController(UINavigationController(rootViewController: gObjSearchController), close: false)
+                    gObjSearchNavController = UINavigationController(rootViewController: gObjSearchController)
+                    gObjBackTocontroller = gObjSearchNavController
+                    
+                    objCurrentController.slideMenuController()?.changeMainViewController(gObjSearchNavController, close: false)
                     
                     //      print(eventDisplayController.eventBeanArray);
                     //                     objCurrentController.presentViewController(goToSearchController, animated: true, completion: nil)
@@ -61,6 +64,9 @@ class SearchDelegate: BaseDelegate {
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+                    (objCurrentContoller as! SearchController).activityIndicator.stopAnimating()
+                    (objCurrentContoller as! SearchController).overlayView.hidden = true
+                    
                     
                     gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
                     

@@ -79,8 +79,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var endDate = NSDate()
     var startDateAndTime = NSDate()
     
-         override func viewWillAppear(animated: Bool) {
+    var tempBackToViewController: UIViewController!
+    
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if(tempBackToViewController != nil){
+            gObjBackTocontroller = tempBackToViewController
+            tempBackToViewController = nil
+        }
+        
         
             //Adding Navbar
 //        menus = regularMenu
@@ -91,7 +99,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
-        backToController = gObjHomeController
+       // backToController = gObjHomeController
     
     
     
@@ -405,6 +413,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     @IBAction func btnSendMessage(sender: AnyObject) {
         
         //showOverlay(self.view)
+        tempBackToViewController = gObjBackTocontroller
+        gObjBackTocontroller = gObjEventShowController
         gUserProfileMessage = false
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
@@ -513,7 +523,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
          showOverlay(self.view)
         
         gSchoolNameSelect = false
-        schoolProfileId = gObjShowEventBean.loc_id
+        gSchoolId = gObjShowEventBean.loc_id
+       
+        //gObjBackTocontroller = gObjEventShowController
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
@@ -523,7 +535,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     }
     @IBAction func btnUserProfile(sender: AnyObject) {
    
-         strUserId = gObjShowEventBean.user_id
+        gUserVIewBadgeId = gObjShowEventBean.user_id
+        //gObjBackTocontroller = gObjEventShowController
         showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()

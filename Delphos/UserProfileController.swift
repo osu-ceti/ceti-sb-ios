@@ -59,28 +59,42 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var userProfileBadgesArray:[UserProfileBadgesBean]! = []
     
     var schoolProfileId:Int!
+    var tempBackToViewController:UIViewController!
 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        rootViewController = self
+        
+        //rootViewController = self
         //Adding Navbar
         //        menus = regularMenu
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
+
+//        setNavBar(self.view.frame.size.width)
+//        searchBar.delegate = self
         
-        backToController = gObjHomeController
+     
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(tempBackToViewController != nil){
+            gObjBackTocontroller = tempBackToViewController
+            tempBackToViewController = nil
+        }
+        
         //Adding Navbar
-        self.isBackEnabled = true
+        rootViewController = self
+        self.isBackEnabled = false
+
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
+
+        
+        
         
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
@@ -260,6 +274,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         print("currentCell", selectCell.eventId.text!)
         
         gEventID = Int(selectCell.eventId.text!)
+        
+        tempBackToViewController = gObjBackTocontroller
+        gObjBackTocontroller = gObjUserProfileNavController
+       
         dispatch_async(dispatch_get_main_queue(), {
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -280,7 +298,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             return userProfileBadgesArray.count
         }
         else{
-            return 1
+            return 0
         }
         
     }
@@ -299,13 +317,13 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             cell.backgroundColor = UIColor.whiteColor()
             var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesArray[indexPath.row]
             
-            let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url)
-            var badgesImage = NSData(contentsOfURL:url!)
+            if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
+                let badgesImage = NSData(contentsOfURL:url)
             
             
-            
-            cell.imgUserBadge.image = UIImage(data:badgesImage!)
-            cell.badgeId.text = String(imageDisplayBean.badge_id)
+                cell.imgUserBadge.image = UIImage(data:badgesImage!)
+                cell.badgeId.text = String(imageDisplayBean.badge_id)
+            }
         }
         //        else{
         //            self.labelNoBadges.hidden = false
@@ -417,6 +435,12 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = false
             self.txtGrades.hidden = false
+            
+            self.labelRole.hidden = false
+            self.labelBiography.hidden = false
+            
+            self.txtRole!.hidden = false
+            self.txtBiography.hidden = false
 
 
         }
@@ -436,6 +460,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else{
             self.labelNoBadges.hidden = false
+             self.labelNoBadges.text = gObjSearchUserListBean.name + " haven't earned any Badges yet!"
+            
         }
 
         self.collectionView.hidden = false
@@ -463,7 +489,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
          showOverlay(self.view)
          gSchoolNameSelect = true
         
-        schoolProfileId = gObjSearchUserListBean.school_id
+        gSchoolId = gObjSearchUserListBean.school_id
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)

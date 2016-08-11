@@ -65,10 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
         print("DEVICE TOKEN = \(deviceToken)")
+        
+        //if(deviceToken != ""){
         gStrDeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
         print("Device Token = " + gStrDeviceToken)
         
-        
+       // }
         
     }
     

@@ -17,7 +17,7 @@ class PublicProfileController:  NavController{
     
     
     @IBOutlet var labelProfileName: UILabel!
-    @IBOutlet var labelProfileSchool: UILabel!
+    
     
     @IBOutlet var labelProfileGrades: UILabel!
     @IBOutlet var labelProfileBiography: UILabel!
@@ -50,10 +50,14 @@ class PublicProfileController:  NavController{
     @IBOutlet var btnEditProfile: UIButton!
     @IBOutlet var btnEditAccount: UIButton!
     
+    @IBOutlet var btnPublicProfile: UIButton!
     
+    @IBOutlet var btnProfileSchoolLink: UIButton!
     @IBOutlet var scrollView: UIScrollView!
     
     var userProfileBean: UserBean!
+    
+    @IBOutlet var changeLabelName: UILabel!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,7 +67,7 @@ class PublicProfileController:  NavController{
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -90,6 +94,7 @@ class PublicProfileController:  NavController{
           hideLabelRole.font = UIFont.boldSystemFontOfSize(15)
           hideLabelEmail.font = UIFont.boldSystemFontOfSize(15)
         
+        self.changeLabelName.hidden = true
          self.txtProfileGrades.hidden = true
          self.txtProfileBiography.hidden = true
          self.txtProfileJobTItle.hidden = true
@@ -100,30 +105,15 @@ class PublicProfileController:  NavController{
         
          self.btnEditProfile.hidden = false
          self.btnEditAccount.hidden = false
-//
-//        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
-//           
-//            self.labelProfileSchool.hidden = true
-//            self.labelProfileGrades.hidden = true
-//            self.hideLabelGrades.hidden = true
-//            self.hideLabelSchool.hidden = true
-//            self.txtProfileGrades.hidden = true
-//            
-//        
-//        }
-//        else{
-//            self.labelProfileSchool.hidden = false
-//            self.labelProfileGrades.hidden = false
-//            self.hideLabelGrades.hidden = false
-//            self.hideLabelSchool.hidden = false
-//            self.txtProfileGrades.hidden = false
-//        
-//        }
+
+
         
         
         if (userProfileBean != nil){
+            
          self.labelProfileName.text = userProfileBean.name
-         self.labelProfileSchool.text = userProfileBean.school_name
+         btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
+         
             
          self.labelProfileGrades.text = userProfileBean.grades
          self.labelProfileBiography.text = userProfileBean.biography
@@ -136,6 +126,15 @@ class PublicProfileController:  NavController{
                 }
             else if(gObjUserBean.role == 2){
                  self.labelProfileRole.text = "SPEAKER"
+                
+                self.btnProfileSchoolLink.hidden = true
+                
+                 self.changeLabelName.hidden = false
+                self.labelProfileName.hidden = true
+                self.hideLabelName.hidden = true
+                
+                self.hideLabelSchool.text = "Name"
+                self.changeLabelName.text = userProfileBean.name
             }
             else{
                  self.labelProfileRole.text = "BOTH"
@@ -143,13 +142,14 @@ class PublicProfileController:  NavController{
         }
         else{
             
-            if (gObjUserBean.school_id == gObjMakeMySchoolListBean.school_id)
-            {
-                self.labelProfileSchool.text = gObjUserBean.school_name
-            }
-            else{
-                self.labelProfileSchool.text = ""
-            }
+//            if (gObjUserBean.school_id == gObjMakeMySchoolListBean.school_id)
+//            {
+//                btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
+//            }
+//            else{
+//                btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
+//            }
+            btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
             self.labelProfileName.text = gObjMakeMySchoolListBean.name
             
             self.labelProfileGrades.text = gObjMakeMySchoolListBean.grades
@@ -247,7 +247,8 @@ class PublicProfileController:  NavController{
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            
+            schoolsRadioBtn.selected = true
+            eventsRadioBtn.selected = false
             gBtnRadioValue = "schools"
         
         
@@ -267,6 +268,14 @@ class PublicProfileController:  NavController{
         testfacade.doTask(self,action: DelphosAction.VIEW_ACCOUNT_EDIT)
     }
     
+    @IBAction func btnProfileSchoolClick(sender: AnyObject) {
+        
+        gSchoolId = userProfileBean.school_id
+         self.showOverlay(self.view)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+    }
     
 }
 

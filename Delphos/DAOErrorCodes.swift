@@ -24,3 +24,4 @@ var SUCCESS_MSG: String = "Success";
 var BAD_REQUEST_MSG: String = "Bad Request";
 var UNAUTHORIZED_REQUEST_MSG: String = "Unauthorized Request! Please Re-Enter The Email and Password";
 var  SERVER_ERROR_MSG = "Could not connect to the server."
+var REGISTERATION_ERROR = "Failed to Register"
