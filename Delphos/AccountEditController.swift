@@ -204,9 +204,12 @@ class AccountEditController: NavController {
     }
     
     @IBAction func btnSaveAccountClick(sender: AnyObject) {
-        var curPassword = txtCurrentPassword.text
+        let curPassword = txtCurrentPassword.text
         
-        if(txtName.text == ""){
+        let trimmedText = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+
+        
+        if(trimmedText == ""){
             self.requiredField.hidden = false
             self.requiredField.text = "Required Name"
             
@@ -263,6 +266,7 @@ class AccountEditController: NavController {
 //                    self.requiredField.text = "Required Role"
 //                }
                 else{
+                    txtName.text = trimmedText
                     showOverlay(self.view)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()

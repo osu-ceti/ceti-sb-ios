@@ -63,7 +63,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
    
-    var strUserId:Int!
+    
     var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
@@ -172,8 +172,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
            gSpeakerId = Int(gObjShowEventBean.speaker_id)
             
             gSpeakerName =  String(gObjShowEventBean.speaker)
-
-            btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
+            if(gSpeakerName != nil){
+                 btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
+            }
             btnLinkLocation.setTitle(gObjShowEventBean.loc_name, forState: .Normal)
             btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, forState: .Normal)
             
@@ -412,6 +413,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
     @IBAction func btnSendMessage(sender: AnyObject) {
         
+        self.btnMessage.hidden = true
+        self.btnAccept.hidden = true
+        self.btnReject.hidden = true
         //showOverlay(self.view)
         tempBackToViewController = gObjBackTocontroller
         gObjBackTocontroller = gObjEventShowController
@@ -511,26 +515,44 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(sender: AnyObject) {
-         strUserId  = gSpeakerId
-        showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
-
+         gUserVIewBadgeId  = gSpeakerId
+        if(gObjShowEventBean.speaker != "TBA" && gObjShowEventBean.speaker != nil){
+            showOverlay(self.view)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+        }
     }
     @IBAction func btnSchoolProfile(sender: AnyObject) {
    
-         showOverlay(self.view)
+     //     ||
+        if(gObjShowEventBean.loc_id != 1 ){
+            showOverlay(self.view)
         
-        gSchoolNameSelect = false
-        gSchoolId = gObjShowEventBean.loc_id
+            gSchoolNameSelect = false
+            gSchoolId = gObjShowEventBean.loc_id
        
-        //gObjBackTocontroller = gObjEventShowController
+            //gObjBackTocontroller = gObjEventShowController
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
-        
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+        }
+        else{
+            navigationItem.titleView = searchBar
+            navigationItem.rightBarButtonItems = [menuButton,searchButton]
+            searchBar.sizeToFit()
+            searchBar.becomeFirstResponder()
+            searchBar.showsCancelButton = true
+            
+            
+            //navigationBar.items = [navigationItem]
+            searchView.hidden = false
+            schoolsRadioBtn.selected = true
+            eventsRadioBtn.selected = false
+            gBtnRadioValue = "schools"
+
+        }
 
     }
     @IBAction func btnUserProfile(sender: AnyObject) {

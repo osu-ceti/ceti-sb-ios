@@ -113,6 +113,7 @@ class EventDelegate: BaseDelegate{
                 gObjShowEventBean.active = resultBean.active
                 gObjShowEventBean.time_zone = resultBean.time_zone
                 gObjShowEventBean.complete = resultBean.complete
+               // gObjShowEventBean.speaker = resultBean.speaker
                 gObjShowEventBean.claim_id = 0
                 self.showEventUI(objCurrentContoller)
                 

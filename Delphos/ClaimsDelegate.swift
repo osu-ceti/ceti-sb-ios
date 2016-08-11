@@ -49,7 +49,8 @@ class ClaimsDelegate: BaseDelegate {
                         
                     
                     if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
-                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH) ){
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER)  ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
@@ -140,8 +141,9 @@ class ClaimsDelegate: BaseDelegate {
              
                 dispatch_async(dispatch_get_main_queue(), {
                 gEventAcceptBean = result as! ClaimAcceptBean
-                
-                
+                gObjShowEventBean.speaker_id = gEventAcceptBean.event.speaker_id
+                gSpeakerId = gEventAcceptBean.event.speaker_id
+                gObjShowEventBean.speaker = gEventAcceptBean.event.speaker
                (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, forState: .Normal)
                  (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, forState: .Normal)
                 (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, forState: .Normal)

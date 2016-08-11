@@ -370,6 +370,7 @@ class DAOServices: DAOBase {
                             var commasCorrectedResult = slashesStrippedResult.stringByReplacingOccurrencesOfString(",", withString: ",\n")
                             var finalResult = commasCorrectedResult.stringByReplacingOccurrencesOfString("}", withString: "\n}")
                             finalResult = commasCorrectedResult.stringByReplacingOccurrencesOfString("{", withString: "{\n")
+                            print("finalResult")
                             print(finalResult)
                         
                             let showEventBean = Mapper<CreateEventResultEventBean>().map(finalResult)!

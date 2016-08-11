@@ -220,7 +220,7 @@ class UserDelegate:BaseDelegate{
     func userProfile(objCurrentContoller: UIViewController) {
         
         let strUserId: String = String(gUserVIewBadgeId)
-       
+      // let strUserId: String = String(strUserProfileId)
         //let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
@@ -529,6 +529,9 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
+                if(strNewpassword != ""){
+                    gPasswordCheck = strNewpassword
+                }
                 let objEdiAccounttResult = result as! AccountEditResponseBean
                 
                 let objEditAccountUser = objEdiAccounttResult.user as! UserBean
@@ -536,6 +539,7 @@ class UserDelegate:BaseDelegate{
                 gObjUserBean.role = objEditAccountUser.role
                 gObjUserBean.name = objEditAccountUser.name
                 gObjUserBean.email = objEditAccountUser.email
+                
                 
                 print("Account Edited")
                 self.showAlert(objCurrentContoller, strMessage:"Account Edited")
