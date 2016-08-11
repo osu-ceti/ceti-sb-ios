@@ -14,11 +14,11 @@
 		0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */; };
 		0F34E1271D08110000CE660B /* SendMessageResBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F34E1261D08110000CE660B /* SendMessageResBean.swift */; };
 		0F46C34D1D1D59E300D0163C /* EditUserProfileBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */; };
+		0F485C541D3F66740013DC52 /* AccountEditResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */; };
 		0F485C5F1D3F6AB40013DC52 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C5E1D3F6AB40013DC52 /* SettingsController.swift */; };
 		0F485C671D3F77FA0013DC52 /* ViewSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C661D3F77FA0013DC52 /* ViewSettingsResponse.swift */; };
 		0F485C6D1D3FC68E0013DC52 /* SettingsListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C6C1D3FC68E0013DC52 /* SettingsListBean.swift */; };
 		0F485C751D3FC6CF0013DC52 /* SettingsBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C741D3FC6CF0013DC52 /* SettingsBean.swift */; };
-		0F485C541D3F66740013DC52 /* AccountEditResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */; };
 		0F488A691D1521AA00A72291 /* SchoolProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */; };
 		0F488A711D15566D00A72291 /* SchoolDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A701D15566D00A72291 /* SchoolDelegate.swift */; };
 		0F488A731D1570E600A72291 /* SignoutResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A721D1570E600A72291 /* SignoutResponseBean.swift */; };
@@ -48,6 +48,7 @@
 		0FA2A86D1D142BD000342797 /* SchoolProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */; };
 		0FAA768E1D488723009E20D5 /* ResetPasswordListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */; };
 		0FAA76901D48874F009E20D5 /* ResetPasswordBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */; };
+		0FAEE2131D5C53AC000ED6F2 /* RegistrationResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEE2121D5C53AC000ED6F2 /* RegistrationResponseBean.swift */; };
 		0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF601CEC3C900094EC79 /* EventBean.swift */; };
 		0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF631CEC5E050094EC79 /* CreateBean.swift */; };
 		0FB713D11CF97A5400C0C77F /* SearchEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */; };
@@ -219,11 +220,11 @@
 		0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelEventBean.swift; sourceTree = "<group>"; };
 		0F34E1261D08110000CE660B /* SendMessageResBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageResBean.swift; sourceTree = "<group>"; };
 		0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileBean.swift; sourceTree = "<group>"; };
+		0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditResponseBean.swift; sourceTree = "<group>"; };
 		0F485C5E1D3F6AB40013DC52 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0F485C661D3F77FA0013DC52 /* ViewSettingsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSettingsResponse.swift; sourceTree = "<group>"; };
 		0F485C6C1D3FC68E0013DC52 /* SettingsListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListBean.swift; sourceTree = "<group>"; };
 		0F485C741D3FC6CF0013DC52 /* SettingsBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsBean.swift; sourceTree = "<group>"; };
-		0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditResponseBean.swift; sourceTree = "<group>"; };
 		0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolProfileCell.swift; sourceTree = "<group>"; };
 		0F488A701D15566D00A72291 /* SchoolDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolDelegate.swift; sourceTree = "<group>"; };
 		0F488A721D1570E600A72291 /* SignoutResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutResponseBean.swift; sourceTree = "<group>"; };
@@ -253,6 +254,7 @@
 		0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolProfileController.swift; sourceTree = "<group>"; };
 		0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordListBean.swift; sourceTree = "<group>"; };
 		0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordBean.swift; sourceTree = "<group>"; };
+		0FAEE2121D5C53AC000ED6F2 /* RegistrationResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationResponseBean.swift; sourceTree = "<group>"; };
 		0FB1DF601CEC3C900094EC79 /* EventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBean.swift; sourceTree = "<group>"; };
 		0FB1DF631CEC5E050094EC79 /* CreateBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBean.swift; sourceTree = "<group>"; };
 		0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventBean.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 		F5C598F51CDDF800000C3F58 /* Beans */ = {
 			isa = PBXGroup;
 			children = (
+				0FAEE2121D5C53AC000ED6F2 /* RegistrationResponseBean.swift */,
 				F58061721CE5F93C004BF043 /* userListBean.swift */,
 				F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */,
 				F58BBACC1CE05B24000A3D2A /* LoginBean.swift */,
@@ -817,6 +820,7 @@
 				0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */,
 				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
 				0FA2A8691D14245900342797 /* SchoolsBean.swift in Sources */,
+				0FAEE2131D5C53AC000ED6F2 /* RegistrationResponseBean.swift in Sources */,
 				0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */,
 				0FFEC95D1D0EB1A400E4A1E0 /* UserProfileController.swift in Sources */,
 				F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */,
