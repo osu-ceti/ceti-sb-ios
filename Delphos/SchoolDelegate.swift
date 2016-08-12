@@ -56,7 +56,7 @@ class SchoolDelegate:BaseDelegate{
                 gObjUserBean.school_id = gObjMakeMySchoolListBean.school_id
                 gObjUserBean.school_name = makeMySchoolName
                
-                print("Make my school")
+                logger.log(LoggingLevel.INFO, message: "Make my school")
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 dispatch_async(dispatch_get_main_queue(), {

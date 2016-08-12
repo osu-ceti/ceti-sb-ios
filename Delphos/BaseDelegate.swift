@@ -13,6 +13,7 @@ class BaseDelegate: NSObject {
     var doPostAPIs: DAOServices!
     var doGetAPIs: DAOServices!
     
+    
     override init() {
         doPostAPIs = DAOServices()
         doGetAPIs = doPostAPIs

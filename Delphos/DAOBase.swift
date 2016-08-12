@@ -62,13 +62,13 @@ class DAOBase: NSObject {
 
         
         // sending AsynchronousRequest
-        print("DoGet - doGet:\(strURL)")
+        logger.log(LoggingLevel.INFO, message: "DoGet - doGet:\(strURL)")
         
         NSURLConnection.sendAsynchronousRequest(objRequest, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             
             if ((error) != nil)
             {
-                print("error: \(error)")
+                logger.log(LoggingLevel.INFO, message: "error: \(error)")
                 
                 strStatus  = false
                 
@@ -87,7 +87,7 @@ class DAOBase: NSObject {
                 return
                 
             }
-            print(response)
+            logger.log(LoggingLevel.INFO, message: "\("response)")")
             
             if let responseUrl = response as? NSHTTPURLResponse
             {
@@ -97,7 +97,7 @@ class DAOBase: NSObject {
                 
                 var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
                 
-                print(strStatusCode)
+                logger.log(LoggingLevel.INFO, message: "\(strStatusCode)")
                 
                 var checkDAta: NSString  = NSString(data: data!, encoding: NSUTF8StringEncoding)!
                 
@@ -107,7 +107,7 @@ class DAOBase: NSObject {
                     disJsonResult = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers)
                 } catch _ {
                     /* TODO: Finish migration: handle the expression passed to error arg: error */
-                    print("Error while Parsing JSON")
+                    logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
                     disJsonResult = ["Result" : "Empty",
                         "description"   : "",
                         
@@ -135,7 +135,7 @@ class DAOBase: NSObject {
                     
                     callBack?(jsonResult: dataToUse, status: strStatus, statusCode: strStatusCode)
                     
-                    print(dataToUse)
+                    logger.log(LoggingLevel.INFO, message: "\(dataToUse)")
                 }
             }
             }
@@ -196,13 +196,13 @@ class DAOBase: NSObject {
         
         
         if (strInputParamsJson != nil && strInputParamsJson != "") {
-            print("DoPost-InputParamJson\(strInputParamsJson)")
+            logger.log(LoggingLevel.INFO, message: "DoPost-InputParamJson\(strInputParamsJson)")
             
             objRequest.HTTPBody = strInputParamsJson!.dataUsingEncoding(NSUTF8StringEncoding)
         }
         
         // sending synchronousRequest
-        print(objRequest)
+        logger.log(LoggingLevel.INFO, message: "\(objRequest)")
         
         let session = NSURLSession.sharedSession()
         
@@ -213,7 +213,7 @@ class DAOBase: NSObject {
             
             if ((error) != nil)
             {
-                print("error: \(error)")
+                logger.log(LoggingLevel.INFO, message: "error: \(error)")
                 
                 strStatus  = false
                 
@@ -231,7 +231,7 @@ class DAOBase: NSObject {
                 return
             }
             
-            print(response)
+            logger.log(LoggingLevel.INFO, message: "\(response)")
             
             if let responseUrl = response as? NSHTTPURLResponse
             {
@@ -241,14 +241,14 @@ class DAOBase: NSObject {
                 
                 let error:NSError?
                 
-                print(strStatusCode)
+                logger.log(LoggingLevel.INFO, message: "\(strStatusCode)")
                 do{
                     //JSON Parser
                     disJsonResult =  try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary
                     
-                    print(disJsonResult)
+                    logger.log(LoggingLevel.INFO, message: "\(disJsonResult)")
                 }catch{
-                    print("Error while Parsing JSON")
+                    logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
                     disJsonResult = ["Result" : "Empty",
                                      "description"   : "",
                                      
@@ -272,7 +272,7 @@ class DAOBase: NSObject {
                         if NSString(data: data!, encoding: NSUTF8StringEncoding) != nil
                         {
                             if let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSArray, let dictionary = json.firstObject as? NSDictionary {
-                                print(dictionary)
+                                logger.log(LoggingLevel.INFO, message: "\(dictionary)")
                                 callBack?(jsonResult: dictionary, status: strStatus, statusCode: strStatusCode)
                             } else {
                                 
@@ -290,7 +290,7 @@ class DAOBase: NSObject {
                         return
                     }
                     for (key, value) in disJsonResult {
-                        print("\(key) = \(value)")
+                        logger.log(LoggingLevel.INFO, message: "\(key) = \(value)")
                     }
                     
                     callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
@@ -302,11 +302,11 @@ class DAOBase: NSObject {
                     
                     callBack?(jsonResult: dataToUse, status: strStatus, statusCode: strStatusCode)
                     
-                    print(dataToUse)
+                    logger.log(LoggingLevel.INFO, message: "\(dataToUse)")
                 }
             }
         }
-        print(task)
+        logger.log(LoggingLevel.INFO, message: "\(task)")
         task.resume()
     }
     
@@ -337,13 +337,13 @@ class DAOBase: NSObject {
 //        
 //        
 //        if strInputParamsJson != "" {
-//            print("DoPost-InputParamJson\(strInputParamsJson)")
+//            logger.log(LoggingLevel.INFO, message: "DoPost-InputParamJson\(strInputParamsJson)")
 //            
 //            objRequest.HTTPBody = strInputParamsJson.dataUsingEncoding(NSUTF8StringEncoding)
 //        }
 //        
 //        // sending synchronousRequest
-//        print(objRequest)
+//        logger.log(LoggingLevel.INFO, message: objRequest)
 //        
 //        let session = NSURLSession.sharedSession()
 //        
@@ -352,7 +352,7 @@ class DAOBase: NSObject {
 //            
 //            if ((error) != nil)
 //            {
-//                print("error: \(error)")
+//                logger.log(LoggingLevel.INFO, message: "error: \(error)")
 //                
 //                strStatus  = false
 //                
@@ -370,7 +370,7 @@ class DAOBase: NSObject {
 //                return
 //            }
 //            
-//            print(response)
+//            logger.log(LoggingLevel.INFO, message: response)
 //            
 //            if let responseUrl = response as? NSHTTPURLResponse
 //            {
@@ -380,14 +380,14 @@ class DAOBase: NSObject {
 //                
 //                let error:NSError?
 //                
-//                print(strStatusCode)
+//                logger.log(LoggingLevel.INFO, message: strStatusCode)
 //                do{
 //                    //JSON Parser
 //                    disJsonResult =  try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary
 //                    
-//                    print(disJsonResult)
+//                    logger.log(LoggingLevel.INFO, message: disJsonResult)
 //                }catch{
-//                    print("Error while Parsing JSON")
+//                    logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
 //                    disJsonResult = ["Result" : "Empty",
 //                                     "description"   : "",
 //                                     
@@ -411,7 +411,7 @@ class DAOBase: NSObject {
 //                        if NSString(data: data!, encoding: NSUTF8StringEncoding) != nil
 //                        {
 //                            if let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSArray, let dictionary = json.firstObject as? NSDictionary {
-//                                print(dictionary)
+//                                logger.log(LoggingLevel.INFO, message: dictionary)
 //                                callBack?(jsonResult: dictionary, status: strStatus, statusCode: strStatusCode)
 //                            } else {
 //                                
@@ -438,7 +438,7 @@ class DAOBase: NSObject {
 //                    
 //                    callBack?(jsonResult: dataToUse, status: strStatus, statusCode: strStatusCode)
 //                    
-//                    print(dataToUse)
+//                    logger.log(LoggingLevel.INFO, message: dataToUse)
 //                }
 //            }
 //        }

@@ -21,7 +21,7 @@ class DAOServices: DAOBase {
         print("getAllEvents")
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
                 // println(jsonResult)
@@ -49,10 +49,10 @@ class DAOServices: DAOBase {
         print("claim view")
         strURL = DEV_TARGET + CLAIMS_LIST + "/" + SHOWCLAIMSDATA + "?" + EVENT_ID + "=" + strClaimEventId
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //  print(jsonResult)
+                //  logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<ClaimListBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -61,7 +61,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -77,10 +77,10 @@ class DAOServices: DAOBase {
         strURL = DEV_TARGET + CLAIMS_LIST + "/" + strClaimDetailId
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //  print(jsonResult)
+                //  logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<ClaimListClaimBeanBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -89,7 +89,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -106,10 +106,10 @@ class DAOServices: DAOBase {
         strURL =  DEV_TARGET + EVENT + strEventID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<ShowEventBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -118,7 +118,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -137,7 +137,7 @@ class DAOServices: DAOBase {
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             
             if(status) {
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 if(gBtnRadioValue == "events") {
                     searchBean = Mapper<EventDisplayBean>().map(jsonResult)
                 }
@@ -154,7 +154,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -184,10 +184,10 @@ class DAOServices: DAOBase {
         var showEventBean : AnyObject!
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 if(gBtnRadioValue == events) {
                     showEventBean = Mapper<ShowEventBean>().map(jsonResult)
                 } else if(gBtnRadioValue == schools) {
@@ -203,7 +203,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -223,10 +223,10 @@ class DAOServices: DAOBase {
         strURL = DEV_TARGET + USERS + strUserProfileId + "/" + BADGES + "/" + strBadgeid
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showBadgeBean = Mapper<UserProfileBadgesBean>().map(jsonResult)
                 
                 callBack?(result: showBadgeBean!, statusCode: statusCode )
@@ -235,7 +235,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -255,10 +255,10 @@ class DAOServices: DAOBase {
         
         strURL = DEV_TARGET + USERS +  SETTINGS
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let showSettingsBean = Mapper<ViewSettingsResponse>().map(jsonResult)
                 
                 callBack?(result: showSettingsBean!, statusCode: statusCode )
@@ -267,7 +267,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -327,7 +327,7 @@ class DAOServices: DAOBase {
                 return
             }
             else{
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
@@ -406,7 +406,7 @@ class DAOServices: DAOBase {
                
             }
             else{
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
@@ -474,13 +474,13 @@ class DAOServices: DAOBase {
         doPost(strEventId,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-              print(jsonResult)
+              logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                  var acceptEventbean = Mapper<ClaimAcceptBean>().map(jsonResult)!
                  callBack?(result: acceptEventbean, statusCode: statusCode )
                  return
             }
             else {
-                //print(jsonResult)
+                //logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
@@ -547,12 +547,12 @@ class DAOServices: DAOBase {
         
         doDelete(strEventID, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             if(status) {
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var cancelEventBean = Mapper<CancelEventBean>().map(jsonResult)!
                 callBack?(result: cancelEventBean, statusCode: statusCode )
                 return
             } else {
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
@@ -572,10 +572,10 @@ class DAOServices: DAOBase {
         strURL =   DEV_TARGET + USERS + strUserID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<usersBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -584,7 +584,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -601,10 +601,10 @@ class DAOServices: DAOBase {
         strURL =  DEV_TARGET + SCHOOL + strSchoolID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -613,7 +613,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -660,12 +660,12 @@ class DAOServices: DAOBase {
         strURL =  DEV_TARGET + SCHOOL + MAKE_MINE + strSchoolID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                print("json result")
-                print(jsonResult)
+                
                 let showEventBean = Mapper<MakeMySchoolBean>().map(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
                 
@@ -673,7 +673,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -691,10 +691,10 @@ class DAOServices: DAOBase {
        
         let userJSONString = Mapper().toJSONString(objUserProfile, prettyPrint: true)
         doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -703,7 +703,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -719,10 +719,10 @@ class DAOServices: DAOBase {
         strURL =   DEV_TARGET + USERS + PROFILE
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<UserBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -731,7 +731,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -747,10 +747,10 @@ class DAOServices: DAOBase {
         print("get award badges")
         strURL =  DEV_TARGET + USERS + AWARD_BADGES
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -759,7 +759,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -775,10 +775,10 @@ class DAOServices: DAOBase {
         strURL =   DEV_TARGET + NOTIFICATION
        
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
                 
                 callBack?(result: showNotificationBean!, statusCode: statusCode )
@@ -787,7 +787,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -870,10 +870,10 @@ class DAOServices: DAOBase {
         strURL = REGISTER_DEVICE
         let userJSONString = Mapper().toJSONString(objDeviceBean, prettyPrint: true)
         doPost(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<DeviceBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -882,7 +882,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -899,10 +899,10 @@ class DAOServices: DAOBase {
         strURL = NOTIFICATION + "/" + strId
             
         doPost(gEmptyJSON, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<DeviceBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -911,7 +911,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -930,10 +930,10 @@ class DAOServices: DAOBase {
         
         let userJSONString = Mapper().toJSONString(objSaveSetting, prettyPrint: true)
         doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -941,7 +941,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -960,10 +960,10 @@ class DAOServices: DAOBase {
         let userJSONString = Mapper().toJSONString(objEditAccount, prettyPrint: true)
         doPut(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             
-            //print(jsonResult);
+            //logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let showAccountEditBean = Mapper<AccountEditResponseBean>().map(jsonResult)
                 
                 callBack?(result: showAccountEditBean!, statusCode: statusCode )
@@ -973,7 +973,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )
@@ -992,10 +992,10 @@ class DAOServices: DAOBase {
         
         let userJSONString = Mapper().toJSONString(objResetPassword, prettyPrint: true)
         doPost(userJSONString!, addAuthHeader: false,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
-            print(jsonResult);
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
             if(status) {
-                //    print(jsonResult)
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 var showEventBean = Mapper<EditUserProfileBean>().map(jsonResult)
                 
                 callBack?(result: showEventBean!, statusCode: statusCode )
@@ -1004,7 +1004,7 @@ class DAOServices: DAOBase {
             }
             else {
                 
-                print(jsonResult)
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 
                 callBack?(result: errorBean, statusCode: statusCode )

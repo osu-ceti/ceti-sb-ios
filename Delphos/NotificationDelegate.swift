@@ -48,7 +48,7 @@ class NotificationDelegate:BaseDelegate{
                 
                 
             }else{
-                print(" error Get Notification")
+                logger.log(LoggingLevel.INFO, message: " error Get Notification")
             }
         })
     }
@@ -78,7 +78,7 @@ func showShareBadge(objCurrentContoller: UIViewController) {
                 
             }
             else{
-                print(" error Get view badge")
+                logger.log(LoggingLevel.INFO, message: " error Get view badge")
 
             }
         })
@@ -92,7 +92,7 @@ func deleteNotification(objCurrentContoller: UIViewController)  {
            
             if(statusCode == SUCCESS) {
                 
-                print("MARK ALL Notification AS READ")
+                logger.log(LoggingLevel.INFO, message: "MARK ALL Notification AS READ")
                // self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
                 
 //                dispatch_async(dispatch_get_main_queue(), {
@@ -106,7 +106,7 @@ func deleteNotification(objCurrentContoller: UIViewController)  {
                 
             }
             else{
-                 print("NOT MARK ALL Notification AS READ")
+                 logger.log(LoggingLevel.INFO, message: "NOT MARK ALL Notification AS READ")
                 //self.showAlert(objCurrentContoller, strMessage: "NOT MARK ALL Notification AS READ")
             }
         })
