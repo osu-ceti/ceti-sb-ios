@@ -1,3 +1,4 @@
+
 //
 //  RegistrationResponseBean.swift
 //  Delphos
@@ -29,7 +30,7 @@ class RegistrationResponseBean: Mappable {
         state                    <- map["state"]
         status       <- map["status"]
         data               <- map["data"]
-       
+        
         
     }
     

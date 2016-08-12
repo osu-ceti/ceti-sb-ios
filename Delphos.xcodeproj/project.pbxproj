@@ -29,7 +29,6 @@
 		0F561A651D2BAFA1002CCE12 /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F561A641D2BAFA1002CCE12 /* NotificationDelegate.swift */; };
 		0F67CB7F1D3E4C91001A541F /* AccountEditBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CB7E1D3E4C91001A541F /* AccountEditBean.swift */; };
 		0F67CB871D3E6FA0001A541F /* AccountEditListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CB861D3E6FA0001A541F /* AccountEditListBean.swift */; };
-		0F767E5B1D5B6ACA00B500F4 /* RegistrationResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F767E5A1D5B6ACA00B500F4 /* RegistrationResponseBean.swift */; };
 		0F82C96A1D0BEA2C00339D1D /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 0F82C9581D0BE7F400339D1D /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0F8447061D2552F400155F8F /* SchoolListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8447051D2552F400155F8F /* SchoolListBean.swift */; };
 		0F84470E1D2555DC00155F8F /* SchoolsDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */; };
@@ -37,6 +36,7 @@
 		0F88009E1D2E889E00E1236B /* AwardBadgeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88009D1D2E889E00E1236B /* AwardBadgeResponse.swift */; };
 		0F8B11FE1D0001330030CE82 /* ClaimListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */; };
 		0F8B12061D00061B0030CE82 /* ClaimListClaimBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B12051D00061B0030CE82 /* ClaimListClaimBean.swift */; };
+		0F94406F1D5DD6F70086F325 /* RegistrationResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F94406E1D5DD6F70086F325 /* RegistrationResponseBean.swift */; };
 		0F9E4F191CF31D4A004FC736 /* DelphosEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */; };
 		0F9E4F1B1CF32891004FC736 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1A1CF32891004FC736 /* RightViewController.swift */; };
 		0F9E4F1D1CF32ACB004FC736 /* SlidingMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */; };
@@ -49,7 +49,6 @@
 		0FA2A86D1D142BD000342797 /* SchoolProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */; };
 		0FAA768E1D488723009E20D5 /* ResetPasswordListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */; };
 		0FAA76901D48874F009E20D5 /* ResetPasswordBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */; };
-		0FAEE2131D5C53AC000ED6F2 /* RegistrationResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEE2121D5C53AC000ED6F2 /* RegistrationResponseBean.swift */; };
 		0FB1DF611CEC3C900094EC79 /* EventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF601CEC3C900094EC79 /* EventBean.swift */; };
 		0FB1DF641CEC5E050094EC79 /* CreateBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB1DF631CEC5E050094EC79 /* CreateBean.swift */; };
 		0FB713D11CF97A5400C0C77F /* SearchEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */; };
@@ -236,7 +235,6 @@
 		0F561A641D2BAFA1002CCE12 /* NotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
 		0F67CB7E1D3E4C91001A541F /* AccountEditBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditBean.swift; sourceTree = "<group>"; };
 		0F67CB861D3E6FA0001A541F /* AccountEditListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditListBean.swift; sourceTree = "<group>"; };
-		0F767E5A1D5B6ACA00B500F4 /* RegistrationResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationResponseBean.swift; sourceTree = "<group>"; };
 		0F82C94D1D0BE7F400339D1D /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = ObjectMapper/ObjectMapper.xcodeproj; sourceTree = "<group>"; };
 		0F8447051D2552F400155F8F /* SchoolListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolListBean.swift; sourceTree = "<group>"; };
 		0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolsDisplayBean.swift; sourceTree = "<group>"; };
@@ -244,6 +242,7 @@
 		0F88009D1D2E889E00E1236B /* AwardBadgeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardBadgeResponse.swift; sourceTree = "<group>"; };
 		0F8B11FD1D0001330030CE82 /* ClaimListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimListBean.swift; sourceTree = "<group>"; };
 		0F8B12051D00061B0030CE82 /* ClaimListClaimBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimListClaimBean.swift; sourceTree = "<group>"; };
+		0F94406E1D5DD6F70086F325 /* RegistrationResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationResponseBean.swift; sourceTree = "<group>"; };
 		0F9E4F181CF31D4A004FC736 /* DelphosEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosEnums.swift; sourceTree = "<group>"; };
 		0F9E4F1A1CF32891004FC736 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		0F9E4F1C1CF32ACB004FC736 /* SlidingMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingMenuController.swift; sourceTree = "<group>"; };
@@ -256,7 +255,6 @@
 		0FA2A86C1D142BD000342797 /* SchoolProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolProfileController.swift; sourceTree = "<group>"; };
 		0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordListBean.swift; sourceTree = "<group>"; };
 		0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordBean.swift; sourceTree = "<group>"; };
-		0FAEE2121D5C53AC000ED6F2 /* RegistrationResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationResponseBean.swift; sourceTree = "<group>"; };
 		0FB1DF601CEC3C900094EC79 /* EventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBean.swift; sourceTree = "<group>"; };
 		0FB1DF631CEC5E050094EC79 /* CreateBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBean.swift; sourceTree = "<group>"; };
 		0FB713D01CF97A5400C0C77F /* SearchEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventBean.swift; sourceTree = "<group>"; };
@@ -518,7 +516,6 @@
 		F5C598F51CDDF800000C3F58 /* Beans */ = {
 			isa = PBXGroup;
 			children = (
-				0FAEE2121D5C53AC000ED6F2 /* RegistrationResponseBean.swift */,
 				F58061721CE5F93C004BF043 /* userListBean.swift */,
 				F5C598F61CDDF80F000C3F58 /* ErrorBean.swift */,
 				F58BBACC1CE05B24000A3D2A /* LoginBean.swift */,
@@ -568,7 +565,7 @@
 				0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */,
 				0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */,
 				0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */,
-				0F767E5A1D5B6ACA00B500F4 /* RegistrationResponseBean.swift */,
+				0F94406E1D5DD6F70086F325 /* RegistrationResponseBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -823,8 +820,7 @@
 				0F500B281CEAFBE0000ED18F /* CreateEventController.swift in Sources */,
 				F58BBAD51CE05B64000A3D2A /* CredentialsBean.swift in Sources */,
 				0FA2A8691D14245900342797 /* SchoolsBean.swift in Sources */,
-				0FAEE2131D5C53AC000ED6F2 /* RegistrationResponseBean.swift in Sources */,
-				0F767E5B1D5B6ACA00B500F4 /* RegistrationResponseBean.swift in Sources */,
+				0F94406F1D5DD6F70086F325 /* RegistrationResponseBean.swift in Sources */,
 				0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */,
 				0FFEC95D1D0EB1A400E4A1E0 /* UserProfileController.swift in Sources */,
 				F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */,
