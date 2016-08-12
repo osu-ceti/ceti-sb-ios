@@ -39,15 +39,15 @@ class UserDelegate:BaseDelegate{
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
-                print("Login Sucessfull")
+                logger.log(LoggingLevel.INFO, message: "Login Sucessfull")
                 gObjUserBean = loginResult as! UserBean
                 
                 if(loginController.switchRememberme.on)
                 {
                     
-                    print("save data")
+                    logger.log(LoggingLevel.INFO, message: "save data")
                     
-                    print("switch button=",loginController.switchRememberme.on)
+                    logger.log(LoggingLevel.INFO, message: "switch button= \(loginController.switchRememberme.on)")
                    
                     //Save username password data
                     let userNameKey = strUser
@@ -57,16 +57,13 @@ class UserDelegate:BaseDelegate{
                     defaultUser.setObject(userNameKey, forKey:"userNameKey")
                     
                     let defaultPassowrd = NSUserDefaults.standardUserDefaults()
-                    defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
+                    defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")                 
                     
-                    
-                    print(defaultPassowrd)
-                    print(defaultUser)
                     
                    
                 }
                 else {
-                     print("Data Not Save ")
+                     logger.log(LoggingLevel.INFO, message: "Data Not Save ")
                      NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
                      NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
                    
@@ -90,7 +87,7 @@ class UserDelegate:BaseDelegate{
             }
             else if statusCode == UNAUTHORIZED_REQUEST{
                 
-                print("Login failure")
+                logger.log(LoggingLevel.INFO, message: "Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
@@ -98,13 +95,13 @@ class UserDelegate:BaseDelegate{
                 
             }
             else if statusCode == BAD_REQUEST {
-                print("Login failure")
+                logger.log(LoggingLevel.INFO, message: "Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
    
             }
             else{
-                print("Login failure")
+                logger.log(LoggingLevel.INFO, message: "Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
             }
@@ -139,7 +136,7 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
-                print("Register")
+                logger.log(LoggingLevel.INFO, message: "Register")
                 boolRegister = true
                  var objUserBean = loginResult as! usersBean
                 gObjUserBean = objUserBean.data
@@ -210,11 +207,11 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
             if (statusCode == SUCCESS){
-                print("sign out")
+                logger.log(LoggingLevel.INFO, message: "sign out")
                 
                 NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
                 NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
-                print("Clear Login Data")
+                logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
                 var object = SignoutResult as! SignoutResponseBean
                 
@@ -229,7 +226,7 @@ class UserDelegate:BaseDelegate{
                
             } else {
             
-             print("Did not sign out")
+             logger.log(LoggingLevel.INFO, message: "Did not sign out")
             }
         }
         
@@ -261,7 +258,7 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doEditProfile(objInputParamBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
-                print("Save profile")
+                logger.log(LoggingLevel.INFO, message: "Save profile")
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     var objUserResponse = result as! EditUserProfileBean
@@ -295,7 +292,7 @@ class UserDelegate:BaseDelegate{
             }
             else{
                 
-               print("NOt Save profile")
+               logger.log(LoggingLevel.INFO, message: "NOt Save profile")
                 
             }
             
@@ -374,14 +371,14 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doSaveSettings(objSettingsInputBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
-                print("Save Settings")
+                logger.log(LoggingLevel.INFO, message: "Save Settings")
                 self.showAlert(objCurrentContoller, strMessage: "Settings Saved")
                 
                     
             }
               else{
                 
-                print("NOt Save Settings")
+                logger.log(LoggingLevel.INFO, message: "NOt Save Settings")
             }
         }
     }
@@ -428,7 +425,7 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doResetPassword(objResetPasswordBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == RESET_SUCCESS) {
-                print("Password Reseted")
+                logger.log(LoggingLevel.INFO, message: "Password Reseted")
                 self.showAlert(objCurrentContoller, strMessage: "Please check your email")
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -445,7 +442,7 @@ class UserDelegate:BaseDelegate{
             else{
                  self.showAlert(objCurrentContoller, strMessage: "Password Not Changed please try again later")
                 
-                 print("Password Not Changed")
+                 logger.log(LoggingLevel.INFO, message: "Password Not Changed")
                 gObjLoginController = self.fetchNavController(gStrLoginControllerID)
                 
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
@@ -487,7 +484,7 @@ class UserDelegate:BaseDelegate{
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == SUCCESS) {
                 
-                print("Account Edited")
+                logger.log(LoggingLevel.INFO, message: "Account Edited")
                 self.showAlert(objCurrentContoller, strMessage:"Account Edited")
                 
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
@@ -508,7 +505,7 @@ class UserDelegate:BaseDelegate{
             }
                 else{
                 self.showAlert(objCurrentContoller, strMessage:"Not Account Edited ")
-                print("Not Account Edited")
+                logger.log(LoggingLevel.INFO, message: "Not Account Edited")
              
                 
 //                gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController

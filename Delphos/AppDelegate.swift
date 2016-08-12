@@ -13,15 +13,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var facade: FacadeDelphos
+    
     override init(){
         facade = FacadeDelphos()
+        logger = Logger()
     }
     
     func getObjFacade() -> FacadeDelphos
     {
-        
         return facade
     }
+    
+    func getLogger() -> Logger
+    {
+        return logger
+    }
+    
     private func createMenuView() {
         
         // create viewController code...

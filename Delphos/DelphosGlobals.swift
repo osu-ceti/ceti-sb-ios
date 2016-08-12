@@ -10,7 +10,7 @@ import UIKit
 
 var gObjStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 var rootViewController: UIViewController!
-
+var logger: Logger!
 
 var gStrDeviceToken: String!
 
@@ -85,4 +85,6 @@ var menus : [String] = regularMenu
 var gEmptyJSON = "{}"
 
 var gObjNotificationInfo: AnyObject?
+
+
 

@@ -11,7 +11,7 @@ import UIKit
 class SearchDelegate: BaseDelegate {
     func  searchEvent(objCurrentController: UIViewController) {
         
-        print(objCurrentController)
+//        print(objCurrentController)
         let objEventDisplayController = objCurrentController as! NavController
         
         var strSearchText = objEventDisplayController.searchBar.text

@@ -14,11 +14,11 @@
 		0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */; };
 		0F34E1271D08110000CE660B /* SendMessageResBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F34E1261D08110000CE660B /* SendMessageResBean.swift */; };
 		0F46C34D1D1D59E300D0163C /* EditUserProfileBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */; };
+		0F485C541D3F66740013DC52 /* AccountEditResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */; };
 		0F485C5F1D3F6AB40013DC52 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C5E1D3F6AB40013DC52 /* SettingsController.swift */; };
 		0F485C671D3F77FA0013DC52 /* ViewSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C661D3F77FA0013DC52 /* ViewSettingsResponse.swift */; };
 		0F485C6D1D3FC68E0013DC52 /* SettingsListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C6C1D3FC68E0013DC52 /* SettingsListBean.swift */; };
 		0F485C751D3FC6CF0013DC52 /* SettingsBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C741D3FC6CF0013DC52 /* SettingsBean.swift */; };
-		0F485C541D3F66740013DC52 /* AccountEditResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */; };
 		0F488A691D1521AA00A72291 /* SchoolProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */; };
 		0F488A711D15566D00A72291 /* SchoolDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A701D15566D00A72291 /* SchoolDelegate.swift */; };
 		0F488A731D1570E600A72291 /* SignoutResponseBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F488A721D1570E600A72291 /* SignoutResponseBean.swift */; };
@@ -69,6 +69,7 @@
 		840AEF8A1D2BA44200400B6A /* PushNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEF891D2BA44200400B6A /* PushNotificationDelegate.swift */; };
 		840AEF921D2BA6AB00400B6A /* DeviceBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEF911D2BA6AB00400B6A /* DeviceBean.swift */; };
 		8412621A1D33661900807F81 /* DelphosStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841262191D33661900807F81 /* DelphosStrings.swift */; };
+		8431DA3F1D5AFEC9008234A8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431DA3E1D5AFEC9008234A8 /* Logger.swift */; };
 		84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCA1D09527C00C614C2 /* BaseDelegate.swift */; };
 		84799FCD1D09528E00C614C2 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCC1D09528E00C614C2 /* EventDelegate.swift */; };
 		84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCE1D09529B00C614C2 /* UserDelegate.swift */; };
@@ -219,11 +220,11 @@
 		0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelEventBean.swift; sourceTree = "<group>"; };
 		0F34E1261D08110000CE660B /* SendMessageResBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageResBean.swift; sourceTree = "<group>"; };
 		0F46C34C1D1D59E300D0163C /* EditUserProfileBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileBean.swift; sourceTree = "<group>"; };
+		0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditResponseBean.swift; sourceTree = "<group>"; };
 		0F485C5E1D3F6AB40013DC52 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0F485C661D3F77FA0013DC52 /* ViewSettingsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSettingsResponse.swift; sourceTree = "<group>"; };
 		0F485C6C1D3FC68E0013DC52 /* SettingsListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListBean.swift; sourceTree = "<group>"; };
 		0F485C741D3FC6CF0013DC52 /* SettingsBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsBean.swift; sourceTree = "<group>"; };
-		0F485C531D3F66740013DC52 /* AccountEditResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditResponseBean.swift; sourceTree = "<group>"; };
 		0F488A681D1521AA00A72291 /* SchoolProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolProfileCell.swift; sourceTree = "<group>"; };
 		0F488A701D15566D00A72291 /* SchoolDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolDelegate.swift; sourceTree = "<group>"; };
 		0F488A721D1570E600A72291 /* SignoutResponseBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutResponseBean.swift; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 		840AEF891D2BA44200400B6A /* PushNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationDelegate.swift; sourceTree = "<group>"; };
 		840AEF911D2BA6AB00400B6A /* DeviceBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceBean.swift; sourceTree = "<group>"; };
 		841262191D33661900807F81 /* DelphosStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosStrings.swift; sourceTree = "<group>"; };
+		8431DA3E1D5AFEC9008234A8 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		84799FCA1D09527C00C614C2 /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		84799FCC1D09528E00C614C2 /* EventDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
 		84799FCE1D09529B00C614C2 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				0F561A641D2BAFA1002CCE12 /* NotificationDelegate.swift */,
 				840AEF891D2BA44200400B6A /* PushNotificationDelegate.swift */,
 				0F561A491D2BA213002CCE12 /* BadgeDelegate.swift */,
+				8431DA3E1D5AFEC9008234A8 /* Logger.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				0F9E4F1F1CF33A9C004FC736 /* UIViewControllerExtension.swift in Sources */,
 				F5C598F71CDDF80F000C3F58 /* ErrorBean.swift in Sources */,
 				0F485C541D3F66740013DC52 /* AccountEditResponseBean.swift in Sources */,
+				8431DA3F1D5AFEC9008234A8 /* Logger.swift in Sources */,
 				0F67CB7F1D3E4C91001A541F /* AccountEditBean.swift in Sources */,
 				F58F698D1CEAF2DB00C4ED91 /* searchUserListBean.swift in Sources */,
 				F5A2EE7A1CDC6CD800419419 /* AppDelegate.swift in Sources */,

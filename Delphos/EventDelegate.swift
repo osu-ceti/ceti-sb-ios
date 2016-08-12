@@ -37,17 +37,16 @@ class EventDelegate: BaseDelegate{
             
             let eventDisplayController = objCurrentContoller as! HomeController
             if(statusCode != 0){
-                print("Show event")
+                logger.log(LoggingLevel.INFO, message: "All Events Retrieved")
                 //var objEventDisplayBean = result as! EventDisplayBean
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjEventDisplayBean = result as! EventDisplayBean
-                    print("Show", objCurrentContoller)
                     
                     eventDisplayController.eventBeanArray = gObjEventDisplayBean.events
                     
-                    //      print(eventDisplayController.eventBeanArray);
+                    //      logger.log(LoggingLevel.INFO,eventDisplayController.eventBeanArray);
                     
                     eventDisplayController.tableView.reloadData()
                     
@@ -73,8 +72,8 @@ class EventDelegate: BaseDelegate{
         var objInputParamEventBean: CreateEventBean = CreateEventBean()
         
         
-        print("strEventEndDate =" + strEventEndDate )
-        print("strEventStartDate =" + strEventStartDate )
+        logger.log(LoggingLevel.INFO,message: "strEventEndDate =" + strEventEndDate )
+        logger.log(LoggingLevel.INFO,message: "strEventStartDate =" + strEventStartDate )
         
         objInputParamEventBean.title = strTitle
         objInputParamEventBean.content = strContents
@@ -94,7 +93,7 @@ class EventDelegate: BaseDelegate{
         doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: eventBean){ (result: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
-                print("create event Sucessfull")
+                logger.log(LoggingLevel.INFO,message: "create event Sucessfull")
                 let resultBean: CreateEventResultEventBean = result as! CreateEventResultEventBean
                 gObjShowEventBean = ShowEventBean()
                 gObjShowEventBean.id = resultBean.id
@@ -119,7 +118,7 @@ class EventDelegate: BaseDelegate{
                 
             }
             else{
-                print("create event failure")
+                logger.log(LoggingLevel.INFO,message: "create event failure")
                 // Handle error
                 self.showAlert(objCurrentContoller, strMessage: "Failed to Create Event")
             }
@@ -144,7 +143,7 @@ class EventDelegate: BaseDelegate{
         
         doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             if (statusCode == SUCCESS){
-                print("Cancel Event")
+                logger.log(LoggingLevel.INFO,message: "Cancel Event")
                  dispatch_async(dispatch_get_main_queue(), {
                // if(gObjHomeController == nil){
                     self.showAlert(objCurrentContoller, strMessage: "Event Cancel ")
@@ -156,7 +155,7 @@ class EventDelegate: BaseDelegate{
             }
             else {
                  self.showAlert(objCurrentContoller, strMessage: "Event Not Cancel ")
-                print("not Cancel Event")
+                logger.log(LoggingLevel.INFO,message: "not Cancel Event")
 //                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
 //               
 //                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)
