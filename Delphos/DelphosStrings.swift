@@ -23,6 +23,7 @@ var users = "users"
 
 var gTimeFormat = "hh:mm a zzz"
 var gDateFormat = "yyyy-MM-dd"
+var gTimeWithoutZoneFormat = "hh:mm a"
 
 var gDateTimeFormat = gDateFormat + " " + gTimeFormat
 
