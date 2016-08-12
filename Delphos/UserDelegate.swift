@@ -22,6 +22,12 @@ class UserDelegate:BaseDelegate{
             objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
         })
     }
+//    func HiddenOverlay(objCurrentContoller: UIViewController,controllerName :UIViewController){
+//        
+//        var objControllerName = objCurrentContoller as! controllerName
+//        objControllerName.activityIndicator.stopAnimating()
+//        objControllerName.overlayView.hidden = true
+//    }
     
     func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
@@ -56,6 +62,10 @@ class UserDelegate:BaseDelegate{
             
             if (statusCode == SUCCESS){
                 print("Login Sucessfull")
+                
+                loginController.activityIndicator.stopAnimating()
+                loginController.overlayView.hidden = true
+                
                 gObjUserBean = loginResult as! UserBean
                 gPasswordCheck = strPassword
                 
@@ -89,8 +99,7 @@ class UserDelegate:BaseDelegate{
                    
                 
                 }
-                loginController.activityIndicator.stopAnimating()
-                loginController.overlayView.removeFromSuperview()
+               
                 boolLogin = true;
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -114,6 +123,7 @@ class UserDelegate:BaseDelegate{
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
+                
                 defaultUser.removeObjectForKey("userNameKey")
                 defaultPassowrd.removeObjectForKey("userPasswordKey")
                 
@@ -126,6 +136,8 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
+                defaultUser.removeObjectForKey("userNameKey")
+                defaultPassowrd.removeObjectForKey("userPasswordKey")
                 self.RedirectLoginPage(objCurrentContoller)
                 
             }
@@ -133,6 +145,8 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
+                defaultUser.removeObjectForKey("userNameKey")
+                defaultPassowrd.removeObjectForKey("userPasswordKey")
                 self.RedirectLoginPage(objCurrentContoller)
                 
             }
@@ -142,6 +156,8 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
+                defaultUser.removeObjectForKey("userNameKey")
+                defaultPassowrd.removeObjectForKey("userPasswordKey")
                 self.RedirectLoginPage(objCurrentContoller)
             }
              callback(status: boolLogin)
@@ -154,6 +170,7 @@ class UserDelegate:BaseDelegate{
     
     
     func register(objCurrentContoller: UIViewController) -> Bool {
+        
         var boolRegister = false
         let registerController = objCurrentContoller as! RegisterController
         let strName = registerController.txtName.text
@@ -174,7 +191,12 @@ class UserDelegate:BaseDelegate{
         objInputRegisterBean.commit = "Create my account"
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
+            registerController.activityIndicator.stopAnimating()
+            registerController.overlayView.removeFromSuperview()
+            registerController.overlayView.hidden = true
             if(statusCode == SUCCESS) {
+                
+
                 print("Register")
                 boolRegister = true
                  var objUserBean = loginResult as! RegistrationResponseBean
@@ -191,6 +213,9 @@ class UserDelegate:BaseDelegate{
                 })
             }
             else if(statusCode == CONNECTION_FAILED) {
+                
+                
+                
                 self.showAlert(objCurrentContoller, strMessage: SERVER_ERROR_MSG)
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -203,6 +228,9 @@ class UserDelegate:BaseDelegate{
             else{
                 
                 self.showAlert(objCurrentContoller, strMessage: REGISTERATION_ERROR)
+                registerController.activityIndicator.stopAnimating()
+                registerController.overlayView.hidden = true
+                registerController.overlayView.removeFromSuperview()
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
@@ -273,6 +301,14 @@ class UserDelegate:BaseDelegate{
             } else {
             
              print("Did not sign out")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+                })
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
             }
         }
         
@@ -471,7 +507,11 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doResetPassword(objResetPasswordBean){ (result: AnyObject, statusCode: Int) in
             if(statusCode == RESET_SUCCESS) {
+                
                 print("Password Reseted")
+                
+                loginController.activityIndicator.stopAnimating()
+                loginController.overlayView.hidden = true
                 self.showAlert(objCurrentContoller, strMessage: "Please check your email")
                 
                 dispatch_async(dispatch_get_main_queue(), {

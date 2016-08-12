@@ -21,6 +21,7 @@ class LoginController: UIViewController {
     
 
    
+   
     var userNameData:String!
     
    
@@ -56,6 +57,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
          rootViewController = self
          self.requiredError.hidden = true
+       
         
         
         if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
@@ -197,12 +199,43 @@ class LoginController: UIViewController {
         self.btnForgetPassword.hidden = true
     }
    
+    func isValidEmail(testStr:String) -> Bool {
+        // println("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        print(emailTest.evaluateWithObject(testStr))
+        
+        return emailTest.evaluateWithObject(testStr)
+        
+        
+    }
 
     @IBAction func btnResetPasswordClick(sender: AnyObject) {
-        self.showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
+        
+        if (userTxt.text == ""){
+            self.requiredError.hidden = false
+            self.requiredError.text = "Required Email"
+            //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
+        }
+        
+        else if (userTxt.text != "" )
+        {
+            var emailvalid = isValidEmail(userTxt.text!)
+            //print(emailvalid)
+            if(emailvalid == false ){
+                self.requiredError.hidden = false
+                self.requiredError.text =  "Required Vaild Email"
+                
+            }
+        }else{
+        
+        
+            self.showOverlay(self.view)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
+        }
     }
 
    
