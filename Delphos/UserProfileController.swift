@@ -486,14 +486,33 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
 
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
-         showOverlay(self.view)
-         gSchoolNameSelect = true
         
-        gSchoolId = gObjSearchUserListBean.school_id
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+        if(gObjUserBean.school_id != 1){
+            showOverlay(self.view)
+            gSchoolNameSelect = true
+        
+            gSchoolId = gObjSearchUserListBean.school_id
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+        }
+        else{
+            navigationItem.titleView = searchBar
+            navigationItem.rightBarButtonItems = [menuButton,searchButton]
+            searchBar.sizeToFit()
+            searchBar.becomeFirstResponder()
+            searchBar.showsCancelButton = true
+            
+            
+            //navigationBar.items = [navigationItem]
+            searchView.hidden = false
+            schoolsRadioBtn.selected = true
+            eventsRadioBtn.selected = false
+            gBtnRadioValue = "schools"
 
+        
+        }
+        
     }
     
     @IBAction func btnContactUserClick(sender: AnyObject) {

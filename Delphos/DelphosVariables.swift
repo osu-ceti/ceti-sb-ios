@@ -76,6 +76,8 @@ var gUserVIewBadgeId:Int!
 
 var gSchoolId:Int!
 
+var strUserProfileId:Int = 0
+
 var gClaimsListDetails:ClaimListClaimBeanBean!
 
 var gClaimsList:ClaimListBean!

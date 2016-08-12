@@ -29,6 +29,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     @IBOutlet weak var btnPostEvent: UIButton!
     
+    let checkCharacter = NSCharacterSet.letterCharacterSet()
+    
     
    // @IBOutlet var txtStartTimeTouch: UITextField!
   
@@ -107,6 +109,56 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
         view.backgroundColor = color
+        
+        var bottomLine = CALayer()
+        bottomLine.frame = CGRectMake(0.0, txtTitle.frame.height - 1, txtTitle.frame.width, 1.0)
+        bottomLine.backgroundColor = UIColor.blackColor().CGColor
+        txtTitle.borderStyle = UITextBorderStyle.None
+        txtTitle.layer.addSublayer(bottomLine)
+        
+        var txtContentsLine = CALayer()
+        txtContentsLine.frame = CGRectMake(0.0, txtContents.frame.height - 1, txtContents.frame.width, 1.0)
+        txtContentsLine.backgroundColor = UIColor.blackColor().CGColor
+        txtContents.borderStyle = UITextBorderStyle.None
+        txtContents.layer.addSublayer(txtContentsLine)
+        
+        var txtTagsLine = CALayer()
+        txtTagsLine.frame = CGRectMake(0.0, txtTags.frame.height - 1, txtTags.frame.width, 1.0)
+        txtTagsLine.backgroundColor = UIColor.blackColor().CGColor
+        txtTags.borderStyle = UITextBorderStyle.None
+        txtTags.layer.addSublayer(txtTagsLine)
+        
+        var txtTimeZoneSelectLine = CALayer()
+        txtTimeZoneSelectLine.frame = CGRectMake(0.0, txtTimeZoneSelect.frame.height - 1, txtTimeZoneSelect.frame.width, 1.0)
+        txtTimeZoneSelectLine.backgroundColor = UIColor.blackColor().CGColor
+        txtTimeZoneSelect.borderStyle = UITextBorderStyle.None
+        txtTimeZoneSelect.layer.addSublayer(txtTimeZoneSelectLine)
+        
+        var startDateLine = CALayer()
+        startDateLine.frame = CGRectMake(0.0, startDate.frame.height - 1, startDate.frame.width, 1.0)
+        startDateLine.backgroundColor = UIColor.blackColor().CGColor
+        startDate.borderStyle = UITextBorderStyle.None
+        startDate.layer.addSublayer(startDateLine)
+        
+        
+        var txtStartTimeLine = CALayer()
+        txtStartTimeLine.frame = CGRectMake(0.0, txtStartTime.frame.height - 1, txtStartTime.frame.width, 1.0)
+        txtStartTimeLine.backgroundColor = UIColor.blackColor().CGColor
+        txtStartTime.borderStyle = UITextBorderStyle.None
+        txtStartTime.layer.addSublayer(txtStartTimeLine)
+        
+        var endDateLine = CALayer()
+        endDateLine.frame = CGRectMake(0.0, endDate.frame.height - 1, endDate.frame.width, 1.0)
+        endDateLine.backgroundColor = UIColor.blackColor().CGColor
+        endDate.borderStyle = UITextBorderStyle.None
+        endDate.layer.addSublayer(endDateLine)
+        
+        
+        var txtEndTimeLine = CALayer()
+        txtEndTimeLine.frame = CGRectMake(0.0, txtEndTime.frame.height - 1, txtEndTime.frame.width, 1.0)
+        txtEndTimeLine.backgroundColor = UIColor.blackColor().CGColor
+        txtEndTime.borderStyle = UITextBorderStyle.None
+        txtEndTime.layer.addSublayer(txtEndTimeLine)
 
         txtTitle.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         txtContents.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
@@ -133,14 +185,18 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         txtStartTime.text = dateFormatter.stringFromDate(startTimeSet)
         txtEndTime.text = dateFormatter.stringFromDate(endTimeSet)
         
+        
+        startDatevalid = startTimeSet
+        endDatevalid = endTimeSet
+         
         self.startTimePicker.setDate(startTimeSet, animated: false)
         self.endTimePicker.setDate(endTimeSet, animated: false)
         
         txtTimeZone.text = "Eastern Time (US & Canada)"
         txtTimeZoneSelect.text = "Eastern Time (US & Canada)"
-        self.startTime.hidden = false
-        self.endTime.hidden = false
-        self.txtTimeZone.hidden = false
+        self.startTime.hidden = true
+        self.endTime.hidden = true
+        self.txtTimeZone.hidden = true
         
         
         var CurrentDateFormat = NSDateFormatter()
@@ -277,6 +333,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateFormat = gDateFormat
         let dtStartDate  = startDate.text!
         if(dtStartDate != ""){
+            
             datePickerView.date = dateFormatter.dateFromString(dtStartDate)!
         }
         
@@ -386,7 +443,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateFormat = gTimeFormat
         let startTimePickerValue  = txtStartTime.text!
         if(startTimePickerValue != ""){
-        timePickerView.date = dateFormatter.dateFromString(startTimePickerValue)!
+           
+            timePickerView.date = startDatevalid
         }
         inputView.addSubview(timePickerView)
         
@@ -406,10 +464,12 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     func handleStartTimePicker(sender: UIDatePicker) {
         let dateFormatter = NSDateFormatter()
        dateFormatter.dateFormat = gTimeFormat
-        startTimeValid = sender.date
+        startDatevalid = sender.date
         
-        txtStartTime.text = dateFormatter.stringFromDate(sender.date)
         startTime.text = dateFormatter.stringFromDate(sender.date)
+        
+        dateFormatter.dateFormat = "hh:mm a"
+        txtStartTime.text = dateFormatter.stringFromDate(sender.date)
     }
     
     @IBAction func endTimePicker(sender: UITextField) {
@@ -431,7 +491,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateFormat = gTimeFormat
         let endTimePickerValue  = txtEndTime.text!
         if(endTimePickerValue != ""){
-        endTimePickerView.date = dateFormatter.dateFromString(endTimePickerValue)!
+            endTimePickerView.date = endDatevalid
         }
         inputView.addSubview(endTimePickerView)
         
@@ -451,10 +511,14 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     func handleEndTimePicker(sender: UIDatePicker) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gTimeFormat
-        endTimeValid = sender.date
+        endDatevalid = sender.date
         
-        txtEndTime.text = dateFormatter.stringFromDate(sender.date)
+        
         endTime.text = dateFormatter.stringFromDate(sender.date)
+        
+        
+        dateFormatter.dateFormat = "hh:mm a"
+        txtEndTime.text = dateFormatter.stringFromDate(sender.date)
     }
     
     @IBAction func startTimePickerChange(sender: AnyObject) {
@@ -605,8 +669,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         var endDateTimeMerge  = endDate.text! + " " + endTime.text!
         endDateAndTime = dateFormatter.dateFromString(endDateTimeMerge)!
         
+       var trimmedTitle = txtTitle.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
-        if(txtTitle.text == "") {
+       var trimmedContents = txtContents.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if(trimmedTitle == "") {
             self.requiredError.hidden = false
              self.requiredError.text = "Required Title"
         }
@@ -615,7 +682,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //            self.requiredError.hidden = false
 //            self.requiredError.text = "Required Tags"
 //        }
-        else if (txtContents.text == "") {
+        else if (trimmedContents == "") {
             self.requiredError.hidden = false
             self.requiredError.text = "Required Contents"
         }
@@ -631,7 +698,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
        else if (startDateAndTime.timeIntervalSinceReferenceDate > endDateAndTime.timeIntervalSinceReferenceDate) {
             // print("Date1 is Later than Date2")
              self.requiredError.hidden = false
-            self.requiredError.text = "Invalid! End Time"
+            self.requiredError.text = "Invalid End Date And Time"
         }
 //        else if startTimeValid.earlierDate(endTimeValid){
 //            self.requiredError.hidden = false
@@ -644,6 +711,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
         else
         {
+            txtTitle.text = trimmedTitle
+            txtContents.text! = trimmedContents
             showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()

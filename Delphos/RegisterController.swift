@@ -38,6 +38,9 @@ class RegisterController: NavController, UITextFieldDelegate {
     
     var arrRole = ["Speaker", "Teacher" ,"Both"]
     
+    
+    
+    
     //var navigationBar: UINavigationBar = UINavigationBar()
 //    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
 //    var searchButton : UIBarButtonItem = UIBarButtonItem()
@@ -57,7 +60,8 @@ class RegisterController: NavController, UITextFieldDelegate {
         //Adding Navbar
         self.isBackEnabled = false
         self.isSearchEnabled = false
-        backButtonNav = "loginId"
+        
+           backButtonNav = "loginId"
         setNavBar(self.view.frame.size.width)
         //searchBar.delegate = self
         let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
@@ -194,8 +198,11 @@ class RegisterController: NavController, UITextFieldDelegate {
         
     }
     @IBAction func btnRegister(sender: UIButton) {
+        
+        var trimmedName = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
     
-        if(txtName.text == "" || txtName.text!.rangeOfCharacterFromSet(checkCharacter.invertedSet) != nil  ){
+        if(trimmedName == ""){
             self.requiredField.hidden = false
            self.requiredField.text = "Required Name"
             
@@ -245,6 +252,8 @@ class RegisterController: NavController, UITextFieldDelegate {
             self.requiredField.text = "Required Role"
         }
         else {
+            
+            txtName.text = trimmedName
             showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()

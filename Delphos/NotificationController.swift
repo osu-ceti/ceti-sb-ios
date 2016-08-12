@@ -32,11 +32,11 @@ class NotificationController: NavController {
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
          rootViewController = self
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
-        backToController = gObjHomeController
+       // backToController = gObjHomeController
     }
     
     

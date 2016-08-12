@@ -49,7 +49,8 @@ class ClaimsDelegate: BaseDelegate {
                         
                     
                     if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
-                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH) ){
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER)  ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
@@ -130,8 +131,8 @@ class ClaimsDelegate: BaseDelegate {
     }
     func claimAccept(objCurrentContoller: UIViewController)  {
         
-        var strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
-        var strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
+        let strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
+        let strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
         
         doPostAPIs.doAcceptClaim(strClaimEventId,strClaimid: strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
             if(statusCode == SUCCESS) {
@@ -140,8 +141,9 @@ class ClaimsDelegate: BaseDelegate {
              
                 dispatch_async(dispatch_get_main_queue(), {
                 gEventAcceptBean = result as! ClaimAcceptBean
-                
-                
+                gObjShowEventBean.speaker_id = gEventAcceptBean.event.speaker_id
+                gSpeakerId = gEventAcceptBean.event.speaker_id
+                gObjShowEventBean.speaker = gEventAcceptBean.event.speaker
                (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, forState: .Normal)
                  (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, forState: .Normal)
                 (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, forState: .Normal)
@@ -151,8 +153,9 @@ class ClaimsDelegate: BaseDelegate {
             }
             else{
                 // print("Error in Accept Claim")
-                self.showAlert(objCurrentContoller, strMessage: "Claim Not Accept")
-                
+                self.showAlert(objCurrentContoller, strMessage: "claim failure")
+                (objCurrentContoller as! EventShowController).activityIndicator.stopAnimating()
+                (objCurrentContoller as! EventShowController).overlayView.hidden = true
             }
         })
         
@@ -182,7 +185,7 @@ class ClaimsDelegate: BaseDelegate {
             }
             else{
                 // print("Error in Accept Claim")
-                self.showAlert(objCurrentContoller, strMessage: "Claim Not Reject")
+                self.showAlert(objCurrentContoller, strMessage: "Claim Reject failure")
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)

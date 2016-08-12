@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import Social
 
 class ViewBadgeController: NavController {
     
@@ -79,9 +80,18 @@ class ViewBadgeController: NavController {
             + ", at " + viewBadgeBean.school_name!
         
         let imageUrl: UIImage = UIImage(data: data)!
+//        
+//        let shareVC: UIActivityViewController = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
+//        self.presentViewController(shareVC, animated: true, completion: nil)
         
-        let shareVC: UIActivityViewController = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
-        self.presentViewController(shareVC, animated: true, completion: nil)
+        
+     
+        let activityVC = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
+        
+          activityVC.popoverPresentationController?.sourceView = sender as! UIView
+            self.presentViewController(activityVC, animated: true, completion: nil)
+       
+          
         
     }
    
