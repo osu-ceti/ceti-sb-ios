@@ -161,10 +161,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         txtEndTime.layer.addSublayer(txtEndTimeLine)
 
         txtTitle.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        txtContents.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        txtTags.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        startDate.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        endDate.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        txtContents.backgroundColor = txtTitle.backgroundColor
+        txtTags.backgroundColor = txtTitle.backgroundColor
+        startDate.backgroundColor = txtTitle.backgroundColor
+        endDate.backgroundColor = txtTitle.backgroundColor
         //button
       
         
@@ -182,6 +182,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         startTime.text = dateFormatter.stringFromDate(startTimeSet)
         endTime.text = dateFormatter.stringFromDate(endTimeSet)
        
+        //Set the display Labels
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
         txtStartTime.text = dateFormatter.stringFromDate(startTimeSet)
         txtEndTime.text = dateFormatter.stringFromDate(endTimeSet)
         
@@ -224,8 +226,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                  //self.txtStartTime.text = gObjShowEventBean.event_start!
                
                 dateFormatter.dateFormat = gTimeFormat
-                //self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
+                self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
                 
+                dateFormatter.dateFormat = gTimeWithoutZoneFormat
                 self.txtStartTime.text =  dateFormatter.stringFromDate(eventStartDate!)
                 
                 dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -246,7 +249,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 self.endTimePicker.date = eventEndDate!
                 
                 dateFormatter.dateFormat = gTimeFormat
-               // self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
+                self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
+
+                dateFormatter.dateFormat = gTimeWithoutZoneFormat
                 self.txtEndTime.text = dateFormatter.stringFromDate(eventEndDate!)
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 self.endDate.text =  dateFormatter.stringFromDate(eventEndDate!)
@@ -396,6 +401,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         startDatevalid = sender.date
         startDate.text = dateFormatter.stringFromDate(sender.date)
         
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
+        txtStartTime.text = dateFormatter.stringFromDate(sender.date)
+        
     }
     
 
@@ -410,6 +418,10 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateFormat = gDateFormat
         endDatevalid = sender.date
         endDate.text = dateFormatter.stringFromDate(sender.date)
+
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
+        txtEndTime.text = dateFormatter.stringFromDate(sender.date)
+
     }
 
 
@@ -468,7 +480,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         startTime.text = dateFormatter.stringFromDate(sender.date)
         
-        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
         txtStartTime.text = dateFormatter.stringFromDate(sender.date)
     }
     
@@ -517,7 +529,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         endTime.text = dateFormatter.stringFromDate(sender.date)
         
         
-        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
         txtEndTime.text = dateFormatter.stringFromDate(sender.date)
     }
     
