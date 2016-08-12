@@ -78,6 +78,7 @@ var gStrAccountEditControllerID: String = "AccountEditControllerId"
 
 var rightViewController: RightViewController!
 
+var gObjRightViewController = rightViewController
 
 var regularMenu = ["Home", "Settings", "Profile","My Account", "Logout"]
 var gRegisterMenu = ["Login"]

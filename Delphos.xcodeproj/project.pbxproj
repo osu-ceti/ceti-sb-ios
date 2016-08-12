@@ -71,6 +71,7 @@
 		840AEF921D2BA6AB00400B6A /* DeviceBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEF911D2BA6AB00400B6A /* DeviceBean.swift */; };
 		8412621A1D33661900807F81 /* DelphosStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841262191D33661900807F81 /* DelphosStrings.swift */; };
 		8431DA3F1D5AFEC9008234A8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431DA3E1D5AFEC9008234A8 /* Logger.swift */; };
+		84384D551D5E1BBC00D811C7 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84384D541D5E1BBC00D811C7 /* BaseController.swift */; };
 		84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCA1D09527C00C614C2 /* BaseDelegate.swift */; };
 		84799FCD1D09528E00C614C2 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCC1D09528E00C614C2 /* EventDelegate.swift */; };
 		84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCE1D09529B00C614C2 /* UserDelegate.swift */; };
@@ -278,6 +279,7 @@
 		840AEF911D2BA6AB00400B6A /* DeviceBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceBean.swift; sourceTree = "<group>"; };
 		841262191D33661900807F81 /* DelphosStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosStrings.swift; sourceTree = "<group>"; };
 		8431DA3E1D5AFEC9008234A8 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		84384D541D5E1BBC00D811C7 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		84799FCA1D09527C00C614C2 /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		84799FCC1D09528E00C614C2 /* EventDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
 		84799FCE1D09529B00C614C2 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				0F561A311D2B9F3F002CCE12 /* BadgeController.swift */,
 				0F485C5E1D3F6AB40013DC52 /* SettingsController.swift */,
 				0F10B13B1D3CE5B1000C4ADF /* AccountEditController.swift */,
+				84384D541D5E1BBC00D811C7 /* BaseController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				0FB80E1E1D2A7E190093B4B1 /* UserProfileBadgesBean.swift in Sources */,
 				0FFB24161D27C1990025CC05 /* NotificationController.swift in Sources */,
 				F58BBADA1CE07444000A3D2A /* HomeController.swift in Sources */,
+				84384D551D5E1BBC00D811C7 /* BaseController.swift in Sources */,
 				840AEF8A1D2BA44200400B6A /* PushNotificationDelegate.swift in Sources */,
 				84799FD31D09961500C614C2 /* SearchDelegate.swift in Sources */,
 				0F88009E1D2E889E00E1236B /* AwardBadgeResponse.swift in Sources */,

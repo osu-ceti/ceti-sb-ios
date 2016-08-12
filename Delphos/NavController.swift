@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate{
+class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate{
     
     //var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
@@ -25,8 +25,8 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var backButtonNav: String!
    // var btnNotification : UIBarButtonItem = UIBarButtonItem()
     
-    var overlayView = UIView()
-    var activityIndicator = UIActivityIndicatorView()
+//    var overlayView = UIView()
+//    var activityIndicator = UIActivityIndicatorView()
     
      var notificationCount:String!
      var eventsRadioBtn = SSRadioButton()
@@ -323,31 +323,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //Loader funvtion
-    func showOverlay(view: UIView) {
-        
-        overlayView.frame = CGRectMake(0, 0, 80, 80)
-        overlayView.center = view.center
-        overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
-        overlayView.clipsToBounds = true
-        overlayView.layer.cornerRadius = 10
-        
-        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
-        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        activityIndicator.color = UIColor.blackColor()
-        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
-        
-        overlayView.addSubview(activityIndicator)
-        view.addSubview(overlayView)
-        
-        activityIndicator.startAnimating()
-    }
     
-    func hideOverlayView() {
-        activityIndicator.stopAnimating()
-        overlayView.removeFromSuperview()
-    }
-
     
     func menuButtonClick(sender: UIBarButtonItem){
         
