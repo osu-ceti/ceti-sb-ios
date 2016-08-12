@@ -34,7 +34,7 @@ class SlideMenuOption {
     }
 }
 
-class SlidingMenuController: UIViewController, UIGestureRecognizerDelegate {
+class SlidingMenuController: BaseController, UIGestureRecognizerDelegate {
     
     enum SlideAction {
         case Open
@@ -504,10 +504,13 @@ class SlidingMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func toggleRight() {
+
+        gObjRightViewController.hidingOverlay()
         if self.isRightOpen() {
             self.closeRight()
             self.setCloseWindowLebel()
         } else {
+            
             self.openRight()
         }
     }
@@ -521,14 +524,14 @@ class SlidingMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func changeMainViewController(mainViewController: UIViewController,  close: Bool) {
-        
-        self.removeViewController(self.mainViewController)
-        self.mainViewController = mainViewController
-        self.setUpViewController(self.mainContainerView, targetViewController: self.mainViewController)
         if (close) {
             self.closeLeft()
             self.closeRight()
         }
+        self.removeViewController(self.mainViewController)
+        self.mainViewController = mainViewController
+        self.setUpViewController(self.mainContainerView, targetViewController: self.mainViewController)
+        
     }
     
     func changeLeftViewController(leftViewController: UIViewController, closeLeft:Bool) {
@@ -878,6 +881,7 @@ extension UIViewController {
     }
     
     func toggleRight() {
+        
         self.slideMenuController()?.toggleRight()
     }
     

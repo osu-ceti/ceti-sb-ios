@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class LoginController: UIViewController {
+class LoginController: BaseController {
     
     @IBOutlet var userTxt: UITextField!
     
@@ -47,9 +47,9 @@ class LoginController: UIViewController {
     
     
     @IBOutlet var btnForgetPassword: UIButton!
-    var overlayView = UIView()
-    var activityIndicator = UIActivityIndicatorView()
-    
+//    var overlayView = UIView()
+//    var activityIndicator = UIActivityIndicatorView()
+//    
 
     
     
@@ -62,7 +62,7 @@ class LoginController: UIViewController {
         
         if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
             NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
-             showOverlay(self.view)
+             self.showOverlay(self.view)
         
              userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
              userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
@@ -132,28 +132,7 @@ class LoginController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func showOverlay(view: UIView) {
-        
-        overlayView.frame = CGRectMake(0, 0, 80, 80)
-        overlayView.center = view.center
-        overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
-        overlayView.clipsToBounds = true
-        overlayView.layer.cornerRadius = 10
-        
-        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
-        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        activityIndicator.color = UIColor.blackColor()
-        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
-        
-        overlayView.addSubview(activityIndicator)
-        view.addSubview(overlayView)
-        
-        activityIndicator.startAnimating()
-    }
-    func hideOverlayView() {
-        activityIndicator.stopAnimating()
-        overlayView.removeFromSuperview()
-    }
+   
     
     @IBAction func touchEvent(sender: UITextField) {
         self.requiredError.hidden = true
