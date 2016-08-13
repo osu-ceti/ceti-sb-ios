@@ -60,12 +60,12 @@ class LoginController: BaseController {
        
         
         
-        if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
-            NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+        if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
+            NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey) != nil){
              //self.showOverlay(self.view)
         
-             userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
-             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
+             userNameData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey)!
+             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey)!
        
              print("userNamedata====",userNameData)
              print("passwordData====",userPasswordData)

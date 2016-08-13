@@ -88,5 +88,7 @@ var gEmptyJSON = "{}"
 
 var gObjNotificationInfo: AnyObject?
 
+let userCredsStorage = NSUserDefaults.standardUserDefaults()
+
 
 

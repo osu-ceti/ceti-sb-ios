@@ -114,7 +114,7 @@ class DAOBase: NSObject {
                         "exception"   : "",
                         "reasonPhrase": "",
                         
-                        "statusCode"    : 0 ]
+                        "statusCode"    : UNAUTHORIZED_REQUEST ]
                     
                     callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: 0)
                     return
@@ -255,7 +255,7 @@ class DAOBase: NSObject {
                                      "exception"   : "",
                                      "reasonPhrase": "",
                                      
-                                     "statusCode"    : 0 ]
+                                     "statusCode"    : UNAUTHORIZED_REQUEST ]
                     
                     callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: 0)
                     return

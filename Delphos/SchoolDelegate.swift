@@ -20,7 +20,7 @@ class SchoolDelegate:BaseDelegate{
         strSchoolId = String(gSchoolId)
         
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                 
@@ -49,7 +49,7 @@ class SchoolDelegate:BaseDelegate{
         //var strschool:String = {}
         
         doGetAPIs.getMakeMySchool(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                
              

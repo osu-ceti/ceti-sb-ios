@@ -19,7 +19,7 @@ class NotificationDelegate:BaseDelegate{
         
         
         doGetAPIs.getNotification( {(result: AnyObject,statusCode: Int)  in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 //var objNotificationBean = result as! NotificationBean!
@@ -58,7 +58,7 @@ func showShareBadge(objCurrentContoller: BaseController) {
        // var strUserId: String = String(0)
         
         doGetAPIs.getShareBadge({(result: AnyObject,statusCode: Int)  in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 
@@ -91,7 +91,7 @@ func deleteNotification(objCurrentContoller: BaseController)  {
        
         
         doPostAPIs.doDeleteNotification({(result: AnyObject,statusCode: Int)   in
-           self.doCleanup(objCurrentContoller)
+           self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 logger.log(LoggingLevel.INFO, message: "MARK ALL Notification AS READ")
@@ -120,7 +120,7 @@ func deleteNotification(objCurrentContoller: BaseController)  {
         var strid = String((objCurrentContoller as! NotificationController).notificationId)
         
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                     //Left Empty for future Use
             }

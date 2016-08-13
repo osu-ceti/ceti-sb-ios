@@ -30,3 +30,6 @@ var gDateTimeFormat = gDateFormat + " " + gTimeFormat
 var gSplitDateTime = "T"
 
 var MSG_AWARDED = "Bagde has been awarded"
+
+var gStrUserStorageKey = "userNameKey"
+var gStrUserStoragePassKey = "userPasswordKey"

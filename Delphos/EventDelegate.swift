@@ -36,7 +36,7 @@ class EventDelegate: BaseDelegate{
         doGetAPIs.getAllEvents { (result: AnyObject,statusCode: Int) in
             
             let eventDisplayController = objCurrentContoller as! HomeController
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode != 0){
                 logger.log(LoggingLevel.INFO, message: "All Events Retrieved")
                 //var objEventDisplayBean = result as! EventDisplayBean
@@ -92,7 +92,7 @@ class EventDelegate: BaseDelegate{
         }
         
         doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: eventBean){ (result: AnyObject, statusCode: Int) in
-            self.doCleanup(createEventController)
+            self.doCleanup(statusCode, objCurrentController:createEventController)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO,message: "create event Sucessfull")
                 let resultBean: CreateEventResultEventBean = result as! CreateEventResultEventBean
@@ -144,7 +144,7 @@ class EventDelegate: BaseDelegate{
         
         
         doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO,message: "Cancel Event")
                  dispatch_async(dispatch_get_main_queue(), {

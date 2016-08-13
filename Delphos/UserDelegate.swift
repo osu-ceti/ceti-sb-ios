@@ -12,16 +12,7 @@ import Security
 
 class UserDelegate:BaseDelegate{
     
-    func RedirectLoginPage(objCurrentContoller: UIViewController){
-        
-       //var loginController = objCurrentContoller as! LoginController
-        dispatch_async(dispatch_get_main_queue(), {
-            
-            gObjLoginController = self.fetchNavController(gStrLoginControllerID)
-            
-            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
-        })
-    }
+    
 //    func HiddenOverlay(objCurrentContoller: UIViewController,controllerName :UIViewController){
 //        
 //        var objControllerName = objCurrentContoller as! controllerName
@@ -36,8 +27,8 @@ class UserDelegate:BaseDelegate{
         
         let strPassword:String
         
-        if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
-            NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
+        if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
+            NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey) != nil){
             
            
              strUser = loginController.userNameData
@@ -54,12 +45,12 @@ class UserDelegate:BaseDelegate{
         objInputParamCredsBean.password = strPassword
         objInputParamCredsBean.id = 0
         objInputParamBean.user = objInputParamCredsBean
-        let defaultUser = NSUserDefaults.standardUserDefaults()
+        
         let defaultPassowrd = NSUserDefaults.standardUserDefaults()
         //DOA calls
         
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
-            self.doCleanup(loginController)
+            self.doCleanup(statusCode, objCurrentController:loginController)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "Login Sucessfull")
 
@@ -79,26 +70,15 @@ class UserDelegate:BaseDelegate{
                     //Save username password data
                     let userNameKey = strUser
                     let userPasswordKey = strPassword
+                    userCredsStorage.setObject(userNameKey, forKey:gStrUserStorageKey)
                     
+                    userCredsStorage.setObject(userPasswordKey, forKey:gStrUserStoragePassKey)
                     
-                    defaultUser.setObject(userNameKey, forKey:"userNameKey")
-                    
-
-                    defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
-
-                    
-                    
-                   
                 }
                 else {
 
-                    logger.log(LoggingLevel.INFO, message: "Data Not Save ")
-                    
-                    defaultUser.removeObjectForKey("userNameKey")
-                    defaultPassowrd.removeObjectForKey("userPasswordKey")
-
-                   
-                
+                    logger.log(LoggingLevel.INFO, message: "Data Not Saved ")
+                    self.removeUserCodes()
                 }
                
                 boolLogin = true;
@@ -125,8 +105,7 @@ class UserDelegate:BaseDelegate{
                 self.showAlert(objCurrentContoller, strMessage: UNAUTHORIZED_REQUEST_MSG)
                 
                 
-                defaultUser.removeObjectForKey("userNameKey")
-                defaultPassowrd.removeObjectForKey("userPasswordKey")
+                self.removeUserCodes()
                 
                 //loginController.activityIndicator.stopAnimating()
                 //loginController.overlayView.removeFromSuperview()
@@ -137,8 +116,7 @@ class UserDelegate:BaseDelegate{
                 logger.log(LoggingLevel.INFO, message: "Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:BAD_REQUEST_MSG )
-                defaultUser.removeObjectForKey("userNameKey")
-                defaultPassowrd.removeObjectForKey("userPasswordKey")
+                self.removeUserCodes()
                 self.RedirectLoginPage(objCurrentContoller)
                 
             }
@@ -146,8 +124,7 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
-                defaultUser.removeObjectForKey("userNameKey")
-                defaultPassowrd.removeObjectForKey("userPasswordKey")
+                self.removeUserCodes()
                 self.RedirectLoginPage(objCurrentContoller)
                 
             }
@@ -157,8 +134,7 @@ class UserDelegate:BaseDelegate{
                 logger.log(LoggingLevel.INFO, message: "Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
-                defaultUser.removeObjectForKey("userNameKey")
-                defaultPassowrd.removeObjectForKey("userPasswordKey")
+                self.removeUserCodes()
                 self.RedirectLoginPage(objCurrentContoller)
             }
              callback(status: boolLogin)
@@ -192,7 +168,7 @@ class UserDelegate:BaseDelegate{
         objInputRegisterBean.commit = "Create my account"
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
-            self.doCleanup(registerController)
+            self.doCleanup(statusCode, objCurrentController:registerController)
             registerController.activityIndicator.stopAnimating()
             registerController.overlayView.removeFromSuperview()
             registerController.overlayView.hidden = true
@@ -253,7 +229,7 @@ class UserDelegate:BaseDelegate{
         //let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
                 
@@ -282,12 +258,12 @@ class UserDelegate:BaseDelegate{
         
         
         doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "sign out")
                 
-                NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
-                NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStorageKey)
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStoragePassKey)
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
                 var object = SignoutResult as! SignoutResponseBean
@@ -308,8 +284,8 @@ class UserDelegate:BaseDelegate{
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 })
-                NSUserDefaults.standardUserDefaults().removeObjectForKey("userNameKey")
-                NSUserDefaults.standardUserDefaults().removeObjectForKey("userPasswordKey")
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStorageKey)
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStoragePassKey)
              logger.log(LoggingLevel.INFO, message: "Did not sign out")
             }
         }
@@ -341,7 +317,7 @@ class UserDelegate:BaseDelegate{
        
         
         doPostAPIs.doEditProfile(objInputParamBean){ (result: AnyObject, statusCode: Int) in
-            self.doCleanup(publicProfileController)
+            self.doCleanup(statusCode, objCurrentController:publicProfileController)
             if(statusCode == SUCCESS) {
                 logger.log(LoggingLevel.INFO, message: "Save profile")
                 
@@ -387,7 +363,7 @@ class UserDelegate:BaseDelegate{
     func menuUserProfile(objCurrentContoller: BaseController) {
 
         doGetAPIs.getMenuUserProfile( {(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
@@ -416,7 +392,7 @@ class UserDelegate:BaseDelegate{
         
         
         doGetAPIs.getSettings({(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 gObjSettingsController = self.instantiateVC(gStrSettingsControllerID) as! SettingsController
@@ -457,7 +433,7 @@ class UserDelegate:BaseDelegate{
         objSettingsInputBean.user = objSettingsInputParamBean
         
         doPostAPIs.doSaveSettings(objSettingsInputBean){ (result: AnyObject, statusCode: Int) in
-            self.doCleanup(publicProfileController)
+            self.doCleanup(statusCode, objCurrentController:publicProfileController)
             if(statusCode == SUCCESS) {
                 logger.log(LoggingLevel.INFO, message: "Save Settings")
                 self.showAlert(objCurrentContoller, strMessage: "Settings Saved")
@@ -512,7 +488,7 @@ class UserDelegate:BaseDelegate{
         objResetPasswordBean.commit = "Reset Password"
         
         doPostAPIs.doResetPassword(objResetPasswordBean){ (result: AnyObject, statusCode: Int) in
-            self.doCleanup(loginController)
+            self.doCleanup(statusCode, objCurrentController:loginController)
             if(statusCode == RESET_SUCCESS) {
                 
                 logger.log(LoggingLevel.INFO, message: "Password Reseted")
@@ -576,7 +552,7 @@ class UserDelegate:BaseDelegate{
         objAccountBean.user = objAccountInputBean
         
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
-            self.doCleanup(accountController)
+            self.doCleanup(statusCode, objCurrentController:accountController)
             if(statusCode == SUCCESS) {
                 if(strNewpassword != ""){
                     gPasswordCheck = strNewpassword

@@ -69,7 +69,7 @@ class BaseDelegate: NSObject {
         var strUserDetail: String = String(gEventID)
         
         doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjShowEventBean = result as! ShowEventBean
                 self.showEventUI(objCurrentContoller)
@@ -98,10 +98,42 @@ class BaseDelegate: NSObject {
     
     }
     
-    func doCleanup(objCurrentController:BaseController){
+    func RedirectLoginPage(objCurrentContoller: UIViewController){
+        
+        //var loginController = objCurrentContoller as! LoginController
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+            
+            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+        })
+    }
+    
+    func removeUserCodes(){
+        userCredsStorage.removeObjectForKey(gStrUserStorageKey)
+        userCredsStorage.removeObjectForKey(gStrUserStoragePassKey)
+    }
+    
+    func responseCodeErrorHandler(statusCode: Int, objCurrentController:BaseController){
+        switch(statusCode){
+            case UNAUTHORIZED_REQUEST:
+            //Redirect to login
+                logger.log(LoggingLevel.INFO,message: SESSION_LOST)
+                removeUserCodes()
+                showAlert(objCurrentController, strMessage: SESSION_LOST)
+                RedirectLoginPage(objCurrentController)
+            break
+        default:
+            //Do nothing
+            break
+        }
+    }
+    
+    func doCleanup(statusCode: Int, objCurrentController:BaseController){
         dispatch_async(dispatch_get_main_queue(), {
             objCurrentController.hideOverlayView()
         })
+        responseCodeErrorHandler(statusCode, objCurrentController: objCurrentController)
     }
     
 }
