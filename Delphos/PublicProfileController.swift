@@ -280,12 +280,11 @@ class PublicProfileController:  NavController{
             searchBar.sizeToFit()
             searchBar.becomeFirstResponder()
             searchBar.showsCancelButton = true
-            
-            
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+           
             gBtnRadioValue = "schools"
         
         
@@ -324,8 +323,9 @@ class PublicProfileController:  NavController{
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
+
             gBtnRadioValue = "schools"
 
         }

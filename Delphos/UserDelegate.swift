@@ -61,7 +61,14 @@ class UserDelegate:BaseDelegate{
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
             
             if (statusCode == SUCCESS){
+
                 logger.log(LoggingLevel.INFO, message: "Login Sucessfull")
+
+
+                
+                
+                print("Login Sucessfull")
+                
 
                 loginController.activityIndicator.stopAnimating()
                 loginController.overlayView.hidden = true
@@ -199,7 +206,13 @@ class UserDelegate:BaseDelegate{
 
                 logger.log(LoggingLevel.INFO, message: "Registration Successful")
                 boolRegister = true
-                 var objUserBean = loginResult as! RegistrationResponseBean
+                var objUserBean = loginResult as! RegistrationResponseBean
+                if(objUserBean.state == 1){
+                    //Print a log
+                    
+                    self.showAlert(objCurrentContoller, strMessage: objUserBean.messages![0])
+                    return
+                }
                 gObjUserBean = objUserBean.data
                 dispatch_async(dispatch_get_main_queue(), {
                     self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
