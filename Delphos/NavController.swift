@@ -255,9 +255,22 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("Clicked")
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
+        
+        var trimmedSearchName = searchBar.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if(trimmedSearchName == ""){
+            searchBar.text = ""
+            searchBar.placeholder = "Please Fill Correct value"
+            
+            
+        
+        }else{
+            searchBar.text = trimmedSearchName
+        
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
+            }
     }
     
     

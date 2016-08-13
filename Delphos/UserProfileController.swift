@@ -15,6 +15,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
    
     
+    @IBOutlet var labelChangeJobTitle: UILabel!
     
     @IBOutlet var labelNoEventFound: UILabel!
     @IBOutlet weak var labelSchool: UILabel!
@@ -92,7 +93,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
 
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
-
+        self.labelChangeJobTitle.hidden = true
         
         
         
@@ -180,12 +181,35 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else  if(gObjSearchUserListBean.role == "Speaker"){
             
+           self.labelChangeJobTitle.hidden = false
            
-           
-            self.labelSchool.hidden   = true
-            self.labelGrades.hidden   = true
+            self.labelSchool.text   = "Job Title:"
+            self.labelGrades.text   = "Business:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            
+            self.labelSchool.hidden   = false
+            labelChangeJobTitle.text = gObjSearchUserListBean.job_title
+            self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = true
-            self.txtGrades.hidden = true
+            self.txtGrades.hidden = false
+            self.txtGrades.text = gObjSearchUserListBean.business
+            
+            self.labelJobTitle.hidden = false
+            self.labelJobTitle.text = gObjSearchUserListBean.role
+            
+            self.txtBusiness!.hidden = false
+            self.txtBusiness!.text = gObjSearchUserListBean.biography
+            
+           
+            
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            
+            self.labelRole.hidden = true
+            self.labelBiography.hidden = true
+            self.txtRole!.hidden = true
+            self.txtBiography.hidden = true
             
             
             
@@ -408,20 +432,30 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else if(gObjSearchUserListBean.role == "Speaker"){
             
-            self.labelSchool.hidden   = true
-            self.labelGrades.hidden   = true
+            self.labelSchool.text   = "Job Title:"
+            self.labelGrades.text   = "Business:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            
+            self.labelSchool.hidden   = false
+            self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = true
-            self.txtGrades.hidden = true
+            self.txtGrades.hidden = false
+            self.txtGrades.text = gObjSearchUserListBean.business
             
             self.labelJobTitle.hidden = false
+            self.labelJobTitle.text = gObjSearchUserListBean.role
+            
             self.labelBusiness.hidden = false
-            self.labelRole.hidden = false
-            self.labelBiography.hidden = false
+             self.labelBusiness.text = gObjSearchUserListBean.biography
+            
+            self.labelRole.hidden = true
+            self.labelBiography.hidden = true
             
             self.txtJobTitle.hidden = false
             self.txtBusiness!.hidden = false
-            self.txtRole!.hidden = false
-            self.txtBiography.hidden = false
+            self.txtRole!.hidden = true
+            self.txtBiography.hidden = true
             
             
         }
