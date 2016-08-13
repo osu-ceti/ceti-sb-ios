@@ -15,10 +15,11 @@ import UIKit
 class NotificationDelegate:BaseDelegate{
 
 
-    func showNotification(objCurrentContoller: UIViewController) {
+    func showNotification(objCurrentContoller: BaseController) {
         
         
         doGetAPIs.getNotification( {(result: AnyObject,statusCode: Int)  in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 //var objNotificationBean = result as! NotificationBean!
@@ -52,11 +53,12 @@ class NotificationDelegate:BaseDelegate{
             }
         })
     }
-func showShareBadge(objCurrentContoller: UIViewController) {
+func showShareBadge(objCurrentContoller: BaseController) {
         
        // var strUserId: String = String(0)
         
         doGetAPIs.getShareBadge({(result: AnyObject,statusCode: Int)  in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 
@@ -84,12 +86,12 @@ func showShareBadge(objCurrentContoller: UIViewController) {
         })
     }
 
-func deleteNotification(objCurrentContoller: UIViewController)  {
+func deleteNotification(objCurrentContoller: BaseController)  {
         
        
         
         doPostAPIs.doDeleteNotification({(result: AnyObject,statusCode: Int)   in
-           
+           self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 logger.log(LoggingLevel.INFO, message: "MARK ALL Notification AS READ")
@@ -113,17 +115,17 @@ func deleteNotification(objCurrentContoller: UIViewController)  {
         
         
     }
-    func readNotification(objCurrentContoller: UIViewController)  {
+    func readNotification(objCurrentContoller: BaseController)  {
         
         var strid = String((objCurrentContoller as! NotificationController).notificationId)
         
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
-            
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
-                
-                           }
+                    //Left Empty for future Use
+            }
             else{
-               
+               //Left Empty for future Use
             }
        
         

@@ -21,12 +21,13 @@ class ClaimsDelegate: BaseDelegate {
 
     
     
-    func showClaimAllList(objCurrentContoller: UIViewController) {
+    func showClaimAllList(objCurrentContoller: BaseController) {
         //var strClaimEventId: String = String(gObjShowEventBean.id)
         
         
         
         doGetAPIs.getClaimView(String(gObjShowEventBean.id),callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -99,10 +100,11 @@ class ClaimsDelegate: BaseDelegate {
             }
         })
     }
-    func showClaimListDetails(objCurrentContoller: UIViewController) {
+    func showClaimListDetails(objCurrentContoller: BaseController) {
         var strClaimDetailId:String  = String(gClaimDetailId)
         
         doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 var objEventShowController = objCurrentContoller as! EventShowController
                 
@@ -129,12 +131,13 @@ class ClaimsDelegate: BaseDelegate {
         
         
     }
-    func claimAccept(objCurrentContoller: UIViewController)  {
+    func claimAccept(objCurrentContoller: BaseController)  {
         
         let strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
         let strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
         
         doPostAPIs.doAcceptClaim(strClaimEventId,strClaimid: strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                self.showAlert(objCurrentContoller, strMessage: "Claim Accepted")
@@ -163,12 +166,13 @@ class ClaimsDelegate: BaseDelegate {
         
         
     }
-    func claimReject(objCurrentContoller: UIViewController)  {
+    func claimReject(objCurrentContoller: BaseController)  {
         
         var strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
         //var strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
         
         doPostAPIs.doRejectClaim(strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                
                 logger.log(LoggingLevel.INFO, message: "Claim Rejected")
@@ -202,12 +206,12 @@ class ClaimsDelegate: BaseDelegate {
         
     }
     
-    func claimEvent(objCurrentContoller: UIViewController) -> Bool {
+    func claimEvent(objCurrentContoller: BaseController) -> Bool {
         
       
         //DOA calls
         doPostAPIs.doClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
-            
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "claimed")
                
@@ -234,7 +238,7 @@ class ClaimsDelegate: BaseDelegate {
         }
         return true
     }
-    func sendMessage(objCurrentContoller: UIViewController)  {
+    func sendMessage(objCurrentContoller: BaseController)  {
         
         var strSendMessage:String = (objCurrentContoller as! MessageController).txtSendMessage.text!
         var strUserId:String!
@@ -263,7 +267,7 @@ class ClaimsDelegate: BaseDelegate {
         //
         //        objInputParamBean.message = objInputBean
         doPostAPIs.doSendMessage(objInputBean){ (loginResult: AnyObject, statusCode: Int) in
-            
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "SEND MESSAGE")
                  self.showAlert(objCurrentContoller, strMessage: "Message Sent")
@@ -306,11 +310,12 @@ class ClaimsDelegate: BaseDelegate {
         //    
     }
 
-    func cancelClaim(objCurrentContoller: UIViewController) -> Bool {
+    func cancelClaim(objCurrentContoller: BaseController) -> Bool {
         
         //   var claimID = gObjShowEventBean.claim_id
         
         doPostAPIs.doCancelClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "Cancel claimed")
                 //if(gObjHomeController == nil){

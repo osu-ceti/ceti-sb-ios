@@ -60,12 +60,12 @@ class LoginController: BaseController {
        
         
         
-        if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
-            NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
-             self.showOverlay(self.view)
+        if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
+            NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey) != nil){
+             //self.showOverlay(self.view)
         
-             userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
-             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
+             userNameData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey)!
+             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey)!
        
              print("userNamedata====",userNameData)
              print("passwordData====",userPasswordData)
@@ -157,7 +157,7 @@ class LoginController: BaseController {
         }
             
         else{
-        self.showOverlay(self.view)
+        //self.showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)
@@ -210,7 +210,7 @@ class LoginController: BaseController {
         }else{
         
         
-            self.showOverlay(self.view)
+            //self.showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
