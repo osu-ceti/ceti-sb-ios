@@ -67,8 +67,8 @@ class LoginController: UIViewController {
              userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
              userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
        
-             print("userNamedata====",userNameData)
-             print("passwordData====",userPasswordData)
+//             print("userNamedata====",userNameData)
+//             print("passwordData====",userPasswordData)
             
              let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
              let testfacade = appDelegate.getObjFacade()

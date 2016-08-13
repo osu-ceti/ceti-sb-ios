@@ -37,14 +37,16 @@ class SearchDelegate: BaseDelegate {
                         gObjSearchController.usersBeanArray = gObjUsersBean.users
                     }
                     
+//                    if((gObjSearchController.eventBeanArray.count == 0) && (gObjSearchController.schoolsBeanArray.count == 0) && (gObjSearchController.usersBeanArray.count == 0)  ){
+//                        print("test")
+//                    
+//                    }else{
+                   
                     gObjSearchNavController = UINavigationController(rootViewController: gObjSearchController)
                     gObjBackTocontroller = gObjSearchNavController
                     
                     objCurrentController.slideMenuController()?.changeMainViewController(gObjSearchNavController, close: false)
-                    
-                    //      print(eventDisplayController.eventBeanArray);
-                    //                     objCurrentController.presentViewController(goToSearchController, animated: true, completion: nil)
-                    //objEventDisplayController.tableView.reloadData()
+                   // }
                     
                 })
                 

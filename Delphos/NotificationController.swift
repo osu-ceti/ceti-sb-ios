@@ -31,7 +31,7 @@ class NotificationController: NavController {
         //        menus = regularMenu
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
-         rootViewController = self
+        rootViewController = self
         self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
@@ -50,10 +50,14 @@ class NotificationController: NavController {
         //        backToView = "HomeID"
         //
         
+       
+        gObjBackTocontroller = gObjNotificationControllerNav
+        
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = bgColor
+        //self.tableView.reloadData()
         
     }
     
@@ -225,35 +229,35 @@ class NotificationController: NavController {
                 
                 //award_badge
                 dispatch_async(dispatch_get_main_queue(), {
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
                 })
-           
-            
             break
             
             case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
             
             //new_badge
                 dispatch_async(dispatch_get_main_queue(), {
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
                 })
-            
-            
             
             break
             
             default :
+               
+                gObjBackTocontroller = gObjHomeController
+               // gObjBackTocontroller = gObjNotificationControllerNav
+
                 dispatch_async(dispatch_get_main_queue(), {
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
                 })
            
             

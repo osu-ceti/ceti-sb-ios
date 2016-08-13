@@ -20,13 +20,9 @@ class RegisterController: NavController, UITextFieldDelegate {
    
     @IBOutlet var txtConformPassword: UITextField!
     
-//    @IBOutlet var radioTeacher: SSRadioButton!
-//    @IBOutlet var radioSpeaker: SSRadioButton!
-//    @IBOutlet var radioBoth: SSRadioButton!
-    
-  
+
     let checkCharacter = NSCharacterSet.letterCharacterSet()
-    //var radioButtonControllerLocal: SSRadioButtonsController?
+   
     
     @IBOutlet var requiredField: UILabel!
     @IBOutlet var btnRegister: UIButton!
@@ -71,6 +67,9 @@ class RegisterController: NavController, UITextFieldDelegate {
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +77,7 @@ class RegisterController: NavController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         gBtnRegisterRadio = ""
         self.requiredField.hidden = true
+
         
         self.segmentUserRole.selectedSegmentIndex = UISegmentedControlNoSegment
         
@@ -142,6 +142,7 @@ class RegisterController: NavController, UITextFieldDelegate {
        
         
     }
+
     @IBAction func touchUserRole(sender: AnyObject) {
         
         if(segmentUserRole.selectedSegmentIndex == 0){
@@ -155,8 +156,12 @@ class RegisterController: NavController, UITextFieldDelegate {
         }
 
     }
-    
+
     @IBAction func btnRegister(sender: UIButton) {
+        
+       
+        
+
         
         var trimmedName = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()
         )
@@ -222,4 +227,6 @@ class RegisterController: NavController, UITextFieldDelegate {
         }
     }
    
+   
+  
 }

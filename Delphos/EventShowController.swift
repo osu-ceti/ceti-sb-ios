@@ -539,6 +539,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
         }
         else{
+            self.searchBar.hidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()

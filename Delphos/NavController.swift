@@ -54,14 +54,14 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         segmentSearchItems.tintColor = UIColor.lightGrayColor()
         segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         
-        
-       
+
         searchView.addSubview(label)
         
         searchView.addSubview(segmentSearchItems)
         
         
-        searchView.hidden = true
+        self.searchView.hidden = true
+        self.searchBar.hidden = true
         
         let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
@@ -95,7 +95,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
             navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount, searchButton]
         }
         else{
-            navigationItem.rightBarButtonItems = [gBtnNotificationCount,menuButton]
+            navigationItem.rightBarButtonItems = [menuButton]
         }
         
         self.view.addSubview(searchView)
@@ -112,6 +112,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         label.text = "Search for: "
         label.textColor = UIColor.blackColor()
         searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+
         
        
         
@@ -124,12 +125,13 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
         
         
+
         searchView.addSubview(label)
         searchView.addSubview(segmentSearchItems)
         
         
-        searchView.hidden = true
-        
+        self.searchView.hidden = true
+        self.searchBar.hidden = true
         let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
         
@@ -162,7 +164,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
             navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount, searchButton]
         }
         else{
-            navigationItem.rightBarButtonItems = [gBtnNotificationCount,menuButton]
+            navigationItem.rightBarButtonItems = [menuButton]
         }
         
         self.view.addSubview(searchView)
@@ -172,12 +174,13 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
 
     
     func btnSearchClick(sender: UIBarButtonItem) {
+        self.searchBar.hidden = false
         navigationItem.titleView = searchBar
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
-        segmentSearchItems.selectedSegmentIndex = 0
+
         
         //navigationBar.items = [navigationItem]
         searchView.hidden = false
