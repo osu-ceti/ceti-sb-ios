@@ -50,7 +50,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
         segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
         segmentSearchItems.frame  = CGRectMake(110,5,200,20)
-        //segmentSearchItems.selectedSegmentIndex = 0
+        segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.tintColor = UIColor.lightGrayColor()
         segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         
@@ -119,7 +119,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
        
         segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
         segmentSearchItems.frame  = CGRectMake(110,5,200,20)
-        segmentSearchItems.selectedSegmentIndex = 0
+        segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.tintColor = UIColor.lightGrayColor()
         segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         

@@ -224,6 +224,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = false
             self.txtGrades.hidden = false
+            self.labelChangeJobTitle.hidden = true
 
         
         
@@ -427,17 +428,22 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.txtGrades.hidden = false
             self.txtJobTitle.hidden = false
             self.txtBusiness!.hidden = false
-            
+            self.labelChangeJobTitle.hidden = true
+
             
         }
         else if(gObjSearchUserListBean.role == "Speaker"){
+            
+            self.labelChangeJobTitle.hidden = false
             
             self.labelSchool.text   = "Job Title:"
             self.labelGrades.text   = "Business:"
             self.labelJobTitle.text = "Role:"
             self.labelBusiness.text = "Biography:"
             
+            self.labelBusiness.hidden = false
             self.labelSchool.hidden   = false
+            labelChangeJobTitle.text = gObjSearchUserListBean.job_title
             self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = true
             self.txtGrades.hidden = false
@@ -446,16 +452,20 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelJobTitle.hidden = false
             self.labelJobTitle.text = gObjSearchUserListBean.role
             
-            self.labelBusiness.hidden = false
-             self.labelBusiness.text = gObjSearchUserListBean.biography
+            self.txtBusiness!.hidden = false
+            self.txtBusiness!.text = gObjSearchUserListBean.biography
             
-            self.labelRole.hidden = true
-            self.labelBiography.hidden = true
+            
             
             self.txtJobTitle.hidden = false
             self.txtBusiness!.hidden = false
+            
+            self.labelRole.hidden = true
+            self.labelBiography.hidden = true
             self.txtRole!.hidden = true
             self.txtBiography.hidden = true
+            
+
             
             
         }
@@ -513,6 +523,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtBusiness!.hidden = true
         self.txtRole!.hidden = true
         self.txtBiography.hidden = true
+        
+        self.labelChangeJobTitle.hidden = true
         
         
         
