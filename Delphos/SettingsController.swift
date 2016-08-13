@@ -11,21 +11,24 @@ import ObjectMapper
 
 class SettingsController: NavController {
     
-    @IBOutlet var radioEventUpdate: SSRadioButton!
-    @IBOutlet var radioComfirmations: SSRadioButton!    
-    @IBOutlet var radioEventClaim: SSRadioButton!
+   
     
    
     @IBOutlet var btnSaveSettings: UIButton!
     
    
    
-    var radioButtonControllerEventUpdate: SSRadioButtonsController?
-    var radioButtonControllerComfirmations: SSRadioButtonsController?
-    var radioButtonControllerEventClaim: SSRadioButtonsController?
+   
     
     @IBOutlet var scrollView: UIScrollView!
+    
    
+    @IBOutlet var switchEventUpdate: UISwitch!
+    
+    @IBOutlet var switchEventClaim: UISwitch!
+    
+    @IBOutlet var switchConfirmation: UISwitch!
+    
     
     var radioEventUpdateBean: Bool!
     var radioComfirmationsBean: Bool!
@@ -52,17 +55,7 @@ class SettingsController: NavController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-               radioButtonControllerEventUpdate = SSRadioButtonsController(buttons: radioEventUpdate)
-        radioButtonControllerEventUpdate!.delegate = self
-        radioButtonControllerEventUpdate!.shouldLetDeSelect = true
         
-        radioButtonControllerComfirmations = SSRadioButtonsController(buttons: radioComfirmations)
-        radioButtonControllerComfirmations!.delegate = self
-        radioButtonControllerComfirmations!.shouldLetDeSelect = true
-        
-        radioButtonControllerEventClaim = SSRadioButtonsController(buttons: radioEventClaim)
-        radioButtonControllerEventClaim!.delegate = self
-        radioButtonControllerEventClaim!.shouldLetDeSelect = true
         
         
         
@@ -72,25 +65,26 @@ class SettingsController: NavController {
         view.backgroundColor = bgColor
         
         if(settingsBean.set_updates == 1){
-            radioEventUpdate.selected = true
+            switchEventUpdate.on = true
+            
         }
         else{
-            radioEventUpdate.selected = false
+            switchEventUpdate.on = false
         }
         
         if(settingsBean.set_confirm == 1){
-            radioComfirmations.selected = true
+            switchConfirmation.on = true
          }
          else{
-            radioComfirmations.selected = false
+            switchConfirmation.on = false
         
         }
        
         if(settingsBean.set_claims == 1){
-            radioEventClaim.selected = true
+            switchEventClaim.on = true
         }
         else{
-            radioEventClaim.selected = false
+            switchEventClaim.on = false
         
         }
         
@@ -104,7 +98,7 @@ class SettingsController: NavController {
         
         
         
-        if(radioEventUpdate.selected == true){
+        if(switchEventUpdate.on == true){
            radioEventUpdateBean = true
             print("true")
         }
@@ -112,7 +106,7 @@ class SettingsController: NavController {
             radioEventUpdateBean = false
         
         }
-        if(radioComfirmations.selected == true){
+        if(switchConfirmation.on == true){
             radioComfirmationsBean = true
              print("true")
         }
@@ -120,7 +114,7 @@ class SettingsController: NavController {
             radioComfirmationsBean = false
              print("false")
         }
-        if(radioEventClaim.selected == true){
+        if(switchEventClaim.on == true){
             radioEventClaimBean = true
              print("true")
         }else{

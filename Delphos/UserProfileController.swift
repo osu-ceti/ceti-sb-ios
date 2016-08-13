@@ -506,8 +506,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+                segmentSearchItems.selectedSegmentIndex = 1
             gBtnRadioValue = "schools"
 
         

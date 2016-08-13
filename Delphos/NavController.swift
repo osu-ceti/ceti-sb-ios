@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDelegate, SSRadioButtonControllerDelegate{
+class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDelegate{
     
     //var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
@@ -17,88 +17,48 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var searchButtonItem = UIBarButtonItem()
     var menuButton : UIBarButtonItem!
     var searchView: UIView = UIView()
-    var radioButtonController: SSRadioButtonsController?
+    //var radioButtonController: SSRadioButtonsController?
     var isBackEnabled:Bool = true
     var isSearchEnabled:Bool = true
     var backToController : UIViewController!
     var shouldClose : Bool! = true
     var backButtonNav: String!
+    var segmentSearchItems: UISegmentedControl!
    // var btnNotification : UIBarButtonItem = UIBarButtonItem()
     
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
     
      var notificationCount:String!
-     var eventsRadioBtn = SSRadioButton()
-    var schoolsRadioBtn = SSRadioButton()
-    var usersRadioBtn = SSRadioButton()
-   
     
-    func buildRadioButton(title: String, position:CGRect, actionCallback:Selector) ->SSRadioButton{
-        
-        let eventsRadioBtn = SSRadioButton()
-        eventsRadioBtn.setTitle(title, forState: .Normal)
-        eventsRadioBtn.circleColor = UIColor.blackColor()
-        eventsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        eventsRadioBtn.frame = position
-        eventsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-        eventsRadioBtn.addTarget(self, action: actionCallback, forControlEvents: UIControlEvents.TouchUpInside)
-        return eventsRadioBtn
-    }
+   
+   
     
     func setNavBar(width: CGFloat){
         
         searchBar.delegate = self
         searchView.frame = CGRectMake(0, 17+44, self.view.frame.size.width, 24);
-        let label = UILabel(frame: CGRectMake(0, 0, 200, 19))
+        let label = UILabel(frame: CGRectMake(0, 5, 200, 19))
         label.textAlignment = NSTextAlignment.Left
         label.text = "Search for: "
         label.textColor = UIColor.blackColor()
         searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
-//        
-//        let eventsRadioBtn = SSRadioButton()
-//        eventsRadioBtn.setTitle("Events", forState: .Normal)
-//        eventsRadioBtn.circleColor = UIColor.blackColor()
-//        eventsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//        eventsRadioBtn.frame = CGRectMake(85, 0, 60, 21)
-//        eventsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-//        eventsRadioBtn.addTarget(self, action: #selector(NavController.eventSearch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-
-        
-
-//        let schoolsRadioBtn = SSRadioButton()
-//        schoolsRadioBtn.setTitle("Schools", forState: .Normal)
-//        schoolsRadioBtn.circleColor = UIColor.blackColor()
-//        schoolsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//        schoolsRadioBtn.frame = CGRectMake(150, 0, 70, 21)
-//        schoolsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-//        schoolsRadioBtn.addTarget(self, action: #selector(NavController.btnSchool(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         
-//        let usersRadioBtn = SSRadioButton()
-//        usersRadioBtn.setTitle("Users", forState: .Normal)
-//        usersRadioBtn.circleColor = UIColor.blackColor()
-//        usersRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-//        usersRadioBtn.frame = CGRectMake(230, 0, 60, 21)
-//        usersRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-//        usersRadioBtn.addTarget(self, action: #selector(NavController.btnUsers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+       
+        
+        segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
+        segmentSearchItems.frame  = CGRectMake(110,5,200,20)
+        //segmentSearchItems.selectedSegmentIndex = 0
+        segmentSearchItems.tintColor = UIColor.lightGrayColor()
+        segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         
         
-          eventsRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(85, 0, 60, 21),actionCallback: #selector(NavController.eventSearch(_:)))
-        
-         schoolsRadioBtn = buildRadioButton(gSearchSchoolsRadioTitle,position: CGRectMake(150, 0, 70, 21),actionCallback: #selector(NavController.btnSchool(_:)))
-        
-         usersRadioBtn = buildRadioButton(gSearchUsersRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
-        
-        radioButtonController = SSRadioButtonsController(buttons: eventsRadioBtn, schoolsRadioBtn, usersRadioBtn)
-        //radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = true
-
-        eventsRadioBtn.selected = true
+       
         searchView.addSubview(label)
-        searchView.addSubview(eventsRadioBtn)
-        searchView.addSubview(schoolsRadioBtn)
-        searchView.addSubview(usersRadioBtn)
+        
+        searchView.addSubview(segmentSearchItems)
         
         
         searchView.hidden = true
@@ -142,59 +102,30 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         rightViewController.tableView.reloadData()
 
     }
+    
     func setNavBar1(width: CGFloat,height:CGFloat){
         
         searchBar.delegate = self
         searchView.frame = CGRectMake(0, height, self.view.frame.size.width, 24);
-        let label = UILabel(frame: CGRectMake(0, 0, 200, 19))
+        let label = UILabel(frame: CGRectMake(0, 5, 200, 19))
         label.textAlignment = NSTextAlignment.Left
         label.text = "Search for: "
         label.textColor = UIColor.blackColor()
         searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
-        //
-        //        let eventsRadioBtn = SSRadioButton()
-        //        eventsRadioBtn.setTitle("Events", forState: .Normal)
-        //        eventsRadioBtn.circleColor = UIColor.blackColor()
-        //        eventsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        //        eventsRadioBtn.frame = CGRectMake(85, 0, 60, 21)
-        //        eventsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-        //        eventsRadioBtn.addTarget(self, action: #selector(NavController.eventSearch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+       
+        
+       
+        segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
+        segmentSearchItems.frame  = CGRectMake(110,5,200,20)
+        segmentSearchItems.selectedSegmentIndex = 0
+        segmentSearchItems.tintColor = UIColor.lightGrayColor()
+        segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         
         
         
-        //        let schoolsRadioBtn = SSRadioButton()
-        //        schoolsRadioBtn.setTitle("Schools", forState: .Normal)
-        //        schoolsRadioBtn.circleColor = UIColor.blackColor()
-        //        schoolsRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        //        schoolsRadioBtn.frame = CGRectMake(150, 0, 70, 21)
-        //        schoolsRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-        //        schoolsRadioBtn.addTarget(self, action: #selector(NavController.btnSchool(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        
-        //        let usersRadioBtn = SSRadioButton()
-        //        usersRadioBtn.setTitle("Users", forState: .Normal)
-        //        usersRadioBtn.circleColor = UIColor.blackColor()
-        //        usersRadioBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        //        usersRadioBtn.frame = CGRectMake(230, 0, 60, 21)
-        //        usersRadioBtn.titleLabel?.font = UIFont(name: gFontName, size: 15)
-        //        usersRadioBtn.addTarget(self, action: #selector(NavController.btnUsers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        
-        eventsRadioBtn = buildRadioButton(gSearchEventsRadioTitle,position: CGRectMake(85, 0, 60, 21),actionCallback: #selector(NavController.eventSearch(_:)))
-        
-        schoolsRadioBtn = buildRadioButton(gSearchSchoolsRadioTitle,position: CGRectMake(150, 0, 70, 21),actionCallback: #selector(NavController.btnSchool(_:)))
-        
-        usersRadioBtn = buildRadioButton(gSearchUsersRadioTitle,position: CGRectMake(230, 0, 60, 21),actionCallback: #selector(NavController.btnUsers(_:)))
-        
-        radioButtonController = SSRadioButtonsController(buttons: eventsRadioBtn, schoolsRadioBtn, usersRadioBtn)
-        //radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = true
-        
-        eventsRadioBtn.selected = true
         searchView.addSubview(label)
-        searchView.addSubview(eventsRadioBtn)
-        searchView.addSubview(schoolsRadioBtn)
-        searchView.addSubview(usersRadioBtn)
+        searchView.addSubview(segmentSearchItems)
         
         
         searchView.hidden = true
@@ -246,10 +177,21 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
-        
+        segmentSearchItems.selectedSegmentIndex = 0
         
         //navigationBar.items = [navigationItem]
         searchView.hidden = false
+        
+        if(segmentSearchItems.selectedSegmentIndex == 0){
+            gBtnRadioValue = "events"
+            
+        }
+        else if(segmentSearchItems.selectedSegmentIndex == 1){
+            gBtnRadioValue = "schools"
+        }
+        else if(segmentSearchItems.selectedSegmentIndex == 2){
+            gBtnRadioValue = "users"
+        }
 
     }
     
@@ -353,20 +295,22 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
         
     }
-    
-    func eventSearch(sender:UIButton){
-        gBtnRadioValue = "events"
-         
-    }
-    
-    func btnSchool(sender: UIButton) {
-        gBtnRadioValue = "schools"
-            }
-    
-    func btnUsers(sender: UIButton) {
-        gBtnRadioValue = "users"
+    func segmentedControllerActivity(sender:UISegmentedControl)
+    {
+        if(sender.selectedSegmentIndex == 0){
+            gBtnRadioValue = "events"
+            
+        }
+        else if(sender.selectedSegmentIndex == 1){
+            gBtnRadioValue = "schools"
+        }
+        else if(sender.selectedSegmentIndex == 2){
+            gBtnRadioValue = "users"
+        }
         
     }
+    
+   
 
 
     
