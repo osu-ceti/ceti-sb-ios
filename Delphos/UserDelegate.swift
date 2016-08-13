@@ -289,10 +289,11 @@ class UserDelegate:BaseDelegate{
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
                 gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
+                gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
+                    
                     self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
                     
                 })

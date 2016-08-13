@@ -88,10 +88,10 @@ class SearchDelegate: BaseDelegate {
                         gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
                         gObjSearchSchoolListBean = objSchoolBean.school
                         gObjSchoolImage = objSchoolBean.badge_url
-                        var objSchoolProfileControllerNav = self.getNavigationController(gObjSchoolProfileController)
+                         gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
                         
                         
-                        self.doNavigate(objCurrentContoller, toController: objSchoolProfileControllerNav,  close: true)
+                        self.doNavigate(objCurrentContoller, toController: gObjSchoolProfileNavController,  close: true)
                         
                     }
                     else if(gBtnRadioValue == users) {
@@ -106,10 +106,10 @@ class SearchDelegate: BaseDelegate {
                          //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)
                         
                         
-                        var objUserProfileControllerNav = self.getNavigationController(gObjUserProfileController)
+                        gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
                         //}
                         
-                        self.doNavigate(objCurrentContoller, toController: objUserProfileControllerNav,  close: true)
+                        self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
 
                     }
                     

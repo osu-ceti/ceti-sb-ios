@@ -41,7 +41,8 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     var strSchoolId:String!
     var makeMySchoolName:String!
-   
+    var tempBackToViewController:UIViewController!
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -71,6 +72,12 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var data = NSData(contentsOfURL:url!)
         if data != nil {
            self.schoolImage.image = UIImage(data:data!)
+        }
+        
+        
+        if(tempBackToViewController != nil){
+            gObjBackTocontroller = tempBackToViewController
+            tempBackToViewController = nil
         }
         
          self.tableView.backgroundColor = bgColor
@@ -167,6 +174,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var selectCell = tableView.cellForRowAtIndexPath(indexPath) as! SchoolProfileCell
         print("currentCell", selectCell.eventId.text!)
         
+        tempBackToViewController = gObjBackTocontroller
         gObjBackTocontroller = gObjSchoolProfileNavController
         gEventID = Int(selectCell.eventId.text!)
         dispatch_async(dispatch_get_main_queue(), {
