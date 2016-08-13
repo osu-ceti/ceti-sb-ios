@@ -88,6 +88,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
         }
+        self.isBackEnabled = true
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
         
         
             //Adding Navbar
@@ -95,9 +98,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //        rightViewController.isRegister = false
 //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
+       
         
        // backToController = gObjHomeController
     

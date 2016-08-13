@@ -25,6 +25,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     var backToController : UIViewController!
     var shouldClose : Bool! = true
     var backButtonNav: String!
+    var settingSearch:Bool = false
    // var btnNotification : UIBarButtonItem = UIBarButtonItem()
     
 //    var overlayView = UIView()
@@ -175,6 +176,30 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
 
     
     func btnSearchClick(sender: UIBarButtonItem) {
+        
+        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            setNavBar1(self.view.frame.size.width,height:30)
+            searchBar.delegate = self
+
+            print("landscape")
+        }
+        else {
+            if (settingSearch){
+                setNavBar1(self.view.frame.size.width,height:0)
+                searchBar.delegate = self
+                
+                if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+                    setNavBar(self.view.frame.size.width)
+                    searchBar.delegate = self
+                }
+            }
+            else{
+                setNavBar(self.view.frame.size.width)
+                searchBar.delegate = self
+                print("portrait")
+            }
+        }
+
         self.searchBar.hidden = false
         navigationItem.titleView = searchBar
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]

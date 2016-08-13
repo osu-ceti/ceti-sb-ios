@@ -338,16 +338,20 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         if (userProfileBadgesArray.count > 0){
             self.labelNoBadges.hidden = true
             
-            cell.backgroundColor = UIColor.whiteColor()
-            var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesArray[indexPath.row]
-            
-            if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
-                let badgesImage = NSData(contentsOfURL:url)
+            dispatch_async(dispatch_get_main_queue(), {
             
             
-                cell.imgUserBadge.image = UIImage(data:badgesImage!)
-                cell.badgeId.text = String(imageDisplayBean.badge_id)
+                cell.backgroundColor = UIColor.whiteColor()
+                let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
+            
+                if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
+                    let badgesImage = NSData(contentsOfURL:url)
+            
+                
+                    cell.imgUserBadge.image = UIImage(data:badgesImage!)
+                    cell.badgeId.text = String(imageDisplayBean.badge_id)
             }
+            })
         }
         //        else{
         //            self.labelNoBadges.hidden = false
@@ -503,7 +507,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else{
             self.labelNoBadges.hidden = false
-             self.labelNoBadges.text = gObjSearchUserListBean.name + " haven't earned any Badges yet!"
+             self.labelNoBadges.text = gObjSearchUserListBean.name + " has not earned any Badges"
             
         }
 

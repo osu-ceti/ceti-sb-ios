@@ -214,20 +214,21 @@ class AccountEditController: NavController {
         
         let trimmedText = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 
+        let trimmedEmail = txtEmail.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         if(trimmedText == ""){
             self.requiredField.hidden = false
             self.requiredField.text = "Required Name"
             
         }
-        else if (txtEmail.text == "" ){
+        else if (trimmedEmail == "" ){
             self.requiredField.hidden = false
             self.requiredField.text = "Required Email"
             
         }
-        else if (txtEmail.text != "" )
+        else if (trimmedEmail != "" )
         {
-            var emailvalid = isValidEmail(txtEmail.text!)
+            var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
             if(emailvalid == false ){
                 self.requiredField.hidden = false
@@ -273,6 +274,7 @@ class AccountEditController: NavController {
 //                }
                 else{
                     txtName.text = trimmedText
+                    txtEmail.text = trimmedEmail
                     showOverlay(self.view)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()

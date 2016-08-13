@@ -88,6 +88,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         super.viewDidLoad()
         rootViewController = self
         self.requiredError.hidden = true
+        settingSearch = true
       
              // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))
         //self.view.addSubview(txtTitle)

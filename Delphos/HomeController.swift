@@ -48,6 +48,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
        // self.gNotificationCount = "0"
         
+        
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
        

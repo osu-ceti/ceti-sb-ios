@@ -57,7 +57,8 @@ class LoginController: BaseController {
         super.viewDidLoad()
          rootViewController = self
          self.requiredError.hidden = true
-       
+        
+        
         
         
         if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
@@ -225,7 +226,7 @@ class LoginController: BaseController {
                 self.requiredError.text =  "Required Vaild Email"
                 
             }
-        }else{
+        else{
         
         
             //self.showOverlay(self.view)
@@ -233,6 +234,7 @@ class LoginController: BaseController {
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
         }
+     }
     }
 
    

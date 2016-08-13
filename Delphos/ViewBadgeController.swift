@@ -51,6 +51,7 @@ class ViewBadgeController: NavController {
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
       
+        self.btnShareBadge.hidden = true
         
         let url = NSURL(string: AWS_S3 + viewBadgeBean.badge_url)
          data = NSData(contentsOfURL:url!)!
@@ -62,9 +63,13 @@ class ViewBadgeController: NavController {
         " awarded " + viewBadgeBean.user_name!  + " a badge for speaking at the event: " + viewBadgeBean.event_name!
         + ", at " + viewBadgeBean.school_name!
         
-        
+        if(gObjUserBean.name == viewBadgeBean.user_name){
+            
+            self.btnShareBadge.hidden = false
+        }
         
     }
+    
     
     
     override func didReceiveMemoryWarning() {
