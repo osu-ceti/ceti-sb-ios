@@ -777,7 +777,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YEc-i0-KJg">
-                                <rect key="frame" x="6" y="158" width="304" height="151"/>
+                                <rect key="frame" x="6" y="209" width="304" height="151"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="52P-8W-nxb">
                                     <size key="itemSize" width="58" height="49"/>
@@ -825,6 +825,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eku-KC-lzU">
+                                <rect key="frame" x="116" y="165" width="201" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -836,6 +843,7 @@
                         <outlet property="collectionView" destination="YEc-i0-KJg" id="hJh-Hy-ct1"/>
                         <outlet property="labelBiography" destination="i7v-NG-tps" id="dWk-tQ-DL7"/>
                         <outlet property="labelBusiness" destination="agI-LZ-IWf" id="YCD-dZ-6bH"/>
+                        <outlet property="labelChangeJobTitle" destination="eku-KC-lzU" id="CBk-xE-Jr1"/>
                         <outlet property="labelEventFeed" destination="5sT-C3-m9W" id="4HG-SQ-mwt"/>
                         <outlet property="labelGrades" destination="0DN-fX-Kh7" id="tXT-xv-JUF"/>
                         <outlet property="labelJobTitle" destination="Yf1-Vz-52z" id="cqn-RP-uBH"/>
