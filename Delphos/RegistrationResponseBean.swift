@@ -15,6 +15,7 @@ class RegistrationResponseBean: Mappable {
     var state:        Int?
     var status:        String?
     var data: UserBean!
+    var messages:   [String]?
     
     required init()
     {
@@ -27,9 +28,10 @@ class RegistrationResponseBean: Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        state                    <- map["state"]
+        state        <- map["state"]
         status       <- map["status"]
-        data               <- map["data"]
+        data         <- map["data"]
+        messages     <- map["messages"]
         
         
     }
