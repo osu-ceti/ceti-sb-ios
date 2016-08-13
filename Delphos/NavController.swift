@@ -180,8 +180,8 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
-
         
+        segmentSearchItems.selectedSegmentIndex = 0
         //navigationBar.items = [navigationItem]
         searchView.hidden = false
         
