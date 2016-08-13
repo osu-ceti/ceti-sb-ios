@@ -45,10 +45,10 @@ class DelegateController: BaseDelegate {
     
     
     
-    func delegateControl(objCurrentController: UIViewController, action enmAction: DelphosAction) {
+    func delegateControl(objCurrentController: BaseController, action enmAction: DelphosAction) {
        
         logger.log(LoggingLevel.INFO, message: "Delegate(delegateControl) - Action: \(enmAction)")
-        
+        objCurrentController.showOverlay(objCurrentController.view)
         switch(enmAction)
         {
         case .LOGIN:

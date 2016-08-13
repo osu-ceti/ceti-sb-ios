@@ -13,13 +13,14 @@ import UIKit
 
 class SchoolDelegate:BaseDelegate{
 
-    func schoolProfile(objCurrentContoller: UIViewController) {
+    func schoolProfile(objCurrentContoller: BaseController) {
         
       
-            var strSchoolId: String
+        var strSchoolId: String
         strSchoolId = String(gSchoolId)
         
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                 
@@ -40,7 +41,7 @@ class SchoolDelegate:BaseDelegate{
             }
         })
     }
-    func showMakeMySchool(objCurrentContoller: UIViewController) {
+    func showMakeMySchool(objCurrentContoller: BaseController) {
        
         let strSchoolId = (objCurrentContoller as! SchoolProfileController).strSchoolId
         let makeMySchoolName = (objCurrentContoller as! SchoolProfileController).makeMySchoolName
@@ -48,6 +49,7 @@ class SchoolDelegate:BaseDelegate{
         //var strschool:String = {}
         
         doGetAPIs.getMakeMySchool(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(objCurrentContoller)
             if(statusCode == SUCCESS) {
                
              

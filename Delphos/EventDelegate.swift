@@ -11,7 +11,7 @@ import ObjectMapper
 
 class EventDelegate: BaseDelegate{
 
-    func showAllEvents(objCurrentContoller: UIViewController) {
+    func showAllEvents(objCurrentContoller: BaseController) {
         
         let  homeController = objCurrentContoller as! HomeController
         
@@ -36,6 +36,7 @@ class EventDelegate: BaseDelegate{
         doGetAPIs.getAllEvents { (result: AnyObject,statusCode: Int) in
             
             let eventDisplayController = objCurrentContoller as! HomeController
+            self.doCleanup(objCurrentContoller)
             if(statusCode != 0){
                 logger.log(LoggingLevel.INFO, message: "All Events Retrieved")
                 //var objEventDisplayBean = result as! EventDisplayBean
@@ -91,7 +92,7 @@ class EventDelegate: BaseDelegate{
         }
         
         doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: eventBean){ (result: AnyObject, statusCode: Int) in
-            
+            self.doCleanup(createEventController)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO,message: "create event Sucessfull")
                 let resultBean: CreateEventResultEventBean = result as! CreateEventResultEventBean
@@ -138,11 +139,12 @@ class EventDelegate: BaseDelegate{
         
     }
     
-    func cancelEvent(objCurrentContoller: UIViewController) -> Bool {
+    func cancelEvent(objCurrentContoller: BaseController) -> Bool {
         
         
         
         doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
+            self.doCleanup(objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO,message: "Cancel Event")
                  dispatch_async(dispatch_get_main_queue(), {

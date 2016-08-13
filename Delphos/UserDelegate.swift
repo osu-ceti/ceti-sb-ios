@@ -59,7 +59,7 @@ class UserDelegate:BaseDelegate{
         //DOA calls
         
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
-            
+            self.doCleanup(loginController)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "Login Sucessfull")
 
@@ -192,6 +192,7 @@ class UserDelegate:BaseDelegate{
         objInputRegisterBean.commit = "Create my account"
         
         doPostAPIs.doRegister(objInputRegisterBean){ (loginResult: AnyObject, statusCode: Int) in
+            self.doCleanup(registerController)
             registerController.activityIndicator.stopAnimating()
             registerController.overlayView.removeFromSuperview()
             registerController.overlayView.hidden = true
@@ -245,13 +246,14 @@ class UserDelegate:BaseDelegate{
     }
     
     
-    func userProfile(objCurrentContoller: UIViewController) {
+    func userProfile(objCurrentContoller: BaseController) {
         
         let strUserId: String = String(gUserVIewBadgeId)
       // let strUserId: String = String(strUserProfileId)
         //let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
                 
@@ -275,11 +277,12 @@ class UserDelegate:BaseDelegate{
     
         
     
-    func signOut(objCurrentContoller: UIViewController) -> Bool {
+    func signOut(objCurrentContoller: BaseController) -> Bool {
         
         
         
         doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
+            self.doCleanup(objCurrentContoller)
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "sign out")
                 
@@ -338,6 +341,7 @@ class UserDelegate:BaseDelegate{
        
         
         doPostAPIs.doEditProfile(objInputParamBean){ (result: AnyObject, statusCode: Int) in
+            self.doCleanup(publicProfileController)
             if(statusCode == SUCCESS) {
                 logger.log(LoggingLevel.INFO, message: "Save profile")
                 
@@ -380,9 +384,10 @@ class UserDelegate:BaseDelegate{
         }
        
     }
-    func menuUserProfile(objCurrentContoller: UIViewController) {
+    func menuUserProfile(objCurrentContoller: BaseController) {
 
         doGetAPIs.getMenuUserProfile( {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(objCurrentContoller)
             if(statusCode == SUCCESS) {
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
@@ -407,10 +412,11 @@ class UserDelegate:BaseDelegate{
     }
 
     
-    func viewSettings(objCurrentContoller: UIViewController) {
+    func viewSettings(objCurrentContoller: BaseController) {
         
         
         doGetAPIs.getSettings({(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 gObjSettingsController = self.instantiateVC(gStrSettingsControllerID) as! SettingsController
@@ -451,6 +457,7 @@ class UserDelegate:BaseDelegate{
         objSettingsInputBean.user = objSettingsInputParamBean
         
         doPostAPIs.doSaveSettings(objSettingsInputBean){ (result: AnyObject, statusCode: Int) in
+            self.doCleanup(publicProfileController)
             if(statusCode == SUCCESS) {
                 logger.log(LoggingLevel.INFO, message: "Save Settings")
                 self.showAlert(objCurrentContoller, strMessage: "Settings Saved")
@@ -505,6 +512,7 @@ class UserDelegate:BaseDelegate{
         objResetPasswordBean.commit = "Reset Password"
         
         doPostAPIs.doResetPassword(objResetPasswordBean){ (result: AnyObject, statusCode: Int) in
+            self.doCleanup(loginController)
             if(statusCode == RESET_SUCCESS) {
                 
                 logger.log(LoggingLevel.INFO, message: "Password Reseted")
@@ -568,6 +576,7 @@ class UserDelegate:BaseDelegate{
         objAccountBean.user = objAccountInputBean
         
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
+            self.doCleanup(accountController)
             if(statusCode == SUCCESS) {
                 if(strNewpassword != ""){
                     gPasswordCheck = strNewpassword

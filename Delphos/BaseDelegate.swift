@@ -65,10 +65,11 @@ class BaseDelegate: NSObject {
         })
     }
     
-    func showEvent(objCurrentContoller: UIViewController) {
+    func showEvent(objCurrentContoller: BaseController) {
         var strUserDetail: String = String(gEventID)
         
         doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjShowEventBean = result as! ShowEventBean
                 self.showEventUI(objCurrentContoller)
@@ -95,6 +96,12 @@ class BaseDelegate: NSObject {
         rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
 
     
+    }
+    
+    func doCleanup(objCurrentController:BaseController){
+        dispatch_async(dispatch_get_main_queue(), {
+            objCurrentController.hideOverlayView()
+        })
     }
     
 }

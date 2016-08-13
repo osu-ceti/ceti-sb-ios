@@ -61,13 +61,13 @@ class BadgeController: NavController {
 
        // badgeUrl
 
-        let url = NSURL(string:AWS_S3 + badgeUrl!)
-        var data = NSData(contentsOfURL:url!)
-        if data != nil {
-            self.badgeImage.image = UIImage(data:data!)
-        }
+        if let url = NSURL(string:AWS_S3 + badgeUrl!){
+            var data = NSData(contentsOfURL:url)
+            if data != nil {
+                self.badgeImage.image = UIImage(data:data!)
+            }
 
-        
+        }
     }
     
     
