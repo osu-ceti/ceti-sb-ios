@@ -17,7 +17,7 @@
 import UIKit
 
 
-class RightViewController: UIViewController, UIWebViewDelegate {
+class RightViewController: BaseController, UIWebViewDelegate {
     
     enum Menu: Int {
         case Home = 0
@@ -46,6 +46,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideOverlayView()
         rootViewController = self
         gObjHomeController = fetchNavController(gStrHomeControllerID)
         
@@ -71,6 +72,10 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         super.viewDidAppear(animated)
     }
     
+    func hidingOverlay(){
+        self.hideOverlayView()
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
@@ -85,7 +90,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        self.showOverlay(self.view)
         if let menu = Menu(rawValue: indexPath.item) {
             
             switch menu {
@@ -138,6 +143,8 @@ class RightViewController: UIViewController, UIWebViewDelegate {
 
             }
         }
+        gObjRightViewController = self
+        
     }
     
    

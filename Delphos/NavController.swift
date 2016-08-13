@@ -7,7 +7,9 @@
 //
 
 import UIKit
-class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDelegate{
+
+class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegate {
+
     
     //var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
@@ -23,15 +25,14 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
     var backToController : UIViewController!
     var shouldClose : Bool! = true
     var backButtonNav: String!
-    var segmentSearchItems: UISegmentedControl!
    // var btnNotification : UIBarButtonItem = UIBarButtonItem()
     
-    var overlayView = UIView()
-    var activityIndicator = UIActivityIndicatorView()
+//    var overlayView = UIView()
+//    var activityIndicator = UIActivityIndicatorView()
     
      var notificationCount:String!
     
-   
+    var segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
    
     
     func setNavBar(width: CGFloat){
@@ -48,9 +49,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         
        
         
-        segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
+//        segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
         segmentSearchItems.frame  = CGRectMake(110,5,200,20)
-        segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+       // segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.tintColor = UIColor.lightGrayColor()
         segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         
@@ -117,9 +118,9 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
        
         
        
-        segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
+        
         segmentSearchItems.frame  = CGRectMake(110,5,200,20)
-        segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+        //segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.tintColor = UIColor.lightGrayColor()
         segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
         
@@ -180,7 +181,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
-        
+        segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.selectedSegmentIndex = 0
         //navigationBar.items = [navigationItem]
         searchView.hidden = false
@@ -281,31 +282,7 @@ class NavController: UIViewController, UINavigationBarDelegate, UISearchBarDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //Loader funvtion
-    func showOverlay(view: UIView) {
-        
-        overlayView.frame = CGRectMake(0, 0, 80, 80)
-        overlayView.center = view.center
-        overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
-        overlayView.clipsToBounds = true
-        overlayView.layer.cornerRadius = 10
-        
-        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
-        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        activityIndicator.color = UIColor.blackColor()
-        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
-        
-        overlayView.addSubview(activityIndicator)
-        view.addSubview(overlayView)
-        
-        activityIndicator.startAnimating()
-    }
     
-    func hideOverlayView() {
-        activityIndicator.stopAnimating()
-        overlayView.removeFromSuperview()
-    }
-
     
     func menuButtonClick(sender: UIBarButtonItem){
         

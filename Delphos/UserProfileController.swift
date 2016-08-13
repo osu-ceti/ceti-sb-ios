@@ -73,8 +73,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         //        rightViewController.tableView.reloadData()
         
 
-//        setNavBar(self.view.frame.size.width)
-//        searchBar.delegate = self
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
         
      
     }
@@ -91,8 +91,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         rootViewController = self
         self.isBackEnabled = false
 
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
+        
         self.labelChangeJobTitle.hidden = true
         
         

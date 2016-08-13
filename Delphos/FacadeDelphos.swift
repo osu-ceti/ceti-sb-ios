@@ -36,7 +36,7 @@ class FacadeDelphos: NSObject {
     /**
      * Relinquish control to Delegate class. This Facade class is added to support internationalization
      */
-    func doTask(objCurrentController: UIViewController, action enmAction: DelphosAction)
+    func doTask(objCurrentController: BaseController, action enmAction: DelphosAction)
     {
         //call to delegate control
         delegateDelphos.delegateControl(objCurrentController,action: enmAction)

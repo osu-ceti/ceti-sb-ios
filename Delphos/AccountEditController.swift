@@ -140,10 +140,10 @@ class AccountEditController: NavController {
         
         
     }
-    override func hideOverlayView() {
-        activityIndicator.stopAnimating()
-        overlayView.removeFromSuperview()
-    }
+//    override func hideOverlayView() {
+//        activityIndicator.stopAnimating()
+//        overlayView.removeFromSuperview()
+//    }
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated);

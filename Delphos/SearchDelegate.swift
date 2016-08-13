@@ -17,6 +17,7 @@ class SearchDelegate: BaseDelegate {
         var strSearchText = objEventDisplayController.searchBar.text
         
         doGetAPIs.searchEvent(gBtnRadioValue!, strSearchEvent: strSearchText!, callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objEventDisplayController)
             if(statusCode == SUCCESS) {
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -56,11 +57,12 @@ class SearchDelegate: BaseDelegate {
         
     }
     
-    func showSearch(objCurrentContoller: UIViewController) {
+    func showSearch(objCurrentContoller: BaseController) {
         
         var strShowSearch: String = String(gSearchValue)
         
         doGetAPIs.getSearchEventsAndUsers(gBtnRadioValue, strsearchID: strShowSearch,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 

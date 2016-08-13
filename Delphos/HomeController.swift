@@ -32,6 +32,8 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet weak var tableView: UITableView!
    // var radioButtonController: SSRadioButtonsController?
+  
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,6 +69,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         rootViewController = self
         
         

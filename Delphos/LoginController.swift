@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class LoginController: UIViewController {
+class LoginController: BaseController {
     
     @IBOutlet var userTxt: UITextField!
     
@@ -47,9 +47,9 @@ class LoginController: UIViewController {
     
     
     @IBOutlet var btnForgetPassword: UIButton!
-    var overlayView = UIView()
-    var activityIndicator = UIActivityIndicatorView()
-    
+//    var overlayView = UIView()
+//    var activityIndicator = UIActivityIndicatorView()
+//    
 
     
     
@@ -60,12 +60,12 @@ class LoginController: UIViewController {
        
         
         
-        if (NSUserDefaults.standardUserDefaults().stringForKey("userNameKey") != nil &&
-            NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey") != nil){
-             showOverlay(self.view)
+        if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
+            NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey) != nil){
+             //self.showOverlay(self.view)
         
-             userNameData = NSUserDefaults.standardUserDefaults().stringForKey("userNameKey")!
-             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey("userPasswordKey")!
+             userNameData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey)!
+             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey)!
        
 //             print("userNamedata====",userNameData)
 //             print("passwordData====",userPasswordData)
@@ -132,28 +132,7 @@ class LoginController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func showOverlay(view: UIView) {
-        
-        overlayView.frame = CGRectMake(0, 0, 80, 80)
-        overlayView.center = view.center
-        overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
-        overlayView.clipsToBounds = true
-        overlayView.layer.cornerRadius = 10
-        
-        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
-        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        activityIndicator.color = UIColor.blackColor()
-        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
-        
-        overlayView.addSubview(activityIndicator)
-        view.addSubview(overlayView)
-        
-        activityIndicator.startAnimating()
-    }
-    func hideOverlayView() {
-        activityIndicator.stopAnimating()
-        overlayView.removeFromSuperview()
-    }
+   
     
     @IBAction func touchEvent(sender: UITextField) {
         self.requiredError.hidden = true
@@ -165,23 +144,40 @@ class LoginController: UIViewController {
     }
     @IBAction func btnSignIn(sender: UIButton) {
         
+        let trimmedName = userTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
-        if (userTxt.text == ""){
+        let trimmedPassword = passwordTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if (trimmedName == ""){
             self.requiredError.hidden = false
-            self.requiredError.text = "Required Username"
+            self.requiredError.text = "Required Email"
            //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
-        else if (passwordTxt.text == "")
+        else if (trimmedName != "" )
+        {
+            var emailvalid = isValidEmail(trimmedName)
+            //print(emailvalid)
+            if(emailvalid == false ){
+                self.requiredError.hidden = false
+                self.requiredError.text =  "Required Vaild Email"
+                
+            }
+        
+        else if (trimmedPassword == "")
         {
             self.requiredError.hidden = false
             self.requiredError.text = "Required Password"
         }
+       
             
         else{
-        self.showOverlay(self.view)
+            userTxt.text = trimmedName
+            passwordTxt.text = trimmedPassword
+        //self.showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)
+        }
         }
     }
 
@@ -213,6 +209,7 @@ class LoginController: UIViewController {
 
     @IBAction func btnResetPasswordClick(sender: AnyObject) {
         
+        
         if (userTxt.text == ""){
             self.requiredError.hidden = false
             self.requiredError.text = "Required Email"
@@ -231,7 +228,7 @@ class LoginController: UIViewController {
         }else{
         
         
-            self.showOverlay(self.view)
+            //self.showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
