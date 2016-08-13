@@ -116,45 +116,45 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         txtTitle.borderStyle = UITextBorderStyle.None
         txtTitle.layer.addSublayer(bottomLine)
         
-        var txtContentsLine = CALayer()
+        let txtContentsLine = CALayer()
         txtContentsLine.frame = CGRectMake(0.0, txtContents.frame.height - 1, txtContents.frame.width, 1.0)
         txtContentsLine.backgroundColor = UIColor.blackColor().CGColor
         txtContents.borderStyle = UITextBorderStyle.None
         txtContents.layer.addSublayer(txtContentsLine)
         
-        var txtTagsLine = CALayer()
+        let txtTagsLine = CALayer()
         txtTagsLine.frame = CGRectMake(0.0, txtTags.frame.height - 1, txtTags.frame.width, 1.0)
         txtTagsLine.backgroundColor = UIColor.blackColor().CGColor
         txtTags.borderStyle = UITextBorderStyle.None
         txtTags.layer.addSublayer(txtTagsLine)
         
-        var txtTimeZoneSelectLine = CALayer()
+        let txtTimeZoneSelectLine = CALayer()
         txtTimeZoneSelectLine.frame = CGRectMake(0.0, txtTimeZoneSelect.frame.height - 1, txtTimeZoneSelect.frame.width, 1.0)
         txtTimeZoneSelectLine.backgroundColor = UIColor.blackColor().CGColor
         txtTimeZoneSelect.borderStyle = UITextBorderStyle.None
         txtTimeZoneSelect.layer.addSublayer(txtTimeZoneSelectLine)
         
-        var startDateLine = CALayer()
+        let startDateLine = CALayer()
         startDateLine.frame = CGRectMake(0.0, startDate.frame.height - 1, startDate.frame.width, 1.0)
         startDateLine.backgroundColor = UIColor.blackColor().CGColor
         startDate.borderStyle = UITextBorderStyle.None
         startDate.layer.addSublayer(startDateLine)
         
         
-        var txtStartTimeLine = CALayer()
+        let txtStartTimeLine = CALayer()
         txtStartTimeLine.frame = CGRectMake(0.0, txtStartTime.frame.height - 1, txtStartTime.frame.width, 1.0)
         txtStartTimeLine.backgroundColor = UIColor.blackColor().CGColor
         txtStartTime.borderStyle = UITextBorderStyle.None
         txtStartTime.layer.addSublayer(txtStartTimeLine)
         
-        var endDateLine = CALayer()
+        let endDateLine = CALayer()
         endDateLine.frame = CGRectMake(0.0, endDate.frame.height - 1, endDate.frame.width, 1.0)
         endDateLine.backgroundColor = UIColor.blackColor().CGColor
         endDate.borderStyle = UITextBorderStyle.None
         endDate.layer.addSublayer(endDateLine)
         
         
-        var txtEndTimeLine = CALayer()
+        let txtEndTimeLine = CALayer()
         txtEndTimeLine.frame = CGRectMake(0.0, txtEndTime.frame.height - 1, txtEndTime.frame.width, 1.0)
         txtEndTimeLine.backgroundColor = UIColor.blackColor().CGColor
         txtEndTime.borderStyle = UITextBorderStyle.None

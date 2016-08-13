@@ -487,7 +487,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
 
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
         
-        if(gObjUserBean.school_id != 1){
+        if(gObjSearchUserListBean.school_id != 1){
             showOverlay(self.view)
             gSchoolNameSelect = true
         

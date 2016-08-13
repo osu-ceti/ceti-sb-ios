@@ -22,12 +22,20 @@ class UserDelegate:BaseDelegate{
             objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
         })
     }
-//    func HiddenOverlay(objCurrentContoller: UIViewController,controllerName :UIViewController){
-//        
-//        var objControllerName = objCurrentContoller as! controllerName
-//        objControllerName.activityIndicator.stopAnimating()
-//        objControllerName.overlayView.hidden = true
-//    }
+    func savePassword( userNameKey:String, userPasswordKey:String){
+        
+        let defaultUser = NSUserDefaults.standardUserDefaults()
+        let defaultPassowrd = NSUserDefaults.standardUserDefaults()
+       
+        defaultUser.setObject(userNameKey, forKey:"userNameKey")
+    
+        defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
+    
+    
+        print(defaultPassowrd)
+        print(defaultUser)
+    
+    }
     
     func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
@@ -79,15 +87,15 @@ class UserDelegate:BaseDelegate{
                     //Save username password data
                     let userNameKey = strUser
                     let userPasswordKey = strPassword
+                    self.savePassword(userNameKey,userPasswordKey:userPasswordKey)
+//                    
+//                    defaultUser.setObject(userNameKey, forKey:"userNameKey")
+//                    
+//                    defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
                     
                     
-                    defaultUser.setObject(userNameKey, forKey:"userNameKey")
-                    
-                    defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
-                    
-                    
-                    print(defaultPassowrd)
-                    print(defaultUser)
+//                    print(defaultPassowrd)
+//                    print(defaultUser)
                     
                    
                 }
@@ -196,11 +204,20 @@ class UserDelegate:BaseDelegate{
             registerController.overlayView.hidden = true
             if(statusCode == SUCCESS) {
                 
+                
 
                 print("Register")
                 boolRegister = true
-                 var objUserBean = loginResult as! RegistrationResponseBean
+                let objUserBean = loginResult as! RegistrationResponseBean
                 gObjUserBean = objUserBean.data
+                
+                
+                
+                let userNameKey = strEmail
+                let userPasswordKey = strPassword
+                self.savePassword(userNameKey!,userPasswordKey:userPasswordKey!)
+                gPasswordCheck = strPassword
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)

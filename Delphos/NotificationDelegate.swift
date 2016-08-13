@@ -117,10 +117,11 @@ func deleteNotification(objCurrentContoller: UIViewController)  {
         
         var strid = String((objCurrentContoller as! NotificationController).notificationId)
         
+        
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
             
             if(statusCode == SUCCESS) {
-                
+                               
                            }
             else{
                

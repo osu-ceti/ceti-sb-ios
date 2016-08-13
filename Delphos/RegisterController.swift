@@ -24,6 +24,7 @@ class RegisterController: NavController, UITextFieldDelegate {
     @IBOutlet var radioSpeaker: SSRadioButton!
     @IBOutlet var radioBoth: SSRadioButton!
     
+   
    // @IBOutlet weak var radioTeacher: SSRadioButton!
    // @IBOutlet weak var radioSpeaker: SSRadioButton!
     //@IBOutlet weak var radioBoth: SSRadioButton!
@@ -47,7 +48,7 @@ class RegisterController: NavController, UITextFieldDelegate {
 //    var searchBarItem = UIBarButtonItem()
 //    var searchButtonItem = UIBarButtonItem()
    // var backButton = UIButton(frame: CGRectMake(0,40,40,0))
-   
+       
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,6 +79,9 @@ class RegisterController: NavController, UITextFieldDelegate {
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +89,8 @@ class RegisterController: NavController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         gBtnRegisterRadio = ""
         self.requiredField.hidden = true
+      
+       
         // Create the navigation bar
 //        navigationBar = UINavigationBar(frame: CGRectMake(0, 17, self.view.frame.size.width, 44))
 //        navigationBar.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
@@ -197,7 +203,12 @@ class RegisterController: NavController, UITextFieldDelegate {
        
         
     }
+  
     @IBAction func btnRegister(sender: UIButton) {
+        
+       
+        
+
         
         var trimmedName = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()
         )
@@ -263,4 +274,6 @@ class RegisterController: NavController, UITextFieldDelegate {
         }
     }
    
+   
+  
 }

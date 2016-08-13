@@ -97,6 +97,8 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 else{
                     rootViewController = gObjHomeController
                     self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                
+                   
                 }
                 break
                 
