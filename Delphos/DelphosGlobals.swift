@@ -75,12 +75,15 @@ var gObjAccountEditController : AccountEditController!
 //var gObjAccountEditControllerNav : UINavigationController!
 var gStrAccountEditControllerID: String = "AccountEditControllerId"
 
+var gObjAboutController : AboutController!
+var gObjAboutControllerNav : UINavigationController!
+var gStrAboutControllerID: String = "AboutControllerId"
 
 var rightViewController: RightViewController!
 
 var gObjRightViewController = rightViewController
 
-var regularMenu = ["Home", "Settings", "Profile","My Account", "Logout"]
+var regularMenu = ["Home", "Settings", "Profile","My Account","About", "Logout"]
 var gRegisterMenu = ["Login"]
 var menus : [String] = regularMenu
 

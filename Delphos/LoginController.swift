@@ -211,15 +211,16 @@ class LoginController: BaseController {
     @IBAction func btnResetPasswordClick(sender: AnyObject) {
         
         
-        if (userTxt.text == ""){
+        let trimmedEmail = userTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if (trimmedEmail == ""){
             self.requiredError.hidden = false
             self.requiredError.text = "Required Email"
             //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
         
-        else if (userTxt.text != "" )
+        else if (trimmedEmail != "" )
         {
-            var emailvalid = isValidEmail(userTxt.text!)
+            var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
             if(emailvalid == false ){
                 self.requiredError.hidden = false
@@ -228,6 +229,7 @@ class LoginController: BaseController {
             }
         else{
         
+                userTxt.text = trimmedEmail
         
             //self.showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

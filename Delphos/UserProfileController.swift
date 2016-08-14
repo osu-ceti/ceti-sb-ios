@@ -65,7 +65,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.showOverlay(self.view)
+       // self.showOverlay(self.view)
         //rootViewController = self
         //Adding Navbar
         //        menus = regularMenu
@@ -81,7 +81,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       self.showOverlay(self.view)
         if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil

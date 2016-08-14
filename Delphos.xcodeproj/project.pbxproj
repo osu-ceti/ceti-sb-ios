@@ -60,6 +60,7 @@
 		0FE7218D1D192F7300D5994D /* MakeMySchoolBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE7218C1D192F7300D5994D /* MakeMySchoolBean.swift */; };
 		0FE7218F1D196B7700D5994D /* PublicProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE7218E1D196B7700D5994D /* PublicProfileController.swift */; };
 		0FE947CE1D05C803009402D6 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE947CD1D05C803009402D6 /* MessageController.swift */; };
+		0FEBA8EE1D603C3100A9F891 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEBA8ED1D603C3100A9F891 /* AboutController.swift */; };
 		0FFB240C1D27B6510025CC05 /* NotificationListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB240B1D27B6510025CC05 /* NotificationListBean.swift */; };
 		0FFB24141D27BB5B0025CC05 /* NotificationBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB24131D27BB5B0025CC05 /* NotificationBean.swift */; };
 		0FFB24161D27C1990025CC05 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB24151D27C1990025CC05 /* NotificationController.swift */; };
@@ -266,6 +267,7 @@
 		0FE7218C1D192F7300D5994D /* MakeMySchoolBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeMySchoolBean.swift; sourceTree = "<group>"; };
 		0FE7218E1D196B7700D5994D /* PublicProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileController.swift; sourceTree = "<group>"; };
 		0FE947CD1D05C803009402D6 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
+		0FEBA8ED1D603C3100A9F891 /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		0FFB240B1D27B6510025CC05 /* NotificationListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationListBean.swift; sourceTree = "<group>"; };
 		0FFB24131D27BB5B0025CC05 /* NotificationBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBean.swift; sourceTree = "<group>"; };
 		0FFB24151D27C1990025CC05 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				0F485C5E1D3F6AB40013DC52 /* SettingsController.swift */,
 				0F10B13B1D3CE5B1000C4ADF /* AccountEditController.swift */,
 				84384D541D5E1BBC00D811C7 /* BaseController.swift */,
+				0FEBA8ED1D603C3100A9F891 /* AboutController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */,
 				0FFEC95D1D0EB1A400E4A1E0 /* UserProfileController.swift in Sources */,
 				F58061751CE5F9CF004BF043 /* usersBean.swift in Sources */,
+				0FEBA8EE1D603C3100A9F891 /* AboutController.swift in Sources */,
 				0FD3C9911D2CFD3B008C7752 /* BadgeCollectionViewCell.swift in Sources */,
 				84BA187E1D03552A009DC8C9 /* DelphosGlobals.swift in Sources */,
 				0FA2A86B1D14252800342797 /* searchSchoolListBean.swift in Sources */,

@@ -24,6 +24,7 @@ class RightViewController: BaseController, UIWebViewDelegate {
         case Settings
         case Profile
         case ViewMyBadges
+        case About
         case Logout
        
         
@@ -130,6 +131,14 @@ class RightViewController: BaseController, UIWebViewDelegate {
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
                 testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+                
+                break
+            case .About:
+                gObjAboutControllerNav = self.fetchNavController(gStrAboutControllerID)
+                
+                self.slideMenuController()?.changeMainViewController(gObjAboutControllerNav, close: true)
+                
+                    
                 
                 break
             case .Logout:
