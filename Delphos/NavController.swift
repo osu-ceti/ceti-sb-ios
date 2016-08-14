@@ -177,31 +177,92 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     
     func btnSearchClick(sender: UIBarButtonItem) {
         
-        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
-            print("landscape")
-            if (settingSearch){
-                setNavBar1(self.view.frame.size.width,height:0)
-                searchBar.delegate = self
-            }else{
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+        // It's an iPhone
+            if UIDevice.currentDevice().orientation.isLandscape.boolValue {
                 print("landscape")
-                setNavBar1(self.view.frame.size.width,height:30)
-                searchBar.delegate = self
+                if (settingSearch){
+                    setNavBar1(self.view.frame.size.width,height:0)
+                    searchBar.delegate = self
+                }else{
+                    print("landscape")
+                    setNavBar1(self.view.frame.size.width,height:30)
+                    searchBar.delegate = self
+                }
+                
             }
-            
+            if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
+                print("portrait")
+                
+                if (settingSearch){
+                    setNavBar1(self.view.frame.size.width,height:0)
+                    searchBar.delegate = self
+                }
+                else{
+                    setNavBar(self.view.frame.size.width)
+                    searchBar.delegate = self
+                }
+                
+            }
+            break
+        case .Pad:
+        // It's an iPad
+            if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+                print("landscape")
+                if (settingSearch){
+                    setNavBar1(self.view.frame.size.width,height:0)
+                    searchBar.delegate = self
+                }else{
+                    print("landscape")
+                    setNavBar1(self.view.frame.size.width,height:60)
+                    searchBar.delegate = self
+                }
+                
+            }
+            if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
+                print("portrait")
+                
+                if (settingSearch){
+                    setNavBar1(self.view.frame.size.width,height:0)
+                    searchBar.delegate = self
+                }
+                else{
+                    setNavBar(self.view.frame.size.width)
+                    searchBar.delegate = self
+                }
+                
+            }
+            break
+        default:
+            if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+                print("landscape")
+                if (settingSearch){
+                    setNavBar1(self.view.frame.size.width,height:0)
+                    searchBar.delegate = self
+                }else{
+                    print("landscape")
+                    setNavBar1(self.view.frame.size.width,height:30)
+                    searchBar.delegate = self
+                }
+                
+            }
+            if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
+                print("portrait")
+                
+                if (settingSearch){
+                    setNavBar1(self.view.frame.size.width,height:0)
+                    searchBar.delegate = self
+                }
+                else{
+                    setNavBar(self.view.frame.size.width)
+                    searchBar.delegate = self
+                }
+                
+            }
+            break
         }
-        if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
-            print("portrait")
-
-            if (settingSearch){
-                setNavBar1(self.view.frame.size.width,height:0)
-                searchBar.delegate = self
-            }
-            else{
-                setNavBar(self.view.frame.size.width)
-                searchBar.delegate = self
-            }
-            
-        }
+       
         
         
 

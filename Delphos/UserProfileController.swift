@@ -61,11 +61,11 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     var schoolProfileId:Int!
     var tempBackToViewController:UIViewController!
-
+    var imagesCount:Int!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.showOverlay(self.view)
         //rootViewController = self
         //Adding Navbar
         //        menus = regularMenu
@@ -81,7 +81,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
@@ -90,7 +90,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         //Adding Navbar
         rootViewController = self
         self.isBackEnabled = false
-
+        imagesCount = userProfileBadgesArray.count
         
         self.labelChangeJobTitle.hidden = true
         
@@ -333,14 +333,18 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BdgeCellId", forIndexPath: indexPath) as! BadgeCollectionViewCell
-        
+        imagesCount = imagesCount-1
         
         if (userProfileBadgesArray.count > 0){
             self.labelNoBadges.hidden = true
             
+           dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            
             dispatch_async(dispatch_get_main_queue(), {
-            
-            
+                
+               
+                
+           
                 cell.backgroundColor = UIColor.whiteColor()
                 let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
             
@@ -351,11 +355,18 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
                     cell.imgUserBadge.image = UIImage(data:badgesImage!)
                     cell.badgeId.text = String(imageDisplayBean.badge_id)
             }
+                 })
             })
         }
-        //        else{
-        //            self.labelNoBadges.hidden = false
-        //        }
+        if(imagesCount == 0){
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.hideOverlayView()
+                
+            })
+            
+        }
+        
         return cell
         
         
@@ -495,6 +506,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     @IBAction func btnBadges(sender: AnyObject) {
         
+        
         bottomLineBadges.frame = CGRectMake(0, btnBadges.frame.size.height - 1.0, btnBadges.frame.size.width, 1)
         bottomLineBadges.borderWidth = 2.0
         bottomLineBadges.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
@@ -529,7 +541,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         self.labelChangeJobTitle.hidden = true
         
-        
+      
         
         
     }
