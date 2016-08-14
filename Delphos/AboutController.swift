@@ -17,8 +17,11 @@ class AboutController: NavController {
     
     @IBOutlet var ontobornUrl: UIButton!
     
+   
+    @IBOutlet var viewDetails: UIView!
+    
+  
     @IBOutlet var contactUs: UIButton!
-
     
     @IBOutlet var firstLabel: UILabel!
     var data = NSData()
@@ -61,6 +64,7 @@ class AboutController: NavController {
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
+        viewDetails.backgroundColor = bgColor
         
 
        self.logoOntoborn.image = UIImage(named:"OntoBornTech")
