@@ -156,7 +156,7 @@ class NotificationController: NavController {
             
             //cancel
             
-            (cell as! NotificationControllerCell).eventName!.text = String(notificationDisplayBean.act_user_name) + "has canceled the event:  "
+            (cell as! NotificationControllerCell).eventName!.text = String(notificationDisplayBean.act_user_name) + " has canceled the event:  "
                 //+ String(notificationDisplayBean.event_title)
            
             break
