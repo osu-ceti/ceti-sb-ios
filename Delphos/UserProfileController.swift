@@ -322,7 +322,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             return userProfileBadgesArray.count
         }
         else{
+            self.hideOverlayView()
+            
             return 0
+            
         }
         
     }
@@ -358,6 +361,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
                  })
             })
         }
+        
         if(imagesCount == 0){
             dispatch_async(dispatch_get_main_queue(), {
                 

@@ -414,6 +414,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
     @IBAction func btnSendMessage(sender: AnyObject) {
         
+        self.labelUserName.hidden = true
+        self.labelBusiness.hidden = true
+        self.labelJobTitle.hidden = true
+        self.mainLabelJobTitle.hidden = true
+        self.mainLabelBusiness.hidden = true
         self.btnMessage.hidden = true
         self.btnAccept.hidden = true
         self.btnReject.hidden = true

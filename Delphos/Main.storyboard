@@ -776,13 +776,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't earned any Badges" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tx9-Y1-cTS">
-                                <rect key="frame" x="52" y="189" width="239" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eku-KC-lzU">
                                 <rect key="frame" x="116" y="165" width="201" height="29"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -832,6 +825,13 @@
                                     <outlet property="delegate" destination="m2X-tJ-2hg" id="xUI-k6-LLU"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you has not award badge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2b0-JY-c60">
+                                <rect key="frame" x="-2" y="223" width="322" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -847,7 +847,7 @@
                         <outlet property="labelEventFeed" destination="5sT-C3-m9W" id="4HG-SQ-mwt"/>
                         <outlet property="labelGrades" destination="0DN-fX-Kh7" id="tXT-xv-JUF"/>
                         <outlet property="labelJobTitle" destination="Yf1-Vz-52z" id="cqn-RP-uBH"/>
-                        <outlet property="labelNoBadges" destination="tx9-Y1-cTS" id="y9X-o1-GrN"/>
+                        <outlet property="labelNoBadges" destination="2b0-JY-c60" id="YMY-BU-e6p"/>
                         <outlet property="labelNoEventFound" destination="uod-bd-ePZ" id="Axl-Bf-8ZW"/>
                         <outlet property="labelRole" destination="H55-in-9S0" id="VAG-63-PJK"/>
                         <outlet property="labelSchool" destination="EUI-Q3-Mo0" id="9vg-bs-IO9"/>
