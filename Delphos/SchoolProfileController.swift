@@ -38,7 +38,11 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     var eventDisplayBean: usersBean!
     var eventBeanArray: [EventBean]! = []
-   
+    
+    var strSchoolId:String!
+    var makeMySchoolName:String!
+    var tempBackToViewController:UIViewController!
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,7 +51,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -59,6 +63,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         rootViewController = self
+         
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
@@ -67,6 +72,12 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var data = NSData(contentsOfURL:url!)
         if data != nil {
            self.schoolImage.image = UIImage(data:data!)
+        }
+        
+        
+        if(tempBackToViewController != nil){
+            gObjBackTocontroller = tempBackToViewController
+            tempBackToViewController = nil
         }
         
          self.tableView.backgroundColor = bgColor
@@ -163,6 +174,8 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var selectCell = tableView.cellForRowAtIndexPath(indexPath) as! SchoolProfileCell
         print("currentCell", selectCell.eventId.text!)
         
+        tempBackToViewController = gObjBackTocontroller
+        gObjBackTocontroller = gObjSchoolProfileNavController
         gEventID = Int(selectCell.eventId.text!)
         dispatch_async(dispatch_get_main_queue(), {
             
@@ -175,6 +188,9 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
 
     
     @IBAction func makeMySchoolClick(sender: AnyObject) {
+        
+        strSchoolId =  String(gObjSearchSchoolListBean.id)
+        makeMySchoolName = gObjSearchSchoolListBean.name
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()

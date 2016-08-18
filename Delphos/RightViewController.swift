@@ -17,14 +17,16 @@
 import UIKit
 
 
-class RightViewController: UIViewController, UIWebViewDelegate {
+class RightViewController: BaseController, UIWebViewDelegate {
     
     enum Menu: Int {
         case Home = 0
         case Settings
         case Profile
+        case ViewMyBadges
+        case About
         case Logout
-        //case PushNotification
+       
         
     }
     @IBOutlet var tableView: UITableView!
@@ -45,6 +47,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideOverlayView()
         rootViewController = self
         gObjHomeController = fetchNavController(gStrHomeControllerID)
         
@@ -70,6 +73,10 @@ class RightViewController: UIViewController, UIWebViewDelegate {
         super.viewDidAppear(animated)
     }
     
+    func hidingOverlay(){
+        self.hideOverlayView()
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
@@ -84,7 +91,7 @@ class RightViewController: UIViewController, UIWebViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        self.showOverlay(self.view)
         if let menu = Menu(rawValue: indexPath.item) {
             
             switch menu {
@@ -96,11 +103,16 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 else{
                     rootViewController = gObjHomeController
                     self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                
+                   
                 }
                 break
                 
             case .Settings:
-                self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.VIEW_SETTINGS)
                 break
             case .Profile:
                // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
@@ -110,6 +122,25 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 
                 
                 break
+            case .ViewMyBadges:
+                
+                // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                
+                gUserVIewBadgeId = gObjUserBean.id
+                //showOverlay(self.view)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+                
+                break
+            case .About:
+                gObjAboutControllerNav = self.fetchNavController(gStrAboutControllerID)
+                
+                self.slideMenuController()?.changeMainViewController(gObjAboutControllerNav, close: true)
+                
+                    
+                
+                break
             case .Logout:
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -117,19 +148,12 @@ class RightViewController: UIViewController, UIWebViewDelegate {
                 testfacade.doTask(self,action: DelphosAction.SIGN_OUT)
 
                 break
-//            case .PushNotification:
-//
-//              // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
-//
-//                
-//                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//                let testfacade = appDelegate.getObjFacade()
-//                testfacade.doTask(self,action: DelphosAction.HANDLE_NOTIFICATION)
-//                
-//                break
+            
 
             }
         }
+        gObjRightViewController = self
+        
     }
     
    

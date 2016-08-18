@@ -50,6 +50,8 @@ class  CreateEventResultEventBean: Mappable {
 
     var claim_id:Int!
     
+     var speaker: String?
+    
     required init()
     {
         //Do not remove required for Initialization
@@ -92,6 +94,8 @@ class  CreateEventResultEventBean: Mappable {
         user_id    <- map["user_id"]
         
         user_name    <- map["user_name"]
+        
+        speaker    <- map["speaker"]
         
     }
 }

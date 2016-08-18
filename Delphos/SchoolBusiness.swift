@@ -72,7 +72,18 @@ let NOTIFICATION = "notifications"
 let AWARD_BADGES = "award_badge"
 let BADGES = "badges"
 
+let ACCOUNT = "account"
+
+let PASSWORD = "password/"
+let NEW = "new"
+
+
 let REGISTER_DEVICE = "register_device"
+
+let SETTINGS = "settings"
+
+
+
 
 
 

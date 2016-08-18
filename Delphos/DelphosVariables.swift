@@ -59,11 +59,8 @@ var gNotificationNType:Int!
 var gBadgeid:Int!
 
 var gSearchUserProfile:Int!
+
 var gActUserId:Int! = 0
-
-
-
-
 
 var gSpeakerId:Int!
 
@@ -72,6 +69,14 @@ var gSpeakerName:String!
 var gUserProfileMessage:Bool!
 
 var gSchoolNameSelect:Bool!
+
+var gPasswordCheck:String!
+
+var gUserVIewBadgeId:Int!
+
+var gSchoolId:Int!
+
+var strUserProfileId:Int = 0
 
 var gClaimsListDetails:ClaimListClaimBeanBean!
 
@@ -95,6 +100,8 @@ var gObjSchoolBean : SchoolsBean!
 var gObjUserProfileBadgesBean : UserProfileBadgesBean!
 
 var viewBadgeBean:UserProfileBadgesBean!
+
+var gPublicEditaccountBean: UserBean!
 
 
 

@@ -32,28 +32,48 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet weak var tableView: UITableView!
    // var radioButtonController: SSRadioButtonsController?
+  
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        gObjBackTocontroller = gObjHomeController
         //Adding Navbar
         menus = regularMenu
         rightViewController.isRegister = false
         rightViewController.tableView.reloadData()
-        
+        navigationItem.title = "School-Business"
         self.isBackEnabled = false
         
        // self.gNotificationCount = "0"
         
+        
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
        
+        navigationItem.titleView = nil
+        navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
+        navigationItem.title = "School-Business"
+        searchBar.text = ""
+        searchBar.sizeToFit()
+        searchBar.becomeFirstResponder()
+        searchBar.showsCancelButton = false
+        
+        
+        
+        // navigationBar.items = [navigationItem]
+        searchView.hidden = true
          
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         rootViewController = self
+        
+        
       
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor

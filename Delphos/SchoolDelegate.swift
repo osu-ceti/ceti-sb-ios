@@ -13,27 +13,19 @@ import UIKit
 
 class SchoolDelegate:BaseDelegate{
 
-    func schoolProfile(objCurrentContoller: UIViewController) {
+    func schoolProfile(objCurrentContoller: BaseController) {
         
       
-            var strSchoolId: String
+        var strSchoolId: String
+        strSchoolId = String(gSchoolId)
         
-        if (gSchoolNameSelect == true)
-        {
-              //strSchoolId = String(gObjSearchUserListBean.school_id)
-            strSchoolId = String((objCurrentContoller as!  UserProfileController).schoolProfileId)
-        }
-        else{
-           // strSchoolId = String(gObjUserBean.school_id)
-             strSchoolId = String((objCurrentContoller as!  EventShowController).schoolProfileId)
-        }
-
         doGetAPIs.getSchoolProfile(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                 
                 
-                var objSchoolBean = result as! SchoolsBean
+                let objSchoolBean = result as! SchoolsBean
                 
                 gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
                 gObjSearchSchoolListBean = objSchoolBean.school
@@ -42,34 +34,38 @@ class SchoolDelegate:BaseDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    var objSchoolProfileControllerNav = self.getNavigationController(gObjSchoolProfileController)
-                    //}
-                    
-                    self.doNavigate(objCurrentContoller, toController: objSchoolProfileControllerNav,  close: true)
+                    gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
+                    self.doNavigate(objCurrentContoller, toController: gObjSchoolProfileNavController,  close: true)
                 })
                 
             }
         })
     }
-    func showMakeMySchool(objCurrentContoller: UIViewController) {
+    func showMakeMySchool(objCurrentContoller: BaseController) {
        
-        var strSchoolId: String = String(gObjUserBean.school_id)
+        let strSchoolId = (objCurrentContoller as! SchoolProfileController).strSchoolId
+        let makeMySchoolName = (objCurrentContoller as! SchoolProfileController).makeMySchoolName
         
         //var strschool:String = {}
         
         doGetAPIs.getMakeMySchool(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
-             
-                 var objMakeMySchoolBean = result as! MakeMySchoolBean
-                gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
                
-                print("Make my school")
+             
+                 let objMakeMySchoolBean = result as! MakeMySchoolBean
+                gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
+                gObjUserBean.school_id = gObjMakeMySchoolListBean.school_id
+                gObjUserBean.school_name = makeMySchoolName
+               // userProfileBean.school_id = gObjMakeMySchoolListBean.school_id
+               
+                logger.log(LoggingLevel.INFO, message: "Make my school")
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 dispatch_async(dispatch_get_main_queue(), {
 
                     
-                    var objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
+                    let objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
                     
                     
                     self.doNavigate(objCurrentContoller, toController: objPublicProfileControllerNav,  close: true)

@@ -21,12 +21,13 @@ class ClaimsDelegate: BaseDelegate {
 
     
     
-    func showClaimAllList(objCurrentContoller: UIViewController) {
+    func showClaimAllList(objCurrentContoller: BaseController) {
         //var strClaimEventId: String = String(gObjShowEventBean.id)
         
         
         
         doGetAPIs.getClaimView(String(gObjShowEventBean.id),callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -49,7 +50,8 @@ class ClaimsDelegate: BaseDelegate {
                         
                     
                     if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
-                        RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH) ){
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER)  ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
@@ -98,10 +100,11 @@ class ClaimsDelegate: BaseDelegate {
             }
         })
     }
-    func showClaimListDetails(objCurrentContoller: UIViewController) {
+    func showClaimListDetails(objCurrentContoller: BaseController) {
         var strClaimDetailId:String  = String(gClaimDetailId)
         
         doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 var objEventShowController = objCurrentContoller as! EventShowController
                 
@@ -128,20 +131,22 @@ class ClaimsDelegate: BaseDelegate {
         
         
     }
-    func claimAccept(objCurrentContoller: UIViewController)  {
+    func claimAccept(objCurrentContoller: BaseController)  {
         
-        var strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
-        var strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
+        let strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
+        let strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
         
         doPostAPIs.doAcceptClaim(strClaimEventId,strClaimid: strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                self.showAlert(objCurrentContoller, strMessage: "Claim Accepted")
              
                 dispatch_async(dispatch_get_main_queue(), {
                 gEventAcceptBean = result as! ClaimAcceptBean
-                
-                
+                gObjShowEventBean.speaker_id = gEventAcceptBean.event.speaker_id
+                gSpeakerId = gEventAcceptBean.event.speaker_id
+                gObjShowEventBean.speaker = gEventAcceptBean.event.speaker
                (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, forState: .Normal)
                  (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, forState: .Normal)
                 (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, forState: .Normal)
@@ -151,22 +156,26 @@ class ClaimsDelegate: BaseDelegate {
             }
             else{
                 // print("Error in Accept Claim")
-                self.showAlert(objCurrentContoller, strMessage: "Claim Not Accept")
+                self.showAlert(objCurrentContoller, strMessage: "claim failure")
+                (objCurrentContoller as! EventShowController).activityIndicator.stopAnimating()
+                (objCurrentContoller as! EventShowController).overlayView.hidden = true
+                logger.log(LoggingLevel.INFO, message: "Error in Accept Claim")
                 
             }
         })
         
         
     }
-    func claimReject(objCurrentContoller: UIViewController)  {
+    func claimReject(objCurrentContoller: BaseController)  {
         
         var strClaimid:String  = String((objCurrentContoller as! EventShowController).selectedClaimId)
         //var strClaimEventId:String = String((objCurrentContoller as! EventShowController).selectedEventId)
         
         doPostAPIs.doRejectClaim(strClaimid,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                
-                print("Claim Rejected")
+                logger.log(LoggingLevel.INFO, message: "Claim Rejected")
                 self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -182,7 +191,8 @@ class ClaimsDelegate: BaseDelegate {
             }
             else{
                 // print("Error in Accept Claim")
-                self.showAlert(objCurrentContoller, strMessage: "Claim Not Reject")
+                self.showAlert(objCurrentContoller, strMessage: "Claim Reject failure")
+
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
@@ -196,14 +206,14 @@ class ClaimsDelegate: BaseDelegate {
         
     }
     
-    func claimEvent(objCurrentContoller: UIViewController) -> Bool {
+    func claimEvent(objCurrentContoller: BaseController) -> Bool {
         
       
         //DOA calls
         doPostAPIs.doClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
-            
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                print("claimed")
+                logger.log(LoggingLevel.INFO, message: "claimed")
                
                 self.showAlert(objCurrentContoller, strMessage: "Event Claimed")
                 dispatch_async(dispatch_get_main_queue(), {
@@ -214,7 +224,7 @@ class ClaimsDelegate: BaseDelegate {
                 
             }
             else {
-                print("Event is not claimed")
+                logger.log(LoggingLevel.INFO, message: "Event is not claimed")
                  self.showAlert(objCurrentContoller, strMessage: "Event is Not Claim")
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -228,7 +238,7 @@ class ClaimsDelegate: BaseDelegate {
         }
         return true
     }
-    func sendMessage(objCurrentContoller: UIViewController)  {
+    func sendMessage(objCurrentContoller: BaseController)  {
         
         var strSendMessage:String = (objCurrentContoller as! MessageController).txtSendMessage.text!
         var strUserId:String!
@@ -257,14 +267,29 @@ class ClaimsDelegate: BaseDelegate {
         //
         //        objInputParamBean.message = objInputBean
         doPostAPIs.doSendMessage(objInputBean){ (loginResult: AnyObject, statusCode: Int) in
-            
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                print("SEND MESSAGE")
+                logger.log(LoggingLevel.INFO, message: "SEND MESSAGE")
                  self.showAlert(objCurrentContoller, strMessage: "Message Sent")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjMessageController = self.fetchNavController(gStrMessageControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjMessageController, close: true)
+                })
+
+
                 
             } else {
-                print("NOT SEND MESSAGE")
+                logger.log(LoggingLevel.INFO, message: "NOT SEND MESSAGE")
                 self.showAlert(objCurrentContoller, strMessage: "NOT SEND MESSAGE")
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    gObjMessageController = self.fetchNavController(gStrMessageControllerID)
+                    
+                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjMessageController, close: true)
+                })
+
                 
             }
         }
@@ -272,7 +297,7 @@ class ClaimsDelegate: BaseDelegate {
     }
     
     func messageClick(objCurrentContoller: UIViewController){
-        print("Send Message")
+        logger.log(LoggingLevel.INFO, message: "Send Message")
         
 
         
@@ -285,13 +310,14 @@ class ClaimsDelegate: BaseDelegate {
         //    
     }
 
-    func cancelClaim(objCurrentContoller: UIViewController) -> Bool {
+    func cancelClaim(objCurrentContoller: BaseController) -> Bool {
         
         //   var claimID = gObjShowEventBean.claim_id
         
         doPostAPIs.doCancelClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                print("Cancel claimed")
+                logger.log(LoggingLevel.INFO, message: "Cancel claimed")
                 //if(gObjHomeController == nil){
                 self.showAlert(objCurrentContoller, strMessage: "Claim Canceled")
                 dispatch_async(dispatch_get_main_queue(), {
@@ -301,7 +327,7 @@ class ClaimsDelegate: BaseDelegate {
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 })
             } else {
-                print("not claimed")
+                logger.log(LoggingLevel.INFO, message: "not claimed")
                 
                 self.showAlert(objCurrentContoller, strMessage: "Claim Not Cancel")
                 dispatch_async(dispatch_get_main_queue(), {

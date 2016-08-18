@@ -45,14 +45,14 @@ class DelegateController: BaseDelegate {
     
     
     
-    func delegateControl(objCurrentController: UIViewController, action enmAction: DelphosAction) {
+    func delegateControl(objCurrentController: BaseController, action enmAction: DelphosAction) {
        
-        print("Delegate(delegateControl) - Action: \(enmAction)")
-        
+        logger.log(LoggingLevel.INFO, message: "Delegate(delegateControl) - Action: \(enmAction)")
+        objCurrentController.showOverlay(objCurrentController.view)
         switch(enmAction)
         {
         case .LOGIN:
-            print("Login")
+            logger.log(LoggingLevel.INFO, message: "Login")
             objUserDelegate.login(objCurrentController, callback: {(status:Bool)
                 in
                 if(status){
@@ -62,131 +62,156 @@ class DelegateController: BaseDelegate {
             })
             
         case .EVENT_ALL:
-            print("Event All")
+            logger.log(LoggingLevel.INFO, message: "Event All")
             objEventDelegate.showAllEvents(objCurrentController)
 
         case .REGISTER:
-            print("Regsiter")
+            logger.log(LoggingLevel.INFO, message: "Regsiter")
             objUserDelegate.register(objCurrentController)
             
         case .SHOW_EVENT:
-            print("SHOW_EVENT")
+            logger.log(LoggingLevel.INFO, message: "SHOW_EVENT")
             objEventDelegate.showEvent(objCurrentController)
             
         case .SEARCH_EVENT:
-            print("SEARCH_EVENT")
+            logger.log(LoggingLevel.INFO, message: "SEARCH_EVENT")
             objSearchDelegate.searchEvent(objCurrentController)
             
         case.CREATE_EVENT:
-            print("CREATE_EVENT")
+            logger.log(LoggingLevel.INFO, message: "CREATE_EVENT")
             objEventDelegate.createEvent(objCurrentController)
             
         case .SHOW_SEARCH:
-            print("SHOW_SEARCH")
+            logger.log(LoggingLevel.INFO, message: "SHOW_SEARCH")
             objSearchDelegate.showSearch(objCurrentController)
             
         case .CLAIM_EVENT:
-            print("CLAIM_EVENT")
+            logger.log(LoggingLevel.INFO, message: "CLAIM_EVENT")
             objClaimsDelegate.claimEvent(objCurrentController)
             
         case .CANCEL_CLAIM:
-            print("CANCEL CLAIM")
+            logger.log(LoggingLevel.INFO, message: "CANCEL CLAIM")
             objClaimsDelegate.cancelClaim(objCurrentController)
             
         case .EDIT_EVENT_SHOW:
-            print("EDIT_EVENT_SHOW")
+            logger.log(LoggingLevel.INFO, message: "EDIT_EVENT_SHOW")
             objEventDelegate.editEvent(objCurrentController)
             
         case .CANCEL_EVENT:
-            print("DELETE_EVENT")
+            logger.log(LoggingLevel.INFO, message: "DELETE_EVENT")
             objEventDelegate.cancelEvent(objCurrentController)
             
         case .CLAIM_LIST:
-            print("claim All List ")
+            logger.log(LoggingLevel.INFO, message: "claim All List ")
              objClaimsDelegate.showClaimAllList(objCurrentController)
             
         case .CLAIM_LIST_DETAILS:
-            print("CLAIM_LIST_DETAILS")
+            logger.log(LoggingLevel.INFO, message: "CLAIM_LIST_DETAILS")
             objClaimsDelegate.showClaimListDetails(objCurrentController)
             
         case .CLAIM_ACCEPT:
-            print("CLAIM ACCEPT")
+            logger.log(LoggingLevel.INFO, message: "CLAIM ACCEPT")
             objClaimsDelegate.claimAccept(objCurrentController)
             
         case .CLAIM_REJECT:
-            print("CLAIM REJECT")
+            logger.log(LoggingLevel.INFO, message: "CLAIM REJECT")
              objClaimsDelegate.claimReject(objCurrentController)
         
         case .SEND_MESSAGE:
-             print("SEND MESSAGE")
+             logger.log(LoggingLevel.INFO, message: "SEND MESSAGE")
             objClaimsDelegate.sendMessage(objCurrentController)
             
         case .VIEW_MESSAGE_CONTROLLER:
-             print("VIEW MESSAGE CONTROLLER")
+             logger.log(LoggingLevel.INFO, message: "VIEW MESSAGE CONTROLLER")
            objClaimsDelegate.messageClick(objCurrentController)
             
         case .SHOW_USER_PROFILE:
-             print("SHOW USER PROFILE")
+             logger.log(LoggingLevel.INFO, message: "SHOW USER PROFILE")
             objUserDelegate.userProfile(objCurrentController)
 
         case .SHOW_SCHOOL_PROFILE:
-             print("SHOW SCHOOL PROFILE")
+             logger.log(LoggingLevel.INFO, message: "SHOW SCHOOL PROFILE")
             objSchoolDelegate.schoolProfile(objCurrentController)
             
         case .SIGN_OUT:
-             print("SIGN OUT")
+             logger.log(LoggingLevel.INFO, message: "SIGN OUT")
              objUserDelegate.signOut(objCurrentController)
           
         case .SHOW_MAKE_MY_SCHOOL:
-            print("SHOW MAKE MY SCHOOL")
+            logger.log(LoggingLevel.INFO, message: "SHOW MAKE MY SCHOOL")
             objSchoolDelegate.showMakeMySchool(objCurrentController)
         
         case .EDIT_USER_PROFILE:
-            print("EDIT USER PROFILE")
+            logger.log(LoggingLevel.INFO, message: "EDIT USER PROFILE")
             objUserDelegate.editUserProfile(objCurrentController)
             
         case .USER_PROFILE:
-            print("Menu USER PROFILE")
+            logger.log(LoggingLevel.INFO, message: "Menu USER PROFILE")
             objUserDelegate.menuUserProfile(objCurrentController)
             
 
         case .SHOW_NOTIFICATION:
-            print("Menu USER PROFILE")
+            logger.log(LoggingLevel.INFO, message: "Menu USER PROFILE")
             objNotificationDelegate.showNotification(objCurrentController)
             
             
         case .SHOW_SHARE_BADGE:
-            print("SHOW SHARE BADGE")
+            logger.log(LoggingLevel.INFO, message: "SHOW SHARE BADGE")
             objNotificationDelegate.showShareBadge(objCurrentController)
 
 
         case .REGISTER_DEVICE:
-            print("Menu REGISTER DEVICE")
+            logger.log(LoggingLevel.INFO, message: "Menu REGISTER DEVICE")
             objPushNotificationDelegate.registerDevice()
 
         case .BADGE_AWARD:
-            print("BADGE AWARD")
+            logger.log(LoggingLevel.INFO, message: "BADGE AWARD")
             objBadgeDelegate.badgesAward(objCurrentController)
 
         case .HANDLE_NOTIFICATION:
-            print("HANDLE NOTIFICATION")
+            logger.log(LoggingLevel.INFO, message: "HANDLE NOTIFICATION")
             objPushNotificationDelegate.handleRemoteNotification(objCurrentController)
 
         case .VIEW_BADGE_AWARD:
-            print("HANDLE NOTIFICATION")
+            logger.log(LoggingLevel.INFO, message: "HANDLE NOTIFICATION")
             objBadgeDelegate.viewAwardBadge(objCurrentController)
             
         case .READ_NOTIFICATION:
-            print("READ NOTIFICATION")
+            logger.log(LoggingLevel.INFO, message: "READ NOTIFICATION")
             objNotificationDelegate.readNotification(objCurrentController)
             
         case .MARK_ALL_NOTIFICATION:
-            print("MARK ALL NOTIFICATION")
+            logger.log(LoggingLevel.INFO, message: "MARK ALL NOTIFICATION")
             objNotificationDelegate.deleteNotification(objCurrentController)
 
+
+
+        case .VIEW_SETTINGS:
+            logger.log(LoggingLevel.INFO, message: "SAVE SETTINGS")
+           objUserDelegate.viewSettings(objCurrentController)
+
+        case .VIEW_ACCOUNT_EDIT:
+            logger.log(LoggingLevel.INFO, message: "VIEW ACCOUNT EDIT")
+            objUserDelegate.viewAccountEdit(objCurrentController)
             
+        case .EDIT_PROFILE_ACCOUNT:
+            logger.log(LoggingLevel.INFO, message: "VIEW ACCOUNT EDIT")
+            objUserDelegate.accountEdit(objCurrentController)
+
+            
+        case .SAVE_SETTINGS:
+            logger.log(LoggingLevel.INFO, message: "SAVE SETTINGS")
+            objUserDelegate.saveSettings(objCurrentController)
+
+
+        case .RESET_FORGET_PASSWORD:
+            logger.log(LoggingLevel.INFO, message: "RESET FORGET PASSWORD")
+            objUserDelegate.resetPassword(objCurrentController)
+
+            
+      
         default:
-            print("Error in delegate enum")
+            logger.log(LoggingLevel.INFO, message: "Error in delegate enum")
 
 
         }

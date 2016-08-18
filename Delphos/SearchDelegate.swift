@@ -11,12 +11,13 @@ import UIKit
 class SearchDelegate: BaseDelegate {
     func  searchEvent(objCurrentController: UIViewController) {
         
-        print(objCurrentController)
+//        print(objCurrentController)
         let objEventDisplayController = objCurrentController as! NavController
         
         var strSearchText = objEventDisplayController.searchBar.text
         
         doGetAPIs.searchEvent(gBtnRadioValue!, strSearchEvent: strSearchText!, callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objEventDisplayController)
             if(statusCode == SUCCESS) {
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -37,11 +38,16 @@ class SearchDelegate: BaseDelegate {
                         gObjSearchController.usersBeanArray = gObjUsersBean.users
                     }
                     
-                    objCurrentController.slideMenuController()?.changeMainViewController(UINavigationController(rootViewController: gObjSearchController), close: false)
+//                    if((gObjSearchController.eventBeanArray.count == 0) && (gObjSearchController.schoolsBeanArray.count == 0) && (gObjSearchController.usersBeanArray.count == 0)  ){
+//                        print("test")
+//                    
+//                    }else{
+                   
+                    gObjSearchNavController = UINavigationController(rootViewController: gObjSearchController)
+                    gObjBackTocontroller = gObjSearchNavController
                     
-                    //      print(eventDisplayController.eventBeanArray);
-                    //                     objCurrentController.presentViewController(goToSearchController, animated: true, completion: nil)
-                    //objEventDisplayController.tableView.reloadData()
+                    objCurrentController.slideMenuController()?.changeMainViewController(gObjSearchNavController, close: false)
+                   // }
                     
                 })
                 
@@ -51,16 +57,20 @@ class SearchDelegate: BaseDelegate {
         
     }
     
-    func showSearch(objCurrentContoller: UIViewController) {
+    func showSearch(objCurrentContoller: BaseController) {
         
         var strShowSearch: String = String(gSearchValue)
         
         doGetAPIs.getSearchEventsAndUsers(gBtnRadioValue, strsearchID: strShowSearch,callBack: {(result: AnyObject,statusCode: Int)   in
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
+                    (objCurrentContoller as! SearchController).activityIndicator.stopAnimating()
+                    (objCurrentContoller as! SearchController).overlayView.hidden = true
+                    
                     
                     gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
                     
@@ -80,10 +90,10 @@ class SearchDelegate: BaseDelegate {
                         gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
                         gObjSearchSchoolListBean = objSchoolBean.school
                         gObjSchoolImage = objSchoolBean.badge_url
-                        var objSchoolProfileControllerNav = self.getNavigationController(gObjSchoolProfileController)
+                         gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
                         
                         
-                        self.doNavigate(objCurrentContoller, toController: objSchoolProfileControllerNav,  close: true)
+                        self.doNavigate(objCurrentContoller, toController: gObjSchoolProfileNavController,  close: true)
                         
                     }
                     else if(gBtnRadioValue == users) {
@@ -98,10 +108,10 @@ class SearchDelegate: BaseDelegate {
                          //objCurrentContoller.slideMenuController()?.changeMainViewController(gObjUserProfileController, close: false)
                         
                         
-                        var objUserProfileControllerNav = self.getNavigationController(gObjUserProfileController)
+                        gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
                         //}
                         
-                        self.doNavigate(objCurrentContoller, toController: objUserProfileControllerNav,  close: true)
+                        self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
 
                     }
                     

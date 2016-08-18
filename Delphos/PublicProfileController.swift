@@ -17,7 +17,7 @@ class PublicProfileController:  NavController{
     
     
     @IBOutlet var labelProfileName: UILabel!
-    @IBOutlet var labelProfileSchool: UILabel!
+    
     
     @IBOutlet var labelProfileGrades: UILabel!
     @IBOutlet var labelProfileBiography: UILabel!
@@ -45,15 +45,21 @@ class PublicProfileController:  NavController{
     @IBOutlet var hideLabelRole: UILabel!
     @IBOutlet var hideLabelEmail: UILabel!
     
+    @IBOutlet var btnEditProfile: UIButton!
+    
+    @IBOutlet var btnEditAccount: UIButton!
     @IBOutlet var btnSaveProfile: UIButton!
     @IBOutlet var btnFindMySchool: UIButton!
-    @IBOutlet var btnEditProfile: UIButton!
-    @IBOutlet var btnEditAccount: UIButton!
     
+    @IBOutlet var btnPublicProfile: UIButton!
     
+    @IBOutlet var btnProfileSchoolLink: UIButton!
     @IBOutlet var scrollView: UIScrollView!
     
     var userProfileBean: UserBean!
+    
+    @IBOutlet var requiredField: UILabel!
+    @IBOutlet var changeLabelName: UILabel!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,7 +69,7 @@ class PublicProfileController:  NavController{
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -78,52 +84,38 @@ class PublicProfileController:  NavController{
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
+        self.requiredField.hidden = true
+        hideLabelAccountSetting.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelPublicProfile.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelName.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelGrades.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelSchool.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelJobTitle.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelBusiness.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelBio.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelRole.font = UIFont.boldSystemFontOfSize(15)
+        hideLabelEmail.font = UIFont.boldSystemFontOfSize(15)
         
-          hideLabelAccountSetting.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelPublicProfile.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelName.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelGrades.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelSchool.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelJobTitle.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelBusiness.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelBio.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelRole.font = UIFont.boldSystemFontOfSize(15)
-          hideLabelEmail.font = UIFont.boldSystemFontOfSize(15)
+        self.changeLabelName.hidden = true
+        self.txtProfileGrades.hidden = true
+        self.txtProfileBiography.hidden = true
+        self.txtProfileJobTItle.hidden = true
+        self.txtProfileBusiness.hidden = true
         
-         self.txtProfileGrades.hidden = true
-         self.txtProfileBiography.hidden = true
-         self.txtProfileJobTItle.hidden = true
-         self.txtProfileBusiness.hidden = true
+        self.btnSaveProfile.hidden = true
+        self.btnFindMySchool.hidden = true
         
-         self.btnSaveProfile.hidden = true
-         self.btnFindMySchool.hidden = true
+        self.btnEditProfile.hidden = false
+        self.btnEditAccount.hidden = false
         
-         self.btnEditProfile.hidden = false
-         self.btnEditAccount.hidden = false
-//
-//        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
-//           
-//            self.labelProfileSchool.hidden = true
-//            self.labelProfileGrades.hidden = true
-//            self.hideLabelGrades.hidden = true
-//            self.hideLabelSchool.hidden = true
-//            self.txtProfileGrades.hidden = true
-//            
-//        
-//        }
-//        else{
-//            self.labelProfileSchool.hidden = false
-//            self.labelProfileGrades.hidden = false
-//            self.hideLabelGrades.hidden = false
-//            self.hideLabelSchool.hidden = false
-//            self.txtProfileGrades.hidden = false
-//        
-//        }
+
         
         
         if (userProfileBean != nil){
+            
          self.labelProfileName.text = userProfileBean.name
-         self.labelProfileSchool.text = userProfileBean.school_name
+         btnProfileSchoolLink.setTitle(userProfileBean.school_name, forState: .Normal)
+         
             
          self.labelProfileGrades.text = userProfileBean.grades
          self.labelProfileBiography.text = userProfileBean.biography
@@ -136,6 +128,15 @@ class PublicProfileController:  NavController{
                 }
             else if(gObjUserBean.role == 2){
                  self.labelProfileRole.text = "SPEAKER"
+                
+                self.btnProfileSchoolLink.hidden = true
+                
+                 self.changeLabelName.hidden = false
+                self.labelProfileName.hidden = true
+                self.hideLabelName.hidden = true
+                
+                self.hideLabelSchool.text = "Name"
+                self.changeLabelName.text = userProfileBean.name
             }
             else{
                  self.labelProfileRole.text = "BOTH"
@@ -145,11 +146,12 @@ class PublicProfileController:  NavController{
             
             if (gObjUserBean.school_id == gObjMakeMySchoolListBean.school_id)
             {
-                self.labelProfileSchool.text = gObjUserBean.school_name
+                btnProfileSchoolLink.setTitle(gObjUserBean.school_name, forState: .Normal)
             }
             else{
-                self.labelProfileSchool.text = ""
+                btnProfileSchoolLink.setTitle(gObjUserBean.school_name, forState: .Normal)
             }
+           // btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
             self.labelProfileName.text = gObjMakeMySchoolListBean.name
             
             self.labelProfileGrades.text = gObjMakeMySchoolListBean.grades
@@ -212,32 +214,111 @@ class PublicProfileController:  NavController{
     
     @IBAction func btnSaveProfileClick(sender: AnyObject) {
         
-        self.txtProfileGrades.hidden    = true
-        self.txtProfileBiography.hidden = true
-        self.txtProfileJobTItle.hidden  = true
-        self.txtProfileBusiness.hidden  = true
-        
-        self.labelProfileGrades.hidden = false
-        self.labelProfileBiography.hidden = false
-        self.labelProfileJobTitle.hidden = false
-        self.labelProfileBusiness.hidden = false
-        
-        self.btnEditProfile.hidden = false
-        self.btnEditAccount.hidden = false
         
         
-        self.btnSaveProfile.hidden = true
-        self.btnFindMySchool.hidden = true
+        var trimmedGrades = txtProfileGrades.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.EDIT_USER_PROFILE)
+        var trimmedBio = txtProfileBiography.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var trimmedJobTitle = txtProfileJobTItle.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var trimmedBusiness = txtProfileBusiness.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if(trimmedGrades == ""){
+            self.requiredField.hidden = false
+            self.requiredField.text = "Required Grades"
+            
+        }else if(trimmedBio == ""){
+                        self.requiredField.hidden = false
+                        self.requiredField.text = "Required Biography"
+
+        
+        }
+        else if(trimmedJobTitle == ""){
+                        self.requiredField.hidden = false
+                        self.requiredField.text = "Required Job TItle"
+           
+        }
+        else if(trimmedBusiness == ""){
+                        self.requiredField.hidden = false
+                        self.requiredField.text = "Required Business"
+            
+        }else{
+            self.requiredField.hidden = true
+            txtProfileGrades.text = trimmedGrades
+            txtProfileBiography.text = trimmedBio
+            txtProfileJobTItle.text = trimmedJobTitle
+            txtProfileBusiness.text = trimmedBusiness
+          
+            self.txtProfileGrades.hidden    = true
+            self.txtProfileBiography.hidden = true
+            self.txtProfileJobTItle.hidden  = true
+            self.txtProfileBusiness.hidden  = true
+            
+            self.labelProfileGrades.hidden = false
+            self.labelProfileBiography.hidden = false
+            self.labelProfileJobTitle.hidden = false
+            self.labelProfileBusiness.hidden = false
+            
+            self.btnEditProfile.hidden = false
+            self.btnEditAccount.hidden = false
+            
+            
+            self.btnSaveProfile.hidden = true
+            self.btnFindMySchool.hidden = true
+        
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.EDIT_USER_PROFILE)
+       }
     }
     
     
-    @IBAction func btnFIndMySchoolClick(sender: AnyObject) {
+     func btnFIndMySchoolClick(sender: AnyObject) {
         
-       
+            self.searchBar.hidden = false
+            navigationItem.titleView = searchBar
+            navigationItem.rightBarButtonItems = [menuButton,searchButton]
+            searchBar.sizeToFit()
+            searchBar.becomeFirstResponder()
+            searchBar.showsCancelButton = true
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
+            //navigationBar.items = [navigationItem]
+            searchView.hidden = false
+           
+            gBtnRadioValue = "schools"
+        
+        
+    }
+   
+    
+     override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+}
+    
+    @IBAction func btnAccountEditClick(sender: AnyObject) {
+    
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.VIEW_ACCOUNT_EDIT)
+    }
+    
+     func btnProfileSchoolClick(sender: AnyObject) {
+        if(gObjUserBean.school_id != 1){
+           
+           // gSchoolId = userProfileBean.school_id
+            
+            gSchoolId =   gObjUserBean.school_id
+            
+            self.showOverlay(self.view)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+        }
+        else{
+            self.searchBar.hidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -247,19 +328,13 @@ class PublicProfileController:  NavController{
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
+
             gBtnRadioValue = "schools"
-        
-        
+
+        }
     }
-   
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-}
-    
-    
     
 }
 

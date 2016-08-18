@@ -1,4 +1,4 @@
-//
+		//
 //  AppDelegate.swift
 //  Delphos
 //
@@ -13,15 +13,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var facade: FacadeDelphos
+    
     override init(){
         facade = FacadeDelphos()
+        logger = Logger()
     }
     
     func getObjFacade() -> FacadeDelphos
     {
-        
         return facade
     }
+    
+    func getLogger() -> Logger
+    {
+        return logger
+    }
+    
     private func createMenuView() {
         
         // create viewController code...
@@ -65,10 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
         print("DEVICE TOKEN = \(deviceToken)")
+        
+        //if(deviceToken != ""){
         gStrDeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
         print("Device Token = " + gStrDeviceToken)
         
-        
+       // }
         
     }
     
@@ -85,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
        // rootViewController.showOverlay(self.rootViewController)
         
-        facade.doTask(UIViewController(), action: DelphosAction.HANDLE_NOTIFICATION)
+        facade.doTask(gObjRightViewController, action: DelphosAction.HANDLE_NOTIFICATION)
 //        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
         
     }
@@ -98,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Entering fetchCompletionHandler\n")
         print(notificationInfo)
         gObjNotificationInfo = notificationInfo
-        facade.doTask(UIViewController(), action: DelphosAction.HANDLE_NOTIFICATION)
+        facade.doTask(gObjRightViewController, action: DelphosAction.HANDLE_NOTIFICATION)
     }
 
     func applicationWillResignActive(application: UIApplication) {

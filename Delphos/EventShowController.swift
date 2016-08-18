@@ -63,7 +63,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
    
-    var strUserId:Int!
+    
     var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
@@ -79,19 +79,28 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var endDate = NSDate()
     var startDateAndTime = NSDate()
     
-         override func viewWillAppear(animated: Bool) {
+    var tempBackToViewController: UIViewController!
+    
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if(tempBackToViewController != nil){
+            gObjBackTocontroller = tempBackToViewController
+            tempBackToViewController = nil
+        }
+        self.isBackEnabled = true
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
+        
         
             //Adding Navbar
 //        menus = regularMenu
 //        rightViewController.isRegister = false
 //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
+       
         
-        backToController = gObjHomeController
+       // backToController = gObjHomeController
     
     
     
@@ -164,8 +173,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
            gSpeakerId = Int(gObjShowEventBean.speaker_id)
             
             gSpeakerName =  String(gObjShowEventBean.speaker)
-
-            btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
+            if(gSpeakerName != nil){
+                 btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
+            }
             btnLinkLocation.setTitle(gObjShowEventBean.loc_name, forState: .Normal)
             btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, forState: .Normal)
             
@@ -404,7 +414,17 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
     @IBAction func btnSendMessage(sender: AnyObject) {
         
+        self.labelUserName.hidden = true
+        self.labelBusiness.hidden = true
+        self.labelJobTitle.hidden = true
+        self.mainLabelJobTitle.hidden = true
+        self.mainLabelBusiness.hidden = true
+        self.btnMessage.hidden = true
+        self.btnAccept.hidden = true
+        self.btnReject.hidden = true
         //showOverlay(self.view)
+        tempBackToViewController = gObjBackTocontroller
+        gObjBackTocontroller = gObjEventShowController
         gUserProfileMessage = false
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
@@ -501,29 +521,52 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(sender: AnyObject) {
-         strUserId  = gSpeakerId
-        showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
-
+         gUserVIewBadgeId  = gSpeakerId
+        if(gObjShowEventBean.speaker != "TBA" && gObjShowEventBean.speaker != nil){
+            showOverlay(self.view)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+        }
     }
     @IBAction func btnSchoolProfile(sender: AnyObject) {
    
-         showOverlay(self.view)
+     //     ||
+        if(gObjShowEventBean.loc_id != 1 ){
+            showOverlay(self.view)
         
-        gSchoolNameSelect = false
-        schoolProfileId = gObjShowEventBean.loc_id
+            gSchoolNameSelect = false
+            gSchoolId = gObjShowEventBean.loc_id
+       
+            //gObjBackTocontroller = gObjEventShowController
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
-        
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+        }
+        else{
+            self.searchBar.hidden = false
+            navigationItem.titleView = searchBar
+            navigationItem.rightBarButtonItems = [menuButton,searchButton]
+            searchBar.sizeToFit()
+            searchBar.becomeFirstResponder()
+            searchBar.showsCancelButton = true
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
+            
+            //navigationBar.items = [navigationItem]
+            searchView.hidden = false
+            
+            
+            gBtnRadioValue = "schools"
+
+        }
 
     }
     @IBAction func btnUserProfile(sender: AnyObject) {
    
-         strUserId = gObjShowEventBean.user_id
+        gUserVIewBadgeId = gObjShowEventBean.user_id
+        //gObjBackTocontroller = gObjEventShowController
         showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()

@@ -28,11 +28,12 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
+        self.isBackEnabled = false
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
-        backToController = gObjHomeController
+        
+        
     }
     
         
