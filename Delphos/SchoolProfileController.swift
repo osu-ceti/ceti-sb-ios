@@ -68,11 +68,14 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
-        let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + gObjSchoolImage)
-        var data = NSData(contentsOfURL:url!)
-        if data != nil {
-           self.schoolImage.image = UIImage(data:data!)
-        }
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            
+            let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + gObjSchoolImage)
+            var data = NSData(contentsOfURL:url!)
+            if data != nil {
+                self.schoolImage.image = UIImage(data:data!)
+            }
+        })
         
         
         if(tempBackToViewController != nil){

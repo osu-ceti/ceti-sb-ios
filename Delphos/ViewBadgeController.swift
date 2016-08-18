@@ -96,8 +96,6 @@ class ViewBadgeController: NavController {
 //        let shareVC: UIActivityViewController = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
 //        self.presentViewController(shareVC, animated: true, completion: nil)
         
-        
-     
         let activityVC = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
         
           activityVC.popoverPresentationController?.sourceView = sender as! UIView

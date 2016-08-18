@@ -77,35 +77,45 @@ class AboutController: NavController {
    
     
     @IBAction func StraightAGrantLink(sender: AnyObject) {
-        let url : NSURL = NSURL(string:"http://education.ohio.gov/Topics/Straight-A-Fund/" )!
-        if UIApplication.sharedApplication().canOpenURL(url) {
-            UIApplication.sharedApplication().openURL(url)
-        }
-
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        
+            let url : NSURL = NSURL(string:"http://education.ohio.gov/Topics/Straight-A-Fund/" )!
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+      })
         
     }
         
     @IBAction func cetiLink(sender: AnyObject) {
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
         
-        let url : NSURL = NSURL(string:"http://www.ceti.cse.ohio-state.edu/" )!
-        if UIApplication.sharedApplication().canOpenURL(url) {
-            UIApplication.sharedApplication().openURL(url)
+            let url : NSURL = NSURL(string:"http://www.ceti.cse.ohio-state.edu/" )!
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
         }
+        })
     }
     @IBAction func ontobornClick(sender: AnyObject) {
-        let url : NSURL = NSURL(string: "http://ontoborn.com/")!
-        if UIApplication.sharedApplication().canOpenURL(url) {
+       
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            let url : NSURL = NSURL(string: "http://ontoborn.com/")!
+            if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
-        }
+            }
         
-
+        })
     }
         
     @IBAction func ourPrivacyPolicyClick(sender: AnyObject) {
-        let url : NSURL = NSURL(string:"http://ceti-test-env.elasticbeanstalk.com/privacy_policy" )!
-        if UIApplication.sharedApplication().canOpenURL(url) {
-            UIApplication.sharedApplication().openURL(url)
-        }
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            
+            let url : NSURL = NSURL(string:"http://ceti-test-env.elasticbeanstalk.com/privacy_policy" )!
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        })
     }
     @IBAction func contactUsLink(sender: AnyObject) {
         

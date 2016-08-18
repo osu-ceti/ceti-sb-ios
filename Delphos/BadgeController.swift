@@ -60,14 +60,16 @@ class BadgeController: NavController {
         
 
        // badgeUrl
-
-        if let url = NSURL(string:AWS_S3 + badgeUrl!){
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
             var data = NSData(contentsOfURL:url)
             if data != nil {
                 self.badgeImage.image = UIImage(data:data!)
             }
 
         }
+            
+        })
     }
     
     
