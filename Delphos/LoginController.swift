@@ -19,7 +19,7 @@ class LoginController: BaseController {
     
     @IBOutlet var scrollView: UIScrollView!
     
-
+    var isResetPassword:Bool = false
    
    
     var userNameData:String!
@@ -29,11 +29,11 @@ class LoginController: BaseController {
     
  
    
-//   
+  
 
-   // var navigationBar: UINavigationBar = UINavigationBar()
+   //var navigationBar: UINavigationBar = UINavigationBar()
     var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-   // var searchButton : UIBarButtonItem = UIBarButtonItem()
+   //var searchButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
 
@@ -47,9 +47,8 @@ class LoginController: BaseController {
     
     
     @IBOutlet var btnForgetPassword: UIButton!
-//    var overlayView = UIView()
-//    var activityIndicator = UIActivityIndicatorView()
-//    
+    var backButton : UIBarButtonItem = UIBarButtonItem()
+
 
     
     
@@ -58,7 +57,7 @@ class LoginController: BaseController {
          rootViewController = self
          self.requiredError.hidden = true
         
-        
+        // isResetPassword = false
         
         
         if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
@@ -68,8 +67,7 @@ class LoginController: BaseController {
              userNameData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey)!
              userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey)!
        
-//             print("userNamedata====",userNameData)
-//             print("passwordData====",userPasswordData)
+
             
              let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
              let testfacade = appDelegate.getObjFacade()
@@ -81,6 +79,8 @@ class LoginController: BaseController {
         navigationItem.title = "School-Business"
         searchButtonItem = UIBarButtonItem(customView:searchBar)
        
+      
+        
         
         let color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
@@ -184,16 +184,32 @@ class LoginController: BaseController {
 
     @IBAction func btnForgetPasswordClick(sender: AnyObject) {
         
+        isResetPassword = true
+        
+        if(isResetPassword){
+           
+            gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+            
+            gObjBackTocontroller = gObjLoginController
+            
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backToSomeController(_:)))
+            
+            navigationItem.leftBarButtonItem = backButton
+        }
         
         self.btnResetPassword.hidden = false
-        
-        
         self.passwordTxt.hidden = true
         self.switchRememberme.hidden = true
         self.btnRegister.hidden = true
         self.btnSignIn.hidden = true
         self.labelRememberMe.hidden = true
         self.btnForgetPassword.hidden = true
+    }
+    func backToSomeController(sender: UIBarButtonItem){
+       
+        
+        self.slideMenuController()?.changeMainViewController(gObjBackTocontroller, close: true)
+        
     }
    
     func isValidEmail(testStr:String) -> Bool {
@@ -230,7 +246,7 @@ class LoginController: BaseController {
         else{
         
                 userTxt.text = trimmedEmail
-        
+                
             //self.showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()

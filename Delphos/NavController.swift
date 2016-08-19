@@ -50,12 +50,12 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
        
         
-//        segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
+// segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
         segmentSearchItems.frame  = CGRectMake(110,5,200,20)
        // segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.tintColor = UIColor.lightGrayColor()
         segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
-        
+         
 
         searchView.addSubview(label)
         

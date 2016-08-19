@@ -51,8 +51,8 @@ class NotificationController: NavController {
         //
         
        
-        gObjBackTocontroller = gObjNotificationControllerNav
-        
+       //gObjBackTocontroller = gObjNotificationControllerNav
+          //self.tableView.reloadData()
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.tableView.tableFooterView = UIView()
@@ -76,9 +76,9 @@ class NotificationController: NavController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-      
+            print(notificationArray.count)
             return notificationArray.count
-       
+        
         
     }
     
@@ -213,14 +213,19 @@ class NotificationController: NavController {
         notificationId = Int(selectCell.id.text!)
        
         gNotificationNType = Int(selectCell.UserNotificationType.text!)
+        
        
+        
         dispatch_async(dispatch_get_main_queue(), {
+             //gObjBackTocontroller = gObjNotificationControllerNav
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.READ_NOTIFICATION)
         })
-
+        
+        gObjNotificationControllerNav = self.fetchNavController(gStrNotificationControllerID)
+        gObjBackTocontroller = gObjNotificationControllerNav
         
         switch gNotificationNType {
 
@@ -250,8 +255,7 @@ class NotificationController: NavController {
             
             default :
                
-                gObjBackTocontroller = gObjHomeController
-               // gObjBackTocontroller = gObjNotificationControllerNav
+              
 
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -262,6 +266,7 @@ class NotificationController: NavController {
            
             
             break
+          
         }
 
         

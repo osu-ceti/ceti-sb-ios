@@ -123,6 +123,8 @@ func deleteNotification(objCurrentContoller: BaseController)  {
         
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            
+            
             if(statusCode == SUCCESS) {
                     //Left Empty for future Use
             }

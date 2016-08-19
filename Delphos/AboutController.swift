@@ -111,7 +111,7 @@ class AboutController: NavController {
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
-            let url : NSURL = NSURL(string:"http://ceti-test-env.elasticbeanstalk.com/privacy_policy" )!
+            let url : NSURL = NSURL(string:"https://www.school2biz.com/privacy_policy" )!
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
             }
