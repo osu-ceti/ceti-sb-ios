@@ -770,10 +770,18 @@ class DAOServices: DAOBase {
             }
         })
     }
-    func getNotification( callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+    func getNotification(pageValue: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         print("get Notification")
-        strURL =   DEV_TARGET + NOTIFICATION
-       
+        if(pageValue == "1"){
+           
+            strURL =   DEV_TARGET + NOTIFICATION
+
+        }
+        else{
+             strURL =   DEV_TARGET + NOTIFICATION + "?" + "page=" + pageValue
+        }
+        
+        
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             

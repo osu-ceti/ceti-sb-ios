@@ -58,18 +58,53 @@ class BadgeController: NavController {
         eventName.text = txtEventName
         speakerName.text = txtSpeakerName
         
-
-       // badgeUrl
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-        if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
-            var data = NSData(contentsOfURL:url)
-            if data != nil {
-                self.badgeImage.image = UIImage(data:data!)
+        if(eventName.text == nil && speakerName.text == nil){
+        
+            if(gEventTitle != nil){
+                eventName.text = gEventTitle
+                speakerName.text = gActUserName
+                eventId = gEventID
+                
+                if let url = NSURL(string:AWS_S3 + "def_school_badge_small.jpg"){
+                    var data = NSData(contentsOfURL:url)
+                    if data != nil {
+                        self.badgeImage.image = UIImage(data:data!)
+                    }
+                    
+                    
+                }
+                if(gAwardNtype == 4){
+                    self.btnAwardBadges.hidden = false
+                    self.btnDoNotAward.hidden = false
+                    
+                }
+                else{
+                    self.btnAwardBadges.hidden = true
+                    self.btnDoNotAward.hidden = true
+                }
             }
 
         }
+        
+
+       // badgeUrl
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
+            if(self.badgeUrl != nil){
+                if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
+                    var data = NSData(contentsOfURL:url)
+                    if data != nil {
+                self.badgeImage.image = UIImage(data:data!)
+                    }
+
+                }
+                
+          }
+           
         })
+        
+        
+      
     }
     
     

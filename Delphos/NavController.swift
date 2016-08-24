@@ -354,7 +354,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
     }
     func btnNotificationClick(sender: UIBarButtonItem){
-       
+        notificationPage = 1
         print(" Notification Click")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()

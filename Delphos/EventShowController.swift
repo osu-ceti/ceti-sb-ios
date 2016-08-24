@@ -513,11 +513,30 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         let testfacade = appDelegate.getObjFacade()
          testfacade.doTask(self,action: DelphosAction.CANCEL_CLAIM)
     }
+    
+    func alertActionOk(){
+    
+    
+    }
     @IBAction func btnDeleteEvent(sender: AnyObject) {
-         showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.CANCEL_EVENT)
+        
+        
+        var refreshAlert = UIAlertController(title: "Alert", message: "Are you confirm delete the event.", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+            print("Ok Action")
+            self.showOverlay(self.view)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.CANCEL_EVENT)
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            print("Cancvel action")
+        }))
+        
+        presentViewController(refreshAlert, animated: true, completion: nil)
+
         
     }
     @IBAction func btnSpeaker(sender: AnyObject) {

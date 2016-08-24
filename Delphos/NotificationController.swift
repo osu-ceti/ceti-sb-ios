@@ -22,6 +22,10 @@ class NotificationController: NavController {
     var actUserId:Int!
     var notificationId:Int!
     
+    var eventNametext:String?
+    
+    
+    
     @IBOutlet var btnMarkAllNotification: UIButton!
     
     
@@ -76,8 +80,9 @@ class NotificationController: NavController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-            print(notificationArray.count)
-            return notificationArray.count
+        
+         // print(notificationArray.count)
+          return notificationArray.count
         
         
     }
@@ -142,7 +147,7 @@ class NotificationController: NavController {
             //award_badge
             
             (cell as! NotificationControllerCell).eventName!.text = "Award them a badge."
-            //String(notificationDisplayBean.act_user_name)
+             eventNametext = notificationDisplayBean.event_title
            
             break
         case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
@@ -211,6 +216,16 @@ class NotificationController: NavController {
         gEventID = Int(selectCell.eventId.text!)
         
         notificationId = Int(selectCell.id.text!)
+        
+       
+        gActUserName = selectCell.actUSerName.text
+        gAwardNtype = gNotificationNType
+      
+        if(eventNametext != nil){
+            gEventTitle = eventNametext
+   
+        }
+       
        
         gNotificationNType = Int(selectCell.UserNotificationType.text!)
         
@@ -233,11 +248,13 @@ class NotificationController: NavController {
             case NOTIFICATION_TYPE.AWARD_BADGE.rawValue :
                 
                 //award_badge
+                
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    testfacade.doTask(self,action: DelphosAction.VIEW_BADGE_AWARD)
                 })
             break
             
@@ -271,6 +288,22 @@ class NotificationController: NavController {
 
         
         
+        
+    }
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        //print("Scroll finished")
+        notificationPage += 1
+        
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+            //reach bottom
+            print("Scroll bottom")
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.SHOW_NOTIFICATION)
+            
+
+    
+        }
         
     }
     @IBAction func btnMarkAllNOtificationClick(sender: AnyObject) {

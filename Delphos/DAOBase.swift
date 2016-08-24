@@ -33,7 +33,7 @@ class DAOBase: NSObject {
      * Method Adds API Key to the HTTP Connection Header.
      * Should be Overridden in Login DAO and Register as API Key is not Required
      */
-    func doGet(addAuthHeader: Bool ,callBack: ((jsonResult: AnyObject, status: Bool, statusCode: Int) -> Void)?){
+    func doGet( addAuthHeader: Bool ,callBack: ((jsonResult: AnyObject, status: Bool, statusCode: Int) -> Void)?){
         
         //println("GET method invoked")
         var objRequest : NSMutableURLRequest = NSMutableURLRequest()
