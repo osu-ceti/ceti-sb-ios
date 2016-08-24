@@ -81,7 +81,7 @@ class NotificationController: NavController {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         
-         // print(notificationArray.count)
+          print(notificationArray.count)
           return notificationArray.count
         
         
