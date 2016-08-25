@@ -11,12 +11,12 @@ import UIKit
 class ClaimsDelegate: BaseDelegate {
     
     func showClaimApprovalPendingUI(objCurrentContoller: UIViewController){
-        (objCurrentContoller as! EventShowController).cancelClaim.hidden = false
-        (objCurrentContoller as! EventShowController).claim.hidden = false
-        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Pending Approval ", forState: .Normal)
+        (objCurrentContoller as! EventShowController).cancelClaim.isHidden = false
+        (objCurrentContoller as! EventShowController).claim.isHidden = false
+        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Pending Approval ", for: .normal)
         
-        (objCurrentContoller as! EventShowController).claim.enabled = false
-        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.grayColor()
+        (objCurrentContoller as! EventShowController).claim.isEnabled = false
+        (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.gray
     }
 
     
@@ -30,7 +30,7 @@ class ClaimsDelegate: BaseDelegate {
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gClaimsList = result as! ClaimListBean
                     (objCurrentContoller as! EventShowController).claimBeanArray = gClaimsList.claims
@@ -39,8 +39,8 @@ class ClaimsDelegate: BaseDelegate {
                     
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
                     
-                    var startDate = NSDate()
-                    var currentDate = NSDate()
+                    var startDate = Date()
+                    var currentDate = Date()
                     
                     startDate = (objCurrentContoller as! EventShowController).startDateAndTime
                     currentDate = (objCurrentContoller as! EventShowController).currentDate
@@ -49,22 +49,22 @@ class ClaimsDelegate: BaseDelegate {
                         
                         
                     
-                    if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER ||
-                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH ||
-                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER)  ){
+                    if(gObjShowEventBean.active == true && (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.speaker ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher)  ){
                     
                         if (gObjUserBean.id == gObjShowEventBean.speaker_id)
                         {
                             //Applied already
-                                (objCurrentContoller as! EventShowController).self.cancelClaim.hidden = false
-                                (objCurrentContoller as! EventShowController).self.claim.hidden = true
+                                (objCurrentContoller as! EventShowController).self.cancelClaim.isHidden = false
+                                (objCurrentContoller as! EventShowController).self.claim.isHidden = true
                             
                         }
                          else {
                             if(gObjShowEventBean.speaker_id != 0){
                                 //Approved
-                                (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
-                                (objCurrentContoller as! EventShowController).claim.hidden = true
+                                (objCurrentContoller as! EventShowController).cancelClaim.isHidden = true
+                                (objCurrentContoller as! EventShowController).claim.isHidden = true
                             }
                             else{
                                 var match:Bool = false
@@ -74,7 +74,7 @@ class ClaimsDelegate: BaseDelegate {
                                     {
                                         //Approval Pending
                                         match = true
-                                       self.showClaimApprovalPendingUI(objCurrentContoller)
+                                       self.showClaimApprovalPendingUI(objCurrentContoller: objCurrentContoller)
                                     }
                                     
                                     
@@ -83,13 +83,13 @@ class ClaimsDelegate: BaseDelegate {
                                     if( match == false && gObjShowEventBean.claim_id == 0){
                                    
                                         //Did not apply
-                                        (objCurrentContoller as! EventShowController).cancelClaim.hidden = true
-                                        (objCurrentContoller as! EventShowController).claim.hidden = false
+                                        (objCurrentContoller as! EventShowController).cancelClaim.isHidden = true
+                                        (objCurrentContoller as! EventShowController).claim.isHidden = false
                                     
                                     }
                                     else{
                                         //Rejected
-                                        self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        self.showClaimApprovalPendingUI(objCurrentContoller: objCurrentContoller)
                                     }
                                 }
                             }
@@ -108,7 +108,7 @@ class ClaimsDelegate: BaseDelegate {
             if(statusCode == SUCCESS) {
                 var objEventShowController = objCurrentContoller as! EventShowController
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                    // gClaimsList = result as! ClaimListBean
 
                     gClaimsListDetails = result as! ClaimListClaimBeanBean
@@ -142,15 +142,15 @@ class ClaimsDelegate: BaseDelegate {
                 
                self.showAlert(objCurrentContoller, strMessage: "Claim Accepted")
              
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                 gEventAcceptBean = result as! ClaimAcceptBean
                 gObjShowEventBean.speaker_id = gEventAcceptBean.event.speaker_id
                 gSpeakerId = gEventAcceptBean.event.speaker_id
                 gObjShowEventBean.speaker = gEventAcceptBean.event.speaker
-               (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, forState: .Normal)
-                 (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, forState: .Normal)
-                (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, forState: .Normal)
-                    (objCurrentContoller as! EventShowController).tableView.hidden = true
+               (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, for: .normal)
+                 (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, for: .normal)
+                (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, for: .normal)
+                    (objCurrentContoller as! EventShowController).tableView.isHidden = true
                 })
                
             }
@@ -158,8 +158,8 @@ class ClaimsDelegate: BaseDelegate {
                 // print("Error in Accept Claim")
                 self.showAlert(objCurrentContoller, strMessage: "claim failure")
                 (objCurrentContoller as! EventShowController).activityIndicator.stopAnimating()
-                (objCurrentContoller as! EventShowController).overlayView.hidden = true
-                logger.log(LoggingLevel.INFO, message: "Error in Accept Claim")
+                (objCurrentContoller as! EventShowController).overlayView.isHidden = true
+                logger.log(LoggingLevel.info, message: "Error in Accept Claim")
                 
             }
         })
@@ -175,16 +175,16 @@ class ClaimsDelegate: BaseDelegate {
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                
-                logger.log(LoggingLevel.INFO, message: "Claim Rejected")
+                logger.log(LoggingLevel.info, message: "Claim Rejected")
                 self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
                      
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
                      //(objCurrentContoller as! EventShowController).tableView.reloadData()
-                    //(objCurrentContoller as! EventShowController).tableView.hidden = false
+                    //(objCurrentContoller as! EventShowController).tableView.isHidden = false
                     })
             
             
@@ -193,7 +193,7 @@ class ClaimsDelegate: BaseDelegate {
                 // print("Error in Accept Claim")
                 self.showAlert(objCurrentContoller, strMessage: "Claim Reject failure")
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
                     
@@ -213,10 +213,10 @@ class ClaimsDelegate: BaseDelegate {
         doPostAPIs.doClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                logger.log(LoggingLevel.INFO, message: "claimed")
+                logger.log(LoggingLevel.info, message: "claimed")
                
                 self.showAlert(objCurrentContoller, strMessage: "Event Claimed")
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                 
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
@@ -224,9 +224,9 @@ class ClaimsDelegate: BaseDelegate {
                 
             }
             else {
-                logger.log(LoggingLevel.INFO, message: "Event is not claimed")
+                logger.log(LoggingLevel.info, message: "Event is not claimed")
                  self.showAlert(objCurrentContoller, strMessage: "Event is Not Claim")
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
                     
@@ -250,8 +250,8 @@ class ClaimsDelegate: BaseDelegate {
         }
         else{
         
-            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
+                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both){
                 strUserId = String(gClaimUser_id)
             }
             else{
@@ -269,9 +269,9 @@ class ClaimsDelegate: BaseDelegate {
         doPostAPIs.doSendMessage(objInputBean){ (loginResult: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                logger.log(LoggingLevel.INFO, message: "SEND MESSAGE")
+                logger.log(LoggingLevel.info, message: "SEND MESSAGE")
                  self.showAlert(objCurrentContoller, strMessage: "Message Sent")
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjMessageController = self.fetchNavController(gStrMessageControllerID)
                     
@@ -281,9 +281,9 @@ class ClaimsDelegate: BaseDelegate {
 
                 
             } else {
-                logger.log(LoggingLevel.INFO, message: "NOT SEND MESSAGE")
+                logger.log(LoggingLevel.info, message: "NOT SEND MESSAGE")
                 self.showAlert(objCurrentContoller, strMessage: "NOT SEND MESSAGE")
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjMessageController = self.fetchNavController(gStrMessageControllerID)
                     
@@ -297,7 +297,7 @@ class ClaimsDelegate: BaseDelegate {
     }
     
     func messageClick(objCurrentContoller: UIViewController){
-        logger.log(LoggingLevel.INFO, message: "Send Message")
+        logger.log(LoggingLevel.info, message: "Send Message")
         
 
         
@@ -317,20 +317,20 @@ class ClaimsDelegate: BaseDelegate {
         doPostAPIs.doCancelClaim(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                logger.log(LoggingLevel.INFO, message: "Cancel claimed")
+                logger.log(LoggingLevel.info, message: "Cancel claimed")
                 //if(gObjHomeController == nil){
                 self.showAlert(objCurrentContoller, strMessage: "Claim Canceled")
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                 
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                                //}
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 })
             } else {
-                logger.log(LoggingLevel.INFO, message: "not claimed")
+                logger.log(LoggingLevel.info, message: "not claimed")
                 
                 self.showAlert(objCurrentContoller, strMessage: "Claim Not Cancel")
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
                 })

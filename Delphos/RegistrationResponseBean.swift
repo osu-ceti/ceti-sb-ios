@@ -27,7 +27,7 @@ class RegistrationResponseBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         state        <- map["state"]
         status       <- map["status"]
         data         <- map["data"]

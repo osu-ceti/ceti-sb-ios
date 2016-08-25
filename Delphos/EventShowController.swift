@@ -8,6 +8,26 @@
 
 import UIKit
 import ObjectMapper
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class EventShowController: NavController, UITableViewDataSource, UITableViewDelegate {
    
@@ -72,16 +92,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var name = ["claim"]
     var selectedClaimId:Int = 0
     var selectedEventId:Int = 0
-    var currentDate = NSDate()
+    var currentDate = Date()
    
-    var dateFormatter = NSDateFormatter()
-    var minusCurrentDate = NSDate()
-    var endDate = NSDate()
-    var startDateAndTime = NSDate()
+    var dateFormatter = DateFormatter()
+    var minusCurrentDate = Date()
+    var endDate = Date()
+    var startDateAndTime = Date()
     
     var tempBackToViewController: UIViewController!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if(tempBackToViewController != nil){
@@ -105,39 +125,39 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     
     
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.CLAIM_LIST)
+        testfacade.doTask(self,action: DelphosAction.claim_LIST)
 
         
     }
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         rootViewController = self
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.cancelClaim.frame.origin.y + 250)
-        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.cancelClaim.frame.origin.y + 250)
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.labelClaims.hidden = true
-        self.labelUserName.hidden = true
-        self.mainLabelBusiness.hidden = true
-        self.mainLabelJobTitle.hidden = true
-        self.labelBusiness.hidden = true
-        self.labelJobTitle.hidden = true
-        self.tableView.hidden = true
+        self.labelClaims.isHidden = true
+        self.labelUserName.isHidden = true
+        self.mainLabelBusiness.isHidden = true
+        self.mainLabelJobTitle.isHidden = true
+        self.labelBusiness.isHidden = true
+        self.labelJobTitle.isHidden = true
+        self.tableView.isHidden = true
         
-        self.btnMessage.hidden = true
-        self.btnAccept.hidden = true
-        self.btnReject.hidden = true
+        self.btnMessage.isHidden = true
+        self.btnAccept.isHidden = true
+        self.btnReject.isHidden = true
         
-        self.editEvent.hidden = true
-        self.cancelEvent.hidden = true
-        self.claim.hidden = true
-        self.cancelClaim.hidden = true
+        self.editEvent.isHidden = true
+        self.cancelEvent.isHidden = true
+        self.claim.isHidden = true
+        self.cancelClaim.isHidden = true
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
@@ -151,13 +171,13 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //        var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = gDateTimeFormat
         
-        txtTitle.font = UIFont.boldSystemFontOfSize(15)
-        labeltext1.font = UIFont.boldSystemFontOfSize(15)
-        labelText2.font = UIFont.boldSystemFontOfSize(15)
-        labelText3.font = UIFont.boldSystemFontOfSize(15)
-        labelText4.font = UIFont.boldSystemFontOfSize(15)
-        labelText5.font = UIFont.boldSystemFontOfSize(15)
-        labelText6.font = UIFont.boldSystemFontOfSize(15)
+        txtTitle.font = UIFont.boldSystemFont(ofSize: 15)
+        labeltext1.font = UIFont.boldSystemFont(ofSize: 15)
+        labelText2.font = UIFont.boldSystemFont(ofSize: 15)
+        labelText3.font = UIFont.boldSystemFont(ofSize: 15)
+        labelText4.font = UIFont.boldSystemFont(ofSize: 15)
+        labelText5.font = UIFont.boldSystemFont(ofSize: 15)
+        labelText6.font = UIFont.boldSystemFont(ofSize: 15)
     
         
         if(gBtnRadioValue == events || gObjShowEventBean != nil) {
@@ -172,18 +192,19 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.labelText6.text = "Content:"
            gSpeakerId = Int(gObjShowEventBean.speaker_id)
             
-            gSpeakerName =  String(gObjShowEventBean.speaker)
-            if(gSpeakerName != nil){
-                 btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
+            
+            if(gObjShowEventBean.speaker != nil){
+                gSpeakerName =  String(gObjShowEventBean.speaker)
+                 btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, for: UIControlState())
             }
-            btnLinkLocation.setTitle(gObjShowEventBean.loc_name, forState: .Normal)
-            btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, forState: .Normal)
+            btnLinkLocation.setTitle(gObjShowEventBean.loc_name, for: UIControlState())
+            btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, for: UIControlState())
             
             if (gObjShowEventBean.active == false)
             {
                 var titleLength = gObjShowEventBean.title.characters.count
                 var attributedString = NSMutableAttributedString(string: gObjShowEventBean.title as String)
-                let secondAttributes = [NSForegroundColorAttributeName: UIColor.redColor(),  NSStrikethroughStyleAttributeName: 1]
+                let secondAttributes = [NSForegroundColorAttributeName: UIColor.red,  NSStrikethroughStyleAttributeName: 1] as [String : Any]
                 attributedString.addAttributes(secondAttributes, range: NSRange(location: 0,length:titleLength))
                 self.txtTitle.attributedText = attributedString
    
@@ -199,66 +220,66 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             //self.txtText4.text =    gObjShowEventBean.loc_name
             //self.txtText5.text =    gObjShowEventBean.user_name
             self.txtText6.text   =    gObjShowEventBean.content
-            minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
+            minusCurrentDate = currentDate.addingTimeInterval(-1*24*60*60);
 
             print("End Date = " + gObjShowEventBean.event_end)
 
             dateFormatter.dateFormat = gDateTimeFormat
 
-            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
 
-            endDate = dateFormatter.dateFromString(gObjShowEventBean.event_end)!
+            endDate = dateFormatter.date(from: gObjShowEventBean.event_end)!
             
-            startDateAndTime = dateFormatter.dateFromString(gObjShowEventBean.event_start)!
+            startDateAndTime = dateFormatter.date(from: gObjShowEventBean.event_start)!
            
-            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
+                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both){
                 
                 
                 if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
-                    self.editEvent.hidden = true
-                    self.cancelEvent.hidden = true
-                    self.claim.hidden = true
-                    self.cancelClaim.hidden = true
-                    self.tableView.hidden = true
+                    self.editEvent.isHidden = true
+                    self.cancelEvent.isHidden = true
+                    self.claim.isHidden = true
+                    self.cancelClaim.isHidden = true
+                    self.tableView.isHidden = true
                     
                 }
                 else if (gObjShowEventBean.active == false)
                 {
-                    self.editEvent.hidden = true
-                    self.cancelEvent.hidden = true
-                    self.claim.hidden = true
-                    self.cancelClaim.hidden = true
-                    self.tableView.hidden = true
+                    self.editEvent.isHidden = true
+                    self.cancelEvent.isHidden = true
+                    self.claim.isHidden = true
+                    self.cancelClaim.isHidden = true
+                    self.tableView.isHidden = true
                 }
                 else if(gObjUserBean.id == gObjShowEventBean.user_id){
-                    self.editEvent.hidden = false
-                    self.cancelEvent.hidden = false
-                    self.claim.hidden = true
-                    self.cancelClaim.hidden = true
+                    self.editEvent.isHidden = false
+                    self.cancelEvent.isHidden = false
+                    self.claim.isHidden = true
+                    self.cancelClaim.isHidden = true
                    
                     
                     gCancelEvent = "cancelEvent "
                     gEditEvent = "EditEvent"
-                    cancelEvent.setTitle( "Cancel Event", forState: .Normal)
-                    editEvent.setTitle( "Edit Event", forState: .Normal)
+                    cancelEvent.setTitle( "Cancel Event", for: UIControlState())
+                    editEvent.setTitle( "Edit Event", for: UIControlState())
                     //gEditEvent.frame = CGRectMake
                 }
                 else{
-                    self.editEvent.hidden = true
-                    self.cancelEvent.hidden = true
-                    self.claim.hidden = false
-                    self.cancelClaim.hidden = true
+                    self.editEvent.isHidden = true
+                    self.cancelEvent.isHidden = true
+                    self.claim.isHidden = false
+                    self.cancelClaim.isHidden = true
                 }
 
             }else{
                 
                 if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
-                    self.editEvent.hidden = true
-                    self.cancelEvent.hidden = true
-                    self.claim.hidden = true
-                    self.cancelClaim.hidden = true
-                    self.tableView.hidden = true
+                    self.editEvent.isHidden = true
+                    self.cancelEvent.isHidden = true
+                    self.claim.isHidden = true
+                    self.cancelClaim.isHidden = true
+                    self.tableView.isHidden = true
                     
                 }
 
@@ -286,10 +307,10 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             
             self.labeltext1.text = "Role:"
             self.labelText2.text = "Biography:"
-            self.labelText3.hidden = true
-            self.labelText4.hidden = true
-            self.labelText5.hidden = true
-            self.labelText6.hidden = true
+            self.labelText3.isHidden = true
+            self.labelText4.isHidden = true
+            self.labelText5.isHidden = true
+            self.labelText6.isHidden = true
             
             self.txtTitle.text = gObjSearchUserListBean.name
            // self.txtText1.text = gObjSearchUserListBean.role
@@ -320,34 +341,34 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return claimBeanArray!.count
           
         
     }
     
-    func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+    func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
          //cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         if(gObjUserBean.id == gObjShowEventBean.user_id){
            
             if(claimBeanArray?.count > 0 &&  gSpeakerId == 0 &&
-                (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH)){
+                (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
+                    RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both)){
                 
                 if (gObjShowEventBean.active == true && startDateAndTime.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
                     
                    
                 
-                    self.labelClaims.hidden = false
-                    self.tableView.hidden  = false
+                    self.labelClaims.isHidden = false
+                    self.tableView.isHidden  = false
             
-                    var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![indexPath.row]
+                    var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![(indexPath as NSIndexPath).row]
                       
                     gClaimUserName = claimDisplayBean.user_name
                     gClaimUser_id = claimDisplayBean.user_id
@@ -358,7 +379,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             }
         }
         else{
-            self.tableView.hidden = true
+            self.tableView.isHidden = true
         
         }
         
@@ -366,189 +387,189 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     //function to return dynamic cell
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("ClaimCell", forIndexPath: indexPath) as? UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ClaimCell", for: indexPath) as? UITableViewCell
         
         configureCell(cell!, indexPath: indexPath)
         
         return cell!
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! EventShowControllerCells
+        let currentCell = tableView.cellForRow(at: indexPath) as! EventShowControllerCells
         print("currentCell", currentCell.userId.text!)
         
         gClaimDetailId = Int(currentCell.userId.text!)
         gUserId = Int(currentCell.userId.text!)
         gClaimSpeakerName = String(currentCell.claimUserName.text!)
 
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.CLAIM_LIST_DETAILS)
+            testfacade.doTask(self,action: DelphosAction.claim_LIST_DETAILS)
            
-        self.tableView.hidden = true
-        self.mainLabelJobTitle.hidden = false
-        self.mainLabelBusiness.hidden = false
-        self.labelUserName.hidden = false
-        self.labelBusiness.hidden = false
-        self.labelJobTitle.hidden = false
-        self.editEvent.hidden = true
-        self.cancelEvent.hidden = true
+        self.tableView.isHidden = true
+        self.mainLabelJobTitle.isHidden = false
+        self.mainLabelBusiness.isHidden = false
+        self.labelUserName.isHidden = false
+        self.labelBusiness.isHidden = false
+        self.labelJobTitle.isHidden = false
+        self.editEvent.isHidden = true
+        self.cancelEvent.isHidden = true
        
-        self.claim.hidden = true
-        self.cancelClaim.hidden = true
+        self.claim.isHidden = true
+        self.cancelClaim.isHidden = true
         if(gObjUserBean.id == gObjShowEventBean.user_id){
-            self.btnMessage.hidden = false
-            self.btnAccept.hidden = false
-            self.btnReject.hidden = false
+            self.btnMessage.isHidden = false
+            self.btnAccept.isHidden = false
+            self.btnReject.isHidden = false
         }
         else{
-            self.btnMessage.hidden = true
-            self.btnAccept.hidden = true
-            self.btnReject.hidden = true
+            self.btnMessage.isHidden = true
+            self.btnAccept.isHidden = true
+            self.btnReject.isHidden = true
         
         }
         
     }
 
-    @IBAction func btnSendMessage(sender: AnyObject) {
+    @IBAction func btnSendMessage(_ sender: AnyObject) {
         
-        self.labelUserName.hidden = true
-        self.labelBusiness.hidden = true
-        self.labelJobTitle.hidden = true
-        self.mainLabelJobTitle.hidden = true
-        self.mainLabelBusiness.hidden = true
-        self.btnMessage.hidden = true
-        self.btnAccept.hidden = true
-        self.btnReject.hidden = true
+        self.labelUserName.isHidden = true
+        self.labelBusiness.isHidden = true
+        self.labelJobTitle.isHidden = true
+        self.mainLabelJobTitle.isHidden = true
+        self.mainLabelBusiness.isHidden = true
+        self.btnMessage.isHidden = true
+        self.btnAccept.isHidden = true
+        self.btnReject.isHidden = true
         //showOverlay(self.view)
         tempBackToViewController = gObjBackTocontroller
         gObjBackTocontroller = gObjEventShowController
         gUserProfileMessage = false
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.VIEW_MESSAGE_CONTROLLER)
+        testfacade.doTask(self,action: DelphosAction.view_MESSAGE_CONTROLLER)
        
         
     }
-    @IBAction func btnTouchAccept(sender: AnyObject) {
+    @IBAction func btnTouchAccept(_ sender: AnyObject) {
         
         //showOverlay(self.view)
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.CLAIM_ACCEPT)
+        testfacade.doTask(self,action: DelphosAction.claim_ACCEPT)
          // var claimAcceptDisplayBean: ShowEventBean! = acceptClaimBeanArray![1]
         
         
        
 
-        self.labelUserName.hidden = true
-        self.mainLabelBusiness.hidden = true
-        self.mainLabelJobTitle.hidden = true
-        self.labelBusiness.hidden = true
-        self.labelJobTitle.hidden = true
-        self.tableView.hidden = true
+        self.labelUserName.isHidden = true
+        self.mainLabelBusiness.isHidden = true
+        self.mainLabelJobTitle.isHidden = true
+        self.labelBusiness.isHidden = true
+        self.labelJobTitle.isHidden = true
+        self.tableView.isHidden = true
         
-        self.btnMessage.hidden = true
-        self.btnAccept.hidden = true
-        self.btnReject.hidden = true
-        self.editEvent.hidden = false
-        self.cancelEvent.hidden = false
+        self.btnMessage.isHidden = true
+        self.btnAccept.isHidden = true
+        self.btnReject.isHidden = true
+        self.editEvent.isHidden = false
+        self.cancelEvent.isHidden = false
         
     }
     
     
-    @IBAction func btnTouchReject(sender: AnyObject) {
+    @IBAction func btnTouchReject(_ sender: AnyObject) {
         
       // showOverlay(self.view)
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.CLAIM_REJECT)
+        testfacade.doTask(self,action: DelphosAction.claim_REJECT)
         
         
-        self.labelUserName.hidden = true
-        self.mainLabelBusiness.hidden = true
-        self.mainLabelJobTitle.hidden = true
-        self.labelBusiness.hidden = true
-        self.labelJobTitle.hidden = true
-       self.tableView.hidden = false
+        self.labelUserName.isHidden = true
+        self.mainLabelBusiness.isHidden = true
+        self.mainLabelJobTitle.isHidden = true
+        self.labelBusiness.isHidden = true
+        self.labelJobTitle.isHidden = true
+       self.tableView.isHidden = false
         
-        self.btnMessage.hidden = true
-        self.btnAccept.hidden = true
-        self.btnReject.hidden = true
-        self.editEvent.hidden = false
-        self.cancelEvent.hidden = false
+        self.btnMessage.isHidden = true
+        self.btnAccept.isHidden = true
+        self.btnReject.isHidden = true
+        self.editEvent.isHidden = false
+        self.cancelEvent.isHidden = false
        
     }
     
     
     
-    @IBAction func btnEditEvent(sender: AnyObject) {
+    @IBAction func btnEditEvent(_ sender: AnyObject) {
         showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.EDIT_EVENT_SHOW)
+        testfacade.doTask(self,action: DelphosAction.edit_EVENT_SHOW)
 
         
 
     }
-    @IBAction func btnClaim(sender: AnyObject) {
+    @IBAction func btnClaim(_ sender: AnyObject) {
         
        showOverlay(self.view)
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-         testfacade.doTask(self,action: DelphosAction.CLAIM_EVENT)
+         testfacade.doTask(self,action: DelphosAction.claim_EVENT)
         
        
     }
     
-    @IBAction func btnCancelClaim(sender: AnyObject) {
+    @IBAction func btnCancelClaim(_ sender: AnyObject) {
    
        // showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-         testfacade.doTask(self,action: DelphosAction.CANCEL_CLAIM)
+         testfacade.doTask(self,action: DelphosAction.cancel_CLAIM)
     }
     
     func alertActionOk(){
     
     
     }
-    @IBAction func btnDeleteEvent(sender: AnyObject) {
+    @IBAction func btnDeleteEvent(_ sender: AnyObject) {
         
         
-        var refreshAlert = UIAlertController(title: "Alert", message: "Are you confirm delete the event.", preferredStyle: UIAlertControllerStyle.Alert)
+        var refreshAlert = UIAlertController(title: "Alert", message: "Are you confirm delete the event.", preferredStyle: UIAlertControllerStyle.alert)
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
             print("Ok Action")
             self.showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.CANCEL_EVENT)
+                    testfacade.doTask(self,action: DelphosAction.cancel_EVENT)
         }))
         
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
             print("Cancvel action")
         }))
         
-        presentViewController(refreshAlert, animated: true, completion: nil)
+        present(refreshAlert, animated: true, completion: nil)
 
         
     }
-    @IBAction func btnSpeaker(sender: AnyObject) {
+    @IBAction func btnSpeaker(_ sender: AnyObject) {
          gUserVIewBadgeId  = gSpeakerId
         if(gObjShowEventBean.speaker != "TBA" && gObjShowEventBean.speaker != nil){
             showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
         }
     }
-    @IBAction func btnSchoolProfile(sender: AnyObject) {
+    @IBAction func btnSchoolProfile(_ sender: AnyObject) {
    
      //     ||
         if(gObjShowEventBean.loc_id != 1 ){
@@ -559,12 +580,12 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
        
             //gObjBackTocontroller = gObjEventShowController
         
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.show_SCHOOL_PROFILE)
         }
         else{
-            self.searchBar.hidden = false
+            self.searchBar.isHidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -574,7 +595,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             segmentSearchItems.selectedSegmentIndex = 1
             
             //navigationBar.items = [navigationItem]
-            searchView.hidden = false
+            searchView.isHidden = false
             
             
             gBtnRadioValue = "schools"
@@ -582,14 +603,14 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         }
 
     }
-    @IBAction func btnUserProfile(sender: AnyObject) {
+    @IBAction func btnUserProfile(_ sender: AnyObject) {
    
         gUserVIewBadgeId = gObjShowEventBean.user_id
         //gObjBackTocontroller = gObjEventShowController
         showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+        testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
 
     }
     

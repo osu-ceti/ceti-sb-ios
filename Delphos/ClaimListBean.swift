@@ -30,7 +30,7 @@ class  ClaimListBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         claims    <- map["claims"]
         

@@ -27,7 +27,7 @@ class  SchoolsDisplayBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         schools    <- map["schools"]
         

@@ -32,7 +32,7 @@ class CancelEventBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         message    <- map["message"]
         

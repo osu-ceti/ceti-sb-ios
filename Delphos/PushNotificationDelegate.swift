@@ -12,30 +12,30 @@ class PushNotificationDelegate: BaseDelegate {
 
     func registerDevice(){
         let objDeviceBean = DeviceBean()
-        objDeviceBean.device_name = UIDevice.currentDevice().name
-        logger.log(LoggingLevel.INFO, message: "Device Name =" + objDeviceBean.device_name!)
+        objDeviceBean.device_name = UIDevice.current.name
+        logger.log(LoggingLevel.info, message: "Device Name =" + objDeviceBean.device_name!)
         if(gStrDeviceToken != nil){
             objDeviceBean.token = gStrDeviceToken
             objDeviceBean.device_type = "ios"
         
             doPostAPIs.doRegisterDevice(objDeviceBean, callBack:{(result: AnyObject,statusCode: Int)   in
                 if(statusCode == SUCCESS) {
-                    logger.log(LoggingLevel.INFO, message: "Device Successfully registered")
+                    logger.log(LoggingLevel.info, message: "Device Successfully registered")
                 
                 }
                 else{
-                    logger.log(LoggingLevel.INFO, message: "Device registration failed")
+                    logger.log(LoggingLevel.info, message: "Device registration failed")
                 }
             })
         }
         
     }
     
-    func handleRemoteNotification(objCurrentContoller: UIViewController) {
+    func handleRemoteNotification(_ objCurrentContoller: UIViewController) {
         
         let pushNotificationBean = Mapper<PushNotificationBean>().map(gObjNotificationInfo)
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
            // var titleCount = String(pushNotificationBean!.data?.count)
             

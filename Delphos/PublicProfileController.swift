@@ -61,7 +61,7 @@ class PublicProfileController:  NavController{
     @IBOutlet var requiredField: UILabel!
     @IBOutlet var changeLabelName: UILabel!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         rootViewController = self
         //Adding Navbar
@@ -82,31 +82,31 @@ class PublicProfileController:  NavController{
         super.viewDidLoad()
         
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        let bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
-        self.requiredField.hidden = true
-        hideLabelAccountSetting.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelPublicProfile.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelName.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelGrades.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelSchool.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelJobTitle.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelBusiness.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelBio.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelRole.font = UIFont.boldSystemFontOfSize(15)
-        hideLabelEmail.font = UIFont.boldSystemFontOfSize(15)
+        self.requiredField.isHidden = true
+        hideLabelAccountSetting.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelPublicProfile.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelName.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelGrades.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelSchool.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelJobTitle.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelBusiness.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelBio.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelRole.font = UIFont.boldSystemFont(ofSize: 15)
+        hideLabelEmail.font = UIFont.boldSystemFont(ofSize: 15)
         
-        self.changeLabelName.hidden = true
-        self.txtProfileGrades.hidden = true
-        self.txtProfileBiography.hidden = true
-        self.txtProfileJobTItle.hidden = true
-        self.txtProfileBusiness.hidden = true
+        self.changeLabelName.isHidden = true
+        self.txtProfileGrades.isHidden = true
+        self.txtProfileBiography.isHidden = true
+        self.txtProfileJobTItle.isHidden = true
+        self.txtProfileBusiness.isHidden = true
         
-        self.btnSaveProfile.hidden = true
-        self.btnFindMySchool.hidden = true
+        self.btnSaveProfile.isHidden = true
+        self.btnFindMySchool.isHidden = true
         
-        self.btnEditProfile.hidden = false
-        self.btnEditAccount.hidden = false
+        self.btnEditProfile.isHidden = false
+        self.btnEditAccount.isHidden = false
         
 
         
@@ -114,7 +114,7 @@ class PublicProfileController:  NavController{
         if (userProfileBean != nil){
             
          self.labelProfileName.text = userProfileBean.name
-         btnProfileSchoolLink.setTitle(userProfileBean.school_name, forState: .Normal)
+         btnProfileSchoolLink.setTitle(userProfileBean.school_name, for: UIControlState())
          
             
          self.labelProfileGrades.text = userProfileBean.grades
@@ -129,11 +129,11 @@ class PublicProfileController:  NavController{
             else if(gObjUserBean.role == 2){
                  self.labelProfileRole.text = "SPEAKER"
                 
-                self.btnProfileSchoolLink.hidden = true
+                self.btnProfileSchoolLink.isHidden = true
                 
-                 self.changeLabelName.hidden = false
-                self.labelProfileName.hidden = true
-                self.hideLabelName.hidden = true
+                 self.changeLabelName.isHidden = false
+                self.labelProfileName.isHidden = true
+                self.hideLabelName.isHidden = true
                 
                 self.hideLabelSchool.text = "Name"
                 self.changeLabelName.text = userProfileBean.name
@@ -146,10 +146,10 @@ class PublicProfileController:  NavController{
             
             if (gObjUserBean.school_id == gObjMakeMySchoolListBean.school_id)
             {
-                btnProfileSchoolLink.setTitle(gObjUserBean.school_name, forState: .Normal)
+                btnProfileSchoolLink.setTitle(gObjUserBean.school_name, for: UIControlState())
             }
             else{
-                btnProfileSchoolLink.setTitle(gObjUserBean.school_name, forState: .Normal)
+                btnProfileSchoolLink.setTitle(gObjUserBean.school_name, for: UIControlState())
             }
            // btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
             self.labelProfileName.text = gObjMakeMySchoolListBean.name
@@ -166,21 +166,21 @@ class PublicProfileController:  NavController{
         
         
     }
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.y + 300)
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.btnEditAccount.frame.origin.y + 300)
         //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
-        scrollView.scrollEnabled = true
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
-    @IBAction func btnEditProfileClick(sender: AnyObject) {
+    @IBAction func btnEditProfileClick(_ sender: AnyObject) {
         
-        self.txtProfileGrades.hidden    = false
-        self.txtProfileBiography.hidden = false
-        self.txtProfileJobTItle.hidden  = false
-        self.txtProfileBusiness.hidden  = false
+        self.txtProfileGrades.isHidden    = false
+        self.txtProfileBiography.isHidden = false
+        self.txtProfileJobTItle.isHidden  = false
+        self.txtProfileBusiness.isHidden  = false
         if (userProfileBean != nil){
             self.txtProfileId.text = String(userProfileBean.id)
             self.txtProfileGrades.text = userProfileBean.grades
@@ -196,85 +196,85 @@ class PublicProfileController:  NavController{
             self.txtProfileJobTItle.text = gObjMakeMySchoolListBean.job_title
             self.txtProfileBusiness.text = gObjMakeMySchoolListBean.business
         }
-        self.labelProfileGrades.hidden = true
-        self.labelProfileBiography.hidden = true
-        self.labelProfileJobTitle.hidden = true
-        self.labelProfileBusiness.hidden = true
+        self.labelProfileGrades.isHidden = true
+        self.labelProfileBiography.isHidden = true
+        self.labelProfileJobTitle.isHidden = true
+        self.labelProfileBusiness.isHidden = true
         
-        self.btnEditProfile.hidden = true
-        self.btnEditAccount.hidden = true
+        self.btnEditProfile.isHidden = true
+        self.btnEditAccount.isHidden = true
         
         
-        self.btnSaveProfile.hidden = false
-        self.btnFindMySchool.hidden = false
+        self.btnSaveProfile.isHidden = false
+        self.btnFindMySchool.isHidden = false
       
 
     }
     
     
-    @IBAction func btnSaveProfileClick(sender: AnyObject) {
+    @IBAction func btnSaveProfileClick(_ sender: AnyObject) {
         
         
         
-        var trimmedGrades = txtProfileGrades.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var trimmedGrades = txtProfileGrades.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        var trimmedBio = txtProfileBiography.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        var trimmedJobTitle = txtProfileJobTItle.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        var trimmedBusiness = txtProfileBusiness.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var trimmedBio = txtProfileBiography.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        var trimmedJobTitle = txtProfileJobTItle.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        var trimmedBusiness = txtProfileBusiness.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if(trimmedGrades == ""){
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Grades"
             
         }else if(trimmedBio == ""){
-                        self.requiredField.hidden = false
+                        self.requiredField.isHidden = false
                         self.requiredField.text = "Required Biography"
 
         
         }
         else if(trimmedJobTitle == ""){
-                        self.requiredField.hidden = false
+                        self.requiredField.isHidden = false
                         self.requiredField.text = "Required Job TItle"
            
         }
         else if(trimmedBusiness == ""){
-                        self.requiredField.hidden = false
+                        self.requiredField.isHidden = false
                         self.requiredField.text = "Required Business"
             
         }else{
-            self.requiredField.hidden = true
+            self.requiredField.isHidden = true
             txtProfileGrades.text = trimmedGrades
             txtProfileBiography.text = trimmedBio
             txtProfileJobTItle.text = trimmedJobTitle
             txtProfileBusiness.text = trimmedBusiness
           
-            self.txtProfileGrades.hidden    = true
-            self.txtProfileBiography.hidden = true
-            self.txtProfileJobTItle.hidden  = true
-            self.txtProfileBusiness.hidden  = true
+            self.txtProfileGrades.isHidden    = true
+            self.txtProfileBiography.isHidden = true
+            self.txtProfileJobTItle.isHidden  = true
+            self.txtProfileBusiness.isHidden  = true
             
-            self.labelProfileGrades.hidden = false
-            self.labelProfileBiography.hidden = false
-            self.labelProfileJobTitle.hidden = false
-            self.labelProfileBusiness.hidden = false
+            self.labelProfileGrades.isHidden = false
+            self.labelProfileBiography.isHidden = false
+            self.labelProfileJobTitle.isHidden = false
+            self.labelProfileBusiness.isHidden = false
             
-            self.btnEditProfile.hidden = false
-            self.btnEditAccount.hidden = false
+            self.btnEditProfile.isHidden = false
+            self.btnEditAccount.isHidden = false
             
             
-            self.btnSaveProfile.hidden = true
-            self.btnFindMySchool.hidden = true
+            self.btnSaveProfile.isHidden = true
+            self.btnFindMySchool.isHidden = true
         
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.EDIT_USER_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.edit_USER_PROFILE)
        }
     }
     
     
-     func btnFIndMySchoolClick(sender: AnyObject) {
+     func btnFIndMySchoolClick(_ sender: AnyObject) {
         
-            self.searchBar.hidden = false
+            self.searchBar.isHidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -283,7 +283,7 @@ class PublicProfileController:  NavController{
             segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
             segmentSearchItems.selectedSegmentIndex = 1
             //navigationBar.items = [navigationItem]
-            searchView.hidden = false
+            searchView.isHidden = false
            
             gBtnRadioValue = "schools"
         
@@ -296,16 +296,16 @@ class PublicProfileController:  NavController{
         // Initialization code
 }
     
-    @IBAction func btnAccountEditClick(sender: AnyObject) {
+    @IBAction func btnAccountEditClick(_ sender: AnyObject) {
     
         
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.VIEW_ACCOUNT_EDIT)
+        testfacade.doTask(self,action: DelphosAction.view_ACCOUNT_EDIT)
     }
     
-     func btnProfileSchoolClick(sender: AnyObject) {
+     func btnProfileSchoolClick(_ sender: AnyObject) {
         if(gObjUserBean.school_id != 1){
            
            // gSchoolId = userProfileBean.school_id
@@ -313,12 +313,12 @@ class PublicProfileController:  NavController{
             gSchoolId =   gObjUserBean.school_id
             
             self.showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.show_SCHOOL_PROFILE)
         }
         else{
-            self.searchBar.hidden = false
+            self.searchBar.isHidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -327,7 +327,7 @@ class PublicProfileController:  NavController{
             
             
             //navigationBar.items = [navigationItem]
-            searchView.hidden = false
+            searchView.isHidden = false
             segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
             segmentSearchItems.selectedSegmentIndex = 1
 

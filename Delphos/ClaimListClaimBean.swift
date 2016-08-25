@@ -42,7 +42,7 @@ class  ClaimListClaimBeanBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         business    <- map["business"]
         

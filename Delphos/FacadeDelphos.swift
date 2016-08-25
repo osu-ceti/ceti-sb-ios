@@ -24,7 +24,7 @@ class FacadeDelphos: NSObject {
     
    
     
-    private let delegateDelphos: DelegateController
+    fileprivate let delegateDelphos: DelegateController
     
     /**
      * Constructor to initialize Delegate class
@@ -36,7 +36,7 @@ class FacadeDelphos: NSObject {
     /**
      * Relinquish control to Delegate class. This Facade class is added to support internationalization
      */
-    func doTask(objCurrentController: BaseController, action enmAction: DelphosAction)
+    func doTask(_ objCurrentController: BaseController, action enmAction: DelphosAction)
     {
         //call to delegate control
         delegateDelphos.delegateControl(objCurrentController,action: enmAction)

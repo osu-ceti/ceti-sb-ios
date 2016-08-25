@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class RegisterController: NavController, UITextFieldDelegate {
     
@@ -21,7 +41,7 @@ class RegisterController: NavController, UITextFieldDelegate {
     @IBOutlet var txtConformPassword: UITextField!
     
 
-    let checkCharacter = NSCharacterSet.letterCharacterSet()
+    let checkCharacter = CharacterSet.letters
    
     
     @IBOutlet var requiredField: UILabel!
@@ -38,7 +58,7 @@ class RegisterController: NavController, UITextFieldDelegate {
     
 
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //Adding SideMenu
@@ -53,18 +73,18 @@ class RegisterController: NavController, UITextFieldDelegate {
            backButtonNav = "loginId"
         setNavBar(self.view.frame.size.width)
         //searchBar.delegate = self
-        let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginId") as! LoginController
+        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginId") as! LoginController
        self.backToController = UINavigationController(rootViewController: loginController)
         self.shouldClose = true
         //backToView = "Back"
     }
     
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnRegister.frame.origin.y + 700)
-        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.btnRegister.frame.origin.y + 700)
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
     override func didReceiveMemoryWarning() {
@@ -76,7 +96,7 @@ class RegisterController: NavController, UITextFieldDelegate {
         rootViewController = self
         // Do any additional setup after loading the view, typically from a nib.
         gBtnRegisterRadio = ""
-        self.requiredField.hidden = true
+        self.requiredField.isHidden = true
 
         
         self.segmentUserRole.selectedSegmentIndex = UISegmentedControlNoSegment
@@ -90,60 +110,60 @@ class RegisterController: NavController, UITextFieldDelegate {
         view.backgroundColor = color
         
   
-        var bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, txtName.frame.height - 1, txtName.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.blackColor().CGColor
-        txtName.borderStyle = UITextBorderStyle.None
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: txtName.frame.height - 1, width: txtName.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        txtName.borderStyle = UITextBorderStyle.none
         txtName.layer.addSublayer(bottomLine)
         
-        var textboxLine = CALayer()
-        textboxLine.frame = CGRectMake(0.0, txtEmail.frame.height - 1, txtEmail.frame.width, 1.0)
-        textboxLine.backgroundColor = UIColor.blackColor().CGColor
-        txtEmail.borderStyle = UITextBorderStyle.None
+        let textboxLine = CALayer()
+        textboxLine.frame = CGRect(x: 0.0, y: txtEmail.frame.height - 1, width: txtEmail.frame.width, height: 1.0)
+        textboxLine.backgroundColor = UIColor.black.cgColor
+        txtEmail.borderStyle = UITextBorderStyle.none
         txtEmail.layer.addSublayer(textboxLine)
        
-        var PasswordLine = CALayer()
-        PasswordLine.frame = CGRectMake(0.0, txtPassword.frame.height - 1, txtPassword.frame.width, 1.0)
-        PasswordLine.backgroundColor = UIColor.blackColor().CGColor
-        txtPassword.borderStyle = UITextBorderStyle.None
+        let PasswordLine = CALayer()
+        PasswordLine.frame = CGRect(x: 0.0, y: txtPassword.frame.height - 1, width: txtPassword.frame.width, height: 1.0)
+        PasswordLine.backgroundColor = UIColor.black.cgColor
+        txtPassword.borderStyle = UITextBorderStyle.none
         txtPassword.layer.addSublayer(PasswordLine)
        
-        var ConformPasswordLine = CALayer()
-        ConformPasswordLine.frame = CGRectMake(0.0, txtConformPassword.frame.height - 1, txtConformPassword.frame.width, 1.0)
-        ConformPasswordLine.backgroundColor = UIColor.blackColor().CGColor
-        txtConformPassword.borderStyle = UITextBorderStyle.None
+        let ConformPasswordLine = CALayer()
+        ConformPasswordLine.frame = CGRect(x: 0.0, y: txtConformPassword.frame.height - 1, width: txtConformPassword.frame.width, height: 1.0)
+        ConformPasswordLine.backgroundColor = UIColor.black.cgColor
+        txtConformPassword.borderStyle = UITextBorderStyle.none
         txtConformPassword.layer.addSublayer(ConformPasswordLine)
 
     }
 
 
     
-    @IBAction func touchRequiredHideName(sender: AnyObject) {
-         self.requiredField.hidden = true
+    @IBAction func touchRequiredHideName(_ sender: AnyObject) {
+         self.requiredField.isHidden = true
         
     }
-    @IBAction func touchrequiredHideEmail(sender: AnyObject) {
-        self.requiredField.hidden = true
+    @IBAction func touchrequiredHideEmail(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
-    @IBAction func touchRequiredHidePassword(sender: AnyObject) {
-        self.requiredField.hidden = true
+    @IBAction func touchRequiredHidePassword(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
-    @IBAction func touchRequiredHideConPwd(sender: AnyObject) {
-        self.requiredField.hidden = true
+    @IBAction func touchRequiredHideConPwd(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
-    func isValidEmail(testStr:String) -> Bool {
+    func isValidEmail(_ testStr:String) -> Bool {
         // println("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        print(emailTest.evaluateWithObject(testStr))
+        print(emailTest.evaluate(with: testStr))
        
-        return emailTest.evaluateWithObject(testStr)
+        return emailTest.evaluate(with: testStr)
        
         
     }
 
-    @IBAction func touchUserRole(sender: AnyObject) {
+    @IBAction func touchUserRole(_ sender: AnyObject) {
         
         if(segmentUserRole.selectedSegmentIndex == 0){
             gBtnRegisterRadio = "Teacher"
@@ -157,22 +177,22 @@ class RegisterController: NavController, UITextFieldDelegate {
 
     }
 
-    @IBAction func btnRegister(sender: UIButton) {
+    @IBAction func btnRegister(_ sender: UIButton) {
         
        
         
 
         
-        var trimmedName = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        var trimmedName = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines
         )
     
         if(trimmedName == ""){
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
            self.requiredField.text = "Required Name"
             
         }
         else if (txtEmail.text == "" ){
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Email"
         
         }
@@ -181,7 +201,7 @@ class RegisterController: NavController, UITextFieldDelegate {
             var emailvalid = isValidEmail(txtEmail.text!)
             //print(emailvalid)
             if(emailvalid == false ){
-                self.requiredField.hidden = false
+                self.requiredField.isHidden = false
                 self.requiredField.text = "Required Vaild Email"
               
             }
@@ -191,37 +211,37 @@ class RegisterController: NavController, UITextFieldDelegate {
         
         if (txtPassword.text! == "")
         {
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Password "
         }
                 
         else if (txtPassword.text?.characters.count <= 7)
         {
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Password Must have 8 character"
         }
         else if (txtConformPassword.text == "")
         {
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required ConfirmPassword"
         }
         else if (txtConformPassword.text != txtPassword.text!)
         {
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "ConfirmPassword does not match"
         }
         else if (gBtnRegisterRadio == "")
         {
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Role"
         }
         else {
             
             txtName.text = trimmedName
             showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.REGISTER)
+            testfacade.doTask(self,action: DelphosAction.register)
         }
             }
         }

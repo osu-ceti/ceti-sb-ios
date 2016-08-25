@@ -21,7 +21,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     
     @IBOutlet weak var tableVIew: UITableView!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -46,12 +46,12 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
 //        navigationBar.delegate = self;
 //        backToView = "HomeID"
 //       
-        self.eventFound.hidden = true
+        self.eventFound.isHidden = true
         self.tableVIew.dataSource = self
         tableVIew.delegate = self
         self.tableVIew.tableFooterView = UIView()
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        let bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.tableVIew.backgroundColor = bgColor
        
@@ -62,12 +62,12 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         // Dispose of any resources that can be recreated.
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         if(eventBeanArray.count > 0) {
             return eventBeanArray.count
@@ -80,11 +80,11 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         return 1
     }
     
-    func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+    func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
        
         if(eventBeanArray.count > 0) {
            
-            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+            let eventDisplayBean: EventBean! = eventBeanArray[(indexPath as NSIndexPath).row]
             //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(eventDisplayBean.event_title)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(eventDisplayBean.id)
@@ -92,14 +92,14 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
                   }
         else if(usersBeanArray.count > 0) {
             
-            var usersListBean: userListBean! = usersBeanArray[indexPath.row]
+            let usersListBean: userListBean! = usersBeanArray[(indexPath as NSIndexPath).row]
             
             (cell as! SearchControllerCell).txtTitle!.text = String(usersListBean.name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(usersListBean.id)
             (cell as! SearchControllerCell).startdate!.text = usersListBean.association
         }
         else if(schoolsBeanArray.count > 0){
-            var schoolsDisplayBean: SchoolListBean! = schoolsBeanArray[indexPath.row]
+            let schoolsDisplayBean: SchoolListBean! = schoolsBeanArray[(indexPath as NSIndexPath).row]
             //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(schoolsDisplayBean.school_name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(schoolsDisplayBean.id)
@@ -110,18 +110,18 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         else{
              cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
            if(gBtnRadioValue == "events") {
-             self.eventFound.hidden = false
-            self.tableVIew.hidden = true
+             self.eventFound.isHidden = false
+            self.tableVIew.isHidden = true
             self.eventFound.text = "No Events Found"
             }
            else if(gBtnRadioValue == "users") {
-             self.eventFound.hidden = false
-             self.tableVIew.hidden = true
+             self.eventFound.isHidden = false
+             self.tableVIew.isHidden = true
              self.eventFound.text = "No Users Found"
             }
            else{
-            self.eventFound.hidden = false
-             self.tableVIew.hidden = true
+            self.eventFound.isHidden = false
+             self.tableVIew.isHidden = true
             self.eventFound.text = "No Schools Found"
             }
             //(cell as! SearchControllerCell).txtTitle.hidden = true
@@ -132,8 +132,8 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     }
     
     //function to return dynamic cell
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("searchId", forIndexPath: indexPath) as? UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchId", for: indexPath) as? UITableViewCell
         
         configureCell(cell!, indexPath: indexPath)
         
@@ -141,19 +141,19 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     }
     
     //function to respond to row selection
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          showOverlay(self.view)
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchControllerCell
+        let currentCell = tableView.cellForRow(at: indexPath) as! SearchControllerCell
         print("currentCell", currentCell.txtIdHidden.text!)
         
         gSearchValue = Int(currentCell.txtIdHidden.text!)
              
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_SEARCH)
+            testfacade.doTask(self,action: DelphosAction.show_SEARCH)
         })
      
     }

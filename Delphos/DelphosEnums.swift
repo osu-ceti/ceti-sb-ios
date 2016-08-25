@@ -10,32 +10,32 @@ import Foundation
 
 //Enum for HomController Event Listing type
 enum EventListingType: UInt{
-    case ALL
-    case APPROVED
-    case CLAIMS
-    case CONFIRMED    
+    case all
+    case approved
+    case claims
+    case confirmed    
 }
 
 enum RoleType: UInt{
-    case TEACHER = 1
-    case SPEAKER = 2
-    case BOTH = 3
+    case teacher = 1
+    case speaker = 2
+    case both = 3
 
 
 }
 
 enum NOTIFICATION_TYPE:Int{
 
-    case CLAIM              = 0
-    case CONFIRM_SPEAKER    = 1
-    case EVENT_UPDATE       = 2
-    case MESSAGE            = 3
-    case AWARD_BADGE        = 4
-    case NEW_BADGE          = 5
-    case CANCEL             = 6
-    case REJECT_CLAIM       = 7
-    case CANCEL_CLAIM       = 8
-    case CANCEL_SPEAKER     = 9
+    case claim              = 0
+    case confirm_SPEAKER    = 1
+    case event_UPDATE       = 2
+    case message            = 3
+    case award_BADGE        = 4
+    case new_BADGE          = 5
+    case cancel             = 6
+    case reject_CLAIM       = 7
+    case cancel_CLAIM       = 8
+    case cancel_SPEAKER     = 9
 
 }
 

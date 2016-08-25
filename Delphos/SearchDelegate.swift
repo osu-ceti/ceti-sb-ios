@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchDelegate: BaseDelegate {
-    func  searchEvent(objCurrentController: UIViewController) {
+    func  searchEvent(_ objCurrentController: UIViewController) {
         
 //        print(objCurrentController)
         let objEventDisplayController = objCurrentController as! NavController
@@ -19,7 +19,7 @@ class SearchDelegate: BaseDelegate {
         doGetAPIs.searchEvent(gBtnRadioValue!, strSearchEvent: strSearchText!, callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objEventDisplayController)
             if(statusCode == SUCCESS) {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     
                     gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
@@ -57,7 +57,7 @@ class SearchDelegate: BaseDelegate {
         
     }
     
-    func showSearch(objCurrentContoller: BaseController) {
+    func showSearch(_ objCurrentContoller: BaseController) {
         
         var strShowSearch: String = String(gSearchValue)
         
@@ -66,10 +66,10 @@ class SearchDelegate: BaseDelegate {
             if(statusCode == SUCCESS) {
                 
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     //                    let goToEventShowController = objCurrentContoller.storyboard?.instantiateViewControllerWithIdentifier("eventShowID") as! EventShowController
                     (objCurrentContoller as! SearchController).activityIndicator.stopAnimating()
-                    (objCurrentContoller as! SearchController).overlayView.hidden = true
+                    (objCurrentContoller as! SearchController).overlayView.isHidden = true
                     
                     
                     gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController

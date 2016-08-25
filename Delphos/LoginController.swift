@@ -32,7 +32,7 @@ class LoginController: BaseController {
   
 
    //var navigationBar: UINavigationBar = UINavigationBar()
-    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+    var searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
    //var searchButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
     var searchButtonItem = UIBarButtonItem()
@@ -55,23 +55,23 @@ class LoginController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
          rootViewController = self
-         self.requiredError.hidden = true
+         self.requiredError.isHidden = true
         
         // isResetPassword = false
         
         
-        if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
-            NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey) != nil){
+        if (UserDefaults.standard.string(forKey: gStrUserStorageKey) != nil &&
+            UserDefaults.standard.string(forKey: gStrUserStoragePassKey) != nil){
              //self.showOverlay(self.view)
         
-             userNameData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey)!
-             userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey)!
+             userNameData = UserDefaults.standard.string(forKey: gStrUserStorageKey)!
+             userPasswordData = UserDefaults.standard.string(forKey: gStrUserStoragePassKey)!
        
 
             
-             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+             let appDelegate = UIApplication.shared.delegate as! AppDelegate
              let testfacade = appDelegate.getObjFacade()
-             testfacade.doTask(self,action: DelphosAction.LOGIN)
+             testfacade.doTask(self,action: DelphosAction.login)
             }
         
      
@@ -86,26 +86,26 @@ class LoginController: BaseController {
         
         view.backgroundColor = color
         
-        self.btnResetPassword.hidden = true
+        self.btnResetPassword.isHidden = true
 
 
 
-        switchRememberme.transform = CGAffineTransformMakeScale(0.50, 0.50);
+        switchRememberme.transform = CGAffineTransform(scaleX: 0.50, y: 0.50);
        
         
         //Bottom border
         
         let bottomLine = CALayer()
         
-        bottomLine.frame = CGRectMake(0.0, userTxt.frame.height - 1, userTxt.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.blackColor().CGColor
-        userTxt.borderStyle = UITextBorderStyle.None
+        bottomLine.frame = CGRect(x: 0.0, y: userTxt.frame.height - 1, width: userTxt.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        userTxt.borderStyle = UITextBorderStyle.none
         userTxt.layer.addSublayer(bottomLine)
         
         let textboxLine = CALayer()
-        textboxLine.frame = CGRectMake(0.0, passwordTxt.frame.height - 1, passwordTxt.frame.width, 1.0)
-        textboxLine.backgroundColor = UIColor.blackColor().CGColor
-        passwordTxt.borderStyle = UITextBorderStyle.None
+        textboxLine.frame = CGRect(x: 0.0, y: passwordTxt.frame.height - 1, width: passwordTxt.frame.width, height: 1.0)
+        textboxLine.backgroundColor = UIColor.black.cgColor
+        passwordTxt.borderStyle = UITextBorderStyle.none
         passwordTxt.layer.addSublayer(textboxLine)
         
         rootViewController = self            
@@ -114,17 +114,17 @@ class LoginController: BaseController {
 
     }
 
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.passwordTxt.frame.origin.y + 500)
-        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.passwordTxt.frame.origin.y + 500)
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        // self.setNavigationBarItem()
     }
@@ -135,22 +135,22 @@ class LoginController: BaseController {
     }
    
     
-    @IBAction func touchEvent(sender: UITextField) {
-        self.requiredError.hidden = true
+    @IBAction func touchEvent(_ sender: UITextField) {
+        self.requiredError.isHidden = true
     }
     
     
-    @IBAction func touchRequiredHidePassword(sender: AnyObject) {
-         self.requiredError.hidden = true
+    @IBAction func touchRequiredHidePassword(_ sender: AnyObject) {
+         self.requiredError.isHidden = true
     }
-    @IBAction func btnSignIn(sender: UIButton) {
+    @IBAction func btnSignIn(_ sender: UIButton) {
         
-        let trimmedName = userTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmedName = userTxt.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        let trimmedPassword = passwordTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmedPassword = passwordTxt.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if (trimmedName == ""){
-            self.requiredError.hidden = false
+            self.requiredError.isHidden = false
             self.requiredError.text = "Required Email"
            //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
@@ -159,14 +159,14 @@ class LoginController: BaseController {
             var emailvalid = isValidEmail(trimmedName)
             //print(emailvalid)
             if(emailvalid == false ){
-                self.requiredError.hidden = false
+                self.requiredError.isHidden = false
                 self.requiredError.text =  "Required Vaild Email"
                 
             }
         
         else if (trimmedPassword == "")
         {
-            self.requiredError.hidden = false
+            self.requiredError.isHidden = false
             self.requiredError.text = "Required Password"
         }
        
@@ -175,14 +175,14 @@ class LoginController: BaseController {
             userTxt.text = trimmedName
             passwordTxt.text = trimmedPassword
         //self.showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.LOGIN)
+        testfacade.doTask(self,action: DelphosAction.login)
         }
         }
     }
 
-    @IBAction func btnForgetPasswordClick(sender: AnyObject) {
+    @IBAction func btnForgetPasswordClick(_ sender: AnyObject) {
         
         isResetPassword = true
         
@@ -192,44 +192,44 @@ class LoginController: BaseController {
             
             gObjBackTocontroller = gObjLoginController
             
-            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backToSomeController(_:)))
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.backToSomeController(_:)))
             
             navigationItem.leftBarButtonItem = backButton
         }
         
-        self.btnResetPassword.hidden = false
-        self.passwordTxt.hidden = true
-        self.switchRememberme.hidden = true
-        self.btnRegister.hidden = true
-        self.btnSignIn.hidden = true
-        self.labelRememberMe.hidden = true
-        self.btnForgetPassword.hidden = true
+        self.btnResetPassword.isHidden = false
+        self.passwordTxt.isHidden = true
+        self.switchRememberme.isHidden = true
+        self.btnRegister.isHidden = true
+        self.btnSignIn.isHidden = true
+        self.labelRememberMe.isHidden = true
+        self.btnForgetPassword.isHidden = true
     }
-    func backToSomeController(sender: UIBarButtonItem){
+    func backToSomeController(_ sender: UIBarButtonItem){
        
         
         self.slideMenuController()?.changeMainViewController(gObjBackTocontroller, close: true)
         
     }
    
-    func isValidEmail(testStr:String) -> Bool {
+    func isValidEmail(_ testStr:String) -> Bool {
         // println("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        print(emailTest.evaluateWithObject(testStr))
+        print(emailTest.evaluate(with: testStr))
         
-        return emailTest.evaluateWithObject(testStr)
+        return emailTest.evaluate(with: testStr)
         
         
     }
 
-    @IBAction func btnResetPasswordClick(sender: AnyObject) {
+    @IBAction func btnResetPasswordClick(_ sender: AnyObject) {
         
         
-        let trimmedEmail = userTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmedEmail = userTxt.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if (trimmedEmail == ""){
-            self.requiredError.hidden = false
+            self.requiredError.isHidden = false
             self.requiredError.text = "Required Email"
             //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
@@ -239,7 +239,7 @@ class LoginController: BaseController {
             var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
             if(emailvalid == false ){
-                self.requiredError.hidden = false
+                self.requiredError.isHidden = false
                 self.requiredError.text =  "Required Vaild Email"
                 
             }
@@ -248,17 +248,17 @@ class LoginController: BaseController {
                 userTxt.text = trimmedEmail
                 
             //self.showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
+            testfacade.doTask(self,action: DelphosAction.reset_FORGET_PASSWORD)
         }
      }
     }
 
    
-    @IBAction func btnRegister(sender: UIButton) {
+    @IBAction func btnRegister(_ sender: UIButton) {
         
-        var registerController = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterId") as! RegisterController
+        var registerController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterId") as! RegisterController
         
         let registerControllerNav = UINavigationController(rootViewController: registerController)
         

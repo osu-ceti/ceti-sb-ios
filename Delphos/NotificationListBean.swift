@@ -43,7 +43,7 @@ class NotificationListBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
        
         act_user_id         <- map["act_user_id"]

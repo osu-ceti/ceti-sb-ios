@@ -31,7 +31,7 @@ class EditUserProfileBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         state    <- map["state"]
         

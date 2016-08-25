@@ -28,7 +28,7 @@ class PushDataBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         badge_url       <- map["badge_url"]
         count           <- map["count"]
         event_id        <- map["event_id"]

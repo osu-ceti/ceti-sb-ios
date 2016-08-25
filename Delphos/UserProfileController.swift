@@ -63,7 +63,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var tempBackToViewController:UIViewController!
     var imagesCount:Int!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        // self.showOverlay(self.view)
         //rootViewController = self
@@ -92,7 +92,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.isBackEnabled = false
         imagesCount = userProfileBadgesArray.count
         
-        self.labelChangeJobTitle.hidden = true
+        self.labelChangeJobTitle.isHidden = true
         
         
         
@@ -101,11 +101,11 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         // navigationBar.delegate = self;
         //backToView = "HomeID"
         
-        self.collectionView.hidden = true
+        self.collectionView.isHidden = true
         gUserProfileMessage = false
         gSchoolNameSelect = false
         
-        self.labelNoBadges.hidden = true
+        self.labelNoBadges.isHidden = true
         
         self.tableView.dataSource = self
         tableView.delegate = self
@@ -114,20 +114,20 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         collectionView.backgroundColor = bgColor
         collectionView.dataSource = self
         
-        self.labelNoEventFound.hidden = true
+        self.labelNoEventFound.isHidden = true
         self.tableView.backgroundColor = bgColor
         self.tableView.dataSource = self
         tableView.delegate = self
         
         self.tableView.tableFooterView = UIView()
         
-        txtUserName.font =  UIFont.boldSystemFontOfSize(15)
-        labelSchool.font = UIFont.boldSystemFontOfSize(15)
-        labelGrades.font = UIFont.boldSystemFontOfSize(15)
-        labelJobTitle.font = UIFont.boldSystemFontOfSize(15)
-        labelBusiness.font = UIFont.boldSystemFontOfSize(15)
-        labelRole.font = UIFont.boldSystemFontOfSize(15)
-        labelBiography.font = UIFont.boldSystemFontOfSize(15)
+        txtUserName.font =  UIFont.boldSystemFont(ofSize: 15)
+        labelSchool.font = UIFont.boldSystemFont(ofSize: 15)
+        labelGrades.font = UIFont.boldSystemFont(ofSize: 15)
+        labelJobTitle.font = UIFont.boldSystemFont(ofSize: 15)
+        labelBusiness.font = UIFont.boldSystemFont(ofSize: 15)
+        labelRole.font = UIFont.boldSystemFont(ofSize: 15)
+        labelBiography.font = UIFont.boldSystemFont(ofSize: 15)
         
         self.labelSchool.text   = "School:"
         self.labelGrades.text   = "Grades:"
@@ -137,7 +137,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.labelBiography.text = "Biography:"
         
         self.txtUserName.text     = gObjSearchUserListBean.name
-        btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, forState: .Normal)
+        btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, for: UIControlState())
         
         self.txtGrades.text       = gObjSearchUserListBean.grades
         self.txtJobTitle.text     = gObjSearchUserListBean.job_title
@@ -149,12 +149,12 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
        
         if(gObjUserBean.id == gObjSearchUserListBean.id){
             
-            self.btnContactUser.hidden = true
+            self.btnContactUser.isHidden = true
             
         }
         else{
             
-            self.btnContactUser.hidden = false
+            self.btnContactUser.isHidden = false
         }
         
         if(gObjSearchUserListBean.role == "Teacher"){
@@ -165,14 +165,14 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelGrades.text   = "Grades:"
             self.labelJobTitle.text = "Role:"
             self.labelBusiness.text = "Biography:"
-            self.labelRole.hidden     = true
-            self.labelBiography.hidden = true
+            self.labelRole.isHidden     = true
+            self.labelBiography.isHidden = true
             
             
             self.txtJobTitle.text       = gObjSearchUserListBean.role
             self.txtBusiness!.text      = gObjSearchUserListBean.biography
-            self.txtRole!.hidden        = true
-            self.txtBiography.hidden    = true
+            self.txtRole!.isHidden        = true
+            self.txtBiography.isHidden    = true
            
            
             
@@ -180,57 +180,57 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else  if(gObjSearchUserListBean.role == "Speaker"){
             
-           self.labelChangeJobTitle.hidden = false
+           self.labelChangeJobTitle.isHidden = false
            
             self.labelSchool.text   = "Job Title:"
             self.labelGrades.text   = "Business:"
             self.labelJobTitle.text = "Role:"
             self.labelBusiness.text = "Biography:"
             
-            self.labelSchool.hidden   = false
+            self.labelSchool.isHidden   = false
             labelChangeJobTitle.text = gObjSearchUserListBean.job_title
-            self.labelGrades.hidden   = false
-            self.btnLinkSchool.hidden = true
-            self.txtGrades.hidden = false
+            self.labelGrades.isHidden   = false
+            self.btnLinkSchool.isHidden = true
+            self.txtGrades.isHidden = false
             self.txtGrades.text = gObjSearchUserListBean.business
             
-            self.labelJobTitle.hidden = false
+            self.labelJobTitle.isHidden = false
             self.labelJobTitle.text = gObjSearchUserListBean.role
             
-            self.txtBusiness!.hidden = false
+            self.txtBusiness!.isHidden = false
             self.txtBusiness!.text = gObjSearchUserListBean.biography
             
            
             
-            self.txtJobTitle.hidden = false
-            self.txtBusiness!.hidden = false
+            self.txtJobTitle.isHidden = false
+            self.txtBusiness!.isHidden = false
             
-            self.labelRole.hidden = true
-            self.labelBiography.hidden = true
-            self.txtRole!.hidden = true
-            self.txtBiography.hidden = true
+            self.labelRole.isHidden = true
+            self.labelBiography.isHidden = true
+            self.txtRole!.isHidden = true
+            self.txtBiography.isHidden = true
             
             
             
         }
         else{
-            self.txtJobTitle.hidden = false
-            self.txtBusiness!.hidden = false
-            self.labelJobTitle.hidden = false
-            self.labelBusiness.hidden = false
+            self.txtJobTitle.isHidden = false
+            self.txtBusiness!.isHidden = false
+            self.labelJobTitle.isHidden = false
+            self.labelBusiness.isHidden = false
             
-            self.labelSchool.hidden   = false
-            self.labelGrades.hidden   = false
-            self.btnLinkSchool.hidden = false
-            self.txtGrades.hidden = false
-            self.labelChangeJobTitle.hidden = true
+            self.labelSchool.isHidden   = false
+            self.labelGrades.isHidden   = false
+            self.btnLinkSchool.isHidden = false
+            self.txtGrades.isHidden = false
+            self.labelChangeJobTitle.isHidden = true
 
         
         
         }
-        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height - 1.0, btnProfile.frame.size.width, 1)
+        bottomLineProfile.frame = CGRect(x: 0, y: btnProfile.frame.size.height - 1.0, width: btnProfile.frame.size.width, height: 1)
         bottomLineProfile.borderWidth = 2.0
-        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.cgColor /* #559369  */
         btnProfile.layer.addSublayer(bottomLineProfile)
 
         
@@ -245,12 +245,12 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         if(eventBeanArray!.count > 0){
             return eventBeanArray!.count
@@ -261,13 +261,13 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
     }
     
-    func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+    func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
         
         
          if(eventBeanArray!.count > 0){
             
-            self.tableView.hidden = false
-            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+            self.tableView.isHidden = false
+            let eventDisplayBean: EventBean! = eventBeanArray[(indexPath as NSIndexPath).row]
         
         
             (cell as! UserProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
@@ -276,16 +276,16 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
          else{
            
-            self.tableView.hidden = true
-            self.labelNoEventFound.hidden = false
+            self.tableView.isHidden = true
+            self.labelNoEventFound.isHidden = false
         }
     }
     
     //function to return dynamic cell
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("userProfileCell", forIndexPath: indexPath) as? UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userProfileCell", for: indexPath) as? UITableViewCell
         
         configureCell(cell!, indexPath: indexPath)
         
@@ -293,8 +293,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     
     //function to respond to row selection
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var selectCell = tableView.cellForRowAtIndexPath(indexPath) as! UserProfileCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var selectCell = tableView.cellForRow(at: indexPath) as! UserProfileCell
         print("currentCell", selectCell.eventId.text!)
         
         gEventID = Int(selectCell.eventId.text!)
@@ -302,21 +302,21 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         tempBackToViewController = gObjBackTocontroller
         gObjBackTocontroller = gObjUserProfileNavController
        
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+            testfacade.doTask(self,action: DelphosAction.show_EVENT)
         })
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return 1
         
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if (userProfileBadgesArray.count > 0){
             return userProfileBadgesArray.count
@@ -331,27 +331,27 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BdgeCellId", forIndexPath: indexPath) as! BadgeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BdgeCellId", for: indexPath) as! BadgeCollectionViewCell
         imagesCount = imagesCount-1
         
         if (userProfileBadgesArray.count > 0){
-            self.labelNoBadges.hidden = true
+            self.labelNoBadges.isHidden = true
             
-           dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+           DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
             
             
 
-                cell.backgroundColor = UIColor.whiteColor()
-                let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
+                cell.backgroundColor = UIColor.white
+                let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[(indexPath as NSIndexPath).row]
             
-                if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
-                    dispatch_async(dispatch_get_main_queue(), {
+                if let url = URL(string:AWS_S3 + imageDisplayBean.badge_url){
+                    DispatchQueue.main.async(execute: {
 
-                        let badgesImage = NSData(contentsOfURL:url)
+                        let badgesImage = try? Data(contentsOf: url)
             
                 
                         cell.imgUserBadge.image = UIImage(data:badgesImage!)
@@ -363,7 +363,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         
         if(imagesCount == 0){
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 self.hideOverlayView()
                 
@@ -390,37 +390,37 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
 //        return
 //    }
     
-    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!)
+    func collectionView(_ collectionView: UICollectionView!, didSelectItemAt indexPath: IndexPath)
     {
         
         
-        var selectCell = collectionView.cellForItemAtIndexPath(indexPath) as! BadgeCollectionViewCell
+        var selectCell = collectionView.cellForItem(at: indexPath) as! BadgeCollectionViewCell
         
         //selectCell.backgroundColor = UIColor.blueColor()
         
         print("select", selectCell.badgeId.text!)
         gBadgeid = Int(selectCell.badgeId.text!)
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_SHARE_BADGE)
+        testfacade.doTask(self,action: DelphosAction.show_SHARE_BADGE)
     }
     
     
     
     
-    @IBAction func btnProfileClick(sender: AnyObject) {
+    @IBAction func btnProfileClick(_ sender: AnyObject) {
    
         
-        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height - 1.0, btnProfile.frame.size.width, 1)
+        bottomLineProfile.frame = CGRect(x: 0, y: btnProfile.frame.size.height - 1.0, width: btnProfile.frame.size.width, height: 1)
         bottomLineProfile.borderWidth = 2.0
-        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.cgColor /* #559369  */
         btnProfile.layer.addSublayer(bottomLineProfile)
        // self.tableView.center =
-        bottomLineBadges.borderColor = UIColor.clearColor().CGColor
+        bottomLineBadges.borderColor = UIColor.clear.cgColor
         
-        self.collectionView.hidden = true
-        self.labelNoBadges.hidden = true        
+        self.collectionView.isHidden = true
+        self.labelNoBadges.isHidden = true        
         
         if(gObjSearchUserListBean.role == "Teacher"){
             
@@ -428,141 +428,141 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelGrades.text   = "Grades:"
             self.labelJobTitle.text = "Role:"
             self.labelBusiness.text = "Biography:"
-            self.labelRole.hidden     = true
-            self.labelBiography.hidden = true
+            self.labelRole.isHidden     = true
+            self.labelBiography.isHidden = true
             
             
             self.txtJobTitle.text       = gObjSearchUserListBean.role
             self.txtBusiness!.text      = gObjSearchUserListBean.biography
-            self.txtRole!.hidden        = true
-            self.txtBiography.hidden    = true
+            self.txtRole!.isHidden        = true
+            self.txtBiography.isHidden    = true
             
-            self.labelSchool.hidden   = false
-            self.labelGrades.hidden   = false
-            self.labelJobTitle.hidden = false
-            self.labelBusiness.hidden = false
+            self.labelSchool.isHidden   = false
+            self.labelGrades.isHidden   = false
+            self.labelJobTitle.isHidden = false
+            self.labelBusiness.isHidden = false
             
-            self.btnLinkSchool.hidden = false
-            self.txtGrades.hidden = false
-            self.txtJobTitle.hidden = false
-            self.txtBusiness!.hidden = false
-            self.labelChangeJobTitle.hidden = true
+            self.btnLinkSchool.isHidden = false
+            self.txtGrades.isHidden = false
+            self.txtJobTitle.isHidden = false
+            self.txtBusiness!.isHidden = false
+            self.labelChangeJobTitle.isHidden = true
 
             
         }
         else if(gObjSearchUserListBean.role == "Speaker"){
             
-            self.labelChangeJobTitle.hidden = false
+            self.labelChangeJobTitle.isHidden = false
             
             self.labelSchool.text   = "Job Title:"
             self.labelGrades.text   = "Business:"
             self.labelJobTitle.text = "Role:"
             self.labelBusiness.text = "Biography:"
             
-            self.labelBusiness.hidden = false
-            self.labelSchool.hidden   = false
+            self.labelBusiness.isHidden = false
+            self.labelSchool.isHidden   = false
             labelChangeJobTitle.text = gObjSearchUserListBean.job_title
-            self.labelGrades.hidden   = false
-            self.btnLinkSchool.hidden = true
-            self.txtGrades.hidden = false
+            self.labelGrades.isHidden   = false
+            self.btnLinkSchool.isHidden = true
+            self.txtGrades.isHidden = false
             self.txtGrades.text = gObjSearchUserListBean.business
             
-            self.labelJobTitle.hidden = false
+            self.labelJobTitle.isHidden = false
             self.labelJobTitle.text = gObjSearchUserListBean.role
             
-            self.txtBusiness!.hidden = false
+            self.txtBusiness!.isHidden = false
             self.txtBusiness!.text = gObjSearchUserListBean.biography
             
             
             
-            self.txtJobTitle.hidden = false
-            self.txtBusiness!.hidden = false
+            self.txtJobTitle.isHidden = false
+            self.txtBusiness!.isHidden = false
             
-            self.labelRole.hidden = true
-            self.labelBiography.hidden = true
-            self.txtRole!.hidden = true
-            self.txtBiography.hidden = true
+            self.labelRole.isHidden = true
+            self.labelBiography.isHidden = true
+            self.txtRole!.isHidden = true
+            self.txtBiography.isHidden = true
             
 
             
             
         }
         else{
-            self.txtJobTitle.hidden = false
-            self.txtBusiness!.hidden = false
-            self.labelJobTitle.hidden = false
-            self.labelBusiness.hidden = false
+            self.txtJobTitle.isHidden = false
+            self.txtBusiness!.isHidden = false
+            self.labelJobTitle.isHidden = false
+            self.labelBusiness.isHidden = false
             
-            self.labelSchool.hidden   = false
-            self.labelGrades.hidden   = false
-            self.btnLinkSchool.hidden = false
-            self.txtGrades.hidden = false
+            self.labelSchool.isHidden   = false
+            self.labelGrades.isHidden   = false
+            self.btnLinkSchool.isHidden = false
+            self.txtGrades.isHidden = false
             
-            self.labelRole.hidden = false
-            self.labelBiography.hidden = false
+            self.labelRole.isHidden = false
+            self.labelBiography.isHidden = false
             
-            self.txtRole!.hidden = false
-            self.txtBiography.hidden = false
+            self.txtRole!.isHidden = false
+            self.txtBiography.isHidden = false
 
 
         }
 
     }
-    @IBAction func btnBadges(sender: AnyObject) {
+    @IBAction func btnBadges(_ sender: AnyObject) {
         
         
-        bottomLineBadges.frame = CGRectMake(0, btnBadges.frame.size.height - 1.0, btnBadges.frame.size.width, 1)
+        bottomLineBadges.frame = CGRect(x: 0, y: btnBadges.frame.size.height - 1.0, width: btnBadges.frame.size.width, height: 1)
         bottomLineBadges.borderWidth = 2.0
-        bottomLineBadges.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        bottomLineBadges.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.cgColor /* #559369  */
         btnBadges.layer.addSublayer(bottomLineBadges)
-        bottomLineProfile.borderColor = UIColor.clearColor().CGColor
+        bottomLineProfile.borderColor = UIColor.clear.cgColor
         
         if (userProfileBadgesArray.count > 0){
             
-            self.labelNoBadges.hidden = true
+            self.labelNoBadges.isHidden = true
         }
         else{
-            self.labelNoBadges.hidden = false
+            self.labelNoBadges.isHidden = false
              self.labelNoBadges.text = gObjSearchUserListBean.name + " has not earned any Badges"
             
         }
 
-        self.collectionView.hidden = false
+        self.collectionView.isHidden = false
         
-        self.labelSchool.hidden = true
-        self.labelGrades.hidden = true
-        self.labelJobTitle.hidden = true
-        self.labelBusiness.hidden = true
-        self.labelRole.hidden = true
-        self.labelBiography.hidden = true
+        self.labelSchool.isHidden = true
+        self.labelGrades.isHidden = true
+        self.labelJobTitle.isHidden = true
+        self.labelBusiness.isHidden = true
+        self.labelRole.isHidden = true
+        self.labelBiography.isHidden = true
         
-        self.btnLinkSchool.hidden = true
-        self.txtGrades.hidden = true
-        self.txtJobTitle.hidden = true
-        self.txtBusiness!.hidden = true
-        self.txtRole!.hidden = true
-        self.txtBiography.hidden = true
+        self.btnLinkSchool.isHidden = true
+        self.txtGrades.isHidden = true
+        self.txtJobTitle.isHidden = true
+        self.txtBusiness!.isHidden = true
+        self.txtRole!.isHidden = true
+        self.txtBiography.isHidden = true
         
-        self.labelChangeJobTitle.hidden = true
+        self.labelChangeJobTitle.isHidden = true
         
       
         
         
     }
 
-    @IBAction func btnSchoolNameClick(sender: AnyObject) {
+    @IBAction func btnSchoolNameClick(_ sender: AnyObject) {
         
         if(gObjSearchUserListBean.school_id != 1){
             showOverlay(self.view)
             gSchoolNameSelect = true
         
             gSchoolId = gObjSearchUserListBean.school_id
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.show_SCHOOL_PROFILE)
         }
         else{
-            self.searchBar.hidden = false
+            self.searchBar.isHidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -571,7 +571,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             
             
             //navigationBar.items = [navigationItem]
-            searchView.hidden = false
+            searchView.isHidden = false
             segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
                 segmentSearchItems.selectedSegmentIndex = 1
             gBtnRadioValue = "schools"
@@ -581,13 +581,13 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
     }
     
-    @IBAction func btnContactUserClick(sender: AnyObject) {
+    @IBAction func btnContactUserClick(_ sender: AnyObject) {
    
         gUserProfileMessage = true
 
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.VIEW_MESSAGE_CONTROLLER)
+        testfacade.doTask(self,action: DelphosAction.view_MESSAGE_CONTROLLER)
     
 }
     

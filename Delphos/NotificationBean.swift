@@ -30,7 +30,7 @@ class  NotificationBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         count    <- map["count"]
 
