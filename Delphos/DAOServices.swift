@@ -132,7 +132,11 @@ class DAOServices: DAOBase {
     
     func searchEvent(gBtnRadioValue: String, strSearchEvent: String, callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
         
-        strURL =  DEV_TARGET + gBtnRadioValue + SEARCH_EVENT + strSearchEvent
+        let addSpaceOnString: String = strSearchEvent
+        
+        let strReplaceSearch = addSpaceOnString.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        strURL =  DEV_TARGET + gBtnRadioValue + SEARCH_EVENT + strReplaceSearch
         var searchBean: AnyObject!
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             

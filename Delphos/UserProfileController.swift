@@ -343,22 +343,22 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             
            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
-            dispatch_async(dispatch_get_main_queue(), {
-                
-               
-                
-           
+            
+
                 cell.backgroundColor = UIColor.whiteColor()
                 let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
             
                 if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
-                    let badgesImage = NSData(contentsOfURL:url)
+                    dispatch_async(dispatch_get_main_queue(), {
+
+                        let badgesImage = NSData(contentsOfURL:url)
             
                 
-                    cell.imgUserBadge.image = UIImage(data:badgesImage!)
-                    cell.badgeId.text = String(imageDisplayBean.badge_id)
+                        cell.imgUserBadge.image = UIImage(data:badgesImage!)
+                        cell.badgeId.text = String(imageDisplayBean.badge_id)
+                })
             }
-                 })
+                 
             })
         }
         

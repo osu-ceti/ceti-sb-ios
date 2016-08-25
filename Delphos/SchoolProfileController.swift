@@ -70,10 +70,12 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
-            let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + gObjSchoolImage)
+            let url = NSURL(string: AWS_S3 + gObjSchoolImage)
             var data = NSData(contentsOfURL:url!)
             if data != nil {
-                self.schoolImage.image = UIImage(data:data!)
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.schoolImage.image = UIImage(data:data!)
+                })
             }
         })
         
