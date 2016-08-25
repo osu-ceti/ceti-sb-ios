@@ -595,7 +595,7 @@ class UserDelegate:BaseDelegate{
                 if(strNewpassword != ""){
                     gPasswordCheck = strNewpassword
                 }
-                let objEdiAccounttResult = result as! AccountEditResponseBean
+                let objEdiAccounttResult = result as! AccountEditResponseBean
                 
                 let objEditAccountUser = objEdiAccounttResult.user as! UserBean
                 
