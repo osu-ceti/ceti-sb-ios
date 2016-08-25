@@ -67,7 +67,7 @@ class AboutController: NavController {
         viewDetails.backgroundColor = bgColor
         
 
-       self.logoOntoborn.image = UIImage(named:"OntoBornTech")
+       self.logoOntoborn.image = UIImage(named:"ontobornlogo")
         
         
         //var label:UILabel!
@@ -115,6 +115,16 @@ class AboutController: NavController {
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
             }
+        })
+    }
+    @IBAction func ontobornUrlClick(sender: AnyObject) {
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            let url : NSURL = NSURL(string: "http://ontoborn.com/")!
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+            
         })
     }
     @IBAction func contactUsLink(sender: AnyObject) {

@@ -17,8 +17,11 @@ class NotificationDelegate:BaseDelegate{
 
     func showNotification(objCurrentContoller: BaseController) {
         
+        var pageValue:String!
+       
+        pageValue = String(notificationPage)
         
-        doGetAPIs.getNotification( {(result: AnyObject,statusCode: Int)  in
+        doGetAPIs.getNotification(pageValue!, callBack: {(result: AnyObject,statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
@@ -32,9 +35,27 @@ class NotificationDelegate:BaseDelegate{
    
                 
                 gNotificationCount = objnotificationBean.count
+               // var firstArray: [NotificationListBean]
+               // var secondArray:[NotificationListBean]
+                var finalArray: [NotificationListBean]
+                
+                if(notificationPage == 1){
+                    
+                     NotificationFirstArray = objnotificationBean.notifications
+                     gObjNotificationController.notificationArray = objnotificationBean.notifications
+                }
+                else{
+                    
+                    NotificationSecondArray = objnotificationBean.notifications
+                    finalArray = NotificationFirstArray + NotificationSecondArray
+                    
+                    gObjNotificationController.notificationArray = finalArray
+                    NotificationFirstArray = finalArray
+                   
+                  
+                }
                 
                 
-                gObjNotificationController.notificationArray = objnotificationBean.notifications
                 
                 dispatch_async(dispatch_get_main_queue(), {
                   
