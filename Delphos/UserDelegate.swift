@@ -12,13 +12,21 @@ import Security
 
 class UserDelegate:BaseDelegate{
     
+    func savePassword( userNameKey:String, userPasswordKey:String){
+        
+        let defaultUser = NSUserDefaults.standardUserDefaults()
+        let defaultPassowrd = NSUserDefaults.standardUserDefaults()
+       
+        defaultUser.setObject(userNameKey, forKey:"userNameKey")
     
-//    func HiddenOverlay(objCurrentContoller: UIViewController,controllerName :UIViewController){
-//        
-//        var objControllerName = objCurrentContoller as! controllerName
-//        objControllerName.activityIndicator.stopAnimating()
-//        objControllerName.overlayView.hidden = true
-//    }
+        defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
+    
+    
+        print(defaultPassowrd)
+        print(defaultUser)
+    
+    }
+
     
     func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
         var boolLogin = false;
@@ -50,9 +58,17 @@ class UserDelegate:BaseDelegate{
         //DOA calls
         
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
-            self.doCleanup(statusCode, objCurrentController:loginController)
+            loginController.hideOverlayView()
+            //self.doCleanup(statusCode, objCurrentController:loginController)
             if (statusCode == SUCCESS){
+
                 logger.log(LoggingLevel.INFO, message: "Login Sucessfull")
+
+
+                
+                
+                print("Login Sucessfull")
+                
 
                 loginController.activityIndicator.stopAnimating()
                 loginController.overlayView.hidden = true
@@ -70,11 +86,10 @@ class UserDelegate:BaseDelegate{
                     //Save username password data
                     let userNameKey = strUser
                     let userPasswordKey = strPassword
-                    userCredsStorage.setObject(userNameKey, forKey:gStrUserStorageKey)
+                    self.savePassword(userNameKey,userPasswordKey:userPasswordKey)
+
                     
-                    userCredsStorage.setObject(userPasswordKey, forKey:gStrUserStoragePassKey)
-                    
-                }
+                  }
                 else {
 
                     logger.log(LoggingLevel.INFO, message: "Data Not Saved ")
@@ -174,10 +189,29 @@ class UserDelegate:BaseDelegate{
             registerController.overlayView.hidden = true
             if(statusCode == SUCCESS) {
 
+
                 logger.log(LoggingLevel.INFO, message: "Registration Successful")
                 boolRegister = true
-                 var objUserBean = loginResult as! RegistrationResponseBean
+
+                var objUserBean = loginResult as! RegistrationResponseBean
+                if(objUserBean.state == 1){
+                    //Print a log
+                    
+                    self.showAlert(objCurrentContoller, strMessage: objUserBean.messages![0])
+                    return
+                }
+
+                //let objUserBean = loginResult as! RegistrationResponseBean
+
                 gObjUserBean = objUserBean.data
+                
+                
+                
+                let userNameKey = strEmail
+                let userPasswordKey = strPassword
+                self.savePassword(userNameKey!,userPasswordKey:userPasswordKey!)
+                gPasswordCheck = strPassword
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
@@ -229,7 +263,7 @@ class UserDelegate:BaseDelegate{
         //let strUserId: String = String((objCurrentContoller as! EventShowController).strUserId)
         
         doGetAPIs.getUserProfile(strUserId,callBack: {(result: AnyObject,statusCode: Int)   in
-            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController: objCurrentContoller)
             if(statusCode == SUCCESS) {
                 gObjUserProfileController = self.instantiateVC(gStrUserProfileControllerID) as! UserProfileController
                 
@@ -238,11 +272,15 @@ class UserDelegate:BaseDelegate{
                 
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
-                gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
+                gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
+                 })
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
+                    
                     self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
                     
                 })

@@ -274,18 +274,17 @@ class PublicProfileController:  NavController{
     
      func btnFIndMySchoolClick(sender: AnyObject) {
         
-       
+            self.searchBar.hidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
             searchBar.becomeFirstResponder()
             searchBar.showsCancelButton = true
-            
-            
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+           
             gBtnRadioValue = "schools"
         
         
@@ -308,13 +307,18 @@ class PublicProfileController:  NavController{
     
      func btnProfileSchoolClick(sender: AnyObject) {
         if(gObjUserBean.school_id != 1){
-            gSchoolId = userProfileBean.school_id
+           
+           // gSchoolId = userProfileBean.school_id
+            
+            gSchoolId =   gObjUserBean.school_id
+            
             self.showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
         }
         else{
+            self.searchBar.hidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -324,8 +328,9 @@ class PublicProfileController:  NavController{
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
+
             gBtnRadioValue = "schools"
 
         }

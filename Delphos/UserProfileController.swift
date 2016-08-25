@@ -15,6 +15,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
    
     
+    @IBOutlet var labelChangeJobTitle: UILabel!
     
     @IBOutlet var labelNoEventFound: UILabel!
     @IBOutlet weak var labelSchool: UILabel!
@@ -60,11 +61,11 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     var schoolProfileId:Int!
     var tempBackToViewController:UIViewController!
-
+    var imagesCount:Int!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+       // self.showOverlay(self.view)
         //rootViewController = self
         //Adding Navbar
         //        menus = regularMenu
@@ -72,15 +73,15 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         //        rightViewController.tableView.reloadData()
         
 
-//        setNavBar(self.view.frame.size.width)
-//        searchBar.delegate = self
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
         
      
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       self.showOverlay(self.view)
         if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
@@ -89,10 +90,9 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         //Adding Navbar
         rootViewController = self
         self.isBackEnabled = false
-
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
-
+        imagesCount = userProfileBadgesArray.count
+        
+        self.labelChangeJobTitle.hidden = true
         
         
         
@@ -180,12 +180,35 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else  if(gObjSearchUserListBean.role == "Speaker"){
             
+           self.labelChangeJobTitle.hidden = false
            
-           
-            self.labelSchool.hidden   = true
-            self.labelGrades.hidden   = true
+            self.labelSchool.text   = "Job Title:"
+            self.labelGrades.text   = "Business:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            
+            self.labelSchool.hidden   = false
+            labelChangeJobTitle.text = gObjSearchUserListBean.job_title
+            self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = true
-            self.txtGrades.hidden = true
+            self.txtGrades.hidden = false
+            self.txtGrades.text = gObjSearchUserListBean.business
+            
+            self.labelJobTitle.hidden = false
+            self.labelJobTitle.text = gObjSearchUserListBean.role
+            
+            self.txtBusiness!.hidden = false
+            self.txtBusiness!.text = gObjSearchUserListBean.biography
+            
+           
+            
+            self.txtJobTitle.hidden = false
+            self.txtBusiness!.hidden = false
+            
+            self.labelRole.hidden = true
+            self.labelBiography.hidden = true
+            self.txtRole!.hidden = true
+            self.txtBiography.hidden = true
             
             
             
@@ -200,6 +223,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = false
             self.txtGrades.hidden = false
+            self.labelChangeJobTitle.hidden = true
 
         
         
@@ -298,7 +322,10 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             return userProfileBadgesArray.count
         }
         else{
+            self.hideOverlayView()
+            
             return 0
+            
         }
         
     }
@@ -309,25 +336,41 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BdgeCellId", forIndexPath: indexPath) as! BadgeCollectionViewCell
-        
+        imagesCount = imagesCount-1
         
         if (userProfileBadgesArray.count > 0){
             self.labelNoBadges.hidden = true
             
-            cell.backgroundColor = UIColor.whiteColor()
-            var imageDisplayBean: UserProfileBadgesBean = userProfileBadgesArray[indexPath.row]
+           dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
-            if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
-                let badgesImage = NSData(contentsOfURL:url)
+            dispatch_async(dispatch_get_main_queue(), {
+                
+               
+                
+           
+                cell.backgroundColor = UIColor.whiteColor()
+                let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
             
+                if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
+                    let badgesImage = NSData(contentsOfURL:url)
             
-                cell.imgUserBadge.image = UIImage(data:badgesImage!)
-                cell.badgeId.text = String(imageDisplayBean.badge_id)
+                
+                    cell.imgUserBadge.image = UIImage(data:badgesImage!)
+                    cell.badgeId.text = String(imageDisplayBean.badge_id)
             }
+                 })
+            })
         }
-        //        else{
-        //            self.labelNoBadges.hidden = false
-        //        }
+        
+        if(imagesCount == 0){
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.hideOverlayView()
+                
+            })
+            
+        }
+        
         return cell
         
         
@@ -403,25 +446,44 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.txtGrades.hidden = false
             self.txtJobTitle.hidden = false
             self.txtBusiness!.hidden = false
-            
+            self.labelChangeJobTitle.hidden = true
+
             
         }
         else if(gObjSearchUserListBean.role == "Speaker"){
             
-            self.labelSchool.hidden   = true
-            self.labelGrades.hidden   = true
+            self.labelChangeJobTitle.hidden = false
+            
+            self.labelSchool.text   = "Job Title:"
+            self.labelGrades.text   = "Business:"
+            self.labelJobTitle.text = "Role:"
+            self.labelBusiness.text = "Biography:"
+            
+            self.labelBusiness.hidden = false
+            self.labelSchool.hidden   = false
+            labelChangeJobTitle.text = gObjSearchUserListBean.job_title
+            self.labelGrades.hidden   = false
             self.btnLinkSchool.hidden = true
-            self.txtGrades.hidden = true
+            self.txtGrades.hidden = false
+            self.txtGrades.text = gObjSearchUserListBean.business
             
             self.labelJobTitle.hidden = false
-            self.labelBusiness.hidden = false
-            self.labelRole.hidden = false
-            self.labelBiography.hidden = false
+            self.labelJobTitle.text = gObjSearchUserListBean.role
+            
+            self.txtBusiness!.hidden = false
+            self.txtBusiness!.text = gObjSearchUserListBean.biography
+            
+            
             
             self.txtJobTitle.hidden = false
             self.txtBusiness!.hidden = false
-            self.txtRole!.hidden = false
-            self.txtBiography.hidden = false
+            
+            self.labelRole.hidden = true
+            self.labelBiography.hidden = true
+            self.txtRole!.hidden = true
+            self.txtBiography.hidden = true
+            
+
             
             
         }
@@ -448,6 +510,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     @IBAction func btnBadges(sender: AnyObject) {
         
+        
         bottomLineBadges.frame = CGRectMake(0, btnBadges.frame.size.height - 1.0, btnBadges.frame.size.width, 1)
         bottomLineBadges.borderWidth = 2.0
         bottomLineBadges.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
@@ -460,7 +523,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         }
         else{
             self.labelNoBadges.hidden = false
-             self.labelNoBadges.text = gObjSearchUserListBean.name + " haven't earned any Badges yet!"
+             self.labelNoBadges.text = gObjSearchUserListBean.name + " has not earned any Badges"
             
         }
 
@@ -480,14 +543,16 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.txtRole!.hidden = true
         self.txtBiography.hidden = true
         
+        self.labelChangeJobTitle.hidden = true
         
+      
         
         
     }
 
     @IBAction func btnSchoolNameClick(sender: AnyObject) {
         
-        if(gObjUserBean.school_id != 1){
+        if(gObjSearchUserListBean.school_id != 1){
             showOverlay(self.view)
             gSchoolNameSelect = true
         
@@ -497,6 +562,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
         }
         else{
+            self.searchBar.hidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
@@ -506,8 +572,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+                segmentSearchItems.selectedSegmentIndex = 1
             gBtnRadioValue = "schools"
 
         

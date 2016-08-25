@@ -32,9 +32,6 @@ class AccountEditController: NavController {
     @IBOutlet var txtName: UITextField!
     @IBOutlet var txtEmail: UITextField!
     
-    @IBOutlet var radioTeacher: SSRadioButton!
-    @IBOutlet var radioBoth: SSRadioButton!
-    @IBOutlet var radioSpeaker: SSRadioButton!
     
     @IBOutlet var txtNewPassword: UITextField!
     @IBOutlet var txtConfirmPassword: UITextField!
@@ -42,6 +39,7 @@ class AccountEditController: NavController {
     @IBOutlet var scrollView: UIScrollView!
     
     
+    @IBOutlet var accountSegmentedRole: UISegmentedControl!
     
     var accountEditId:Int!
     var txtRole:String!
@@ -50,8 +48,7 @@ class AccountEditController: NavController {
     
      var userAccountEditBean: UserBean!
     
-    var radioButtonControllerLocal: SSRadioButtonsController?
-    
+        
    
     
     override func viewWillAppear(animated: Bool) {
@@ -76,9 +73,7 @@ class AccountEditController: NavController {
         view.backgroundColor = bgColor
         
         
-        radioButtonControllerLocal = SSRadioButtonsController(buttons: radioTeacher,radioSpeaker,radioBoth)
-        radioButtonControllerLocal!.delegate = self
-        radioButtonControllerLocal!.shouldLetDeSelect = true
+        
         
         self.requiredField.hidden = true
         
@@ -119,20 +114,25 @@ class AccountEditController: NavController {
        
         if(userAccountEditBean.role == 1)
         {
-            radioTeacher.selected = true
+            
             txtRole = "Teacher"
+            accountSegmentedRole.selectedSegmentIndex = 0
             
         }
         else if(userAccountEditBean.role == 2){
            
-            radioSpeaker.selected = true
+           
             txtRole = "Speaker"
+            accountSegmentedRole.selectedSegmentIndex = 1
+
         }
         
         else if(userAccountEditBean.role == 3)
         {
-            radioBoth.selected = true
+           
             txtRole =  "Both"
+            accountSegmentedRole.selectedSegmentIndex = 2
+
             
            
            
@@ -153,18 +153,22 @@ class AccountEditController: NavController {
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
     }
+   
     
-    @IBAction func btnTeacher(sender: AnyObject) {
-         txtRole = "Teacher"
-    }
-    
-    @IBAction func btnSpeaker(sender: AnyObject) {
-        txtRole = "Speaker"
-
-    }
-    
-    @IBAction func btnBoth(sender: AnyObject) {
-         txtRole =  "Both"
+    @IBAction func accountUserRoleTouch(sender: AnyObject) {
+        
+        if(accountSegmentedRole.selectedSegmentIndex == 0){
+            txtRole = "Teacher"
+        }
+        else if(accountSegmentedRole.selectedSegmentIndex == 1 ){
+            txtRole = "Speaker"
+        }
+        else if(accountSegmentedRole.selectedSegmentIndex == 2){
+            txtRole = "Both"
+        }
+        
+        
+        
     }
     func isValidEmail(testStr:String) -> Bool {
         // println("validate calendar: \(testStr)")
@@ -203,25 +207,28 @@ class AccountEditController: NavController {
         self.requiredField.hidden = true
     }
     
+   
+    
     @IBAction func btnSaveAccountClick(sender: AnyObject) {
         let curPassword = txtCurrentPassword.text
         
         let trimmedText = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 
+        let trimmedEmail = txtEmail.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         if(trimmedText == ""){
             self.requiredField.hidden = false
             self.requiredField.text = "Required Name"
             
         }
-        else if (txtEmail.text == "" ){
+        else if (trimmedEmail == "" ){
             self.requiredField.hidden = false
             self.requiredField.text = "Required Email"
             
         }
-        else if (txtEmail.text != "" )
+        else if (trimmedEmail != "" )
         {
-            var emailvalid = isValidEmail(txtEmail.text!)
+            var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
             if(emailvalid == false ){
                 self.requiredField.hidden = false
@@ -267,6 +274,7 @@ class AccountEditController: NavController {
 //                }
                 else{
                     txtName.text = trimmedText
+                    txtEmail.text = trimmedEmail
                     showOverlay(self.view)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()

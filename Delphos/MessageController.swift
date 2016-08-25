@@ -23,6 +23,7 @@ class MessageController:  NavController  {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var btnSendMessage: UIButton!
     
+    @IBOutlet var requiredField: UILabel!
     var userMessageId:Int!
     
     override func viewDidLoad() {
@@ -39,6 +40,7 @@ class MessageController:  NavController  {
         
         var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
+        self.requiredField.hidden = true
         
          messageViewUserName.font = UIFont.boldSystemFontOfSize(15)
          labelSendMessage.font = UIFont.boldSystemFontOfSize(15)
@@ -80,12 +82,22 @@ class MessageController:  NavController  {
     
     @IBAction func touchSendMessage(sender: AnyObject) {
         
-        //showOverlay(self.view)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SEND_MESSAGE)
+        var trimmedName = txtSendMessage.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
         
+        if(trimmedName == ""){
+            self.requiredField.hidden = false
+            self.requiredField.text = "Required Message"
+            
+        }
+        else{
         
+            //showOverlay(self.view)
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.SEND_MESSAGE)
+        
+        }
     }
  
 

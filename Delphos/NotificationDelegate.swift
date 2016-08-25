@@ -58,7 +58,8 @@ func showShareBadge(objCurrentContoller: BaseController) {
        // var strUserId: String = String(0)
         
         doGetAPIs.getShareBadge({(result: AnyObject,statusCode: Int)  in
-            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            objCurrentContoller.hideOverlayView()
+            self.responseCodeErrorHandler(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 
@@ -118,6 +119,7 @@ func deleteNotification(objCurrentContoller: BaseController)  {
     func readNotification(objCurrentContoller: BaseController)  {
         
         var strid = String((objCurrentContoller as! NotificationController).notificationId)
+        
         
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)

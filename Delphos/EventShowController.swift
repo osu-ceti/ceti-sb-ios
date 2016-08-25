@@ -88,6 +88,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
         }
+        self.isBackEnabled = true
+        setNavBar(self.view.frame.size.width)
+        searchBar.delegate = self
         
         
             //Adding Navbar
@@ -95,9 +98,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //        rightViewController.isRegister = false
 //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = true
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
+       
         
        // backToController = gObjHomeController
     
@@ -413,6 +414,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
     @IBAction func btnSendMessage(sender: AnyObject) {
         
+        self.labelUserName.hidden = true
+        self.labelBusiness.hidden = true
+        self.labelJobTitle.hidden = true
+        self.mainLabelJobTitle.hidden = true
+        self.mainLabelBusiness.hidden = true
         self.btnMessage.hidden = true
         self.btnAccept.hidden = true
         self.btnReject.hidden = true
@@ -539,17 +545,19 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             testfacade.doTask(self,action: DelphosAction.SHOW_SCHOOL_PROFILE)
         }
         else{
+            self.searchBar.hidden = false
             navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
             searchBar.becomeFirstResponder()
             searchBar.showsCancelButton = true
-            
+            segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+            segmentSearchItems.selectedSegmentIndex = 1
             
             //navigationBar.items = [navigationItem]
             searchView.hidden = false
-            schoolsRadioBtn.selected = true
-            eventsRadioBtn.selected = false
+            
+            
             gBtnRadioValue = "schools"
 
         }

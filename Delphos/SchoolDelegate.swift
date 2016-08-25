@@ -57,6 +57,7 @@ class SchoolDelegate:BaseDelegate{
                 gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
                 gObjUserBean.school_id = gObjMakeMySchoolListBean.school_id
                 gObjUserBean.school_name = makeMySchoolName
+               // userProfileBean.school_id = gObjMakeMySchoolListBean.school_id
                
                 logger.log(LoggingLevel.INFO, message: "Make my school")
                

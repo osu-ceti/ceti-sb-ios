@@ -57,7 +57,8 @@ class LoginController: BaseController {
         super.viewDidLoad()
          rootViewController = self
          self.requiredError.hidden = true
-       
+        
+        
         
         
         if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
@@ -67,8 +68,8 @@ class LoginController: BaseController {
              userNameData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey)!
              userPasswordData = NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey)!
        
-             print("userNamedata====",userNameData)
-             print("passwordData====",userPasswordData)
+//             print("userNamedata====",userNameData)
+//             print("passwordData====",userPasswordData)
             
              let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
              let testfacade = appDelegate.getObjFacade()
@@ -144,23 +145,40 @@ class LoginController: BaseController {
     }
     @IBAction func btnSignIn(sender: UIButton) {
         
+        let trimmedName = userTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
-        if (userTxt.text == ""){
+        let trimmedPassword = passwordTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if (trimmedName == ""){
             self.requiredError.hidden = false
-            self.requiredError.text = "Required Username"
+            self.requiredError.text = "Required Email"
            //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
-        else if (passwordTxt.text == "")
+        else if (trimmedName != "" )
+        {
+            var emailvalid = isValidEmail(trimmedName)
+            //print(emailvalid)
+            if(emailvalid == false ){
+                self.requiredError.hidden = false
+                self.requiredError.text =  "Required Vaild Email"
+                
+            }
+        
+        else if (trimmedPassword == "")
         {
             self.requiredError.hidden = false
             self.requiredError.text = "Required Password"
         }
+       
             
         else{
+            userTxt.text = trimmedName
+            passwordTxt.text = trimmedPassword
         //self.showOverlay(self.view)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.LOGIN)
+        }
         }
     }
 
@@ -192,29 +210,33 @@ class LoginController: BaseController {
 
     @IBAction func btnResetPasswordClick(sender: AnyObject) {
         
-        if (userTxt.text == ""){
+        
+        let trimmedEmail = userTxt.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if (trimmedEmail == ""){
             self.requiredError.hidden = false
             self.requiredError.text = "Required Email"
             //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
         
-        else if (userTxt.text != "" )
+        else if (trimmedEmail != "" )
         {
-            var emailvalid = isValidEmail(userTxt.text!)
+            var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
             if(emailvalid == false ){
                 self.requiredError.hidden = false
                 self.requiredError.text =  "Required Vaild Email"
                 
             }
-        }else{
+        else{
         
+                userTxt.text = trimmedEmail
         
             //self.showOverlay(self.view)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.RESET_FORGET_PASSWORD)
         }
+     }
     }
 
    
