@@ -107,9 +107,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             //  timeZonePicker.delegate = self
             // datepickerstartdate.addTarget(self, action: Selector("dataPickerChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         //label and back ground design
-        var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
-        view.backgroundColor = color
+        view.backgroundColor = bgColor
         
         var bottomLine = CALayer()
         bottomLine.frame = CGRectMake(0.0, txtTitle.frame.height - 1, txtTitle.frame.width, 1.0)
@@ -161,7 +160,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         txtEndTime.borderStyle = UITextBorderStyle.None
         txtEndTime.layer.addSublayer(txtEndTimeLine)
 
-        txtTitle.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        txtTitle.backgroundColor = bgColor //UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         txtContents.backgroundColor = txtTitle.backgroundColor
         txtTags.backgroundColor = txtTitle.backgroundColor
         startDate.backgroundColor = txtTitle.backgroundColor

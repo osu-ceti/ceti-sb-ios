@@ -65,7 +65,6 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         rootViewController = self
          
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {

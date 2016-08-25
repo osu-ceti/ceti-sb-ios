@@ -51,7 +51,6 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         tableVIew.delegate = self
         self.tableVIew.tableFooterView = UIView()
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.tableVIew.backgroundColor = bgColor
        
@@ -108,7 +107,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         
         }
         else{
-             cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+             cell.backgroundColor = bgColor //UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
            if(gBtnRadioValue == "events") {
              self.eventFound.hidden = false
             self.tableVIew.hidden = true

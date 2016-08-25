@@ -85,9 +85,8 @@ class RegisterController: NavController, UITextFieldDelegate {
         
         
         
-        let color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         
-        view.backgroundColor = color
+        view.backgroundColor = bgColor
         
   
         var bottomLine = CALayer()

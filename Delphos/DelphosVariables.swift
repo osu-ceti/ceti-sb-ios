@@ -113,6 +113,6 @@ var viewBadgeBean:UserProfileBadgesBean!
 
 var gPublicEditaccountBean: UserBean!
 
-
+var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
 
 

@@ -109,7 +109,6 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         self.tableView.dataSource = self
         tableView.delegate = self
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         collectionView.backgroundColor = bgColor
         collectionView.dataSource = self

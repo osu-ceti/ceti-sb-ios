@@ -82,7 +82,6 @@ class PublicProfileController:  NavController{
         super.viewDidLoad()
         
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.requiredField.hidden = true
         hideLabelAccountSetting.font = UIFont.boldSystemFontOfSize(15)
