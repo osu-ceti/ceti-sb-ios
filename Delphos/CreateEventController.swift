@@ -208,11 +208,15 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
       
         if(isEdit){
             //Page is being edited 
-            self.eventId = gObjShowEventBean.id
-
-            self.txtTitle.text = gObjShowEventBean.title
-            self.txtContents.text = gObjShowEventBean.content
-            
+            if(gObjShowEventBean.id != nil){
+                self.eventId = gObjShowEventBean.id
+            }
+            if(gObjShowEventBean.title != nil){
+                self.txtTitle.text = gObjShowEventBean.title
+            }
+            if(gObjShowEventBean.content != nil){
+                self.txtContents.text = gObjShowEventBean.content
+            }
             
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
             //DateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")

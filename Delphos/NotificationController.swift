@@ -116,6 +116,7 @@ class NotificationController: NavController {
            
             // claim
              (cell as! NotificationControllerCell).eventName!.text = "has claimed your event: "  + String(notificationDisplayBean.event_title)
+             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             
             break
             
@@ -123,7 +124,7 @@ class NotificationController: NavController {
             
             //confrim speaker
             (cell as! NotificationControllerCell).eventName!.text = "has confirmed you as the speaker of event: "  + String(notificationDisplayBean.event_title)
-            
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
             
         case NOTIFICATION_TYPE.EVENT_UPDATE.rawValue :
@@ -131,7 +132,7 @@ class NotificationController: NavController {
             //event update
             
             (cell as! NotificationControllerCell).eventName!.text = "has updated event: "  + String(notificationDisplayBean.event_title)
-            
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         case NOTIFICATION_TYPE.MESSAGE.rawValue :
            
@@ -139,6 +140,7 @@ class NotificationController: NavController {
            
             
             (cell as! NotificationControllerCell).eventName!.text = "has sent you a message via email."
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             
             break
         case NOTIFICATION_TYPE.AWARD_BADGE.rawValue :
@@ -147,14 +149,15 @@ class NotificationController: NavController {
             
             (cell as! NotificationControllerCell).eventName!.text = "Award them a badge."
              eventNametext = notificationDisplayBean.event_title
-           
+           (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
             
             //new_badge
             
-            (cell as! NotificationControllerCell).eventName!.text = "has awards you a badge!"
+            (cell as! NotificationControllerCell).eventName!.text = "has awarded you a badge!"
             //String(notificationDisplayBean.act_user_name) +
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         case NOTIFICATION_TYPE.CANCEL.rawValue :
             
@@ -162,7 +165,7 @@ class NotificationController: NavController {
             
             (cell as! NotificationControllerCell).eventName!.text = String(notificationDisplayBean.act_user_name) + " has canceled the event:  "
                 //+ String(notificationDisplayBean.event_title)
-           
+           (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         case NOTIFICATION_TYPE.REJECT_CLAIM.rawValue :
             
@@ -170,7 +173,7 @@ class NotificationController: NavController {
             
             (cell as! NotificationControllerCell).eventName!.text = " has chosen a different candidate"
             //String(notificationDisplayBean.act_user_name)
-            
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         case NOTIFICATION_TYPE.CANCEL_CLAIM.rawValue :
            
@@ -178,7 +181,7 @@ class NotificationController: NavController {
            
             (cell as! NotificationControllerCell).eventName!.text =  String(notificationDisplayBean.act_user_name) + " has canceled their claim"
             //for event: " +  String(notificationDisplayBean.event_title)
-           
+           (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         case NOTIFICATION_TYPE.CANCEL_SPEAKER.rawValue :
             
@@ -186,12 +189,12 @@ class NotificationController: NavController {
             
             (cell as! NotificationControllerCell).eventName!.text = String(notificationDisplayBean.act_user_name) + " has to cancel their speaking engagement "
             //for event:" + String(notificationDisplayBean.event_title)
-           
+           (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         default :
            
             (cell as! NotificationControllerCell).eventName!.text = ""  + String(notificationDisplayBean.event_title)
-            
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             break
         }
     }
@@ -220,9 +223,9 @@ class NotificationController: NavController {
         gActUserName = selectCell.actUSerName.text
         gAwardNtype = gNotificationNType
       
-        if(eventNametext != nil){
-            gEventTitle = eventNametext
-   
+        if(selectCell.hiddenEventName.text != nil){
+            //gEventTitle = eventNametext
+            gEventTitle = selectCell.hiddenEventName.text!
         }
        
        

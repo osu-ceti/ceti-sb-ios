@@ -862,6 +862,7 @@ class DAOServices: DAOBase {
         doPost(nil,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
+                print(jsonResult)
                 let awardBadgeResponseBean = Mapper<AwardBadgeResponse>().map(jsonResult)!
                 callBack?(result: awardBadgeResponseBean, statusCode: statusCode )
                 return

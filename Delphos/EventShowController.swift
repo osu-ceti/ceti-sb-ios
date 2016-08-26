@@ -159,7 +159,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         labelText6.font = UIFont.boldSystemFontOfSize(15)
     
         
-        if(gBtnRadioValue == events || gObjShowEventBean != nil) {
+        if(gBtnRadioValue == events && gObjShowEventBean != nil) {
             
 
             
@@ -169,12 +169,15 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.labelText4.text = "Location:"
             self.labelText5.text = "Created By:"
             self.labelText6.text = "Content:"
-           gSpeakerId = Int(gObjShowEventBean.speaker_id)
+            if(gObjShowEventBean.speaker_id != nil){
+                gSpeakerId = Int(gObjShowEventBean.speaker_id)
+            }
             
-            gSpeakerName =  String(gObjShowEventBean.speaker)
-            if(gSpeakerName != nil){
+            if(gObjShowEventBean.speaker != nil){
+                 gSpeakerName =  String(gObjShowEventBean.speaker)
                  btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, forState: .Normal)
             }
+            
             btnLinkLocation.setTitle(gObjShowEventBean.loc_name, forState: .Normal)
             btnLinkCreatedBy.setTitle(gObjShowEventBean.user_name, forState: .Normal)
             
@@ -290,9 +293,14 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             self.labelText5.hidden = true
             self.labelText6.hidden = true
             
-            self.txtTitle.text = gObjSearchUserListBean.name
+            if(gObjSearchUserListBean.name != nil){
+                self.txtTitle.text = gObjSearchUserListBean.name
+            }
            // self.txtText1.text = gObjSearchUserListBean.role
-            self.txtText2.text = gObjSearchUserListBean.biography
+            if(gObjSearchUserListBean.biography != nil){
+
+                self.txtText2.text = gObjSearchUserListBean.biography
+            }
         }
         
         

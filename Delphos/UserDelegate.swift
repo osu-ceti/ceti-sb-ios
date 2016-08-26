@@ -302,6 +302,7 @@ class UserDelegate:BaseDelegate{
                 
                 NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStorageKey)
                 NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStoragePassKey)
+                gNotificationCount = 0
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
                 var object = SignoutResult as! SignoutResponseBean

@@ -45,8 +45,9 @@ class EventDelegate: BaseDelegate{
                     
                     gObjEventDisplayBean = result as! EventDisplayBean
                     
-                    eventDisplayController.eventBeanArray = gObjEventDisplayBean.events
-                    
+                    if(gObjEventDisplayBean.events != nil){
+                        eventDisplayController.eventBeanArray = gObjEventDisplayBean.events
+                    }
                     //      logger.log(LoggingLevel.INFO,eventDisplayController.eventBeanArray);
                     
                     eventDisplayController.tableView.reloadData()
