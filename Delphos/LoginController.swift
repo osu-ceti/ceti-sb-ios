@@ -83,7 +83,7 @@ class LoginController: BaseController {
         
         
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         
         self.btnResetPassword.hidden = true
 

@@ -63,7 +63,7 @@ class SettingsController: NavController {
         rootViewController = self
         settingSearch = true
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         viewSetting.backgroundColor = bgColor
         if(settingsBean.set_updates == 1){
             switchEventUpdate.on = true

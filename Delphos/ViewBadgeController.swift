@@ -51,7 +51,7 @@ class ViewBadgeController: NavController {
         //
         
         gObjBackTocontroller = gObjUserProfileNavController
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
       
         self.btnShareBadge.hidden = true
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {

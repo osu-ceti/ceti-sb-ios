@@ -38,7 +38,7 @@ class MessageController:  NavController  {
         //backToView = "HomeID"
         
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         self.requiredField.hidden = true
         
          messageViewUserName.font = UIFont.boldSystemFontOfSize(15)

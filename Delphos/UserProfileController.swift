@@ -109,7 +109,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         self.tableView.dataSource = self
         tableView.delegate = self
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         collectionView.backgroundColor = bgColor
         collectionView.dataSource = self
         

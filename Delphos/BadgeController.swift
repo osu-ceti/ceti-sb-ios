@@ -52,7 +52,7 @@ class BadgeController: NavController {
         super.viewDidLoad()
         rootViewController = self
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         
         eventName.text = txtEventName
         speakerName.text = txtSpeakerName

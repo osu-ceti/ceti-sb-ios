@@ -108,7 +108,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             // datepickerstartdate.addTarget(self, action: Selector("dataPickerChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         //label and back ground design
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         
         var bottomLine = CALayer()
         bottomLine.frame = CGRectMake(0.0, txtTitle.frame.height - 1, txtTitle.frame.width, 1.0)

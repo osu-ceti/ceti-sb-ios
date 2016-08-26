@@ -75,7 +75,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         
       
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         self.tableView.backgroundColor = bgColor
         
        

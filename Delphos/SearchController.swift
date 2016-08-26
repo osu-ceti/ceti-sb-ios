@@ -51,7 +51,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         tableVIew.delegate = self
         self.tableVIew.tableFooterView = UIView()
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         self.tableVIew.backgroundColor = bgColor
        
     }

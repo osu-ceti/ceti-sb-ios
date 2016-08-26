@@ -69,7 +69,7 @@ class AccountEditController: NavController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         
         
         

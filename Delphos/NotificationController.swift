@@ -57,7 +57,7 @@ class NotificationController: NavController {
        
        //gObjBackTocontroller = gObjNotificationControllerNav
           //self.tableView.reloadData()
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = bgColor
         //self.tableView.reloadData()

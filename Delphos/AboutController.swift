@@ -63,7 +63,7 @@ class AboutController: NavController {
 
         
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         viewDetails.backgroundColor = bgColor
         
 

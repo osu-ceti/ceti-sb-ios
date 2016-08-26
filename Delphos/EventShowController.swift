@@ -139,7 +139,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.claim.hidden = true
         self.cancelClaim.hidden = true
         
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         
         self.tableView.backgroundColor = bgColor
         self.tableView.dataSource = self
