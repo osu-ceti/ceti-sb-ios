@@ -52,19 +52,19 @@ class PushNotificationDelegate: BaseDelegate {
                     event_id: (pushNotificationBean!.data?.event_id)!, speaker_name: (pushNotificationBean!.data?.speaker_name)!, badge_url: (pushNotificationBean!.data?.badge_url)!)
                 
             }
-            else {
-                 let objBadgesController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController
-                
-                gObjBadgeController = self.getNavigationController(objBadgesController)
-                
-                
-                rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
-
-//                gEventID = pushNotificationBean!.data?.event_id
-//                self.showEvent(rootViewController)
-                
-                
-            }
+//            else {
+//                 let objBadgesController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController
+//                
+//                gObjBadgeController = self.getNavigationController(objBadgesController)
+//                
+//                
+//                rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
+//
+////                gEventID = pushNotificationBean!.data?.event_id
+////                self.showEvent(rootViewController)
+//                
+//                
+//            }
         })
         
         

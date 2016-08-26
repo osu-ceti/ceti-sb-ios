@@ -72,7 +72,7 @@ class BadgeController: NavController {
                     
                     
                 }
-                if(gAwardNtype == 4){
+                if(gAwardNtype == 4 ){
                     self.btnAwardBadges.hidden = false
                     self.btnDoNotAward.hidden = false
                     
@@ -93,11 +93,14 @@ class BadgeController: NavController {
                 if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
                     var data = NSData(contentsOfURL:url)
                     if data != nil {
-                self.badgeImage.image = UIImage(data:data!)
+                         dispatch_async(dispatch_get_main_queue(), {
+                            self.badgeImage.image = UIImage(data:data!)
+                        })
                     }
 
                 }
-                
+                self.btnAwardBadges.hidden = false
+                self.btnDoNotAward.hidden = false
           }
            
         })
