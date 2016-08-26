@@ -145,8 +145,10 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchControllerCell
         print("currentCell", currentCell.txtIdHidden.text!)
         
-        gSearchValue = Int(currentCell.txtIdHidden.text!)
-             
+        if(currentCell.txtIdHidden.text != nil){
+            gSearchValue = Int(currentCell.txtIdHidden.text!)
+        }
+        
         
         dispatch_async(dispatch_get_main_queue(), {
             

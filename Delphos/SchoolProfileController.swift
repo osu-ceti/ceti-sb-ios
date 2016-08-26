@@ -193,9 +193,14 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     @IBAction func makeMySchoolClick(sender: AnyObject) {
         
-        strSchoolId =  String(gObjSearchSchoolListBean.id)
-        makeMySchoolName = gObjSearchSchoolListBean.name
-        
+        if(gObjSearchSchoolListBean != nil){
+            if(gObjSearchSchoolListBean.id != nil){
+                strSchoolId =  String(gObjSearchSchoolListBean.id)
+            }
+            if(gObjSearchSchoolListBean.name != nil){
+                makeMySchoolName = gObjSearchSchoolListBean.name
+            }
+        }
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_MAKE_MY_SCHOOL)
