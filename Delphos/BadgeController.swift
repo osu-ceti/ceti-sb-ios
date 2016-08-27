@@ -26,6 +26,9 @@ class BadgeController: NavController {
     
     @IBOutlet var btnDoNotAward: UIButton!
     
+    @IBOutlet var labelAwardedBadge: UILabel!
+    @IBOutlet var labelForEvent: UILabel!
+    
     @IBOutlet weak var badgeImage: UIImageView!
     var txtEventName: String?
     var eventId:Int?
@@ -33,6 +36,15 @@ class BadgeController: NavController {
     var badgeUrl:String?
     var badgesAwardToEvent:Bool!
     
+    var isAwarded:Bool = false
+    @IBOutlet var msgAwardedBadge: UILabel!
+    
+    
+    @IBOutlet var afterAwardedForEvent: UILabel!
+    
+    @IBOutlet var afterAwardedEventName: UILabel!
+   
+   // var awardResponse:[AwardBadgesResponse]!
     @IBOutlet var scrollView: UIScrollView!
     
     override func viewWillAppear(animated: Bool) {
@@ -51,60 +63,82 @@ class BadgeController: NavController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rootViewController = self
-        
+        self.msgAwardedBadge.hidden = true
         self.view.backgroundColor = bgColor
+       
+        self.afterAwardedForEvent.hidden = true
+        self.afterAwardedEventName.hidden = true
+        self.speakerName.hidden = false
+        self.labelAwardedBadge.hidden = false
+        self.labelForEvent.hidden = false
+        self.eventName.hidden = false
         
         eventName.text = txtEventName
         speakerName.text = txtSpeakerName
         
-        if(eventName.text == nil && speakerName.text == nil){
         
-            if(gEventTitle != nil){
-                eventName.text = gEventTitle
-                speakerName.text = gActUserName
-                eventId = gEventID
+        
                 
-                if let url = NSURL(string:AWS_S3 + "def_school_badge_small.jpg"){
-                    var data = NSData(contentsOfURL:url)
-                    if data != nil {
-                        self.badgeImage.image = UIImage(data:data!)
-                    }
+//                eventName.text = gEventTitle
+//                speakerName.text = gActUserName
+//                eventId = gEventID
+        
+//                if let url = NSURL(string:AWS_S3 + badgeUrl! ){
+//                    var data = NSData(contentsOfURL:url)
+//                    if data != nil {
+//                        self.badgeImage.image = UIImage(data:data!)
+//                    }
+//                    
+//                    
+//                }
+                if(isAwarded == true){
+                    
+                    self.msgAwardedBadge.hidden = false
+                    self.afterAwardedForEvent.hidden = false
+                    self.afterAwardedEventName.hidden = false
+                    self.speakerName.hidden = true
+                    self.labelAwardedBadge.hidden = true
+                    self.labelForEvent.hidden = true
+                    self.eventName.hidden = true
+                    
+                    self.afterAwardedEventName.text = gEventTitle
+                    self.msgAwardedBadge.text = msgAwardedBadge.text! + gActUserName
+                    self.btnAwardBadges.hidden = true
+                    self.btnDoNotAward.hidden = true
                     
                     
-                }
-                if(gAwardNtype == 4 ){
-                    self.btnAwardBadges.hidden = false
-                    self.btnDoNotAward.hidden = false
                     
                 }
                 else{
-                    self.btnAwardBadges.hidden = true
-                    self.btnDoNotAward.hidden = true
+                    ///Badge Not awarded yet
+                    self.btnAwardBadges.hidden = false
+                    self.btnDoNotAward.hidden = false
                 }
-            }
+            
 
-        }
+        
         
 
        // badgeUrl
+        self.showOverlay(self.view)
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-            
+        
             if(self.badgeUrl != nil){
+                print("self.badgeUrl : ", self.badgeUrl)
                 if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
                     var data = NSData(contentsOfURL:url)
                     if data != nil {
                          dispatch_async(dispatch_get_main_queue(), {
+                            self.hideOverlayView()
                             self.badgeImage.image = UIImage(data:data!)
                         })
                     }
 
                 }
-                self.btnAwardBadges.hidden = false
-                self.btnDoNotAward.hidden = false
+
           }
            
         })
-        
         
       
     }

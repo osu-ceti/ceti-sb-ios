@@ -64,7 +64,7 @@ var gSearchUserProfile:Int!
 
 var gActUserId:Int! = 0
 
-var gSpeakerId:Int!
+var gSpeakerId:Int! = 0
 
 var gSpeakerName:String!
 

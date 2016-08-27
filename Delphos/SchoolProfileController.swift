@@ -66,13 +66,14 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
          
         
         self.view.backgroundColor = bgColor
-        
+        self.showOverlay(self.view)
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
             let url = NSURL(string: AWS_S3 + gObjSchoolImage)
             var data = NSData(contentsOfURL:url!)
             if data != nil {
                 dispatch_async(dispatch_get_main_queue(), {
+                    self.hideOverlayView()
                     self.schoolImage.image = UIImage(data:data!)
                 })
             }

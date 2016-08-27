@@ -23,6 +23,7 @@ class NotificationController: NavController {
     var notificationId:Int!
     
     var eventNametext:String?
+    var eventId:Int!
     
     
     
@@ -117,6 +118,7 @@ class NotificationController: NavController {
             // claim
              (cell as! NotificationControllerCell).eventName!.text = "has claimed your event: "  + String(notificationDisplayBean.event_title)
              (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+              (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             
             break
             
@@ -125,6 +127,7 @@ class NotificationController: NavController {
             //confrim speaker
             (cell as! NotificationControllerCell).eventName!.text = "has confirmed you as the speaker of event: "  + String(notificationDisplayBean.event_title)
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
             
         case NOTIFICATION_TYPE.EVENT_UPDATE.rawValue :
@@ -133,6 +136,7 @@ class NotificationController: NavController {
             
             (cell as! NotificationControllerCell).eventName!.text = "has updated event: "  + String(notificationDisplayBean.event_title)
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         case NOTIFICATION_TYPE.MESSAGE.rawValue :
            
@@ -141,6 +145,7 @@ class NotificationController: NavController {
             
             (cell as! NotificationControllerCell).eventName!.text = "has sent you a message via email."
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             
             break
         case NOTIFICATION_TYPE.AWARD_BADGE.rawValue :
@@ -150,6 +155,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text = "Award them a badge."
              eventNametext = notificationDisplayBean.event_title
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
             
@@ -158,6 +164,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text = "has awarded you a badge!"
             //String(notificationDisplayBean.act_user_name) +
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         case NOTIFICATION_TYPE.CANCEL.rawValue :
             
@@ -166,6 +173,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text = String(notificationDisplayBean.act_user_name) + " has canceled the event:  "
                 //+ String(notificationDisplayBean.event_title)
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         case NOTIFICATION_TYPE.REJECT_CLAIM.rawValue :
             
@@ -174,6 +182,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text = " has chosen a different candidate"
             //String(notificationDisplayBean.act_user_name)
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         case NOTIFICATION_TYPE.CANCEL_CLAIM.rawValue :
            
@@ -182,6 +191,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text =  String(notificationDisplayBean.act_user_name) + " has canceled their claim"
             //for event: " +  String(notificationDisplayBean.event_title)
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         case NOTIFICATION_TYPE.CANCEL_SPEAKER.rawValue :
             
@@ -190,11 +200,13 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text = String(notificationDisplayBean.act_user_name) + " has to cancel their speaking engagement "
             //for event:" + String(notificationDisplayBean.event_title)
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         default :
            
             (cell as! NotificationControllerCell).eventName!.text = ""  + String(notificationDisplayBean.event_title)
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
         }
     }
@@ -216,12 +228,12 @@ class NotificationController: NavController {
         print("currentCell", selectCell.eventId.text!)
         
         gEventID = Int(selectCell.eventId.text!)
-        
+        eventId = Int(selectCell.eventId.text!)
         notificationId = Int(selectCell.id.text!)
         
        
         gActUserName = selectCell.actUSerName.text
-        gAwardNtype = gNotificationNType
+        gAwardNtype = Int(selectCell.hiddenNType.text!)
       
         if(selectCell.hiddenEventName.text != nil){
             //gEventTitle = eventNametext
@@ -233,15 +245,15 @@ class NotificationController: NavController {
         
        
         
-        dispatch_async(dispatch_get_main_queue(), {
+       // dispatch_async(dispatch_get_main_queue(), {
              //gObjBackTocontroller = gObjNotificationControllerNav
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.READ_NOTIFICATION)
-        })
+       // })
         
-        gObjNotificationControllerNav = self.fetchNavController(gStrNotificationControllerID)
+        
         gObjBackTocontroller = gObjNotificationControllerNav
         
         switch gNotificationNType {
@@ -252,23 +264,23 @@ class NotificationController: NavController {
                 //award_badge
                 
                 
-                dispatch_async(dispatch_get_main_queue(), {
+               // dispatch_async(dispatch_get_main_queue(), {
                     
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
                     testfacade.doTask(self,action: DelphosAction.VIEW_BADGE_AWARD)
-                })
+              //  })
             break
             
             case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
             
             //new_badge
-                dispatch_async(dispatch_get_main_queue(), {
+              //  dispatch_async(dispatch_get_main_queue(), {
                     
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
                     testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
-                })
+               // })
             
             break
             
@@ -276,12 +288,12 @@ class NotificationController: NavController {
                
               
 
-                dispatch_async(dispatch_get_main_queue(), {
+                //dispatch_async(dispatch_get_main_queue(), {
                     
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
                     testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
-                })
+                //})
            
             
             break

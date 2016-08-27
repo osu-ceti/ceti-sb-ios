@@ -159,7 +159,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         labelText6.font = UIFont.boldSystemFontOfSize(15)
     
         
-        if(gBtnRadioValue == events && gObjShowEventBean != nil) {
+        if(gBtnRadioValue == events || gObjShowEventBean != nil) {
             
 
             
@@ -192,7 +192,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             }
             
             else{
-            self.txtTitle.text = gObjShowEventBean.title
+                self.txtTitle.text = gObjShowEventBean.title
             }
            
             //self.txtText1.text =    gObjShowEventBean.speaker
@@ -266,6 +266,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 
             
             }
+            
 //            else if (gObjUserBean.id == gObjShowEventBean.speaker_id) {
 //                
 //                self.editEvent.hidden = true
@@ -386,10 +387,13 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! EventShowControllerCells
         print("currentCell", currentCell.userId.text!)
         
-        gClaimDetailId = Int(currentCell.userId.text!)
-        gUserId = Int(currentCell.userId.text!)
-        gClaimSpeakerName = String(currentCell.claimUserName.text!)
-
+        if(currentCell.userId.text != nil){
+            gClaimDetailId = Int(currentCell.userId.text!)
+            gUserId = Int(currentCell.userId.text!)
+        }
+        if(currentCell.claimUserName.text != nil){
+            gClaimSpeakerName = String(currentCell.claimUserName.text!)
+        }
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.CLAIM_LIST_DETAILS)

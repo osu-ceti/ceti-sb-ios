@@ -90,10 +90,10 @@ class BaseDelegate: NSObject {
         objBadgesController.txtSpeakerName = speaker_name
         objBadgesController.badgeUrl = badge_url
         
-        gObjBadgeController = self.getNavigationController(objBadgesController)
+        gObjBadgeControllerNav = self.getNavigationController(objBadgesController)
         
         
-        rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
+        rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeControllerNav, close: true)
 
     
     }

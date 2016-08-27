@@ -28,7 +28,9 @@ class NotificationDelegate:BaseDelegate{
                 //var objNotificationBean = result as! NotificationBean!
                 
                 
+                
                 gObjNotificationController = self.instantiateVC(gStrNotificationControllerID) as! NotificationController
+               
                 
                 
                 let objnotificationBean = result as! NotificationBean
@@ -60,9 +62,9 @@ class NotificationDelegate:BaseDelegate{
                 dispatch_async(dispatch_get_main_queue(), {
                   
                     
-                    var objNotificationControllerNav = self.getNavigationController(gObjNotificationController)
+                     gObjNotificationControllerNav = self.getNavigationController(gObjNotificationController)
                     
-                    self.doNavigate(objCurrentContoller, toController: objNotificationControllerNav,  close: true)
+                    self.doNavigate(objCurrentContoller, toController: gObjNotificationControllerNav,  close: true)
                     
                 })
                 

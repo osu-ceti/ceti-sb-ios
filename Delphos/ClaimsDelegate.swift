@@ -106,17 +106,33 @@ class ClaimsDelegate: BaseDelegate {
         doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
-                var objEventShowController = objCurrentContoller as! EventShowController
+                let objEventShowController = objCurrentContoller as! EventShowController
                 
                 dispatch_async(dispatch_get_main_queue(), {
                    // gClaimsList = result as! ClaimListBean
 
                     gClaimsListDetails = result as! ClaimListClaimBeanBean
-                    objEventShowController.labelBusiness.text! = String(gClaimsListDetails.business)
-                    objEventShowController.labelJobTitle.text! = String(gClaimsListDetails.job_title)
-                    objEventShowController.labelUserName.text! = String(gClaimsListDetails.user_name)
-                    objEventShowController.selectedClaimId = gClaimsListDetails.claim_id
-                    objEventShowController.selectedEventId = gClaimsListDetails.event_id
+                    if(gClaimsListDetails != nil){
+                        if(gClaimsListDetails.business != nil){
+                            objEventShowController.labelBusiness.text! = String(gClaimsListDetails.business)
+                        }
+                        if(gClaimsListDetails.job_title != nil){
+
+                            objEventShowController.labelJobTitle.text! = String(gClaimsListDetails.job_title)
+                        }
+                        if(gClaimsListDetails.user_name != nil){
+
+                            objEventShowController.labelUserName.text! = String(gClaimsListDetails.user_name)
+                        }
+                        if(gClaimsListDetails.claim_id != nil){
+
+                            objEventShowController.selectedClaimId = gClaimsListDetails.claim_id
+                        }
+                        if(gClaimsListDetails.event_id != nil){
+
+                            objEventShowController.selectedEventId = gClaimsListDetails.event_id
+                        }
+                    }
                     
                    // (objCurrentContoller as! EventShowController).claimBeanDetail = gclaimsListDetails
                     // (objCurrentContoller as! EventShowController).tableView.reloadData()

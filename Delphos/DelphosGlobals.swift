@@ -59,8 +59,8 @@ var gStrBadgesAwardControllerID: String = "BadgesAwardControllerId"
 var gObjViewBadgeController :ViewBadgeController!
 var gStrViewBadgeControllerID: String = "ViewBadgeControllerId"
 
-var gObjBadgeControllerNav : BadgeController!
-var gObjBadgeController : UINavigationController!
+var gObjBadgeController : BadgeController!
+var gObjBadgeControllerNav : UINavigationController!
 var gStrBadgeControllerID: String = "BadgeControllerId"
 
 

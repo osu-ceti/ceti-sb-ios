@@ -20,6 +20,7 @@ class NotificationControllerCell: UITableViewCell {
     
     @IBOutlet var hiddenEventName: UILabel!
     
+    @IBOutlet var hiddenNType: UILabel!
     @IBOutlet var UserNotificationType: UILabel!
     
     override func awakeFromNib() {

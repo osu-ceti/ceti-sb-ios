@@ -284,6 +284,38 @@ class DAOServices: DAOBase {
     }
 
     
+    func getAwardBadgeDetails(eventid :String,callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
+        //print("GET AWARD DEATAILS")
+        var strEventId = eventid
+       // api/users/award_badge?event_id=282
+       
+        strURL = DEV_TARGET + USERS +  AWARD_BADGES + "?" + EVENT_ID + "=" + strEventId
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
+            
+            if(status) {
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
+                print(jsonResult)
+                let showAwardBadgeResponse = Mapper<AwardBadgesResponse>().map(jsonResult)
+                
+                callBack?(result: showAwardBadgeResponse!, statusCode: statusCode )
+                
+                return
+            }
+            else {
+                
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                
+                callBack?(result: errorBean, statusCode: statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
     //GET APIs -- ENDS HERE
     
@@ -473,7 +505,7 @@ class DAOServices: DAOBase {
         
         var strEventId = String(strClaimEventId)
         var strClaimid = String(strClaimid)
-         strURL =  CLAIMS_LIST + "/" + TEACHER_CONFIRM + "?" + "event_id=" + strEventId + "&" + "claim_id=" + strClaimid
+         strURL =  CLAIMS_LIST + "/" + TEACHER_CONFIRM + "?event_id=" + strEventId + "&claim_id=" + strClaimid
         
         doPost(strEventId,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
@@ -609,9 +641,9 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var showEventBean = Mapper<SchoolsBean>().map(jsonResult)
+                var showSchoolBean = Mapper<SchoolsBean>().map(jsonResult)
                 
-                callBack?(result: showEventBean!, statusCode: statusCode )
+                callBack?(result: showSchoolBean!, statusCode: statusCode )
                 
                 return
             }
@@ -634,7 +666,7 @@ class DAOServices: DAOBase {
     
     
     func doSignOut(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        var strEmptyJson = gEmptyJSON
+        let strEmptyJson = gEmptyJSON
         strURL =   USERS + SIGN_OUT
        
         
@@ -782,7 +814,7 @@ class DAOServices: DAOBase {
 
         }
         else{
-             strURL =   DEV_TARGET + NOTIFICATION + "?" + "page=" + pageValue
+             strURL =   DEV_TARGET + NOTIFICATION + "?page=" + pageValue
         }
         
         
@@ -791,7 +823,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
+                let showNotificationBean = Mapper<NotificationBean>().map(jsonResult)
                 
                 callBack?(result: showNotificationBean!, statusCode: statusCode )
                 
@@ -811,7 +843,7 @@ class DAOServices: DAOBase {
         })
     }
     func doDeleteNotification(callBack: ((result: AnyObject, statusCode: Int) -> Void)?) {
-        var strEmptyJson = gEmptyJSON
+        let strEmptyJson = gEmptyJSON
         strURL =   NOTIFICATION
         
         
@@ -820,12 +852,12 @@ class DAOServices: DAOBase {
         doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status) {
-                var signoutBean = Mapper<SignoutResponseBean>().map(jsonResult)!
+                let signoutBean = Mapper<SignoutResponseBean>().map(jsonResult)!
                 callBack?(result: signoutBean, statusCode: statusCode )
                 return
             } else {
                 //println(jsonResult)
-                var  errorBean = Mapper<ErrorBean>().map(jsonResult)!
+                let  errorBean = Mapper<ErrorBean>().map(jsonResult)!
                 callBack?(result: errorBean, statusCode: statusCode )
                 return
             }
@@ -849,9 +881,9 @@ class DAOServices: DAOBase {
         let strEventId = String(eventId)
         
         
-        let strSubUrl = "?" + "award=" + strAward
+        let strSubUrl = "?award=" + strAward
         
-        let strSubUrl2 = "&" + "event_id=" + strEventId
+        let strSubUrl2 = "&event_id=" + strEventId
         
         strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
         
