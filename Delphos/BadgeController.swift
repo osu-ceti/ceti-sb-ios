@@ -91,7 +91,10 @@ class BadgeController: NavController {
 //                    
 //                    
 //                }
+        
                 if(isAwarded == true){
+                    
+                    
                     
                     self.msgAwardedBadge.hidden = false
                     self.afterAwardedForEvent.hidden = false
@@ -106,6 +109,11 @@ class BadgeController: NavController {
                     self.btnAwardBadges.hidden = true
                     self.btnDoNotAward.hidden = true
                     
+                    if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+                    {
+                        afterAwardedForEvent.frame.origin.x = 280
+                        afterAwardedEventName.frame.origin.x = 350
+                    }
                     
                     
                 }
@@ -124,7 +132,7 @@ class BadgeController: NavController {
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
         
             if(self.badgeUrl != nil){
-                print("self.badgeUrl : ", self.badgeUrl)
+               // print("self.badgeUrl : ", self.badgeUrl)
                 if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
                     var data = NSData(contentsOfURL:url)
                     if data != nil {
