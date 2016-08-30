@@ -54,17 +54,25 @@ class ViewBadgeController: NavController {
         self.view.backgroundColor = bgColor
       
         self.btnShareBadge.hidden = true
+        showOverlay(self.view)
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
             dispatch_async(dispatch_get_main_queue(), {
-        
+                self.hideOverlayView()
                 let url = NSURL(string: AWS_S3 + viewBadgeBean.badge_url)
                 self.data = NSData(contentsOfURL:url!)!
                 if self.data != "" {
                     self.imgbadge.image = UIImage(data:self.data)
                 }
             })
+            
         })
+        
+        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        {
+            labelData.frame.origin.y = 450
+        
+        }
         self.labelData.text = viewBadgeBean.event_owner! +
         " awarded " + viewBadgeBean.user_name!  + " a badge for speaking at the event: " + viewBadgeBean.event_name!
         + ", at " + viewBadgeBean.school_name!

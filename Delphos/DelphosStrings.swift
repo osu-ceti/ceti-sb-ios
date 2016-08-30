@@ -33,3 +33,7 @@ var MSG_AWARDED = "Bagde has been awarded"
 
 var gStrUserStorageKey = "userNameKey"
 var gStrUserStoragePassKey = "userPasswordKey"
+
+var EMPTY_STRING = ""
+var EMPTY_INT:Int = 0
+

@@ -112,18 +112,18 @@ class ClaimsDelegate: BaseDelegate {
                    // gClaimsList = result as! ClaimListBean
 
                     gClaimsListDetails = result as! ClaimListClaimBeanBean
+                    //self.isCheckNilOrNotBase(gClaimsListDetails.business,labelText: objEventShowController.labelBusiness)
+                    
+                    
                     if(gClaimsListDetails != nil){
-                        if(gClaimsListDetails.business != nil){
-                            objEventShowController.labelBusiness.text! = String(gClaimsListDetails.business)
-                        }
-                        if(gClaimsListDetails.job_title != nil){
-
-                            objEventShowController.labelJobTitle.text! = String(gClaimsListDetails.job_title)
-                        }
-                        if(gClaimsListDetails.user_name != nil){
-
-                            objEventShowController.labelUserName.text! = String(gClaimsListDetails.user_name)
-                        }
+                        
+                        objEventShowController.labelBusiness.text! = self.ifNilReturnEmptyString(gClaimsListDetails.business)
+                   
+                       objEventShowController.labelJobTitle.text! =  self.ifNilReturnEmptyString(gClaimsListDetails.job_title)
+                        
+                        objEventShowController.labelUserName.text! = self.ifNilReturnEmptyString(gClaimsListDetails.user_name)
+                 
+                       
                         if(gClaimsListDetails.claim_id != nil){
 
                             objEventShowController.selectedClaimId = gClaimsListDetails.claim_id
@@ -132,6 +132,12 @@ class ClaimsDelegate: BaseDelegate {
 
                             objEventShowController.selectedEventId = gClaimsListDetails.event_id
                         }
+                        
+                        objEventShowController.mainLabelJobTitle.hidden = false
+                        objEventShowController.mainLabelBusiness.hidden = false
+                        objEventShowController.labelUserName.hidden = false
+                        objEventShowController.labelBusiness.hidden = false
+                        objEventShowController.labelJobTitle.hidden = false
                     }
                     
                    // (objCurrentContoller as! EventShowController).claimBeanDetail = gclaimsListDetails

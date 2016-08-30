@@ -53,7 +53,9 @@ class SettingsController: NavController {
         
         backToController = gObjHomeController
     }
+    @IBOutlet var endLineView: UIView!
     @IBOutlet var viewSetting: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,7 +90,10 @@ class SettingsController: NavController {
             switchEventClaim.on = false
         
         }
-        
+        if(UIDevice.currentDevice().orientation.isLandscape.boolValue) {
+            print("landscape")
+            endLineView.frame = CGRect(x: 0,y: 200,width: 700,height: 1)
+        }
         
         
         

@@ -62,6 +62,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var schoolProfileId:Int!
     var tempBackToViewController:UIViewController!
     var imagesCount:Int!
+    var isBadgesClicked: Bool!! = false
     
     var profileButtonColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor
     
@@ -83,7 +84,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.showOverlay(self.view)
+       //self.showOverlay(self.view)
         if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
@@ -317,17 +318,12 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if (userProfileBadgesArray.count > 0){
-            return userProfileBadgesArray.count
+        if(isBadgesClicked != false){
+            if (userProfileBadgesArray.count > 0){
+                return userProfileBadgesArray.count
+            }
         }
-        else{
-            self.hideOverlayView()
-            
-            return 0
-            
-        }
-        
+        return 0
     }
     
     
@@ -340,8 +336,9 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         if (userProfileBadgesArray.count > 0){
             self.labelNoBadges.hidden = true
-            
-           dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            self.showOverlay(self.view)
+           
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
             
 
@@ -349,7 +346,9 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
                 let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
             
                 if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
+                    
                     dispatch_async(dispatch_get_main_queue(), {
+                        self.hideOverlayView()
 
                         let badgesImage = NSData(contentsOfURL:url)
             
@@ -512,7 +511,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     @IBAction func btnBadges(sender: AnyObject) {
         
-        
+        isBadgesClicked = true;
+        self.collectionView.reloadData()
         bottomLineBadges.frame = CGRectMake(0, btnBadges.frame.size.height, btnBadges.frame.size.width, 1)
         bottomLineBadges.borderWidth = 2.0
         

@@ -1,4 +1,4 @@
-//
+    //
 //  EventShowController.swift
 //  Delphos
 //
@@ -399,11 +399,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             testfacade.doTask(self,action: DelphosAction.CLAIM_LIST_DETAILS)
            
         self.tableView.hidden = true
-        self.mainLabelJobTitle.hidden = false
-        self.mainLabelBusiness.hidden = false
-        self.labelUserName.hidden = false
-        self.labelBusiness.hidden = false
-        self.labelJobTitle.hidden = false
+//        self.mainLabelJobTitle.hidden = false
+//        self.mainLabelBusiness.hidden = false
+//        self.labelUserName.hidden = false
+//        self.labelBusiness.hidden = false
+//        self.labelJobTitle.hidden = false
         self.editEvent.hidden = true
         self.cancelEvent.hidden = true
        
