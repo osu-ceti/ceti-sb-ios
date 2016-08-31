@@ -139,7 +139,7 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
-                self.removeUserCodes()
+               // self.removeUserCodes()
                 self.RedirectLoginPage(objCurrentContoller)
                 
             }
