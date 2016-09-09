@@ -21,7 +21,7 @@ class PushAPSBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         alert       <- map["alert"]
         
     }

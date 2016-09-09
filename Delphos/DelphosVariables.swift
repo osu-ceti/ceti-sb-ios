@@ -56,6 +56,8 @@ var gBadgesAwardToEvent:Bool!
 
 var gNotificationNType:Int!
 
+var gAwardNtype:Int!
+
 var gBadgeid:Int!
 
 var gSearchUserProfile:Int!
@@ -74,9 +76,17 @@ var gPasswordCheck:String!
 
 var gUserVIewBadgeId:Int!
 
+var gActUserName:String!
+var gEventTitle:String!
+
 var gSchoolId:Int!
 
 var strUserProfileId:Int = 0
+
+var notificationPage:Int = 1
+
+var NotificationFirstArray: [NotificationListBean]!
+var NotificationSecondArray:[NotificationListBean]!
 
 var gClaimsListDetails:ClaimListClaimBeanBean!
 
@@ -103,6 +113,7 @@ var viewBadgeBean:UserProfileBadgesBean!
 
 var gPublicEditaccountBean: UserBean!
 
+var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
 
 
 

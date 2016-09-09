@@ -13,21 +13,21 @@ let DEBUG_MSG:String = "DEBUG: "
 let ERROR_MSG:String = "ERROR: "
 
 enum LoggingLevel{
-    case INFO
-    case DEBUG
-    case ERROR
+    case info
+    case debug
+    case error
 }
 class Logger {
-    func log(level :LoggingLevel, message:String)->Void{
+    func log(_ level :LoggingLevel, message:String)->Void{
         switch(level)
         {
-            case .INFO:
+            case .info:
                 NSLog(INFO_MSG + message)
             
-            case .DEBUG:
+            case .debug:
                 NSLog(DEBUG_MSG + message)
             
-            case .ERROR:
+            case .error:
                 NSLog(ERROR_MSG + message)
         }
         

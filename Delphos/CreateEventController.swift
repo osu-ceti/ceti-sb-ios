@@ -29,7 +29,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     @IBOutlet weak var btnPostEvent: UIButton!
     
-    let checkCharacter = NSCharacterSet.letterCharacterSet()
+    let checkCharacter = CharacterSet.letters
     
     
    // @IBOutlet var txtStartTimeTouch: UITextField!
@@ -41,18 +41,18 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     var timePickerView = UIDatePicker()
     var endTimePickerView = UIDatePicker()
     
-    func getCurrentDate() -> NSDate{
-        return NSDate()
+    func getCurrentDate() -> Date{
+        return Date()
     }
-    var currentDate = NSDate()
+    var currentDate = Date()
 
-    var dateFormatter       = NSDateFormatter()
-    var endDatevalid        = NSDate()
-    var startDatevalid      = NSDate()
-    var startTimeValid      = NSDate()
-    var endTimeValid        = NSDate()
-    var startDateAndTime    = NSDate()
-    var endDateAndTime      = NSDate()
+    var dateFormatter       = DateFormatter()
+    var endDatevalid        = Date()
+    var startDatevalid      = Date()
+    var startTimeValid      = Date()
+    var endTimeValid        = Date()
+    var startDateAndTime    = Date()
+    var endDateAndTime      = Date()
     
     var isEdit = false
     var eventId = 0
@@ -69,7 +69,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
    
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -87,7 +87,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
         rootViewController = self
-        self.requiredError.hidden = true
+        self.requiredError.isHidden = true
         settingSearch = true
       
              // txtTitle = UITextField(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 25))
@@ -107,61 +107,61 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             //  timeZonePicker.delegate = self
             // datepickerstartdate.addTarget(self, action: Selector("dataPickerChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         //label and back ground design
-        var color = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+       
         
-        view.backgroundColor = color
+        view.backgroundColor = bgColor
         
-        var bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, txtTitle.frame.height - 1, txtTitle.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.blackColor().CGColor
-        txtTitle.borderStyle = UITextBorderStyle.None
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: txtTitle.frame.height - 1, width: txtTitle.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        txtTitle.borderStyle = UITextBorderStyle.none
         txtTitle.layer.addSublayer(bottomLine)
         
         let txtContentsLine = CALayer()
-        txtContentsLine.frame = CGRectMake(0.0, txtContents.frame.height - 1, txtContents.frame.width, 1.0)
-        txtContentsLine.backgroundColor = UIColor.blackColor().CGColor
-        txtContents.borderStyle = UITextBorderStyle.None
+        txtContentsLine.frame = CGRect(x: 0.0, y: txtContents.frame.height - 1, width: txtContents.frame.width, height: 1.0)
+        txtContentsLine.backgroundColor = UIColor.black.cgColor
+        txtContents.borderStyle = UITextBorderStyle.none
         txtContents.layer.addSublayer(txtContentsLine)
         
         let txtTagsLine = CALayer()
-        txtTagsLine.frame = CGRectMake(0.0, txtTags.frame.height - 1, txtTags.frame.width, 1.0)
-        txtTagsLine.backgroundColor = UIColor.blackColor().CGColor
-        txtTags.borderStyle = UITextBorderStyle.None
+        txtTagsLine.frame = CGRect(x: 0.0, y: txtTags.frame.height - 1, width: txtTags.frame.width, height: 1.0)
+        txtTagsLine.backgroundColor = UIColor.black.cgColor
+        txtTags.borderStyle = UITextBorderStyle.none
         txtTags.layer.addSublayer(txtTagsLine)
         
         let txtTimeZoneSelectLine = CALayer()
-        txtTimeZoneSelectLine.frame = CGRectMake(0.0, txtTimeZoneSelect.frame.height - 1, txtTimeZoneSelect.frame.width, 1.0)
-        txtTimeZoneSelectLine.backgroundColor = UIColor.blackColor().CGColor
-        txtTimeZoneSelect.borderStyle = UITextBorderStyle.None
+        txtTimeZoneSelectLine.frame = CGRect(x: 0.0, y: txtTimeZoneSelect.frame.height - 1, width: txtTimeZoneSelect.frame.width, height: 1.0)
+        txtTimeZoneSelectLine.backgroundColor = UIColor.black.cgColor
+        txtTimeZoneSelect.borderStyle = UITextBorderStyle.none
         txtTimeZoneSelect.layer.addSublayer(txtTimeZoneSelectLine)
         
         let startDateLine = CALayer()
-        startDateLine.frame = CGRectMake(0.0, startDate.frame.height - 1, startDate.frame.width, 1.0)
-        startDateLine.backgroundColor = UIColor.blackColor().CGColor
-        startDate.borderStyle = UITextBorderStyle.None
+        startDateLine.frame = CGRect(x: 0.0, y: startDate.frame.height - 1, width: startDate.frame.width, height: 1.0)
+        startDateLine.backgroundColor = UIColor.black.cgColor
+        startDate.borderStyle = UITextBorderStyle.none
         startDate.layer.addSublayer(startDateLine)
         
         
         let txtStartTimeLine = CALayer()
-        txtStartTimeLine.frame = CGRectMake(0.0, txtStartTime.frame.height - 1, txtStartTime.frame.width, 1.0)
-        txtStartTimeLine.backgroundColor = UIColor.blackColor().CGColor
-        txtStartTime.borderStyle = UITextBorderStyle.None
+        txtStartTimeLine.frame = CGRect(x: 0.0, y: txtStartTime.frame.height - 1, width: txtStartTime.frame.width, height: 1.0)
+        txtStartTimeLine.backgroundColor = UIColor.black.cgColor
+        txtStartTime.borderStyle = UITextBorderStyle.none
         txtStartTime.layer.addSublayer(txtStartTimeLine)
         
         let endDateLine = CALayer()
-        endDateLine.frame = CGRectMake(0.0, endDate.frame.height - 1, endDate.frame.width, 1.0)
-        endDateLine.backgroundColor = UIColor.blackColor().CGColor
-        endDate.borderStyle = UITextBorderStyle.None
+        endDateLine.frame = CGRect(x: 0.0, y: endDate.frame.height - 1, width: endDate.frame.width, height: 1.0)
+        endDateLine.backgroundColor = UIColor.black.cgColor
+        endDate.borderStyle = UITextBorderStyle.none
         endDate.layer.addSublayer(endDateLine)
         
         
         let txtEndTimeLine = CALayer()
-        txtEndTimeLine.frame = CGRectMake(0.0, txtEndTime.frame.height - 1, txtEndTime.frame.width, 1.0)
-        txtEndTimeLine.backgroundColor = UIColor.blackColor().CGColor
-        txtEndTime.borderStyle = UITextBorderStyle.None
+        txtEndTimeLine.frame = CGRect(x: 0.0, y: txtEndTime.frame.height - 1, width: txtEndTime.frame.width, height: 1.0)
+        txtEndTimeLine.backgroundColor = UIColor.black.cgColor
+        txtEndTime.borderStyle = UITextBorderStyle.none
         txtEndTime.layer.addSublayer(txtEndTimeLine)
 
-        txtTitle.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        txtTitle.backgroundColor = bgColor //UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         txtContents.backgroundColor = txtTitle.backgroundColor
         txtTags.backgroundColor = txtTitle.backgroundColor
         startDate.backgroundColor = txtTitle.backgroundColor
@@ -172,21 +172,21 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         //end bg design
         //start.frame = CGRectMake(10, 30, 30, 20)
-        let startTimeSet = currentDate.dateByAddingTimeInterval(60*60);
-        let endTimeSet = currentDate.dateByAddingTimeInterval(60*120);
+        let startTimeSet = currentDate.addingTimeInterval(60*60);
+        let endTimeSet = currentDate.addingTimeInterval(60*120);
         
        // let checkCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
         
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = gTimeFormat
        
-        startTime.text = dateFormatter.stringFromDate(startTimeSet)
-        endTime.text = dateFormatter.stringFromDate(endTimeSet)
+        startTime.text = dateFormatter.string(from: startTimeSet)
+        endTime.text = dateFormatter.string(from: endTimeSet)
        
         //Set the display Labels
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
-        txtStartTime.text = dateFormatter.stringFromDate(startTimeSet)
-        txtEndTime.text = dateFormatter.stringFromDate(endTimeSet)
+        txtStartTime.text = dateFormatter.string(from: startTimeSet)
+        txtEndTime.text = dateFormatter.string(from: endTimeSet)
         
         
         startDatevalid = startTimeSet
@@ -197,15 +197,15 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         txtTimeZone.text = "Eastern Time (US & Canada)"
         txtTimeZoneSelect.text = "Eastern Time (US & Canada)"
-        self.startTime.hidden = true
-        self.endTime.hidden = true
-        self.txtTimeZone.hidden = true
+        self.startTime.isHidden = true
+        self.endTime.isHidden = true
+        self.txtTimeZone.isHidden = true
         
         
-        var CurrentDateFormat = NSDateFormatter()
+        let CurrentDateFormat = DateFormatter()
         CurrentDateFormat.dateFormat = gDateFormat
-        self.startDate.text = CurrentDateFormat.stringFromDate(currentDate)
-        self.endDate.text = CurrentDateFormat.stringFromDate(currentDate)
+        self.startDate.text = CurrentDateFormat.string(from: currentDate)
+        self.endDate.text = CurrentDateFormat.string(from: currentDate)
       
         if(isEdit){
             //Page is being edited 
@@ -217,7 +217,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
             //DateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
-            var eventStartDate =  dateFormatter.dateFromString(gObjShowEventBean.event_start)
+            let eventStartDate =  dateFormatter.date(from: gObjShowEventBean.event_start)
             if  (eventStartDate != nil) {
                 //String is already formatted
                 
@@ -227,13 +227,13 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                  //self.txtStartTime.text = gObjShowEventBean.event_start!
                
                 dateFormatter.dateFormat = gTimeFormat
-                self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
+                self.startTime.text = dateFormatter.string(from: eventStartDate!)
                 
                 dateFormatter.dateFormat = gTimeWithoutZoneFormat
-                self.txtStartTime.text =  dateFormatter.stringFromDate(eventStartDate!)
+                self.txtStartTime.text =  dateFormatter.string(from: eventStartDate!)
                 
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                self.startDate.text =  dateFormatter.stringFromDate(eventStartDate!)
+                self.startDate.text =  dateFormatter.string(from: eventStartDate!)
                 
                 startDatevalid = eventStartDate!
                 
@@ -241,7 +241,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             }
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
 
-           var eventEndDate =  dateFormatter.dateFromString(gObjShowEventBean.event_end)
+           let eventEndDate =  dateFormatter.date(from: gObjShowEventBean.event_end)
             if  (eventEndDate != nil) {
                 //String is already formatted
                 
@@ -250,12 +250,12 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 self.endTimePicker.date = eventEndDate!
                 
                 dateFormatter.dateFormat = gTimeFormat
-                self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
+                self.endTime.text = dateFormatter.string(from: eventEndDate!)
 
                 dateFormatter.dateFormat = gTimeWithoutZoneFormat
-                self.txtEndTime.text = dateFormatter.stringFromDate(eventEndDate!)
+                self.txtEndTime.text = dateFormatter.string(from: eventEndDate!)
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                self.endDate.text =  dateFormatter.stringFromDate(eventEndDate!)
+                self.endDate.text =  dateFormatter.string(from: eventEndDate!)
                 
                 endDatevalid = eventEndDate!
             }
@@ -317,93 +317,93 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //            self.endTime.text = spiltEndDateTime[1]
             
             
-            btnPostEvent.setTitle("Update Event", forState: .Normal)
+            btnPostEvent.setTitle("Update Event", for: UIControlState())
             
          
         }
     }
     
-    @IBAction func StartDateTouch(sender: UITextField) {
+    @IBAction func StartDateTouch(_ sender: UITextField) {
          
         
-        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
-        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        let inputView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         {
-            datePickerView = UIDatePicker(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+            datePickerView = UIDatePicker(frame: CGRect(x: inputView.frame.origin.x + 250 , y: 40, width: 0, height: 0))
         }
         else {
-            datePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+            datePickerView = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 0, height: 0))
         }
-        datePickerView.datePickerMode = UIDatePickerMode.Date
+        datePickerView.datePickerMode = UIDatePickerMode.date
         
         dateFormatter.dateFormat = gDateFormat
         let dtStartDate  = startDate.text!
         if(dtStartDate != ""){
             
-            datePickerView.date = dateFormatter.dateFromString(dtStartDate)!
+            datePickerView.date = dateFormatter.date(from: dtStartDate)!
         }
         
         
         
         inputView.addSubview(datePickerView)
         
-        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
-        doneButton.setTitle("Done", forState: UIControlState.Normal)
-        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
-        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        let doneButton = UIButton(frame: CGRect(x: (self.view.frame.size.width/2) - (100/2), y: 0, width: 100, height: 50))
+        doneButton.setTitle("Done", for: UIControlState())
+        doneButton.setTitle("Done", for: UIControlState.highlighted)
+        doneButton.setTitleColor(UIColor.black, for: UIControlState())
+        doneButton.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         
         inputView.addSubview(doneButton) // add Button to UIView
         
-        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        doneButton.addTarget(self, action: #selector(CreateEventController.doneButton(_:)), for: UIControlEvents.touchUpInside) // set button click event
         sender.inputView = inputView
-        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+        datePickerView.addTarget(self, action: #selector(CreateEventController.handleDatePicker(_:)), for: UIControlEvents.valueChanged)
     }
  
-    @IBAction func EndDateTouch(sender: UITextField) {
+    @IBAction func EndDateTouch(_ sender: UITextField) {
       
    
-        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        let inputView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
         
-        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         {
-            datePickerView = UIDatePicker(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+            datePickerView = UIDatePicker(frame: CGRect(x: inputView.frame.origin.x + 250 , y: 40, width: 0, height: 0))
         }
         else {
-            datePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+            datePickerView = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 0, height: 0))
         }
         
-        datePickerView.datePickerMode = UIDatePickerMode.Date
+        datePickerView.datePickerMode = UIDatePickerMode.date
         
         dateFormatter.dateFormat = gDateFormat
         let dtEndDate  = endDate.text!
         if(dtEndDate != ""){
-            datePickerView.date = dateFormatter.dateFromString(dtEndDate)!
+            datePickerView.date = dateFormatter.date(from: dtEndDate)!
         }
         inputView.addSubview(datePickerView)
         
-        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
-        doneButton.setTitle("Done", forState: UIControlState.Normal)
-        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
-        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        let doneButton = UIButton(frame: CGRect(x: (self.view.frame.size.width/2) - (100/2), y: 0, width: 100, height: 50))
+        doneButton.setTitle("Done", for: UIControlState())
+        doneButton.setTitle("Done", for: UIControlState.highlighted)
+        doneButton.setTitleColor(UIColor.black, for: UIControlState())
+        doneButton.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         
         inputView.addSubview(doneButton) // add Button to UIView
-        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        doneButton.addTarget(self, action: #selector(CreateEventController.doneButton(_:)), for: UIControlEvents.touchUpInside) // set button click event
         
         sender.inputView = inputView
-        datePickerView.addTarget(self, action: Selector("handleEndDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+        datePickerView.addTarget(self, action: #selector(CreateEventController.handleEndDatePicker(_:)), for: UIControlEvents.valueChanged)
     }
     /**
      * Method call to showing date picker for start date in a correct format
      */
-    func handleDatePicker(sender: UIDatePicker) {
+    func handleDatePicker(_ sender: UIDatePicker) {
         dateFormatter.dateFormat = gDateFormat
         startDatevalid = sender.date
-        startDate.text = dateFormatter.stringFromDate(sender.date)
+        startDate.text = dateFormatter.string(from: sender.date)
         
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
-        txtStartTime.text = dateFormatter.stringFromDate(sender.date)
+        txtStartTime.text = dateFormatter.string(from: sender.date)
         
     }
     
@@ -414,19 +414,19 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
      */
  
     
-    func handleEndDatePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
+    func handleEndDatePicker(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = gDateFormat
         endDatevalid = sender.date
-        endDate.text = dateFormatter.stringFromDate(sender.date)
+        endDate.text = dateFormatter.string(from: sender.date)
 
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
-        txtEndTime.text = dateFormatter.stringFromDate(sender.date)
+        txtEndTime.text = dateFormatter.string(from: sender.date)
 
     }
 
 
-    func doneButton(sender:UIButton)
+    func doneButton(_ sender:UIButton)
     {
         startDate.resignFirstResponder() // To resign the inputView on clicking done.
         endDate.resignFirstResponder()
@@ -438,20 +438,20 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
     
     
-    @IBAction func startTimeClick(sender: UITextField) {
+    @IBAction func startTimeClick(_ sender: UITextField) {
         
-        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        let inputView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
         
-        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         {
-            timePickerView = UIDatePicker(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+            timePickerView = UIDatePicker(frame: CGRect(x: inputView.frame.origin.x + 250 , y: 40, width: 0, height: 0))
         }
         else {
-            timePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+            timePickerView = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 0, height: 0))
         }
         
         
-        timePickerView.datePickerMode = UIDatePickerMode.Time
+        timePickerView.datePickerMode = UIDatePickerMode.time
         
         dateFormatter.dateFormat = gTimeFormat
         let startTimePickerValue  = txtStartTime.text!
@@ -461,45 +461,45 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         }
         inputView.addSubview(timePickerView)
         
-        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
-        doneButton.setTitle("Done", forState: UIControlState.Normal)
-        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
-        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        let doneButton = UIButton(frame: CGRect(x: (self.view.frame.size.width/2) - (100/2), y: 0, width: 100, height: 50))
+        doneButton.setTitle("Done", for: UIControlState())
+        doneButton.setTitle("Done", for: UIControlState.highlighted)
+        doneButton.setTitleColor(UIColor.black, for: UIControlState())
+        doneButton.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         
         inputView.addSubview(doneButton) // add Button to UIView
-        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        doneButton.addTarget(self, action: #selector(CreateEventController.doneButton(_:)), for: UIControlEvents.touchUpInside) // set button click event
         
         sender.inputView = inputView
-        timePickerView.addTarget(self, action: Selector("handleStartTimePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+        timePickerView.addTarget(self, action: #selector(CreateEventController.handleStartTimePicker(_:)), for: UIControlEvents.valueChanged)
     }
     
-    func handleStartTimePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
+    func handleStartTimePicker(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
        dateFormatter.dateFormat = gTimeFormat
         startDatevalid = sender.date
         
-        startTime.text = dateFormatter.stringFromDate(sender.date)
+        startTime.text = dateFormatter.string(from: sender.date)
         
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
-        txtStartTime.text = dateFormatter.stringFromDate(sender.date)
+        txtStartTime.text = dateFormatter.string(from: sender.date)
     }
     
-    @IBAction func endTimePicker(sender: UITextField) {
+    @IBAction func endTimePicker(_ sender: UITextField) {
        
         
-        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        let inputView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
         
-        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         {
-            endTimePickerView = UIDatePicker(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+            endTimePickerView = UIDatePicker(frame: CGRect(x: inputView.frame.origin.x + 250 , y: 40, width: 0, height: 0))
         }
         else {
-            endTimePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+            endTimePickerView = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 0, height: 0))
         }
         
         
-        endTimePickerView.datePickerMode = UIDatePickerMode.Time
+        endTimePickerView.datePickerMode = UIDatePickerMode.time
         
         dateFormatter.dateFormat = gTimeFormat
         let endTimePickerValue  = txtEndTime.text!
@@ -508,33 +508,33 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         }
         inputView.addSubview(endTimePickerView)
         
-        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
-        doneButton.setTitle("Done", forState: UIControlState.Normal)
-        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
-        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        let doneButton = UIButton(frame: CGRect(x: (self.view.frame.size.width/2) - (100/2), y: 0, width: 100, height: 50))
+        doneButton.setTitle("Done", for: UIControlState())
+        doneButton.setTitle("Done", for: UIControlState.highlighted)
+        doneButton.setTitleColor(UIColor.black, for: UIControlState())
+        doneButton.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         
         inputView.addSubview(doneButton) // add Button to UIView
-        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        doneButton.addTarget(self, action: #selector(CreateEventController.doneButton(_:)), for: UIControlEvents.touchUpInside) // set button click event
         
         sender.inputView = inputView
-        endTimePickerView.addTarget(self, action: Selector("handleEndTimePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+        endTimePickerView.addTarget(self, action: #selector(CreateEventController.handleEndTimePicker(_:)), for: UIControlEvents.valueChanged)
     }
     
-    func handleEndTimePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
+    func handleEndTimePicker(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = gTimeFormat
         endDatevalid = sender.date
         
         
-        endTime.text = dateFormatter.stringFromDate(sender.date)
+        endTime.text = dateFormatter.string(from: sender.date)
         
         
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
-        txtEndTime.text = dateFormatter.stringFromDate(sender.date)
+        txtEndTime.text = dateFormatter.string(from: sender.date)
     }
     
-    @IBAction func startTimePickerChange(sender: AnyObject) {
+    @IBAction func startTimePickerChange(_ sender: AnyObject) {
     
 //        var dateFormatter = NSDateFormatter()
 //        dateFormatter.dateFormat = gTimeFormat
@@ -544,7 +544,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
     }
     
-    @IBAction func endTimePickerChange(sender: AnyObject) {
+    @IBAction func endTimePickerChange(_ sender: AnyObject) {
    
 //        var dateFormatter = NSDateFormatter()
 //        dateFormatter.dateFormat = gTimeFormat
@@ -558,16 +558,16 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     
     
-    @IBAction func touchTimeZone(sender: UITextField) {
+    @IBAction func touchTimeZone(_ sender: UITextField) {
         
-        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        let inputView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
         
-        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         {
-            newTimeZonePicker = UIPickerView(frame: CGRectMake(inputView.frame.origin.x + 250 , 40, 0, 0))
+            newTimeZonePicker = UIPickerView(frame: CGRect(x: inputView.frame.origin.x + 250 , y: 40, width: 0, height: 0))
         }
         else {
-            newTimeZonePicker = UIPickerView(frame: CGRectMake(0, 40, 0, 0))
+            newTimeZonePicker = UIPickerView(frame: CGRect(x: 0, y: 40, width: 0, height: 0))
         }
        
         newTimeZonePicker.dataSource = self
@@ -578,11 +578,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         inputView.addSubview(newTimeZonePicker)
         
-        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
-        doneButton.setTitle("Done", forState: UIControlState.Normal)
-        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
-        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        let doneButton = UIButton(frame: CGRect(x: (self.view.frame.size.width/2) - (100/2), y: 0, width: 100, height: 50))
+        doneButton.setTitle("Done", for: UIControlState())
+        doneButton.setTitle("Done", for: UIControlState.highlighted)
+        doneButton.setTitleColor(UIColor.black, for: UIControlState())
+        doneButton.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         
         inputView.addSubview(doneButton) // add Button to UIView
        
@@ -590,7 +590,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //        txtTime.text = "Eastern Time (US & Canada)"
 //        inputView.addSubview(txtTime)
         
-        doneButton.addTarget(self, action: "doneButton:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+        doneButton.addTarget(self, action: #selector(CreateEventController.doneButton(_:)), for: UIControlEvents.touchUpInside) // set button click event
         
         sender.inputView = inputView
        // datePickerView.addTarget(self, action: Selector("handleTimeZonePicker:"), forControlEvents: UIControlEvents.ValueChanged)
@@ -603,16 +603,16 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //    }
 
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return iOStimeZones.count
     }
     
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         
 //       
 //        let titleData = iOStimeZones[row]
@@ -621,7 +621,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         return iOStimeZones[row]
     }
 
-    func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(_ pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
     {
         // selected value in Uipickerview in Swift
          txtTimeZone.text = iOStimeZones[row]
@@ -642,12 +642,12 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     
     
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrolview.contentSize = CGSizeMake(self.view.bounds.width, self.btnPostEvent.frame.origin.y + 300)
-        scrolview.scrollEnabled = true
+        scrolview.contentSize = CGSize(width: self.view.bounds.width, height: self.btnPostEvent.frame.origin.y + 300)
+        scrolview.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
     override func didReceiveMemoryWarning() {
@@ -655,20 +655,20 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         // Dispose of any resources that can be recreated.
     }
     
-        @IBAction func touchReqTitle(sender: AnyObject) {
+        @IBAction func touchReqTitle(_ sender: AnyObject) {
    
-        self.requiredError.hidden = true
+        self.requiredError.isHidden = true
     }
-    @IBAction func touchReqContent(sender: AnyObject) {
+    @IBAction func touchReqContent(_ sender: AnyObject) {
    
-        self.requiredError.hidden = true
+        self.requiredError.isHidden = true
 
     }
 //    @IBAction func touchReqTag(sender: AnyObject) {
 //        self.requiredError.hidden = true
 //
 //    }
-    @IBAction func btnPostEvent(sender: UIButton) {
+    @IBAction func btnPostEvent(_ sender: UIButton) {
         
         //dateFormatter.dateFormat = "yyyy-MM-dd"
        // var stratDateValidate = dateFormatter.dateFromString(startDate.text!)
@@ -677,17 +677,17 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gDateTimeFormat
         var startDateTimeMerge  = startDate.text! + " " + startTime.text!
-        startDateAndTime = dateFormatter.dateFromString(startDateTimeMerge)!
+        startDateAndTime = dateFormatter.date(from: startDateTimeMerge)!
         
         var endDateTimeMerge  = endDate.text! + " " + endTime.text!
-        endDateAndTime = dateFormatter.dateFromString(endDateTimeMerge)!
+        endDateAndTime = dateFormatter.date(from: endDateTimeMerge)!
         
-       var trimmedTitle = txtTitle.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+       var trimmedTitle = txtTitle.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-       var trimmedContents = txtContents.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+       var trimmedContents = txtContents.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if(trimmedTitle == "") {
-            self.requiredError.hidden = false
+            self.requiredError.isHidden = false
              self.requiredError.text = "Required Title"
         }
       
@@ -696,21 +696,21 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 //            self.requiredError.text = "Required Tags"
 //        }
         else if (trimmedContents == "") {
-            self.requiredError.hidden = false
+            self.requiredError.isHidden = false
             self.requiredError.text = "Required Contents"
         }
 //        else if (stratDateValidate!.compare(currentDateValidate) == NSComparisonResult.OrderedSame) {
 //            print("Same dates")
 //        }
             
-        else if (startDateAndTime.compare(currentDate) == NSComparisonResult.OrderedAscending) {
+        else if (startDateAndTime.compare(currentDate) == ComparisonResult.orderedAscending) {
             // print("Date1 is Later than Date2")
-            self.requiredError.hidden = false
+            self.requiredError.isHidden = false
             self.requiredError.text = "Invalid Start date and time value. Please select a value at least 1 hour from now."
         }
        else if (startDateAndTime.timeIntervalSinceReferenceDate > endDateAndTime.timeIntervalSinceReferenceDate) {
             // print("Date1 is Later than Date2")
-             self.requiredError.hidden = false
+             self.requiredError.isHidden = false
             self.requiredError.text = "Invalid End Date And Time"
         }
 //        else if startTimeValid.earlierDate(endTimeValid){
@@ -727,15 +727,15 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             txtTitle.text = trimmedTitle
             txtContents.text! = trimmedContents
             showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
             if(isEdit){
-                testfacade.doTask(self,action: DelphosAction.CREATE_EVENT)
+                testfacade.doTask(self,action: DelphosAction.create_EVENT)
 
             }
             else{
             
-                testfacade.doTask(self,action: DelphosAction.CREATE_EVENT)
+                testfacade.doTask(self,action: DelphosAction.create_EVENT)
             }
         }
         

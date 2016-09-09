@@ -26,7 +26,7 @@ class SchoolListBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         city_state      <- map["city_state"]
         

@@ -62,7 +62,7 @@ class  CreateEventResultEventBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         claim_id  <- map["claim_id"]
         active    <- map["active"]
         

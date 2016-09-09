@@ -25,7 +25,7 @@ class SettingsBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         user       <- map["user"]
         

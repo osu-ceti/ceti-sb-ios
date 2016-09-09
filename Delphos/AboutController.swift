@@ -24,8 +24,8 @@ class AboutController: NavController {
     @IBOutlet var contactUs: UIButton!
     
     @IBOutlet var firstLabel: UILabel!
-    var data = NSData()
-    override func viewWillAppear(animated: Bool) {
+    var data = Data()
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -44,30 +44,30 @@ class AboutController: NavController {
     }
     @IBOutlet var viewSetting: UIView!
     
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         rootViewController = self
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.contactUs.frame.origin.y + 250)
-        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.contactUs.frame.origin.y + 250)
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       gObjRightViewController.hideOverlayView()
+       gObjRightViewController?.hideOverlayView()
            
 
         rootViewController = self
         settingSearch = true
 
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        
         view.backgroundColor = bgColor
         viewDetails.backgroundColor = bgColor
         
 
-       self.logoOntoborn.image = UIImage(named:"OntoBornTech")
+       self.logoOntoborn.image = UIImage(named:"ontobornlogo")
         
         
         //var label:UILabel!
@@ -76,48 +76,58 @@ class AboutController: NavController {
     }
    
     
-    @IBAction func StraightAGrantLink(sender: AnyObject) {
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+    @IBAction func StraightAGrantLink(_ sender: AnyObject) {
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
         
-            let url : NSURL = NSURL(string:"http://education.ohio.gov/Topics/Straight-A-Fund/" )!
-            if UIApplication.sharedApplication().canOpenURL(url) {
-                UIApplication.sharedApplication().openURL(url)
+            let url : URL = URL(string:"http://education.ohio.gov/Topics/Straight-A-Fund/" )!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
             }
       })
         
     }
         
-    @IBAction func cetiLink(sender: AnyObject) {
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+    @IBAction func cetiLink(_ sender: AnyObject) {
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
         
-            let url : NSURL = NSURL(string:"http://www.ceti.cse.ohio-state.edu/" )!
-            if UIApplication.sharedApplication().canOpenURL(url) {
-                UIApplication.sharedApplication().openURL(url)
+            let url : URL = URL(string:"http://www.ceti.cse.ohio-state.edu/" )!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
         }
         })
     }
-    @IBAction func ontobornClick(sender: AnyObject) {
+    @IBAction func ontobornClick(_ sender: AnyObject) {
        
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-            let url : NSURL = NSURL(string: "http://ontoborn.com/")!
-            if UIApplication.sharedApplication().canOpenURL(url) {
-            UIApplication.sharedApplication().openURL(url)
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
+            let url : URL = URL(string: "http://ontoborn.com/")!
+            if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
             }
         
         })
     }
         
-    @IBAction func ourPrivacyPolicyClick(sender: AnyObject) {
+    @IBAction func ourPrivacyPolicyClick(_ sender: AnyObject) {
         
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
             
-            let url : NSURL = NSURL(string:"http://ceti-test-env.elasticbeanstalk.com/privacy_policy" )!
-            if UIApplication.sharedApplication().canOpenURL(url) {
-                UIApplication.sharedApplication().openURL(url)
+            let url : URL = URL(string:"https://www.school2biz.com/privacy_policy" )!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
             }
         })
     }
-    @IBAction func contactUsLink(sender: AnyObject) {
+    @IBAction func ontobornUrlClick(_ sender: AnyObject) {
+        
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
+            let url : URL = URL(string: "http://ontoborn.com/")!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.openURL(url)
+            }
+            
+        })
+    }
+    @IBAction func contactUsLink(_ sender: AnyObject) {
         
         let shareData = ""
         
@@ -127,7 +137,7 @@ class AboutController: NavController {
         let activityVC = UIActivityViewController(activityItems: [shareData], applicationActivities: nil)
         
         activityVC.popoverPresentationController?.sourceView = sender as! UIView
-        self.presentViewController(activityVC, animated: true, completion: nil)
+        self.present(activityVC, animated: true, completion: nil)
 
     }
    

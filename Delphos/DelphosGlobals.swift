@@ -59,7 +59,7 @@ var gStrBadgesAwardControllerID: String = "BadgesAwardControllerId"
 var gObjViewBadgeController :ViewBadgeController!
 var gStrViewBadgeControllerID: String = "ViewBadgeControllerId"
 
-//var gObjBadgeController : BadgeController!
+var gObjBadgeControllerNav : BadgeController!
 var gObjBadgeController : UINavigationController!
 var gStrBadgeControllerID: String = "BadgeControllerId"
 
@@ -91,7 +91,7 @@ var gEmptyJSON = "{}"
 
 var gObjNotificationInfo: AnyObject?
 
-let userCredsStorage = NSUserDefaults.standardUserDefaults()
+let userCredsStorage = UserDefaults.standard
 
 
 

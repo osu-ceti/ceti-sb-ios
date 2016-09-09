@@ -50,7 +50,7 @@ class searchUserListBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         id    <- map["id"]
         

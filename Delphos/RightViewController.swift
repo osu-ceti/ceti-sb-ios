@@ -20,12 +20,12 @@ import UIKit
 class RightViewController: BaseController, UIWebViewDelegate {
     
     enum Menu: Int {
-        case Home = 0
-        case Settings
-        case Profile
-        case ViewMyBadges
-        case About
-        case Logout
+        case home = 0
+        case settings
+        case profile
+        case viewMyBadges
+        case about
+        case logout
        
         
     }
@@ -69,7 +69,7 @@ class RightViewController: BaseController, UIWebViewDelegate {
        
         
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -77,25 +77,25 @@ class RightViewController: BaseController, UIWebViewDelegate {
         self.hideOverlayView()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
-        cell.backgroundColor = UIColor.whiteColor()
-        cell.textLabel!.font = UIFont.italicSystemFontOfSize(16)
-        cell.textLabel!.textColor = UIColor.blackColor()
-        cell.textLabel!.text = menus[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
+        cell.backgroundColor = UIColor.white
+        cell.textLabel!.font = UIFont.italicSystemFont(ofSize: 16)
+        cell.textLabel!.textColor = UIColor.black
+        cell.textLabel!.text = menus[(indexPath as NSIndexPath).row]
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         self.showOverlay(self.view)
-        if let menu = Menu(rawValue: indexPath.item) {
+        if let menu = Menu(rawValue: (indexPath as NSIndexPath).item) {
             
             switch menu {
-            case .Home:
+            case .home:
                 if(isRegister){
                     rootViewController = gObjLoginController
                     self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
@@ -108,32 +108,32 @@ class RightViewController: BaseController, UIWebViewDelegate {
                 }
                 break
                 
-            case .Settings:
+            case .settings:
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.VIEW_SETTINGS)
+                testfacade.doTask(self,action: DelphosAction.view_SETTINGS)
                 break
-            case .Profile:
+            case .profile:
                // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.USER_PROFILE)
+                testfacade.doTask(self,action: DelphosAction.user_PROFILE)
                 
                 
                 break
-            case .ViewMyBadges:
+            case .viewMyBadges:
                 
                 // self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 
                 gUserVIewBadgeId = gObjUserBean.id
                 //showOverlay(self.view)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE)
+                testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
                 
                 break
-            case .About:
+            case .about:
                 gObjAboutControllerNav = self.fetchNavController(gStrAboutControllerID)
                 
                 self.slideMenuController()?.changeMainViewController(gObjAboutControllerNav, close: true)
@@ -141,11 +141,11 @@ class RightViewController: BaseController, UIWebViewDelegate {
                     
                 
                 break
-            case .Logout:
+            case .logout:
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.SIGN_OUT)
+                testfacade.doTask(self,action: DelphosAction.sign_OUT)
 
                 break
             

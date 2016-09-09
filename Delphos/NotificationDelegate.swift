@@ -15,10 +15,13 @@ import UIKit
 class NotificationDelegate:BaseDelegate{
 
 
-    func showNotification(objCurrentContoller: BaseController) {
+    func showNotification(_ objCurrentContoller: BaseController) {
         
+        var pageValue:String!
+       
+        pageValue = String(notificationPage)
         
-        doGetAPIs.getNotification( {(result: AnyObject,statusCode: Int)  in
+        doGetAPIs.getNotification(pageValue!, callBack: {(result: AnyObject,statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
@@ -32,11 +35,29 @@ class NotificationDelegate:BaseDelegate{
    
                 
                 gNotificationCount = objnotificationBean.count
+               // var firstArray: [NotificationListBean]
+               // var secondArray:[NotificationListBean]
+                var finalArray: [NotificationListBean]
+                
+                if(notificationPage == 1){
+                    
+                     NotificationFirstArray = objnotificationBean.notifications
+                     gObjNotificationController.notificationArray = objnotificationBean.notifications
+                }
+                else{
+                    
+                    NotificationSecondArray = objnotificationBean.notifications
+                    finalArray = NotificationFirstArray + NotificationSecondArray
+                    
+                    gObjNotificationController.notificationArray = finalArray
+                    NotificationFirstArray = finalArray
+                   
+                  
+                }
                 
                 
-                gObjNotificationController.notificationArray = objnotificationBean.notifications
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                   
                     
                     var objNotificationControllerNav = self.getNavigationController(gObjNotificationController)
@@ -49,11 +70,11 @@ class NotificationDelegate:BaseDelegate{
                 
                 
             }else{
-                logger.log(LoggingLevel.INFO, message: " error Get Notification")
+                logger.log(LoggingLevel.info, message: " error Get Notification")
             }
         })
     }
-func showShareBadge(objCurrentContoller: BaseController) {
+func showShareBadge(_ objCurrentContoller: BaseController) {
         
        // var strUserId: String = String(0)
         
@@ -69,7 +90,7 @@ func showShareBadge(objCurrentContoller: BaseController) {
                 viewBadgeBean = objBadgeBean
               
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                       var objViewBadgeControllerNav = self.getNavigationController(gObjViewBadgeController)
                     
@@ -81,13 +102,13 @@ func showShareBadge(objCurrentContoller: BaseController) {
                 
             }
             else{
-                logger.log(LoggingLevel.INFO, message: " error Get view badge")
+                logger.log(LoggingLevel.info, message: " error Get view badge")
 
             }
         })
     }
 
-func deleteNotification(objCurrentContoller: BaseController)  {
+func deleteNotification(_ objCurrentContoller: BaseController)  {
         
        
         
@@ -95,10 +116,10 @@ func deleteNotification(objCurrentContoller: BaseController)  {
            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                 
-                logger.log(LoggingLevel.INFO, message: "MARK ALL Notification AS READ")
+                logger.log(LoggingLevel.info, message: "MARK ALL Notification AS READ")
                // self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
                 
-//                dispatch_async(dispatch_get_main_queue(), {
+//                dispatch_async(DispatchQueue.main, {
 //                    
 //                    gObjNotificationControllerNav = self.fetchNavController(gStrNotificationControllerID)
 //                    
@@ -109,20 +130,22 @@ func deleteNotification(objCurrentContoller: BaseController)  {
                 
             }
             else{
-                 logger.log(LoggingLevel.INFO, message: "NOT MARK ALL Notification AS READ")
+                 logger.log(LoggingLevel.info, message: "NOT MARK ALL Notification AS READ")
                 //self.showAlert(objCurrentContoller, strMessage: "NOT MARK ALL Notification AS READ")
             }
         })
         
         
     }
-    func readNotification(objCurrentContoller: BaseController)  {
+    func readNotification(_ objCurrentContoller: BaseController)  {
         
         var strid = String((objCurrentContoller as! NotificationController).notificationId)
         
         
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            
+            
             if(statusCode == SUCCESS) {
                     //Left Empty for future Use
             }

@@ -22,10 +22,14 @@ class NotificationController: NavController {
     var actUserId:Int!
     var notificationId:Int!
     
+    var eventNametext:String?
+    
+    
+    
     @IBOutlet var btnMarkAllNotification: UIButton!
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -51,9 +55,9 @@ class NotificationController: NavController {
         //
         
        
-        gObjBackTocontroller = gObjNotificationControllerNav
-        
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+       //gObjBackTocontroller = gObjNotificationControllerNav
+          //self.tableView.reloadData()
+        //let bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = bgColor
@@ -69,30 +73,31 @@ class NotificationController: NavController {
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-      
-            return notificationArray.count
-       
+        
+          print(notificationArray.count)
+          return notificationArray.count
+        
         
     }
     
-    func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+    func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
         
       
         
-         var notificationDisplayBean: NotificationListBean! = notificationArray[indexPath.row]
+         var notificationDisplayBean: NotificationListBean! = notificationArray[(indexPath as NSIndexPath).row]
         if(gNotificationCount != nil && notificationDisplayBean.read == 0){
             
             cell.backgroundColor = UIColor(hue: 0.5583, saturation: 0.25, brightness: 0.97, alpha: 1.0)
         }
         else{
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.backgroundColor = UIColor.white
             
         }
          (cell as! NotificationControllerCell).actUSerName!.text = String(notificationDisplayBean.act_user_name)
@@ -108,28 +113,28 @@ class NotificationController: NavController {
         
         switch gNotificationNType {
         
-        case NOTIFICATION_TYPE.CLAIM.rawValue :
+        case NOTIFICATION_TYPE.claim.rawValue :
            
             // claim
              (cell as! NotificationControllerCell).eventName!.text = "has claimed your event: "  + String(notificationDisplayBean.event_title)
             
             break
             
-        case NOTIFICATION_TYPE.CONFIRM_SPEAKER.rawValue :
+        case NOTIFICATION_TYPE.confirm_SPEAKER.rawValue :
             
             //confrim speaker
             (cell as! NotificationControllerCell).eventName!.text = "has confirmed you as the speaker of event: "  + String(notificationDisplayBean.event_title)
             
             break
             
-        case NOTIFICATION_TYPE.EVENT_UPDATE.rawValue :
+        case NOTIFICATION_TYPE.event_UPDATE.rawValue :
             
             //event update
             
             (cell as! NotificationControllerCell).eventName!.text = "has updated event: "  + String(notificationDisplayBean.event_title)
             
             break
-        case NOTIFICATION_TYPE.MESSAGE.rawValue :
+        case NOTIFICATION_TYPE.message.rawValue :
            
             //message
            
@@ -137,22 +142,22 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).eventName!.text = "has sent you a message via email."
             
             break
-        case NOTIFICATION_TYPE.AWARD_BADGE.rawValue :
+        case NOTIFICATION_TYPE.award_BADGE.rawValue :
             
             //award_badge
             
             (cell as! NotificationControllerCell).eventName!.text = "Award them a badge."
-            //String(notificationDisplayBean.act_user_name)
+             eventNametext = notificationDisplayBean.event_title
            
             break
-        case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
+        case NOTIFICATION_TYPE.new_BADGE.rawValue :
             
             //new_badge
             
             (cell as! NotificationControllerCell).eventName!.text = "has awards you a badge!"
             //String(notificationDisplayBean.act_user_name) +
             break
-        case NOTIFICATION_TYPE.CANCEL.rawValue :
+        case NOTIFICATION_TYPE.cancel.rawValue :
             
             //cancel
             
@@ -160,7 +165,7 @@ class NotificationController: NavController {
                 //+ String(notificationDisplayBean.event_title)
            
             break
-        case NOTIFICATION_TYPE.REJECT_CLAIM.rawValue :
+        case NOTIFICATION_TYPE.reject_CLAIM.rawValue :
             
             //reject_claim
             
@@ -168,7 +173,7 @@ class NotificationController: NavController {
             //String(notificationDisplayBean.act_user_name)
             
             break
-        case NOTIFICATION_TYPE.CANCEL_CLAIM.rawValue :
+        case NOTIFICATION_TYPE.cancel_CLAIM.rawValue :
            
             //cancel_claim
            
@@ -176,7 +181,7 @@ class NotificationController: NavController {
             //for event: " +  String(notificationDisplayBean.event_title)
            
             break
-        case NOTIFICATION_TYPE.CANCEL_SPEAKER.rawValue :
+        case NOTIFICATION_TYPE.cancel_SPEAKER.rawValue :
             
             //cancel_speaker
             
@@ -194,9 +199,9 @@ class NotificationController: NavController {
     
     //function to return dynamic cell
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("NotificationId", forIndexPath: indexPath) as? UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationId", for: indexPath) as? UITableViewCell
         
         configureCell(cell!, indexPath: indexPath)
         
@@ -204,76 +209,109 @@ class NotificationController: NavController {
     }
     
     //function to respond to row selection
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var selectCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationControllerCell
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        var selectCell = tableView.cellForRow(at: indexPath) as! NotificationControllerCell
         print("currentCell", selectCell.eventId.text!)
         
         gEventID = Int(selectCell.eventId.text!)
         
         notificationId = Int(selectCell.id.text!)
+        
+       
+        gActUserName = selectCell.actUSerName.text
+        gAwardNtype = gNotificationNType
+      
+        if(eventNametext != nil){
+            gEventTitle = eventNametext
+   
+        }
+       
        
         gNotificationNType = Int(selectCell.UserNotificationType.text!)
+        
        
-        dispatch_async(dispatch_get_main_queue(), {
+        
+        DispatchQueue.main.async(execute: {
+             //gObjBackTocontroller = gObjNotificationControllerNav
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.READ_NOTIFICATION)
+            testfacade.doTask(self,action: DelphosAction.read_NOTIFICATION)
         })
-
+        
+        gObjNotificationControllerNav = self.fetchNavController(gStrNotificationControllerID)
+        gObjBackTocontroller = gObjNotificationControllerNav
         
         switch gNotificationNType {
 
             
-            case NOTIFICATION_TYPE.AWARD_BADGE.rawValue :
+            case NOTIFICATION_TYPE.award_BADGE.rawValue :
                 
                 //award_badge
-                dispatch_async(dispatch_get_main_queue(), {
+                
+                
+                DispatchQueue.main.async(execute: {
                     
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    testfacade.doTask(self,action: DelphosAction.view_BADGE_AWARD)
                 })
             break
             
-            case NOTIFICATION_TYPE.NEW_BADGE.rawValue :
+            case NOTIFICATION_TYPE.new_BADGE.rawValue :
             
             //new_badge
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    testfacade.doTask(self,action: DelphosAction.show_EVENT)
                 })
             
             break
             
             default :
                
-                gObjBackTocontroller = gObjHomeController
-               // gObjBackTocontroller = gObjNotificationControllerNav
+              
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+                    testfacade.doTask(self,action: DelphosAction.show_EVENT)
                 })
            
             
             break
+          
         }
 
         
         
         
     }
-    @IBAction func btnMarkAllNOtificationClick(sender: AnyObject) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        //print("Scroll finished")
+        notificationPage += 1
+        
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+            //reach bottom
+            print("Scroll bottom")
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.show_NOTIFICATION)
+            
+
+    
+        }
+        
+    }
+    @IBAction func btnMarkAllNOtificationClick(_ sender: AnyObject) {
    
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.MARK_ALL_NOTIFICATION)
+        testfacade.doTask(self,action: DelphosAction.mark_ALL_NOTIFICATION)
         
     }
     

@@ -35,7 +35,7 @@ class SchoolsBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
          badge_url    <- map["badge_url"]
         

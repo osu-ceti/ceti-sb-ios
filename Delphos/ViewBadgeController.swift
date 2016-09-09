@@ -22,9 +22,9 @@ class ViewBadgeController: NavController {
     @IBOutlet var btnShareBadge: UIButton!
    
     
-    var data = NSData()
+    var data = Data()
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -51,17 +51,17 @@ class ViewBadgeController: NavController {
         //
         
         gObjBackTocontroller = gObjUserProfileNavController
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        //var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         view.backgroundColor = bgColor
       
-        self.btnShareBadge.hidden = true
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        self.btnShareBadge.isHidden = true
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
         
-                let url = NSURL(string: AWS_S3 + viewBadgeBean.badge_url)
-                self.data = NSData(contentsOfURL:url!)!
-                if self.data != "" {
+                let url = URL(string: AWS_S3 + viewBadgeBean.badge_url)
+                self.data = try! Data(contentsOf: url!)
+                if self.data != nil {
                     self.imgbadge.image = UIImage(data:self.data)
                 }
             })
@@ -72,7 +72,7 @@ class ViewBadgeController: NavController {
         
         if(gObjUserBean.name == viewBadgeBean.user_name){
             
-            self.btnShareBadge.hidden = false
+            self.btnShareBadge.isHidden = false
         }
         
     }
@@ -84,7 +84,7 @@ class ViewBadgeController: NavController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func btnShareBadgeClick(sender: AnyObject) {
+    @IBAction func btnShareBadgeClick(_ sender: AnyObject) {
         print("share")
         
         let shareData =  viewBadgeBean.event_owner! +
@@ -99,7 +99,7 @@ class ViewBadgeController: NavController {
         let activityVC = UIActivityViewController(activityItems: [(imageUrl), shareData], applicationActivities: nil)
         
           activityVC.popoverPresentationController?.sourceView = sender as! UIView
-            self.presentViewController(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: nil)
        
           
         

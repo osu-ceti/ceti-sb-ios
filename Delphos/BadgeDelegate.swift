@@ -12,18 +12,18 @@ class BadgeDelegate:BaseDelegate{
     
     
     
-    func badgesAward(objCurrentContoller: UIViewController) {
+    func badgesAward(_ objCurrentContoller: UIViewController) {
         
         var badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
         var eventId = (objCurrentContoller as! BadgeController).eventId
         
         //var eventId = 309
-        doPostAPIs.postBadgesAward(badgesAwardToEvent,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
+        doPostAPIs.postBadgesAward(badgesAwardToEvent!,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
            
             if(statusCode == SUCCESS) {
           
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
@@ -37,11 +37,18 @@ class BadgeDelegate:BaseDelegate{
         
     }
     
-    func viewAwardBadge(objCurrentContoller: UIViewController) {
-//        
-//        self.showAwardBadge((pushNotificationBean!.data?.event_name)!,
-//                            event_id: (pushNotificationBean!.data?.event_id)!, speaker_name: (pushNotificationBean!.data?.speaker_name)!, badge_url: (pushNotificationBean!.data?.badge_url)!)
+    func viewAwardBadge(_ objCurrentContoller: UIViewController) {
+
         
+       // (objCurrentContoller as! BadgeController).txtSpeakerName = gActUserName
+        //(objCurrentContoller as! BadgeController).txtEventName = gEventTitle
+        
+        DispatchQueue.main.async(execute: {
+            gObjBadgeController = self.fetchNavController(gStrBadgeControllerID)
+            
+            objCurrentContoller.slideMenuController()?.changeMainViewController(gObjBadgeController, close: false)
+        })
+
         
     }
     

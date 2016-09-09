@@ -11,21 +11,21 @@ import ObjectMapper
 
 class EventDelegate: BaseDelegate{
 
-    func showAllEvents(objCurrentContoller: BaseController) {
+    func showAllEvents(_ objCurrentContoller: BaseController) {
         
         let  homeController = objCurrentContoller as! HomeController
         
         switch homeController.listType {
-        case .ALL:
+        case .all:
             doGetAPIs.strURL =  DEV_TARGET + SHOW_ALL_EVENTS
             
-        case .APPROVED:
+        case .approved:
             doGetAPIs.strURL =  DEV_TARGET + SHOW_APPROVED
             
-        case .CLAIMS:
+        case .claims:
             doGetAPIs.strURL =  DEV_TARGET + SHOW_CLAIMS
             
-        case .CONFIRMED:
+        case .confirmed:
             doGetAPIs.strURL =  DEV_TARGET + SHOW_CONFIRMED
             
         default:
@@ -38,10 +38,10 @@ class EventDelegate: BaseDelegate{
             let eventDisplayController = objCurrentContoller as! HomeController
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode != 0){
-                logger.log(LoggingLevel.INFO, message: "All Events Retrieved")
+                logger.log(LoggingLevel.info, message: "All Events Retrieved")
                 //var objEventDisplayBean = result as! EventDisplayBean
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjEventDisplayBean = result as! EventDisplayBean
                     
@@ -56,7 +56,7 @@ class EventDelegate: BaseDelegate{
         }
     }
     
-    func createEvent(objCurrentContoller: UIViewController){
+    func createEvent(_ objCurrentContoller: UIViewController){
         let createEventController = objCurrentContoller as! CreateEventController
         let strTitle = createEventController.txtTitle.text
         let strContents = createEventController.txtContents.text
@@ -73,8 +73,8 @@ class EventDelegate: BaseDelegate{
         var objInputParamEventBean: CreateEventBean = CreateEventBean()
         
         
-        logger.log(LoggingLevel.INFO,message: "strEventEndDate =" + strEventEndDate )
-        logger.log(LoggingLevel.INFO,message: "strEventStartDate =" + strEventStartDate )
+        logger.log(LoggingLevel.info,message: "strEventEndDate =" + strEventEndDate )
+        logger.log(LoggingLevel.info,message: "strEventStartDate =" + strEventStartDate )
         
         objInputParamEventBean.title = strTitle
         objInputParamEventBean.content = strContents
@@ -94,7 +94,7 @@ class EventDelegate: BaseDelegate{
         doPostAPIs.doSaveEvent(createEventController.isEdit, eventId: eventId, objEventParam: eventBean){ (result: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:createEventController)
             if (statusCode == SUCCESS){
-                logger.log(LoggingLevel.INFO,message: "create event Sucessfull")
+                logger.log(LoggingLevel.info,message: "create event Sucessfull")
                 let resultBean: CreateEventResultEventBean = result as! CreateEventResultEventBean
                 gObjShowEventBean = ShowEventBean()
                 gObjShowEventBean.id = resultBean.id
@@ -120,7 +120,7 @@ class EventDelegate: BaseDelegate{
                 
             }
             else{
-                logger.log(LoggingLevel.INFO,message: "create event failure")
+                logger.log(LoggingLevel.info,message: "create event failure")
                 // Handle error
                 self.showAlert(objCurrentContoller, strMessage: "Failed to Create Event")
             }
@@ -132,22 +132,22 @@ class EventDelegate: BaseDelegate{
     
        
     
-    func editEvent(objCurrentContoller: UIViewController){
+    func editEvent(_ objCurrentContoller: UIViewController){
         var editEventController:CreateEventController = instantiateVC(gStrCreateEventControllerID) as! CreateEventController
         editEventController.isEdit = true
         doNavigate(objCurrentContoller, toController: UINavigationController(rootViewController: editEventController),close: true)
         
     }
     
-    func cancelEvent(objCurrentContoller: BaseController) -> Bool {
+    func cancelEvent(_ objCurrentContoller: BaseController) -> Bool {
         
         
         
         doPostAPIs.doCancelEvent(gObjShowEventBean){ (loginResult: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if (statusCode == SUCCESS){
-                logger.log(LoggingLevel.INFO,message: "Cancel Event")
-                 dispatch_async(dispatch_get_main_queue(), {
+                logger.log(LoggingLevel.info,message: "Cancel Event")
+                 DispatchQueue.main.async(execute: {
                // if(gObjHomeController == nil){
                     self.showAlert(objCurrentContoller, strMessage: "Event Cancel ")
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
@@ -158,7 +158,7 @@ class EventDelegate: BaseDelegate{
             }
             else {
                  self.showAlert(objCurrentContoller, strMessage: "Event Not Cancel ")
-                logger.log(LoggingLevel.INFO,message: "not Cancel Event")
+                logger.log(LoggingLevel.info,message: "not Cancel Event")
 //                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
 //               
 //                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: false)

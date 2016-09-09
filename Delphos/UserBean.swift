@@ -62,7 +62,7 @@ class UserBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         authentication_token    <- map["authentication_token"]
         

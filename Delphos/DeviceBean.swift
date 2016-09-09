@@ -24,7 +24,7 @@ class DeviceBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         token       <- map["token"]
         device_name <- map["device_name"]
         state       <- map["state"]

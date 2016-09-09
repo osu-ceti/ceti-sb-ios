@@ -31,7 +31,7 @@ class EventBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         event_start    <- map["event_start"]
         

@@ -27,7 +27,7 @@ class BadgesBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
                 
     }
