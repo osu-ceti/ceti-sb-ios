@@ -22,10 +22,12 @@ var schools = "schools"
 var users = "users"
 
 var gTimeFormat = "hh:mm a zzz"
+var gTimeFormat24 = "hh:mm zzz"
 var gDateFormat = "yyyy-MM-dd"
 var gTimeWithoutZoneFormat = "hh:mm a"
 
 var gDateTimeFormat = gDateFormat + " " + gTimeFormat
+var gDateTimeFormat24 = gDateFormat + " " + gTimeFormat24
 
 var gSplitDateTime = "T"
 

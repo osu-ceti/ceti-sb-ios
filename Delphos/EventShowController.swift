@@ -105,9 +105,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     
     
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.CLAIM_LIST)
+        
 
         
     }
@@ -159,7 +157,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         labelText6.font = UIFont.boldSystemFontOfSize(15)
     
         
-        if(gBtnRadioValue == events || gObjShowEventBean != nil) {
+        if(gObjShowEventBean != nil) {
             
 
             
@@ -204,8 +202,14 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             minusCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
 
             print("End Date = " + gObjShowEventBean.event_end)
-
-            dateFormatter.dateFormat = gDateTimeFormat
+            
+            if(!gObjShowEventBean.event_end.containsString("AM") && !gObjShowEventBean.event_end.containsString("PM")){
+                logger.log(LoggingLevel.INFO, message: "24 hou time detected")
+                dateFormatter.dateFormat = gDateTimeFormat24
+            }
+            else{
+                dateFormatter.dateFormat = gDateTimeFormat
+            }
 
             dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
 
@@ -284,25 +288,25 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //            }
            
             
-            
-        } else if(gBtnRadioValue == users) {
-            
-            self.labeltext1.text = "Role:"
-            self.labelText2.text = "Biography:"
-            self.labelText3.hidden = true
-            self.labelText4.hidden = true
-            self.labelText5.hidden = true
-            self.labelText6.hidden = true
-            
-            if(gObjSearchUserListBean.name != nil){
-                self.txtTitle.text = gObjSearchUserListBean.name
-            }
-           // self.txtText1.text = gObjSearchUserListBean.role
-            if(gObjSearchUserListBean.biography != nil){
-
-                self.txtText2.text = gObjSearchUserListBean.biography
-            }
         }
+//        } else if(gBtnRadioValue == users) {
+//            
+//            self.labeltext1.text = "Role:"
+//            self.labelText2.text = "Biography:"
+//            self.labelText3.hidden = true
+//            self.labelText4.hidden = true
+//            self.labelText5.hidden = true
+//            self.labelText6.hidden = true
+//            
+//            if(gObjSearchUserListBean.name != nil){
+//                self.txtTitle.text = gObjSearchUserListBean.name
+//            }
+//           // self.txtText1.text = gObjSearchUserListBean.role
+//            if(gObjSearchUserListBean.biography != nil){
+//
+//                self.txtText2.text = gObjSearchUserListBean.biography
+//            }
+//        }
         
         
         
@@ -314,7 +318,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
 //        activityIndicator.center = CGPointMake(overlay!.bounds.width / 2, overlay!.bounds.height / 2)
         
-        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.CLAIM_LIST)
         
        
     }
