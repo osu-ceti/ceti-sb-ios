@@ -69,9 +69,9 @@ class EventDelegate: BaseDelegate{
         let strEndDate: String = createEventController.endDate.text!
         let strEndTime: String = createEventController.endTime.text!
         
-        var strEventStartDate =  strStartDate + " " + strStartTime
-        var strEventEndDate =  strEndDate + " " + strEndTime
-        var strEventTimeZone = createEventController.txtTimeZone.text
+        let strEventStartDate =  strStartDate + " " + strStartTime + " EDT"
+        let strEventEndDate =  strEndDate + " " + strEndTime + " EDT"
+        let strEventTimeZone = createEventController.txtTimeZone.text
         
         var eventId = 0
         var objInputParamBean:CreateBean  = CreateBean()

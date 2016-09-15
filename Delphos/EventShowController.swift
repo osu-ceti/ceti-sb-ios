@@ -210,6 +210,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             else{
                 dateFormatter.dateFormat = gDateTimeFormat
             }
+           
+            dateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
 
             dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
 
