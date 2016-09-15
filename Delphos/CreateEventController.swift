@@ -171,13 +171,16 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         //end bg design
         //start.frame = CGRectMake(10, 30, 30, 20)
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        
         let startTimeSet = currentDate.dateByAddingTimeInterval(60*60);
         let endTimeSet = currentDate.dateByAddingTimeInterval(60*120);
         
        // let checkCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
         
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = gTimeFormat
+        
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
        
         startTime.text = dateFormatter.stringFromDate(startTimeSet)
         endTime.text = dateFormatter.stringFromDate(endTimeSet)
@@ -203,6 +206,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         var CurrentDateFormat = NSDateFormatter()
         CurrentDateFormat.dateFormat = gDateFormat
+        CurrentDateFormat.timeZone = NSTimeZone(abbreviation: "EDT")
         self.startDate.text = CurrentDateFormat.stringFromDate(currentDate)
         self.endDate.text = CurrentDateFormat.stringFromDate(currentDate)
       
@@ -229,7 +233,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 //self.startTimePicker.date = eventStartDate!
                  //self.txtStartTime.text = gObjShowEventBean.event_start!
                
-                dateFormatter.dateFormat = gTimeFormat
+                dateFormatter.dateFormat = gTimeWithoutZoneFormat
                 self.startTime.text = dateFormatter.stringFromDate(eventStartDate!)
                 
                 dateFormatter.dateFormat = gTimeWithoutZoneFormat
@@ -252,7 +256,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 
                 self.endTimePicker.date = eventEndDate!
                 
-                dateFormatter.dateFormat = gTimeFormat
+                dateFormatter.dateFormat = gTimeWithoutZoneFormat
                 self.endTime.text = dateFormatter.stringFromDate(eventEndDate!)
 
                 dateFormatter.dateFormat = gTimeWithoutZoneFormat
@@ -418,7 +422,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
  
     
     func handleEndDatePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
+       
         dateFormatter.dateFormat = gDateFormat
         endDatevalid = sender.date
         endDate.text = dateFormatter.stringFromDate(sender.date)
@@ -453,14 +457,15 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             timePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
         }
         
-        
+         timePickerView.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         timePickerView.datePickerMode = UIDatePickerMode.Time
         
-        dateFormatter.dateFormat = gTimeFormat
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
         let startTimePickerValue  = txtStartTime.text!
         if(startTimePickerValue != ""){
            
             timePickerView.date = startDatevalid
+            timePickerView.timeZone =  NSTimeZone(abbreviation: "EDT")
         }
         inputView.addSubview(timePickerView)
         
@@ -478,8 +483,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
     
     func handleStartTimePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-       dateFormatter.dateFormat = gTimeFormat
+        
+       dateFormatter.dateFormat = gTimeWithoutZoneFormat
         startDatevalid = sender.date
         
         startTime.text = dateFormatter.stringFromDate(sender.date)
@@ -501,14 +506,14 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
             endTimePickerView = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
         }
         
-        
+        endTimePickerView.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         endTimePickerView.datePickerMode = UIDatePickerMode.Time
         
-        dateFormatter.dateFormat = gTimeFormat
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
         let endTimePickerValue  = txtEndTime.text!
         if(endTimePickerValue != ""){
             endTimePickerView.date = endDatevalid
-        }
+            endTimePickerView.timeZone = NSTimeZone(abbreviation: "EDT")        }
         inputView.addSubview(endTimePickerView)
         
         let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
@@ -525,8 +530,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     }
     
     func handleEndTimePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = gTimeFormat
+       
+        dateFormatter.dateFormat = gTimeWithoutZoneFormat
         endDatevalid = sender.date
         
         
@@ -678,7 +683,16 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
        // var currentDateValidate = dateFormatter.stringFromDate(currentDateCheck)
         
-        dateFormatter.dateFormat = gDateTimeFormat
+       // dateFormatter.dateFormat = gDateTimeFormat
+        if(!(startTime.text?.containsString("AM"))! && !(startTime.text?.containsString("PM"))!){
+            logger.log(LoggingLevel.INFO, message: "24 hour time detected")
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            
+            
+        }else
+        {
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
+        }
         var startDateTimeMerge  = startDate.text! + " " + startTime.text!
         startDateAndTime = dateFormatter.dateFromString(startDateTimeMerge)!
         

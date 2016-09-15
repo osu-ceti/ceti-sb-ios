@@ -17,6 +17,38 @@
             endingLineNumber = "726"
             landmarkName = "doEditProfile(_:callBack:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delphos.DAOServices.getMenuUserProfile (Swift.Optional&lt;(Swift.AnyObject, Swift.Int) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "Delphos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/DAOServices.swift"
+                  timestampString = "495641381.779085"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "727"
+                  endingLineNumber = "727"
+                  offsetFromSymbolStart = "456">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delphos.DAOServices.(getMenuUserProfile (Swift.Optional&lt;(Swift.AnyObject, Swift.Int) -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Delphos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/babu/Documents/ceti-sb-ios/Delphos/DAOServices.swift"
+                  timestampString = "495641381.781733"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "728"
+                  endingLineNumber = "728"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
