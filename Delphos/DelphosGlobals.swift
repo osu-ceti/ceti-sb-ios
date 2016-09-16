@@ -18,6 +18,7 @@ var gObjHomeController : UINavigationController!
 var gStrHomeControllerID: String = "HomeID"
 
 var gObjLoginController : UINavigationController!
+var gObjLoginViewController : LoginController!
 var gStrLoginControllerID: String = "loginId"
 
 var gObjRegisterController : UINavigationController!

@@ -528,37 +528,39 @@ class UserDelegate:BaseDelegate{
         
         doPostAPIs.doResetPassword(objResetPasswordBean){ (result: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:loginController)
+            
+            var strMessage: String
             if(statusCode == RESET_SUCCESS) {
                 
                 logger.log(LoggingLevel.INFO, message: "Password Reseted")
-                
-                loginController.activityIndicator.stopAnimating()
-                loginController.overlayView.hidden = true
-
-                self.showAlert(objCurrentContoller, strMessage: "Please check your email")
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                   
-                    gObjLoginController = self.fetchNavController(gStrLoginControllerID)
-                    
-                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
-                    
-                    
-                    
-                })
+                strMessage = "Instructions to reset your password have been sent to your email."
                 
             }
+        
             else{
-                 self.showAlert(objCurrentContoller, strMessage: "Password Not Changed please try again later")
+                logger.log(LoggingLevel.INFO, message: "Password Not Changed")
+                strMessage = "Failed to find your email. Please register."
+            }
+        
+
+            
+            loginController.activityIndicator.stopAnimating()
+            loginController.overlayView.hidden = true
+
+            
                 
-                 logger.log(LoggingLevel.INFO, message: "Password Not Changed")
-                gObjLoginController = self.fetchNavController(gStrLoginControllerID)
+            dispatch_async(dispatch_get_main_queue(), {
+                gObjLoginViewController = self.instantiateVC(gStrLoginControllerID) as! LoginController
+                    
+                gObjLoginController = self.getNavigationController(gObjLoginViewController)
                 
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
+                self.showAlert(gObjLoginViewController, strMessage: strMessage)
+            })
                 
-            }
-            
         }
+            
+        
     }
 
     func accountEdit(objCurrentContoller: UIViewController)  {
