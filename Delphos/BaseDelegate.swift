@@ -19,42 +19,42 @@ class BaseDelegate: NSObject {
         doGetAPIs = doPostAPIs
     }
     
-    func showAlert(objCurrentController: UIViewController, strMessage: String) {
+    func showAlert(_ objCurrentController: UIViewController, strMessage: String) {
         
-        dispatch_async(dispatch_get_main_queue(), {
-            let alertView = UIAlertController(title: "", message: strMessage, preferredStyle: .Alert)
-            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        DispatchQueue.main.async(execute: {
+            let alertView = UIAlertController(title: "", message: strMessage, preferredStyle: .alert)
+            alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             
-            objCurrentController.presentViewController(alertView, animated: true, completion: nil)
+            objCurrentController.present(alertView, animated: true, completion: nil)
              
             
         })
     }
     
-    func instantiateVC(controllerId: String) -> UIViewController{
-        return  gObjStoryBoard.instantiateViewControllerWithIdentifier(controllerId)
+    func instantiateVC(_ controllerId: String) -> UIViewController{
+        return  gObjStoryBoard.instantiateViewController(withIdentifier: controllerId)
         
     }
     
-    func fetchNavController(controllerId: String) -> UINavigationController{
+    func fetchNavController(_ controllerId: String) -> UINavigationController{
         return UINavigationController( rootViewController: instantiateVC(controllerId))
     }
     
-    func getNavigationController(objController: UIViewController) -> UINavigationController{
+    func getNavigationController(_ objController: UIViewController) -> UINavigationController{
         return UINavigationController( rootViewController: objController)
     }
     
     
-    func doNavigate(objCurrentController: UIViewController,toController: UINavigationController, close: Bool)->Void{
+    func doNavigate(_ objCurrentController: UIViewController,toController: UINavigationController, close: Bool)->Void{
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             objCurrentController.slideMenuController()?.changeMainViewController(toController, close: close)
         })
     }
 
-    func showEventUI(objCurrentContoller: UIViewController) {
+    func showEventUI(_ objCurrentContoller: UIViewController) {
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             
             //if(gObjEventShowController == nil){
@@ -65,7 +65,7 @@ class BaseDelegate: NSObject {
         })
     }
     
-    func showEvent(objCurrentContoller: BaseController) {
+    func showEvent(_ objCurrentContoller: BaseController) {
         var strUserDetail: String = String(gEventID)
         
         doGetAPIs.getEvent(strUserDetail,callBack: {(result: AnyObject,statusCode: Int)   in
@@ -78,7 +78,7 @@ class BaseDelegate: NSObject {
         })
     }
     
-    func showAwardBadge(event_name: String,
+    func showAwardBadge(_ event_name: String,
                         event_id: Int, speaker_name: String, badge_url: String) {
        
        
@@ -98,10 +98,10 @@ class BaseDelegate: NSObject {
     
     }
     
-    func RedirectLoginPage(objCurrentContoller: UIViewController){
+    func RedirectLoginPage(_ objCurrentContoller: UIViewController){
         
         //var loginController = objCurrentContoller as! LoginController
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             gObjLoginController = self.fetchNavController(gStrLoginControllerID)
             
@@ -110,11 +110,11 @@ class BaseDelegate: NSObject {
     }
     
     func removeUserCodes(){
-        userCredsStorage.removeObjectForKey(gStrUserStorageKey)
-        userCredsStorage.removeObjectForKey(gStrUserStoragePassKey)
+        userCredsStorage.removeObject(forKey: gStrUserStorageKey)
+        userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
     }
     
-    func responseCodeErrorHandler(statusCode: Int, objCurrentController:BaseController){
+    func responseCodeErrorHandler(_ statusCode: Int, objCurrentController:BaseController){
         switch(statusCode){
             case UNAUTHORIZED_REQUEST:
             //Redirect to login
@@ -129,14 +129,14 @@ class BaseDelegate: NSObject {
         }
     }
     
-    func doCleanup(statusCode: Int, objCurrentController: BaseController){
-        dispatch_async(dispatch_get_main_queue(), {
+    func doCleanup(_ statusCode: Int, objCurrentController: BaseController){
+        DispatchQueue.main.async(execute: {
             objCurrentController.hideOverlayView()
         })
         responseCodeErrorHandler(statusCode, objCurrentController: objCurrentController)
     }
     
-    func ifNilReturnEmptyString(labelData: String?) -> String{
+    func ifNilReturnEmptyString(_ labelData: String?) -> String{
         
         if(labelData != nil){
             return labelData!
@@ -146,7 +146,7 @@ class BaseDelegate: NSObject {
         }
        
     }
-    func ifNilReturnEmptyInt(labelData: Int?) -> Int{
+    func ifNilReturnEmptyInt(_ labelData: Int?) -> Int{
         
         if(labelData != nil){
             return labelData!

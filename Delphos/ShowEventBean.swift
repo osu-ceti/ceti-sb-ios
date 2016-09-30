@@ -62,7 +62,7 @@ class  ShowEventBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         active    <- map["active"]
         

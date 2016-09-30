@@ -34,7 +34,7 @@ class ErrorBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         description    <- map["description"]
         

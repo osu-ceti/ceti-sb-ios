@@ -29,7 +29,7 @@ class SettingsListBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         set_claims       <- map["set_claims"]
         

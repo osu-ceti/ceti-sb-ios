@@ -12,8 +12,9 @@ class PushNotificationDelegate: BaseDelegate {
 
     func registerDevice(){
         let objDeviceBean = DeviceBean()
-        objDeviceBean.device_name = UIDevice.currentDevice().name
-        logger.log(LoggingLevel.INFO, message: "Device Name =" + objDeviceBean.device_name!)
+        objDeviceBean.device_name = UIDevice.current.name
+        logger.log(LoggingLevel.INFO
+            , message: "Device Name =" + objDeviceBean.device_name!)
         if(gStrDeviceToken != nil){
             objDeviceBean.token = gStrDeviceToken
             objDeviceBean.device_type = "ios"
@@ -31,11 +32,11 @@ class PushNotificationDelegate: BaseDelegate {
         
     }
     
-    func handleRemoteNotification(objCurrentContoller: UIViewController) {
+    func handleRemoteNotification(_ objCurrentContoller: UIViewController) {
         
         let pushNotificationBean = Mapper<PushNotificationBean>().map(gObjNotificationInfo)
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
            // var titleCount = String(pushNotificationBean!.data?.count)
             

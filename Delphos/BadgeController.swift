@@ -47,7 +47,7 @@ class BadgeController: NavController {
    // var awardResponse:[AwardBadgesResponse]!
     @IBOutlet var scrollView: UIScrollView!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -63,15 +63,15 @@ class BadgeController: NavController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rootViewController = self
-        self.msgAwardedBadge.hidden = true
+        self.msgAwardedBadge.isHidden = true
         self.view.backgroundColor = bgColor
        
-        self.afterAwardedForEvent.hidden = true
-        self.afterAwardedEventName.hidden = true
-        self.speakerName.hidden = false
-        self.labelAwardedBadge.hidden = false
-        self.labelForEvent.hidden = false
-        self.eventName.hidden = false
+        self.afterAwardedForEvent.isHidden = true
+        self.afterAwardedEventName.isHidden = true
+        self.speakerName.isHidden = false
+        self.labelAwardedBadge.isHidden = false
+        self.labelForEvent.isHidden = false
+        self.eventName.isHidden = false
         
         eventName.text = txtEventName
         speakerName.text = txtSpeakerName
@@ -96,20 +96,20 @@ class BadgeController: NavController {
                     
                     
                     
-                    self.msgAwardedBadge.hidden = false
-                    self.afterAwardedForEvent.hidden = false
-                    self.afterAwardedEventName.hidden = false
-                    self.speakerName.hidden = true
-                    self.labelAwardedBadge.hidden = true
-                    self.labelForEvent.hidden = true
-                    self.eventName.hidden = true
+                    self.msgAwardedBadge.isHidden = false
+                    self.afterAwardedForEvent.isHidden = false
+                    self.afterAwardedEventName.isHidden = false
+                    self.speakerName.isHidden = true
+                    self.labelAwardedBadge.isHidden = true
+                    self.labelForEvent.isHidden = true
+                    self.eventName.isHidden = true
                     
                     self.afterAwardedEventName.text = gEventTitle
                     self.msgAwardedBadge.text = msgAwardedBadge.text! + gActUserName
-                    self.btnAwardBadges.hidden = true
-                    self.btnDoNotAward.hidden = true
+                    self.btnAwardBadges.isHidden = true
+                    self.btnDoNotAward.isHidden = true
                     
-                    if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+                    if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
                     {
                         afterAwardedForEvent.frame.origin.x = 280
                         afterAwardedEventName.frame.origin.x = 350
@@ -119,8 +119,8 @@ class BadgeController: NavController {
                 }
                 else{
                     ///Badge Not awarded yet
-                    self.btnAwardBadges.hidden = false
-                    self.btnDoNotAward.hidden = false
+                    self.btnAwardBadges.isHidden = false
+                    self.btnDoNotAward.isHidden = false
                 }
             
 
@@ -129,14 +129,14 @@ class BadgeController: NavController {
 
        // badgeUrl
         self.showOverlay(self.view)
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
         
             if(self.badgeUrl != nil){
                // print("self.badgeUrl : ", self.badgeUrl)
-                if let url = NSURL(string:AWS_S3 + self.badgeUrl!){
-                    var data = NSData(contentsOfURL:url)
+                if let url = URL(string:AWS_S3 + self.badgeUrl!){
+                    var data = try? Data(contentsOf: url)
                     if data != nil {
-                         dispatch_async(dispatch_get_main_queue(), {
+                         DispatchQueue.main.async(execute: {
                             self.hideOverlayView()
                             self.badgeImage.image = UIImage(data:data!)
                         })
@@ -156,32 +156,32 @@ class BadgeController: NavController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         rootViewController = self
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnDoNotAward.frame.origin.y + 220)
-        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.btnDoNotAward.frame.origin.y + 220)
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
     
-    @IBAction func btnAwardBadgesClick(sender: AnyObject) {
+    @IBAction func btnAwardBadgesClick(_ sender: AnyObject) {
         
         
         badgesAwardToEvent = true
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.BADGE_AWARD)
+        testfacade.doTask(self,action: DelphosAction.badge_AWARD)
         
     }
     
-    @IBAction func btnDoNotAwardClick(sender: AnyObject) {
+    @IBAction func btnDoNotAwardClick(_ sender: AnyObject) {
         
         badgesAwardToEvent = false
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.BADGE_AWARD)
+        testfacade.doTask(self,action: DelphosAction.badge_AWARD)
         
     }
     

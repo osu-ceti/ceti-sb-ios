@@ -22,7 +22,7 @@ class PushNotificationBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         aps         <- map["aps"]
         data        <- map["data"]
     }

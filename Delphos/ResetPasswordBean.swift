@@ -25,7 +25,7 @@ class ResetPasswordBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         utf8                    <- map["utf8"]
          authenticity_token       <- map["authenticity_token"]
          user               <- map["user"]

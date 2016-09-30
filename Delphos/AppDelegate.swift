@@ -29,36 +29,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return logger
     }
     
-    private func createMenuView() {
+    fileprivate func createMenuView() {
         
         // create viewController code...
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("loginId") as! LoginController
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "loginId") as! LoginController
        
-         rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
+         rightViewController = storyboard.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
         
         let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
-        UINavigationBar.appearance().tintColor = UIColor.blueColor()
+        UINavigationBar.appearance().tintColor = UIColor.blue
         
         
         
         let slideMenuController = SlidingMenuController(mainViewController:nvc, rightMenuViewController: rightViewController)
         
-        self.window?.backgroundColor = UIColor.whiteColor()
+        self.window?.backgroundColor = UIColor.white
         self.window?.rootViewController = slideMenuController
         rootViewController = slideMenuController
         self.window?.makeKeyAndVisible()
     }
     
-    func registerForPushNotifications(application: UIApplication){
-        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
-        let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+    func registerForPushNotifications(_ application: UIApplication){
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
         application.registerUserNotificationSettings(pushNotificationSettings)
         application.registerForRemoteNotifications()
     }
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         //Creating SlideMenuController
@@ -70,75 +70,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
         print("DEVICE TOKEN = \(deviceToken)")
         
         //if(deviceToken != ""){
-        gStrDeviceToken = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
+        gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: "")
         print("Device Token = " + gStrDeviceToken)
         
        // }
         
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print(error)
     }
     
     
    
-    func application(application: UIApplication, didReceiveRemoteNotification notificationInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification notificationInfo: [AnyHashable: Any]) {
         print("Entering didReceiveRemoteNotification\n")
         print(notificationInfo)
-        gObjNotificationInfo = notificationInfo
+        gObjNotificationInfo = notificationInfo as AnyObject?
         
        // rootViewController.showOverlay(self.rootViewController)
         
-        facade.doTask(gObjRightViewController, action: DelphosAction.HANDLE_NOTIFICATION)
+        facade.doTask(gObjRightViewController!, action: DelphosAction.handle_NOTIFICATION)
 //        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
         
     }
-    func handleRemotePush(bgInfo: UIBackgroundFetchResult) -> Void{
+    func handleRemotePush(_ bgInfo: UIBackgroundFetchResult) -> Void{
         print("Handling remote push\n")
         print (bgInfo)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification notificationInfo: [NSObject : AnyObject], handleRemotePush completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification notificationInfo: [AnyHashable: Any], handleRemotePush completionHandler: (UIBackgroundFetchResult) -> Void) {
         print("Entering fetchCompletionHandler\n")
         print(notificationInfo)
-        gObjNotificationInfo = notificationInfo
-        facade.doTask(gObjRightViewController, action: DelphosAction.HANDLE_NOTIFICATION)
+        gObjNotificationInfo = notificationInfo as AnyObject?
+        facade.doTask(gObjRightViewController!, action: DelphosAction.handle_NOTIFICATION)
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("applicationDidEnterBackground")
     }
     
-    func application( application: UIApplication,
-                       didReceiveLocalNotification notification: UILocalNotification){
+    func application( _ application: UIApplication,
+                       didReceive notification: UILocalNotification){
         print("didReceiveLocalNotification")
     }
     
 
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         print("applicationDidBecomeActive")
         print(window?.rootViewController)
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 

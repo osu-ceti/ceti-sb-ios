@@ -44,7 +44,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     var tempBackToViewController:UIViewController!
 
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -67,12 +67,12 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         
         self.view.backgroundColor = bgColor
         self.showOverlay(self.view)
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
             
-            let url = NSURL(string: AWS_S3 + gObjSchoolImage)
-            var data = NSData(contentsOfURL:url!)
+            let url = URL(string: AWS_S3 + gObjSchoolImage)
+            var data = try? Data(contentsOf: url!)
             if data != nil {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.hideOverlayView()
                     self.schoolImage.image = UIImage(data:data!)
                 })
@@ -92,14 +92,14 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         self.tableView.tableFooterView = UIView()
        
         //schoolImage.image = UIImage(named:"gObjSchoolImage")
-        schoolNameLabel.font = UIFont.boldSystemFontOfSize(15)
-        labelAddress.font = UIFont.boldSystemFontOfSize(15)
-        labelCity.font = UIFont.boldSystemFontOfSize(15)
-        labelState.font = UIFont.boldSystemFontOfSize(15)
-        labelZip.font = UIFont.boldSystemFontOfSize(15)
-        labelPhone.font = UIFont.boldSystemFontOfSize(15)
+        schoolNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        labelAddress.font = UIFont.boldSystemFont(ofSize: 15)
+        labelCity.font = UIFont.boldSystemFont(ofSize: 15)
+        labelState.font = UIFont.boldSystemFont(ofSize: 15)
+        labelZip.font = UIFont.boldSystemFont(ofSize: 15)
+        labelPhone.font = UIFont.boldSystemFont(ofSize: 15)
         
-        self.labelNoEventFound.hidden = true
+        self.labelNoEventFound.isHidden = true
         
         self.schoolNameLabel.text = gObjSearchSchoolListBean.name
         
@@ -128,12 +128,12 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         if(eventBeanArray!.count > 0){
           
@@ -145,11 +145,11 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         }
     }
     
-    func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+    func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
         
         if(eventBeanArray!.count > 0){
-            self.tableView.hidden = false
-            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+            self.tableView.isHidden = false
+            let eventDisplayBean: EventBean! = eventBeanArray[(indexPath as NSIndexPath).row]
 
             (cell as! SchoolProfileCell).eventTitle!.text = String(eventDisplayBean.event_title)
             (cell as! SchoolProfileCell).eventStartDate!.text = String(eventDisplayBean.event_start)
@@ -157,8 +157,8 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         }
         else{
             
-            self.tableView.hidden = true
-            self.labelNoEventFound.hidden = false
+            self.tableView.isHidden = true
+            self.labelNoEventFound.isHidden = false
         }
        
         
@@ -166,33 +166,33 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     //function to return dynamic cell
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("schoolProfileCell", forIndexPath: indexPath) as? UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "schoolProfileCell", for: indexPath) as? UITableViewCell
         
         configureCell(cell!, indexPath: indexPath)
         
         return cell!
     }
     //function to respond to row selection
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var selectCell = tableView.cellForRowAtIndexPath(indexPath) as! SchoolProfileCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var selectCell = tableView.cellForRow(at: indexPath) as! SchoolProfileCell
         print("currentCell", selectCell.eventId.text!)
         
         tempBackToViewController = gObjBackTocontroller
         gObjBackTocontroller = gObjSchoolProfileNavController
         gEventID = Int(selectCell.eventId.text!)
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+            testfacade.doTask(self,action: DelphosAction.show_EVENT)
         })
     }
     
 
     
-    @IBAction func makeMySchoolClick(sender: AnyObject) {
+    @IBAction func makeMySchoolClick(_ sender: AnyObject) {
         
         if(gObjSearchSchoolListBean != nil){
             if(gObjSearchSchoolListBean.id != nil){
@@ -202,9 +202,9 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
                 makeMySchoolName = gObjSearchSchoolListBean.name
             }
         }
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_MAKE_MY_SCHOOL)
+        testfacade.doTask(self,action: DelphosAction.show_MAKE_MY_SCHOOL)
         
     }
     

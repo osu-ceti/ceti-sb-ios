@@ -15,7 +15,7 @@ import UIKit
 class NotificationDelegate:BaseDelegate{
 
 
-    func showNotification(objCurrentContoller: BaseController) {
+    func showNotification(_ objCurrentContoller: BaseController) {
         
         var pageValue:String!
        
@@ -59,7 +59,7 @@ class NotificationDelegate:BaseDelegate{
                 
                 
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                   
                     
                      gObjNotificationControllerNav = self.getNavigationController(gObjNotificationController)
@@ -76,7 +76,7 @@ class NotificationDelegate:BaseDelegate{
             }
         })
     }
-func showShareBadge(objCurrentContoller: BaseController) {
+func showShareBadge(_ objCurrentContoller: BaseController) {
         
        // var strUserId: String = String(0)
         
@@ -92,7 +92,7 @@ func showShareBadge(objCurrentContoller: BaseController) {
                 viewBadgeBean = objBadgeBean
               
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                       var objViewBadgeControllerNav = self.getNavigationController(gObjViewBadgeController)
                     
@@ -110,7 +110,7 @@ func showShareBadge(objCurrentContoller: BaseController) {
         })
     }
 
-func deleteNotification(objCurrentContoller: BaseController)  {
+func deleteNotification(_ objCurrentContoller: BaseController)  {
         
        
         
@@ -139,7 +139,7 @@ func deleteNotification(objCurrentContoller: BaseController)  {
         
         
     }
-    func readNotification(objCurrentContoller: BaseController)  {
+    func readNotification(_ objCurrentContoller: BaseController)  {
         
         var strid = String((objCurrentContoller as! NotificationController).notificationId)
         

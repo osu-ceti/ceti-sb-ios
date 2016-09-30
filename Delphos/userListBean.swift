@@ -32,7 +32,7 @@ class userListBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         association    <- map["association"]
         

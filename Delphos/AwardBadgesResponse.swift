@@ -30,7 +30,7 @@ class AwardBadgesResponse: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         badge_url           <- map["badge_url"]
         event_id            <- map["event_id"]
         event_name          <- map["event_name"]

@@ -39,10 +39,10 @@ class MessageController:  NavController  {
         
         
         self.view.backgroundColor = bgColor
-        self.requiredField.hidden = true
+        self.requiredField.isHidden = true
         
-         messageViewUserName.font = UIFont.boldSystemFontOfSize(15)
-         labelSendMessage.font = UIFont.boldSystemFontOfSize(15)
+         messageViewUserName.font = UIFont.boldSystemFont(ofSize: 15)
+         labelSendMessage.font = UIFont.boldSystemFont(ofSize: 15)
         
        
         if (gUserProfileMessage == true)
@@ -52,13 +52,13 @@ class MessageController:  NavController  {
         
         }
         else{
-            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
+            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
+                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both){
        
                 self.messageViewUserName.text = gClaimSpeakerName
                 //userMessageId = gClaimUser_id
             }
-            else if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.SPEAKER){
+            else if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.speaker){
             
                 self.messageViewUserName.text = gObjShowEventBean.user_name
         
@@ -66,12 +66,12 @@ class MessageController:  NavController  {
         }
         
     }
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSendMessage.frame.origin.y + 350)
-        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.btnSendMessage.frame.origin.y + 350)
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
     override func awakeFromNib() {
@@ -79,22 +79,22 @@ class MessageController:  NavController  {
         // Initialization code
     }
     
-    @IBAction func touchSendMessage(sender: AnyObject) {
+    @IBAction func touchSendMessage(_ sender: AnyObject) {
         
-        var trimmedName = txtSendMessage.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        var trimmedName = txtSendMessage.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines
         )
         
         if(trimmedName == ""){
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Message"
             
         }
         else{
         
             //showOverlay(self.view)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SEND_MESSAGE)
+            testfacade.doTask(self,action: DelphosAction.send_MESSAGE)
         
         }
     }

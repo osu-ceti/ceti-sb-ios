@@ -12,7 +12,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
 
     
     //var navigationBar: UINavigationBar = UINavigationBar()
-    var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+    var searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var searchButton : UIBarButtonItem = UIBarButtonItem()
     var backButton : UIBarButtonItem = UIBarButtonItem()
     var searchBarItem = UIBarButtonItem()
@@ -36,14 +36,14 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     var segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
    
     
-    func setNavBar(width: CGFloat){
+    func setNavBar(_ width: CGFloat){
         
         searchBar.delegate = self
-        searchView.frame = CGRectMake(0, 17+44, self.view.frame.size.width, 24);
-        let label = UILabel(frame: CGRectMake(0, 5, 200, 19))
-        label.textAlignment = NSTextAlignment.Left
+        searchView.frame = CGRect(x: 0, y: 17+44, width: self.view.frame.size.width, height: 24);
+        let label = UILabel(frame: CGRect(x: 0, y: 5, width: 200, height: 19))
+        label.textAlignment = NSTextAlignment.left
         label.text = "Search for: "
-        label.textColor = UIColor.blackColor()
+        label.textColor = UIColor.black
         searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
         
         
@@ -51,10 +51,10 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
        
         
 // segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
-        segmentSearchItems.frame  = CGRectMake(110,5,200,20)
+        segmentSearchItems.frame  = CGRect(x: 110,y: 5,width: 200,height: 20)
        // segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
-        segmentSearchItems.tintColor = UIColor.lightGrayColor()
-        segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
+        segmentSearchItems.tintColor = UIColor.lightGray
+        segmentSearchItems.addTarget(self, action: #selector(NavController.segmentedControllerActivity(_:)), for:.valueChanged)
          
 
         searchView.addSubview(label)
@@ -62,14 +62,14 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         searchView.addSubview(segmentSearchItems)
         
         
-        self.searchView.hidden = true
-        self.searchBar.hidden = true
+        self.searchView.isHidden = true
+        self.searchBar.isHidden = true
         
         let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
        
         if(backButtonNav != nil){
-            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToNavController(_:)))
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.plain, target: self, action: #selector(NavController.backToNavController(_:)))
             
             navigationItem.leftBarButtonItem = backButton
         
@@ -77,7 +77,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         
         if(isBackEnabled){
-            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToSomeController(_:)))
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.plain, target: self, action: #selector(NavController.backToSomeController(_:)))
         
             navigationItem.leftBarButtonItem = backButton
         }
@@ -86,13 +86,13 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
       
        
         
-        gBtnNotificationCount = UIBarButtonItem(title : String(gNotificationCount),style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
+        gBtnNotificationCount = UIBarButtonItem(title : String(gNotificationCount),style: UIBarButtonItemStyle.plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
         
         
         
         if(isSearchEnabled){
             searchButtonItem = UIBarButtonItem(customView:searchBar)
-            searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
+            searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(NavController.btnSearchClick(_:)))
 
             navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount, searchButton]
         }
@@ -105,14 +105,14 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
 
     }
     
-    func setNavBar1(width: CGFloat,height:CGFloat){
+    func setNavBar1(_ width: CGFloat,height:CGFloat){
         
         searchBar.delegate = self
-        searchView.frame = CGRectMake(0, height, self.view.frame.size.width, 24);
-        let label = UILabel(frame: CGRectMake(0, 5, 200, 19))
-        label.textAlignment = NSTextAlignment.Left
+        searchView.frame = CGRect(x: 0, y: height, width: self.view.frame.size.width, height: 24);
+        let label = UILabel(frame: CGRect(x: 0, y: 5, width: 200, height: 19))
+        label.textAlignment = NSTextAlignment.left
         label.text = "Search for: "
-        label.textColor = UIColor.blackColor()
+        label.textColor = UIColor.black
         searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
 
         
@@ -120,10 +120,10 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
        
         
-        segmentSearchItems.frame  = CGRectMake(110,5,200,20)
+        segmentSearchItems.frame  = CGRect(x: 110,y: 5,width: 200,height: 20)
         //segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
-        segmentSearchItems.tintColor = UIColor.lightGrayColor()
-        segmentSearchItems.addTarget(self, action: Selector("segmentedControllerActivity:"), forControlEvents:.ValueChanged)
+        segmentSearchItems.tintColor = UIColor.lightGray
+        segmentSearchItems.addTarget(self, action: #selector(NavController.segmentedControllerActivity(_:)), for:.valueChanged)
         
         
         
@@ -132,13 +132,13 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         searchView.addSubview(segmentSearchItems)
         
         
-        self.searchView.hidden = true
-        self.searchBar.hidden = true
+        self.searchView.isHidden = true
+        self.searchBar.isHidden = true
         let navigationItem = self.navigationItem
         navigationItem.title = "School-Business"
         
         if(backButtonNav != nil){
-            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToNavController(_:)))
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.plain, target: self, action: #selector(NavController.backToNavController(_:)))
             
             navigationItem.leftBarButtonItem = backButton
             
@@ -146,7 +146,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         
         if(isBackEnabled){
-            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.backToSomeController(_:)))
+            backButton = UIBarButtonItem(title : "Back",style: UIBarButtonItemStyle.plain, target: self, action: #selector(NavController.backToSomeController(_:)))
             
             navigationItem.leftBarButtonItem = backButton
         }
@@ -155,13 +155,13 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         
         
-        gBtnNotificationCount = UIBarButtonItem(title : String(gNotificationCount),style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
+        gBtnNotificationCount = UIBarButtonItem(title : String(gNotificationCount),style: UIBarButtonItemStyle.plain, target: self, action: #selector(NavController.btnNotificationClick(_:)))
         
         
         
         if(isSearchEnabled){
             searchButtonItem = UIBarButtonItem(customView:searchBar)
-            searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: #selector(NavController.btnSearchClick(_:)))
+            searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(NavController.btnSearchClick(_:)))
             
             navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount, searchButton]
         }
@@ -175,12 +175,12 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     }
 
     
-    func btnSearchClick(sender: UIBarButtonItem) {
+    func btnSearchClick(_ sender: UIBarButtonItem) {
         
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
         // It's an iPhone
-            if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            if UIDevice.current.orientation.isLandscape {
                 print("landscape")
                 if (settingSearch){
                     setNavBar1(self.view.frame.size.width,height:0)
@@ -192,7 +192,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
                 }
                 
             }
-            if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
+            if(UIDevice.current.orientation.isPortrait) {
                 print("portrait")
                 
                 if (settingSearch){
@@ -206,9 +206,9 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
                 
             }
             break
-        case .Pad:
+        case .pad:
         // It's an iPad
-            if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            if UIDevice.current.orientation.isLandscape {
                 print("landscape")
                 if (settingSearch){
                     setNavBar1(self.view.frame.size.width,height:0)
@@ -220,7 +220,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
                 }
                 
             }
-            if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
+            if(UIDevice.current.orientation.isPortrait) {
                 print("portrait")
                 
                 if (settingSearch){
@@ -235,7 +235,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
             }
             break
         default:
-            if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            if UIDevice.current.orientation.isLandscape {
                 print("landscape")
                 if (settingSearch){
                     setNavBar1(self.view.frame.size.width,height:0)
@@ -247,7 +247,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
                 }
                 
             }
-            if(UIDevice.currentDevice().orientation.isPortrait.boolValue) {
+            if(UIDevice.current.orientation.isPortrait) {
                 print("portrait")
                 
                 if (settingSearch){
@@ -266,7 +266,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         
 
-        self.searchBar.hidden = false
+        self.searchBar.isHidden = false
         navigationItem.titleView = searchBar
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         searchBar.sizeToFit()
@@ -275,7 +275,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
         segmentSearchItems.selectedSegmentIndex = 0
         //navigationBar.items = [navigationItem]
-        searchView.hidden = false
+        searchView.isHidden = false
         
         if(segmentSearchItems.selectedSegmentIndex == 0){
             gBtnRadioValue = "events"
@@ -291,14 +291,14 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     }
     
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Changed")
         //        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         //        let testfacade = appDelegate.getObjFacade()
         //        testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         navigationItem.titleView = nil
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         navigationItem.title = "School-Business"
@@ -310,15 +310,15 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         
        // navigationBar.items = [navigationItem]
-        searchView.hidden = true
+        searchView.isHidden = true
 
     }
     
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Clicked")
         
-        var trimmedSearchName = searchBar.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var trimmedSearchName = searchBar.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if(trimmedSearchName == ""){
             searchBar.text = ""
@@ -329,14 +329,14 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         }else{
             searchBar.text = trimmedSearchName
         
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SEARCH_EVENT)
+            testfacade.doTask(self,action: DelphosAction.search_EVENT)
             }
     }
     
     
-    func backToSomeController(sender: UIBarButtonItem){
+    func backToSomeController(_ sender: UIBarButtonItem){
         //if(backToController == nil){
 //            /gObjBackTocontroller = self.fetchNavController(gStrHomeControllerID)
        // }
@@ -345,7 +345,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
     }
     
-    func backToNavController(sender: UIBarButtonItem){
+    func backToNavController(_ sender: UIBarButtonItem){
         //if(backToController == nil){
         //backToController = self.fetchNavController(backButtonNav)
         // }
@@ -353,20 +353,20 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
         
     }
-    func btnNotificationClick(sender: UIBarButtonItem){
+    func btnNotificationClick(_ sender: UIBarButtonItem){
         notificationPage = 1
         print(" Notification Click")
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SHOW_NOTIFICATION)
+        testfacade.doTask(self,action: DelphosAction.show_NOTIFICATION)
         
     }
     
-    func didSelectButton(aButton: UIButton?) {
+    func didSelectButton(_ aButton: UIButton?) {
         print(aButton)
     }
     
-    func btnAdd(sender:UIButton) {
+    func btnAdd(_ sender:UIButton) {
         print("clicked")
     }
     override func didReceiveMemoryWarning() {
@@ -375,11 +375,11 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     }
     
     
-    func menuButtonClick(sender: UIBarButtonItem){
+    func menuButtonClick(_ sender: UIBarButtonItem){
         
         
     }
-    func segmentedControllerActivity(sender:UISegmentedControl)
+    func segmentedControllerActivity(_ sender:UISegmentedControl)
     {
         if(sender.selectedSegmentIndex == 0){
             gBtnRadioValue = "events"

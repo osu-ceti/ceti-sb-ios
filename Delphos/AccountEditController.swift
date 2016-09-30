@@ -8,6 +8,26 @@
 
 import UIKit
 import ObjectMapper
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class AccountEditController: NavController {
     
@@ -51,7 +71,7 @@ class AccountEditController: NavController {
         
    
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -74,7 +94,7 @@ class AccountEditController: NavController {
         
         
         
-        self.requiredField.hidden = true
+        self.requiredField.isHidden = true
         
         self.BottomLine(txtName)
         self.BottomLine(txtEmail)
@@ -189,26 +209,26 @@ class AccountEditController: NavController {
 //        activityIndicator.stopAnimating()
 //        overlayView.removeFromSuperview()
 //    }
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSaveAccount.frame.origin.y + 300)
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.btnSaveAccount.frame.origin.y + 300)
         //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
-        scrollView.scrollEnabled = true
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
-    func BottomLine(textField:UITextField){
+    func BottomLine(_ textField:UITextField){
         
-        var bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.blackColor().CGColor
-        textField.borderStyle = UITextBorderStyle.None
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.height - 1, width: textField.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        textField.borderStyle = UITextBorderStyle.none
         textField.layer.addSublayer(bottomLine)
     }
    
     
-    @IBAction func accountUserRoleTouch(sender: AnyObject) {
+    @IBAction func accountUserRoleTouch(_ sender: AnyObject) {
         
         if(accountSegmentedRole.selectedSegmentIndex == 0){
             txtRole = "Teacher"
@@ -223,59 +243,59 @@ class AccountEditController: NavController {
         
         
     }
-    func isValidEmail(testStr:String) -> Bool {
+    func isValidEmail(_ testStr:String) -> Bool {
         // println("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        print(emailTest.evaluateWithObject(testStr))
+        print(emailTest.evaluate(with: testStr))
         
-        return emailTest.evaluateWithObject(testStr)
+        return emailTest.evaluate(with: testStr)
         
         
     }
-    @IBAction func txtnametouchdown(sender: AnyObject) {
-        self.requiredField.hidden = true
+    @IBAction func txtnametouchdown(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
-    @IBAction func txtNameTouch(sender: AnyObject) {
+    @IBAction func txtNameTouch(_ sender: AnyObject) {
         
         
-        self.requiredField.hidden = true
+        self.requiredField.isHidden = true
     }
-    @IBAction func txtEmailTouch(sender: AnyObject) {
-        self.requiredField.hidden = true
-    }
-    
-    
-    @IBAction func txtNewPasswordTouch(sender: AnyObject) {
-        self.requiredField.hidden = true
+    @IBAction func txtEmailTouch(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
     
-    @IBAction func txtConfirmPasswordTouch(sender: AnyObject) {
-        
-        self.requiredField.hidden = true
+    
+    @IBAction func txtNewPasswordTouch(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
     
-    @IBAction func txtCurrentPasswordTouch(sender: AnyObject) {
-        self.requiredField.hidden = true
+    @IBAction func txtConfirmPasswordTouch(_ sender: AnyObject) {
+        
+        self.requiredField.isHidden = true
+    }
+    
+    @IBAction func txtCurrentPasswordTouch(_ sender: AnyObject) {
+        self.requiredField.isHidden = true
     }
     
    
     
-    @IBAction func btnSaveAccountClick(sender: AnyObject) {
+    @IBAction func btnSaveAccountClick(_ sender: AnyObject) {
         let curPassword = txtCurrentPassword.text
         
-        let trimmedText = txtName.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmedText = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
-        let trimmedEmail = txtEmail.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmedEmail = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if(trimmedText == ""){
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Name"
             
         }
         else if (trimmedEmail == "" ){
-            self.requiredField.hidden = false
+            self.requiredField.isHidden = false
             self.requiredField.text = "Required Email"
             
         }
@@ -284,7 +304,7 @@ class AccountEditController: NavController {
             var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
             if(emailvalid == false ){
-                self.requiredField.hidden = false
+                self.requiredField.isHidden = false
                 self.requiredField.text = "Required Vaild Email"
                 
             }
@@ -297,7 +317,7 @@ class AccountEditController: NavController {
                 
                 if ((txtNewPassword.text! != "") && (txtNewPassword.text?.characters.count <= 7))
                 {
-                    self.requiredField.hidden = false
+                    self.requiredField.isHidden = false
                     self.requiredField.text = "Password Must have 8 character"
                 }
 //                else if (txtConfirmPassword.text == "")
@@ -307,17 +327,17 @@ class AccountEditController: NavController {
 //                }
                 else if ((txtConfirmPassword.text != "") && (txtConfirmPassword.text != txtNewPassword.text!))
                 {
-                    self.requiredField.hidden = false
+                    self.requiredField.isHidden = false
                     self.requiredField.text = "ConfirmPassword does not match"
                 }
                 else if (txtCurrentPassword.text == "")
                 {
-                    self.requiredField.hidden = false
+                    self.requiredField.isHidden = false
                     self.requiredField.text = "Required Current Password"
                 }
                 else if (curPassword != gPasswordCheck)
                 {
-                    self.requiredField.hidden = false
+                    self.requiredField.isHidden = false
                     self.requiredField.text = "Current password is not match"
                 }
 //                else if (txtRole == "")
@@ -329,9 +349,9 @@ class AccountEditController: NavController {
                     txtName.text = trimmedText
                     txtEmail.text = trimmedEmail
                     showOverlay(self.view)
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.EDIT_PROFILE_ACCOUNT)
+            testfacade.doTask(self,action: DelphosAction.edit_PROFILE_ACCOUNT)
                 
                 
                 }

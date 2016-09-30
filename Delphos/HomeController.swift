@@ -28,14 +28,14 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     var eventBeanArray: [EventBean]! = []
     var eventBeanSearchArray: [EventBean]! = []
    
-    var listType = EventListingType.ALL
+    var listType = EventListingType.all
     
     @IBOutlet weak var tableView: UITableView!
    // var radioButtonController: SSRadioButtonsController?
   
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         gObjBackTocontroller = gObjHomeController
@@ -63,7 +63,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         
         // navigationBar.items = [navigationItem]
-        searchView.hidden = true
+        searchView.isHidden = true
          
         
     }
@@ -80,38 +80,38 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
        
         
-        self.tableView.hidden = true
-        self.noEventsFound.hidden = true
+        self.tableView.isHidden = true
+        self.noEventsFound.isHidden = true
         
         self.tableView.dataSource = self
         tableView.delegate = self
        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.EVENT_ALL)
+        testfacade.doTask(self,action: DelphosAction.event_ALL)
         
         self.tableView.tableFooterView = UIView()
         gBtnRadioValue = "events"
        
         //self.setNavigationBarItem()
-        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.TEACHER ||
-            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.BOTH){
-            self.btnCreateEvent.hidden = false
+        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
+            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both){
+            self.btnCreateEvent.isHidden = false
         }
         else{
-            self.btnCreateEvent.hidden = true
+            self.btnCreateEvent.isHidden = true
         }
         
-        bottomLineAll.frame = CGRectMake(0, btnAllEvent.frame.size.height - 1.0, btnAllEvent.frame.size.width, 1)
+        bottomLineAll.frame = CGRect(x: 0, y: btnAllEvent.frame.size.height - 1.0, width: btnAllEvent.frame.size.width, height: 1)
         bottomLineAll.borderWidth = 2.0
-        bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
+        bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).cgColor /* #38a083 */
         btnAllEvent.layer.addSublayer(bottomLineAll)
 
         
     }
     
     
-    @IBAction func btnCreateEvent(sender: UIButton) {
+    @IBAction func btnCreateEvent(_ sender: UIButton) {
        // if(gObjCreateEventController == nil){
             gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
         //}
@@ -132,74 +132,74 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
    
     func getEventsList(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.EVENT_ALL)
+        testfacade.doTask(self,action: DelphosAction.event_ALL)
     }
    
-    @IBAction func eventAll(sender: UIButton) {
-       listType = EventListingType.ALL
+    @IBAction func eventAll(_ sender: UIButton) {
+       listType = EventListingType.all
        getEventsList()
  
-        bottomLineAll.frame = CGRectMake(0, btnAllEvent.frame.size.height - 1.0, btnAllEvent.frame.size.width, 1)
+        bottomLineAll.frame = CGRect(x: 0, y: btnAllEvent.frame.size.height - 1.0, width: btnAllEvent.frame.size.width, height: 1)
         bottomLineAll.borderWidth = 2.0
-        bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
+        bottomLineAll.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).cgColor /* #38a083 */
         btnAllEvent.layer.addSublayer(bottomLineAll)
        
        
-        bottomLineApproval.borderColor = UIColor.clearColor().CGColor
-        bottomLineClaim.borderColor = UIColor.clearColor().CGColor
-        bottomLineConfirm.borderColor = UIColor.clearColor().CGColor
+        bottomLineApproval.borderColor = UIColor.clear.cgColor
+        bottomLineClaim.borderColor = UIColor.clear.cgColor
+        bottomLineConfirm.borderColor = UIColor.clear.cgColor
        
     }
-    @IBAction func eventApproval(sender: AnyObject) {
-        listType = EventListingType.APPROVED
+    @IBAction func eventApproval(_ sender: AnyObject) {
+        listType = EventListingType.approved
         getEventsList()
         
-        bottomLineApproval.frame = CGRectMake(0, btnApprovalEvent.frame.size.height - 1.0, btnApprovalEvent.frame.size.width, 1)
+        bottomLineApproval.frame = CGRect(x: 0, y: btnApprovalEvent.frame.size.height - 1.0, width: btnApprovalEvent.frame.size.width, height: 1)
         bottomLineApproval.borderWidth = 2.0
-        bottomLineApproval.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
+        bottomLineApproval.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).cgColor /* #38a083 */
         btnApprovalEvent.layer.addSublayer(bottomLineApproval)
        
-        bottomLineClaim.borderColor = UIColor.clearColor().CGColor
-        bottomLineAll.borderColor = UIColor.clearColor().CGColor
-        bottomLineConfirm.borderColor = UIColor.clearColor().CGColor
+        bottomLineClaim.borderColor = UIColor.clear.cgColor
+        bottomLineAll.borderColor = UIColor.clear.cgColor
+        bottomLineConfirm.borderColor = UIColor.clear.cgColor
        
     }
-    @IBAction func eventClaims(sender: AnyObject) {
-        listType = EventListingType.CLAIMS
+    @IBAction func eventClaims(_ sender: AnyObject) {
+        listType = EventListingType.claims
         getEventsList()
         
-        bottomLineClaim.frame = CGRectMake(0, btnClaimEvent.frame.size.height - 1.0, btnClaimEvent.frame.size.width, 1)
+        bottomLineClaim.frame = CGRect(x: 0, y: btnClaimEvent.frame.size.height - 1.0, width: btnClaimEvent.frame.size.width, height: 1)
         bottomLineClaim.borderWidth = 2.0
-        bottomLineClaim.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
+        bottomLineClaim.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).cgColor /* #38a083 */
         btnClaimEvent.layer.addSublayer(bottomLineClaim)
         
-        bottomLineAll.borderColor = UIColor.clearColor().CGColor
-        bottomLineApproval.borderColor = UIColor.clearColor().CGColor
-        bottomLineConfirm.borderColor = UIColor.clearColor().CGColor
+        bottomLineAll.borderColor = UIColor.clear.cgColor
+        bottomLineApproval.borderColor = UIColor.clear.cgColor
+        bottomLineConfirm.borderColor = UIColor.clear.cgColor
        
     }
-    @IBAction func eventConfirmed(sender: AnyObject) {
-        listType = EventListingType.CONFIRMED
+    @IBAction func eventConfirmed(_ sender: AnyObject) {
+        listType = EventListingType.confirmed
         getEventsList()
         
-        bottomLineConfirm.frame = CGRectMake(0, btnConfirmEvent.frame.size.height - 1.0, btnConfirmEvent.frame.size.width, 1)
+        bottomLineConfirm.frame = CGRect(x: 0, y: btnConfirmEvent.frame.size.height - 1.0, width: btnConfirmEvent.frame.size.width, height: 1)
         bottomLineConfirm.borderWidth = 2.0
-        bottomLineConfirm.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor /* #38a083 */
+        bottomLineConfirm.borderColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).cgColor /* #38a083 */
         btnConfirmEvent.layer.addSublayer(bottomLineConfirm)
         
-        bottomLineAll.borderColor = UIColor.clearColor().CGColor
-        bottomLineApproval.borderColor = UIColor.clearColor().CGColor
-        bottomLineClaim.borderColor = UIColor.clearColor().CGColor
+        bottomLineAll.borderColor = UIColor.clear.cgColor
+        bottomLineApproval.borderColor = UIColor.clear.cgColor
+        bottomLineClaim.borderColor = UIColor.clear.cgColor
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         if(eventBeanArray.count > 0){
             return eventBeanArray.count
@@ -209,13 +209,13 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-     func configureCell(cell: UITableViewCell,   indexPath: NSIndexPath)  {
+     func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
        
         
         if(eventBeanArray.count > 0){
-            self.tableView.hidden = false
-            self.noEventsFound.hidden = true
-            var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
+            self.tableView.isHidden = false
+            self.noEventsFound.isHidden = true
+            let eventDisplayBean: EventBean! = eventBeanArray[(indexPath as NSIndexPath).row]
             if(eventDisplayBean.event_title != nil){
                 (cell as! EventDisplayCell).eventName!.text = String(eventDisplayBean.event_title)
             }
@@ -229,14 +229,14 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
             }
         }
         else{
-            self.tableView.hidden = true
-            self.noEventsFound.hidden = false
+            self.tableView.isHidden = true
+            self.noEventsFound.isHidden = false
         }
      }
     
     //function to return dynamic cell
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("HomeID", forIndexPath: indexPath) as? UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeID", for: indexPath) as? UITableViewCell
         
         configureCell(cell!, indexPath: indexPath)
         
@@ -244,16 +244,16 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     }
     
     //function to respond to row selection
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! EventDisplayCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCell = tableView.cellForRow(at: indexPath) as! EventDisplayCell
         print("currentCell", currentCell.eventID.text!)
         
        gEventID = Int(currentCell.eventID.text!)
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
 
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.SHOW_EVENT)
+            testfacade.doTask(self,action: DelphosAction.show_EVENT)
         })
     }
     

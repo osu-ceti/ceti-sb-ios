@@ -30,7 +30,7 @@ class ClaimBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         event_id    <- map["event_id"]
         

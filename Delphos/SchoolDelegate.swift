@@ -13,7 +13,7 @@ import UIKit
 
 class SchoolDelegate:BaseDelegate{
 
-    func schoolProfile(objCurrentContoller: BaseController) {
+    func schoolProfile(_ objCurrentContoller: BaseController) {
         
       
         var strSchoolId: String
@@ -32,7 +32,7 @@ class SchoolDelegate:BaseDelegate{
                 gObjSchoolImage = objSchoolBean.badge_url
                
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
                     self.doNavigate(objCurrentContoller, toController: gObjSchoolProfileNavController,  close: true)
@@ -41,14 +41,14 @@ class SchoolDelegate:BaseDelegate{
             }
         })
     }
-    func showMakeMySchool(objCurrentContoller: BaseController) {
+    func showMakeMySchool(_ objCurrentContoller: BaseController) {
        
         let strSchoolId = (objCurrentContoller as! SchoolProfileController).strSchoolId
         let makeMySchoolName = (objCurrentContoller as! SchoolProfileController).makeMySchoolName
         
         //var strschool:String = {}
         
-        doGetAPIs.getMakeMySchool(strSchoolId,callBack: {(result: AnyObject,statusCode: Int)   in
+        doGetAPIs.getMakeMySchool(strSchoolId!,callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
                
@@ -69,7 +69,7 @@ class SchoolDelegate:BaseDelegate{
                 logger.log(LoggingLevel.INFO, message: "Make my school")
                
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
 
                     
                     let objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)

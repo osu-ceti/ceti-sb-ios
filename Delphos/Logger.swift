@@ -18,7 +18,7 @@ enum LoggingLevel{
     case ERROR
 }
 class Logger {
-    func log(level :LoggingLevel, message:String)->Void{
+    func log(_ level :LoggingLevel, message:String)->Void{
         switch(level)
         {
             case .INFO:

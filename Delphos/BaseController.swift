@@ -11,18 +11,18 @@ class BaseController:UIViewController {
     var overlayView = UIView()
     var activityIndicator = UIActivityIndicatorView()
     //Loader funvtion
-    func showOverlay(view: UIView) {
+    func showOverlay(_ view: UIView) {
         
-        overlayView.frame = CGRectMake(0, 0, 80, 80)
+        overlayView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         overlayView.center = view.center
         overlayView.backgroundColor = UIColor(white: 0xFFFFFF, alpha: 0.7)
         overlayView.clipsToBounds = true
         overlayView.layer.cornerRadius = 10
         
-        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
-        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        activityIndicator.color = UIColor.blackColor()
-        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, overlayView.bounds.height / 2)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.color = UIColor.black
+        activityIndicator.center = CGPoint(x: overlayView.bounds.width / 2, y: overlayView.bounds.height / 2)
         
         overlayView.addSubview(activityIndicator)
         view.addSubview(overlayView)
@@ -35,7 +35,7 @@ class BaseController:UIViewController {
         overlayView.removeFromSuperview()
     }
     
-    func isCheckNilOrNot(labelData:String,labelText:String){
+    func isCheckNilOrNot(_ labelData:String,labelText:String){
         
         if(labelData != ""){
         

@@ -36,7 +36,7 @@ class SettingsController: NavController {
     
     var settingsBean :ViewSettingsResponse!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
         //        menus = regularMenu
@@ -68,29 +68,29 @@ class SettingsController: NavController {
         self.view.backgroundColor = bgColor
         viewSetting.backgroundColor = bgColor
         if(settingsBean.set_updates == 1){
-            switchEventUpdate.on = true
+            switchEventUpdate.isOn = true
             
         }
         else{
-            switchEventUpdate.on = false
+            switchEventUpdate.isOn = false
         }
         
         if(settingsBean.set_confirm == 1){
-            switchConfirmation.on = true
+            switchConfirmation.isOn = true
          }
          else{
-            switchConfirmation.on = false
+            switchConfirmation.isOn = false
         
         }
        
         if(settingsBean.set_claims == 1){
-            switchEventClaim.on = true
+            switchEventClaim.isOn = true
         }
         else{
-            switchEventClaim.on = false
+            switchEventClaim.isOn = false
         
         }
-        if(UIDevice.currentDevice().orientation.isLandscape.boolValue) {
+        if(UIDevice.current.orientation.isLandscape) {
             print("landscape")
             endLineView.frame = CGRect(x: 0,y: 200,width: 700,height: 1)
         }
@@ -98,13 +98,13 @@ class SettingsController: NavController {
         
         
     }
-    @IBAction func btnSaveSettingsClick(sender: AnyObject) {
+    @IBAction func btnSaveSettingsClick(_ sender: AnyObject) {
         
         
         
         
         
-        if(switchEventUpdate.on == true){
+        if(switchEventUpdate.isOn == true){
            radioEventUpdateBean = true
             print("true")
         }
@@ -112,7 +112,7 @@ class SettingsController: NavController {
             radioEventUpdateBean = false
         
         }
-        if(switchConfirmation.on == true){
+        if(switchConfirmation.isOn == true){
             radioComfirmationsBean = true
              print("true")
         }
@@ -120,7 +120,7 @@ class SettingsController: NavController {
             radioComfirmationsBean = false
              print("false")
         }
-        if(switchEventClaim.on == true){
+        if(switchEventClaim.isOn == true){
             radioEventClaimBean = true
              print("true")
         }else{
@@ -128,9 +128,9 @@ class SettingsController: NavController {
              print("false")
         
         }
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.SAVE_SETTINGS)
+        testfacade.doTask(self,action: DelphosAction.save_SETTINGS)
         
         
     }
@@ -139,13 +139,13 @@ class SettingsController: NavController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
         
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnSaveSettings.frame.origin.y + 150)
+        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.btnSaveSettings.frame.origin.y + 150)
         //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
-        scrollView.scrollEnabled = true
+        scrollView.isScrollEnabled = true
         //view.addSubview(scrolview)
     }
 }

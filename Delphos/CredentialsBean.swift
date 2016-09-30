@@ -41,7 +41,7 @@ class  CredentialsBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         email       <- map["email"]
         

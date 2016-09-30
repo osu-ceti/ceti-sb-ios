@@ -29,7 +29,7 @@ class  EventDisplayBean: Mappable {
     }
     
     // Mappable
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         
         events    <- map["events"]
         

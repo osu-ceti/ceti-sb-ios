@@ -12,14 +12,14 @@ import Security
 
 class UserDelegate:BaseDelegate{
     
-    func savePassword( userNameKey:String, userPasswordKey:String){
+    func savePassword( _ userNameKey:String, userPasswordKey:String){
         
-        let defaultUser = NSUserDefaults.standardUserDefaults()
-        let defaultPassowrd = NSUserDefaults.standardUserDefaults()
+        let defaultUser = UserDefaults.standard
+        let defaultPassowrd = UserDefaults.standard
        
-        defaultUser.setObject(userNameKey, forKey:"userNameKey")
+        defaultUser.set(userNameKey, forKey:"userNameKey")
     
-        defaultPassowrd.setObject(userPasswordKey, forKey:"userPasswordKey")
+        defaultPassowrd.set(userPasswordKey, forKey:"userPasswordKey")
     
     
         print(defaultPassowrd)
@@ -28,15 +28,15 @@ class UserDelegate:BaseDelegate{
     }
 
     
-    func login(objCurrentContoller: UIViewController, callback:(status: Bool)->Void) -> Bool {
+    func login(_ objCurrentContoller: UIViewController, callback:@escaping (_ status: Bool)->Void) -> Bool {
         var boolLogin = false;
         let loginController = objCurrentContoller as! LoginController
         let strUser :String
         
         let strPassword:String
         
-        if (NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStorageKey) != nil &&
-            NSUserDefaults.standardUserDefaults().stringForKey(gStrUserStoragePassKey) != nil){
+        if (UserDefaults.standard.string(forKey: gStrUserStorageKey) != nil &&
+            UserDefaults.standard.string(forKey: gStrUserStoragePassKey) != nil){
             
            
              strUser = loginController.userNameData
@@ -54,7 +54,7 @@ class UserDelegate:BaseDelegate{
         objInputParamCredsBean.id = 0
         objInputParamBean.user = objInputParamCredsBean
         
-        let defaultPassowrd = NSUserDefaults.standardUserDefaults()
+        let defaultPassowrd = UserDefaults.standard
         //DOA calls
         
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
@@ -71,17 +71,17 @@ class UserDelegate:BaseDelegate{
                 
 
                 loginController.activityIndicator.stopAnimating()
-                loginController.overlayView.hidden = true
+                loginController.overlayView.isHidden = true
                 
                 gObjUserBean = loginResult as! UserBean
                 gPasswordCheck = strPassword
                 
-                if(loginController.switchRememberme.on)
+                if(loginController.switchRememberme.isOn)
                 {
                     
                     logger.log(LoggingLevel.INFO, message: "save data")
                     
-                    logger.log(LoggingLevel.INFO, message: "switch button= \(loginController.switchRememberme.on)")
+                    logger.log(LoggingLevel.INFO, message: "switch button= \(loginController.switchRememberme.isOn)")
                    
                     //Save username password data
                     let userNameKey = strUser
@@ -98,7 +98,7 @@ class UserDelegate:BaseDelegate{
                
                 boolLogin = true;
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                   
@@ -107,7 +107,7 @@ class UserDelegate:BaseDelegate{
                     
                     gObjUsers = loginResult as! UserBean
                     //                   objCurrentContoller.presentViewController(goToEventDisplay, animated: true, completion: nil)
-                    callback(status: true)
+                    callback(true)
                 })
                 
                 
@@ -152,7 +152,7 @@ class UserDelegate:BaseDelegate{
                 self.removeUserCodes()
                 self.RedirectLoginPage(objCurrentContoller)
             }
-             callback(status: boolLogin)
+             callback(boolLogin)
             
         }
         return boolLogin
@@ -161,7 +161,7 @@ class UserDelegate:BaseDelegate{
     
     
     
-    func register(objCurrentContoller: UIViewController) -> Bool {
+    func register(_ objCurrentContoller: UIViewController) -> Bool {
         
         var boolRegister = false
         let registerController = objCurrentContoller as! RegisterController
@@ -186,7 +186,7 @@ class UserDelegate:BaseDelegate{
             self.doCleanup(statusCode, objCurrentController:registerController)
             registerController.activityIndicator.stopAnimating()
             registerController.overlayView.removeFromSuperview()
-            registerController.overlayView.hidden = true
+            registerController.overlayView.isHidden = true
             if(statusCode == SUCCESS) {
 
 
@@ -212,7 +212,7 @@ class UserDelegate:BaseDelegate{
                 self.savePassword(userNameKey!,userPasswordKey:userPasswordKey!)
                 gPasswordCheck = strPassword
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
@@ -228,7 +228,7 @@ class UserDelegate:BaseDelegate{
                 
                 
                 self.showAlert(objCurrentContoller, strMessage: SERVER_ERROR_MSG)
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
                     
@@ -240,9 +240,9 @@ class UserDelegate:BaseDelegate{
                 
                 self.showAlert(objCurrentContoller, strMessage: REGISTERATION_ERROR)
                 registerController.activityIndicator.stopAnimating()
-                registerController.overlayView.hidden = true
+                registerController.overlayView.isHidden = true
                 registerController.overlayView.removeFromSuperview()
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
                     
@@ -256,7 +256,7 @@ class UserDelegate:BaseDelegate{
     }
     
     
-    func userProfile(objCurrentContoller: BaseController) {
+    func userProfile(_ objCurrentContoller: BaseController) {
         
         let strUserId: String = String(gUserVIewBadgeId)
       // let strUserId: String = String(strUserProfileId)
@@ -274,11 +274,11 @@ class UserDelegate:BaseDelegate{
                 gObjSearchUserListBean = objUserBean.user
                 gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
                  })
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     
                     self.doNavigate(objCurrentContoller, toController: gObjUserProfileNavController,  close: true)
@@ -291,7 +291,7 @@ class UserDelegate:BaseDelegate{
     
         
     
-    func signOut(objCurrentContoller: BaseController) -> Bool {
+    func signOut(_ objCurrentContoller: BaseController) -> Bool {
         
         
         
@@ -300,14 +300,14 @@ class UserDelegate:BaseDelegate{
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "sign out")
                 
-                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStorageKey)
-                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStoragePassKey)
+                UserDefaults.standard.removeObject(forKey: gStrUserStorageKey)
+                UserDefaults.standard.removeObject(forKey: gStrUserStoragePassKey)
                 gNotificationCount = 0
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
                 var object = SignoutResult as! SignoutResponseBean
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjLoginController = self.fetchNavController(gStrLoginControllerID)
                      
@@ -317,21 +317,21 @@ class UserDelegate:BaseDelegate{
                
                
             } else {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjLoginController = self.fetchNavController(gStrLoginControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 })
-                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStorageKey)
-                NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStoragePassKey)
+                UserDefaults.standard.removeObject(forKey: gStrUserStorageKey)
+                UserDefaults.standard.removeObject(forKey: gStrUserStoragePassKey)
              logger.log(LoggingLevel.INFO, message: "Did not sign out")
             }
         }
         
         return true
     }
-    func editUserProfile(objCurrentContoller: UIViewController)  {
+    func editUserProfile(_ objCurrentContoller: UIViewController)  {
         
         let publicProfileController = objCurrentContoller as! PublicProfileController
         
@@ -360,7 +360,7 @@ class UserDelegate:BaseDelegate{
             if(statusCode == SUCCESS) {
                 logger.log(LoggingLevel.INFO, message: "Save profile")
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     var objUserResponse = result as! EditUserProfileBean
                     
                    
@@ -399,7 +399,7 @@ class UserDelegate:BaseDelegate{
         }
        
     }
-    func menuUserProfile(objCurrentContoller: BaseController) {
+    func menuUserProfile(_ objCurrentContoller: BaseController) {
 
         doGetAPIs.getMenuUserProfile( {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
@@ -413,7 +413,7 @@ class UserDelegate:BaseDelegate{
                 
                 gObjPublicProfileController.userProfileBean = objUserBean
              
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     var objPublicProfileControllerNav = self.getNavigationController(gObjPublicProfileController)
                    
@@ -427,7 +427,7 @@ class UserDelegate:BaseDelegate{
     }
 
     
-    func viewSettings(objCurrentContoller: BaseController) {
+    func viewSettings(_ objCurrentContoller: BaseController) {
         
         
         doGetAPIs.getSettings({(result: AnyObject,statusCode: Int)   in
@@ -441,7 +441,7 @@ class UserDelegate:BaseDelegate{
                 
               gObjSettingsController.settingsBean = objSettingBean
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     let objSettingsControllerNav = self.getNavigationController(gObjSettingsController)
                     
@@ -454,7 +454,7 @@ class UserDelegate:BaseDelegate{
         })
     }
     
-    func saveSettings(objCurrentContoller: UIViewController)  {
+    func saveSettings(_ objCurrentContoller: UIViewController)  {
         
         let publicProfileController = objCurrentContoller as! SettingsController
         
@@ -486,14 +486,14 @@ class UserDelegate:BaseDelegate{
         }
     }
 
-    func viewAccountEdit(objCurrentContoller: UIViewController) {
+    func viewAccountEdit(_ objCurrentContoller: UIViewController) {
     
        
         
         gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController
        gObjAccountEditController.userAccountEditBean = gPublicEditaccountBean
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
             
@@ -506,7 +506,7 @@ class UserDelegate:BaseDelegate{
         
         
     }
-    func resetPassword(objCurrentContoller: UIViewController)  {
+    func resetPassword(_ objCurrentContoller: UIViewController)  {
         
         let loginController = objCurrentContoller as! LoginController
         
@@ -533,11 +533,11 @@ class UserDelegate:BaseDelegate{
                 logger.log(LoggingLevel.INFO, message: "Password Reseted")
                 
                 loginController.activityIndicator.stopAnimating()
-                loginController.overlayView.hidden = true
+                loginController.overlayView.isHidden = true
 
                 self.showAlert(objCurrentContoller, strMessage: "Please check your email")
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                    
                     gObjLoginController = self.fetchNavController(gStrLoginControllerID)
                     
@@ -561,7 +561,7 @@ class UserDelegate:BaseDelegate{
         }
     }
 
-    func accountEdit(objCurrentContoller: UIViewController)  {
+    func accountEdit(_ objCurrentContoller: UIViewController)  {
         
         let accountController = objCurrentContoller as! AccountEditController
         
@@ -610,7 +610,7 @@ class UserDelegate:BaseDelegate{
                 
                 gObjPublicProfileController = self.instantiateVC(gStrPublicProfileControllerID) as! PublicProfileController
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
@@ -631,7 +631,7 @@ class UserDelegate:BaseDelegate{
                 
 //                gObjAccountEditController = self.instantiateVC(gStrAccountEditControllerID) as! AccountEditController
 //                
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                  (objCurrentContoller as! AccountEditController).hideOverlayView()
 //                
 //                    var gObjAccountEditControllerNav = self.getNavigationController(gObjAccountEditController)
