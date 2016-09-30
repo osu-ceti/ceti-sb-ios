@@ -53,7 +53,9 @@ class SettingsController: NavController {
         
         backToController = gObjHomeController
     }
+    @IBOutlet var endLineView: UIView!
     @IBOutlet var viewSetting: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,8 +65,7 @@ class SettingsController: NavController {
         rootViewController = self
         settingSearch = true
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         viewSetting.backgroundColor = bgColor
         if(settingsBean.set_updates == 1){
             switchEventUpdate.on = true
@@ -89,7 +90,10 @@ class SettingsController: NavController {
             switchEventClaim.on = false
         
         }
-        
+        if(UIDevice.currentDevice().orientation.isLandscape.boolValue) {
+            print("landscape")
+            endLineView.frame = CGRect(x: 0,y: 200,width: 700,height: 1)
+        }
         
         
         

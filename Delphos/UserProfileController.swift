@@ -62,8 +62,11 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     var schoolProfileId:Int!
     var tempBackToViewController:UIViewController!
     var imagesCount:Int!
+    var isBadgesClicked: Bool!! = false
     
-    override func viewWillAppear(animated: Bool) {
+    var profileButtonColor = UIColor(hue: 0.4528, saturation: 0.65, brightness: 0.63, alpha: 1.0).CGColor
+    
+      override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
        // self.showOverlay(self.view)
         //rootViewController = self
@@ -81,7 +84,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.showOverlay(self.view)
+       //self.showOverlay(self.view)
         if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
@@ -109,8 +112,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         self.tableView.dataSource = self
         tableView.delegate = self
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         collectionView.backgroundColor = bgColor
         collectionView.dataSource = self
         
@@ -128,7 +130,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         labelBusiness.font = UIFont.boldSystemFontOfSize(15)
         labelRole.font = UIFont.boldSystemFontOfSize(15)
         labelBiography.font = UIFont.boldSystemFontOfSize(15)
-        
+        labelEventFeed.font = UIFont.boldSystemFontOfSize(15)
         self.labelSchool.text   = "School:"
         self.labelGrades.text   = "Grades:"
         self.labelJobTitle.text = "JobTitle:"
@@ -228,10 +230,9 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         
         }
-        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height - 1.0, btnProfile.frame.size.width, 1)
+        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height, btnProfile.frame.size.width, 1)
         bottomLineProfile.borderWidth = 2.0
-        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
-        btnProfile.layer.addSublayer(bottomLineProfile)
+        bottomLineProfile.borderColor = profileButtonColor;        btnProfile.layer.addSublayer(bottomLineProfile)
 
         
     }
@@ -317,17 +318,12 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if (userProfileBadgesArray.count > 0){
-            return userProfileBadgesArray.count
+        if(isBadgesClicked != false){
+            if (userProfileBadgesArray.count > 0){
+                return userProfileBadgesArray.count
+            }
         }
-        else{
-            self.hideOverlayView()
-            
-            return 0
-            
-        }
-        
+        return 0
     }
     
     
@@ -340,25 +336,28 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         if (userProfileBadgesArray.count > 0){
             self.labelNoBadges.hidden = true
-            
-           dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                
-               
-                
+            self.showOverlay(self.view)
            
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            
+            
+
                 cell.backgroundColor = UIColor.whiteColor()
                 let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[indexPath.row]
             
                 if let url = NSURL(string:AWS_S3 + imageDisplayBean.badge_url){
-                    let badgesImage = NSData(contentsOfURL:url)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.hideOverlayView()
+
+                        let badgesImage = NSData(contentsOfURL:url)
             
                 
-                    cell.imgUserBadge.image = UIImage(data:badgesImage!)
-                    cell.badgeId.text = String(imageDisplayBean.badge_id)
+                        cell.imgUserBadge.image = UIImage(data:badgesImage!)
+                        cell.badgeId.text = String(imageDisplayBean.badge_id)
+                })
             }
-                 })
+                 
             })
         }
         
@@ -412,9 +411,11 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     @IBAction func btnProfileClick(sender: AnyObject) {
    
         
-        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height - 1.0, btnProfile.frame.size.width, 1)
+        bottomLineProfile.frame = CGRectMake(0, btnProfile.frame.size.height, btnProfile.frame.size.width, 1)
         bottomLineProfile.borderWidth = 2.0
-        bottomLineProfile.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        
+        
+        bottomLineProfile.borderColor = profileButtonColor
         btnProfile.layer.addSublayer(bottomLineProfile)
        // self.tableView.center =
         bottomLineBadges.borderColor = UIColor.clearColor().CGColor
@@ -510,10 +511,13 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
     }
     @IBAction func btnBadges(sender: AnyObject) {
         
-        
-        bottomLineBadges.frame = CGRectMake(0, btnBadges.frame.size.height - 1.0, btnBadges.frame.size.width, 1)
+        isBadgesClicked = true;
+        self.collectionView.reloadData()
+        bottomLineBadges.frame = CGRectMake(0, btnBadges.frame.size.height, btnBadges.frame.size.width, 1)
         bottomLineBadges.borderWidth = 2.0
-        bottomLineBadges.borderColor = UIColor(hue: 0.3194, saturation: 1, brightness: 0.24, alpha: 1.0) /* #053d00  */.CGColor /* #559369  */
+        
+        
+        bottomLineBadges.borderColor = profileButtonColor
         btnBadges.layer.addSublayer(bottomLineBadges)
         bottomLineProfile.borderColor = UIColor.clearColor().CGColor
         

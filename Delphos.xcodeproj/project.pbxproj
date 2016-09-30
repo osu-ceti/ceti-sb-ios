@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0160441D71A944006A39A1 /* AwardBadgesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0160431D71A944006A39A1 /* AwardBadgesResponse.swift */; };
 		0F10B13C1D3CE5B1000C4ADF /* AccountEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10B13B1D3CE5B1000C4ADF /* AccountEditController.swift */; };
 		0F14C38A1CFF0DAB002C6912 /* EventShowControllerCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F14C3891CFF0DAB002C6912 /* EventShowControllerCells.swift */; };
 		0F271E0B1CF48F2A0053F39B /* CancelEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */; };
@@ -214,6 +215,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F0160431D71A944006A39A1 /* AwardBadgesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardBadgesResponse.swift; sourceTree = "<group>"; };
 		0F10B13B1D3CE5B1000C4ADF /* AccountEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditController.swift; sourceTree = "<group>"; };
 		0F14C3891CFF0DAB002C6912 /* EventShowControllerCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventShowControllerCells.swift; sourceTree = "<group>"; };
 		0F271E0A1CF48F2A0053F39B /* CancelEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelEventBean.swift; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 				0FAA768D1D488723009E20D5 /* ResetPasswordListBean.swift */,
 				0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */,
 				0F94406E1D5DD6F70086F325 /* RegistrationResponseBean.swift */,
+				0F0160431D71A944006A39A1 /* AwardBadgesResponse.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				F5AFC0551CE0B56D00C95687 /* EventDsiplayCell.swift in Sources */,
 				0F8B12061D00061B0030CE82 /* ClaimListClaimBean.swift in Sources */,
 				84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */,
+				0F0160441D71A944006A39A1 /* AwardBadgesResponse.swift in Sources */,
 				0FAA768E1D488723009E20D5 /* ResetPasswordListBean.swift in Sources */,
 				0FD8A7BF1CEF00F200A43790 /* CreateEventResultBean.swift in Sources */,
 				0FE721851D19297F00D5994D /* MakeMySchoolListBean.swift in Sources */,

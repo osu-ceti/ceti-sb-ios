@@ -69,73 +69,118 @@ class AccountEditController: NavController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         
         
         
         
         self.requiredField.hidden = true
         
-        var bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, txtName.frame.height - 1, txtName.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.blackColor().CGColor
-        txtName.borderStyle = UITextBorderStyle.None
-        txtName.layer.addSublayer(bottomLine)
-        
-        var txtEmailLine = CALayer()
-        txtEmailLine.frame = CGRectMake(0.0, txtEmail.frame.height - 1, txtEmail.frame.width, 1.0)
-        txtEmailLine.backgroundColor = UIColor.blackColor().CGColor
-        txtEmail.borderStyle = UITextBorderStyle.None
-        txtEmail.layer.addSublayer(txtEmailLine)
-        
-        var txtNewPasswordLine = CALayer()
-        txtNewPasswordLine.frame = CGRectMake(0.0, txtNewPassword.frame.height - 1, txtNewPassword.frame.width, 1.0)
-        txtNewPasswordLine.backgroundColor = UIColor.blackColor().CGColor
-        txtNewPassword.borderStyle = UITextBorderStyle.None
-        txtNewPassword.layer.addSublayer(txtNewPasswordLine)
-       
-        var txtConfirmPasswordLine = CALayer()
-        txtConfirmPasswordLine.frame = CGRectMake(0.0, txtConfirmPassword.frame.height - 1, txtConfirmPassword.frame.width, 1.0)
-        txtConfirmPasswordLine.backgroundColor = UIColor.blackColor().CGColor
-        txtConfirmPassword.borderStyle = UITextBorderStyle.None
-        txtConfirmPassword.layer.addSublayer(txtConfirmPasswordLine)
-       
-        
-        var txtCurrentPasswordLine = CALayer()
-        txtCurrentPasswordLine.frame = CGRectMake(0.0, txtCurrentPassword.frame.height - 1, txtCurrentPassword.frame.width, 1.0)
-        txtCurrentPasswordLine.backgroundColor = UIColor.blackColor().CGColor
-        txtCurrentPassword.borderStyle = UITextBorderStyle.None
-        txtCurrentPassword.layer.addSublayer(txtCurrentPasswordLine)
+        self.BottomLine(txtName)
+        self.BottomLine(txtEmail)
+        self.BottomLine(txtNewPassword)
+        self.BottomLine(txtConfirmPassword)
+        self.BottomLine(txtCurrentPassword)
 
-        txtName.text = userAccountEditBean.name
-        txtEmail.text! = userAccountEditBean.email
-        accountEditId = userAccountEditBean.id
-       
-        if(userAccountEditBean.role == 1)
-        {
-            
-            txtRole = "Teacher"
-            accountSegmentedRole.selectedSegmentIndex = 0
-            
-        }
-        else if(userAccountEditBean.role == 2){
-           
-           
-            txtRole = "Speaker"
-            accountSegmentedRole.selectedSegmentIndex = 1
 
-        }
+
         
-        else if(userAccountEditBean.role == 3)
-        {
-           
-            txtRole =  "Both"
-            accountSegmentedRole.selectedSegmentIndex = 2
+        
+//        var bottomLine = CALayer()
+//        bottomLine.frame = CGRectMake(0.0, txtName.frame.height - 1, txtName.frame.width, 1.0)
+//        bottomLine.backgroundColor = UIColor.blackColor().CGColor
+//        txtName.borderStyle = UITextBorderStyle.None
+//        txtName.layer.addSublayer(bottomLine)
+        
+//        var txtEmailLine = CALayer()
+//        txtEmailLine.frame = CGRectMake(0.0, txtEmail.frame.height - 1, txtEmail.frame.width, 1.0)
+//        txtEmailLine.backgroundColor = UIColor.blackColor().CGColor
+//        txtEmail.borderStyle = UITextBorderStyle.None
+//        txtEmail.layer.addSublayer(txtEmailLine)
+//        
+//        var txtNewPasswordLine = CALayer()
+//        txtNewPasswordLine.frame = CGRectMake(0.0, txtNewPassword.frame.height - 1, txtNewPassword.frame.width, 1.0)
+//        txtNewPasswordLine.backgroundColor = UIColor.blackColor().CGColor
+//        txtNewPassword.borderStyle = UITextBorderStyle.None
+//        txtNewPassword.layer.addSublayer(txtNewPasswordLine)
+//       
+//        var txtConfirmPasswordLine = CALayer()
+//        txtConfirmPasswordLine.frame = CGRectMake(0.0, txtConfirmPassword.frame.height - 1, txtConfirmPassword.frame.width, 1.0)
+//        txtConfirmPasswordLine.backgroundColor = UIColor.blackColor().CGColor
+//        txtConfirmPassword.borderStyle = UITextBorderStyle.None
+//        txtConfirmPassword.layer.addSublayer(txtConfirmPasswordLine)
+//       
+//        
+//        var txtCurrentPasswordLine = CALayer()
+//        txtCurrentPasswordLine.frame = CGRectMake(0.0, txtCurrentPassword.frame.height - 1, txtCurrentPassword.frame.width, 1.0)
+//        txtCurrentPasswordLine.backgroundColor = UIColor.blackColor().CGColor
+//        txtCurrentPassword.borderStyle = UITextBorderStyle.None
+//        txtCurrentPassword.layer.addSublayer(txtCurrentPasswordLine)
 
+//        txtName.text = userAccountEditBean.name
+//        txtEmail.text! = userAccountEditBean.email
+//        accountEditId = userAccountEditBean.id
+//       
+//        if(userAccountEditBean.role == 1)
+//        {
+//            
+//            txtRole = "Teacher"
+//            accountSegmentedRole.selectedSegmentIndex = 0
+//            
+//        }
+//        else if(userAccountEditBean.role == 2){
+//           
+//           
+//            txtRole = "Speaker"
+//            accountSegmentedRole.selectedSegmentIndex = 1
+//
+//        }
+//        
+//        else if(userAccountEditBean.role == 3)
+//        {
+//           
+//            txtRole =  "Both"
+//            accountSegmentedRole.selectedSegmentIndex = 2
+//
+//            
+//           
+//           
+//        }
+        
+        
+        if(userAccountEditBean != nil ){
+            if(txtName != nil && userAccountEditBean.name != nil){
+                txtName.text = userAccountEditBean.name
+            }
             
-           
-           
+            if(txtEmail != nil && userAccountEditBean.email != nil){
+                txtEmail.text! = userAccountEditBean.email
+            }
+            accountEditId = userAccountEditBean.id
+            if(userAccountEditBean.role != nil){
+                if(userAccountEditBean.role == 1)
+                {
+                    
+                    txtRole = "Teacher"
+                    accountSegmentedRole.selectedSegmentIndex = 0
+                    
+                }
+                else if(userAccountEditBean.role == 2){
+                    
+                    
+                    txtRole = "Speaker"
+                    accountSegmentedRole.selectedSegmentIndex = 1
+                    
+                }
+                    
+                else if(userAccountEditBean.role == 3)
+                {
+                    
+                    txtRole =  "Both"
+                    accountSegmentedRole.selectedSegmentIndex = 2
+                    
+                }
+            }
         }
         
         
@@ -152,6 +197,14 @@ class AccountEditController: NavController {
         //scrollView.contentSize = CGSizeMake(self.view.bounds.width, self.btnEditAccount.frame.origin.x + 700)
         scrollView.scrollEnabled = true
         //view.addSubview(scrolview)
+    }
+    func BottomLine(textField:UITextField){
+        
+        var bottomLine = CALayer()
+        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
+        bottomLine.backgroundColor = UIColor.blackColor().CGColor
+        textField.borderStyle = UITextBorderStyle.None
+        textField.layer.addSublayer(bottomLine)
     }
    
     

@@ -1,0 +1,33 @@
+{
+  "images" : [
+    {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "tile",
+          "width" : 745
+        },
+        "cap-insets" : {
+          "right" : 134,
+          "left" : 145
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "ontobornlogo 3.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "ontobornlogo 3-1.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

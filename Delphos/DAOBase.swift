@@ -33,7 +33,7 @@ class DAOBase: NSObject {
      * Method Adds API Key to the HTTP Connection Header.
      * Should be Overridden in Login DAO and Register as API Key is not Required
      */
-    func doGet(addAuthHeader: Bool ,callBack: ((jsonResult: AnyObject, status: Bool, statusCode: Int) -> Void)?){
+    func doGet( addAuthHeader: Bool ,callBack: ((jsonResult: AnyObject, status: Bool, statusCode: Int) -> Void)?){
         
         //println("GET method invoked")
         var objRequest : NSMutableURLRequest = NSMutableURLRequest()
@@ -453,7 +453,9 @@ class DAOBase: NSObject {
         //We will convert format 2 to format 1 here
         
         //dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
+
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 
         

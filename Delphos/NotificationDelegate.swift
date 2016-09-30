@@ -17,31 +17,54 @@ class NotificationDelegate:BaseDelegate{
 
     func showNotification(objCurrentContoller: BaseController) {
         
+        var pageValue:String!
+       
+        pageValue = String(notificationPage)
         
-        doGetAPIs.getNotification( {(result: AnyObject,statusCode: Int)  in
+        doGetAPIs.getNotification(pageValue!, callBack: {(result: AnyObject,statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 //var objNotificationBean = result as! NotificationBean!
                 
                 
+                
                 gObjNotificationController = self.instantiateVC(gStrNotificationControllerID) as! NotificationController
+               
                 
                 
                 let objnotificationBean = result as! NotificationBean
    
                 
                 gNotificationCount = objnotificationBean.count
+               // var firstArray: [NotificationListBean]
+               // var secondArray:[NotificationListBean]
+                var finalArray: [NotificationListBean]
+                
+                if(notificationPage == 1){
+                    
+                     NotificationFirstArray = objnotificationBean.notifications
+                     gObjNotificationController.notificationArray = objnotificationBean.notifications
+                }
+                else{
+                    
+                    NotificationSecondArray = objnotificationBean.notifications
+                    finalArray = NotificationFirstArray + NotificationSecondArray
+                    
+                    gObjNotificationController.notificationArray = finalArray
+                    NotificationFirstArray = finalArray
+                   
+                  
+                }
                 
                 
-                gObjNotificationController.notificationArray = objnotificationBean.notifications
                 
                 dispatch_async(dispatch_get_main_queue(), {
                   
                     
-                    var objNotificationControllerNav = self.getNavigationController(gObjNotificationController)
+                     gObjNotificationControllerNav = self.getNavigationController(gObjNotificationController)
                     
-                    self.doNavigate(objCurrentContoller, toController: objNotificationControllerNav,  close: true)
+                    self.doNavigate(objCurrentContoller, toController: gObjNotificationControllerNav,  close: true)
                     
                 })
                 
@@ -123,6 +146,8 @@ func deleteNotification(objCurrentContoller: BaseController)  {
         
         doPostAPIs.doReadNotification(strid){ (result: AnyObject, statusCode: Int)  in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            
+            
             if(statusCode == SUCCESS) {
                     //Left Empty for future Use
             }

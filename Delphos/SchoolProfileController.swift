@@ -65,15 +65,17 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         rootViewController = self
          
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        view.backgroundColor = bgColor
-        
+        self.view.backgroundColor = bgColor
+        self.showOverlay(self.view)
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
-            let url = NSURL(string:"https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + gObjSchoolImage)
+            let url = NSURL(string: AWS_S3 + gObjSchoolImage)
             var data = NSData(contentsOfURL:url!)
             if data != nil {
-                self.schoolImage.image = UIImage(data:data!)
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.hideOverlayView()
+                    self.schoolImage.image = UIImage(data:data!)
+                })
             }
         })
         
@@ -192,9 +194,14 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     @IBAction func makeMySchoolClick(sender: AnyObject) {
         
-        strSchoolId =  String(gObjSearchSchoolListBean.id)
-        makeMySchoolName = gObjSearchSchoolListBean.name
-        
+        if(gObjSearchSchoolListBean != nil){
+            if(gObjSearchSchoolListBean.id != nil){
+                strSchoolId =  String(gObjSearchSchoolListBean.id)
+            }
+            if(gObjSearchSchoolListBean.name != nil){
+                makeMySchoolName = gObjSearchSchoolListBean.name
+            }
+        }
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.SHOW_MAKE_MY_SCHOOL)

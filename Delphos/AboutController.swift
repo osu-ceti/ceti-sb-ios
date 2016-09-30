@@ -59,15 +59,19 @@ class AboutController: NavController {
            
 
         rootViewController = self
-        settingSearch = true
+        settingSearch = false
 
+        if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+        {
+            logoOntoborn.frame.origin.y = 20
+            logoOntoborn.frame.origin.x = 320
+        }
         
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         viewDetails.backgroundColor = bgColor
         
 
-       self.logoOntoborn.image = UIImage(named:"OntoBornTech")
+       self.logoOntoborn.image = UIImage(named:"ontobornlogo")
         
         
         //var label:UILabel!
@@ -111,10 +115,20 @@ class AboutController: NavController {
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
             
-            let url : NSURL = NSURL(string:"http://ceti-test-env.elasticbeanstalk.com/privacy_policy" )!
+            let url : NSURL = NSURL(string:"https://www.school2biz.com/privacy_policy" )!
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
             }
+        })
+    }
+    @IBAction func ontobornUrlClick(sender: AnyObject) {
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            let url : NSURL = NSURL(string: "http://ontoborn.com/")!
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+            
         })
     }
     @IBAction func contactUsLink(sender: AnyObject) {

@@ -34,6 +34,17 @@ class BaseController:UIViewController {
         activityIndicator.stopAnimating()
         overlayView.removeFromSuperview()
     }
-
+    
+    func isCheckNilOrNot(labelData:String,labelText:String){
+        
+        if(labelData != ""){
+        
+        }
+        else{
+        
+        }
+    
+    
+    }
     
 }

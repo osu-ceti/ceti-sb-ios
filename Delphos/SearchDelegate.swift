@@ -26,16 +26,22 @@ class SearchDelegate: BaseDelegate {
                    
                     if(gBtnRadioValue == "events") {
                         gObjEventDisplayBean = result as! EventDisplayBean
-                        gObjSearchController.eventBeanArray = gObjEventDisplayBean.events
+                        if(gObjEventDisplayBean.events != nil){
+                            gObjSearchController.eventBeanArray = gObjEventDisplayBean.events
+                        }
                     }
                     else if(gBtnRadioValue == "schools") {
                        gObjSchoolListBean = result as! SchoolsDisplayBean
                         // gObjUsersBean = result as! usersBean
-                        gObjSearchController.schoolsBeanArray = gObjSchoolListBean.schools
+                        if(gObjSchoolListBean.schools != nil){
+                            gObjSearchController.schoolsBeanArray = gObjSchoolListBean.schools
+                        }
                     }
                     else if(gBtnRadioValue == "users") {
                         gObjUsersBean = result as! usersBean
-                        gObjSearchController.usersBeanArray = gObjUsersBean.users
+                        if(gObjUsersBean.users != nil){
+                            gObjSearchController.usersBeanArray = gObjUsersBean.users
+                        }
                     }
                     
 //                    if((gObjSearchController.eventBeanArray.count == 0) && (gObjSearchController.schoolsBeanArray.count == 0) && (gObjSearchController.usersBeanArray.count == 0)  ){
@@ -85,11 +91,17 @@ class SearchDelegate: BaseDelegate {
                         gObjSchoolProfileController = self.instantiateVC(gStrSchoolProfileControllerID) as! SchoolProfileController
                         
                         
-                        var objSchoolBean = result as! SchoolsBean
+                        let objSchoolBean = result as! SchoolsBean
                         
-                        gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
-                        gObjSearchSchoolListBean = objSchoolBean.school
-                        gObjSchoolImage = objSchoolBean.badge_url
+                        if(objSchoolBean.events != nil){
+                            gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
+                        }
+                        if(objSchoolBean.school != nil){
+                            gObjSearchSchoolListBean = objSchoolBean.school
+                        }
+                        if(objSchoolBean.badge_url != nil){
+                            gObjSchoolImage = objSchoolBean.badge_url
+                        }
                          gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
                         
                         

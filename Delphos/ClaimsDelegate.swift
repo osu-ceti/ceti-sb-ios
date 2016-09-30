@@ -106,17 +106,39 @@ class ClaimsDelegate: BaseDelegate {
         doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             if(statusCode == SUCCESS) {
-                var objEventShowController = objCurrentContoller as! EventShowController
+                let objEventShowController = objCurrentContoller as! EventShowController
                 
                 dispatch_async(dispatch_get_main_queue(), {
                    // gClaimsList = result as! ClaimListBean
 
                     gClaimsListDetails = result as! ClaimListClaimBeanBean
-                    objEventShowController.labelBusiness.text! = String(gClaimsListDetails.business)
-                    objEventShowController.labelJobTitle.text! = String(gClaimsListDetails.job_title)
-                    objEventShowController.labelUserName.text! = String(gClaimsListDetails.user_name)
-                    objEventShowController.selectedClaimId = gClaimsListDetails.claim_id
-                    objEventShowController.selectedEventId = gClaimsListDetails.event_id
+                    //self.isCheckNilOrNotBase(gClaimsListDetails.business,labelText: objEventShowController.labelBusiness)
+                    
+                    
+                    if(gClaimsListDetails != nil){
+                        
+                        objEventShowController.labelBusiness.text! = self.ifNilReturnEmptyString(gClaimsListDetails.business)
+                   
+                       objEventShowController.labelJobTitle.text! =  self.ifNilReturnEmptyString(gClaimsListDetails.job_title)
+                        
+                        objEventShowController.labelUserName.text! = self.ifNilReturnEmptyString(gClaimsListDetails.user_name)
+                 
+                       
+                        if(gClaimsListDetails.claim_id != nil){
+
+                            objEventShowController.selectedClaimId = gClaimsListDetails.claim_id
+                        }
+                        if(gClaimsListDetails.event_id != nil){
+
+                            objEventShowController.selectedEventId = gClaimsListDetails.event_id
+                        }
+                        
+                        objEventShowController.mainLabelJobTitle.hidden = false
+                        objEventShowController.mainLabelBusiness.hidden = false
+                        objEventShowController.labelUserName.hidden = false
+                        objEventShowController.labelBusiness.hidden = false
+                        objEventShowController.labelJobTitle.hidden = false
+                    }
                     
                    // (objCurrentContoller as! EventShowController).claimBeanDetail = gclaimsListDetails
                     // (objCurrentContoller as! EventShowController).tableView.reloadData()

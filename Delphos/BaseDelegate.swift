@@ -90,10 +90,10 @@ class BaseDelegate: NSObject {
         objBadgesController.txtSpeakerName = speaker_name
         objBadgesController.badgeUrl = badge_url
         
-        gObjBadgeController = self.getNavigationController(objBadgesController)
+        gObjBadgeControllerNav = self.getNavigationController(objBadgesController)
         
         
-        rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeController, close: true)
+        rootViewController.slideMenuController()?.changeMainViewController(gObjBadgeControllerNav, close: true)
 
     
     }
@@ -129,11 +129,32 @@ class BaseDelegate: NSObject {
         }
     }
     
-    func doCleanup(statusCode: Int, objCurrentController:BaseController){
+    func doCleanup(statusCode: Int, objCurrentController: BaseController){
         dispatch_async(dispatch_get_main_queue(), {
             objCurrentController.hideOverlayView()
         })
         responseCodeErrorHandler(statusCode, objCurrentController: objCurrentController)
+    }
+    
+    func ifNilReturnEmptyString(labelData: String?) -> String{
+        
+        if(labelData != nil){
+            return labelData!
+        }
+        else{
+            return EMPTY_STRING
+        }
+       
+    }
+    func ifNilReturnEmptyInt(labelData: Int?) -> Int{
+        
+        if(labelData != nil){
+            return labelData!
+        }
+        else{
+            return EMPTY_INT
+        }
+        
     }
     
 }

@@ -139,7 +139,7 @@ class UserDelegate:BaseDelegate{
                 print("Login failure")
                 boolLogin = false;
                 self.showAlert(objCurrentContoller, strMessage:SERVER_ERROR_MSG )
-                self.removeUserCodes()
+               // self.removeUserCodes()
                 self.RedirectLoginPage(objCurrentContoller)
                 
             }
@@ -302,6 +302,7 @@ class UserDelegate:BaseDelegate{
                 
                 NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStorageKey)
                 NSUserDefaults.standardUserDefaults().removeObjectForKey(gStrUserStoragePassKey)
+                gNotificationCount = 0
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
                 var object = SignoutResult as! SignoutResponseBean
@@ -595,7 +596,7 @@ class UserDelegate:BaseDelegate{
                 if(strNewpassword != ""){
                     gPasswordCheck = strNewpassword
                 }
-                let objEdiAccounttResult = result as! AccountEditResponseBean
+                let objEdiAccounttResult = result as! AccountEditResponseBean
                 
                 let objEditAccountUser = objEdiAccounttResult.user as! UserBean
                 

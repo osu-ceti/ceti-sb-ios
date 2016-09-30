@@ -54,9 +54,16 @@ class SchoolDelegate:BaseDelegate{
                
              
                  let objMakeMySchoolBean = result as! MakeMySchoolBean
-                gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
-                gObjUserBean.school_id = gObjMakeMySchoolListBean.school_id
-                gObjUserBean.school_name = makeMySchoolName
+                if(objMakeMySchoolBean.profile != nil){
+                    gObjMakeMySchoolListBean = objMakeMySchoolBean.profile
+                }
+                if(gObjMakeMySchoolListBean.school_id != nil){
+
+                    gObjUserBean.school_id = gObjMakeMySchoolListBean.school_id
+                }
+                if(makeMySchoolName != nil){
+                    gObjUserBean.school_name = makeMySchoolName
+                }
                // userProfileBean.school_id = gObjMakeMySchoolListBean.school_id
                
                 logger.log(LoggingLevel.INFO, message: "Make my school")

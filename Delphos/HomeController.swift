@@ -75,8 +75,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         
       
-        var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
-        view.backgroundColor = bgColor
+        self.view.backgroundColor = bgColor
         self.tableView.backgroundColor = bgColor
         
        
@@ -217,10 +216,17 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
             self.tableView.hidden = false
             self.noEventsFound.hidden = true
             var eventDisplayBean: EventBean! = eventBeanArray[indexPath.row]
-        
-            (cell as! EventDisplayCell).eventName!.text = String(eventDisplayBean.event_title)
-            (cell as! EventDisplayCell).eventStartDate!.text = String(eventDisplayBean.event_start)
-            (cell as! EventDisplayCell).eventID!.text = String(eventDisplayBean.id)
+            if(eventDisplayBean.event_title != nil){
+                (cell as! EventDisplayCell).eventName!.text = String(eventDisplayBean.event_title)
+            }
+            if(eventDisplayBean.event_start != nil){
+
+                (cell as! EventDisplayCell).eventStartDate!.text = String(eventDisplayBean.event_start)
+            }
+            if(eventDisplayBean.id != nil){
+
+                (cell as! EventDisplayCell).eventID!.text = String(eventDisplayBean.id)
+            }
         }
         else{
             self.tableView.hidden = true
