@@ -130,13 +130,19 @@ class DAOServices: DAOBase {
         })
     }
     
-    func searchEvent(_ gBtnRadioValue: String, strSearchEvent: String, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+    func searchEvent(_ gObjSearchBean: SearchBean, strSearchEvent: String, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         
         let addSpaceOnString: String = strSearchEvent
         
         let strReplaceSearch = addSpaceOnString.replacingOccurrences(of: " ", with: "+", options: NSString.CompareOptions.literal, range: nil)
-        
-        strURL =  DEV_TARGET + gBtnRadioValue + SEARCH_EVENT + strReplaceSearch
+        if(gObjSearchBean.isLocation == false){
+            strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
+        }
+        else{
+            strURL =  DEV_TARGET + gBtnRadioValue!
+            strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
+            strURL = strURL + "&location=true"
+        }
         var searchBean: AnyObject!
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             

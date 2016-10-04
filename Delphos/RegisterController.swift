@@ -28,7 +28,7 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class RegisterController: NavController, UITextFieldDelegate {
+class RegisterController: NavController {
     
     @IBOutlet weak var schoolbusiness: UILabel!
    

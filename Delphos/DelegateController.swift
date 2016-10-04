@@ -75,7 +75,11 @@ class DelegateController: BaseDelegate {
             
         case .search_EVENT:
             logger.log(LoggingLevel.INFO, message: "SEARCH_EVENT")
-            objSearchDelegate.searchEvent(objCurrentController)
+            objSearchDelegate.searchEvent(objCurrentController, isLocation: false)
+            
+        case .search_ZIPEVENT:
+            logger.log(LoggingLevel.INFO, message: "SEARCH_EVENT")
+            objSearchDelegate.searchEvent(objCurrentController, isLocation: true)
             
         case.create_EVENT:
             logger.log(LoggingLevel.INFO, message: "CREATE_EVENT")
@@ -185,7 +189,6 @@ class DelegateController: BaseDelegate {
             objNotificationDelegate.deleteNotification(objCurrentController)
 
 
-
         case .view_SETTINGS:
             logger.log(LoggingLevel.INFO, message: "SAVE SETTINGS")
            objUserDelegate.viewSettings(objCurrentController)
@@ -207,6 +210,8 @@ class DelegateController: BaseDelegate {
         case .reset_FORGET_PASSWORD:
             logger.log(LoggingLevel.INFO, message: "RESET FORGET PASSWORD")
             objUserDelegate.resetPassword(objCurrentController)
+            
+        
 
             
       

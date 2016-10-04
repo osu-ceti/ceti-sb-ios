@@ -9,14 +9,16 @@
 import UIKit
 
 class SearchDelegate: BaseDelegate {
-    func  searchEvent(_ objCurrentController: UIViewController) {
+    func  searchEvent(_ objCurrentController: UIViewController,isLocation: Bool) {
         
 //        print(objCurrentController)
         let objEventDisplayController = objCurrentController as! NavController
         
         var strSearchText = objEventDisplayController.searchBar.text
         
-        doGetAPIs.searchEvent(gBtnRadioValue!, strSearchEvent: strSearchText!, callBack: {(result: AnyObject,statusCode: Int)   in
+        
+        
+        doGetAPIs.searchEvent(gObjSearchBean, strSearchEvent: strSearchText!, callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objEventDisplayController)
             if(statusCode == SUCCESS) {
                 DispatchQueue.main.async(execute: {

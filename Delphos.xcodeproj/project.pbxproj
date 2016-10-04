@@ -81,6 +81,7 @@
 		84A5B1C31D2D3C2200090CFB /* PushAPSBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B1C21D2D3C2200090CFB /* PushAPSBean.swift */; };
 		84A5B1C51D2D3C5500090CFB /* PushDataBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B1C41D2D3C5500090CFB /* PushDataBean.swift */; };
 		84BA187E1D03552A009DC8C9 /* DelphosGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA187D1D03552A009DC8C9 /* DelphosGlobals.swift */; };
+		84C3C62F1DA390AE0051F13F /* SearchBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3C62E1DA390AE0051F13F /* SearchBean.swift */; };
 		F57260411CEC2F18007078C3 /* ClaimBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57260401CEC2F18007078C3 /* ClaimBean.swift */; };
 		F578B5761CE1F2EC0063246A /* RegisterBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F578B5751CE1F2EC0063246A /* RegisterBean.swift */; };
 		F580614F1CE4668E004BF043 /* ShowEventBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580614E1CE4668E004BF043 /* ShowEventBean.swift */; };
@@ -290,6 +291,7 @@
 		84A5B1C21D2D3C2200090CFB /* PushAPSBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAPSBean.swift; sourceTree = "<group>"; };
 		84A5B1C41D2D3C5500090CFB /* PushDataBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushDataBean.swift; sourceTree = "<group>"; };
 		84BA187D1D03552A009DC8C9 /* DelphosGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosGlobals.swift; sourceTree = "<group>"; };
+		84C3C62E1DA390AE0051F13F /* SearchBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBean.swift; sourceTree = "<group>"; };
 		F57260401CEC2F18007078C3 /* ClaimBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimBean.swift; sourceTree = "<group>"; };
 		F578B5751CE1F2EC0063246A /* RegisterBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBean.swift; sourceTree = "<group>"; };
 		F580614E1CE4668E004BF043 /* ShowEventBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventBean.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 				0FAA768F1D48874F009E20D5 /* ResetPasswordBean.swift */,
 				0F94406E1D5DD6F70086F325 /* RegistrationResponseBean.swift */,
 				0F0160431D71A944006A39A1 /* AwardBadgesResponse.swift */,
+				84C3C62E1DA390AE0051F13F /* SearchBean.swift */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				0FFB24161D27C1990025CC05 /* NotificationController.swift in Sources */,
 				F58BBADA1CE07444000A3D2A /* HomeController.swift in Sources */,
 				84384D551D5E1BBC00D811C7 /* BaseController.swift in Sources */,
+				84C3C62F1DA390AE0051F13F /* SearchBean.swift in Sources */,
 				840AEF8A1D2BA44200400B6A /* PushNotificationDelegate.swift in Sources */,
 				84799FD31D09961500C614C2 /* SearchDelegate.swift in Sources */,
 				0F88009E1D2E889E00E1236B /* AwardBadgeResponse.swift in Sources */,

@@ -48,6 +48,7 @@ enum DelphosAction
     case view_ACCOUNT_EDIT
     case edit_PROFILE_ACCOUNT
     case reset_FORGET_PASSWORD
+    case search_ZIPEVENT
 
 }
 

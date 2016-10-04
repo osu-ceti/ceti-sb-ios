@@ -16,6 +16,7 @@ var gObjUsersBean : usersBean!
 var gEventID : Int!
 var gObjShowEventBean: ShowEventBean!
 var gBtnRadioValue: String!
+var gObjSearchBean = SearchBean()
 var gBtnRegisterRadio: String!
 var gObjUserBean : UserBean!
 

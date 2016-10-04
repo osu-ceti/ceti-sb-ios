@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegate {
+class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegate, UITextFieldDelegate {
 
     
     //var navigationBar: UINavigationBar = UINavigationBar()
@@ -19,6 +19,8 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     var searchButtonItem = UIBarButtonItem()
     var menuButton : UIBarButtonItem!
     var searchView: UIView = UIView()
+    let zipView:UIView = UIView()
+
     //var radioButtonController: SSRadioButtonsController?
     var isBackEnabled:Bool = true
     var isSearchEnabled:Bool = true
@@ -26,29 +28,79 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     var shouldClose : Bool! = true
     var backButtonNav: String!
     var settingSearch:Bool = false
-   // var btnNotification : UIBarButtonItem = UIBarButtonItem()
-    
-//    var overlayView = UIView()
-//    var activityIndicator = UIActivityIndicatorView()
+    let zipText = UITextField(frame: CGRect(x: 110, y: 30, width: 200, height: 20))
+
+    let radiusText = UITextField(frame: CGRect(x: 110, y: 60, width: 200, height: 20))
+
     
      var notificationCount:String!
     
     var segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
-   
+    
+    let zipLabel = UILabel(frame: CGRect(x: 0, y: 30, width: 200, height: 19))
+
+    let zipRadius = UILabel(frame: CGRect(x: 0, y: 60, width: 200, height: 19))
+    var nearMeButton: UIButton = UIButton()
+    
+    func zipSubViewAdd(){
+        zipLabel.textAlignment = NSTextAlignment.left
+        zipLabel.text = "Zip Code: "
+        zipLabel.textColor = UIColor.black
+        zipView.addSubview(zipLabel)
+        
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: zipText.frame.height - 1, width: zipText.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        zipText.borderStyle = UITextBorderStyle.none
+        zipText.layer.addSublayer(bottomLine)
+        zipText.delegate = self
+        zipText.becomeFirstResponder()
+        //zipText.keyboardType = UIKeyboardType.numberPad
+        
+        zipText.isHidden = true
+        searchView.addSubview(zipText)
+        
+        
+        zipRadius.textAlignment = NSTextAlignment.left
+        zipRadius.text = "Radius: "
+        zipRadius.textColor = UIColor.black
+        zipView.addSubview(zipRadius)
+        
+        let bottomLineRadius = CALayer()
+        bottomLineRadius.frame = CGRect(x: 0.0, y: zipText.frame.height - 1, width: zipText.frame.width, height: 1.0)
+        bottomLineRadius.backgroundColor = UIColor.black.cgColor
+        radiusText.borderStyle = UITextBorderStyle.none
+        radiusText.layer.addSublayer(bottomLineRadius)
+        radiusText.becomeFirstResponder()
+        radiusText.isHidden = true
+        searchView.addSubview(radiusText)
+        
+        
+        
+        nearMeButton.backgroundColor = UIColor.blue
+        nearMeButton.setTitle("Near Me", for: UIControlState.normal)
+        nearMeButton.frame = CGRect(x: 1, y: 90, width: 200, height: 30)
+        //        nearMeButton.addTarget(self, action: "nearMeButtonPressed:", for: UIControlEvents.touchUpInside)
+        nearMeButton.addTarget(nil, action: #selector(NavController.nearMeButtonPressed(_:)), for:.allEvents)
+        nearMeButton.isHidden = true
+        searchView.addSubview(nearMeButton)
+        
+        zipView.isHidden = true
+        
+        searchView.addSubview(zipView)
+
+    }
     
     func setNavBar(_ width: CGFloat){
-        
+        gObjSearchBean.isLocation = false
         searchBar.delegate = self
-        searchView.frame = CGRect(x: 0, y: 17+44, width: self.view.frame.size.width, height: 24);
+        searchView.frame = CGRect(x: 0, y: 17+44, width: self.view.frame.size.width, height: 150);
         let label = UILabel(frame: CGRect(x: 0, y: 5, width: 200, height: 19))
         label.textAlignment = NSTextAlignment.left
         label.text = "Search for: "
         label.textColor = UIColor.black
-        searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+        searchView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
-        
-        
-       
         
 // segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
         segmentSearchItems.frame  = CGRect(x: 110,y: 5,width: 200,height: 20)
@@ -60,6 +112,9 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         searchView.addSubview(label)
         
         searchView.addSubview(segmentSearchItems)
+        
+        zipSubViewAdd()
+        
         
         
         self.searchView.isHidden = true
@@ -106,14 +161,14 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     }
     
     func setNavBar1(_ width: CGFloat,height:CGFloat){
-        
+        gObjSearchBean.isLocation = false
         searchBar.delegate = self
         searchView.frame = CGRect(x: 0, y: height, width: self.view.frame.size.width, height: 24);
         let label = UILabel(frame: CGRect(x: 0, y: 5, width: 200, height: 19))
         label.textAlignment = NSTextAlignment.left
         label.text = "Search for: "
         label.textColor = UIColor.black
-        searchView.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0)
+        searchView.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.95, alpha: 1.0)
 
         
        
@@ -126,7 +181,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         segmentSearchItems.addTarget(self, action: #selector(NavController.segmentedControllerActivity(_:)), for:.valueChanged)
         
         
-        
+        zipSubViewAdd()
 
         searchView.addSubview(label)
         searchView.addSubview(segmentSearchItems)
@@ -283,7 +338,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         }
         else if(segmentSearchItems.selectedSegmentIndex == 1){
             gBtnRadioValue = "schools"
-        }
+                   }
         else if(segmentSearchItems.selectedSegmentIndex == 2){
             gBtnRadioValue = "users"
         }
@@ -353,6 +408,26 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
         
     }
+    
+    func nearMeButtonPressed(_ sender: UIButton){
+        
+        print("Near me pressed")
+        gObjSearchBean.isLocation = true
+        gObjSearchBean.radius = Int(radiusText.text!)
+        gObjSearchBean.zip = Int(zipText.text!)
+        
+//        gObjSearchBean.radius = 53119
+//        gObjSearchBean.zip = 100
+        gObjSearchBean.searchType = gBtnRadioValue
+        
+
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.search_ZIPEVENT)
+
+    }
+    
     func btnNotificationClick(_ sender: UIBarButtonItem){
         notificationPage = 1
         print(" Notification Click")
@@ -384,12 +459,24 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         if(sender.selectedSegmentIndex == 0){
             gBtnRadioValue = "events"
             
+            zipView.isHidden = false
+            zipText.isHidden = false
+            radiusText.isHidden = false
+            nearMeButton.isHidden = false
         }
         else if(sender.selectedSegmentIndex == 1){
             gBtnRadioValue = "schools"
+            zipView.isHidden = false
+            zipText.isHidden = false
+            radiusText.isHidden = false
+            nearMeButton.isHidden = false
         }
         else if(sender.selectedSegmentIndex == 2){
             gBtnRadioValue = "users"
+            zipView.isHidden = true
+            zipText.isHidden = true
+            radiusText.isHidden = true
+            nearMeButton.isHidden = true
         }
         
     }
