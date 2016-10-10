@@ -1,4 +1,4 @@
-//
+	//
 //  DAOPostAPIs.swift
 //  Delphos
 //
@@ -135,14 +135,75 @@ class DAOServices: DAOBase {
         let addSpaceOnString: String = strSearchEvent
         
         let strReplaceSearch = addSpaceOnString.replacingOccurrences(of: " ", with: "+", options: NSString.CompareOptions.literal, range: nil)
-        if(gObjSearchBean.isLocation == false){
-            strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
+//        if(gObjSearchBean.isLocation == false){
+//            strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
+//        }
+//        else{
+//            strURL =  DEV_TARGET + gBtnRadioValue!
+//            strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
+//            strURL = strURL + "&location=true"
+//        }
+        if(gObjSearchBean.searchType == "schools"){
+            
+            if((gObjSearchBean.searchText) != nil){
+                //Search with zip and radius
+                if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
+                    
+                    
+                    
+                    var strURL2 = DEV_TARGET + gBtnRadioValue! + "/near_me?zip=" + String(gObjSearchBean.zip!) + "&radius=" + String(gObjSearchBean.radius!)
+                    
+                    var strURL3 = "&commit=Near+Me&search=" + gObjSearchBean.searchText!
+                    
+                    strURL = strURL2 + strURL3
+                   //near_me?zip=45833&radius=10&commit=Near+Me&search=delphos
+                }
+                else{
+                    // Only search
+                    strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
+                }
+            }
+            else{
+                if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
+                    
+                    strURL =  DEV_TARGET + gBtnRadioValue!
+                    strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
+                    strURL = strURL + "&location=true"
+                
+                }
+                
+                
+            }
         }
-        else{
-            strURL =  DEV_TARGET + gBtnRadioValue!
-            strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
-            strURL = strURL + "&location=true"
+        else if(gObjSearchBean.searchType == "events"){
+            
+            
+            if((gObjSearchBean.searchText) != nil){
+                //Search with zip and radius
+               
+                if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
+                    
+                    let strURL1 =  "events?zip=" + String(gObjSearchBean.zip!) + "&radius=" + String(gObjSearchBean.radius!) + "&location=" + String(gObjSearchBean.isLocation!) + "&commit=Near+Me&search=" + gObjSearchBean.searchText!
+                    
+                    strURL =  DEV_TARGET + strURL1
+                    
+                }else{
+                    // Only search
+                    strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
+                
+                }
+                
+            }
+            else{
+                
+                strURL =  DEV_TARGET + gBtnRadioValue!
+                strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
+                strURL = strURL + "&location=true"
+                
+            }
+            
         }
+        
         var searchBean: AnyObject!
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             

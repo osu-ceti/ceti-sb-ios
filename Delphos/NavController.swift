@@ -45,8 +45,9 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     let searchLabel = UILabel(frame: CGRect(x: 0, y: 30, width: 200, height: 19))
     
     func zipSubViewAdd(){
+        
         searchLabel.textAlignment = NSTextAlignment.left
-        searchLabel.text = "Search: "
+        searchLabel.text = "With: "
         searchLabel.textColor = UIColor.black
         zipView.addSubview(searchLabel)
         
@@ -434,10 +435,13 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         gObjSearchBean.isLocation = true
         gObjSearchBean.radius = Int(radiusText.text!)
         gObjSearchBean.zip = Int(zipText.text!)
+        gObjSearchBean.searchText = searchText.text!
         
 //        gObjSearchBean.radius = 53119
 //        gObjSearchBean.zip = 100
         gObjSearchBean.searchType = gBtnRadioValue
+       
+        
         
 
 

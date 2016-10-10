@@ -21,4 +21,6 @@ class SearchBean {
     
     var zip: Int!
     
+    var searchText: String?
+    
 }
