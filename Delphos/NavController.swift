@@ -28,21 +28,40 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     var shouldClose : Bool! = true
     var backButtonNav: String!
     var settingSearch:Bool = false
-    let zipText = UITextField(frame: CGRect(x: 110, y: 30, width: 200, height: 20))
+    let zipText = UITextField(frame: CGRect(x: 110, y: 60, width: 200, height: 20))
 
-    let radiusText = UITextField(frame: CGRect(x: 110, y: 60, width: 200, height: 20))
+    let radiusText = UITextField(frame: CGRect(x: 110, y: 90, width: 200, height: 20))
 
     
      var notificationCount:String!
     
     var segmentSearchItems = UISegmentedControl(items: ["Events","Schools","Users"])
     
-    let zipLabel = UILabel(frame: CGRect(x: 0, y: 30, width: 200, height: 19))
+    let zipLabel = UILabel(frame: CGRect(x: 0, y: 60, width: 200, height: 19))
 
-    let zipRadius = UILabel(frame: CGRect(x: 0, y: 60, width: 200, height: 19))
+    let zipRadius = UILabel(frame: CGRect(x: 0, y: 90, width: 200, height: 19))
     var nearMeButton: UIButton = UIButton()
+    let searchText = UITextField(frame: CGRect(x: 110, y: 30, width: 200, height: 20))
+    let searchLabel = UILabel(frame: CGRect(x: 0, y: 30, width: 200, height: 19))
     
     func zipSubViewAdd(){
+        searchLabel.textAlignment = NSTextAlignment.left
+        searchLabel.text = "Search: "
+        searchLabel.textColor = UIColor.black
+        zipView.addSubview(searchLabel)
+        
+        let bottomLineSearch = CALayer()
+        bottomLineSearch.frame = CGRect(x: 0.0, y: searchText.frame.height - 1, width: searchText.frame.width, height: 1.0)
+        bottomLineSearch.backgroundColor = UIColor.black.cgColor
+        searchText.borderStyle = UITextBorderStyle.none
+        searchText.layer.addSublayer(bottomLineSearch)
+        searchText.delegate = self
+        searchText.becomeFirstResponder()
+        //zipText.keyboardType = UIKeyboardType.numberPad
+        
+        searchText.isHidden = false
+        searchView.addSubview(searchText)
+        
         zipLabel.textAlignment = NSTextAlignment.left
         zipLabel.text = "Zip Code: "
         zipLabel.textColor = UIColor.black
@@ -57,7 +76,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         zipText.becomeFirstResponder()
         //zipText.keyboardType = UIKeyboardType.numberPad
         
-        zipText.isHidden = true
+        zipText.isHidden = false
         searchView.addSubview(zipText)
         
         
@@ -72,20 +91,20 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         radiusText.borderStyle = UITextBorderStyle.none
         radiusText.layer.addSublayer(bottomLineRadius)
         radiusText.becomeFirstResponder()
-        radiusText.isHidden = true
+        radiusText.isHidden = false
         searchView.addSubview(radiusText)
         
         
         
         nearMeButton.backgroundColor = UIColor.blue
-        nearMeButton.setTitle("Near Me", for: UIControlState.normal)
-        nearMeButton.frame = CGRect(x: 1, y: 90, width: 200, height: 30)
+        nearMeButton.setTitle("Search", for: UIControlState.normal)
+        nearMeButton.frame = CGRect(x: 1, y: 120, width: 200, height: 30)
         //        nearMeButton.addTarget(self, action: "nearMeButtonPressed:", for: UIControlEvents.touchUpInside)
         nearMeButton.addTarget(nil, action: #selector(NavController.nearMeButtonPressed(_:)), for:.allEvents)
-        nearMeButton.isHidden = true
+        nearMeButton.isHidden = false
         searchView.addSubview(nearMeButton)
         
-        zipView.isHidden = true
+        zipView.isHidden = false
         
         searchView.addSubview(zipView)
 

@@ -11,9 +11,9 @@ import ObjectMapper
 
 class LoginController: BaseController {
     
-    @IBOutlet var userTxt: UITextField!
-    
-    @IBOutlet var passwordTxt: UITextField!
+//    @IBOutlet var userTxt: UITextField!
+//    
+//    @IBOutlet var passwordTxt: UITextField!
     
     @IBOutlet var switchRememberme: UISwitch!
     
@@ -27,7 +27,9 @@ class LoginController: BaseController {
    
     var userPasswordData:String!
     
+    @IBOutlet var userTxt: UITextField!
  
+    @IBOutlet var passwordTxt: UITextField!
    
   
 
@@ -38,19 +40,26 @@ class LoginController: BaseController {
     var searchButtonItem = UIBarButtonItem()
 
     @IBOutlet var requiredError: UILabel!
+    //@IBOutlet var requiredError: UILabel!
     
-    @IBOutlet var btnResetPassword: UIButton!
+   // @IBOutlet var btnResetPassword: UIButton!
    
     @IBOutlet var labelRememberMe: UILabel!
+    //@IBOutlet var labelRememberMe: UILabel!
+    
+    
+    //@IBOutlet var btnSignIn: UIButton!
+    //@IBOutlet var btnRegister: UIButton!
+    
     @IBOutlet var btnSignIn: UIButton!
+    
     @IBOutlet var btnRegister: UIButton!
     
-    
-    @IBOutlet var btnForgetPassword: UIButton!
+    @IBOutlet var btnResetPassword: UIButton!
+    //@IBOutlet var btnForgetPassword: UIButton!
     var backButton : UIBarButtonItem = UIBarButtonItem()
 
-
-    
+    @IBOutlet var btnForgetPassword: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +151,7 @@ class LoginController: BaseController {
     @IBAction func touchRequiredHidePassword(_ sender: AnyObject) {
          self.requiredError.isHidden = true
     }
-    @IBAction func btnSignIn(_ sender: UIButton) {
+    @IBAction func btnSignIn(_ sender: AnyObject) {
         
         let trimmedName = userTxt.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
@@ -222,7 +231,6 @@ class LoginController: BaseController {
         
         
     }
-
     @IBAction func btnResetPasswordClick(_ sender: AnyObject) {
         
         
@@ -254,8 +262,7 @@ class LoginController: BaseController {
      }
     }
 
-   
-    @IBAction func btnRegister(_ sender: UIButton) {
+    @IBAction func btnRegister(_ sender: AnyObject) {
         
         var registerController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterId") as! RegisterController
         
