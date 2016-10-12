@@ -102,7 +102,11 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
             //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(schoolsDisplayBean.school_name)
             (cell as! SearchControllerCell).txtIdHidden!.text = String(schoolsDisplayBean.id)
-            (cell as! SearchControllerCell).startdate!.text = String(schoolsDisplayBean.city_state)
+            if(schoolsDisplayBean.city_state != nil){
+                (cell as! SearchControllerCell).startdate!.text = String(schoolsDisplayBean.city_state)
+            }else{
+                (cell as! SearchControllerCell).startdate!.text = schoolsDisplayBean.mail_city
+            }
         
         
         }

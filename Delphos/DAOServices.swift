@@ -132,7 +132,9 @@ class DAOServices: DAOBase {
     
     func searchEvent(_ gObjSearchBean: SearchBean, strSearchEvent: String, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         
-        let addSpaceOnString: String = strSearchEvent
+        //let addSpaceOnString: String = strSearchEvent
+        let addSpaceOnString: String = gObjSearchBean.searchText!
+        
         
         let strReplaceSearch = addSpaceOnString.replacingOccurrences(of: " ", with: "+", options: NSString.CompareOptions.literal, range: nil)
 //        if(gObjSearchBean.isLocation == false){
@@ -160,6 +162,7 @@ class DAOServices: DAOBase {
                 }
                 else{
                     // Only search
+                    //gBtnRadioValue = "events"
                     strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
                 }
             }
@@ -202,6 +205,10 @@ class DAOServices: DAOBase {
                 
             }
             
+        }
+        else if(gObjSearchBean.searchType == "users"){
+            
+             strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
         }
         
         var searchBean: AnyObject!
