@@ -114,6 +114,18 @@ var viewBadgeBean:UserProfileBadgesBean!
 
 var gPublicEditaccountBean: UserBean!
 
+var gUsers = "users"
+
+var gSchools = "schools"
+
+var gEvents = "events"
+
+var gEmptyString = DelphosStrings.EMPTY_STRING
+
+var gSearchTextErrorMsg = "Please fill the search box with the search query"
+
+var gZipcodeTextErrorMsg = "Please fill the search form with both zipcode & radius"
+
 var bgColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
 
 

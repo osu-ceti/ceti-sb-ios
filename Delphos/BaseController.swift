@@ -37,7 +37,7 @@ class BaseController:UIViewController {
     
     func isCheckNilOrNot(_ labelData:String,labelText:String){
         
-        if(labelData != ""){
+        if(labelData != DelphosStrings.EMPTY_STRING){
         
         }
         else{
@@ -45,6 +45,17 @@ class BaseController:UIViewController {
         }
     
     
+    }
+    func showAlert(_ objCurrentController: UIViewController, strMessage: String) {
+        
+        DispatchQueue.main.async(execute: {
+            let alertView = UIAlertController(title: DelphosStrings.EMPTY_STRING, message: strMessage, preferredStyle: .alert)
+            alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            
+            objCurrentController.present(alertView, animated: true, completion: nil)
+            
+            
+        })
     }
     
 }

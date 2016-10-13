@@ -109,10 +109,10 @@ class DAOBase: NSObject {
                     /* TODO: Finish migration: handle the expression passed to error arg: error */
                     logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
                     disJsonResult = ["Result" : "Empty",
-                                     "description"   : "",
+                                     "description"   : DelphosStrings.EMPTY_STRING,
                                      
-                                     "exception"   : "",
-                                     "reasonPhrase": "",
+                                     "exception"   : DelphosStrings.EMPTY_STRING,
+                                     "reasonPhrase": DelphosStrings.EMPTY_STRING,
                                      
                                      "statusCode"    : UNAUTHORIZED_REQUEST ]
                     
@@ -197,7 +197,7 @@ class DAOBase: NSObject {
         }
         
         
-        if (strInputParamsJson != nil && strInputParamsJson != "") {
+        if (strInputParamsJson != nil && strInputParamsJson != DelphosStrings.EMPTY_STRING) {
             logger.log(LoggingLevel.INFO, message: "DoPost-InputParamJson\(strInputParamsJson)")
             
             objRequest.httpBody = strInputParamsJson!.data(using: String.Encoding.utf8)
@@ -252,10 +252,10 @@ class DAOBase: NSObject {
                 }catch{
                     logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
                     disJsonResult = ["Result" : "Empty",
-                                     "description"   : "",
+                                     "description"   : DelphosStrings.EMPTY_STRING,
                                      
-                                     "exception"   : "",
-                                     "reasonPhrase": "",
+                                     "exception"   : DelphosStrings.EMPTY_STRING,
+                                     "reasonPhrase": DelphosStrings.EMPTY_STRING,
                                      
                                      "statusCode"    : UNAUTHORIZED_REQUEST ]
                     
@@ -338,7 +338,7 @@ class DAOBase: NSObject {
 //        }
 //        
 //        
-//        if strInputParamsJson != "" {
+//        if strInputParamsJson != DelphosStrings.EMPTY_STRING {
 //            logger.log(LoggingLevel.INFO, message: "DoPost-InputParamJson\(strInputParamsJson)")
 //            
 //            objRequest.HTTPBody = strInputParamsJson.dataUsingEncoding(NSUTF8StringEncoding)
@@ -391,10 +391,10 @@ class DAOBase: NSObject {
 //                }catch{
 //                    logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
 //                    disJsonResult = ["Result" : "Empty",
-//                                     "description"   : "",
+//                                     "description"   : DelphosStrings.EMPTY_STRING,
 //                                     
-//                                     "exception"   : "",
-//                                     "reasonPhrase": "",
+//                                     "exception"   : DelphosStrings.EMPTY_STRING,
+//                                     "reasonPhrase": DelphosStrings.EMPTY_STRING,
 //                                     
 //                                     "statusCode"    : 0 ]
 //                    

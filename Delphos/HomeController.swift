@@ -55,7 +55,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         navigationItem.titleView = nil
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         navigationItem.title = "School-Business"
-        searchBar.text = ""
+        searchBar.text = DelphosStrings.EMPTY_STRING
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = false

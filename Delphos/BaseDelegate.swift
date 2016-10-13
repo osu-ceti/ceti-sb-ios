@@ -22,7 +22,7 @@ class BaseDelegate: NSObject {
     func showAlert(_ objCurrentController: UIViewController, strMessage: String) {
         
         DispatchQueue.main.async(execute: {
-            let alertView = UIAlertController(title: "", message: strMessage, preferredStyle: .alert)
+            let alertView = UIAlertController(title: DelphosStrings.EMPTY_STRING, message: strMessage, preferredStyle: .alert)
             alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             
             objCurrentController.present(alertView, animated: true, completion: nil)
@@ -142,7 +142,7 @@ class BaseDelegate: NSObject {
             return labelData!
         }
         else{
-            return EMPTY_STRING
+            return DelphosStrings.EMPTY_STRING
         }
        
     }
@@ -152,7 +152,7 @@ class BaseDelegate: NSObject {
             return labelData!
         }
         else{
-            return EMPTY_INT
+            return DelphosStrings.EMPTY_INT
         }
         
     }

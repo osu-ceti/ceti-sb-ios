@@ -38,7 +38,9 @@ var MSG_AWARDED = "Bagde has been awarded"
 
 var gStrUserStorageKey = "userNameKey"
 var gStrUserStoragePassKey = "userPasswordKey"
+class DelphosStrings{
+    static var EMPTY_STRING = ""
+    static var EMPTY_INT:Int = 0
+}
 
-var EMPTY_STRING = ""
-var EMPTY_INT:Int = 0
 

@@ -54,6 +54,9 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     let searchLabel = UILabel(frame: CGRect(x: 0, y: 30, width: 200, height: 19))
     var searchCancelBtn: UIButton = UIButton()
     func zipSubViewAdd(){
+        searchText.placeholder = "Search"
+        zipText.placeholder = "Zipcode"
+        radiusText.placeholder = "Radius"
         
         searchLabel.textAlignment = NSTextAlignment.left
         searchLabel.text = "With: "
@@ -417,7 +420,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         navigationItem.titleView = nil
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         navigationItem.title = "School-Business"
-        searchBar.text = ""
+        searchBar.text = DelphosStrings.EMPTY_STRING
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = false
@@ -435,8 +438,8 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         var trimmedSearchName = searchBar.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        if(trimmedSearchName == ""){
-            searchBar.text = ""
+        if(trimmedSearchName == DelphosStrings.EMPTY_STRING){
+            searchBar.text = DelphosStrings.EMPTY_STRING
             searchBar.placeholder = "Please Fill Correct value"
             
             
@@ -464,7 +467,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         navigationItem.titleView = nil
         navigationItem.rightBarButtonItems = [menuButton,gBtnNotificationCount,searchButton]
         navigationItem.title = "School-Business"
-        searchBar.text = ""
+        searchBar.text = DelphosStrings.EMPTY_STRING
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = false
@@ -480,7 +483,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
         
     }
-    
+   
     func nearMeButtonPressed(_ sender: UIButton){
         
         
@@ -489,18 +492,51 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         gObjSearchBean.radius = Int(radiusText.text!)
         gObjSearchBean.zip = Int(zipText.text!)
         gObjSearchBean.searchText = searchText.text!
-        
-//        gObjSearchBean.radius = 53119
-//        gObjSearchBean.zip = 100
+        var searchFunction = false
+
         gObjSearchBean.searchType = gBtnRadioValue
        
+        var trimmedSearchText = gObjSearchBean.searchText!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
+        if(gObjSearchBean.searchType != gUsers){
+            if(trimmedSearchText == gEmptyString){
+                
+                if(zipText.text! == gEmptyString && radiusText.text! == gEmptyString){
+                    
+                    self.showAlert(self, strMessage: gSearchTextErrorMsg)
+                    
+                }else if((zipText.text! != gEmptyString && radiusText.text! == gEmptyString) || (zipText.text! == gEmptyString && radiusText.text! != gEmptyString) ){
+                    
+                    self.showAlert(self, strMessage: gZipcodeTextErrorMsg)
+                }
+                else{
+                    searchFunction = true
+                }
+                
+            }
+            else{
+                gObjSearchBean.searchText = trimmedSearchText
+                searchFunction = true
+            }
+        }
+        else {
+            if(trimmedSearchText == gEmptyString){
+                self.showAlert(self, strMessage: gSearchTextErrorMsg)
+            }
+            else{
+                gObjSearchBean.searchText = trimmedSearchText
+                searchFunction = true
+                
+                
+            }
+            
+        }
+        if(searchFunction == true){
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.search_ZIPEVENT)
+        }
         
-
-
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.search_ZIPEVENT)
 
     }
     

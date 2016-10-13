@@ -520,8 +520,8 @@ class UserDelegate:BaseDelegate{
         
         let objResetPasswordBean: ResetPasswordBean = ResetPasswordBean()
         
-        objResetPasswordBean.utf8 = ""
-        objResetPasswordBean.authenticity_token = ""
+        objResetPasswordBean.utf8 = DelphosStrings.EMPTY_STRING
+        objResetPasswordBean.authenticity_token = DelphosStrings.EMPTY_STRING
         
         objResetPasswordBean.user = objResetInputParamBean
         objResetPasswordBean.commit = "Reset Password"
@@ -593,7 +593,7 @@ class UserDelegate:BaseDelegate{
         doPostAPIs.doEditProfileAccount(objAccountBean){ (result: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:accountController)
             if(statusCode == SUCCESS) {
-                if(strNewpassword != ""){
+                if(strNewpassword != DelphosStrings.EMPTY_STRING){
                     gPasswordCheck = strNewpassword
                 }
                 let objEdiAccounttResult = result as! AccountEditResponseBean

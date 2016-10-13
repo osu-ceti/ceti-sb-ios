@@ -84,7 +84,7 @@ class MessageController:  NavController  {
         var trimmedName = txtSendMessage.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines
         )
         
-        if(trimmedName == ""){
+        if(trimmedName == DelphosStrings.EMPTY_STRING){
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Message"
             

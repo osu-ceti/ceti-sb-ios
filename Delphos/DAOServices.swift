@@ -137,32 +137,23 @@ class DAOServices: DAOBase {
         
         
         let strReplaceSearch = addSpaceOnString.replacingOccurrences(of: " ", with: "+", options: NSString.CompareOptions.literal, range: nil)
-//        if(gObjSearchBean.isLocation == false){
-//            strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
-//        }
-//        else{
-//            strURL =  DEV_TARGET + gBtnRadioValue!
-//            strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
-//            strURL = strURL + "&location=true"
-//        }
-        if(gObjSearchBean.searchType == "schools"){
+
+        if(gObjSearchBean.searchType == gSchools){
             
-            if((gObjSearchBean.searchText) != nil){
+            if((gObjSearchBean.searchText) != nil && (gObjSearchBean.searchText) != gEmptyString){
                 //Search with zip and radius
                 if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
                     
+                    var strURL2 = DEV_TARGET + gBtnRadioValue! + NEAR_ME_URL + ZIP_URL + String(gObjSearchBean.zip!) + RADIUS_URL + String(gObjSearchBean.radius!)
                     
-                    
-                    var strURL2 = DEV_TARGET + gBtnRadioValue! + "/near_me?zip=" + String(gObjSearchBean.zip!) + "&radius=" + String(gObjSearchBean.radius!)
-                    
-                    var strURL3 = "&commit=Near+Me&search=" + gObjSearchBean.searchText!
+                    var strURL3 = COMMIT_URL + gObjSearchBean.searchText!
                     
                     strURL = strURL2 + strURL3
                    //near_me?zip=45833&radius=10&commit=Near+Me&search=delphos
                 }
                 else{
                     // Only search
-                    //gBtnRadioValue = "events"
+                    
                     strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
                 }
             }
@@ -170,23 +161,23 @@ class DAOServices: DAOBase {
                 if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
                     
                     strURL =  DEV_TARGET + gBtnRadioValue!
-                    strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
-                    strURL = strURL + "&location=true"
+                    strURL = strURL + ZIP_URL + String(gObjSearchBean.zip) + RADIUS_URL + String(gObjSearchBean.radius)
+                    strURL = strURL + LOCATION_URL_TRUE
                 
                 }
                 
                 
             }
         }
-        else if(gObjSearchBean.searchType == "events"){
+        else if(gObjSearchBean.searchType == gEvents){
             
             
-            if((gObjSearchBean.searchText) != nil){
+            if((gObjSearchBean.searchText) != nil && (gObjSearchBean.searchText) != gEmptyString){
                 //Search with zip and radius
                
                 if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
                     
-                    let strURL1 =  "events?zip=" + String(gObjSearchBean.zip!) + "&radius=" + String(gObjSearchBean.radius!) + "&location=" + String(gObjSearchBean.isLocation!) + "&commit=Near+Me&search=" + gObjSearchBean.searchText!
+                    let strURL1 =  EVENT_URL + ZIP_URL + String(gObjSearchBean.zip!) + RADIUS_URL + String(gObjSearchBean.radius!) + LOCATION_URL + String(gObjSearchBean.isLocation!) + COMMIT_URL + gObjSearchBean.searchText!
                     
                     strURL =  DEV_TARGET + strURL1
                     
@@ -200,13 +191,13 @@ class DAOServices: DAOBase {
             else{
                 
                 strURL =  DEV_TARGET + gBtnRadioValue!
-                strURL = strURL + "?zip=" + String(gObjSearchBean.zip) + "&radius=" + String(gObjSearchBean.radius)
-                strURL = strURL + "&location=true"
+                strURL = strURL + ZIP_URL + String(gObjSearchBean.zip) + RADIUS_URL + String(gObjSearchBean.radius)
+                strURL = strURL + LOCATION_URL_TRUE
                 
             }
             
         }
-        else if(gObjSearchBean.searchType == "users"){
+        else if(gObjSearchBean.searchType == gUsers){
             
              strURL =  DEV_TARGET + gBtnRadioValue! + SEARCH_EVENT + strReplaceSearch
         }
@@ -216,13 +207,13 @@ class DAOServices: DAOBase {
             
             if(status) {
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                if(gBtnRadioValue == "events") {
+                if(gBtnRadioValue == gEvents) {
                     searchBean = Mapper<EventDisplayBean>().map(jsonResult)
                 }
-                else if(gBtnRadioValue == "schools") {
+                else if(gBtnRadioValue == gSchools) {
                     searchBean = Mapper<SchoolsDisplayBean>().map(jsonResult)
                 }
-                else if(gBtnRadioValue == "users") {
+                else if(gBtnRadioValue == gUsers) {
                     searchBean = Mapper<usersBean>().map(jsonResult)
                 }
                 
@@ -458,7 +449,7 @@ class DAOServices: DAOBase {
             strURL =  CREATE_EVENT_URL
             method = POST
         }
-         var JSONString = ""
+         var JSONString = DelphosStrings.EMPTY_STRING
         if(isEdit){
             JSONString = Mapper().toJSONString(objEventParam as! CreateEventBean, prettyPrint: true)!
         }

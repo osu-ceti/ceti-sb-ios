@@ -157,12 +157,12 @@ class LoginController: BaseController {
         
         let trimmedPassword = passwordTxt.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        if (trimmedName == ""){
+        if (trimmedName == DelphosStrings.EMPTY_STRING){
             self.requiredError.isHidden = false
             self.requiredError.text = "Required Email"
            //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
-        else if (trimmedName != "" )
+        else if (trimmedName != DelphosStrings.EMPTY_STRING )
         {
             var emailvalid = isValidEmail(trimmedName)
             //print(emailvalid)
@@ -172,7 +172,7 @@ class LoginController: BaseController {
                 
             }
         
-        else if (trimmedPassword == "")
+        else if (trimmedPassword == DelphosStrings.EMPTY_STRING)
         {
             self.requiredError.isHidden = false
             self.requiredError.text = "Required Password"
@@ -235,13 +235,13 @@ class LoginController: BaseController {
         
         
         let trimmedEmail = userTxt.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        if (trimmedEmail == ""){
+        if (trimmedEmail == DelphosStrings.EMPTY_STRING){
             self.requiredError.isHidden = false
             self.requiredError.text = "Required Email"
             //  self.showAlert(objCurrentContoller, strMessage: "Invalid UserName and Password")
         }
         
-        else if (trimmedEmail != "" )
+        else if (trimmedEmail != DelphosStrings.EMPTY_STRING )
         {
             var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)

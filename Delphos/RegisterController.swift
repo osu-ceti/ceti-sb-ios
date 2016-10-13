@@ -95,7 +95,7 @@ class RegisterController: NavController {
         super.viewDidLoad()
         rootViewController = self
         // Do any additional setup after loading the view, typically from a nib.
-        gBtnRegisterRadio = ""
+        gBtnRegisterRadio = DelphosStrings.EMPTY_STRING
         self.requiredField.isHidden = true
 
         
@@ -185,17 +185,17 @@ class RegisterController: NavController {
         var trimmedName = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines
         )
     
-        if(trimmedName == ""){
+        if(trimmedName == DelphosStrings.EMPTY_STRING){
             self.requiredField.isHidden = false
            self.requiredField.text = "Required Name"
             
         }
-        else if (txtEmail.text == "" ){
+        else if (txtEmail.text == DelphosStrings.EMPTY_STRING ){
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Email"
         
         }
-        else if (txtEmail.text != "" )
+        else if (txtEmail.text != DelphosStrings.EMPTY_STRING )
         {
             var emailvalid = isValidEmail(txtEmail.text!)
             //print(emailvalid)
@@ -208,7 +208,7 @@ class RegisterController: NavController {
             
             
         
-        if (txtPassword.text! == "")
+        if (txtPassword.text! == DelphosStrings.EMPTY_STRING)
         {
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Password "
@@ -219,7 +219,7 @@ class RegisterController: NavController {
             self.requiredField.isHidden = false
             self.requiredField.text = "Password Must have 8 character"
         }
-        else if (txtConformPassword.text == "")
+        else if (txtConformPassword.text == DelphosStrings.EMPTY_STRING)
         {
             self.requiredField.isHidden = false
             self.requiredField.text = "Required ConfirmPassword"
@@ -229,7 +229,7 @@ class RegisterController: NavController {
             self.requiredField.isHidden = false
             self.requiredField.text = "ConfirmPassword does not match"
         }
-        else if (gBtnRegisterRadio == "")
+        else if (gBtnRegisterRadio == DelphosStrings.EMPTY_STRING)
         {
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Role"

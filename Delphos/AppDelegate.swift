@@ -73,8 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
         print("DEVICE TOKEN = \(deviceToken)")
         
-        //if(deviceToken != ""){
-        gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: "")
+        //if(deviceToken != DelphosStrings.EMPTY_STRING){
+        gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: DelphosStrings.EMPTY_STRING)
         print("Device Token = " + gStrDeviceToken)
         
        // }

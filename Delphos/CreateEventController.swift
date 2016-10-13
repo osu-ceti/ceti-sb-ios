@@ -272,7 +272,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gDateFormat
         let dtStartDate  = startDate.text!
-        if(dtStartDate != ""){
+        if(dtStartDate != DelphosStrings.EMPTY_STRING){
             
             datePickerView.date = dateFormatter.date(from: dtStartDate)!
         }
@@ -311,7 +311,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gDateFormat
         let dtEndDate  = endDate.text!
-        if(dtEndDate != ""){
+        if(dtEndDate != DelphosStrings.EMPTY_STRING){
             datePickerView.date = dateFormatter.date(from: dtEndDate)!
         }
         inputView.addSubview(datePickerView)
@@ -400,7 +400,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
         let startTimePickerValue  = txtStartTime.text!
-        if(startTimePickerValue != ""){
+        if(startTimePickerValue != DelphosStrings.EMPTY_STRING){
            
             timePickerView.date = startDatevalid
             timePickerView.timeZone =  TimeZone(abbreviation: "EDT")
@@ -449,7 +449,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gTimeWithoutZoneFormat
         let endTimePickerValue  = txtEndTime.text!
-        if(endTimePickerValue != ""){
+        if(endTimePickerValue != DelphosStrings.EMPTY_STRING){
             endTimePickerView.date = endDatevalid
             endTimePickerView.timeZone = TimeZone(abbreviation: "EDT")
         }
@@ -639,16 +639,16 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
        var trimmedContents = txtContents.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        if(trimmedTitle == "") {
+        if(trimmedTitle == DelphosStrings.EMPTY_STRING) {
             self.requiredError.isHidden = false
              self.requiredError.text = "Required Title"
         }
       
-//      else if (txtTags.text == "") {
+//      else if (txtTags.text == DelphosStrings.EMPTY_STRING) {
 //            self.requiredError.hidden = false
 //            self.requiredError.text = "Required Tags"
 //        }
-        else if (trimmedContents == "") {
+        else if (trimmedContents == DelphosStrings.EMPTY_STRING) {
             self.requiredError.isHidden = false
             self.requiredError.text = "Required Contents"
         }

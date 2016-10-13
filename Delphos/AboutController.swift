@@ -133,7 +133,7 @@ class AboutController: NavController {
     }
     @IBAction func contactUsLink(_ sender: AnyObject) {
         
-        let shareData = ""
+        let shareData = DelphosStrings.EMPTY_STRING
         
         //let imageUrl: UIImage = UIImage(data: data)!
         

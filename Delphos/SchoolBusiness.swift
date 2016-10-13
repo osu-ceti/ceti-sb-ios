@@ -82,6 +82,18 @@ let REGISTER_DEVICE = "register_device"
 
 let SETTINGS = "settings"
 
+let ZIP_URL = "?zip="
+
+let RADIUS_URL = "&radius="
+
+let COMMIT_URL = "&commit=Near+Me&search="
+
+let NEAR_ME_URL = "/near_me"
+
+let LOCATION_URL_TRUE = "&location=true"
+
+let LOCATION_URL = "&location="
+
 
 
 

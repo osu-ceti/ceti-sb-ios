@@ -289,17 +289,17 @@ class AccountEditController: NavController {
 
         let trimmedEmail = txtEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        if(trimmedText == ""){
+        if(trimmedText == DelphosStrings.EMPTY_STRING){
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Name"
             
         }
-        else if (trimmedEmail == "" ){
+        else if (trimmedEmail == DelphosStrings.EMPTY_STRING ){
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Email"
             
         }
-        else if (trimmedEmail != "" )
+        else if (trimmedEmail != DelphosStrings.EMPTY_STRING )
         {
             var emailvalid = isValidEmail(trimmedEmail)
             //print(emailvalid)
@@ -309,28 +309,28 @@ class AccountEditController: NavController {
                 
             }
             else{
-//                if (txtNewPassword.text! == "")
+//                if (txtNewPassword.text! == DelphosStrings.EMPTY_STRING)
 //                {
 //                    self.requiredField.hidden = false
 //                    self.requiredField.text = "Required Password "
 //                }
                 
-                if ((txtNewPassword.text! != "") && (txtNewPassword.text?.characters.count <= 7))
+                if ((txtNewPassword.text! != DelphosStrings.EMPTY_STRING) && (txtNewPassword.text?.characters.count <= 7))
                 {
                     self.requiredField.isHidden = false
                     self.requiredField.text = "Password Must have 8 character"
                 }
-//                else if (txtConfirmPassword.text == "")
+//                else if (txtConfirmPassword.text == DelphosStrings.EMPTY_STRING)
 //                {
 //                    self.requiredField.hidden = false
 //                    self.requiredField.text = "Required ConfirmPassword"
 //                }
-                else if ((txtConfirmPassword.text != "") && (txtConfirmPassword.text != txtNewPassword.text!))
+                else if ((txtConfirmPassword.text != DelphosStrings.EMPTY_STRING) && (txtConfirmPassword.text != txtNewPassword.text!))
                 {
                     self.requiredField.isHidden = false
                     self.requiredField.text = "ConfirmPassword does not match"
                 }
-                else if (txtCurrentPassword.text == "")
+                else if (txtCurrentPassword.text == DelphosStrings.EMPTY_STRING)
                 {
                     self.requiredField.isHidden = false
                     self.requiredField.text = "Required Current Password"
@@ -340,7 +340,7 @@ class AccountEditController: NavController {
                     self.requiredField.isHidden = false
                     self.requiredField.text = "Current password is not match"
                 }
-//                else if (txtRole == "")
+//                else if (txtRole == DelphosStrings.EMPTY_STRING)
 //                {
 //                    self.requiredField.hidden = false
 //                    self.requiredField.text = "Required Role"

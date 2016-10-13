@@ -204,7 +204,7 @@ class NotificationController: NavController {
             break
         default :
            
-            (cell as! NotificationControllerCell).eventName!.text = ""  + String(notificationDisplayBean.event_title)
+            (cell as! NotificationControllerCell).eventName!.text = DelphosStrings.EMPTY_STRING  + String(notificationDisplayBean.event_title)
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break

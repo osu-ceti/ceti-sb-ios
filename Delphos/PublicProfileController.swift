@@ -221,22 +221,22 @@ class PublicProfileController:  NavController{
         var trimmedJobTitle = txtProfileJobTItle.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         var trimmedBusiness = txtProfileBusiness.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        if(trimmedGrades == ""){
+        if(trimmedGrades == DelphosStrings.EMPTY_STRING){
             self.requiredField.isHidden = false
             self.requiredField.text = "Required Grades"
             
-        }else if(trimmedBio == ""){
+        }else if(trimmedBio == DelphosStrings.EMPTY_STRING){
                         self.requiredField.isHidden = false
                         self.requiredField.text = "Required Biography"
 
         
         }
-        else if(trimmedJobTitle == ""){
+        else if(trimmedJobTitle == DelphosStrings.EMPTY_STRING){
                         self.requiredField.isHidden = false
                         self.requiredField.text = "Required Job TItle"
            
         }
-        else if(trimmedBusiness == ""){
+        else if(trimmedBusiness == DelphosStrings.EMPTY_STRING){
                         self.requiredField.isHidden = false
                         self.requiredField.text = "Required Business"
             
