@@ -9,6 +9,8 @@
 import UIKit
 
 @UIApplicationMain
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -71,15 +73,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
-        print("DEVICE TOKEN = \(deviceToken)")
+        if #available(iOS 10.0, *) {
+            
+            let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+            
+            print("Registration succeeded!")
+            
+            print("DEVICE TOKEN = \(token)")
+            
+            //if(deviceToken != ""){
+            gStrDeviceToken = token.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: "")
+            print("Device Token = " + gStrDeviceToken)
+
+        }
+        else{
+            
+            // use UIStackView
+            gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: DelphosStrings.EMPTY_STRING)
+        }
         
-        //if(deviceToken != DelphosStrings.EMPTY_STRING){
-        gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: DelphosStrings.EMPTY_STRING)
-        print("Device Token = " + gStrDeviceToken)
-        
-       // }
+        // }
         
     }
+    
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+//        print("DEVICE TOKEN = \(deviceToken)")
+//        
+//        //if(deviceToken != DelphosStrings.EMPTY_STRING){
+//        gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: DelphosStrings.EMPTY_STRING)
+//        print("Device Token = " + gStrDeviceToken)
+//        
+//       // }
+//        
+//    }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print(error)
@@ -109,6 +135,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gObjNotificationInfo = notificationInfo as AnyObject?
         facade.doTask(gObjRightViewController!, action: DelphosAction.handle_NOTIFICATION)
     }
+    
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
