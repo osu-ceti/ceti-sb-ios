@@ -66,12 +66,12 @@
 		0FFB24161D27C1990025CC05 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB24151D27C1990025CC05 /* NotificationController.swift */; };
 		0FFB24181D27C8140025CC05 /* NotificationControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB24171D27C8140025CC05 /* NotificationControllerCell.swift */; };
 		0FFEC95D1D0EB1A400E4A1E0 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFEC95C1D0EB1A400E4A1E0 /* UserProfileController.swift */; };
-		8402064D1D9E7D0C00DD848E /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8402063D1D9E7CB000DD848E /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		840AEF8A1D2BA44200400B6A /* PushNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEF891D2BA44200400B6A /* PushNotificationDelegate.swift */; };
 		840AEF921D2BA6AB00400B6A /* DeviceBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEF911D2BA6AB00400B6A /* DeviceBean.swift */; };
 		8412621A1D33661900807F81 /* DelphosStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841262191D33661900807F81 /* DelphosStrings.swift */; };
 		8431DA3F1D5AFEC9008234A8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431DA3E1D5AFEC9008234A8 /* Logger.swift */; };
 		84384D551D5E1BBC00D811C7 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84384D541D5E1BBC00D811C7 /* BaseController.swift */; };
+		846C38FA1DCD000C00510F7F /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 846C38EB1DCCFFF800510F7F /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84799FCB1D09527C00C614C2 /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCA1D09527C00C614C2 /* BaseDelegate.swift */; };
 		84799FCD1D09528E00C614C2 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCC1D09528E00C614C2 /* EventDelegate.swift */; };
 		84799FCF1D09529B00C614C2 /* UserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84799FCE1D09529B00C614C2 /* UserDelegate.swift */; };
@@ -120,58 +120,58 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8402063C1D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38EA1DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6AAC8F7619F03C2900E7A677;
 			remoteInfo = "ObjectMapper-iOS";
 		};
-		8402063E1D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38EC1DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CD1602FF1AC023D5000CD69A;
 			remoteInfo = "ObjectMapper-Mac";
 		};
-		840206401D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38EE1DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6A2AD03D1B2C78540097E150;
 			remoteInfo = "ObjectMapper-watchOS";
 		};
-		840206421D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38F01DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6A05B7A61BE274BE00F19B53;
 			remoteInfo = "ObjectMapper-tvOS";
 		};
-		840206441D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38F21DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6AAC8F8119F03C2900E7A677;
 			remoteInfo = "ObjectMapper-iOSTests";
 		};
-		840206461D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38F41DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CD1603091AC023D6000CD69A;
 			remoteInfo = "ObjectMapper-MacTests";
 		};
-		840206481D9E7CB000DD848E /* PBXContainerItemProxy */ = {
+		846C38F61DCCFFF800510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6A05B7AF1BE274BE00F19B53;
 			remoteInfo = "ObjectMapper-tvOSTests";
 		};
-		8402064B1D9E7D0200DD848E /* PBXContainerItemProxy */ = {
+		846C38F81DCD000400510F7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+			containerPortal = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6AAC8F7519F03C2900E7A677;
 			remoteInfo = "ObjectMapper-iOS";
@@ -208,7 +208,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8402064D1D9E7D0C00DD848E /* ObjectMapper.framework in Copy Frameworks */,
+				846C38FA1DCD000C00510F7F /* ObjectMapper.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,13 +275,13 @@
 		0FFB24151D27C1990025CC05 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		0FFB24171D27C8140025CC05 /* NotificationControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationControllerCell.swift; sourceTree = "<group>"; };
 		0FFEC95C1D0EB1A400E4A1E0 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
-		840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = "ObjectMapper-swift-3/ObjectMapper.xcodeproj"; sourceTree = "<group>"; };
 		8402064A1D9E7CDE00DD848E /* Delphos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Delphos.entitlements; sourceTree = "<group>"; };
 		840AEF891D2BA44200400B6A /* PushNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationDelegate.swift; sourceTree = "<group>"; };
 		840AEF911D2BA6AB00400B6A /* DeviceBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceBean.swift; sourceTree = "<group>"; };
 		841262191D33661900807F81 /* DelphosStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelphosStrings.swift; sourceTree = "<group>"; };
 		8431DA3E1D5AFEC9008234A8 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		84384D541D5E1BBC00D811C7 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
+		846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = "ObjectMapper-protocols-serializing/ObjectMapper.xcodeproj"; sourceTree = "<group>"; };
 		84799FCA1D09527C00C614C2 /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		84799FCC1D09528E00C614C2 /* EventDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
 		84799FCE1D09529B00C614C2 /* UserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDelegate.swift; sourceTree = "<group>"; };
@@ -358,16 +358,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		840206331D9E7CB000DD848E /* Products */ = {
+		846C38E11DCCFFF700510F7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8402063D1D9E7CB000DD848E /* ObjectMapper.framework */,
-				8402063F1D9E7CB000DD848E /* ObjectMapper.framework */,
-				840206411D9E7CB000DD848E /* ObjectMapper.framework */,
-				840206431D9E7CB000DD848E /* ObjectMapper.framework */,
-				840206451D9E7CB000DD848E /* ObjectMapper-iOSTests.xctest */,
-				840206471D9E7CB000DD848E /* ObjectMapper-MacTests.xctest */,
-				840206491D9E7CB000DD848E /* ObjectMapper-tvOSTests.xctest */,
+				846C38EB1DCCFFF800510F7F /* ObjectMapper.framework */,
+				846C38ED1DCCFFF800510F7F /* ObjectMapper.framework */,
+				846C38EF1DCCFFF800510F7F /* ObjectMapper.framework */,
+				846C38F11DCCFFF800510F7F /* ObjectMapper.framework */,
+				846C38F31DCCFFF800510F7F /* ObjectMapper-iOSTests.xctest */,
+				846C38F51DCCFFF800510F7F /* ObjectMapper-MacTests.xctest */,
+				846C38F71DCCFFF800510F7F /* ObjectMapper-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 		F5A2EE6D1CDC6CD800419419 = {
 			isa = PBXGroup;
 			children = (
-				840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */,
+				846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */,
 				F5A2EE781CDC6CD800419419 /* Delphos */,
 				F5A2EE8D1CDC6CD800419419 /* DelphosTests */,
 				F5A2EE981CDC6CD800419419 /* DelphosUITests */,
@@ -589,7 +589,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8402064C1D9E7D0200DD848E /* PBXTargetDependency */,
+				846C38F91DCD000400510F7F /* PBXTargetDependency */,
 			);
 			name = Delphos;
 			productName = Delphos;
@@ -639,7 +639,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Ontoborn;
 				TargetAttributes = {
 					F5A2EE751CDC6CD800419419 = {
@@ -680,8 +680,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 840206331D9E7CB000DD848E /* Products */;
-					ProjectRef = 840206321D9E7CB000DD848E /* ObjectMapper.xcodeproj */;
+					ProductGroup = 846C38E11DCCFFF700510F7F /* Products */;
+					ProjectRef = 846C38E01DCCFFF700510F7F /* ObjectMapper.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -694,53 +694,53 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8402063D1D9E7CB000DD848E /* ObjectMapper.framework */ = {
+		846C38EB1DCCFFF800510F7F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 8402063C1D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38EA1DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8402063F1D9E7CB000DD848E /* ObjectMapper.framework */ = {
+		846C38ED1DCCFFF800510F7F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 8402063E1D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38EC1DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		840206411D9E7CB000DD848E /* ObjectMapper.framework */ = {
+		846C38EF1DCCFFF800510F7F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 840206401D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38EE1DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		840206431D9E7CB000DD848E /* ObjectMapper.framework */ = {
+		846C38F11DCCFFF800510F7F /* ObjectMapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ObjectMapper.framework;
-			remoteRef = 840206421D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38F01DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		840206451D9E7CB000DD848E /* ObjectMapper-iOSTests.xctest */ = {
+		846C38F31DCCFFF800510F7F /* ObjectMapper-iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "ObjectMapper-iOSTests.xctest";
-			remoteRef = 840206441D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38F21DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		840206471D9E7CB000DD848E /* ObjectMapper-MacTests.xctest */ = {
+		846C38F51DCCFFF800510F7F /* ObjectMapper-MacTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "ObjectMapper-MacTests.xctest";
-			remoteRef = 840206461D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38F41DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		840206491D9E7CB000DD848E /* ObjectMapper-tvOSTests.xctest */ = {
+		846C38F71DCCFFF800510F7F /* ObjectMapper-tvOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "ObjectMapper-tvOSTests.xctest";
-			remoteRef = 840206481D9E7CB000DD848E /* PBXContainerItemProxy */;
+			remoteRef = 846C38F61DCCFFF800510F7F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -903,10 +903,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8402064C1D9E7D0200DD848E /* PBXTargetDependency */ = {
+		846C38F91DCD000400510F7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ObjectMapper-iOS";
-			targetProxy = 8402064B1D9E7D0200DD848E /* PBXContainerItemProxy */;
+			targetProxy = 846C38F81DCD000400510F7F /* PBXContainerItemProxy */;
 		};
 		F5A2EE8C1CDC6CD800419419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -946,8 +946,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -992,8 +994,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1012,6 +1016,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1020,14 +1025,14 @@
 		F5A2EE9F1CDC6CD800419419 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Delphos/Delphos.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Delphos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.Delphos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1040,14 +1045,14 @@
 		F5A2EEA01CDC6CD800419419 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Delphos/Delphos.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Delphos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ontoborn.Delphos;
 				PRODUCT_NAME = "$(TARGET_NAME)";

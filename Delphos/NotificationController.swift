@@ -108,12 +108,12 @@ class NotificationController: NavController {
         (cell as! NotificationControllerCell).id!.text = String(notificationDisplayBean.id)
         
         
-        gNotificationNType = notificationDisplayBean.n_type
+        gNotificationNType = NOTIFICATION_TYPE(rawValue:notificationDisplayBean.n_type)!
         actUserId = Int(notificationDisplayBean.act_user_id)
         
-        switch gNotificationNType {
+        switch  gNotificationNType {
         
-        case NOTIFICATION_TYPE.claim.rawValue :
+        case .claim :
            
             // claim
              (cell as! NotificationControllerCell).eventName!.text = "has claimed your event: "  + String(notificationDisplayBean.event_title)
@@ -122,7 +122,7 @@ class NotificationController: NavController {
             
             break
             
-        case NOTIFICATION_TYPE.confirm_SPEAKER.rawValue :
+        case NOTIFICATION_TYPE.confirm_SPEAKER :
             
             //confrim speaker
             (cell as! NotificationControllerCell).eventName!.text = "has confirmed you as the speaker of event: "  + String(notificationDisplayBean.event_title)
@@ -130,7 +130,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
             
-        case NOTIFICATION_TYPE.event_UPDATE.rawValue :
+        case NOTIFICATION_TYPE.event_UPDATE :
             
             //event update
             
@@ -138,7 +138,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
-        case NOTIFICATION_TYPE.message.rawValue :
+        case NOTIFICATION_TYPE.message :
            
             //message
            
@@ -148,7 +148,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             
             break
-        case NOTIFICATION_TYPE.award_BADGE.rawValue :
+        case NOTIFICATION_TYPE.award_BADGE :
             
             //award_badge
             
@@ -157,7 +157,7 @@ class NotificationController: NavController {
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
-        case NOTIFICATION_TYPE.new_BADGE.rawValue :
+        case NOTIFICATION_TYPE.new_BADGE :
             
             //new_badge
             
@@ -166,7 +166,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
-        case NOTIFICATION_TYPE.cancel.rawValue :
+        case NOTIFICATION_TYPE.cancel :
             
             //cancel
             
@@ -175,7 +175,7 @@ class NotificationController: NavController {
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
-        case NOTIFICATION_TYPE.reject_CLAIM.rawValue :
+        case NOTIFICATION_TYPE.reject_CLAIM :
             
             //reject_claim
             
@@ -184,7 +184,7 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
-        case NOTIFICATION_TYPE.cancel_CLAIM.rawValue :
+        case NOTIFICATION_TYPE.cancel_CLAIM :
            
             //cancel_claim
            
@@ -193,7 +193,7 @@ class NotificationController: NavController {
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
-        case NOTIFICATION_TYPE.cancel_SPEAKER.rawValue :
+        case NOTIFICATION_TYPE.cancel_SPEAKER :
             
             //cancel_speaker
             
@@ -241,7 +241,7 @@ class NotificationController: NavController {
         }
        
        
-        gNotificationNType = Int(selectCell.UserNotificationType.text!)
+        gNotificationNType = NOTIFICATION_TYPE(rawValue:Int(selectCell.UserNotificationType.text!)!)!
         
        
         
@@ -259,7 +259,7 @@ class NotificationController: NavController {
         switch gNotificationNType {
 
             
-            case NOTIFICATION_TYPE.award_BADGE.rawValue :
+            case NOTIFICATION_TYPE.award_BADGE :
                 
                 //award_badge
                 
@@ -272,7 +272,7 @@ class NotificationController: NavController {
               //  })
             break
             
-            case NOTIFICATION_TYPE.new_BADGE.rawValue :
+            case NOTIFICATION_TYPE.new_BADGE :
             
             //new_badge
               //  dispatch_async(dispatch_get_main_queue(), {

@@ -25,7 +25,7 @@ enum RoleType: UInt{
 }
 
 enum NOTIFICATION_TYPE:Int{
-
+    case none               = -1
     case claim              = 0
     case confirm_SPEAKER    = 1
     case event_UPDATE       = 2

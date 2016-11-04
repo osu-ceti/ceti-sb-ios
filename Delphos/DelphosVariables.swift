@@ -55,7 +55,7 @@ var gBtnNotificationCount:UIBarButtonItem  = UIBarButtonItem()
 
 var gBadgesAwardToEvent:Bool!
 
-var gNotificationNType:Int!
+var gNotificationNType = NOTIFICATION_TYPE.none
 
 var gAwardNtype:Int!
 

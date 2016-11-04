@@ -17,12 +17,12 @@ class PushNotificationBean: Mappable {
         //Do not remove required for Initialization
     }
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map: map)
     }
     
     // Mappable
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         aps         <- map["aps"]
         data        <- map["data"]
     }

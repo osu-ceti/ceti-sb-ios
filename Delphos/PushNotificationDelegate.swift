@@ -34,7 +34,7 @@ class PushNotificationDelegate: BaseDelegate {
     
     func handleRemoteNotification(_ objCurrentContoller: UIViewController) {
         
-        let pushNotificationBean = Mapper<PushNotificationBean>().map(gObjNotificationInfo)
+        let pushNotificationBean = Mapper<PushNotificationBean>().map(JSONString: gObjNotificationInfo as! String)
         
         DispatchQueue.main.async(execute: {
             
