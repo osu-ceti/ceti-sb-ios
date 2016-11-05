@@ -58,6 +58,10 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         zipText.placeholder = "Zipcode"
         radiusText.placeholder = "Radius"
         
+        searchText.font =  searchText.font?.withSize(12)
+        zipText.font =  zipText.font?.withSize(12)
+        radiusText.font =  radiusText.font?.withSize(12)
+        
         searchLabel.textAlignment = NSTextAlignment.left
         searchLabel.text = "With: "
         searchLabel.textColor = UIColor.black
@@ -115,7 +119,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         locationSwitchLabel.textAlignment = NSTextAlignment.left
         locationSwitchLabel.text = "Use my location's zipcode"
-        locationSwitchLabel.font = UIFont.systemFont(ofSize: 12)
+        locationSwitchLabel.font = UIFont.systemFont(ofSize: 10)
         locationSwitchLabel.textColor = UIColor.black
         searchView.addSubview(locationSwitchLabel)
         

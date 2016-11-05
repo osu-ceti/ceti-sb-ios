@@ -92,9 +92,11 @@ class NotificationController: NavController {
       
         
          var notificationDisplayBean: NotificationListBean! = notificationArray[(indexPath as NSIndexPath).row]
-        if(gNotificationCount != nil && notificationDisplayBean.read == 0){
-            
-            cell.backgroundColor = UIColor(hue: 0.5583, saturation: 0.25, brightness: 0.97, alpha: 1.0)
+        1
+        if(gNotificationCount != nil && notificationDisplayBean.read != nil){
+            if(notificationDisplayBean.read == 0){
+                cell.backgroundColor = UIColor(hue: 0.5583, saturation: 0.25, brightness: 0.97, alpha: 1.0)
+            }
         }
         else{
             cell.backgroundColor = UIColor.white

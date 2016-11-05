@@ -67,28 +67,32 @@ class SettingsController: NavController {
         
         self.view.backgroundColor = bgColor
         viewSetting.backgroundColor = bgColor
-        if(settingsBean.set_updates == 1){
-            switchEventUpdate.isOn = true
+        if(settingsBean.set_updates != nil){
+            if(settingsBean.set_updates == 1){
+                switchEventUpdate.isOn = true
             
+            }
+            else{
+                switchEventUpdate.isOn = false
+            }
         }
-        else{
-            switchEventUpdate.isOn = false
-        }
+        if(settingsBean.set_confirm != nil){
+            if(settingsBean.set_confirm == 1){
+                switchConfirmation.isOn = true
+            }
+            else{
+                switchConfirmation.isOn = false
         
-        if(settingsBean.set_confirm == 1){
-            switchConfirmation.isOn = true
-         }
-         else{
-            switchConfirmation.isOn = false
-        
+            }
         }
-       
-        if(settingsBean.set_claims == 1){
-            switchEventClaim.isOn = true
-        }
-        else{
-            switchEventClaim.isOn = false
+        if(settingsBean.set_claims != nil){
+            if(settingsBean.set_claims == 1){
+                switchEventClaim.isOn = true
+            }
+            else{
+                switchEventClaim.isOn = false
         
+            }
         }
         if(UIDevice.current.orientation.isLandscape) {
             print("landscape")

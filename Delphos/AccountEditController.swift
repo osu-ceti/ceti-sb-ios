@@ -318,7 +318,7 @@ class AccountEditController: NavController {
                 if ((txtNewPassword.text! != DelphosStrings.EMPTY_STRING) && (txtNewPassword.text?.characters.count <= 7))
                 {
                     self.requiredField.isHidden = false
-                    self.requiredField.text = "Password Must have 8 character"
+                    self.requiredField.text = "Password must have 8 character"
                 }
 //                else if (txtConfirmPassword.text == DelphosStrings.EMPTY_STRING)
 //                {
@@ -328,7 +328,7 @@ class AccountEditController: NavController {
                 else if ((txtConfirmPassword.text != DelphosStrings.EMPTY_STRING) && (txtConfirmPassword.text != txtNewPassword.text!))
                 {
                     self.requiredField.isHidden = false
-                    self.requiredField.text = "ConfirmPassword does not match"
+                    self.requiredField.text = "Confirm Password does not match"
                 }
                 else if (txtCurrentPassword.text == DelphosStrings.EMPTY_STRING)
                 {
@@ -338,7 +338,7 @@ class AccountEditController: NavController {
                 else if (curPassword != gPasswordCheck)
                 {
                     self.requiredField.isHidden = false
-                    self.requiredField.text = "Current password is not match"
+                    self.requiredField.text = "Invalid current password"
                 }
 //                else if (txtRole == DelphosStrings.EMPTY_STRING)
 //                {

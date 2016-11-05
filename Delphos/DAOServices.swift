@@ -25,16 +25,16 @@ class DAOServices: DAOBase {
             
             if(status) {
                 // println(jsonResult)
-                var eventDisplayBean = Mapper<EventDisplayBean>().map(JSONString: jsonResult as! String)
+                var eventDisplayBean = Mapper<EventDisplayBean>().map(JSON: jsonResult as! [String : Any] )!
                 
-                callBack?(eventDisplayBean!, statusCode )
+                callBack?(eventDisplayBean, statusCode )
                 
                 return
             }
             else {
                 
                 //println(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -53,7 +53,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //  logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<ClaimListBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<ClaimListBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -62,7 +62,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -81,7 +81,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //  logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<ClaimListClaimBeanBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<ClaimListClaimBeanBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -90,7 +90,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -110,7 +110,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<ShowEventBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<ShowEventBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -119,7 +119,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -208,13 +208,13 @@ class DAOServices: DAOBase {
             if(status) {
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 if(gBtnRadioValue == gEvents) {
-                    searchBean = Mapper<EventDisplayBean>().map(JSONString: jsonResult as! String)
+                    searchBean = Mapper<EventDisplayBean>().map(JSON: jsonResult as! [String : Any] )
                 }
                 else if(gBtnRadioValue == gSchools) {
-                    searchBean = Mapper<SchoolsDisplayBean>().map(JSONString: jsonResult as! String)
+                    searchBean = Mapper<SchoolsDisplayBean>().map(JSON: jsonResult as! [String : Any] )
                 }
                 else if(gBtnRadioValue == gUsers) {
-                    searchBean = Mapper<usersBean>().map(JSONString: jsonResult as! String)
+                    searchBean = Mapper<usersBean>().map(JSON: jsonResult as! [String : Any] )
                 }
                 
                 callBack?(searchBean!, statusCode )
@@ -224,7 +224,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -258,12 +258,12 @@ class DAOServices: DAOBase {
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 if(gBtnRadioValue == events) {
-                    responseBean = Mapper<ShowEventBean>().map(JSONString: jsonResult as! String)
+                    responseBean = Mapper<ShowEventBean>().map(JSON: jsonResult as! [String : Any] )
                 } else if(gBtnRadioValue == schools) {
-                     responseBean = Mapper<SchoolsBean>().map(JSONString: jsonResult as! String)
+                     responseBean = Mapper<SchoolsBean>().map(JSON: jsonResult as! [String : Any] )
                     
                 } else if(gBtnRadioValue == users) {
-                    responseBean = Mapper<usersBean>().map(JSONString: jsonResult as! String)
+                    responseBean = Mapper<usersBean>().map(JSON: jsonResult as! [String : Any] )
                 }
                 
                  callBack?(responseBean!, statusCode )
@@ -273,7 +273,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -296,7 +296,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var showBadgeBean = Mapper<UserProfileBadgesBean>().map(JSONString: jsonResult as! String)
+                var showBadgeBean = Mapper<UserProfileBadgesBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(showBadgeBean!, statusCode )
                 
@@ -305,7 +305,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -328,7 +328,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let showSettingsBean = Mapper<ViewSettingsResponse>().map(JSONString: jsonResult as! String)
+                let showSettingsBean = Mapper<ViewSettingsResponse>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(showSettingsBean!, statusCode )
                 
@@ -337,7 +337,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -362,7 +362,7 @@ class DAOServices: DAOBase {
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 print(jsonResult)
-                let showAwardBadgeResponse = Mapper<AwardBadgesResponse>().map(JSONString: jsonResult as! String)
+                let showAwardBadgeResponse = Mapper<AwardBadgesResponse>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(showAwardBadgeResponse!, statusCode )
                 
@@ -371,7 +371,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -402,13 +402,16 @@ class DAOServices: DAOBase {
         doPost(JSONString!, addAuthHeader: false,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                let userBean = Mapper<UserBean>().map(JSONString: jsonResult as! String)!
+                print("jsonResult ==>")
+                //print(jsonResult)
+                let userBean = 	Mapper<UserBean>().map(JSON: jsonResult as! [String : Any] )!
+               
                 callBack?(userBean, statusCode )
                 return
             }
             else{
                 //println(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -423,13 +426,13 @@ class DAOServices: DAOBase {
         doPost(JSONString!, addAuthHeader: false,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var userBean = Mapper<RegistrationResponseBean>().map(JSONString: jsonResult as! String)!
+                var userBean = Mapper<RegistrationResponseBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(userBean, statusCode )
                 return
             }
             else{
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -500,7 +503,7 @@ class DAOServices: DAOBase {
                 }
                
                 else{
-                    let responseBean = Mapper<CreateEventResultBean>().map(JSONString: jsonResult as! String)!
+                    let responseBean = Mapper<CreateEventResultBean>().map(JSON: jsonResult as! [String : Any] )!
                     callBack?(responseBean.event, statusCode )
                     return
                 }
@@ -508,7 +511,7 @@ class DAOServices: DAOBase {
             }
             else{
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -528,13 +531,13 @@ class DAOServices: DAOBase {
         doPost(JSONString!, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var claimEventBean = Mapper<ClaimEventBean>().map(JSONString: jsonResult as! String)!
+                var claimEventBean = Mapper<ClaimEventBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(claimEventBean, statusCode )
                 return
             }
             else{
                 //println(jsonResult)
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -550,12 +553,12 @@ class DAOServices: DAOBase {
         
         doDelete(strClaimID, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
           if(status) {
-            var claimEventBean = Mapper<ClaimEventBean>().map(JSONString: jsonResult as! String)!
+            var claimEventBean = Mapper<ClaimEventBean>().map(JSON: jsonResult as! [String : Any] )!
             callBack?(claimEventBean, statusCode )
             return
           } else {
                 //println(jsonResult)
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -580,13 +583,13 @@ class DAOServices: DAOBase {
             
             if(status){
               logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                 var acceptEventbean = Mapper<ClaimAcceptBean>().map(JSONString: jsonResult as! String)!
+                 var acceptEventbean = Mapper<ClaimAcceptBean>().map(JSON: jsonResult as! [String : Any] )!
                  callBack?(acceptEventbean, statusCode )
                  return
             }
             else {
                 //logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -605,13 +608,13 @@ class DAOServices: DAOBase {
         doPost(JSONString!,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status){
-                var claimEventBean = Mapper<ClaimEventBean>().map(JSONString: jsonResult as! String)!
+                var claimEventBean = Mapper<ClaimEventBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(claimEventBean, statusCode )
                 return
             }
             else {
                 //println(jsonResult)
-               var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+               var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -628,13 +631,13 @@ class DAOServices: DAOBase {
     doDelete(strClaimid!,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
     
     if(status){
-        var claimEventBean = Mapper<ClaimEventBean>().map(JSONString: jsonResult as! String)!
+        var claimEventBean = Mapper<ClaimEventBean>().map(JSON: jsonResult as! [String : Any] )!
         callBack?(claimEventBean, statusCode )
         return
     }
     else {
         //println(jsonResult)
-        var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+        var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
         callBack?(errorBean, statusCode )
         return
     }
@@ -653,12 +656,12 @@ class DAOServices: DAOBase {
         doDelete(strEventID, addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             if(status) {
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var cancelEventBean = Mapper<CancelEventBean>().map(JSONString: jsonResult as! String)!
+                var cancelEventBean = Mapper<CancelEventBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?( cancelEventBean, statusCode )
                 return
             } else {
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -681,7 +684,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<usersBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<usersBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -690,7 +693,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -710,7 +713,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var showSchoolBean = Mapper<SchoolsBean>().map(JSONString: jsonResult as! String)
+                var showSchoolBean = Mapper<SchoolsBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(showSchoolBean!, statusCode )
                 
@@ -719,7 +722,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -743,12 +746,12 @@ class DAOServices: DAOBase {
         
         doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             if(status) {
-                var signoutBean = Mapper<SignoutResponseBean>().map(JSONString: jsonResult as! String)!
+                var signoutBean = Mapper<SignoutResponseBean>().map(JSON: jsonResult as! [String : Any] )!
                callBack?(signoutBean, statusCode )
                 return
             } else {
                 //println(jsonResult)
-                var  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                var  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -769,7 +772,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 
-                let responseBean = Mapper<MakeMySchoolBean>().map(JSONString: jsonResult as! String)
+                let responseBean = Mapper<MakeMySchoolBean>().map(JSON: jsonResult as! [String : Any] )
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
                 
                 callBack?(responseBean!, statusCode )
@@ -779,7 +782,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -800,7 +803,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<EditUserProfileBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<EditUserProfileBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -809,7 +812,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -828,7 +831,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<UserBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<UserBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -837,7 +840,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -856,7 +859,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<SchoolsBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<SchoolsBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -865,7 +868,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -892,7 +895,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let showNotificationBean = Mapper<NotificationBean>().map(JSONString: jsonResult as! String)
+                let showNotificationBean = Mapper<NotificationBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(showNotificationBean!, statusCode )
                 
@@ -901,7 +904,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -921,12 +924,12 @@ class DAOServices: DAOBase {
         doDelete(strEmptyJson,addAuthHeader: true,callBack:{(jsonResult: NSDictionary, status:Bool, statusCode: Int) in
             
             if(status) {
-                let signoutBean = Mapper<SignoutResponseBean>().map(JSONString: jsonResult as! String)!
+                let signoutBean = Mapper<SignoutResponseBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(signoutBean, statusCode )
                 return
             } else {
                 //println(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -964,13 +967,13 @@ class DAOServices: DAOBase {
             
             if(status){
                 print(jsonResult)
-                let awardBadgeResponseBean = Mapper<AwardBadgeResponse>().map(JSONString: jsonResult as! String)!
+                let awardBadgeResponseBean = Mapper<AwardBadgeResponse>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(awardBadgeResponseBean, statusCode )
                 return
             }
             else {
                 //println(jsonResult)
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 callBack?(errorBean, statusCode )
                 return
             }
@@ -988,7 +991,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<DeviceBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<DeviceBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -997,7 +1000,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -1017,7 +1020,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<DeviceBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<DeviceBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -1026,7 +1029,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -1048,7 +1051,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<EditUserProfileBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<EditUserProfileBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 return
@@ -1056,7 +1059,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -1078,7 +1081,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let showAccountEditBean = Mapper<AccountEditResponseBean>().map(JSONString: jsonResult as! String)
+                let showAccountEditBean = Mapper<AccountEditResponseBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(showAccountEditBean!, statusCode )
 
@@ -1088,7 +1091,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
@@ -1110,7 +1113,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                var responseBean = Mapper<EditUserProfileBean>().map(JSONString: jsonResult as! String)
+                var responseBean = Mapper<EditUserProfileBean>().map(JSON: jsonResult as! [String : Any] )
                 
                 callBack?(responseBean!, statusCode )
                 
@@ -1119,7 +1122,7 @@ class DAOServices: DAOBase {
             else {
                 
                 logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let  errorBean = Mapper<ErrorBean>().map(JSONString: jsonResult as! String)!
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(errorBean, statusCode )
                 
