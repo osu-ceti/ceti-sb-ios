@@ -36,7 +36,7 @@ class DAOServices: DAOBase {
                 //println(jsonResult)
                 let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
                 
-                callBack?(errorBean, statusCode )
+                callBack?(errorBean, statusCode)
                 
                 return
                 
@@ -893,9 +893,15 @@ class DAOServices: DAOBase {
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
             
+            
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-                let showNotificationBean = Mapper<NotificationBean>().map(JSON: jsonResult as! [String : Any] )
+                
+                 //var strJsonResult = String(describing: jsonResult).replacingOccurrences(of: "read" , with: "\"read\"", options: NSString.CompareOptions.literal, range: nil)
+                
+                 //strJsonResult =  strJsonResult.replacingOccurrences(of: "\n" , with: " ", options: NSString.CompareOptions.literal, range: nil)
+                
+                let showNotificationBean = Mapper<NotificationBean>().map(JSON: jsonResult as! [String : Any])
                 
                 callBack?(showNotificationBean!, statusCode )
                 

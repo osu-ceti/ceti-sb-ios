@@ -18,7 +18,7 @@ class BadgeDelegate:BaseDelegate{
     
     func badgesAward(_ objCurrentContoller: UIViewController) {
         
-        var badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
+        let badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
         var eventId = (objCurrentContoller as! BadgeController).eventId
         
         //var eventId = 309
@@ -78,7 +78,7 @@ class BadgeDelegate:BaseDelegate{
 
                 }
                 if(objAwardResponse.isAwarded != nil){
-                    if(objAwardResponse.isAwarded == 1){
+                    if(objAwardResponse.isAwarded == true){
                         gObjBadgeController.isAwarded = true
                     }
                     else{

@@ -23,7 +23,7 @@ class NotificationListBean: Mappable {
     
     var n_type: Int!
     
-    var read: Int!
+    var read: Bool!
     
     var user_id: Int!
     
@@ -57,11 +57,9 @@ class NotificationListBean: Mappable {
         id                  <- map["id"]
         
         n_type              <- map["n_type"]
-
         
         read                <- map["read"]
 
-        
         user_id             <- map["user_id"]
 
         user_name           <- map["user_name"]

@@ -17,7 +17,7 @@ class AwardBadgesResponse: Mappable {
     var badge_url:      String!
     var event_id:       Int!
     var event_name:     String!
-    var isAwarded:      Int!
+    var isAwarded:      Bool!
     var speaker_name:   String!
     
     required init()
