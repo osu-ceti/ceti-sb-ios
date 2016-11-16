@@ -11,11 +11,11 @@ import ObjectMapper
 
 class ViewSettingsResponse: Mappable {
     
-    var set_claims:          Int!
+    var set_claims:          Bool!
     
-    var set_confirm:         Int!
+    var set_confirm:         Bool!
     
-    var set_updates:         Int!
+    var set_updates:         Bool!
     
     
     

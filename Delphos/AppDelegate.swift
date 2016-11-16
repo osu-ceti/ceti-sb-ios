@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import  CocoaLumberjack
 
 @UIApplicationMain
 
@@ -67,7 +68,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.createMenuView()
         
         //Register for Push  Notifications
+        //self.registerForPushNotifications(application)
+        
+        
         self.registerForPushNotifications(application)
+        
+        DDLog.add(DDASLLogger.sharedInstance())
+        DDLog.add(DDTTYLogger.sharedInstance())
+        
+        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+        
+        DDLogVerbose("Verbose");
+        DDLogDebug("Debug");
+        DDLogInfo("Info");
+        DDLogWarn("Warn");
+        DDLogError("Error");
         
         return true
     }

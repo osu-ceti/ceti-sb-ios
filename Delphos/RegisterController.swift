@@ -245,7 +245,20 @@ class RegisterController: NavController {
             }
         }
     }
-   
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            
+            return false
+        }
+        
+        return true
+    }
    
   
 }

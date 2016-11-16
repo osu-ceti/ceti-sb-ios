@@ -68,7 +68,7 @@ class SettingsController: NavController {
         self.view.backgroundColor = bgColor
         viewSetting.backgroundColor = bgColor
         if(settingsBean.set_updates != nil){
-            if(settingsBean.set_updates == 1){
+            if(settingsBean.set_updates == true){
                 switchEventUpdate.isOn = true
             
             }
@@ -77,7 +77,7 @@ class SettingsController: NavController {
             }
         }
         if(settingsBean.set_confirm != nil){
-            if(settingsBean.set_confirm == 1){
+            if(settingsBean.set_confirm == true){
                 switchConfirmation.isOn = true
             }
             else{
@@ -86,7 +86,7 @@ class SettingsController: NavController {
             }
         }
         if(settingsBean.set_claims != nil){
-            if(settingsBean.set_claims == 1){
+            if(settingsBean.set_claims == true){
                 switchEventClaim.isOn = true
             }
             else{

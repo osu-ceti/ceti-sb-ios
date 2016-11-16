@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CocoaLumberjack
 
 let INFO_MSG:String = "INFO: "
 let DEBUG_MSG:String = "DEBUG: "
@@ -18,17 +19,20 @@ enum LoggingLevel{
     case ERROR
 }
 class Logger {
+    
+    
     func log(_ level :LoggingLevel, message:String)->Void{
         switch(level)
         {
-            case .INFO:
-                NSLog(INFO_MSG + message)
+        case .INFO:
+            DDLogInfo(INFO_MSG + message)
             
-            case .DEBUG:
-                NSLog(DEBUG_MSG + message)
+        case .DEBUG:
+            DDLogDebug(DEBUG_MSG + message)
             
-            case .ERROR:
-                NSLog(ERROR_MSG + message)
+        case .ERROR:
+            
+            DDLogError(ERROR_MSG + message)
         }
         
     }
