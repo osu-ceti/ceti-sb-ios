@@ -19,6 +19,7 @@ var gStrHomeControllerID: String = "HomeID"
 
 var gObjLoginController : UINavigationController!
 var gStrLoginControllerID: String = "loginId"
+var gStrLoginControllerNav:  LoginController!
 
 var gObjRegisterController : UINavigationController!
 var gStrRegisterControllerID: String = "RegisterId"

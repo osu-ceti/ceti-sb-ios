@@ -174,7 +174,7 @@ class AccountEditController: NavController {
             }
             
             if(txtEmail != nil && userAccountEditBean.email != nil){
-                txtEmail.text! = userAccountEditBean.email
+                txtEmail.text! = userAccountEditBean.email!
             }
             accountEditId = userAccountEditBean.id
             if(userAccountEditBean.role != nil){

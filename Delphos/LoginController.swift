@@ -40,23 +40,14 @@ class LoginController: BaseController {
     var searchButtonItem = UIBarButtonItem()
 
     @IBOutlet var requiredError: UILabel!
-    //@IBOutlet var requiredError: UILabel!
     
-   // @IBOutlet var btnResetPassword: UIButton!
-   
     @IBOutlet var labelRememberMe: UILabel!
-    //@IBOutlet var labelRememberMe: UILabel!
-    
-    
-    //@IBOutlet var btnSignIn: UIButton!
-    //@IBOutlet var btnRegister: UIButton!
     
     @IBOutlet var btnSignIn: UIButton!
     
     @IBOutlet var btnRegister: UIButton!
     
     @IBOutlet var btnResetPassword: UIButton!
-    //@IBOutlet var btnForgetPassword: UIButton!
     var backButton : UIBarButtonItem = UIBarButtonItem()
 
     @IBOutlet var btnForgetPassword: UIButton!
@@ -69,19 +60,19 @@ class LoginController: BaseController {
         // isResetPassword = false
         
         
-        if (UserDefaults.standard.string(forKey: gStrUserStorageKey) != nil &&
-            UserDefaults.standard.string(forKey: gStrUserStoragePassKey) != nil){
-             //self.showOverlay(self.view)
-        
-             userNameData = UserDefaults.standard.string(forKey: gStrUserStorageKey)!
-             userPasswordData = UserDefaults.standard.string(forKey: gStrUserStoragePassKey)!
-       
-
-            
-             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-             let testfacade = appDelegate.getObjFacade()
-             testfacade.doTask(self,action: DelphosAction.login)
-            }
+//        if (userCredsStorage.string(forKey: gStrUserStorageKey) != nil &&
+//            userCredsStorage.string(forKey: gStrUserStoragePassKey) != nil){
+//             //self.showOverlay(self.view)
+//        
+//             userNameData = userCredsStorage.string(forKey: gStrUserStorageKey)!
+//             userPasswordData = userCredsStorage.string(forKey: gStrUserStoragePassKey)!
+//       
+//
+//            
+//             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//             let testfacade = appDelegate.getObjFacade()
+//             testfacade.doTask(self,action: DelphosAction.login)
+//            }
         
      
 

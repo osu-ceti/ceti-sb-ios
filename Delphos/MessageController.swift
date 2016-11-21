@@ -52,13 +52,13 @@ class MessageController:  NavController  {
         
         }
         else{
-            if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
-                RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both){
+            if(RoleType(rawValue:UInt(gObjUserBean.role!)) == RoleType.teacher ||
+                RoleType(rawValue:UInt(gObjUserBean.role!)) == RoleType.both){
        
                 self.messageViewUserName.text = gClaimSpeakerName
                 //userMessageId = gClaimUser_id
             }
-            else if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.speaker){
+            else if(RoleType(rawValue:UInt(gObjUserBean.role!)) == RoleType.speaker){
             
                 self.messageViewUserName.text = gObjShowEventBean.user_name
         

@@ -12,21 +12,48 @@ import Security
 
 class UserDelegate:BaseDelegate{
     
-    func savePassword( _ userNameKey:String, userPasswordKey:String){
+    func saveInLocalStorageIfPresent(key: String, value: AnyObject){
+        if(value != nil){
+            userCredsStorage.set(value, forKey:key)
+        }
+    }
+    
+    func saveInLocalStorage(){
         
-        let defaultUser = UserDefaults.standard
-        let defaultPassowrd = UserDefaults.standard
-       
-        defaultUser.set(userNameKey, forKey:"userNameKey")
-    
-        defaultPassowrd.set(userPasswordKey, forKey:"userPasswordKey")
-    
-    
-        print(defaultPassowrd)
-        print(defaultUser)
+        
+        //print("Auth",defaultAuth)
+        
+        
+        if(gObjUserBean != nil){
+            print(gObjUserBean)
+          
+            saveInLocalStorageIfPresent(key: gAuthenticationKey, value: gObjUserBean.authentication_token as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gEmailKey, value: gObjUserBean.email as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gBiographyKey, value: gObjUserBean.biography as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gBusinessKey, value: gObjUserBean.business as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gIdKey, value: gObjUserBean.id as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gJobTitleKey, value: gObjUserBean.job_title as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gNameKey, value: gObjUserBean.name as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gRolekey, value: gObjUserBean.role as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gSchoolIdKey, value: gObjUserBean.school_id as AnyObject)
+            
+            saveInLocalStorageIfPresent(key: gSchoolNameKey, value: gObjUserBean.school_name as AnyObject)
+          
+           
+            
+        }
     
     }
-
+    
+  
     
     func login(_ objCurrentContoller: UIViewController, callback:@escaping (_ status: Bool)->Void) -> Bool {
         var boolLogin = false;
@@ -35,8 +62,8 @@ class UserDelegate:BaseDelegate{
         
         let strPassword:String
         
-        if (UserDefaults.standard.string(forKey: gStrUserStorageKey) != nil &&
-            UserDefaults.standard.string(forKey: gStrUserStoragePassKey) != nil){
+        if (userCredsStorage.string(forKey: gStrUserStorageKey) != nil &&
+            userCredsStorage.string(forKey: gStrUserStoragePassKey) != nil){
             
            
              strUser = loginController.userNameData
@@ -54,7 +81,7 @@ class UserDelegate:BaseDelegate{
         objInputParamCredsBean.id = 0
         objInputParamBean.user = objInputParamCredsBean
         
-        let defaultPassowrd = UserDefaults.standard
+        let defaultPassowrd = userCredsStorage
         //DOA calls
         
         doPostAPIs.doLogin(objInputParamBean){ (loginResult: AnyObject, statusCode: Int) in
@@ -76,6 +103,7 @@ class UserDelegate:BaseDelegate{
                 gObjUserBean = loginResult as! UserBean
                 gPasswordCheck = strPassword
                 
+                self.saveInLocalStorageIfPresent(key: gStrUserStoragePassKey, value: gPasswordCheck as AnyObject)
                 if(loginController.switchRememberme.isOn)
                 {
                     
@@ -86,8 +114,9 @@ class UserDelegate:BaseDelegate{
                     //Save username password data
                     let userNameKey = strUser
                     let userPasswordKey = strPassword
-                    self.savePassword(userNameKey,userPasswordKey:userPasswordKey)
-
+                    let authToken = gObjUserBean.authentication_token
+                    self.saveInLocalStorage()
+                    
                     
                   }
                 else {
@@ -209,9 +238,11 @@ class UserDelegate:BaseDelegate{
                 
                 let userNameKey = strEmail
                 let userPasswordKey = strPassword
-                self.savePassword(userNameKey!,userPasswordKey:userPasswordKey!)
-                gPasswordCheck = strPassword
+                let authToken = gObjUserBean.authentication_token
+                self.saveInLocalStorage()
                 
+                gPasswordCheck = strPassword
+                self.saveInLocalStorageIfPresent(key: gStrUserStoragePassKey, value: gPasswordCheck as AnyObject)
                 DispatchQueue.main.async(execute: {
                     self.showAlert(objCurrentContoller, strMessage: SUCCESS_MSG)
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
@@ -300,8 +331,8 @@ class UserDelegate:BaseDelegate{
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "sign out")
                 
-                UserDefaults.standard.removeObject(forKey: gStrUserStorageKey)
-                UserDefaults.standard.removeObject(forKey: gStrUserStoragePassKey)
+                userCredsStorage.removeObject(forKey: gStrUserStorageKey)
+                userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
                 gNotificationCount = 0
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
@@ -323,8 +354,8 @@ class UserDelegate:BaseDelegate{
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 })
-                UserDefaults.standard.removeObject(forKey: gStrUserStorageKey)
-                UserDefaults.standard.removeObject(forKey: gStrUserStoragePassKey)
+                userCredsStorage.removeObject(forKey: gStrUserStorageKey)
+                userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
              logger.log(LoggingLevel.INFO, message: "Did not sign out")
             }
         }
@@ -595,6 +626,7 @@ class UserDelegate:BaseDelegate{
             if(statusCode == SUCCESS) {
                 if(strNewpassword != DelphosStrings.EMPTY_STRING){
                     gPasswordCheck = strNewpassword
+                    self.saveInLocalStorageIfPresent(key: gStrUserStoragePassKey, value: gPasswordCheck as AnyObject)
                 }
                 let objEdiAccounttResult = result as! AccountEditResponseBean
                 

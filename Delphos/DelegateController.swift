@@ -212,7 +212,9 @@ class DelegateController: BaseDelegate {
             objUserDelegate.resetPassword(objCurrentController)
             
         
-
+//        case .AUTHENTICATE_USER:
+//            logger.log(LoggingLevel.INFO, message: "AUTHENTICATE USER")
+//            objUserDelegate.authenticateUserCheck(objCurrentController)
             
       
         default:

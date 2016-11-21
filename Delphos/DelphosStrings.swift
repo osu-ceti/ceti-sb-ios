@@ -38,6 +38,19 @@ var MSG_AWARDED = "Bagde has been awarded"
 
 var gStrUserStorageKey = "userNameKey"
 var gStrUserStoragePassKey = "userPasswordKey"
+var gAuthenticationKey = "AuthKey"
+var gBiographyKey = "bioGraphyKey"
+var gBusinessKey = "businessKey"
+var gEmailKey = "emailKey"
+var gGradesKey = "gradesKey"
+var gIdKey = "idKey"
+var gJobTitleKey = "jobTitleKey"
+var gNameKey = "nameKey"
+var gRolekey = "rolekey"
+var gSchoolIdKey = "schoolId"
+var gSchoolNameKey = "schoolNameKey"
+
+
 class DelphosStrings{
     static var EMPTY_STRING = ""
     static var EMPTY_INT:Int = 0

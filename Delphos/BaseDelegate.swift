@@ -108,10 +108,29 @@ class BaseDelegate: NSObject {
             objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
         })
     }
-    
+    func removeFromLocalStorage(key :String){
+        
+        if let value = userCredsStorage.string(forKey: key) {
+            userCredsStorage.removeObject(forKey: key)
+        }
+        
+        
+    }
     func removeUserCodes(){
-        userCredsStorage.removeObject(forKey: gStrUserStorageKey)
-        userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+      
+        removeFromLocalStorage(key: gAuthenticationKey)
+        removeFromLocalStorage(key: gBiographyKey)
+        removeFromLocalStorage(key: gBusinessKey)
+        removeFromLocalStorage(key: gEmailKey)
+        removeFromLocalStorage(key: gGradesKey)
+        removeFromLocalStorage(key: gIdKey)
+        removeFromLocalStorage(key: gJobTitleKey)
+        removeFromLocalStorage(key: gNameKey)
+        removeFromLocalStorage(key: gRolekey)
+        removeFromLocalStorage(key: gSchoolIdKey)
+        removeFromLocalStorage(key: gSchoolNameKey)
+
+
     }
     
     func responseCodeErrorHandler(_ statusCode: Int, objCurrentController:BaseController){

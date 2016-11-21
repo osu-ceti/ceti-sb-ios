@@ -73,7 +73,9 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         searchText.borderStyle = UITextBorderStyle.none
         searchText.layer.addSublayer(bottomLineSearch)
         searchText.delegate = self
-        searchText.becomeFirstResponder()
+        //searchText.becomeFirstResponder()
+        
+        searchText.resignFirstResponder()
         //zipText.keyboardType = UIKeyboardType.numberPad
         
         searchText.isHidden = false
@@ -90,7 +92,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         zipText.borderStyle = UITextBorderStyle.none
         zipText.layer.addSublayer(bottomLine)
         zipText.delegate = self
-        zipText.becomeFirstResponder()
+        //zipText.becomeFirstResponder()
         //zipText.keyboardType = UIKeyboardType.numberPad
         
         zipText.isHidden = false
@@ -112,7 +114,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         bottomLineRadius.backgroundColor = UIColor.black.cgColor
         radiusText.borderStyle = UITextBorderStyle.none
         radiusText.layer.addSublayer(bottomLineRadius)
-        radiusText.becomeFirstResponder()
+        //radiusText.becomeFirstResponder()
         radiusText.isHidden = false
         searchView.addSubview(radiusText)
         
@@ -125,7 +127,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         locationSwitch.transform = CGAffineTransform(scaleX: 0.50, y: 0.50);
         locationSwitch.frame = CGRect(x: 155, y: 60, width: 200, height: 19)
-        locationSwitch.becomeFirstResponder()
+        //locationSwitch.becomeFirstResponder()
         locationSwitch.accessibilityValue = "Use my zipcode"
         locationSwitch.isHidden = false
         locationSwitchLabel.isHidden = false

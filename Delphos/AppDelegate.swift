@@ -32,13 +32,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return logger
     }
     
+    func authenticateUser() -> Bool  {
+        
+        if let authkey = userCredsStorage.string(forKey: gAuthenticationKey) {
+            logger.log(LoggingLevel.INFO, message: "Auth token found")
+            gObjUserBean = UserBean()
+            gObjUserBean.authentication_token = authkey
+            
+           
+
+           if let biography = userCredsStorage.string(forKey: gBiographyKey) {
+                gObjUserBean.biography = biography
+            }
+            if let business = userCredsStorage.string(forKey: gBusinessKey ){
+                gObjUserBean.business = business
+            }
+            if let email = userCredsStorage.string(forKey: gEmailKey){
+                gObjUserBean.email = email
+            }
+            if let grades = userCredsStorage.string(forKey: gGradesKey){
+                gObjUserBean.grades = grades
+            }
+            
+            if let id = userCredsStorage.string(forKey: gIdKey){
+                gObjUserBean.id = Int(id)
+
+            }
+            if let grades = userCredsStorage.string(forKey: gJobTitleKey){
+                 gObjUserBean.grades = grades
+            }
+            if let name = userCredsStorage.string(forKey: gNameKey){
+                gObjUserBean.name = name
+            }
+            
+            if let role = userCredsStorage.string(forKey: gRolekey){
+                gObjUserBean.role
+                    = Int(role)
+            }
+            if let schoolId = userCredsStorage.string(forKey: gSchoolIdKey){
+                 gObjUserBean.school_id = Int(schoolId)
+            }
+            if let schoolName = userCredsStorage.string(forKey: gSchoolNameKey){
+                gObjUserBean.school_name = schoolName
+            }
+            if let passKey = userCredsStorage.string(forKey: gStrUserStoragePassKey){
+                gPasswordCheck = passKey
+                //print("passKey",passKey)
+            }
+
+           
+                      
+            return true
+            
+        }
+        else{
+         
+            return false
+        }
+        
+    }
+
+    
     fileprivate func createMenuView() {
         
         // create viewController code...
+        
+        
+        var mainViewController :UIViewController
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewController(withIdentifier: "loginId") as! LoginController
-       
+        if(authenticateUser()){
+            mainViewController = storyboard.instantiateViewController(withIdentifier: "HomeID") as! HomeController
+        }
+        else{
+            mainViewController = storyboard.instantiateViewController(withIdentifier: "loginId") as! LoginController
+        }
          rightViewController = storyboard.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
         
         let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)

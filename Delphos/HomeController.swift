@@ -38,6 +38,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+       
         gObjBackTocontroller = gObjHomeController
         //Adding Navbar
         menus = regularMenu
@@ -85,6 +86,7 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         
         self.tableView.dataSource = self
         tableView.delegate = self
+        
        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
@@ -94,8 +96,8 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
         gBtnRadioValue = "events"
        
         //self.setNavigationBarItem()
-        if(RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
-            RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both){
+        if(RoleType(rawValue:UInt(gObjUserBean.role!)) == RoleType.teacher ||
+            RoleType(rawValue:UInt(gObjUserBean.role!)) == RoleType.both){
             self.btnCreateEvent.isHidden = false
         }
         else{
