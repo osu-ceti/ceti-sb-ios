@@ -61,12 +61,12 @@ class AboutController: NavController {
         rootViewController = self
         settingSearch = false
 
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-        {
-            logoOntoborn.frame.origin.y = 20
-            logoOntoborn.frame.origin.x = 320
-        }
-        
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+//        {
+//            logoOntoborn.frame.origin.y = 20
+//            logoOntoborn.frame.origin.x = 320
+//        }
+//        
         self.view.backgroundColor = bgColor
         viewDetails.backgroundColor = bgColor
         
