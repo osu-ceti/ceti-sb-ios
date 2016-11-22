@@ -8,26 +8,6 @@
 
 import UIKit
 import ObjectMapper
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class EventShowController: NavController, UITableViewDataSource, UITableViewDelegate {
    
@@ -372,7 +352,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
          //cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         if(gObjUserBean.id == gObjShowEventBean.user_id){
            
-            if(claimBeanArray?.count > 0 &&  gSpeakerId == 0 &&
+            if((claimBeanArray?.count)! > 0 &&  gSpeakerId == 0 &&
                 (RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.teacher ||
                     RoleType(rawValue:UInt(gObjUserBean.role)) == RoleType.both)){
                 
