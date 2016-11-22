@@ -176,4 +176,25 @@ class BaseDelegate: NSObject {
         
     }
     
+    func extractDay(fromDate: String) -> String{
+        
+        return fromDate.substring(to: fromDate.index(fromDate.startIndex, offsetBy: 10))
+        
+        
+    }
+    func getTimeZone(from: String)->String{
+        let day = extractDay(fromDate: from)
+        
+        let dFormat = DateFormatter()
+        dFormat.dateFormat = gDateFormat
+        
+        let targetDate = dFormat.date(from: day)
+        let isDST = NSTimeZone().isDaylightSavingTime(for: targetDate!)
+        if(isDST == true){
+            return "EDT"
+        }
+        else{
+            return "EST"
+        }
+    }
 }

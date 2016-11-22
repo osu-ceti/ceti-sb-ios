@@ -211,7 +211,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 dateFormatter.dateFormat = gDateTimeFormat
             }
            
-            dateFormatter.timeZone = TimeZone(abbreviation: "EDT")
+            dateFormatter.timeZone = TimeZone(abbreviation: getTimeZone(from: gObjShowEventBean.event_end!))
 
             dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 

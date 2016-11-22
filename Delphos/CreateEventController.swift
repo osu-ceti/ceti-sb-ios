@@ -151,14 +151,14 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         //button
       
         
-        
-        //end bg design
-        //start.frame = CGRectMake(10, 30, 30, 20)
-        dateFormatter.timeZone = TimeZone(abbreviation: "EDT")
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
         let startTimeSet = currentDate.addingTimeInterval(60*60);
         let endTimeSet = currentDate.addingTimeInterval(60*120);
+        dateFormatter.dateFormat = gDateFormat
+        //start.frame = CGRectMake(10, 30, 30, 20)
+        dateFormatter.timeZone = TimeZone(abbreviation: getTimeZone(from: dateFormatter.string(from: startTimeSet)))
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        
         
        // let checkCurrentDate = currentDate.dateByAddingTimeInterval(-1*24*60*60);
         
@@ -203,8 +203,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 self.txtContents.text = gObjShowEventBean.content
             }
             
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
-            //DateFormatter.timeZone = NSTimeZone(abbreviation: "EDT")
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a '" + getTimeZone(from: gObjShowEventBean.event_start) + "'"
+            dateFormatter.timeZone = TimeZone(abbreviation: getTimeZone(from:  gObjShowEventBean.event_start)) 
+            
             let eventStartDate =  dateFormatter.date(from: gObjShowEventBean.event_start)
             if  (eventStartDate != nil) {
                 //String is already formatted
@@ -227,7 +228,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
                 
                 
             }
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a 'EDT'"
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a '" + getTimeZone(from: gObjShowEventBean.event_end) + "'"
 
            let eventEndDate =  dateFormatter.date(from: gObjShowEventBean.event_end)
             if  (eventEndDate != nil) {
@@ -338,7 +339,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateFormat = gDateFormat
         startDate.text = dateFormatter.string(from: sender.date)
         
-        let tempBuiltDate = startDate.text! + " " + chosenTime + " EDT"
+        let tempBuiltDate = startDate.text! + " " + chosenTime + " " + getTimeZone(from: startDate.text!)
         
         dateFormatter.dateFormat = gDateTimeFormat
         startDatevalid = dateFormatter.date(from: tempBuiltDate)!      
@@ -361,7 +362,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateFormat = gDateFormat
         endDate.text = dateFormatter.string(from: sender.date)
         
-        let tempBuiltDate = endDate.text! + " " + chosenTime + " EDT"
+        let tempBuiltDate = endDate.text! + " " + chosenTime + " " + getTimeZone(from: endDate.text!)
         
         dateFormatter.dateFormat = gDateTimeFormat
         endDatevalid = dateFormatter.date(from: tempBuiltDate)!
@@ -403,7 +404,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         if(startTimePickerValue != DelphosStrings.EMPTY_STRING){
            
             timePickerView.date = startDatevalid
-            timePickerView.timeZone =  TimeZone(abbreviation: "EDT")
+            timePickerView.timeZone =  TimeZone(abbreviation: getTimeZone(from: startTimePickerValue))
         }
         inputView.addSubview(timePickerView)
         
@@ -451,7 +452,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         let endTimePickerValue  = txtEndTime.text!
         if(endTimePickerValue != DelphosStrings.EMPTY_STRING){
             endTimePickerView.date = endDatevalid
-            endTimePickerView.timeZone = TimeZone(abbreviation: "EDT")
+            endTimePickerView.timeZone = TimeZone(abbreviation: getTimeZone(from: endTimePickerValue))
         }
         inputView.addSubview(endTimePickerView)
         
@@ -659,7 +660,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         else if (startDateAndTime.compare(currentDate) == ComparisonResult.orderedAscending) {
             // print("Date1 is Later than Date2")
             self.requiredError.isHidden = false
-            self.requiredError.text = "Invalid Start date and time value. Please select a value at least 1 hour from now in EDT."
+            self.requiredError.text = "Invalid Start date and time value. Please select a value at least 1 hour from now in ET."
         }
        else if (startDateAndTime.timeIntervalSinceReferenceDate >= endDateAndTime.timeIntervalSinceReferenceDate) {
             // print("Date1 is Later than Date2")

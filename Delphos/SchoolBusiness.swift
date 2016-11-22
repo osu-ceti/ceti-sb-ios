@@ -9,10 +9,10 @@
 import Foundation
 
 let DEBUG: Bool = true
-let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
-let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
-//let DEV_URL: String = "http://192.168.1.3:3000"
-//let DEV_TARGET: String  =  "http://192.168.1.3:3000/api/"
+//let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
+//let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
+let DEV_URL: String = "http://192.168.1.3:3000"
+let DEV_TARGET: String  =  "http://192.168.1.3:3000/api/"
 let DEV_TARGET_NO_API: String  =  "http://192.168.1.3:3000/"
 
 //let DEV_URL: String = "https://www.school2biz.com";

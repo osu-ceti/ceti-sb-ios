@@ -37,7 +37,7 @@ class EventDelegate: BaseDelegate{
             
             let eventDisplayController = objCurrentContoller as! HomeController
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
-            if(statusCode != 0){
+            if(statusCode != UNAUTHORIZED_REQUEST){
                 logger.log(LoggingLevel.INFO, message: "All Events Retrieved")
                 //var objEventDisplayBean = result as! EventDisplayBean
                 
@@ -69,8 +69,9 @@ class EventDelegate: BaseDelegate{
         let strEndDate: String = createEventController.endDate.text!
         let strEndTime: String = createEventController.endTime.text!
         
-        let strEventStartDate =  strStartDate + " " + strStartTime + " EDT"
-        let strEventEndDate =  strEndDate + " " + strEndTime + " EDT"
+        let strEventStartDate =  strStartDate + " " + strStartTime + " " + getTimeZone(from: strStartDate)
+    
+        let strEventEndDate =  strEndDate + " " + strEndTime + " " + getTimeZone(from: strEndDate)
         let strEventTimeZone = createEventController.txtTimeZone.text
         
         var eventId = 0

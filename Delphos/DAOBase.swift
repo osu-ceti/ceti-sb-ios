@@ -448,6 +448,27 @@ class DAOBase: NSObject {
 //    }
     
     var dateFormatter = DateFormatter()
+    func extractDay(fromDate: String) -> String{
+        
+        return fromDate.substring(to: fromDate.index(fromDate.startIndex, offsetBy: 10))
+        
+        
+    }
+    func getTimeZone(from: String)->String{
+        let day = extractDay(fromDate: from)
+        
+        let dFormat = DateFormatter()
+        dFormat.dateFormat = gDateFormat
+        
+        let targetDate = dFormat.date(from: day)
+        let isDST = NSTimeZone().isDaylightSavingTime(for: targetDate!)
+        if(isDST == true){
+            return "EDT"
+        }
+        else{
+            return "EST"
+        }
+    }
     func prettyConvertDateString(_ dateStr:String)->String{
         //The Server returns time in two formats
         //1. Event Details - "2016-05-28  9:56 AM EDT"
@@ -456,7 +477,7 @@ class DAOBase: NSObject {
         
         //dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.timeZone = TimeZone(abbreviation: "EDT")
+        dateFormatter.timeZone = TimeZone(abbreviation: getTimeZone(from: dateStr))
 
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 
