@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Delphos.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-DelphosTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-DelphosUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>220E9999636F774B1942CBE48C063466</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9C9C4FC97CF17F584DF7BFEE472FE408</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D71E220BC4CC102E5657BE47F593988B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D7D6460167E9A0525598385B4C60B93C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

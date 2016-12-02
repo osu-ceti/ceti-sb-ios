@@ -1,0 +1,6 @@
+framework module Pods_DelphosUITests {
+  umbrella header "Pods-DelphosUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
