@@ -56,6 +56,9 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     
     var isEdit = false
     var eventId = 0
+    
+    var startDateTZ = "EST"
+    var endDateTZ = "EST"
 
    // let dataTimeZone = NSTimeZone.knownTimeZoneNames()
     //var timeAbb = iOStimeZones?.abbreviation
@@ -338,8 +341,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gDateFormat
         startDate.text = dateFormatter.string(from: sender.date)
-        
-        let tempBuiltDate = startDate.text! + " " + chosenTime + " " + getTimeZone(from: startDate.text!)
+        startDateTZ = getTimeZone(from: startDate.text!)
+        let tempBuiltDate = startDate.text! + " " + chosenTime + " " + startDateTZ
         
         dateFormatter.dateFormat = gDateTimeFormat
         startDatevalid = dateFormatter.date(from: tempBuiltDate)!      
@@ -361,8 +364,8 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         
         dateFormatter.dateFormat = gDateFormat
         endDate.text = dateFormatter.string(from: sender.date)
-        
-        let tempBuiltDate = endDate.text! + " " + chosenTime + " " + getTimeZone(from: endDate.text!)
+        endDateTZ = getTimeZone(from: endDate.text!)
+        let tempBuiltDate = endDate.text! + " " + chosenTime + " " + endDateTZ
         
         dateFormatter.dateFormat = gDateTimeFormat
         endDatevalid = dateFormatter.date(from: tempBuiltDate)!
@@ -404,7 +407,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         if(startTimePickerValue != DelphosStrings.EMPTY_STRING){
            
             timePickerView.date = startDatevalid
-            timePickerView.timeZone =  TimeZone(abbreviation: getTimeZone(from: startTimePickerValue))
+            timePickerView.timeZone =  TimeZone(abbreviation: startDateTZ)
         }
         inputView.addSubview(timePickerView)
         
@@ -452,7 +455,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         let endTimePickerValue  = txtEndTime.text!
         if(endTimePickerValue != DelphosStrings.EMPTY_STRING){
             endTimePickerView.date = endDatevalid
-            endTimePickerView.timeZone = TimeZone(abbreviation: getTimeZone(from: endTimePickerValue))
+            endTimePickerView.timeZone = TimeZone(abbreviation: endDateTZ)
         }
         inputView.addSubview(endTimePickerView)
         
