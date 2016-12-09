@@ -26,27 +26,36 @@ class UserDelegate:BaseDelegate{
         
         if(gObjUserBean != nil){
             print(gObjUserBean)
-          
-            saveInLocalStorageIfPresent(key: gAuthenticationKey, value: gObjUserBean.authentication_token as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gEmailKey, value: gObjUserBean.email as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gBiographyKey, value: gObjUserBean.biography as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gBusinessKey, value: gObjUserBean.business as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gIdKey, value: gObjUserBean.id as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gJobTitleKey, value: gObjUserBean.job_title as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gNameKey, value: gObjUserBean.name as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gRolekey, value: gObjUserBean.role as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gSchoolIdKey, value: gObjUserBean.school_id as AnyObject)
-            
-            saveInLocalStorageIfPresent(key: gSchoolNameKey, value: gObjUserBean.school_name as AnyObject)
-          
+            if(gObjUserBean.authentication_token != nil){
+                saveInLocalStorageIfPresent(key: gAuthenticationKey, value: gObjUserBean.authentication_token as    AnyObject)
+            }
+            if(gObjUserBean.email != nil){
+                saveInLocalStorageIfPresent(key: gEmailKey, value: gObjUserBean.email as AnyObject)
+            }
+            if(gObjUserBean.biography != nil){
+                saveInLocalStorageIfPresent(key: gBiographyKey, value: gObjUserBean.biography as AnyObject)
+            }
+            if(gObjUserBean.business != nil){
+                saveInLocalStorageIfPresent(key: gBusinessKey, value: gObjUserBean.business as AnyObject)
+            }
+            if(gObjUserBean.id != nil){
+                saveInLocalStorageIfPresent(key: gIdKey, value: gObjUserBean.id as AnyObject)
+            }
+            if(gObjUserBean.job_title != nil){
+                saveInLocalStorageIfPresent(key: gJobTitleKey, value: gObjUserBean.job_title as AnyObject)
+            }
+            if(gObjUserBean.name != nil){
+                saveInLocalStorageIfPresent(key: gNameKey, value: gObjUserBean.name as AnyObject)
+            }
+            if(gObjUserBean.role != nil){
+                saveInLocalStorageIfPresent(key: gRolekey, value: gObjUserBean.role as AnyObject)
+            }
+            if(gObjUserBean.school_id != nil){
+                saveInLocalStorageIfPresent(key: gSchoolIdKey, value: gObjUserBean.school_id as AnyObject)
+            }
+            if(gObjUserBean.school_name != nil){
+                saveInLocalStorageIfPresent(key: gSchoolNameKey, value: gObjUserBean.school_name as AnyObject)
+            }
            
             
         }
