@@ -68,14 +68,15 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         self.view.backgroundColor = bgColor
         self.showOverlay(self.view)
         DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
-            
-            let url = URL(string: AWS_S3 + gObjSchoolImage)
-            var data = try? Data(contentsOf: url!)
-            if data != nil {
-                DispatchQueue.main.async(execute: {
-                    self.hideOverlayView()
-                    self.schoolImage.image = UIImage(data:data!)
-                })
+            if(gObjSchoolImage != nil){
+                let url = URL(string: AWS_S3 + gObjSchoolImage)
+                var data = try? Data(contentsOf: url!)
+                if data != nil {
+                    DispatchQueue.main.async(execute: {
+                        self.hideOverlayView()
+                        self.schoolImage.image = UIImage(data:data!)
+                    })
+                }
             }
         })
         
@@ -118,8 +119,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     }
     
     
-    
-    
+
     
     
     override func awakeFromNib() {

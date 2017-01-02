@@ -82,7 +82,7 @@ func showShareBadge(_ objCurrentContoller: BaseController) {
         
         doGetAPIs.getShareBadge({(result: AnyObject,statusCode: Int)  in
             objCurrentContoller.hideOverlayView()
-            self.responseCodeErrorHandler(statusCode, objCurrentController:objCurrentContoller)
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
                 

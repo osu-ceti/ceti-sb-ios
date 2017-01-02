@@ -114,9 +114,9 @@ class DAOBase: NSObject {
                                      "exception"   : DelphosStrings.EMPTY_STRING,
                                      "reasonPhrase": DelphosStrings.EMPTY_STRING,
                                      
-                                     "statusCode"    : UNAUTHORIZED_REQUEST ]
+                                     "statusCode"    : ERROR_IN_PARSING ]
                     
-                    callBack?(disJsonResult, strStatus, UNAUTHORIZED_REQUEST)
+                    callBack?(disJsonResult, strStatus, ERROR_IN_PARSING)
                     return
                     
                 }
@@ -257,9 +257,9 @@ class DAOBase: NSObject {
                                      "exception"   : DelphosStrings.EMPTY_STRING,
                                      "reasonPhrase": DelphosStrings.EMPTY_STRING,
                                      
-                                     "statusCode"    : UNAUTHORIZED_REQUEST ]
+                                     "statusCode"    : ERROR_IN_PARSING ]
                     
-                    callBack?(disJsonResult, strStatus, UNAUTHORIZED_REQUEST)
+                    callBack?(disJsonResult, strStatus, ERROR_IN_PARSING)
                     return
                     
                     
@@ -312,140 +312,7 @@ class DAOBase: NSObject {
         task.resume()
     }
     
-//    func doDelete(strInputParamsJson: String, addAuthHeader: Bool ,callBack: ((jsonResult: NSDictionary, status: Bool, statusCode: Int) -> Void)?){
-//        
-//        
-//        let objRequest : NSMutableURLRequest = NSMutableURLRequest()
-//        
-//        var disJsonResult: NSDictionary!
-//        
-//        var strStatus = false
-//        
-//        var strStatusCode: Int!
-//        
-//        
-//        objRequest.URL = NSURL(string: DEV_TARGET+strURL)
-//        
-//        objRequest.HTTPMethod = "DELETE"
-//        
-//        objRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        
-//        if (addAuthHeader) {
-//            
-//            objRequest.setValue(gObjUserBean.email, forHTTPHeaderField: "X-User-Email")
-//            
-//            objRequest.setValue(gObjUserBean.authentication_token, forHTTPHeaderField: "X-User-Token")
-//        }
-//        
-//        
-//        if strInputParamsJson != DelphosStrings.EMPTY_STRING {
-//            logger.log(LoggingLevel.INFO, message: "DoPost-InputParamJson\(strInputParamsJson)")
-//            
-//            objRequest.HTTPBody = strInputParamsJson.dataUsingEncoding(NSUTF8StringEncoding)
-//        }
-//        
-//        // sending synchronousRequest
-//        logger.log(LoggingLevel.INFO, message: objRequest)
-//        
-//        let session = NSURLSession.sharedSession()
-//        
-//        // println("hold request proceeding")
-//        let task = session.dataTaskWithRequest(objRequest) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
-//            
-//            if ((error) != nil)
-//            {
-//                logger.log(LoggingLevel.INFO, message: "error: \(error)")
-//                
-//                strStatus  = false
-//                
-//                let errorBean:ErrorBean = ErrorBean()
-//                errorBean.description = "Empty Respsonse , Probable API key error"
-//                errorBean.exception   =  error.debugDescription
-//                errorBean.statusCode  =  error!.code
-//                errorBean.reasonPhrase = "Check Status Code"
-//                
-//                //let dataToUse = NSJSONSerialization.JSONObjectWithData(errorBean as NSData, options:   NSJSONReadingOptions.AllowFragments, error: errorData) as! NSDictionary
-//                let JSONString = Mapper().toJSON(errorBean)
-//                
-//                callBack?(jsonResult: JSONString, status: strStatus, statusCode: 401)
-//                
-//                return
-//            }
-//            
-//            logger.log(LoggingLevel.INFO, message: response)
-//            
-//            if let responseUrl = response as? NSHTTPURLResponse
-//            {
-//                strStatusCode = responseUrl.statusCode
-//                
-//                // println(responseUrl)
-//                
-//                let error:NSError?
-//                
-//                logger.log(LoggingLevel.INFO, message: strStatusCode)
-//                do{
-//                    //JSON Parser
-//                    disJsonResult =  try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary
-//                    
-//                    logger.log(LoggingLevel.INFO, message: disJsonResult)
-//                }catch{
-//                    logger.log(LoggingLevel.INFO, message: "Error while Parsing JSON")
-//                    disJsonResult = ["Result" : "Empty",
-//                                     "description"   : DelphosStrings.EMPTY_STRING,
-//                                     
-//                                     "exception"   : DelphosStrings.EMPTY_STRING,
-//                                     "reasonPhrase": DelphosStrings.EMPTY_STRING,
-//                                     
-//                                     "statusCode"    : 0 ]
-//                    
-//                    callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: 0)
-//                    return
-//                    
-//                    
-//                }
-//                
-//                if(strStatusCode < 400){
-//                    
-//                    strStatus  = true
-//                    if(disJsonResult == nil)
-//                    {
-//                        
-//                        if NSString(data: data!, encoding: NSUTF8StringEncoding) != nil
-//                        {
-//                            if let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSArray, let dictionary = json.firstObject as? NSDictionary {
-//                                logger.log(LoggingLevel.INFO, message: dictionary)
-//                                callBack?(jsonResult: dictionary, status: strStatus, statusCode: strStatusCode)
-//                            } else {
-//                                
-//                                disJsonResult = ["Result" : "Empty"]
-//                                
-//                                callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
-//                                return
-//                            }
-//                            return
-//                        }
-//                        
-//                        disJsonResult = ["Result" : "Empty"]
-//                        
-//                        callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
-//                        return
-//                    }
-//                    
-//                    callBack?(jsonResult: disJsonResult, status: strStatus, statusCode: strStatusCode)
-//                }
-//                else{
-//                    strStatus  = false
-//                    
-//                    let dataToUse = (try! NSJSONSerialization.JSONObjectWithData(data!, options:   NSJSONReadingOptions.AllowFragments)) as! NSDictionary
-//                    
-//                    callBack?(jsonResult: dataToUse, status: strStatus, statusCode: strStatusCode)
-//                    
-//                    logger.log(LoggingLevel.INFO, message: dataToUse)
-//                }
-//            }
-//        }
-//        task.resume()
-//    }
+
     
     var dateFormatter = DateFormatter()
     func extractDay(fromDate: String) -> String{

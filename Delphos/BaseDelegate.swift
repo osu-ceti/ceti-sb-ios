@@ -142,9 +142,15 @@ class BaseDelegate: NSObject {
                 showAlert(objCurrentController, strMessage: SESSION_LOST)
                 RedirectLoginPage(objCurrentController)
             break
+        case ERROR_IN_PARSING:
+            showAlert(objCurrentController, strMessage: ERROR_PARSING_MSG)
+            break;
+      
         default:
             //Do nothing
-            break
+            showAlert(objCurrentController, strMessage: ERROR_MSG_FROM_SERVER)
+            break;
+
         }
     }
     
@@ -152,7 +158,9 @@ class BaseDelegate: NSObject {
         DispatchQueue.main.async(execute: {
             objCurrentController.hideOverlayView()
         })
-        responseCodeErrorHandler(statusCode, objCurrentController: objCurrentController)
+        if(statusCode > 400){
+            responseCodeErrorHandler(statusCode, objCurrentController: objCurrentController)
+        }
     }
     
     func ifNilReturnEmptyString(_ labelData: String?) -> String{

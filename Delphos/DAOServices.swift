@@ -160,9 +160,9 @@ class DAOServices: DAOBase {
             else{
                 if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
                     
-                    strURL =  DEV_TARGET + gBtnRadioValue!
+                    strURL =  DEV_TARGET + gBtnRadioValue! + NEAR_ME_URL
                     strURL = strURL + ZIP_URL + String(gObjSearchBean.zip) + RADIUS_URL + String(gObjSearchBean.radius)
-                    strURL = strURL + LOCATION_URL_TRUE
+                    strURL = strURL + LOCATION_URL_TRUE + "&search="
                 
                 }
                 
