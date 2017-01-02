@@ -88,6 +88,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
         }
+        self.hideOverlayView()
         self.isBackEnabled = true
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
@@ -319,7 +320,10 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //        activityIndicator.frame = CGRectMake(0, 0, 40, 40)
 //        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
 //        activityIndicator.center = CGPointMake(overlay!.bounds.width / 2, overlay!.bounds.height / 2)
-        
+//        DispatchQueue.main.async(execute: {
+//            self.hideOverlayView()
+//            
+//        })
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.claim_LIST)
@@ -350,6 +354,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     func configureCell(_ cell: UITableViewCell,   indexPath: IndexPath)  {
          //cell.backgroundColor = UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
+        
         if(gObjUserBean.id == gObjShowEventBean.user_id){
            
             if((claimBeanArray?.count)! > 0 &&  gSpeakerId == 0 &&
@@ -442,6 +447,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.btnAccept.isHidden = true
         self.btnReject.isHidden = true
         //showOverlay(self.view)
+        self.tableView.isHidden = false
         tempBackToViewController = gObjBackTocontroller
         gObjBackTocontroller = gObjEventShowController
         gUserProfileMessage = false

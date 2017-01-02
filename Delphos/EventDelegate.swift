@@ -37,7 +37,7 @@ class EventDelegate: BaseDelegate{
             
             let eventDisplayController = objCurrentContoller as! HomeController
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
-            if(statusCode != UNAUTHORIZED_REQUEST){
+            if(statusCode != UNAUTHORIZED_REQUEST && statusCode != ERROR_IN_PARSING){
                 logger.log(LoggingLevel.INFO, message: "All Events Retrieved")
                 //var objEventDisplayBean = result as! EventDisplayBean
                 
