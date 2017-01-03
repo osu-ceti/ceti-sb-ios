@@ -50,6 +50,7 @@ enum DelphosAction
     case reset_FORGET_PASSWORD
     case search_ZIPEVENT
     case AUTHENTICATE_USER
+    case SHOW_AWARDED_BADGE
 
 }
 

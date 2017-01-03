@@ -315,7 +315,39 @@ class DAOServices: DAOBase {
             }
         })
     }
-  
+    func getAwardedBadge(_ callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+        
+        var strUserProfileId = String(gObjUserBean.id)
+        
+        var strEventid = String(gEventID)
+        
+        
+        strURL = DEV_TARGET + USERS + strUserProfileId + "/event_badge/" + strEventid
+        
+        doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
+            
+            if(status) {
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
+                var showBadgeBean = Mapper<UserProfileBadgesBean>().map(JSON: jsonResult as! [String : Any] )
+                
+                callBack?(showBadgeBean!, statusCode )
+                
+                return
+            }
+            else {
+                
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
+                
+                callBack?(errorBean, statusCode )
+                
+                return
+                
+                
+            }
+        })
+    }
     
     func getSettings(_ callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         print("get Settings")

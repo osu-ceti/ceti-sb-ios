@@ -279,9 +279,13 @@ class NotificationController: NavController {
             //new_badge
               //  dispatch_async(dispatch_get_main_queue(), {
                     
+//                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                    let testfacade = appDelegate.getObjFacade()
+//                    testfacade.doTask(self,action: DelphosAction.show_EVENT)
+                
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.show_EVENT)
+                    testfacade.doTask(self,action: DelphosAction.SHOW_AWARDED_BADGE)
                // })
             
             break

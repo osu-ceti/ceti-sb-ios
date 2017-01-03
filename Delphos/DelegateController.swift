@@ -215,6 +215,11 @@ class DelegateController: BaseDelegate {
 //        case .AUTHENTICATE_USER:
 //            logger.log(LoggingLevel.INFO, message: "AUTHENTICATE USER")
 //            objUserDelegate.authenticateUserCheck(objCurrentController)
+            //
+            
+        case .SHOW_AWARDED_BADGE:
+            logger.log(LoggingLevel.INFO, message: "AWARD_NEW_BADGE")
+            objBadgeDelegate.showAwardedBadge(objCurrentController)
             
       
         default:

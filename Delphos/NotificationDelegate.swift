@@ -85,7 +85,7 @@ func showShareBadge(_ objCurrentContoller: BaseController) {
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
             
             if(statusCode == SUCCESS) {
-                
+                gObjBackTocontroller = gObjUserProfileNavController
                  gObjViewBadgeController = self.instantiateVC(gStrViewBadgeControllerID) as! ViewBadgeController
                
                 var objBadgeBean = result as! UserProfileBadgesBean

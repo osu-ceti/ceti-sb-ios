@@ -109,7 +109,39 @@ class BadgeDelegate:BaseDelegate{
     }
     
     
-
+    func showAwardedBadge(_ objCurrentContoller: BaseController) {
+        
+        // var strUserId: String = String(0)
+        
+        doGetAPIs.getAwardedBadge({(result: AnyObject,statusCode: Int)  in
+            objCurrentContoller.hideOverlayView()
+            self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            
+            if(statusCode == SUCCESS) {
+                gObjBackTocontroller = gObjNotificationControllerNav
+                gObjViewBadgeController = self.instantiateVC(gStrViewBadgeControllerID) as! ViewBadgeController
+                
+                var objBadgeBean = result as! UserProfileBadgesBean
+                viewBadgeBean = objBadgeBean
+                
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    var objViewBadgeControllerNav = self.getNavigationController(gObjViewBadgeController)
+                    
+                    self.doNavigate(objCurrentContoller, toController: objViewBadgeControllerNav,  close: true)
+                    
+                })
+                
+                
+                
+            }
+            else{
+                logger.log(LoggingLevel.INFO, message: " error Get view badge")
+                
+            }
+        })
+    }
     
     
 }

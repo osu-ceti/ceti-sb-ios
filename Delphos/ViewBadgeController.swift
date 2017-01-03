@@ -50,7 +50,7 @@ class ViewBadgeController: NavController {
         //        backToView = "HomeID"
         //
         
-        gObjBackTocontroller = gObjUserProfileNavController
+        
         self.view.backgroundColor = bgColor
       
         self.btnShareBadge.isHidden = true

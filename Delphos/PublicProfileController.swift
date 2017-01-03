@@ -273,8 +273,8 @@ class PublicProfileController:  NavController{
     
      func btnFIndMySchoolClick(_ sender: AnyObject) {
         
-            self.searchBar.isHidden = false
-            navigationItem.titleView = searchBar
+            self.searchBar.isHidden = true
+            //navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
             searchBar.becomeFirstResponder()
@@ -317,8 +317,8 @@ class PublicProfileController:  NavController{
             testfacade.doTask(self,action: DelphosAction.show_SCHOOL_PROFILE)
         }
         else{
-            self.searchBar.isHidden = false
-            navigationItem.titleView = searchBar
+            self.searchBar.isHidden = true
+            //navigationItem.titleView = searchBar
             navigationItem.rightBarButtonItems = [menuButton,searchButton]
             searchBar.sizeToFit()
             searchBar.becomeFirstResponder()
