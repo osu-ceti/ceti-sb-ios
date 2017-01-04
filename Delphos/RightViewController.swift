@@ -101,8 +101,13 @@ class RightViewController: BaseController, UIWebViewDelegate {
                     self.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 }
                 else{
+                    gObjHomeController = self.fetchNavController(gStrHomeControllerID)
+                    
+                    self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true )
                     rootViewController = gObjHomeController
-                    self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                    //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
+                    
+                    
                 
                    
                 }
