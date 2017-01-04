@@ -58,7 +58,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         backToController = gObjHomeController
     }
     
-
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,20 +101,37 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         labelPhone.font = UIFont.boldSystemFont(ofSize: 15)
         
         self.labelNoEventFound.isHidden = true
-        
-        self.schoolNameLabel.text = gObjSearchSchoolListBean.name
+        if(gObjSearchSchoolListBean.name != nil){
+            self.schoolNameLabel.text = checkForNull(txtField: gObjSearchSchoolListBean.name)
+        }
         
         self.labelAddress.text = "Address:"
         self.labelCity.text =   "City:"
         self.labelState.text = "State:"
         self.labelZip.text = "Zip:"
         self.labelPhone.text = "Phone:"
+        
+        if(gObjSearchSchoolListBean.address != nil){
+            self.txtAddress.text = checkForNull(txtField: gObjSearchSchoolListBean.address)
+        }
+        if(gObjSearchSchoolListBean.city != nil){
+            self.txtCity.text = checkForNull(txtField: gObjSearchSchoolListBean.city)
+        }
+        if(gObjSearchSchoolListBean.state != nil){
+            self.txtState.text = checkForNull(txtField: gObjSearchSchoolListBean.state)
+        }
+        if(gObjSearchSchoolListBean.zip != nil){
+            self.txtZip.text = checkForNull(txtField: gObjSearchSchoolListBean.zip)
+        }
+        if(gObjSearchSchoolListBean.phone != nil){
+            self.txtPhone.text = checkForNull(txtField: gObjSearchSchoolListBean.phone)
+        }
 
-        self.txtAddress.text = gObjSearchSchoolListBean.address
-        self.txtCity.text = gObjSearchSchoolListBean.city
-        self.txtState.text = gObjSearchSchoolListBean.state
-        self.txtZip.text = gObjSearchSchoolListBean.zip
-        self.txtPhone.text = gObjSearchSchoolListBean.phone
+        //self.txtAddress.text = gObjSearchSchoolListBean.address
+        //self.txtCity.text = gObjSearchSchoolListBean.city
+        //self.txtState.text = gObjSearchSchoolListBean.state
+        //self.txtZip.text = gObjSearchSchoolListBean.zip
+        //self.txtPhone.text = gObjSearchSchoolListBean.phone
         
     }
     

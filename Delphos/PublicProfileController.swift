@@ -76,7 +76,7 @@ class PublicProfileController:  NavController{
         backToController = gObjHomeController
     }
     
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +101,13 @@ class PublicProfileController:  NavController{
         self.txtProfileJobTItle.isHidden = true
         self.txtProfileBusiness.isHidden = true
         
+        
+        
+        txtProfileBusiness.delegate = self
+        txtProfileBiography.delegate = self
+        txtProfileJobTItle.delegate = self
+        txtProfileGrades.delegate = self
+        
         self.btnSaveProfile.isHidden = true
         self.btnFindMySchool.isHidden = true
         
@@ -115,11 +122,19 @@ class PublicProfileController:  NavController{
          self.labelProfileName.text = userProfileBean.name
          btnProfileSchoolLink.setTitle(userProfileBean.school_name, for: UIControlState())
          
-            
-         self.labelProfileGrades.text = userProfileBean.grades
-         self.labelProfileBiography.text = userProfileBean.biography
-         self.labelProfileJobTitle.text = userProfileBean.job_title
-         self.labelProfileBusiness.text = userProfileBean.business
+            if(userProfileBean.grades != nil){
+                self.labelProfileGrades.text = checkForNull(txtField: userProfileBean.grades)
+            }
+            if(userProfileBean.biography != nil){
+                self.labelProfileBiography.text = checkForNull(txtField: userProfileBean.biography)
+            }
+            if(userProfileBean.job_title != nil){
+                self.labelProfileJobTitle.text = checkForNull(txtField: userProfileBean.job_title)
+            }
+            if(userProfileBean.business != nil){
+                self.labelProfileBusiness.text = checkForNull(txtField: userProfileBean.business)
+                
+            }
         
          self.labelProfileEmail.text = userProfileBean.email
             if (userProfileBean.role == 1){
@@ -153,13 +168,26 @@ class PublicProfileController:  NavController{
            // btnProfileSchoolLink.setTitle( userProfileBean.school_name, forState: .Normal)
             self.labelProfileName.text = gObjMakeMySchoolListBean.name
             
-            self.labelProfileGrades.text = gObjMakeMySchoolListBean.grades
-            self.labelProfileBiography.text = gObjMakeMySchoolListBean.biography
-            self.labelProfileJobTitle.text = gObjMakeMySchoolListBean.job_title
-            self.labelProfileBusiness.text = gObjMakeMySchoolListBean.business
-            
-            self.labelProfileEmail.text = gObjMakeMySchoolListBean.email
-            self.labelProfileRole.text = gObjMakeMySchoolListBean.role
+            if(gObjMakeMySchoolListBean.grades != nil){
+                self.labelProfileGrades.text = checkForNull(txtField: gObjMakeMySchoolListBean.grades)
+            }
+            if(gObjMakeMySchoolListBean.biography != nil){
+                self.labelProfileBiography.text = checkForNull(txtField: gObjMakeMySchoolListBean.biography)
+            }
+            if(gObjMakeMySchoolListBean.job_title != nil){
+                self.labelProfileJobTitle.text = checkForNull(txtField: gObjMakeMySchoolListBean.job_title)
+            }
+            if(gObjMakeMySchoolListBean.business != nil){
+                self.labelProfileBusiness.text = checkForNull(txtField: gObjMakeMySchoolListBean.business)
+            }
+            if(gObjMakeMySchoolListBean.email != nil){
+                self.labelProfileEmail.text = checkForNull(txtField: gObjMakeMySchoolListBean.email)
+            }
+            if(gObjMakeMySchoolListBean.role != nil){
+                self.labelProfileRole.text = checkForNull(txtField: gObjMakeMySchoolListBean.role)
+                
+                
+            }
 
         }
         
@@ -189,7 +217,7 @@ class PublicProfileController:  NavController{
         
         }
         else{
-             self.txtProfileId.text = String(gObjMakeMySchoolListBean.id)
+            self.txtProfileId.text = String(gObjMakeMySchoolListBean.id)
             self.txtProfileGrades.text = gObjMakeMySchoolListBean.grades
             self.txtProfileBiography.text = gObjMakeMySchoolListBean.biography
             self.txtProfileJobTItle.text = gObjMakeMySchoolListBean.job_title
@@ -221,26 +249,30 @@ class PublicProfileController:  NavController{
         var trimmedJobTitle = txtProfileJobTItle.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         var trimmedBusiness = txtProfileBusiness.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        if(trimmedGrades == DelphosStrings.EMPTY_STRING){
-            self.requiredField.isHidden = false
-            self.requiredField.text = "Required Grades"
-            
-        }else if(trimmedBio == DelphosStrings.EMPTY_STRING){
-                        self.requiredField.isHidden = false
-                        self.requiredField.text = "Required Biography"
-
         
-        }
-        else if(trimmedJobTitle == DelphosStrings.EMPTY_STRING){
-                        self.requiredField.isHidden = false
-                        self.requiredField.text = "Required Job TItle"
-           
-        }
-        else if(trimmedBusiness == DelphosStrings.EMPTY_STRING){
+         if(trimmedBusiness == DelphosStrings.EMPTY_STRING){
                         self.requiredField.isHidden = false
                         self.requiredField.text = "Required Business"
             
-        }else{
+        }
+         else if(trimmedJobTitle == DelphosStrings.EMPTY_STRING){
+            self.requiredField.isHidden = false
+            self.requiredField.text = "Required Job TItle"
+            
+        }
+        else if(trimmedGrades == DelphosStrings.EMPTY_STRING){
+            self.requiredField.isHidden = false
+            self.requiredField.text = "Required Grades"
+            
+         }
+         else if(trimmedBio == DelphosStrings.EMPTY_STRING){
+            self.requiredField.isHidden = false
+            self.requiredField.text = "Required Biography"
+            
+            
+         }
+
+         else{
             self.requiredField.isHidden = true
             txtProfileGrades.text = trimmedGrades
             txtProfileBiography.text = trimmedBio

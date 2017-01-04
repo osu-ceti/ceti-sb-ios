@@ -95,6 +95,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
       
         
         self.view.backgroundColor = bgColor
+        txtTitle.delegate = self
+        txtContents.delegate = self
+        txtTags.delegate = self
+        
+        
         
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0.0, y: txtTitle.frame.height - 1, width: txtTitle.frame.width, height: 1.0)

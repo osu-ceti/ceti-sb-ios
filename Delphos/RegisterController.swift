@@ -245,7 +245,7 @@ class RegisterController: NavController {
             }
         }
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }

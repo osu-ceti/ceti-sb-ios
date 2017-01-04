@@ -119,16 +119,10 @@ func deleteNotification(_ objCurrentContoller: BaseController)  {
             if(statusCode == SUCCESS) {
                 
                 logger.log(LoggingLevel.INFO, message: "MARK ALL Notification AS READ")
-               // self.showAlert(objCurrentContoller, strMessage: "Claim Rejected")
+                notificationPage = 1;
+                self.showNotification(objCurrentContoller)
                 
-//                dispatch_async(dispatch_get_main_queue(), {
-//                    
-//                    gObjNotificationControllerNav = self.fetchNavController(gStrNotificationControllerID)
-//                    
-//                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjNotificationControllerNav, close: true)
-//                   
-//                })
-                
+
                 
             }
             else{

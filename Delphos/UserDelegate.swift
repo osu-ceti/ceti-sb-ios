@@ -70,19 +70,11 @@ class UserDelegate:BaseDelegate{
         let strUser :String
         
         let strPassword:String
+       
         
-        if (userCredsStorage.string(forKey: gStrUserStorageKey) != nil &&
-            userCredsStorage.string(forKey: gStrUserStoragePassKey) != nil){
-            
-           
-             strUser = loginController.userNameData
-             strPassword = loginController.userPasswordData
-        }
-        else{
+        strUser = loginController.userTxt.text!
+        strPassword = loginController.passwordTxt.text!
         
-         strUser = loginController.userTxt.text!
-         strPassword = loginController.passwordTxt.text!
-        }
         var objInputParamBean: LoginBean = LoginBean()
         var objInputParamCredsBean: CredentialsBean = CredentialsBean()
         objInputParamCredsBean.email = strUser
@@ -644,6 +636,12 @@ class UserDelegate:BaseDelegate{
                 gObjUserBean.role = objEditAccountUser.role
                 gObjUserBean.name = objEditAccountUser.name
                 gObjUserBean.email = objEditAccountUser.email
+                
+                self.saveInLocalStorageIfPresent(key: gRolekey, value: objEditAccountUser.role  as AnyObject)
+               
+                self.saveInLocalStorageIfPresent(key: gNameKey, value: objEditAccountUser.name as AnyObject)
+                self.saveInLocalStorageIfPresent(key:gEmailKey, value: objEditAccountUser.email as AnyObject)
+               
                 
                 
                 logger.log(LoggingLevel.INFO, message: "Account Edited")

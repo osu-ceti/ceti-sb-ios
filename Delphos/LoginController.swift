@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class LoginController: BaseController {
+class LoginController: BaseController,UITextFieldDelegate {
     
 //    @IBOutlet var userTxt: UITextField!
 //    
@@ -57,29 +57,10 @@ class LoginController: BaseController {
          rootViewController = self
          self.requiredError.isHidden = true
         
-        // isResetPassword = false
-        
-        
-//        if (userCredsStorage.string(forKey: gStrUserStorageKey) != nil &&
-//            userCredsStorage.string(forKey: gStrUserStoragePassKey) != nil){
-//             //self.showOverlay(self.view)
-//        
-//             userNameData = userCredsStorage.string(forKey: gStrUserStorageKey)!
-//             userPasswordData = userCredsStorage.string(forKey: gStrUserStoragePassKey)!
-//       
-//
-//            
-//             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//             let testfacade = appDelegate.getObjFacade()
-//             testfacade.doTask(self,action: DelphosAction.login)
-//            }
-        
-     
-
-        navigationItem.title = "School-Business"
+       navigationItem.title = "School-Business"
         searchButtonItem = UIBarButtonItem(customView:searchBar)
        
-      
+       
         
         
         
@@ -108,7 +89,8 @@ class LoginController: BaseController {
         passwordTxt.layer.addSublayer(textboxLine)
         
         rootViewController = self            
-        
+        userTxt.delegate = self
+        passwordTxt.delegate = self
       
 
     }

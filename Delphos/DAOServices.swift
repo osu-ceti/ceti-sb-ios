@@ -142,7 +142,10 @@ class DAOServices: DAOBase {
             
             if((gObjSearchBean.searchText) != nil && (gObjSearchBean.searchText) != gEmptyString){
                 //Search with zip and radius
-                if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
+                if((gObjSearchBean.zip) != nil
+                    && (gObjSearchBean.radius) != nil
+                    && Int(gObjSearchBean.radius) != nil
+                    && Int(gObjSearchBean.zip) != nil){
                     
                     var strURL2 = DEV_TARGET + gBtnRadioValue! + NEAR_ME_URL + ZIP_URL + String(gObjSearchBean.zip!) + RADIUS_URL + String(gObjSearchBean.radius!)
                     
@@ -708,7 +711,7 @@ class DAOServices: DAOBase {
     
     
     func getUserProfile(_ strUserID: String, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
-        print("get user profile make my school")
+        //print("get user profile make my school")
         strURL =   DEV_TARGET + USERS + strUserID
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in

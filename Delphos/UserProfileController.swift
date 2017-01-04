@@ -82,6 +82,8 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
      
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        //self.showOverlay(self.view)
@@ -138,17 +140,33 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         self.labelRole.text     = "Role:"
         self.labelBiography.text = "Biography:"
         
-        self.txtUserName.text     = gObjSearchUserListBean.name
-        btnLinkSchool.setTitle( gObjSearchUserListBean.school_name, for: UIControlState())
         
-        self.txtGrades.text       = gObjSearchUserListBean.grades
-        self.txtJobTitle.text     = gObjSearchUserListBean.job_title
-        self.txtBusiness!.text    = gObjSearchUserListBean.business
-        self.txtRole!.text        = gObjSearchUserListBean.role
-        self.txtBiography.text    = gObjSearchUserListBean.biography
-        
-        gSearchUserProfile = gObjSearchUserListBean.id
-       
+        if(gObjSearchUserListBean.name != nil){
+            self.txtUserName.text     = checkForNull(txtField: gObjSearchUserListBean.name)
+        }
+        if(gObjSearchUserListBean.school_name != nil){
+            btnLinkSchool.setTitle( checkForNull(txtField: gObjSearchUserListBean.school_name), for: UIControlState())
+        }
+        if(gObjSearchUserListBean.grades != nil){
+            self.txtGrades.text       = checkForNull(txtField: gObjSearchUserListBean.grades)
+            
+            
+        }
+        if(gObjSearchUserListBean.job_title != nil){
+            self.txtJobTitle.text     = checkForNull(txtField: gObjSearchUserListBean.job_title)
+        }
+        if(gObjSearchUserListBean.business != nil){
+            self.txtBusiness!.text    = checkForNull(txtField: gObjSearchUserListBean.business!)
+        }
+        if(gObjSearchUserListBean.role != nil){
+            self.txtRole!.text        = checkForNull(txtField: gObjSearchUserListBean.role)
+        }
+        if(gObjSearchUserListBean.biography != nil){
+            self.txtBiography.text    = checkForNull(txtField: gObjSearchUserListBean.biography!)
+        }
+        if(gObjSearchUserListBean.id != nil){
+            gSearchUserProfile = gObjSearchUserListBean.id
+        }
         if(gObjUserBean.id == gObjSearchUserListBean.id){
             
             self.btnContactUser.isHidden = true
@@ -170,9 +188,14 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelRole.isHidden     = true
             self.labelBiography.isHidden = true
             
+            if(gObjSearchUserListBean.role != nil){
+                self.txtJobTitle.text     = checkForNull(txtField: gObjSearchUserListBean.role)
+            }
+            if(gObjSearchUserListBean.biography != nil){
+                self.txtBusiness!.text     = checkForNull(txtField: gObjSearchUserListBean.biography!)
+            }
             
-            self.txtJobTitle.text       = gObjSearchUserListBean.role
-            self.txtBusiness!.text      = gObjSearchUserListBean.biography
+            //self.txtBusiness!.text      = gObjSearchUserListBean.biography
             self.txtRole!.isHidden        = true
             self.txtBiography.isHidden    = true
            
@@ -190,17 +213,31 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelBusiness.text = "Biography:"
             
             self.labelSchool.isHidden   = false
-            labelChangeJobTitle.text = gObjSearchUserListBean.job_title
+           
+            if(gObjSearchUserListBean.job_title != nil){
+                self.labelChangeJobTitle.text     = checkForNull(txtField: gObjSearchUserListBean.job_title!)
+            }
+            //labelChangeJobTitle.text = gObjSearchUserListBean.job_title
             self.labelGrades.isHidden   = false
             self.btnLinkSchool.isHidden = true
             self.txtGrades.isHidden = false
-            self.txtGrades.text = gObjSearchUserListBean.business
+            if(gObjSearchUserListBean.business != nil){
+                self.txtGrades.text     = checkForNull(txtField: gObjSearchUserListBean.business!)
+            }
+            //self.txtGrades.text = gObjSearchUserListBean.business
             
             self.labelJobTitle.isHidden = false
-            self.labelJobTitle.text = gObjSearchUserListBean.role
+            
+            if(gObjSearchUserListBean.role != nil){
+                self.labelJobTitle.text     = checkForNull(txtField: gObjSearchUserListBean.role!)
+            }
+            //self.labelJobTitle.text = gObjSearchUserListBean.role
             
             self.txtBusiness!.isHidden = false
-            self.txtBusiness!.text = gObjSearchUserListBean.biography
+            if(gObjSearchUserListBean.biography != nil){
+                self.txtBusiness!.text     = checkForNull(txtField: gObjSearchUserListBean.biography!)
+            }
+            //self.txtBusiness!.text = gObjSearchUserListBean.biography
             
            
             

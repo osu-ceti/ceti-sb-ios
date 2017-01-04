@@ -37,10 +37,8 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     let locationSwitchLabel = UILabel(frame: CGRect(x: 185, y: 60, width: 200, height: 19))
    
     
-    let zipText = UITextField(frame: CGRect(x: 90, y: 60, width: 60, height: 20))
-
-    let radiusText = UITextField(frame: CGRect(x: 90, y: 90, width: 200, height: 20))
-
+    var zipText = UITextField(frame: CGRect(x: 90, y: 60, width: 60, height: 20))
+    var radiusText = UITextField(frame: CGRect(x: 90, y: 90, width: 200, height: 20))
     
      var notificationCount:String!
     
@@ -65,6 +63,10 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         searchLabel.textAlignment = NSTextAlignment.left
         searchLabel.text = "With: "
         searchLabel.textColor = UIColor.black
+        
+        zipText.keyboardType = UIKeyboardType.numberPad
+        radiusText.keyboardType = UIKeyboardType.numberPad
+        
         searchView.addSubview(searchLabel)
         
         let bottomLineSearch = CALayer()
@@ -114,6 +116,8 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         bottomLineRadius.backgroundColor = UIColor.black.cgColor
         radiusText.borderStyle = UITextBorderStyle.none
         radiusText.layer.addSublayer(bottomLineRadius)
+        radiusText.delegate = self
+
         //radiusText.becomeFirstResponder()
         radiusText.isHidden = false
         searchView.addSubview(radiusText)
@@ -664,6 +668,60 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("error getting location \(error.localizedDescription)")
     }
-
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String)
+        -> Bool
+    {
+        // We ignore any change that doesn't add characters to the text field.
+        // These changes are things like character deletions and cuts, as well
+        // as moving the insertion point.
+        //
+        // We still return true to allow the change to take place.
+        if string.characters.count == 0 {
+            return true
+        }
+        
+        // Check to see if the text field's contents still fit the constraints
+        // with the new content added to it.
+        // If the contents still fit the constraints, allow the change
+        // by returning true; otherwise disallow the change by returning false.
+        let currentText = textField.text ?? ""
+        let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        switch textField {
+            
+            // Allow only upper- and lower-case vowels in this field,
+        // and limit its contents to a maximum of 6 characters.
+                    // Allow any characters EXCEPT upper- and lower-case vowels in this field,
+        // and limit its contents to a maximum of 8 characters.
+               case zipText:
+                if(Int(prospectiveText) == nil){
+                    return false
+                }
+                break
+            
+              case radiusText:
+                if(Int(prospectiveText) == nil){
+                    return false
+                }
+                break
+            
+  
+        default:
+            return true
+        }
+        return true
+    }
+    
+    func checkForNull(txtField: String)->String{
+        if(txtField == nil || (txtField != nil &&
+            (txtField == "Null"
+                || txtField == "null"
+                || txtField == "NULL"))){
+            return gEmptyString
+        }
+        return txtField
+    }
     
 }

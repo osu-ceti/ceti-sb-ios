@@ -15,4 +15,8 @@ extension UIViewController{
         let objViewController = gObjStoryBoard.instantiateViewController(withIdentifier: controllerId)
         return UINavigationController( rootViewController: objViewController)
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
 }

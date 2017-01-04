@@ -289,7 +289,9 @@ class NotificationController: NavController {
                // })
             
             break
-            
+            case NOTIFICATION_TYPE.message :
+                
+            break
             default :
                
               
@@ -332,6 +334,8 @@ class NotificationController: NavController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.mark_ALL_NOTIFICATION)
+        
+
         
     }
     
