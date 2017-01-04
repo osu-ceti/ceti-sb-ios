@@ -160,7 +160,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
-        if #available(iOS 10.0, *) {
+        // use UIStackView
+        gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: DelphosStrings.EMPTY_STRING)
+        if (gStrDeviceToken == "32bytes") {
             
             let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
             
@@ -173,13 +175,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Device Token = " + gStrDeviceToken)
 
         }
-        else{
-            
-            // use UIStackView
-            gStrDeviceToken = deviceToken.description.trimmingCharacters(in: CharacterSet.init(charactersIn: "<>")).replacingOccurrences(of: " ", with: DelphosStrings.EMPTY_STRING)
-        }
-        
-        // }
         
     }
     
