@@ -617,6 +617,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
     func getLocationFromGPS(_ sender: UISwitch){
         
         if(self.locationSwitch.isOn){
+            self.showOverlay(self.view)
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
@@ -655,6 +656,7 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
      */
     func displayLocationInfo(placemark: CLPlacemark) {
         //stop updating location to save battery life
+        self.hideOverlayView()
         self.locationManager.stopUpdatingLocation()
         print("Placement = ",placemark.postalCode!)
         zipText.text = placemark.postalCode!

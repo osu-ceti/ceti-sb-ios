@@ -98,6 +98,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
             (cell as! SearchControllerCell).startdate!.text = usersListBean.association
         }
         else if(schoolsBeanArray.count > 0){
+            
             let schoolsDisplayBean: SchoolListBean! = schoolsBeanArray[(indexPath as NSIndexPath).row]
             //(cell as! SearchControllerCell).startdate.hidden = false
             (cell as! SearchControllerCell).txtTitle!.text = String(schoolsDisplayBean.school_name)
@@ -152,7 +153,9 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         if(currentCell.txtIdHidden.text != nil){
             gSearchValue = Int(currentCell.txtIdHidden.text!)
         }
-        
+        if(schoolsBeanArray.count > 0){
+            gSchoolBackBtn = true
+        }
         
         DispatchQueue.main.async(execute: {
             

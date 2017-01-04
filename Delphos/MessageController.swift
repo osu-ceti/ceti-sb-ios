@@ -37,7 +37,7 @@ class MessageController:  NavController  {
        // navigationBar.delegate = self;
         //backToView = "HomeID"
         
-        
+        txtSendMessage.delegate = self
         self.view.backgroundColor = bgColor
         self.requiredField.isHidden = true
         

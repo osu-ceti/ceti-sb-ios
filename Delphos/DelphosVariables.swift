@@ -114,6 +114,8 @@ var viewBadgeBean:UserProfileBadgesBean!
 
 var gPublicEditaccountBean: UserBean!
 
+var gSchoolBackBtn = false
+
 var gUsers = "users"
 
 var gSchools = "schools"

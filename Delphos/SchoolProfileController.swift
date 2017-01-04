@@ -51,11 +51,21 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         //        rightViewController.isRegister = false
         //        rightViewController.tableView.reloadData()
         
-        self.isBackEnabled = false
-        setNavBar(self.view.frame.size.width)
-        searchBar.delegate = self
+        if(gSchoolBackBtn == true){
+            self.isBackEnabled = true
+            gSchoolBackBtn = false
+        }
+        else{
+            self.isBackEnabled = false
+        }
         
-        backToController = gObjHomeController
+        searchBar.delegate = self
+        if(tempBackToViewController != nil){
+            gObjBackTocontroller = tempBackToViewController
+            tempBackToViewController = nil
+        }
+       // backToController = gObjHomeController
+        setNavBar(self.view.frame.size.width)
     }
     
    
@@ -81,10 +91,10 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         })
         
         
-        if(tempBackToViewController != nil){
-            gObjBackTocontroller = tempBackToViewController
-            tempBackToViewController = nil
-        }
+//        if(tempBackToViewController != nil){
+//            gObjBackTocontroller = tempBackToViewController
+//            tempBackToViewController = nil
+//        }
         
          self.tableView.backgroundColor = bgColor
         self.tableView.dataSource = self
