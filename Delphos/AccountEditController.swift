@@ -96,6 +96,14 @@ class AccountEditController: NavController {
         
         self.requiredField.isHidden = true
         
+        
+        txtName.delegate = self
+        txtEmail.delegate = self
+        txtNewPassword.delegate = self
+        txtConfirmPassword.delegate = self
+        txtCurrentPassword.delegate = self
+        
+        
         self.BottomLine(txtName)
         self.BottomLine(txtEmail)
         self.BottomLine(txtNewPassword)

@@ -229,7 +229,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             self.labelJobTitle.isHidden = false
             
             if(gObjSearchUserListBean.role != nil){
-                self.labelJobTitle.text     = checkForNull(txtField: gObjSearchUserListBean.role!)
+                self.txtJobTitle.text     = checkForNull(txtField: gObjSearchUserListBean.role!)
             }
             //self.labelJobTitle.text = gObjSearchUserListBean.role
             
