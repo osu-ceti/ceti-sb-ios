@@ -78,6 +78,7 @@ let NEW = "new"
 
 
 let REGISTER_DEVICE = "register_device"
+let UNREGISTER_DEVICE = "unregister_device"
 
 let SETTINGS = "settings"
 

@@ -1052,6 +1052,35 @@ class DAOServices: DAOBase {
         })
         
     }
+    func doUnregisterDevice(_ objDeviceBean: DeviceBean, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+        
+        strURL = UNREGISTER_DEVICE
+        let userJSONString = Mapper().toJSONString(objDeviceBean, prettyPrint: true)
+        doPost(userJSONString!, addAuthHeader: true,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
+            logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
+            
+            if(status) {
+                //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
+//                var responseBean = Mapper<DeviceBean>().map(JSON: jsonResult as! [String : Any] )
+//                
+//                callBack?(responseBean!, statusCode )
+                
+                return
+            }
+            else {
+                
+                logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
+                let  errorBean = Mapper<ErrorBean>().map(JSON: jsonResult as! [String : Any] )!
+                
+                callBack?(errorBean, statusCode )
+                
+                return
+                
+                
+            }
+        })
+        
+    }
     func doReadNotification(_ strId: String , callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         
         strURL = NOTIFICATION + "/" + strId

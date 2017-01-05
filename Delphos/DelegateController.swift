@@ -220,7 +220,10 @@ class DelegateController: BaseDelegate {
         case .SHOW_AWARDED_BADGE:
             logger.log(LoggingLevel.INFO, message: "AWARD_NEW_BADGE")
             objBadgeDelegate.showAwardedBadge(objCurrentController)
-            
+        
+        case .UNREGISTER_DEVICE:
+            logger.log(LoggingLevel.INFO, message: "UNREGISTER DEVICE")
+            objPushNotificationDelegate.unregisterDevice()
       
         default:
             logger.log(LoggingLevel.INFO, message: "Error in delegate enum")

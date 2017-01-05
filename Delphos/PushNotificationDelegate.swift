@@ -72,4 +72,26 @@ class PushNotificationDelegate: BaseDelegate {
         
         
     }
+    
+    func unregisterDevice(){
+        let objDeviceBean = DeviceBean()
+        objDeviceBean.device_name = UIDevice.current.name
+        logger.log(LoggingLevel.INFO
+            , message: "Device Name =" + objDeviceBean.device_name!)
+        if(gStrDeviceToken != nil){
+            objDeviceBean.token = gStrDeviceToken
+            objDeviceBean.device_type = "ios"
+            
+            doPostAPIs.doUnregisterDevice(objDeviceBean, callBack:{(result: AnyObject,statusCode: Int)   in
+                if(statusCode == SUCCESS) {
+                    logger.log(LoggingLevel.INFO, message: "Device Successfully remove registered")
+                    
+                }
+                else{
+                    logger.log(LoggingLevel.INFO, message: "Device remove registration failed")
+                }
+            })
+        }
+        
+    }
 }

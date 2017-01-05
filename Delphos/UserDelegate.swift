@@ -325,15 +325,17 @@ class UserDelegate:BaseDelegate{
     
     func signOut(_ objCurrentContoller: BaseController) -> Bool {
         
-        
+        userCredsStorage.removeObject(forKey: gStrUserStorageKey)
+        userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+        userCredsStorage.removeObject(forKey: gAuthenticationKey)
         
         doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "sign out")
                 
-                userCredsStorage.removeObject(forKey: gStrUserStorageKey)
-                userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+                
                 gNotificationCount = 0
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
@@ -355,8 +357,7 @@ class UserDelegate:BaseDelegate{
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 })
-                userCredsStorage.removeObject(forKey: gStrUserStorageKey)
-                userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+
              logger.log(LoggingLevel.INFO, message: "Did not sign out")
             }
         }

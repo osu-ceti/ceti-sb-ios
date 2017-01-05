@@ -51,6 +51,7 @@ enum DelphosAction
     case search_ZIPEVENT
     case AUTHENTICATE_USER
     case SHOW_AWARDED_BADGE
+    case UNREGISTER_DEVICE
 
 }
 
