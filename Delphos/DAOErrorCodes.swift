@@ -22,7 +22,7 @@ var ERROR_IN_PARSING: Int! = 600
 
 //Error Code Messages
 var SUCCESS_MSG: String = "Success";
-var BAD_REQUEST_MSG: String = "Bad Request";
+var BAD_REQUEST_MSG: String = "Bad Request. May be internet is down. Please check!";
 var UNAUTHORIZED_REQUEST_MSG: String = "Invalid Email and Password";
 var SERVER_ERROR_MSG = "Could not connect to the server."
 var REGISTERATION_ERROR = "Failed to Register"

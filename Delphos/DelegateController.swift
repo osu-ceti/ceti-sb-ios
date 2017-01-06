@@ -67,7 +67,14 @@ class DelegateController: BaseDelegate {
 
         case .register:
             logger.log(LoggingLevel.INFO, message: "Regsiter")
-            objUserDelegate.register(objCurrentController)
+            objUserDelegate.register(objCurrentController, callback: {(status:Bool)
+                in
+                if(status){
+                    //Register Device
+                    self.delegateControl(objCurrentController,action: DelphosAction.register_DEVICE)
+                }
+            })
+
             
         case .show_EVENT:
             logger.log(LoggingLevel.INFO, message: "SHOW_EVENT")

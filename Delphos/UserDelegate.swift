@@ -191,7 +191,7 @@ class UserDelegate:BaseDelegate{
     
     
     
-    func register(_ objCurrentContoller: UIViewController) -> Bool {
+    func register(_ objCurrentContoller: UIViewController, callback:@escaping (_ status: Bool)->Void) -> Bool{
         
         var boolRegister = false
         let registerController = objCurrentContoller as! RegisterController
@@ -249,6 +249,8 @@ class UserDelegate:BaseDelegate{
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                    callback(true)
+                    
 
 //                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
 //                   
@@ -265,6 +267,7 @@ class UserDelegate:BaseDelegate{
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                    callback(false)
                 })
                 
             }
@@ -279,6 +282,7 @@ class UserDelegate:BaseDelegate{
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                    callback(false)
                 })
 
             }
