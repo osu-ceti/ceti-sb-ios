@@ -76,13 +76,13 @@ class DAOBase: NSObject {
                 var errorBean:ErrorBean = ErrorBean()
                 errorBean.description = "Empty Respsonse , Probable API key error"
                 errorBean.exception   =  error.debugDescription
-                errorBean.statusCode  =  401
+                errorBean.statusCode  =  BAD_REQUEST
                 errorBean.reasonPhrase = "Check Status Code"
                 
                 //let dataToUse = NSJSONSerialization.JSONObjectWithData(errorBean as NSData, options:   NSJSONReadingOptions.AllowFragments, error: errorData) as! NSDictionary
                 let JSONString = Mapper().toJSON(errorBean)
                 
-                callBack?(JSONString as AnyObject, strStatus, 401)
+                callBack?(JSONString as AnyObject, strStatus, BAD_REQUEST)
                 
                 return
                 
@@ -222,7 +222,7 @@ class DAOBase: NSObject {
                 let errorBean:ErrorBean = ErrorBean()
                 errorBean.description = "Empty Respsonse , May be API key error"
                 errorBean.exception   =  error.debugDescription
-                errorBean.statusCode  =  401
+                errorBean.statusCode  =  BAD_REQUEST
                 errorBean.reasonPhrase = "Check Status Code"
                 
                 //let dataToUse = NSJSONSerialization.JSONObjectWithData(errorBean as NSData, options:   NSJSONReadingOptions.AllowFragments, error: errorData) as! NSDictionary

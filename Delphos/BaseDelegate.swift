@@ -145,6 +145,10 @@ class BaseDelegate: NSObject {
         case ERROR_IN_PARSING:
             showAlert(objCurrentController, strMessage: ERROR_PARSING_MSG)
             break;
+        case BAD_REQUEST:
+            showAlert(objCurrentController, strMessage: ERROR)
+            break;
+        
       
         default:
             //Do nothing
@@ -158,7 +162,7 @@ class BaseDelegate: NSObject {
         DispatchQueue.main.async(execute: {
             objCurrentController.hideOverlayView()
         })
-        if(statusCode > 400){
+        if(statusCode >= BAD_REQUEST){
             responseCodeErrorHandler(statusCode, objCurrentController: objCurrentController)
         }
     }

@@ -570,26 +570,25 @@ class UserDelegate:BaseDelegate{
 
                 self.showAlert(objCurrentContoller, strMessage: "Please check your email")
                 
-                DispatchQueue.main.async(execute: {
-                   
-                    gObjLoginController = self.fetchNavController(gStrLoginControllerID)
-                    
-                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
-                    
-                    
-                    
-                })
                 
             }
             else{
                  self.showAlert(objCurrentContoller, strMessage: "Password Not Changed please try again later")
                 
                  logger.log(LoggingLevel.INFO, message: "Password Not Changed")
+                
+                
+            }
+            DispatchQueue.main.async(execute: {
+                
                 gObjLoginController = self.fetchNavController(gStrLoginControllerID)
                 
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 
-            }
+                
+                
+            })
+
             
         }
     }
