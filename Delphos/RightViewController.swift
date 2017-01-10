@@ -108,7 +108,7 @@ class RightViewController: BaseController, UIWebViewDelegate {
                     //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                     
                     
-                
+        
                    
                 }
                 break
@@ -150,8 +150,7 @@ class RightViewController: BaseController, UIWebViewDelegate {
                 //self.slideMenuController()?.changeMainViewController(gObjHomeController, close: true)
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let testfacade = appDelegate.getObjFacade()
-                testfacade.doTask(self,action: DelphosAction.sign_OUT)
-                
+                //testfacade.doTask(self,action: DelphosAction.sign_OUT)
                 testfacade.doTask(self,action: DelphosAction.UNREGISTER_DEVICE)
 
                 break

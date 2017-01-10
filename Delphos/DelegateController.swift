@@ -230,7 +230,7 @@ class DelegateController: BaseDelegate {
         
         case .UNREGISTER_DEVICE:
             logger.log(LoggingLevel.INFO, message: "UNREGISTER DEVICE")
-            objPushNotificationDelegate.unregisterDevice()
+            objUserDelegate.unregisterDevice(objCurrentController: objCurrentController)
       
         default:
             logger.log(LoggingLevel.INFO, message: "Error in delegate enum")

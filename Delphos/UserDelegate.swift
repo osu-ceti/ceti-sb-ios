@@ -687,5 +687,29 @@ class UserDelegate:BaseDelegate{
             }
         }
     }
+    
+    func unregisterDevice(objCurrentController: BaseController){
+        let objDeviceBean = DeviceBean()
+        objDeviceBean.device_name = UIDevice.current.name
+        logger.log(LoggingLevel.INFO
+            , message: "Device Name =" + objDeviceBean.device_name!)
+        if(gStrDeviceToken != nil){
+            objDeviceBean.token = gStrDeviceToken
+            objDeviceBean.device_type = "ios"
+            
+            doPostAPIs.doUnregisterDevice(objDeviceBean, callBack:{(result: AnyObject,statusCode: Int)   in
+                if(statusCode == SUCCESS) {
+                    logger.log(LoggingLevel.INFO, message: "Device successfully removed")
+                    
+                    
+                }
+                else{
+                    logger.log(LoggingLevel.INFO, message: "Device removal failed")
+                }
+                self.signOut(objCurrentController)
+            })
+        }
+        
+    }
 
 }

@@ -1061,9 +1061,9 @@ class DAOServices: DAOBase {
             
             if(status) {
                 //    logger.log(LoggingLevel.INFO, message: "\(jsonResult)")
-//                var responseBean = Mapper<DeviceBean>().map(JSON: jsonResult as! [String : Any] )
-//                
-//                callBack?(responseBean!, statusCode )
+                var responseBean = Mapper<DeviceBean>().map(JSON: jsonResult as! [String : Any] )
+                
+                callBack?(responseBean!, statusCode )
                 
                 return
             }
