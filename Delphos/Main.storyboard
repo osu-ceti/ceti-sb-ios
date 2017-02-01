@@ -2531,7 +2531,7 @@ QVdBUkQgQkFER0UIA
                                                         <rect key="frame" x="100" y="196" width="182" height="23"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <state key="normal" title="contactus@ontoborn.com"/>
+                                                        <state key="normal" title="support@school2biz.com"/>
                                                         <connections>
                                                             <action selector="contactUsLink:" destination="T6B-X9-cvg" eventType="touchUpInside" id="hDn-qy-IEL"/>
                                                         </connections>
