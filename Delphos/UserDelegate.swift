@@ -191,7 +191,7 @@ class UserDelegate:BaseDelegate{
     
     
     
-    func register(_ objCurrentContoller: UIViewController) -> Bool {
+    func register(_ objCurrentContoller: UIViewController, callback:@escaping (_ status: Bool)->Void) -> Bool{
         
         var boolRegister = false
         let registerController = objCurrentContoller as! RegisterController
@@ -249,6 +249,8 @@ class UserDelegate:BaseDelegate{
                     gObjHomeController = self.fetchNavController(gStrHomeControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjHomeController, close: false)
+                    callback(true)
+                    
 
 //                   gObjLoginController = self.self.fetchNavController(gStrLoginControllerID)
 //                   
@@ -265,6 +267,7 @@ class UserDelegate:BaseDelegate{
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                    callback(false)
                 })
                 
             }
@@ -279,6 +282,7 @@ class UserDelegate:BaseDelegate{
                     gObjRegisterController = self.fetchNavController(gStrRegisterControllerID)
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjRegisterController, close: true)
+                    callback(false)
                 })
 
             }
@@ -325,15 +329,17 @@ class UserDelegate:BaseDelegate{
     
     func signOut(_ objCurrentContoller: BaseController) -> Bool {
         
-        
+        userCredsStorage.removeObject(forKey: gStrUserStorageKey)
+        userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+        userCredsStorage.removeObject(forKey: gAuthenticationKey)
         
         doPostAPIs.doSignOut(){ (SignoutResult: AnyObject, statusCode: Int) in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
+            
             if (statusCode == SUCCESS){
                 logger.log(LoggingLevel.INFO, message: "sign out")
                 
-                userCredsStorage.removeObject(forKey: gStrUserStorageKey)
-                userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+                
                 gNotificationCount = 0
                 logger.log(LoggingLevel.INFO, message: "Clear Login Data")
                 gObjUserBean = nil
@@ -355,8 +361,7 @@ class UserDelegate:BaseDelegate{
                     
                     objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 })
-                userCredsStorage.removeObject(forKey: gStrUserStorageKey)
-                userCredsStorage.removeObject(forKey: gStrUserStoragePassKey)
+
              logger.log(LoggingLevel.INFO, message: "Did not sign out")
             }
         }
@@ -569,26 +574,25 @@ class UserDelegate:BaseDelegate{
 
                 self.showAlert(objCurrentContoller, strMessage: "Please check your email")
                 
-                DispatchQueue.main.async(execute: {
-                   
-                    gObjLoginController = self.fetchNavController(gStrLoginControllerID)
-                    
-                    objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
-                    
-                    
-                    
-                })
                 
             }
             else{
                  self.showAlert(objCurrentContoller, strMessage: "Password Not Changed please try again later")
                 
                  logger.log(LoggingLevel.INFO, message: "Password Not Changed")
+                
+                
+            }
+            DispatchQueue.main.async(execute: {
+                
                 gObjLoginController = self.fetchNavController(gStrLoginControllerID)
                 
                 objCurrentContoller.slideMenuController()?.changeMainViewController(gObjLoginController, close: true)
                 
-            }
+                
+                
+            })
+
             
         }
     }

@@ -9,14 +9,14 @@
 import Foundation
 
 let DEBUG: Bool = true
-let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
-let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
+//let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
+//let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
 //let DEV_URL: String = "http://192.168.1.29:3000"
 //let DEV_TARGET: String  =  "http://192.168.1.29:3000/api/"
 let DEV_TARGET_NO_API: String  =  "http://192.168.1.29:3000/"
 
-//let DEV_URL: String = "https://www.school2biz.com";
-//let DEV_TARGET: String =  "https://www.school2biz.com/api/"
+let DEV_URL: String = "https://www.school2biz.com";
+let DEV_TARGET: String =  "https://www.school2biz.com/api/"
 
 let PRO_URL: String = "https://www.school2biz.com";
 let PRO_TARGETL: String =  "https://www.school2biz.com/api/"
@@ -78,6 +78,7 @@ let NEW = "new"
 
 
 let REGISTER_DEVICE = "register_device"
+let UNREGISTER_DEVICE = "unregister_device"
 
 let SETTINGS = "settings"
 

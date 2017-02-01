@@ -101,10 +101,10 @@ class RegisterController: NavController {
         
         self.segmentUserRole.selectedSegmentIndex = UISegmentedControlNoSegment
         
-      
-        
-        
-        
+        txtName.delegate = self
+        txtEmail.delegate = self
+        txtPassword.delegate = self
+        txtConformPassword.delegate = self
         
         self.view.backgroundColor = bgColor
         
