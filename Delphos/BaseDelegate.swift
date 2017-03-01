@@ -149,7 +149,9 @@ class BaseDelegate: NSObject {
             showAlert(objCurrentController, strMessage: ERROR)
             break;
         
-      
+        case EMAIL_BAD_REQUEST:
+            showAlert(objCurrentController, strMessage: EMAIL_ERROR)
+            break;
         default:
             //Do nothing
             showAlert(objCurrentController, strMessage: ERROR_MSG_FROM_SERVER)
