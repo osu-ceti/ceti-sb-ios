@@ -45,6 +45,12 @@ class DelphosUITests: XCTestCase {
         passwordSecureTextField.typeText("ontojith")
         
         XCUIApplication().scrollViews.otherElements.buttons["SIGNIN"].tap()
+        
+        
+        XCUIApplication().buttons["Approval"].tap()
+        
+        let trackInfoLabel = app.staticTexts["Approval"]
+        XCTAssertEqual(trackInfoLabel.exists, true)
 
         
     }
@@ -62,7 +68,7 @@ class DelphosUITests: XCTestCase {
         let emailTextField = app.textFields["Email "]
         
         emailTextField.tap()
-        emailTextField.typeText("demomail2@gmail.com")
+        emailTextField.typeText("demomail5@gmail.com")
         
         let paswordsecureTextFields = app.secureTextFields["Password"]
         paswordsecureTextFields.tap()
@@ -96,7 +102,7 @@ class DelphosUITests: XCTestCase {
         //let app = XCUIApplication()
         let titleTextField = app.textFields["Title"]
         titleTextField.tap()
-        titleTextField.typeText("demo utest2")
+        titleTextField.typeText("demo utest3")
         
         let contentTextField = app.textFields["Contents"]
         
@@ -208,4 +214,269 @@ class DelphosUITests: XCTestCase {
         
         
     }
+    func testSetting(){
+    
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        XCUIApplication().scrollViews.otherElements.buttons["SIGNIN"].tap()
+        
+        app.navigationBars["School-Business"].buttons["menu btn"].tap()
+        app.tables.staticTexts["Settings"].tap()
+        
+        //let app = XCUIApplication()
+        let scrollViewsQuery = app.scrollViews
+       
+        let eventUpdatesElementsQuery = scrollViewsQuery.otherElements.containing(.staticText, identifier:"Event Updates")
+        
+        let switch2 = eventUpdatesElementsQuery.children(matching: .switch).matching(identifier: "1").element(boundBy: 0)
+        switch2.tap()
+        
+        scrollViewsQuery.otherElements.containing(.staticText, identifier:"Event Updates").element.tap()
+        switch2.tap()
+        
+        //let elementsQuery = scrollViewsQuery.otherElements
+        elementsQuery.switches["1"].tap()
+        
+        let saveSettingsButton = app.buttons["SAVE SETTINGS"]
+        saveSettingsButton.tap()
+        
+        let okButton = app.alerts.buttons["Ok"]
+        okButton.tap()
+        
+        let switch3 = eventUpdatesElementsQuery.children(matching: .switch).matching(identifier: "0").element(boundBy: 0)
+        switch3.tap()
+        switch3.tap()
+        elementsQuery.switches["0"].tap()
+        saveSettingsButton.tap()
+        okButton.tap()
+        
+        
+        
+    }
+    func testEditEvent(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        XCUIApplication().scrollViews.otherElements.buttons["SIGNIN"].tap()
+        
+        
+        //let app = XCUIApplication()
+    app.tables.staticTexts["2017-05-04  8:00 PM EDT"].tap()
+        app.scrollViews.otherElements.buttons["Edit Event"].tap()
+        
+        
+        app.textFields["Title"].tap()
+        //let app = XCUIApplication()
+        app.textFields["Title"].typeText("  1")
+        
+        let contentsTextField = app.textFields["Contents"]
+        contentsTextField.tap()
+        contentsTextField.typeText("mash up edit ")
+       
+        let textField = app.scrollViews.children(matching: .textField).element(boundBy: 4)
+       
+        
+        textField.tap()
+     
+        let datePickersQuery = app.datePickers
+        let aprilPickerWheel = datePickersQuery.pickerWheels["April"]
+        aprilPickerWheel.press(forDuration: 1.3);
+        aprilPickerWheel.swipeUp()
+       
+        datePickersQuery.pickerWheels["14"].swipeUp()
+        datePickersQuery.pickerWheels["2017"].press(forDuration: 1.0);
+        app.buttons["Done"].tap()
+
+        
+        
+        
+        
+        //let app = XCUIApplication()
+        let textField2 = app.scrollViews.children(matching: .textField).element(boundBy: 6)
+         textField2.tap()
+        aprilPickerWheel.press(forDuration: 1.3);
+        aprilPickerWheel.swipeUp()
+        
+        datePickersQuery.pickerWheels["14"].swipeUp()
+        datePickersQuery.pickerWheels["2017"].swipeUp()
+        
+        app.buttons["Done"].tap()
+       
+        
+        
+        app.buttons["Update Event"].tap()
+        
+        
+        
+    
+    
+    }
+    func testSearch(){
+        
+        let app = XCUIApplication()
+        let schoolBusinessNavigationBar = app.navigationBars["School-Business"]
+//
+        let searchButton = schoolBusinessNavigationBar.buttons["Search"]
+        searchButton.tap()
+//        
+        app.buttons["Events"].tap()
+        app.textFields["Search"].tap()
+        
+       
+        app.textFields["Search"].typeText("test")
+        
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+
+//        let app = XCUIApplication()
+//               schoolBusinessNavigationBar.buttons["menu btn"].tap()
+//        app.statusBars.otherElements["-100% battery power"].tap()
+//        
+//       
+         searchButton.tap()
+        app.buttons["Schools"].tap()
+        //XCUIApplication().buttons["Schools"].tap()
+        
+        let searchTextField = XCUIApplication().textFields["Search"]
+        searchTextField.tap()
+        searchTextField.typeText("delphos")
+        
+        
+        
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+
+    
+        
+   // user search
+
+        
+        searchButton.tap()
+        app.buttons["Users"].tap()
+        searchTextField.tap()
+        searchTextField.typeText("babu")
+        
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+
+        
+     // zip code search
+        searchButton.tap()
+        let zipcodeTextField = XCUIApplication().textFields["Zipcode"]
+        zipcodeTextField.tap()
+        zipcodeTextField.typeText("45833")
+        
+        //let app = XCUIApplication()
+       let radiusTextField = app.textFields["Radius"]
+        radiusTextField.tap()
+        radiusTextField.typeText("10")
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+//
+        
+        
+        // event zip code search 
+        
+        searchButton.tap()
+        app.buttons["Events"].tap()
+        
+        searchTextField.tap()
+        searchTextField.typeText("test")
+        
+        //app.buttons["Schools"].tap()
+        
+       // let zipcodeTextField = XCUIApplication().textFields["Zipcode"]
+        zipcodeTextField.tap()
+        zipcodeTextField.typeText("45833")
+        
+        //let app = XCUIApplication()
+     //  let radiusTextField = app.textFields["Radius"]
+        radiusTextField.tap()
+        radiusTextField.typeText("10")
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+        
+        
+        // school zip code and raduis search
+        
+        searchButton.tap()
+        app.buttons["Schools"].tap()
+        
+        searchTextField.tap()
+        searchTextField.typeText("delphos")
+        
+        //app.buttons["Schools"].tap()
+        
+        //let zipcodeTextField = XCUIApplication().textFields["Zipcode"]
+        zipcodeTextField.tap()
+        zipcodeTextField.typeText("45833")
+        
+        //let app = XCUIApplication()
+        //let radiusTextField = app.textFields["Radius"]
+        radiusTextField.tap()
+        radiusTextField.typeText("10")
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+        
+        
+    }
+    func testSearchUserAndSentMsg(){
+        
+        
+        
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        usernameTextField.tap()
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        
+        
+        let searchButton = XCUIApplication().navigationBars["School-Business"].buttons["Search"]
+        searchButton.tap()
+        //searchButton.tap()
+        
+        let app = XCUIApplication()
+        app.buttons["Users"].tap()
+        XCUIApplication().textFields["Search"].tap()
+        
+        app.textFields["Search"].typeText("babu")
+        
+        
+        
+        
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1)
+        element.children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+        element.tables.children(matching: .cell).element(boundBy: 1).staticTexts["babu"].tap()
+        app.buttons["Contact User"].tap()
+        
+       // let app = XCUIApplication()
+        let textField = app.scrollViews.children(matching: .textField).element
+        textField.tap()
+        textField.typeText("hai")
+        app.buttons["Send message"].tap()
+        app.alerts.buttons["Ok"].tap()
+        
+        
+        
+    }
+    
+    
+   
 }

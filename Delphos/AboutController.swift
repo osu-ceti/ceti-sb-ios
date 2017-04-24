@@ -21,6 +21,7 @@ class AboutController: NavController {
     @IBOutlet var viewDetails: UIView!
     
   
+    @IBOutlet var versionNumber: UILabel!
     @IBOutlet var contactUs: UIButton!
     
     @IBOutlet var firstLabel: UILabel!
@@ -75,6 +76,16 @@ class AboutController: NavController {
         
         
         //var label:UILabel!
+        
+        versionNumber.isHidden = true
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            versionNumber.isHidden = false
+            versionNumber.text = "App version number is "+version
+            
+            print("version number = ")
+            print(version)
+        }
+        
         
         
     }
