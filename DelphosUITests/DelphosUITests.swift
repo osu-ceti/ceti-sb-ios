@@ -477,6 +477,141 @@ class DelphosUITests: XCTestCase {
         
     }
     
+    func testCancelEvent(){
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        usernameTextField.tap()
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        
+        
+        let app = XCUIApplication()
+        app.tables.staticTexts["ipl"].tap()
+        app.scrollViews.otherElements.buttons["Cancel Event"].tap()
+        app.alerts["Alert"].buttons["Ok"].tap()
+        
+    }
+    func testMakeMySchol(){
+        
+        
+        let app = XCUIApplication()
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        usernameTextField.tap()
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        
+        
+//        let app = XCUIApplication()
+        let searchButton = app.navigationBars["School-Business"].buttons["Search"]
+        searchButton.tap()
+        searchButton.tap()
+        app.buttons["Schools"].tap()
+        
+//        let app = XCUIApplication()
+        let searchTextField = app.textFields["Search"]
+        searchTextField.tap()
+        searchTextField.typeText("athens")
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].tap()
+        app.tables.cells.containing(.staticText, identifier:"ATHENS HIGH SCH").staticTexts["ATHENS, AL"].tap()
+        app.buttons["MAKE MY SCHOOL"].tap()
+        
+        
+        
+    }
+    func testAcceptEvent(){
+        
+        
+        
+        let app = XCUIApplication()
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        usernameTextField.tap()
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        app.tables.staticTexts["2017-04-26  5:05 AM EDT"].tap()
+        
+        XCUIApplication().scrollViews.otherElements.tables.staticTexts["saqi"].tap()
+
+        elementsQuery.buttons["Accept"].tap()
+        app.alerts.buttons["Ok"].tap()
+        
+        
+        
+
+        
+    }
+    func testRejectClaim(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        usernameTextField.tap()
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        app.tables.staticTexts["2017-04-26  6:57 AM EDT"].tap()
+        
+        XCUIApplication().scrollViews.otherElements.tables.staticTexts["saqi"].tap()
+        
+        elementsQuery.buttons["Reject"].tap()
+        app.alerts.buttons["Ok"].tap()
+        
     
+    }
+    func testClaimEvent(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        usernameTextField.tap()
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        XCUIApplication().navigationBars["School-Business"].buttons["Search"].tap()
+        
+//        let app = XCUIApplication()
+        let searchTextField = app.textFields["Search"]
+        searchTextField.tap()
+        searchTextField.typeText("ui100")
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.buttons["Search"].press(forDuration: 1.8);
+        app.tables.staticTexts["2017-04-29  9:00 PM EDT"].tap()
+        app.scrollViews.otherElements.buttons["Claim"].tap()
+        app.alerts.buttons["Ok"].tap()
+        
+    }
    
 }
