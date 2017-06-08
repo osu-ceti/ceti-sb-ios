@@ -613,5 +613,119 @@ class DelphosUITests: XCTestCase {
         app.alerts.buttons["Ok"].tap()
         
     }
+    func testForgotPassword(){
+        XCUIApplication().scrollViews.otherElements.buttons["Forgot Password"].tap()
+        
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+     
+        usernameTextField.tap()
+        usernameTextField.typeText("saqi@saqi.com")
+        
+        elementsQuery.buttons["RESET PASSWORD"].tap()
+        
+        
+        
+    }
+    func testCheckNotifications(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        app.navigationBars["School-Business"].buttons["0"].tap()
+        app.tables.staticTexts["has claimed your event: ul shaba"].tap()
+        
+    }
+    func testAwardBadge(){
+        
+        
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        app.navigationBars["School-Business"].buttons["0"].tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).tables.children(matching: .cell).element(boundBy: 0).staticTexts["Award them a badge."].tap()
+        app.scrollViews.otherElements.buttons["AWARD BADGE"].tap()
+        
+        
+//        let app = XCUIApplication()
+//        app.icons["Delphos"].tap()
+//        app.navigationBars["School-Business"].buttons["0"].tap()
+//        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).tables.children(matching: .cell).element(boundBy: 5).staticTexts["Award them a badge."].tap()
+//        app.scrollViews.otherElements.buttons["AWARD BADGE\b"].tap()
+        
+        
+    }
+    func testMyAccount(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        app.navigationBars["School-Business"].buttons["menu btn"].tap()
+        app.tables.staticTexts["My Account"].tap()
+        app.buttons["Badges"].tap()
+        
+    }
+    func testAboutPage(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+        usernameTextField.tap()
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        app.navigationBars["School-Business"].buttons["menu btn"].tap()
+        app.tables.staticTexts["About"].press(forDuration: 0.8);
+        elementsQuery.buttons["Ontoborn Technologies LLC,"].tap()
+        XCUIDevice.shared().orientation = .portrait
+        XCUIDevice.shared().orientation = .portrait
+        
+    
+       
+        
+    }
+    func testLogout(){
+        
+        let app = XCUIApplication()
+        let elementsQuery = app.scrollViews.otherElements
+        let usernameTextField = elementsQuery.textFields["Username"]
+       
+        usernameTextField.tap()
+        usernameTextField.typeText("jith87@gmail.com")
+        
+        let passwordSecureTextField = elementsQuery.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("ontojith")
+        elementsQuery.buttons["SIGNIN"].tap()
+        
+        app.navigationBars["School-Business"].buttons["menu btn"].tap()
+        app.tables.staticTexts["Logout"].tap()
+        
+    }
    
 }
