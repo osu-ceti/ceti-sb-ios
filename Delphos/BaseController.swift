@@ -64,13 +64,16 @@ class BaseController:UIViewController {
 
     }
     func getTimeZone(from: String)->String{
+        //"2017-10-27"
         let day = extractDay(fromDate: from)
         
         let dFormat = DateFormatter()
         dFormat.dateFormat = gDateFormat
         dFormat.locale = Locale(identifier: "en_US_POSIX")
         let targetDate = dFormat.date(from: day)
-        let isDST = NSTimeZone().isDaylightSavingTime(for: targetDate!)
+        let isDST = NSTimeZone.local.isDaylightSavingTime(for: targetDate!)
+        let calTimezone = Calendar.current.timeZone.abbreviation()!
+        
         if(isDST == true){
             return "EDT"
         }

@@ -57,9 +57,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     var isEdit = false
     var eventId = 0
     
-    var startDateTZ = "EST"
-    var endDateTZ = "EST"
-
+//    var startDateTZ = "EST"
+//    var endDateTZ = "EST"
+    
+    var startDateTZ = "EDT"
+    var endDateTZ = "EDT"
    // let dataTimeZone = NSTimeZone.knownTimeZoneNames()
     //var timeAbb = iOStimeZones?.abbreviation
     let iOStimeZones = ["Eastern Time (US & Canada)"]
