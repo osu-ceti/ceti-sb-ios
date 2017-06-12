@@ -72,7 +72,7 @@ class BaseController:UIViewController {
         dFormat.locale = Locale(identifier: "en_US_POSIX")
         let targetDate = dFormat.date(from: day)
         let isDST = NSTimeZone.local.isDaylightSavingTime(for: targetDate!)
-        let calTimezone = Calendar.current.timeZone.abbreviation()!
+        //let calTimezone = Calendar.current.timeZone.abbreviation()!
         
         if(isDST == true){
             return "EDT"

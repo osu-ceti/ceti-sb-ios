@@ -328,8 +328,8 @@ class DAOBase: NSObject {
         dFormat.dateFormat = gDateFormat
         
         let targetDate = dFormat.date(from: day)
-        let isDST = NSTimeZone().isDaylightSavingTime(for: targetDate!)
-        if(isDST == false){
+        let isDST = NSTimeZone.local.isDaylightSavingTime(for: targetDate!)
+        if(isDST == true){
             return "EDT"
         }
         else{

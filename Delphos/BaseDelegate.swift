@@ -204,7 +204,7 @@ class BaseDelegate: NSObject {
         
         let targetDate = dFormat.date(from: day)
         let isDST = NSTimeZone.local.isDaylightSavingTime(for: targetDate!)
-        if(isDST == false){
+        if(isDST == true){
             return "EDT"
         }
         else{

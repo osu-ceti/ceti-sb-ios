@@ -28,7 +28,6 @@
 		0F561A651D2BAFA1002CCE12 /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F561A641D2BAFA1002CCE12 /* NotificationDelegate.swift */; };
 		0F67CB7F1D3E4C91001A541F /* AccountEditBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CB7E1D3E4C91001A541F /* AccountEditBean.swift */; };
 		0F67CB871D3E6FA0001A541F /* AccountEditListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CB861D3E6FA0001A541F /* AccountEditListBean.swift */; };
-		0F75FB221DCDD2B10052960B /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 0F75FB131DCDD2990052960B /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0F8447061D2552F400155F8F /* SchoolListBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8447051D2552F400155F8F /* SchoolListBean.swift */; };
 		0F84470E1D2555DC00155F8F /* SchoolsDisplayBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */; };
 		0F8800911D2E6E3600E1236B /* ViewBadgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8800901D2E6E3500E1236B /* ViewBadgeController.swift */; };
@@ -123,62 +122,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0F75FB121DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6AAC8F7619F03C2900E7A677;
-			remoteInfo = "ObjectMapper-iOS";
-		};
-		0F75FB141DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD1602FF1AC023D5000CD69A;
-			remoteInfo = "ObjectMapper-Mac";
-		};
-		0F75FB161DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6A2AD03D1B2C78540097E150;
-			remoteInfo = "ObjectMapper-watchOS";
-		};
-		0F75FB181DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6A05B7A61BE274BE00F19B53;
-			remoteInfo = "ObjectMapper-tvOS";
-		};
-		0F75FB1A1DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6AAC8F8119F03C2900E7A677;
-			remoteInfo = "ObjectMapper-iOSTests";
-		};
-		0F75FB1C1DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD1603091AC023D6000CD69A;
-			remoteInfo = "ObjectMapper-MacTests";
-		};
-		0F75FB1E1DCDD2990052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6A05B7AF1BE274BE00F19B53;
-			remoteInfo = "ObjectMapper-tvOSTests";
-		};
-		0F75FB201DCDD2A90052960B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6AAC8F7519F03C2900E7A677;
-			remoteInfo = "ObjectMapper-iOS";
-		};
 		F5A2EE8B1CDC6CD800419419 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F5A2EE6E1CDC6CD800419419 /* Project object */;
@@ -211,7 +154,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0F75FB221DCDD2B10052960B /* ObjectMapper.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,7 +183,6 @@
 		0F561A641D2BAFA1002CCE12 /* NotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
 		0F67CB7E1D3E4C91001A541F /* AccountEditBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditBean.swift; sourceTree = "<group>"; };
 		0F67CB861D3E6FA0001A541F /* AccountEditListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditListBean.swift; sourceTree = "<group>"; };
-		0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectMapper.xcodeproj; path = "../../Downloads/ObjectMapper-protocols-serializing/ObjectMapper.xcodeproj"; sourceTree = "<group>"; };
 		0F8447051D2552F400155F8F /* SchoolListBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolListBean.swift; sourceTree = "<group>"; };
 		0F84470D1D2555DC00155F8F /* SchoolsDisplayBean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolsDisplayBean.swift; sourceTree = "<group>"; };
 		0F8800901D2E6E3500E1236B /* ViewBadgeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewBadgeController.swift; sourceTree = "<group>"; };
@@ -373,20 +314,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F75FB091DCDD2990052960B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0F75FB131DCDD2990052960B /* ObjectMapper.framework */,
-				0F75FB151DCDD2990052960B /* ObjectMapper.framework */,
-				0F75FB171DCDD2990052960B /* ObjectMapper.framework */,
-				0F75FB191DCDD2990052960B /* ObjectMapper.framework */,
-				0F75FB1B1DCDD2990052960B /* ObjectMapper-iOSTests.xctest */,
-				0F75FB1D1DCDD2990052960B /* ObjectMapper-MacTests.xctest */,
-				0F75FB1F1DCDD2990052960B /* ObjectMapper-tvOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		680076D0C1AA334618BBB4DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,7 +392,6 @@
 		F5A2EE6D1CDC6CD800419419 = {
 			isa = PBXGroup;
 			children = (
-				0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */,
 				F5A2EE781CDC6CD800419419 /* Delphos */,
 				F5A2EE8D1CDC6CD800419419 /* DelphosTests */,
 				F5A2EE981CDC6CD800419419 /* DelphosUITests */,
@@ -632,7 +558,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0F75FB211DCDD2A90052960B /* PBXTargetDependency */,
 			);
 			name = Delphos;
 			productName = Delphos;
@@ -727,12 +652,6 @@
 			mainGroup = F5A2EE6D1CDC6CD800419419;
 			productRefGroup = F5A2EE771CDC6CD800419419 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 0F75FB091DCDD2990052960B /* Products */;
-					ProjectRef = 0F75FB081DCDD2990052960B /* ObjectMapper.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				F5A2EE751CDC6CD800419419 /* Delphos */,
@@ -741,58 +660,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		0F75FB131DCDD2990052960B /* ObjectMapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ObjectMapper.framework;
-			remoteRef = 0F75FB121DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0F75FB151DCDD2990052960B /* ObjectMapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ObjectMapper.framework;
-			remoteRef = 0F75FB141DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0F75FB171DCDD2990052960B /* ObjectMapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ObjectMapper.framework;
-			remoteRef = 0F75FB161DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0F75FB191DCDD2990052960B /* ObjectMapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ObjectMapper.framework;
-			remoteRef = 0F75FB181DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0F75FB1B1DCDD2990052960B /* ObjectMapper-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ObjectMapper-iOSTests.xctest";
-			remoteRef = 0F75FB1A1DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0F75FB1D1DCDD2990052960B /* ObjectMapper-MacTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ObjectMapper-MacTests.xctest";
-			remoteRef = 0F75FB1C1DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0F75FB1F1DCDD2990052960B /* ObjectMapper-tvOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ObjectMapper-tvOSTests.xctest";
-			remoteRef = 0F75FB1E1DCDD2990052960B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F5A2EE741CDC6CD800419419 /* Resources */ = {
@@ -1090,11 +957,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0F75FB211DCDD2A90052960B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ObjectMapper-iOS";
-			targetProxy = 0F75FB201DCDD2A90052960B /* PBXContainerItemProxy */;
-		};
 		F5A2EE8C1CDC6CD800419419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F5A2EE751CDC6CD800419419 /* Delphos */;
