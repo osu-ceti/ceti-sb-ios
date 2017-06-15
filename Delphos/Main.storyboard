@@ -2623,6 +2623,13 @@ QVdBUkQgQkFER0UIA
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2tS-Jc-SR5">
+                                                        <rect key="frame" x="5" y="256" width="180" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="0TF-b7-Fkd">
@@ -2643,6 +2650,7 @@ QVdBUkQgQkFER0UIA
                         <outlet property="contactUs" destination="VHR-dk-xNc" id="E7K-0D-gfp"/>
                         <outlet property="logoOntoborn" destination="0TF-b7-Fkd" id="WlP-pF-SAg"/>
                         <outlet property="scrollView" destination="Epp-NJ-685" id="wGJ-Hf-usK"/>
+                        <outlet property="versionLabel" destination="2tS-Jc-SR5" id="tc7-Gu-nUT"/>
                         <outlet property="viewDetails" destination="clG-Mh-ION" id="luT-Yv-eaP"/>
                     </connections>
                 </viewController>
