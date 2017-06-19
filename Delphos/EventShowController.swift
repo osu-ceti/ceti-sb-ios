@@ -67,6 +67,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
+    var speakerNameArr: [SpeakerBean]? = []
    // var acceptClaimBeanDetails: ShowEventBean?
    
     var name = ["claim"]
@@ -80,7 +81,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var startDateAndTime = Date()
     
     var tempBackToViewController: UIViewController!
-    
+    var strSpeakerName:String = ""
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -171,10 +172,32 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             if(gObjShowEventBean.speaker_id != nil){
                 gSpeakerId = Int(gObjShowEventBean.speaker_id)
             }
-            
+           
             if(gObjShowEventBean.speaker != nil){
-                 gSpeakerName =  String(gObjShowEventBean.speaker)
-                 btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, for: UIControlState())
+                
+                //strSpeakerName
+                speakerNameArr = gObjShowEventBean.speaker
+                var count : Int = 0
+                if((speakerNameArr?.count)! > 2){
+                    count = 2
+                }else{
+                    count = (speakerNameArr?.count)!
+                }
+                
+                for index in 0 ..< (count) {
+                  strSpeakerName = strSpeakerName + (speakerNameArr?[index].name)! + ","
+                }
+               let endIndexSpeakerName = strSpeakerName.index(strSpeakerName.endIndex, offsetBy:-1)
+                strSpeakerName = strSpeakerName.substring(to:endIndexSpeakerName)
+                
+                 gSpeakerName =  String(describing: strSpeakerName)
+                 btnLinkSpeaker.setTitle( gSpeakerName, for: UIControlState())
+                
+            }
+            else{
+                gSpeakerName =  "TBA"
+                btnLinkSpeaker.setTitle( gSpeakerName, for: UIControlState())
+
             }
             
             btnLinkLocation.setTitle(gObjShowEventBean.loc_name, for: UIControlState())
@@ -474,7 +497,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.mainLabelJobTitle.isHidden = true
         self.labelBusiness.isHidden = true
         self.labelJobTitle.isHidden = true
-        self.tableView.isHidden = true
+        self.tableView.isHidden = false
         
         self.btnMessage.isHidden = true
         self.btnAccept.isHidden = true
@@ -565,13 +588,21 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(_ sender: AnyObject) {
-         gUserVIewBadgeId  = gSpeakerId
-        if(gObjShowEventBean.speaker != "TBA" && gObjShowEventBean.speaker != nil){
-            showOverlay(self.view)
+        
+        if(gObjShowEventBean.speaker != nil){
+           
+            gUserVIewBadgeId  = gSpeakerId
+        
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE_LIST)
         }
+//        if(gObjShowEventBean.speaker != nil){
+//            showOverlay(self.view)
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            let testfacade = appDelegate.getObjFacade()
+//            testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
+//        }
     }
     @IBAction func btnSchoolProfile(_ sender: AnyObject) {
    

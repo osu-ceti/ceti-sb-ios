@@ -324,6 +324,19 @@ class UserDelegate:BaseDelegate{
             }
         })
     }
+    func userProfileList(_ objCurrentContoller: UIViewController) {
+        
+        gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
+        
+        gObjSearchController.selectSpeakerList = true
+        gObjSearchController.speakerBeanArray = gObjShowEventBean.speaker        
+        
+        gObjSearchNavController = UINavigationController(rootViewController: gObjSearchController)
+        gObjBackTocontroller = gObjSearchNavController
+        
+        objCurrentContoller.slideMenuController()?.changeMainViewController(gObjSearchNavController, close: false)
+    
+    }
     
         
     

@@ -16,6 +16,8 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     var usersBeanArray: [userListBean]! = []
     var schoolsDisplayBean: SchoolsDisplayBean!
     var schoolsBeanArray: [SchoolListBean]! = []
+    var speakerBeanArray: [SpeakerBean]! = []
+    var selectSpeakerList:Bool = false
     
     @IBOutlet weak var eventFound: UILabel!
     
@@ -76,6 +78,9 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         } else if (schoolsBeanArray.count > 0){
             return schoolsBeanArray.count
         }
+        if(selectSpeakerList == true){
+            return speakerBeanArray.count
+        }
         return 1
     }
     
@@ -110,6 +115,14 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
             }
         
         
+        }
+        else if(selectSpeakerList == true){
+            
+            let speakerNameArr: SpeakerBean! = speakerBeanArray[(indexPath as NSIndexPath).row]
+            
+            (cell as! SearchControllerCell).txtTitle!.text = speakerNameArr.name
+            (cell as! SearchControllerCell).txtIdHidden!.text = String(speakerNameArr.id)
+            (cell as! SearchControllerCell).startdate!.isHidden = true
         }
         else{
              cell.backgroundColor = bgColor //UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
@@ -159,9 +172,22 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         
         DispatchQueue.main.async(execute: {
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.show_SEARCH)
+            if(self.selectSpeakerList == true){
+                if(gObjShowEventBean.speaker != nil){
+                    
+                    gUserVIewBadgeId  = Int(currentCell.txtIdHidden.text!)
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let testfacade = appDelegate.getObjFacade()
+                    testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
+                }
+            
+            }else{
+            
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let testfacade = appDelegate.getObjFacade()
+                testfacade.doTask(self,action: DelphosAction.show_SEARCH)
+            }
         })
      
     }

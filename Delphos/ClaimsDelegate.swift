@@ -169,10 +169,10 @@ class ClaimsDelegate: BaseDelegate {
                 gObjShowEventBean.speaker_id = gEventAcceptBean.event.speaker_id
                 gSpeakerId = gEventAcceptBean.event.speaker_id
                 gObjShowEventBean.speaker = gEventAcceptBean.event.speaker
-               (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, for: UIControlState())
+              // (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, for: UIControlState())
                  (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, for: UIControlState())
                 (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, for: UIControlState())
-                    (objCurrentContoller as! EventShowController).tableView.isHidden = true
+                    (objCurrentContoller as! EventShowController).tableView.isHidden = false
                 })
                
             }
