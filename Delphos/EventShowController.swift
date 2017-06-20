@@ -185,10 +185,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 }
                 
                 for index in 0 ..< (count) {
-                  strSpeakerName = strSpeakerName + (speakerNameArr?[index].name)! + ","
+                  strSpeakerName = strSpeakerName + (speakerNameArr?[index].name)! + ", "
                 }
-               let endIndexSpeakerName = strSpeakerName.index(strSpeakerName.endIndex, offsetBy:-1)
-                strSpeakerName = strSpeakerName.substring(to:endIndexSpeakerName)
+              
+                
+                if(count > 1){
+                    strSpeakerName = strSpeakerName + "more"
+                }else if(count <= 1){
+                    let endIndexSpeakerName = strSpeakerName.index(strSpeakerName.endIndex, offsetBy:-2)
+                    strSpeakerName = strSpeakerName.substring(to:endIndexSpeakerName)
+                }
                 
                  gSpeakerName =  String(describing: strSpeakerName)
                  btnLinkSpeaker.setTitle( gSpeakerName, for: UIControlState())
