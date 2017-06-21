@@ -149,7 +149,9 @@ class BaseDelegate: NSObject {
             showAlert(objCurrentController, strMessage: ERROR)
             break;
         
-      
+        case EMAIL_BAD_REQUEST:
+            showAlert(objCurrentController, strMessage: EMAIL_ERROR)
+            break;
         default:
             //Do nothing
             showAlert(objCurrentController, strMessage: ERROR_MSG_FROM_SERVER)
@@ -201,7 +203,7 @@ class BaseDelegate: NSObject {
         dFormat.dateFormat = gDateFormat
         
         let targetDate = dFormat.date(from: day)
-        let isDST = NSTimeZone().isDaylightSavingTime(for: targetDate!)
+        let isDST = NSTimeZone.local.isDaylightSavingTime(for: targetDate!)
         if(isDST == true){
             return "EDT"
         }

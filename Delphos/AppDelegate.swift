@@ -201,8 +201,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gObjNotificationInfo = notificationInfo as AnyObject?
         
        // rootViewController.showOverlay(self.rootViewController)
-        
-        facade.doTask(gObjRightViewController!, action: DelphosAction.handle_NOTIFICATION)
+        notificationPage = 1
+        facade.doTask(gObjRightViewController!, action: DelphosAction.show_NOTIFICATION)
 //        facade.doTask(UIViewController(), action: DelphosAction.VIEW_BADGE_AWARD)
         
     }
@@ -214,8 +214,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification notificationInfo: [AnyHashable: Any], handleRemotePush completionHandler: (UIBackgroundFetchResult) -> Void) {
         print("Entering fetchCompletionHandler\n")
         print(notificationInfo)
+        notificationPage = 1
         gObjNotificationInfo = notificationInfo as AnyObject?
-        facade.doTask(gObjRightViewController!, action: DelphosAction.handle_NOTIFICATION)
+        facade.doTask(gObjRightViewController!, action: DelphosAction.show_NOTIFICATION)
     }
     
     
