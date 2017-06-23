@@ -18,6 +18,7 @@ var APIKEY_EXPIRED: Int! = -1012;
 var CONNECTION_FAILED:Int! = -1004;
 var RESET_SUCCESS: Int = 201;
 var ERROR_IN_PARSING: Int! = 600
+var EMAIL_BAD_REQUEST: Int! = 422;
 
 
 //Error Code Messages
@@ -30,3 +31,4 @@ var SESSION_LOST: String = "Session Expired! Please Login"
 var ERROR_PARSING_MSG : String = "Error while parsing response from server"
 var ERROR_MSG_FROM_SERVER : String = "Server error! Please try after sometime."
 var ERROR: String = "Error"
+var EMAIL_ERROR = "Invalid Username/Email."
