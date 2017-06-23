@@ -7,6 +7,7 @@
 //
 
 import UIKit
+    
 import ObjectMapper
 
 class EventShowController: NavController, UITableViewDataSource, UITableViewDelegate {
@@ -84,13 +85,18 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var strSpeakerName:String = ""
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if(tempBackToViewController != nil){
+       
+       if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
+            self.isBackEnabled = true
         }
+       else{
+           gObjBackTocontroller = gObjHomeController
+        }
+        
         self.hideOverlayView()
-        self.isBackEnabled = true
+       
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -189,9 +195,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 }
               
                 
-                if(count > 1){
+                if((speakerNameArr?.count)! > 2){
                     strSpeakerName = strSpeakerName + "more"
-                }else if(count <= 1){
+                }else{
                     let endIndexSpeakerName = strSpeakerName.index(strSpeakerName.endIndex, offsetBy:-2)
                     strSpeakerName = strSpeakerName.substring(to:endIndexSpeakerName)
                 }

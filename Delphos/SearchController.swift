@@ -22,7 +22,7 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var eventFound: UILabel!
     
     @IBOutlet weak var tableVIew: UITableView!
-    
+    var tempBackToViewController: UIViewController!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Adding Navbar
@@ -31,9 +31,20 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         //        rightViewController.tableView.reloadData()
         
         self.isBackEnabled = false
+         
+        
+        if(selectSpeakerList == true){
+            self.isBackEnabled = true
+            
+            if(tempBackToViewController != nil){
+                gObjBackTocontroller = tempBackToViewController
+                tempBackToViewController = nil
+            }
+
+        }
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
-        
+
         
         
     }
@@ -173,6 +184,11 @@ class SearchController: NavController, UITableViewDataSource, UITableViewDelegat
         DispatchQueue.main.async(execute: {
             
             if(self.selectSpeakerList == true){
+                
+                self.tempBackToViewController = gObjBackTocontroller
+                //gObjBackTocontroller = gObjEventShowController
+                
+                
                 if(gObjShowEventBean.speaker != nil){
                     
                     gUserVIewBadgeId  = Int(currentCell.txtIdHidden.text!)

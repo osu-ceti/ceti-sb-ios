@@ -94,7 +94,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
         
         //Adding Navbar
         rootViewController = self
-        self.isBackEnabled = false
+        self.isBackEnabled = true
         imagesCount = userProfileBadgesArray.count
         
         self.labelChangeJobTitle.isHidden = true
