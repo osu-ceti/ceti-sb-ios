@@ -71,25 +71,34 @@ class ClaimsDelegate: BaseDelegate {
                                 
                                 for claimUser in gClaimsList.claims{
                                     if(gObjUserBean.id == claimUser.user_id)
-                                    {
-                                        //Approval Pending
+                                    { 
                                         match = true
-                                       self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        //Approved
+                                        if(claimUser.confirmed_by_teacher == true){
+                                            (objCurrentContoller as! EventShowController).cancelClaim.isHidden = false
+                                            (objCurrentContoller as! EventShowController).claim.isHidden = true
+                                        }else{
+                                        //Approval Pending
+                                            
+                                            self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        }
                                     }
                                     
                                     
                                 }
                                 if(gObjUserBean.id != gObjShowEventBean.user_id){
-                                    if( match == false && gObjShowEventBean.claim_id == 0){
-                                   
-                                        //Did not apply
-                                        (objCurrentContoller as! EventShowController).cancelClaim.isHidden = true
-                                        (objCurrentContoller as! EventShowController).claim.isHidden = false
-                                    
-                                    }
-                                    else{
-                                        //Rejected
-                                        self.showClaimApprovalPendingUI(objCurrentContoller)
+                                    if( match == false){
+                                        if( gObjShowEventBean.claim_id == 0){
+                                            
+                                            //Did not apply
+                                            (objCurrentContoller as! EventShowController).cancelClaim.isHidden = true
+                                            (objCurrentContoller as! EventShowController).claim.isHidden = false
+                                            
+                                        }
+                                        else{
+                                            //Rejected
+                                            self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        }
                                     }
                                 }
                             }
