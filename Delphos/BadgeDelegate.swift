@@ -46,13 +46,14 @@ class BadgeDelegate:BaseDelegate{
     func viewAwardBadge(_ objCurrentContoller: UIViewController) {
 
         
-       // (objCurrentContoller as! BadgeController).txtSpeakerName = gActUserName
+        
         //(objCurrentContoller as! BadgeController).txtEventName = gEventTitle
         //        badgeAwardApiCall(true, badgesAwardToEvent: false,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
 
         var eventId = String(gEventID)
+        var notificationId = String((objCurrentContoller as! NotificationController).notificationId)
             //String((objCurrentContoller as! NotificationController).eventId)
-        doGetAPIs.getAwardBadgeDetails(eventId,callBack: {(result: AnyObject,statusCode: Int)   in
+        doGetAPIs.getAwardBadgeDetails(eventId, notificationId: notificationId, callBack: {(result: AnyObject,statusCode: Int)   in
             
             if(statusCode == SUCCESS) {
                 gObjBadgeController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController

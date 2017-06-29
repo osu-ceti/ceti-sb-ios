@@ -27,6 +27,7 @@ class NotificationController: NavController {
     
     
     
+    
     @IBOutlet var btnMarkAllNotification: UIButton!
     
     
@@ -158,6 +159,8 @@ class NotificationController: NavController {
              eventNametext = notificationDisplayBean.event_title
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
+            (cell as! NotificationControllerCell).speakerId!.text = String(notificationDisplayBean.act_user_id)
+            
             break
         case NOTIFICATION_TYPE.new_BADGE :
             
@@ -265,7 +268,7 @@ class NotificationController: NavController {
                 
                 //award_badge
                 
-                
+               //gActUserId = Int(selectCell.id.text!)
                // dispatch_async(dispatch_get_main_queue(), {
                     
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate

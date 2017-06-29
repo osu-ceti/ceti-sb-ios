@@ -404,6 +404,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     
                     (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
                     (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
+                    (cell as! EventShowControllerCells).claimId!.text =  String(claimDisplayBean.claim_id)
+                    
                 }
             }
         }
@@ -430,7 +432,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         print("currentCell", currentCell.userId.text!)
         
         if(currentCell.userId.text != nil){
-            gClaimDetailId = Int(currentCell.userId.text!)
+            gClaimDetailId = Int(currentCell.claimId.text!)
             gUserId = Int(currentCell.userId.text!)
         }
         if(currentCell.claimUserName.text != nil){

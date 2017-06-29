@@ -599,6 +599,13 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="speakerId" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YUW-Ow-aaf">
+                                                    <rect key="frame" x="351" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -609,6 +616,7 @@
                                             <outlet property="hiddenEventName" destination="smG-hA-kUq" id="nMP-op-WBS"/>
                                             <outlet property="hiddenNType" destination="zPN-XX-0Ko" id="a1g-44-Ki2"/>
                                             <outlet property="id" destination="WIG-2n-ay8" id="gur-jo-uLz"/>
+                                            <outlet property="speakerId" destination="YUW-Ow-aaf" id="0jJ-J9-GL2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1530,6 +1538,13 @@
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="claim id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w4M-7U-mt7">
+                                                                    <rect key="frame" x="188" y="19" width="100" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BIg-bR-6PN">
                                                                     <rect key="frame" x="44" y="8" width="542" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1540,6 +1555,7 @@
                                                             </subviews>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="claimId" destination="w4M-7U-mt7" id="hRm-b6-30r"/>
                                                             <outlet property="claimUserName" destination="BIg-bR-6PN" id="54s-EI-X5s"/>
                                                             <outlet property="userId" destination="zdJ-Q1-bf7" id="HYX-Cp-TOw"/>
                                                         </connections>

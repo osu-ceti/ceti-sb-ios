@@ -384,12 +384,13 @@ class DAOServices: DAOBase {
     }
 
     
-    func getAwardBadgeDetails(_ eventid :String,callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+    func getAwardBadgeDetails(_ eventid :String, notificationId : String, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         //print("GET AWARD DEATAILS")
         var strEventId = eventid
+        var strNotificationId = notificationId
        // api/users/award_badge?event_id=282
        
-        strURL = DEV_TARGET + USERS +  AWARD_BADGES + "?" + EVENT_ID + "=" + strEventId
+        strURL = DEV_TARGET + USERS +  AWARD_BADGES + "?" + "notification_id=" + strNotificationId
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             logger.log(LoggingLevel.INFO, message: "\(jsonResult)");

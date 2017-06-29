@@ -16,6 +16,8 @@ class EventShowControllerCells: UITableViewCell {
     
     @IBOutlet weak var userId: UILabel!
     
+    @IBOutlet var claimId: UILabel!
+    
        override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
