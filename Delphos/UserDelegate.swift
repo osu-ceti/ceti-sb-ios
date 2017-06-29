@@ -309,7 +309,7 @@ class UserDelegate:BaseDelegate{
                 gObjUserProfileController.eventBeanArray = objUserBean.events
                 gObjSearchUserListBean = objUserBean.user
                 gObjUserProfileNavController = self.getNavigationController(gObjUserProfileController)
-                
+                gObjBackTocontroller = gObjSearchNavController
                 DispatchQueue.main.async(execute: {
                     gObjUserProfileController.userProfileBadgesArray = objUserBean.badges
                  })
@@ -329,10 +329,12 @@ class UserDelegate:BaseDelegate{
         gObjSearchController = self.instantiateVC(gStrSearchControllerID) as! SearchController
         
         gObjSearchController.selectSpeakerList = true
+        
         gObjSearchController.speakerBeanArray = gObjShowEventBean.speaker        
         
         gObjSearchNavController = UINavigationController(rootViewController: gObjSearchController)
-        gObjBackTocontroller = gObjSearchNavController
+        gObjBackTocontroller = gObjEventShowController
+        
         
         objCurrentContoller.slideMenuController()?.changeMainViewController(gObjSearchNavController, close: false)
     
