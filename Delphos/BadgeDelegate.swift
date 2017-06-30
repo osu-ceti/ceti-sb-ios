@@ -74,8 +74,8 @@ class BadgeDelegate:BaseDelegate{
                    gObjBadgeController.txtSpeakerName = objAwardResponse.speaker_name
 
                 }
-                if(objAwardResponse.event_id != nil){
-                    gObjBadgeController.eventId = objAwardResponse.event_id
+                if(objAwardResponse.claim_id != nil){
+                    gObjBadgeController.eventId = objAwardResponse.claim_id
 
                 }
                 if(objAwardResponse.isAwarded != nil){

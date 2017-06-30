@@ -33,6 +33,8 @@ class  ClaimListClaimBeanBean: Mappable {
     
     var confirmed_by_teacher: Bool!
     
+    var claim_rejected: Bool!
+    
     
     required init()
     {
@@ -61,6 +63,9 @@ class  ClaimListClaimBeanBean: Mappable {
         user_name    <- map["user_name"]
         
         confirmed_by_teacher    <- map["confirmed_by_teacher"]
+        
+        claim_rejected    <- map["claim_rejected"]
+
 
         
     }

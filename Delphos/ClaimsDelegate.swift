@@ -34,7 +34,17 @@ class ClaimsDelegate: BaseDelegate {
                     
                     gClaimsList = result as! ClaimListBean
                     (objCurrentContoller as! EventShowController).claimBeanArray = gClaimsList.claims
-                  
+                    var count:Int = 0
+                    for claimcount in gClaimsList.claims{
+                        if(claimcount.claim_rejected == false
+                            && claimcount.confirmed_by_teacher == false){
+                            count = count+1
+                        }
+                        
+                    }
+
+                      (objCurrentContoller as! EventShowController).claimListCount = count
+                   
                     var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
                     
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
@@ -68,8 +78,11 @@ class ClaimsDelegate: BaseDelegate {
                             }
                             else{
                                 var match:Bool = false
-                                
                                 for claimUser in gClaimsList.claims{
+                                    
+//                                    if (claimUser.claim_rejected == false){
+//                                        count = count+1
+//                                    }
                                     if(gObjUserBean.id == claimUser.user_id)
                                     { 
                                         match = true
@@ -86,6 +99,8 @@ class ClaimsDelegate: BaseDelegate {
                                     
                                     
                                 }
+                                //claimListCount = count
+                                
                                 if(gObjUserBean.id != gObjShowEventBean.user_id){
                                     if( match == false){
                                         if( gObjShowEventBean.claim_id == 0){
@@ -110,7 +125,7 @@ class ClaimsDelegate: BaseDelegate {
         })
     }
     func showClaimListDetails(_ objCurrentContoller: BaseController) {
-        var strClaimDetailId:String  = String(gClaimDetailId)
+        let strClaimDetailId:String  = String(gClaimDetailId)
         
         doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)

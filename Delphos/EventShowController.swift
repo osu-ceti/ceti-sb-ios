@@ -64,7 +64,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
    
-    
+    var claimListCount: Int = 0
     var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
@@ -363,6 +363,8 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         let testfacade = appDelegate.getObjFacade()
         testfacade.doTask(self,action: DelphosAction.claim_LIST)
         
+       // claimListCount = (claimBeanArray?.count)!
+        
        
     }
   
@@ -382,7 +384,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return claimBeanArray!.count
+        return claimListCount
           
         
     }
@@ -398,19 +400,22 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 
                 if (gObjShowEventBean.active == true && startDateAndTime.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
                     
-                   
+                     var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![(indexPath as NSIndexPath).row]
                 
-                    self.labelClaims.isHidden = false
-                    self.tableView.isHidden  = false
-            
-                    var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![(indexPath as NSIndexPath).row]
-                      
-                    gClaimUserName = claimDisplayBean.user_name
-                    gClaimUser_id = claimDisplayBean.user_id
-                    
-                    (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
-                    (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
-                    (cell as! EventShowControllerCells).claimId!.text =  String(claimDisplayBean.claim_id)
+                    if(claimDisplayBean.claim_rejected == false
+                        && claimDisplayBean.confirmed_by_teacher == false ){
+                        self.labelClaims.isHidden = false
+                        self.tableView.isHidden  = false
+                        
+                        
+                        
+                        gClaimUserName = claimDisplayBean.user_name
+                        gClaimUser_id = claimDisplayBean.user_id
+                        
+                        (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
+                        (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
+                        (cell as! EventShowControllerCells).claimId!.text =  String(claimDisplayBean.claim_id)
+                    }
                     
                 }
             }
