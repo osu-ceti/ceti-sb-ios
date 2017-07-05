@@ -382,7 +382,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
                 cell.backgroundColor = UIColor.white
                 let imageDisplayBean: UserProfileBadgesBean = self.userProfileBadgesArray[(indexPath as NSIndexPath).row]
             
-                if let url = URL(string:AWS_S3 + imageDisplayBean.badge_url){
+                if let url = URL(string:AWS_S3 + String(imageDisplayBean.badge_id) + "/" + imageDisplayBean.badge_url){
                     
                     DispatchQueue.main.async(execute: {
                         self.hideOverlayView()

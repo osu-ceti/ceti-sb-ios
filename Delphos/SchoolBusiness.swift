@@ -7,20 +7,20 @@
 //
 
 import Foundation
-
+let MODE = "test" //"production"
 let DEBUG: Bool = true
-//let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
-//let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
+let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
+let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
 //let DEV_URL: String = "http://192.168.1.29:3000"
-//let DEV_TARGET: String  =  "http://192.168.1.29:3000/api/"
-let DEV_TARGET_NO_API: String  =  "http://192.168.1.29:3000/"
+//let DEV_TARGET: String  =  "http://192.168.1.6:3000/api/"
+let DEV_TARGET_NO_API: String  =  "http://192.168.1.6:3000/"
 
-let DEV_URL: String = "https://www.school2biz.com";
-let DEV_TARGET: String =  "https://www.school2biz.com/api/"
+//let DEV_URL: String = "https://www.school2biz.com";
+//let DEV_TARGET: String =  "https://www.school2biz.com/api/"
 
 let PRO_URL: String = "https://www.school2biz.com";
 let PRO_TARGETL: String =  "https://www.school2biz.com/api/"
-let AWS_S3: String = "https://s3-us-west-1.amazonaws.com/ceti-sb/badges/"
+let AWS_S3: String = "https://s3-us-west-1.amazonaws.com/ceti-sb/badges/" + MODE + "/"
 let NONE: String = "None"
 let TEACHER: String = "Teacher"
 let SPEAKER: String = "Speaker"

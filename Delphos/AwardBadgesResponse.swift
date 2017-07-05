@@ -13,7 +13,7 @@ import UIKit
 import ObjectMapper
 
 class AwardBadgesResponse: Mappable {
-    
+    var badge_id:       Int!
     var badge_url:      String!
     var event_id:       Int!
     var event_name:     String!
@@ -31,6 +31,7 @@ class AwardBadgesResponse: Mappable {
     
     // Mappable
     func mapping(map: Map) {
+        badge_id            <- map["badge_id"]
         badge_url           <- map["badge_url"]
         event_id            <- map["event_id"]
         event_name          <- map["event_name"]

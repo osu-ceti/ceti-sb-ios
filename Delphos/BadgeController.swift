@@ -34,6 +34,7 @@ class BadgeController: NavController {
     var eventId:Int?
     var txtSpeakerName: String?
     var badgeUrl:String?
+    var badgeId:Int?
     var badgesAwardToEvent:Bool!
     
     var isAwarded:Bool = false

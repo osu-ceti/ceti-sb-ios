@@ -59,7 +59,7 @@ class ViewBadgeController: NavController {
             
             DispatchQueue.main.async(execute: {
                 self.hideOverlayView()
-                if let url = URL(string: AWS_S3 + viewBadgeBean.badge_url){
+                if let url = URL(string: AWS_S3 + String(viewBadgeBean.badge_id) + "/" + viewBadgeBean.badge_url){
                     self.data = try! Data(contentsOf: url)
                     self.imgbadge.image = UIImage(data:self.data)
                 }

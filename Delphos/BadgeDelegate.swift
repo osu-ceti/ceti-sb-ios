@@ -60,10 +60,15 @@ class BadgeDelegate:BaseDelegate{
                 
                 let objAwardResponse = result as! AwardBadgesResponse
                 
+                if(objAwardResponse.badge_id != nil){
+                    
+                    gObjBadgeController.badgeId = objAwardResponse.badge_id
+                    
+                }
                 if(objAwardResponse.badge_url != nil){
-                
+                    
                     gObjBadgeController.badgeUrl = objAwardResponse.badge_url
- 
+                    
                 }
                 if(objAwardResponse.event_name != nil){
                     gObjBadgeController.txtEventName = objAwardResponse.event_name

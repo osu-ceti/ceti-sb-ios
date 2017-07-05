@@ -14,7 +14,8 @@ import ObjectMapper
  * returned from REST API JSON
  */
 class SchoolsBean: Mappable {
-    
+    var badge_id: Int!
+
     var badge_url:String!
     
     var events: [EventBean]!
@@ -36,7 +37,8 @@ class SchoolsBean: Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        
+        badge_id    <- map["badge_id"]
+
          badge_url    <- map["badge_url"]
         
         events    <- map["events"]
