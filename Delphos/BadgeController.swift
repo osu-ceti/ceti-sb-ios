@@ -134,7 +134,7 @@ class BadgeController: NavController {
         
             if(self.badgeUrl != nil){
                // print("self.badgeUrl : ", self.badgeUrl)
-                if let url = URL(string:AWS_S3 + self.badgeUrl!){
+                if let url = URL(string:AWS_S3 + String(describing: self.badgeId!) + "/" + self.badgeUrl!){
                     var data = try? Data(contentsOf: url)
                     if data != nil {
                          DispatchQueue.main.async(execute: {
