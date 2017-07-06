@@ -391,7 +391,7 @@ class UserProfileController:  NavController, UITableViewDataSource, UITableViewD
             
                 
                         cell.imgUserBadge.image = UIImage(data:badgesImage!)
-                        cell.badgeId.text = String(imageDisplayBean.badge_id)
+                        cell.badgeId.text = String(imageDisplayBean.user_badge_id!)
                 })
             }
                  
