@@ -115,10 +115,15 @@ class HomeController:  NavController, UITableViewDataSource, UITableViewDelegate
     
     @IBAction func btnCreateEvent(_ sender: UIButton) {
        // if(gObjCreateEventController == nil){
-            gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
-        //}
+        
+        if(self.isSchoolConfigured()) {
+               handleSchoolMissing()
+               return
+        }
+        gObjCreateEventController = fetchNavController(gStrCreateEventControllerID)
+        
         self.slideMenuController()?.changeMainViewController(gObjCreateEventController, close: false)
-//
+        
 //        let goToCreateEvent = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventId") as! CreateEventController
 //        self.presentViewController(goToCreateEvent, animated: true, completion: nil)
     }

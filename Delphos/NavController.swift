@@ -113,6 +113,8 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         let bottomLineRadius = CALayer()
         bottomLineRadius.frame = CGRect(x: 0.0, y: zipText.frame.height - 1, width: zipText.frame.width, height: 1.0)
+        
+        
         bottomLineRadius.backgroundColor = UIColor.black.cgColor
         radiusText.borderStyle = UITextBorderStyle.none
         radiusText.layer.addSublayer(bottomLineRadius)
@@ -725,5 +727,25 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         }
         return txtField
     }
+    func handleSchoolMissing() {
+        showAlert(self, strMessage: "Please choose a school for yourself before trying to create events.")
+        self.searchView.isHidden = false
+        segmentSearchItems.selectedSegmentIndex = UISegmentedControlNoSegment
+        segmentSearchItems.selectedSegmentIndex = 1
+        gBtnRadioValue = "schools"
+        return 
+    }
     
-}
+//    func showAlert(_ objCurrentController: UIViewController, strMessage: String) {
+//        
+//        
+//            let alertView = UIAlertController(title: DelphosStrings.EMPTY_STRING, message: strMessage, preferredStyle: .alert)
+//            alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            
+//            objCurrentController.present(alertView, animated: true, completion: nil)
+//            
+//            
+//      )
+    }
+    
+
