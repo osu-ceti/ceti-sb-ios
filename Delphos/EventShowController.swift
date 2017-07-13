@@ -359,9 +359,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //            self.hideOverlayView()
 //            
 //        })
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.claim_LIST)
+        if(gObjUserBean.id == gObjShowEventBean.user_id){
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.claim_LIST)
+        }
         
        // claimListCount = (claimBeanArray?.count)!
         

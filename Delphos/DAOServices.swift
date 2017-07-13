@@ -980,7 +980,7 @@ class DAOServices: DAOBase {
         })
         
     }
-    func postBadgesAward(_ badgesAwardToEvent:Bool, eventId:Int, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+    func postBadgesAward(_ badgesAwardToEvent:Bool, claimId:Int, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         
         let strAward:String
         if(badgesAwardToEvent)
@@ -992,12 +992,12 @@ class DAOServices: DAOBase {
         }
         
         //let strAward = String(badgesAwardToEvent)
-        let strEventId = String(eventId)
+        let strClaimId = String(claimId)
         
         
         let strSubUrl = "?award=" + strAward
         
-        let strSubUrl2 = "&event_id=" + strEventId
+        let strSubUrl2 = "&claim_id=" + strClaimId
         
         strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
         

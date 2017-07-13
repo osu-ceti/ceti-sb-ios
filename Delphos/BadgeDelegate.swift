@@ -19,12 +19,12 @@ class BadgeDelegate:BaseDelegate{
     func badgesAward(_ objCurrentContoller: UIViewController) {
         
         let badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
-        var eventId = (objCurrentContoller as! BadgeController).eventId
+        var claimId = (objCurrentContoller as! BadgeController).eventId
         
         //var eventId = 309
         
         
-        doPostAPIs.postBadgesAward(badgesAwardToEvent!,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
+        doPostAPIs.postBadgesAward(badgesAwardToEvent!,claimId: claimId!,callBack: {(result: AnyObject,statusCode: Int)   in
            
             if(statusCode == SUCCESS) {
           
@@ -122,7 +122,7 @@ class BadgeDelegate:BaseDelegate{
                 gObjBackTocontroller = gObjNotificationControllerNav
                 gObjViewBadgeController = self.instantiateVC(gStrViewBadgeControllerID) as! ViewBadgeController
                 
-                var objBadgeBean = result as! UserProfileBadgesBean
+                let objBadgeBean = result as! UserProfileBadgesBean
                 viewBadgeBean = objBadgeBean
                 
                 
