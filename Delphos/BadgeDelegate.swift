@@ -87,7 +87,14 @@ class BadgeDelegate:BaseDelegate{
                     
                     }
                 }
-                     gObjBadgeControllerNav = self.getNavigationController(gObjBadgeController)
+                if(objAwardResponse.isRejected != nil){
+                    if(objAwardResponse.isRejected == true){
+                        gObjBadgeController.isRejected = true
+                    }
+                   
+                }
+
+                gObjBadgeControllerNav = self.getNavigationController(gObjBadgeController)
                     
                 DispatchQueue.main.async(execute: {
   

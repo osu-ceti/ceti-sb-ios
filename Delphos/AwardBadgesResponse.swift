@@ -19,6 +19,7 @@ class AwardBadgesResponse: Mappable {
     var event_name:     String!
     var isAwarded:      Bool!
     var speaker_name:   String!
+    var isRejected:      Bool?
     
     required init()
     {
@@ -36,6 +37,7 @@ class AwardBadgesResponse: Mappable {
         event_name          <- map["event_name"]
         isAwarded           <- map["isAwarded"]
         speaker_name        <- map["speaker_name"]
+        isRejected           <- map["isRejected"]
 
         
         

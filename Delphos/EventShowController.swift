@@ -83,6 +83,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     var tempBackToViewController: UIViewController!
     var strSpeakerName:String = ""
+    var isCurrentUserApproved:Bool = false
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        
@@ -192,8 +193,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 
                 for index in 0 ..< (count) {
                   strSpeakerName = strSpeakerName + (speakerNameArr?[index].name)! + ", "
+                  if(speakerNameArr?[index].id == gObjUserBean.id){
+                     isCurrentUserApproved = true
+                  }
                 }
-              
+                for index in 0 ..< ((speakerNameArr?.count)!) {
+                   
+                    if(speakerNameArr?[index].id == gObjUserBean.id){
+                        isCurrentUserApproved = true
+                    }
+                }
                 
                 if((speakerNameArr?.count)! > 2){
                     strSpeakerName = strSpeakerName + "more"
@@ -276,6 +285,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.tableView.isHidden = true
                 }
                 else if(gObjUserBean.id == gObjShowEventBean.user_id){
+                    
                     self.editEvent.isHidden = false
                     self.cancelEvent.isHidden = false
                     self.claim.isHidden = true
@@ -288,6 +298,23 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     editEvent.setTitle( "Edit Event", for: UIControlState())
                     //gEditEvent.frame = CGRectMake
                 }
+                else if (gObjShowEventBean.claim_id > 0) {
+                    
+                    if(isCurrentUserApproved == false){
+                        handlePendingClaim()
+                    }else{
+                        self.editEvent.isHidden = true
+                        self.cancelEvent.isHidden = true
+                        self.claim.isHidden = true
+                        self.cancelClaim.isHidden = false
+                        cancelClaim.setTitle( "Cancel Claim", for: .normal)
+                        self.tableView.isHidden = true
+                        
+                    }
+                    
+                    
+                }
+                    
                 else{
                     self.editEvent.isHidden = true
                     self.cancelEvent.isHidden = true
@@ -296,14 +323,58 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 }
 
             }else{
-                
-                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
+                var canceled = (gObjShowEventBean.active == false) && (gObjShowEventBean.complete == false);
+
+                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate || canceled) {
                     self.editEvent.isHidden = true
                     self.cancelEvent.isHidden = true
                     self.claim.isHidden = true
                     self.cancelClaim.isHidden = true
                     self.tableView.isHidden = true
                     
+                }
+                else{
+                    
+
+                    if (!canceled) {
+                        /* Is user the speaker of the event? */
+                       // if (response.getString("speaker_id").equals(SchoolBusiness.getUserAttr(Constants.ID))) {
+                        if(gObjUserBean.id == gObjShowEventBean.speaker_id){
+                           
+                            self.editEvent.isHidden = true
+                            self.cancelEvent.isHidden = true
+                            self.claim.isHidden = true
+                            self.cancelClaim.isHidden = false
+                            cancelClaim.setTitle( "Cancel Claim", for: .normal)
+                            self.tableView.isHidden = true
+                        
+                           
+                        } else if (gObjShowEventBean.claim_id > 0) {
+                            if(isCurrentUserApproved == false){
+                                
+                               handlePendingClaim()
+                                
+                            }else{
+                                self.editEvent.isHidden = true
+                                self.cancelEvent.isHidden = true
+                                self.claim.isHidden = true
+                                self.cancelClaim.isHidden = false
+                                cancelClaim.setTitle( "Cancel Claim", for: .normal)
+                                self.tableView.isHidden = true
+
+                            }
+                            
+                           
+                        } else {
+                            self.editEvent.isHidden = true
+                            self.cancelEvent.isHidden = true
+                            self.claim.isHidden = false
+                            self.cancelClaim.isHidden = true
+                            
+                            self.tableView.isHidden = true
+
+                        }
+                    }
                 }
 
             
@@ -364,6 +435,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             let testfacade = appDelegate.getObjFacade()
             testfacade.doTask(self,action: DelphosAction.claim_LIST)
         }
+        else {
+            
+        }
         
        // claimListCount = (claimBeanArray?.count)!
         
@@ -377,7 +451,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     }
        
     
+    func handlePendingClaim(){
     
+        self.cancelClaim.isHidden = false
+        self.claim.isHidden = false
+        self.claim.setTitle( "Claimed: Pending Approval", for: UIControlState())
+        
+        self.claim.isEnabled = false
+        self.claim.backgroundColor = UIColor.gray
+        
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
@@ -525,6 +608,10 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.btnReject.isHidden = true
         self.editEvent.isHidden = false
         self.cancelEvent.isHidden = false
+        
+        gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+        self.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+
         
     }
     

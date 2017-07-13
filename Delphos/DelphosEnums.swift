@@ -36,6 +36,8 @@ enum NOTIFICATION_TYPE:Int{
     case reject_CLAIM       = 7
     case cancel_CLAIM       = 8
     case cancel_SPEAKER     = 9
+    case awarded_BADGE      = 10
+    case rejected_BADGE     = 11
 
 }
 

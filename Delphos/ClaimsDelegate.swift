@@ -13,7 +13,7 @@ class ClaimsDelegate: BaseDelegate {
     func showClaimApprovalPendingUI(_ objCurrentContoller: UIViewController){
         (objCurrentContoller as! EventShowController).cancelClaim.isHidden = false
         (objCurrentContoller as! EventShowController).claim.isHidden = false
-        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Pending Approval ", for: UIControlState())
+        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed: Pending Approval ", for: UIControlState())
         
         (objCurrentContoller as! EventShowController).claim.isEnabled = false
         (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.gray
