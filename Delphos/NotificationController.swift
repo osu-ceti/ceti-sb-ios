@@ -27,6 +27,7 @@ class NotificationController: NavController {
     
     
     
+    
     @IBOutlet var btnMarkAllNotification: UIButton!
     
     
@@ -150,24 +151,48 @@ class NotificationController: NavController {
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             
             break
-        case NOTIFICATION_TYPE.award_BADGE :
-            
-            //award_badge
-            
-            (cell as! NotificationControllerCell).eventName!.text = "Award them a badge."
-             eventNametext = notificationDisplayBean.event_title
-           (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
-            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
-            break
         case NOTIFICATION_TYPE.new_BADGE :
             
             //new_badge
             
             (cell as! NotificationControllerCell).eventName!.text = "has awarded you a badge!"
+            
+            //String(notificationDisplayBean.act_user_name) +
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
+            
+            break
+        case NOTIFICATION_TYPE.award_BADGE :
+            
+            //award_badge
+            
+            (cell as! NotificationControllerCell).eventName!.text = "Award them a badge."
+            eventNametext = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
+            (cell as! NotificationControllerCell).speakerId!.text = String(notificationDisplayBean.act_user_id)
+            
+            break
+
+        case NOTIFICATION_TYPE.awarded_BADGE :
+            
+            //new_badge
+            
+            (cell as! NotificationControllerCell).eventName!.text = "You awarded a badge!"
             //String(notificationDisplayBean.act_user_name) +
             (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
+        case NOTIFICATION_TYPE.rejected_BADGE :
+            
+            //new_badge
+            
+            (cell as! NotificationControllerCell).eventName!.text = "You rejected a badge!"
+            //String(notificationDisplayBean.act_user_name) +
+            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
+            (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
+            break
+            
         case NOTIFICATION_TYPE.cancel :
             
             //cancel
@@ -177,6 +202,7 @@ class NotificationController: NavController {
            (cell as! NotificationControllerCell).hiddenEventName!.text = notificationDisplayBean.event_title
             (cell as! NotificationControllerCell).hiddenNType!.text = String(notificationDisplayBean.n_type)
             break
+            
         case NOTIFICATION_TYPE.reject_CLAIM :
             
             //reject_claim
@@ -263,18 +289,19 @@ class NotificationController: NavController {
             
             case NOTIFICATION_TYPE.award_BADGE :
                 
-                //award_badge
+                 navigateToAwardBadgePage()
+            break
+            case NOTIFICATION_TYPE.awarded_BADGE :
+            
+                navigateToAwardBadgePage()
+            break
+            case NOTIFICATION_TYPE.rejected_BADGE :
                 
-                
-               // dispatch_async(dispatch_get_main_queue(), {
-                    
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let testfacade = appDelegate.getObjFacade()
-                    testfacade.doTask(self,action: DelphosAction.view_BADGE_AWARD)
-              //  })
+                 navigateToAwardBadgePage()
             break
             
             case NOTIFICATION_TYPE.new_BADGE :
+            
             
             //new_badge
               //  dispatch_async(dispatch_get_main_queue(), {
@@ -311,6 +338,12 @@ class NotificationController: NavController {
         
         
         
+    }
+    func navigateToAwardBadgePage(){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let testfacade = appDelegate.getObjFacade()
+        testfacade.doTask(self,action: DelphosAction.view_BADGE_AWARD)
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //print("Scroll finished")

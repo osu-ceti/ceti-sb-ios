@@ -36,7 +36,7 @@ class  ShowEventBean: Mappable {
     
     var loc_name: String!
     
-    var speaker: String!
+    var speaker: [SpeakerBean]!
     
     var speaker_id: Int!
     

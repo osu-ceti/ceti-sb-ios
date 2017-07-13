@@ -19,12 +19,12 @@ class BadgeDelegate:BaseDelegate{
     func badgesAward(_ objCurrentContoller: UIViewController) {
         
         let badgesAwardToEvent = (objCurrentContoller as! BadgeController).badgesAwardToEvent
-        var eventId = (objCurrentContoller as! BadgeController).eventId
+        var claimId = (objCurrentContoller as! BadgeController).eventId
         
         //var eventId = 309
         
         
-        doPostAPIs.postBadgesAward(badgesAwardToEvent!,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
+        doPostAPIs.postBadgesAward(badgesAwardToEvent!,claimId: claimId!,callBack: {(result: AnyObject,statusCode: Int)   in
            
             if(statusCode == SUCCESS) {
           
@@ -46,13 +46,14 @@ class BadgeDelegate:BaseDelegate{
     func viewAwardBadge(_ objCurrentContoller: UIViewController) {
 
         
-       // (objCurrentContoller as! BadgeController).txtSpeakerName = gActUserName
+        
         //(objCurrentContoller as! BadgeController).txtEventName = gEventTitle
         //        badgeAwardApiCall(true, badgesAwardToEvent: false,eventId: eventId!,callBack: {(result: AnyObject,statusCode: Int)   in
 
         var eventId = String(gEventID)
+        var notificationId = String((objCurrentContoller as! NotificationController).notificationId)
             //String((objCurrentContoller as! NotificationController).eventId)
-        doGetAPIs.getAwardBadgeDetails(eventId,callBack: {(result: AnyObject,statusCode: Int)   in
+        doGetAPIs.getAwardBadgeDetails(eventId, notificationId: notificationId, callBack: {(result: AnyObject,statusCode: Int)   in
             
             if(statusCode == SUCCESS) {
                 gObjBadgeController = self.instantiateVC(gStrBadgeControllerID) as! BadgeController
@@ -78,8 +79,8 @@ class BadgeDelegate:BaseDelegate{
                    gObjBadgeController.txtSpeakerName = objAwardResponse.speaker_name
 
                 }
-                if(objAwardResponse.event_id != nil){
-                    gObjBadgeController.eventId = objAwardResponse.event_id
+                if(objAwardResponse.claim_id != nil){
+                    gObjBadgeController.eventId = objAwardResponse.claim_id
 
                 }
                 if(objAwardResponse.isAwarded != nil){
@@ -91,7 +92,14 @@ class BadgeDelegate:BaseDelegate{
                     
                     }
                 }
-                     gObjBadgeControllerNav = self.getNavigationController(gObjBadgeController)
+                if(objAwardResponse.isRejected != nil){
+                    if(objAwardResponse.isRejected == true){
+                        gObjBadgeController.isRejected = true
+                    }
+                   
+                }
+
+                gObjBadgeControllerNav = self.getNavigationController(gObjBadgeController)
                     
                 DispatchQueue.main.async(execute: {
   
@@ -126,7 +134,7 @@ class BadgeDelegate:BaseDelegate{
                 gObjBackTocontroller = gObjNotificationControllerNav
                 gObjViewBadgeController = self.instantiateVC(gStrViewBadgeControllerID) as! ViewBadgeController
                 
-                var objBadgeBean = result as! UserProfileBadgesBean
+                let objBadgeBean = result as! UserProfileBadgesBean
                 viewBadgeBean = objBadgeBean
                 
                 

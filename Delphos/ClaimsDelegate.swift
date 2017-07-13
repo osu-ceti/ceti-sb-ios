@@ -13,7 +13,7 @@ class ClaimsDelegate: BaseDelegate {
     func showClaimApprovalPendingUI(_ objCurrentContoller: UIViewController){
         (objCurrentContoller as! EventShowController).cancelClaim.isHidden = false
         (objCurrentContoller as! EventShowController).claim.isHidden = false
-        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed Pending Approval ", for: UIControlState())
+        (objCurrentContoller as! EventShowController).claim.setTitle( "Claimed: Pending Approval ", for: UIControlState())
         
         (objCurrentContoller as! EventShowController).claim.isEnabled = false
         (objCurrentContoller as! EventShowController).claim.backgroundColor = UIColor.gray
@@ -34,7 +34,17 @@ class ClaimsDelegate: BaseDelegate {
                     
                     gClaimsList = result as! ClaimListBean
                     (objCurrentContoller as! EventShowController).claimBeanArray = gClaimsList.claims
-                  
+                    var count:Int = 0
+                    for claimcount in gClaimsList.claims{
+                        if(claimcount.claim_rejected == false
+                            && claimcount.confirmed_by_teacher == false){
+                            count = count+1
+                        }
+                        
+                    }
+
+                      (objCurrentContoller as! EventShowController).claimListCount = count
+                   
                     var countClaimList = (objCurrentContoller as! EventShowController).claimBeanArray?.count
                     
                     (objCurrentContoller as! EventShowController).tableView.reloadData()
@@ -68,28 +78,42 @@ class ClaimsDelegate: BaseDelegate {
                             }
                             else{
                                 var match:Bool = false
-                                
                                 for claimUser in gClaimsList.claims{
+                                    
+//                                    if (claimUser.claim_rejected == false){
+//                                        count = count+1
+//                                    }
                                     if(gObjUserBean.id == claimUser.user_id)
-                                    {
-                                        //Approval Pending
+                                    { 
                                         match = true
-                                       self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        //Approved
+                                        if(claimUser.confirmed_by_teacher == true){
+                                            (objCurrentContoller as! EventShowController).cancelClaim.isHidden = false
+                                            (objCurrentContoller as! EventShowController).claim.isHidden = true
+                                        }else{
+                                        //Approval Pending
+                                            
+                                            self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        }
                                     }
                                     
                                     
                                 }
+                                //claimListCount = count
+                                
                                 if(gObjUserBean.id != gObjShowEventBean.user_id){
-                                    if( match == false && gObjShowEventBean.claim_id == 0){
-                                   
-                                        //Did not apply
-                                        (objCurrentContoller as! EventShowController).cancelClaim.isHidden = true
-                                        (objCurrentContoller as! EventShowController).claim.isHidden = false
-                                    
-                                    }
-                                    else{
-                                        //Rejected
-                                        self.showClaimApprovalPendingUI(objCurrentContoller)
+                                    if( match == false){
+                                        if( gObjShowEventBean.claim_id == 0){
+                                            
+                                            //Did not apply
+                                            (objCurrentContoller as! EventShowController).cancelClaim.isHidden = true
+                                            (objCurrentContoller as! EventShowController).claim.isHidden = false
+                                            
+                                        }
+                                        else{
+                                            //Rejected
+                                            self.showClaimApprovalPendingUI(objCurrentContoller)
+                                        }
                                     }
                                 }
                             }
@@ -101,7 +125,7 @@ class ClaimsDelegate: BaseDelegate {
         })
     }
     func showClaimListDetails(_ objCurrentContoller: BaseController) {
-        var strClaimDetailId:String  = String(gClaimDetailId)
+        let strClaimDetailId:String  = String(gClaimDetailId)
         
         doGetAPIs.getClaimListDetails(strClaimDetailId,callBack: {(result: AnyObject,statusCode: Int)   in
             self.doCleanup(statusCode, objCurrentController:objCurrentContoller)
@@ -169,10 +193,10 @@ class ClaimsDelegate: BaseDelegate {
                 gObjShowEventBean.speaker_id = gEventAcceptBean.event.speaker_id
                 gSpeakerId = gEventAcceptBean.event.speaker_id
                 gObjShowEventBean.speaker = gEventAcceptBean.event.speaker
-               (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, for: UIControlState())
+              // (objCurrentContoller as! EventShowController).btnLinkSpeaker.setTitle( gEventAcceptBean.event.speaker, for: UIControlState())
                  (objCurrentContoller as! EventShowController).btnLinkLocation.setTitle(gEventAcceptBean.event.loc_name, for: UIControlState())
                 (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, for: UIControlState())
-                    (objCurrentContoller as! EventShowController).tableView.isHidden = true
+                    (objCurrentContoller as! EventShowController).tableView.isHidden = false
                 })
                
             }

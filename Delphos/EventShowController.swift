@@ -7,6 +7,7 @@
 //
 
 import UIKit
+    
 import ObjectMapper
 
 class EventShowController: NavController, UITableViewDataSource, UITableViewDelegate {
@@ -63,10 +64,11 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var scrollView: UIScrollView!
    
-    
+    var claimListCount: Int = 0
     var schoolProfileId:Int!
    
     var claimBeanArray: [ClaimListClaimBeanBean]? = []
+    var speakerNameArr: [SpeakerBean]? = []
    // var acceptClaimBeanDetails: ShowEventBean?
    
     var name = ["claim"]
@@ -80,16 +82,22 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     var startDateAndTime = Date()
     
     var tempBackToViewController: UIViewController!
-    
+    var strSpeakerName:String = ""
+    var isCurrentUserApproved:Bool = false
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if(tempBackToViewController != nil){
+       
+       if(tempBackToViewController != nil){
             gObjBackTocontroller = tempBackToViewController
             tempBackToViewController = nil
+            self.isBackEnabled = true
         }
+       else{
+           gObjBackTocontroller = gObjHomeController
+        }
+        
         self.hideOverlayView()
-        self.isBackEnabled = true
+       
         setNavBar(self.view.frame.size.width)
         searchBar.delegate = self
         
@@ -171,10 +179,46 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
             if(gObjShowEventBean.speaker_id != nil){
                 gSpeakerId = Int(gObjShowEventBean.speaker_id)
             }
-            
+           
             if(gObjShowEventBean.speaker != nil){
-                 gSpeakerName =  String(gObjShowEventBean.speaker)
-                 btnLinkSpeaker.setTitle( gObjShowEventBean.speaker, for: UIControlState())
+                
+                //strSpeakerName
+                speakerNameArr = gObjShowEventBean.speaker
+                var count : Int = 0
+                if((speakerNameArr?.count)! > 2){
+                    count = 2
+                }else{
+                    count = (speakerNameArr?.count)!
+                }
+                
+                for index in 0 ..< (count) {
+                  strSpeakerName = strSpeakerName + (speakerNameArr?[index].name)! + ", "
+                  if(speakerNameArr?[index].id == gObjUserBean.id){
+                     isCurrentUserApproved = true
+                  }
+                }
+                for index in 0 ..< ((speakerNameArr?.count)!) {
+                   
+                    if(speakerNameArr?[index].id == gObjUserBean.id){
+                        isCurrentUserApproved = true
+                    }
+                }
+                
+                if((speakerNameArr?.count)! > 2){
+                    strSpeakerName = strSpeakerName + "more"
+                }else{
+                    let endIndexSpeakerName = strSpeakerName.index(strSpeakerName.endIndex, offsetBy:-2)
+                    strSpeakerName = strSpeakerName.substring(to:endIndexSpeakerName)
+                }
+                
+                 gSpeakerName =  String(describing: strSpeakerName)
+                 btnLinkSpeaker.setTitle( gSpeakerName, for: UIControlState())
+                
+            }
+            else{
+                gSpeakerName =  "TBA"
+                btnLinkSpeaker.setTitle( gSpeakerName, for: UIControlState())
+
             }
             
             btnLinkLocation.setTitle(gObjShowEventBean.loc_name, for: UIControlState())
@@ -241,6 +285,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     self.tableView.isHidden = true
                 }
                 else if(gObjUserBean.id == gObjShowEventBean.user_id){
+                    
                     self.editEvent.isHidden = false
                     self.cancelEvent.isHidden = false
                     self.claim.isHidden = true
@@ -253,6 +298,23 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                     editEvent.setTitle( "Edit Event", for: UIControlState())
                     //gEditEvent.frame = CGRectMake
                 }
+                else if (gObjShowEventBean.claim_id > 0) {
+                    
+                    if(isCurrentUserApproved == false){
+                        handlePendingClaim()
+                    }else{
+                        self.editEvent.isHidden = true
+                        self.cancelEvent.isHidden = true
+                        self.claim.isHidden = true
+                        self.cancelClaim.isHidden = false
+                        cancelClaim.setTitle( "Cancel Claim", for: .normal)
+                        self.tableView.isHidden = true
+                        
+                    }
+                    
+                    
+                }
+                    
                 else{
                     self.editEvent.isHidden = true
                     self.cancelEvent.isHidden = true
@@ -261,14 +323,58 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 }
 
             }else{
-                
-                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate) {
+                var canceled = (gObjShowEventBean.active == false) && (gObjShowEventBean.complete == false);
+
+                if (startDateAndTime.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate || canceled) {
                     self.editEvent.isHidden = true
                     self.cancelEvent.isHidden = true
                     self.claim.isHidden = true
                     self.cancelClaim.isHidden = true
                     self.tableView.isHidden = true
                     
+                }
+                else{
+                    
+
+                    if (!canceled) {
+                        /* Is user the speaker of the event? */
+                       // if (response.getString("speaker_id").equals(SchoolBusiness.getUserAttr(Constants.ID))) {
+                        if(gObjUserBean.id == gObjShowEventBean.speaker_id){
+                           
+                            self.editEvent.isHidden = true
+                            self.cancelEvent.isHidden = true
+                            self.claim.isHidden = true
+                            self.cancelClaim.isHidden = false
+                            cancelClaim.setTitle( "Cancel Claim", for: .normal)
+                            self.tableView.isHidden = true
+                        
+                           
+                        } else if (gObjShowEventBean.claim_id > 0) {
+                            if(isCurrentUserApproved == false){
+                                
+                               handlePendingClaim()
+                                
+                            }else{
+                                self.editEvent.isHidden = true
+                                self.cancelEvent.isHidden = true
+                                self.claim.isHidden = true
+                                self.cancelClaim.isHidden = false
+                                cancelClaim.setTitle( "Cancel Claim", for: .normal)
+                                self.tableView.isHidden = true
+
+                            }
+                            
+                           
+                        } else {
+                            self.editEvent.isHidden = true
+                            self.cancelEvent.isHidden = true
+                            self.claim.isHidden = false
+                            self.cancelClaim.isHidden = true
+                            
+                            self.tableView.isHidden = true
+
+                        }
+                    }
                 }
 
             
@@ -324,9 +430,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
 //            self.hideOverlayView()
 //            
 //        })
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let testfacade = appDelegate.getObjFacade()
-        testfacade.doTask(self,action: DelphosAction.claim_LIST)
+        if(gObjUserBean.id == gObjShowEventBean.user_id){
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let testfacade = appDelegate.getObjFacade()
+            testfacade.doTask(self,action: DelphosAction.claim_LIST)
+        }
+        else {
+            
+        }
+        
+       // claimListCount = (claimBeanArray?.count)!
         
        
     }
@@ -338,7 +451,16 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     }
        
     
+    func handlePendingClaim(){
     
+        self.cancelClaim.isHidden = false
+        self.claim.isHidden = false
+        self.claim.setTitle( "Claimed: Pending Approval", for: UIControlState())
+        
+        self.claim.isEnabled = false
+        self.claim.backgroundColor = UIColor.gray
+        
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
@@ -347,7 +469,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return claimBeanArray!.count
+        return claimListCount
           
         
     }
@@ -363,18 +485,23 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
                 
                 if (gObjShowEventBean.active == true && startDateAndTime.timeIntervalSinceReferenceDate > currentDate.timeIntervalSinceReferenceDate){
                     
-                   
+                     var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![(indexPath as NSIndexPath).row]
                 
-                    self.labelClaims.isHidden = false
-                    self.tableView.isHidden  = false
-            
-                    var claimDisplayBean: ClaimListClaimBeanBean! = claimBeanArray![(indexPath as NSIndexPath).row]
-                      
-                    gClaimUserName = claimDisplayBean.user_name
-                    gClaimUser_id = claimDisplayBean.user_id
+                    if(claimDisplayBean.claim_rejected == false
+                        && claimDisplayBean.confirmed_by_teacher == false ){
+                        self.labelClaims.isHidden = false
+                        self.tableView.isHidden  = false
+                        
+                        
+                        
+                        gClaimUserName = claimDisplayBean.user_name
+                        gClaimUser_id = claimDisplayBean.user_id
+                        
+                        (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
+                        (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
+                        (cell as! EventShowControllerCells).claimId!.text =  String(claimDisplayBean.claim_id)
+                    }
                     
-                    (cell as! EventShowControllerCells).claimUserName!.text = String(claimDisplayBean.user_name)
-                    (cell as! EventShowControllerCells).userId!.text =  String(claimDisplayBean.event_id)
                 }
             }
         }
@@ -401,7 +528,7 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         print("currentCell", currentCell.userId.text!)
         
         if(currentCell.userId.text != nil){
-            gClaimDetailId = Int(currentCell.userId.text!)
+            gClaimDetailId = Int(currentCell.claimId.text!)
             gUserId = Int(currentCell.userId.text!)
         }
         if(currentCell.claimUserName.text != nil){
@@ -474,13 +601,17 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.mainLabelJobTitle.isHidden = true
         self.labelBusiness.isHidden = true
         self.labelJobTitle.isHidden = true
-        self.tableView.isHidden = true
+        self.tableView.isHidden = false
         
         self.btnMessage.isHidden = true
         self.btnAccept.isHidden = true
         self.btnReject.isHidden = true
         self.editEvent.isHidden = false
         self.cancelEvent.isHidden = false
+        
+        gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+        self.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+
         
     }
     
@@ -565,13 +696,21 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         
     }
     @IBAction func btnSpeaker(_ sender: AnyObject) {
-         gUserVIewBadgeId  = gSpeakerId
-        if(gObjShowEventBean.speaker != "TBA" && gObjShowEventBean.speaker != nil){
-            showOverlay(self.view)
+        
+        if(gObjShowEventBean.speaker != nil){
+           
+            gUserVIewBadgeId  = gSpeakerId
+        
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let testfacade = appDelegate.getObjFacade()
-            testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
+            testfacade.doTask(self,action: DelphosAction.SHOW_USER_PROFILE_LIST)
         }
+//        if(gObjShowEventBean.speaker != nil){
+//            showOverlay(self.view)
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            let testfacade = appDelegate.getObjFacade()
+//            testfacade.doTask(self,action: DelphosAction.show_USER_PROFILE)
+//        }
     }
     @IBAction func btnSchoolProfile(_ sender: AnyObject) {
    

@@ -23,6 +23,8 @@ class NotificationControllerCell: UITableViewCell {
     @IBOutlet var hiddenNType: UILabel!
     @IBOutlet var UserNotificationType: UILabel!
     
+    
+    @IBOutlet var speakerId: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
