@@ -609,8 +609,9 @@ class EventShowController: NavController, UITableViewDataSource, UITableViewDele
         self.editEvent.isHidden = false
         self.cancelEvent.isHidden = false
         
-        gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
-        self.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+//        gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+//        self.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+//        
 
         
     }

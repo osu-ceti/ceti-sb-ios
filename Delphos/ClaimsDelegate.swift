@@ -198,7 +198,8 @@ class ClaimsDelegate: BaseDelegate {
                 (objCurrentContoller as! EventShowController).btnLinkCreatedBy.setTitle(gEventAcceptBean.event.user_name, for: UIControlState())
                     (objCurrentContoller as! EventShowController).tableView.isHidden = false
                 })
-               
+
+                
             }
             else{
                 // print("Error in Accept Claim")
@@ -208,6 +209,14 @@ class ClaimsDelegate: BaseDelegate {
                 logger.log(LoggingLevel.INFO, message: "Error in Accept Claim")
                 
             }
+            
+            DispatchQueue.main.async(execute: {
+                
+                gObjEventShowController = self.fetchNavController(gStrEventShowControllerID)
+                
+                objCurrentContoller.slideMenuController()?.changeMainViewController(gObjEventShowController, close: true)
+                
+            })
         })
         
         

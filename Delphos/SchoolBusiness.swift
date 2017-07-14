@@ -11,8 +11,8 @@ let MODE = "test" //"production"
 let DEBUG: Bool = true
 let DEV_URL: String = "http://ceti-test-env.elasticbeanstalk.com"
 let DEV_TARGET: String  =  "http://ceti-test-env.elasticbeanstalk.com/api/"
-//let DEV_URL: String = "http://192.168.1.29:3000"
-//let DEV_TARGET: String  =  "http://192.168.1.6:3000/api/"
+//let DEV_URL: String = "http://192.168.1.8:3000"
+//let DEV_TARGET: String  =  "http://192.168.1.8:3000/api/"
 let DEV_TARGET_NO_API: String  =  "http://192.168.1.6:3000/"
 
 //let DEV_URL: String = "https://www.school2biz.com";
@@ -69,6 +69,7 @@ let PROFILE = "profile"
 
 let NOTIFICATION = "notifications"
 let AWARD_BADGES = "award_badge"
+let REJECT_BADGES = "reject_badge"
 let BADGES = "badges"
 
 let ACCOUNT = "account"
