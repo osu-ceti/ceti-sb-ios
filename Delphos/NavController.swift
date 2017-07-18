@@ -79,6 +79,8 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         
         searchText.resignFirstResponder()
         //zipText.keyboardType = UIKeyboardType.numberPad
+
+       // zipText.addTarget(self, action: #selector(NavController.onChangeZipText(textField:)), for:.allEditingEvents)
         
         searchText.isHidden = false
         searchView.addSubview(searchText)
@@ -495,7 +497,15 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         self.slideMenuController()?.changeMainViewController(backToController, close: shouldClose)
         
     }
-   
+//    func onChangeZipText(textField: UITextField){
+//        
+//        if(textField.text != nil && textField.text != ""){
+//            if(textField.text?.characters.count == 1){
+//                locationSwitch.setOn(false, animated:true)
+//            }
+//        }
+//        
+//    }
     func nearMeButtonPressed(_ sender: UIButton){
         
         
@@ -616,17 +626,30 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
         }
         
     }
+   
     func getLocationFromGPS(_ sender: UISwitch){
         
         if(self.locationSwitch.isOn){
-            self.showOverlay(self.view)
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
+            
+            if CLLocationManager.locationServicesEnabled() {
+
+                self.showOverlay(self.view)
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.startUpdatingLocation()
+
+            } else {
+                print("Location services are not enabled")
+                locationSwitch.setOn(false, animated:true)
+                navigateToLocationService()
+            }
+            
+
         }
         else{
             print("locationSwitch is off")
+            
         }
         
         
@@ -651,6 +674,24 @@ class NavController: BaseController, UINavigationBarDelegate, UISearchBarDelegat
                 print("problem with the data received from geocoder")
             }
         })
+    }
+    
+     func navigateToLocationService() {
+        
+        var alertController = UIAlertController (title: "Switch on GPS ", message: "Go to Location?", preferredStyle: .alert)
+        
+        var settingsAction = UIAlertAction(title: "Location", style: .default) { (_) -> Void in
+            let settingsUrl = NSURL(string: "App-Prefs:root=Privacy&path=LOCATION")
+            if let url = settingsUrl {
+                UIApplication.shared.openURL(url as URL)
+            }
+        }
+        
+        var cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     /**

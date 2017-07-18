@@ -1109,6 +1109,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="btnMakeMySchool" destination="F1K-PI-XD4" id="CvV-sn-aia"/>
                         <outlet property="labelAddress" destination="J74-fd-iOd" id="LNB-bO-BL5"/>
                         <outlet property="labelCity" destination="CPV-MT-g70" id="QBl-8H-WrS"/>
                         <outlet property="labelNoEventFound" destination="xhb-RI-BxA" id="8Ns-ZP-GSW"/>
