@@ -218,7 +218,11 @@ class DelegateController: BaseDelegate {
             logger.log(LoggingLevel.INFO, message: "RESET FORGET PASSWORD")
             objUserDelegate.resetPassword(objCurrentController)
             
-        
+        case .SHOW_USER_PROFILE_LIST:
+            logger.log(LoggingLevel.INFO, message: "SHOW USER PROFILE LIST")
+            objUserDelegate.userProfileList(objCurrentController)
+            
+            
 //        case .AUTHENTICATE_USER:
 //            logger.log(LoggingLevel.INFO, message: "AUTHENTICATE USER")
 //            objUserDelegate.authenticateUserCheck(objCurrentController)

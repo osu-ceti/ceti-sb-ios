@@ -13,12 +13,13 @@ import UIKit
 import ObjectMapper
 
 class AwardBadgesResponse: Mappable {
-    
+    var badge_id:       Int!
     var badge_url:      String!
-    var event_id:       Int!
+    var claim_id:       Int!
     var event_name:     String!
     var isAwarded:      Bool!
     var speaker_name:   String!
+    var isRejected:      Bool?
     
     required init()
     {
@@ -31,11 +32,13 @@ class AwardBadgesResponse: Mappable {
     
     // Mappable
     func mapping(map: Map) {
+        badge_id            <- map["badge_id"]
         badge_url           <- map["badge_url"]
-        event_id            <- map["event_id"]
+        claim_id            <- map["claim_id"]
         event_name          <- map["event_name"]
         isAwarded           <- map["isAwarded"]
         speaker_name        <- map["speaker_name"]
+        isRejected           <- map["isRejected"]
 
         
         

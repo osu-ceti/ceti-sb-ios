@@ -52,6 +52,7 @@ enum DelphosAction
     case AUTHENTICATE_USER
     case SHOW_AWARDED_BADGE
     case UNREGISTER_DEVICE
+    case SHOW_USER_PROFILE_LIST
 
 }
 

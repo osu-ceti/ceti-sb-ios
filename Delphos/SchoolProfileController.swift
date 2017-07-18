@@ -36,6 +36,7 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
     
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var btnMakeMySchool: UIButton!
     var eventDisplayBean: usersBean!
     var eventBeanArray: [EventBean]! = []
     
@@ -101,7 +102,8 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         
         self.tableView.tableFooterView = UIView()
-       
+        btnMakeMySchool.isHidden = false
+        
         //schoolImage.image = UIImage(named:"gObjSchoolImage")
         schoolNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
         labelAddress.font = UIFont.boldSystemFont(ofSize: 15)
@@ -143,6 +145,10 @@ class SchoolProfileController:  NavController, UITableViewDataSource, UITableVie
         //self.txtZip.text = gObjSearchSchoolListBean.zip
         //self.txtPhone.text = gObjSearchSchoolListBean.phone
         
+        
+        if(gObjSearchSchoolListBean.id == gObjUserBean.school_id){
+            btnMakeMySchool.isHidden = true
+        }
     }
     
     

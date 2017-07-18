@@ -57,6 +57,15 @@ class BaseController:UIViewController {
             
         })
     }
+    func isSchoolConfigured() -> Bool{
+        
+        if(gObjUserBean.school_name == nil || gObjUserBean.school_name == "Please Select A School") {
+            return true
+        }
+        return false
+
+    }
+    
     func extractDay(fromDate: String) -> String{
         
         return fromDate.substring(to: fromDate.index(fromDate.startIndex, offsetBy: 10))

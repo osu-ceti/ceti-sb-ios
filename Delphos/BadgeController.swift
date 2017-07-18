@@ -34,9 +34,11 @@ class BadgeController: NavController {
     var eventId:Int?
     var txtSpeakerName: String?
     var badgeUrl:String?
+    var badgeId:Int?
     var badgesAwardToEvent:Bool!
     
     var isAwarded:Bool = false
+    var isRejected:Bool = false
     @IBOutlet var msgAwardedBadge: UILabel!
     
     
@@ -94,27 +96,11 @@ class BadgeController: NavController {
         
                 if(isAwarded == true){
                     
+                   handleAwardOrRejected(msgAwardedBadge.text!)
                     
-                    
-                    self.msgAwardedBadge.isHidden = false
-                    self.afterAwardedForEvent.isHidden = false
-                    self.afterAwardedEventName.isHidden = false
-                    self.speakerName.isHidden = true
-                    self.labelAwardedBadge.isHidden = true
-                    self.labelForEvent.isHidden = true
-                    self.eventName.isHidden = true
-                    
-                    self.afterAwardedEventName.text = gEventTitle
-                    self.msgAwardedBadge.text = msgAwardedBadge.text! + gActUserName
-                    self.btnAwardBadges.isHidden = true
-                    self.btnDoNotAward.isHidden = true
-                    
-                    if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-                    {
-                        afterAwardedForEvent.frame.origin.x = 280
-                        afterAwardedEventName.frame.origin.x = 350
-                    }
-                    
+                }
+                else if(isRejected == true){
+                    handleAwardOrRejected("You rejected a badge to ")
                     
                 }
                 else{
@@ -133,7 +119,7 @@ class BadgeController: NavController {
         
             if(self.badgeUrl != nil){
                // print("self.badgeUrl : ", self.badgeUrl)
-                if let url = URL(string:AWS_S3 + self.badgeUrl!){
+                if let url = URL(string:AWS_S3 + String(describing: self.badgeId!) + "/" + self.badgeUrl!){
                     var data = try? Data(contentsOf: url)
                     if data != nil {
                          DispatchQueue.main.async(execute: {
@@ -151,7 +137,29 @@ class BadgeController: NavController {
       
     }
     
+    func handleAwardOrRejected(_ badgeMessage: String){
     
+        
+        self.msgAwardedBadge.isHidden = false
+        self.afterAwardedForEvent.isHidden = false
+        self.afterAwardedEventName.isHidden = false
+        self.speakerName.isHidden = true
+        self.labelAwardedBadge.isHidden = true
+        self.labelForEvent.isHidden = true
+        self.eventName.isHidden = true
+        
+        self.afterAwardedEventName.text = gEventTitle
+        self.msgAwardedBadge.text = badgeMessage + gActUserName
+        self.btnAwardBadges.isHidden = true
+        self.btnDoNotAward.isHidden = true
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+        {
+            afterAwardedForEvent.frame.origin.x = 280
+            afterAwardedEventName.frame.origin.x = 350
+        }
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

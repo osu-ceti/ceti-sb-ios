@@ -1,8 +1,16 @@
 //
-//  SchoolsBean.swift
+//  SpeakerBean.swift
 //  Delphos
 //
-//  Created by Babu on 6/17/16.
+//  Created by Haripriya on 6/15/17.
+//  Copyright © 2017 Ontoborn. All rights reserved.
+//
+
+//
+//  EventBean.swift
+//  Delphos
+//
+//  Created by Babu on 5/18/16.
 //  Copyright © 2016 Ontoborn. All rights reserved.
 //
 
@@ -13,16 +21,11 @@ import ObjectMapper
  * ErrorBean Class to store ErrorBean details
  * returned from REST API JSON
  */
-class SchoolsBean: Mappable {
-    var badge_id: Int!
-
-    var badge_url:String!
+class SpeakerBean: Mappable {
     
-    var events: [EventBean]!
+    var id: Int!
     
-   // var users: [userListBean]!
-    
-    var school: searchSchoolListBean!
+    var name: String!
     
     
     
@@ -37,16 +40,14 @@ class SchoolsBean: Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        badge_id    <- map["badge_id"]
-
-         badge_url    <- map["badge_url"]
         
-        events    <- map["events"]
+        id    <- map["id"]
         
-       // users    <- map["users"]
+        name    <- map["name"]
         
-        school    <- map["school"]
+       
         
     }
+    
 }
 
