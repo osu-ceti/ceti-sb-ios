@@ -5,7 +5,7 @@ To get this app installed in your laptop you will need a Machintosh Operating Sy
 1. Install Xcode
 2. Install cocoapods
 3. Open terminal and cd to the directory where you cloned this git repo and type
->pod install
+`pod install`
 This command will install all the dependencies mentioned in the "Podfile"
 4. Once all dependencies are installed you will notice a file with "xcworkspace". In my case it is "Delphos.xcworkspace". 
 5. Open that file in Xcode and you will notice two folders. One named "Delphos" containing the code written by us and the other named "pods" containing all dowloaded third party dependencies.
