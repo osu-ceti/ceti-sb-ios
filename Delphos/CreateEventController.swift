@@ -15,7 +15,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
    
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtContents: UITextField!
-    @IBOutlet weak var txtTags: UITextField!
+    //@IBOutlet weak var txtTags: UITextField!
     @IBOutlet weak var startDate: UITextField!
     
     @IBOutlet weak var startTimePicker: UIDatePicker!
@@ -57,9 +57,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
     var isEdit = false
     var eventId = 0
     
-    var startDateTZ = "EST"
-    var endDateTZ = "EST"
-
+//    var startDateTZ = "EST"
+//    var endDateTZ = "EST"
+    
+    var startDateTZ = "EDT"
+    var endDateTZ = "EDT"
    // let dataTimeZone = NSTimeZone.knownTimeZoneNames()
     //var timeAbb = iOStimeZones?.abbreviation
     let iOStimeZones = ["Eastern Time (US & Canada)"]
@@ -97,7 +99,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         self.view.backgroundColor = bgColor
         txtTitle.delegate = self
         txtContents.delegate = self
-        txtTags.delegate = self
+        //txtTags.delegate = self
         
         
         
@@ -113,11 +115,11 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
         txtContents.borderStyle = UITextBorderStyle.none
         txtContents.layer.addSublayer(txtContentsLine)
         
-        let txtTagsLine = CALayer()
-        txtTagsLine.frame = CGRect(x: 0.0, y: txtTags.frame.height - 1, width: txtTags.frame.width, height: 1.0)
-        txtTagsLine.backgroundColor = UIColor.black.cgColor
-        txtTags.borderStyle = UITextBorderStyle.none
-        txtTags.layer.addSublayer(txtTagsLine)
+//        let txtTagsLine = CALayer()
+//        txtTagsLine.frame = CGRect(x: 0.0, y: txtTags.frame.height - 1, width: txtTags.frame.width, height: 1.0)
+//        txtTagsLine.backgroundColor = UIColor.black.cgColor
+//        txtTags.borderStyle = UITextBorderStyle.none
+//        txtTags.layer.addSublayer(txtTagsLine)
         
         let txtTimeZoneSelectLine = CALayer()
         txtTimeZoneSelectLine.frame = CGRect(x: 0.0, y: txtTimeZoneSelect.frame.height - 1, width: txtTimeZoneSelect.frame.width, height: 1.0)
@@ -153,7 +155,7 @@ class CreateEventController: NavController, UIPickerViewDataSource, UIPickerView
 
         txtTitle.backgroundColor = bgColor //UIColor(hue: 0.2889, saturation: 0, brightness: 0.95, alpha: 1.0) /* #f2f2f2 */
         txtContents.backgroundColor = txtTitle.backgroundColor
-        txtTags.backgroundColor = txtTitle.backgroundColor
+       // txtTags.backgroundColor = txtTitle.backgroundColor
         startDate.backgroundColor = txtTitle.backgroundColor
         endDate.backgroundColor = txtTitle.backgroundColor
         //button

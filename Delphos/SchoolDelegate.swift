@@ -29,7 +29,7 @@ class SchoolDelegate:BaseDelegate{
                 
                 gObjSchoolProfileController.eventBeanArray = objSchoolBean.events
                 gObjSearchSchoolListBean = objSchoolBean.school
-                gObjSchoolImage = objSchoolBean.badge_url
+                gObjSchoolImage = String(objSchoolBean.badge_id) + "/" + objSchoolBean.badge_url
                
                 
                 DispatchQueue.main.async(execute: {

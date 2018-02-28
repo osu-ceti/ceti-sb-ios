@@ -50,7 +50,7 @@ class  CreateEventResultEventBean: Mappable {
 
     var claim_id:Int!
     
-     var speaker: String?
+     var speaker: [SpeakerBean]!
     
     required init()
     {

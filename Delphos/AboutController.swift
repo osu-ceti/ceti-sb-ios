@@ -20,6 +20,7 @@ class AboutController: NavController {
    
     @IBOutlet var viewDetails: UIView!
     
+    @IBOutlet var versionLabel: UILabel!
   
     @IBOutlet var contactUs: UIButton!
     
@@ -75,7 +76,10 @@ class AboutController: NavController {
         
         
         //var label:UILabel!
-        
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            self.versionLabel.text = "Version number : "+version
+            
+        }
         
     }
    

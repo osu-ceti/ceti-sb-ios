@@ -25,7 +25,7 @@ class DAOServices: DAOBase {
             
             if(status) {
                 // println(jsonResult)
-                var eventDisplayBean = Mapper<EventDisplayBean>().map(JSON: jsonResult as! [String : Any] )!
+                let eventDisplayBean = Mapper<EventDisplayBean>().map(JSON: jsonResult as! [String : Any] )!
                 
                 callBack?(eventDisplayBean, statusCode )
                 
@@ -149,7 +149,7 @@ class DAOServices: DAOBase {
                     
                     var strURL2 = DEV_TARGET + gBtnRadioValue! + NEAR_ME_URL + ZIP_URL + String(gObjSearchBean.zip!) + RADIUS_URL + String(gObjSearchBean.radius!)
                     
-                    var strURL3 = COMMIT_URL + gObjSearchBean.searchText!
+                    var strURL3 = COMMIT_URL + strReplaceSearch
                     
                     strURL = strURL2 + strURL3
                    //near_me?zip=45833&radius=10&commit=Near+Me&search=delphos
@@ -180,7 +180,7 @@ class DAOServices: DAOBase {
                
                 if((gObjSearchBean.zip) != nil && (gObjSearchBean.radius) != nil ){
                     
-                    let strURL1 =  EVENT_URL + ZIP_URL + String(gObjSearchBean.zip!) + RADIUS_URL + String(gObjSearchBean.radius!) + LOCATION_URL + String(gObjSearchBean.isLocation!) + COMMIT_URL + gObjSearchBean.searchText!
+                    let strURL1 =  EVENT_URL + ZIP_URL + String(gObjSearchBean.zip!) + RADIUS_URL + String(gObjSearchBean.radius!) + LOCATION_URL + String(gObjSearchBean.isLocation!) + COMMIT_URL + strReplaceSearch
                     
                     strURL =  DEV_TARGET + strURL1
                     
@@ -384,12 +384,13 @@ class DAOServices: DAOBase {
     }
 
     
-    func getAwardBadgeDetails(_ eventid :String,callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+    func getAwardBadgeDetails(_ eventid :String, notificationId : String, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         //print("GET AWARD DEATAILS")
         var strEventId = eventid
+        var strNotificationId = notificationId
        // api/users/award_badge?event_id=282
        
-        strURL = DEV_TARGET + USERS +  AWARD_BADGES + "?" + EVENT_ID + "=" + strEventId
+        strURL = DEV_TARGET + USERS +  AWARD_BADGES + "?" + "notification_id=" + strNotificationId
         
         doGet(addAuthHeader,callBack:{(jsonResult: AnyObject, status: Bool, statusCode: Int) in
             logger.log(LoggingLevel.INFO, message: "\(jsonResult)");
@@ -979,7 +980,7 @@ class DAOServices: DAOBase {
         })
         
     }
-    func postBadgesAward(_ badgesAwardToEvent:Bool, eventId:Int, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
+    func postBadgesAward(_ badgesAwardToEvent:Bool, claimId:Int, callBack: ((_ result: AnyObject, _ statusCode: Int) -> Void)?) {
         
         let strAward:String
         if(badgesAwardToEvent)
@@ -991,14 +992,19 @@ class DAOServices: DAOBase {
         }
         
         //let strAward = String(badgesAwardToEvent)
-        let strEventId = String(eventId)
+        let strClaimId = String(claimId)
         
         
         let strSubUrl = "?award=" + strAward
         
-        let strSubUrl2 = "&event_id=" + strEventId
+        let strSubUrl2 = "&claim_id=" + strClaimId
+        if(badgesAwardToEvent){
+            strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
+        }
+        else{
+            strURL = USERS + REJECT_BADGES + "?claim_id=" + strClaimId
+        }
         
-        strURL = USERS + AWARD_BADGES + strSubUrl + strSubUrl2
         
         
         

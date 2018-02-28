@@ -102,7 +102,7 @@ class SearchDelegate: BaseDelegate {
                             gObjSearchSchoolListBean = objSchoolBean.school
                         }
                         if(objSchoolBean.badge_url != nil){
-                            gObjSchoolImage = objSchoolBean.badge_url
+                            gObjSchoolImage = String(objSchoolBean.badge_id) + "/" + objSchoolBean.badge_url
                         }
                          gObjSchoolProfileNavController = self.getNavigationController(gObjSchoolProfileController)
                         
